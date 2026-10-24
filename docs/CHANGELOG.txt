@@ -567,6 +567,12 @@ cover and did not scrub; crossfade opacity 0.93 -> 0.61 after a song change; new
 Not verified: Space/play on a real song (audio embed silent while the pane is hidden), real phone, Spotlight cap by eye, Blur offset by eye.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  05:24 AM (correction)
+
+CORRECTION to the entry above: its header said 05:15 AM - 05:30 AM; measured times are 05:15:00 to 05:24:41 (9m 41s) for the
+code push. The 05:30 was a guess, not a measurement (same mistake as before: take the end time from `date`).
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
