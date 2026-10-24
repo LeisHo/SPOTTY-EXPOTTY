@@ -6,7 +6,7 @@
 // the real song plays in Spotify's (invisible) embedded player. The album cover is the play/pause
 // button. Every on-screen element's position and scale is owned by the UI Layout Engine (lib/ui-engine).
 import {
-    createUIElement, updateElement, resolveAndApplyAll, captureAllLayoutConfigs, registerStorageBackend, loadLayoutConfig,
+    createUIElement, updateElement, setContextValue, getActiveContext, resolveAndApplyAll, captureAllLayoutConfigs, registerStorageBackend, loadLayoutConfig,
     resetLayoutConfig,
 } from '../lib/ui-engine/registry.mjs';
 import { setting } from './app/settings.js';
@@ -147,7 +147,9 @@ async function boot() {
     }
     const songs = data.songs;
     let pos = 0, idx = 0, dir = 1, handedOff = false, handoffTimer = 0, preloadQueued = false, moveLog = [];
-    let lastTimelineHeight = null;
+    let lastTimelineHeight = null, heightTouched = false;
+    // (capture phase: runs before the generic settings listener below, so applyLook sees the flag)
+    ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; }, true));
 
     const timeline = createTimeline(el('spxTimeline'), data);
     if (window.__spxPendingLayout) { window.spxApplyLayout(window.__spxPendingLayout); window.__spxPendingLayout = null; }
@@ -207,10 +209,16 @@ async function boot() {
         scale('--spx-meta-scale', setting('sliderMetaScale'));
         // Timeline height goes through the layout engine; the timeline is pinned by its bottom edge and
         // nothing else is positioned from it, so only the bars grow (upward).
+        // On a phone the engine's own per-device height (150 px portrait / 110 px landscape) overrides the base
+        // height, so the slider must write to the ACTIVE context or it does nothing there. Until the slider has
+        // actually been touched, a phone keeps those defaults.
         const wantH = setting('sliderTimelineHeight') + 'px';
-        if (wantH !== lastTimelineHeight) {
-            lastTimelineHeight = wantH;
-            updateElement('spxTimeline', { size: { height: { value: wantH } } });
+        const ctxKey = getActiveContext();
+        const sig = ctxKey + ':' + wantH;
+        if (sig !== lastTimelineHeight && (ctxKey === 'base' || heightTouched)) {
+            lastTimelineHeight = sig;
+            if (ctxKey === 'base') updateElement('spxTimeline', { size: { height: { value: wantH } } });
+            else setContextValue('spxTimeline', ctxKey, 'heightValue', wantH);
             resolveAndApplyAll();
         }
         timeline.draw();
