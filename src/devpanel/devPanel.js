@@ -7530,6 +7530,8 @@
         const scrubInputContent = findGroupContent(tab, 'Scrub Input', 'renderSpottyDevControls', WC);
         scrubInputContent.appendChild(createDevGroupElement(WC, tab));
         scrubInputContent.appendChild(createDevGroupElement(SC, tab));
+        const TS = 'Touch Scrub And Pinch';
+        scrubInputContent.appendChild(createDevGroupElement(TS, tab));
         const CURVE_CONTROLS = [
             { tab, group: WC, id: 'checkboxWheelCurveEnabled', type: 'checkbox', label: 'Enabled', value: false },
             { tab, group: WC, id: 'curveEditorWheelScrubCurve', type: 'curve-editor', label: 'Curve (X: Zoom Scale, Y: Px Per Notch):', defaultPoints: [{ x: 0, y: 0.2 }, { x: 1, y: 0.7 }], defaultMethod: 'monotone' },
@@ -7544,6 +7546,13 @@
             { tab, group: SC, id: 'sliderStartSpanCurveMinDays', type: 'slider', label: 'Y Bottom: Span At Curve 0 (Days):', min: 0.01, max: 5000, step: 0.01, value: 7 },
             { tab, group: SC, id: 'sliderStartSpanCurveMaxDays', type: 'slider', label: 'Y Top: Span At Curve 1 (Days):', min: 0.01, max: 6000, step: 0.01, value: 1200 },
             { tab, group: SC, id: 'checkboxStartSpanApplyOnJump', type: 'checkbox', label: 'Also Apply On Double-Click, Home And End:', value: true },
+            // Phones have no wheel: one finger and a two-finger pinch have their own settings, separate from the wheel's.
+            { tab, group: TS, id: 'sliderTouchScrubSpeed', type: 'slider', label: 'One-Finger Scrub Speed (x):', min: 0.05, max: 10, step: 0.05, value: 1 },
+            { tab, group: TS, id: 'sliderTouchScrubAcceleration', type: 'slider', label: 'Scrub Acceleration With Finger Speed (x):', min: 0, max: 5, step: 0.05, value: 0 },
+            { tab, group: TS, id: 'sliderTouchStartThreshold', type: 'slider', label: 'Drag Start Threshold (Px):', min: 0, max: 40, step: 1, value: 4 },
+            { tab, group: TS, id: 'checkboxInvertTouchScrub', type: 'checkbox', label: 'Invert One-Finger Scrub Direction:', value: false },
+            { tab, group: TS, id: 'sliderPinchZoomSpeed', type: 'slider', label: 'Pinch Zoom Speed (x):', min: 0.1, max: 5, step: 0.05, value: 1 },
+            { tab, group: TS, id: 'checkboxInvertPinch', type: 'checkbox', label: 'Invert Pinch Direction:', value: false },
         ];
         renderControlArray(CURVE_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_CURVE_CONTROLS', CURVE_CONTROLS);

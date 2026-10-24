@@ -328,18 +328,23 @@ async function boot() {
     window.addEventListener('pointerdown', e => {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         if ((inUi(e.target) || inText(e.target)) && e.target.id !== 'spxTimeline') return;
-        ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: e.pointerType, onTimeline: e.target.id === 'spxTimeline', moved: false });
+        ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: e.pointerType, onTimeline: e.target.id === 'spxTimeline', moved: false, t: performance.now() });
         if (ptrs.size === 2) pinchDist = pinchSpan();
     });
     window.addEventListener('pointermove', e => {
         const p = ptrs.get(e.pointerId);
         if (!p) return;
         const dx = e.clientX - p.x;
-        if (Math.hypot(e.clientX - p.startX, e.clientY - p.startY) > 4) p.moved = true;
+        // a finger must travel its own 'start threshold' before it counts as a drag (a tap is not a drag); a mouse 4 px
+        const startPx = p.type === 'mouse' ? 4 : setting('sliderTouchStartThreshold');
+        if (Math.hypot(e.clientX - p.startX, e.clientY - p.startY) > startPx) p.moved = true;
+        const now = performance.now(), dt = Math.max(1, now - p.t); // ms since this finger's previous move
+        p.t = now;
         p.x = e.clientX; p.y = e.clientY;
         if (ptrs.size === 2) {
             const d = pinchSpan();
-            timeline.zoomBy(pinchDist / d); // fingers apart = zoom in (smaller span), origin = playhead
+            // fingers apart = zoom in (smaller span), origin = playhead; Pinch Zoom Speed is the exponent (1 = follows the fingers 1:1)
+            timeline.zoomBy(Math.pow(pinchDist / d, setting('sliderPinchZoomSpeed') * (setting('checkboxInvertPinch') ? -1 : 1)));
             pinchDist = d;
             timeline.draw();
         } else if (p.moved) {
@@ -347,7 +352,11 @@ async function boot() {
                 timeline.zoomBy(Math.exp(-dx * 0.008 * setting('sliderTimelineZoomSpeed') * (setting('checkboxInvertZoomDrag') ? -1 : 1)));
                 timeline.draw();
             } else { // one finger: scrub
-                moveTo(timeline.scrubByPixels(dx * (setting('checkboxInvertScroll') ? -1 : 1)));
+                // One finger has its OWN settings (dev panel > Scrub Input > Touch Scrub And Pinch): the playhead moves
+                // Touch Scrub Speed px per px of finger movement, plus Acceleration x the finger's speed (px/ms, capped
+                // at 4) so a fast swipe travels farther than a slow one.
+                const gain = setting('sliderTouchScrubSpeed') * (1 + setting('sliderTouchScrubAcceleration') * Math.min(4, Math.abs(dx) / dt));
+                moveTo(timeline.scrubByPixels(dx * gain * (setting('checkboxInvertTouchScrub') ? -1 : 1)));
             }
         }
     });

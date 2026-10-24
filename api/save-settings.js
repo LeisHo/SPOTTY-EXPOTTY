@@ -22,13 +22,23 @@ const DEFAULT_REPO = 'LeisHo/SPOTTY-EXPOTTY';
 const DEFAULT_BRANCH = 'main';
 const DEFAULT_PATH = 'data/processed/dev-panel-settings.json';
 
+// Error text goes back to the browser (and GET needs no secret), so it must never contain a credential:
+// an earlier version returned the exception message verbatim and that message contained the whole token.
+const scrub = v => String(v)
+    .replace(/(github_pat_|gh[pousr]_)[A-Za-z0-9_]+/g, '[redacted]')
+    .replace(/Bearer\s+\S+/gi, 'Bearer [redacted]');
+const safeErr = err => scrub((err && err.message) || err);
+
 export default async function handler(req, res) {
     if (req.method !== 'POST' && req.method !== 'GET') {
         res.status(405).json({ ok: false, error: 'Method not allowed' });
         return;
     }
 
-    const token = process.env.GITHUB_TOKEN;
+    // The env var must hold exactly ONE token. It was once saved with two tokens separated by blank lines, and
+    // GitHub rejected every request ("invalid header value"). Use the first whitespace-separated token so a
+    // stray paste cannot break saving; the Vercel setting should still be fixed to a single token.
+    const token = (process.env.GITHUB_TOKEN || '').split(/\s+/).find(Boolean) || '';
     const secret = process.env.DEV_PANEL_SAVE_SECRET;
     // Report exactly which var is missing. DEV_PANEL_SAVE_SECRET only gates POST.
     const missing = [];
@@ -63,7 +73,7 @@ export default async function handler(req, res) {
             }
             if (!getResp.ok) {
                 const errText = await getResp.text();
-                res.status(502).json({ ok: false, error: `GitHub lookup failed (${getResp.status}): ${errText}` });
+                res.status(502).json({ ok: false, error: `GitHub lookup failed (${getResp.status}): ${scrub(errText)}` });
                 return;
             }
             const getData = await getResp.json();
@@ -89,7 +99,7 @@ export default async function handler(req, res) {
                 res.status(200).json({ ok: true, settings: JSON.parse(jsonText) });
             }
         } catch (err) {
-            res.status(500).json({ ok: false, error: String((err && err.message) || err) });
+            res.status(500).json({ ok: false, error: safeErr(err) });
         }
         return;
     }
@@ -99,7 +109,7 @@ export default async function handler(req, res) {
         try {
             body = JSON.parse(zlib.gunzipSync(Buffer.from(body.gz, 'base64')).toString('utf-8'));
         } catch (err) {
-            res.status(400).json({ ok: false, error: 'Bad gz payload: ' + String((err && err.message) || err) });
+            res.status(400).json({ ok: false, error: 'Bad gz payload: ' + safeErr(err) });
             return;
         }
     }
@@ -117,7 +127,7 @@ export default async function handler(req, res) {
             sha = getData.sha;
         } else if (getResp.status !== 404) {
             const errText = await getResp.text();
-            res.status(502).json({ ok: false, error: `GitHub lookup failed (${getResp.status}): ${errText}` });
+            res.status(502).json({ ok: false, error: `GitHub lookup failed (${getResp.status}): ${scrub(errText)}` });
             return;
         }
 
@@ -134,12 +144,12 @@ export default async function handler(req, res) {
         });
         if (!putResp.ok) {
             const errText = await putResp.text();
-            res.status(502).json({ ok: false, error: `GitHub commit failed (${putResp.status}): ${errText}` });
+            res.status(502).json({ ok: false, error: `GitHub commit failed (${putResp.status}): ${scrub(errText)}` });
             return;
         }
         const putData = await putResp.json();
         res.status(200).json({ ok: true, commitSha: putData.commit && putData.commit.sha });
     } catch (err) {
-        res.status(500).json({ ok: false, error: String((err && err.message) || err) });
+        res.status(500).json({ ok: false, error: safeErr(err) });
     }
 }
