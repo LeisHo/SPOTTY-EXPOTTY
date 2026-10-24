@@ -192,6 +192,11 @@ export function createTimeline(canvas, data) {
             const best = [...buckets.values()].sort((x, y) => y.length - x.length)[0];
             return { solid: A(meanRgb(best)) };
         }
+        // Vivid-dominant variants, per bar: the mean of every album's vivid dominant colour / a bottom-to-top gradient through
+        // every album's vivid dominant colour (in song order) / just the first album's vivid dominant colour.
+        if (o.mode === 'vividAverage') return { solid: A(meanRgb(cs.map(c => c[1]))) };
+        if (o.mode === 'vividGradient') return cs.length === 1 ? { solid: A(cs[0][1]) } : { gradient: cs.map(c => A(c[1])) };
+        if (o.mode === 'vividFirst') return { solid: A(cs[0][1]) };
         // palette: bottom -> top gradient of the bars' averaged palette colours
         return { gradient: [2, 3, 4].map(k => A(meanRgb(cs.map(c => c[k])))) };
     }
@@ -201,9 +206,8 @@ export function createTimeline(canvas, data) {
         if (paint.solid) { ctx.fillStyle = rgbCss(paint.solid, alpha); ctx.fillRect(x, y, w, h); return; }
         if (paint.gradient) {
             const g = ctx.createLinearGradient(0, y + h, 0, y);
-            g.addColorStop(0, rgbCss(paint.gradient[0], alpha));
-            g.addColorStop(0.5, rgbCss(paint.gradient[1], alpha));
-            g.addColorStop(1, rgbCss(paint.gradient[2], alpha));
+            const n = paint.gradient.length; // any number of stops, evenly spaced bottom -> top
+            paint.gradient.forEach((c, i) => g.addColorStop(n === 1 ? 0 : i / (n - 1), rgbCss(c, alpha)));
             ctx.fillStyle = g; ctx.fillRect(x, y, w, h); return;
         }
         const k = paint.stack.length, seg = h / k, gap = Math.min(1, seg * 0.2);
@@ -275,7 +279,7 @@ export function createTimeline(canvas, data) {
             bins.forEach((bn, b) => {
                 if (!bn) return;
                 const paint = binColorOf(bn);
-                const rgb = paint ? (paint.solid || (paint.gradient && paint.gradient[1]) || paint.stack[paint.stack.length - 1]) : hexToRgb(accent);
+                const rgb = paint ? (paint.solid || (paint.gradient && paint.gradient[paint.gradient.length >> 1]) || paint.stack[paint.stack.length - 1]) : hexToRgb(accent);
                 const x = b * bw + bw / 2, top = topH - binH(bn);
                 ctx.save();
                 ctx.shadowColor = rgbCss(rgb, intensity);
@@ -305,7 +309,7 @@ export function createTimeline(canvas, data) {
                 if (colorOpts.on) {
                     for (let d = 0; d < nb; d++) { // nearest non-empty bin
                         const bn = bins[clamp(bi + (d % 2 ? -(d >> 1) - 1 : d >> 1), 0, nb - 1)];
-                        if (bn) { const p = binColorOf(bn); if (p) rgb = p.solid || (p.gradient && p.gradient[1]) || p.stack[p.stack.length >> 1]; break; }
+                        if (bn) { const p = binColorOf(bn); if (p) rgb = p.solid || (p.gradient && p.gradient[p.gradient.length >> 1]) || p.stack[p.stack.length >> 1]; break; }
                     }
                 }
                 grad.addColorStop(f, rgbCss(rgb, 1));
@@ -385,7 +389,7 @@ export function createTimeline(canvas, data) {
                     const bi = clamp(Math.floor((x / cols) * nb), 0, nb - 1);
                     const bn = bins[bi];
                     const p = bn && binColorOf(bn);
-                    if (p) rgb = p.solid || (p.gradient && p.gradient[1]) || p.stack[p.stack.length >> 1];
+                    if (p) rgb = p.solid || (p.gradient && p.gradient[p.gradient.length >> 1]) || p.stack[p.stack.length >> 1];
                 }
                 const th = thick * (0.35 + 0.65 * Math.min(1, cnt[x] / mx));
                 ctx.fillStyle = rgbCss(rgb, Math.min(1, baseAlpha + 0.1));
