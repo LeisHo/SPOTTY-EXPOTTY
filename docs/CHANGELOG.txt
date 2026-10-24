@@ -527,6 +527,21 @@ CORRECTION to the entry above: its header said 04:10 AM - 04:13 AM; measured tim
 code push. The 04:13 was a guess, not a measurement.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  04:13 AM - 04:32 AM EDT  (Save fixed; measured 04:13:34 first probe to 04:32:35 working Save)
+
+Symptom: dev-panel Save returned 502. Cause, read from the endpoint's own response (a live POST with the panel's secret):
+"GitHub commit failed (403): Resource not accessible by personal access token". keyps.txt GOTHOT holds TWO tokens: line 15 is a
+fine-grained github_pat_ token (reads the public repo, cannot write it) and line 17 is a classic ghp_ token with the "repo" scope
+(checked: X-OAuth-Scopes: repo). api/save-settings.js used the FIRST token only, so every write was refused.
+Fix (api/save-settings.js): GITHUB_TOKEN may hold several tokens; values not shaped like a GitHub token are ignored; each token is
+tried in order and the next is used when GitHub answers 401/403. Two mistakes on the way, both fixed within minutes: (1) a stray
+non-header-safe value in the Vercel variable gave "invalid header value" (hence the shape filter); (2) the first version of that
+filter lost its backslashes (split on the letter s) and was live for ~1 minute until the fix at 7565376.
+Verified: a POST to https://spottypotty.vercel.app/api/save-settings returned {"ok":true,"commitSha":"b13a644eb6715e59238bda49849bd08eaecf4b86"}.
+SIDE EFFECT: that test committed data/processed/dev-panel-settings.json containing only {"_diagnostic": ...}. Press Save in the dev
+panel once to replace it with the real settings. Not verified: pressing Save in the actual dev panel (the owner's step).
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
