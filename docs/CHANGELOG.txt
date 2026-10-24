@@ -409,6 +409,13 @@ Note: the playlist ending "Nov 10, 2026" is the future-dated song's date after t
 to the latest playlist; the date itself is untouched.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  02:33 AM EDT (correction)
+
+CORRECTION to the entry above: its header said "~2:20 AM - ~3:05 AM EDT"; the measured times are 02:20:33
+(start) to 02:33:48 (docs pushed), 13m15s. The 3:05 was an estimate written as if it were a time.
+Pushed in order: code bb0da93, then docs f31e452.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
