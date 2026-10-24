@@ -513,6 +513,14 @@ has 20 options and Pacifico applied; smooth border rendered (screenshot). Not ve
 phone (the emulated browser cannot reproduce it); the date line's text on a phone-width canvas.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  04:10 AM - 04:13 AM EDT  (visual cleanup; times are for the code, docs followed)
+
+Volume control: no dark background behind the button or the slider panel, no percent label, and the icon is the speaker
+only (the sound waves and the mute cross are always hidden; the slider is still the only volume cue). Previous/next
+buttons: no background, plain triangles (end-cap bars removed). Cover play glyph 44 px -> 22 px. A soft drop shadow keeps
+the bare icons legible on any background. Checked in the built-in browser (screenshot). Not verified on a real phone.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
