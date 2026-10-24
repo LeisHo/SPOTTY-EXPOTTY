@@ -542,6 +542,31 @@ SIDE EFFECT: that test committed data/processed/dev-panel-settings.json containi
 panel once to replace it with the real settings. Not verified: pressing Save in the actual dev panel (the owner's step).
 
 --------------------------------------------------------------------------------
+2026-10-24  -  05:15 AM - 05:30 AM EDT  (big round: 16 items; times are for the code, docs followed)
+
+Dev panel / settings: Timeline Look > Scrub Line Width (Px) and Height (% Of Timeline); Scrub Audio > Randomize Starting Song (jumps to a random song
+once saved settings have arrived, unless the visitor already moved); Starting Timeline Span Curve sliders now max at 4805 days (the data spans 4,804.6
+days, 2013-09-14 to 2026-11-10); Background > Spotlight Max Brightness (%) (scales the spotlight colour down so its brightest channel stays under the cap)
+and Blur Cover X / Y Offset (% Of Screen); Timeline Look > Album Cover Colors: Vivid Dominant Average / Vivid Dominant Gradient / Vivid Dominant Color Of
+First Album (per bar; the gradient runs bottom to top through every album's vivid colour, any number of stops).
+UI Layout: new toggleable "Volume Button" group (icon size, circle radius, bar width/length, 3 colours, hover tolerance px, drop-down time ms, animation
+speed curve) and "Album Cover" group (scale, X / Y offset; visual only via CSS scale/translate, nothing else moves).
+Volume: the slider now opens when the mouse hovers the icon and closes when it leaves (a tolerance of N px around icon + slider), dropping down / rising up;
+touch still taps. The curve's Y is speed (1 = the time slider's full speed), X is progress of the drop/rise. Group off = the old click behaviour and look.
+Controls: no play icon on the cover (the cover is still the play button); Space = play/pause, Left/Right = previous/next song, Up/Down = volume,
+Shift = bigger step. Previous/next buttons sit 14 px from the browser edges and stay level with the cover's centre (they follow its scale/offset).
+Fixes: a press that lands on the timeline/text but inside a button's rectangle (a tall timeline or a scaled-up cover covering a button) is now that
+button's click instead of a scrub; the background crossfade now also runs on every song change (and the fading layer is now ABOVE the new frame, it was
+below it so the fade never showed), blending correctly when a new fade starts mid-fade.
+Gotchas found: the layout engine writes a left-side relative gap as -calc(...), which is invalid CSS (the position is silently dropped), so the nav
+buttons are shifted with CSS translate in placeNav(); anchor() follows a transformed (scaled/moved) cover, so the shift is computed from the cover's
+on-screen box; an apostrophe inside a single-quoted label in devPanel.js broke the whole panel once (check with node --check).
+Verified in the built-in browser: nav 14 px from both edges and level with the cover at default and at scale 2 / offset, phone 375 px; hover open
+(160 px) / near-bottom stays open / closes; keys (Right/Left changed song, Down lowered volume 0.469 -> 0.419); click through a scaled cover reached the
+cover and did not scrub; crossfade opacity 0.93 -> 0.61 after a song change; new colour modes (gradient 42 distinct colours in a column vs 6).
+Not verified: Space/play on a real song (audio embed silent while the pane is hidden), real phone, Spotlight cap by eye, Blur offset by eye.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
