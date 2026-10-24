@@ -573,6 +573,14 @@ CORRECTION to the entry above: its header said 05:15 AM - 05:30 AM; measured tim
 code push. The 05:30 was a guess, not a measurement (same mistake as before: take the end time from `date`).
 
 --------------------------------------------------------------------------------
+2026-10-24  -  05:25:19 - ~05:28 EDT  (Smooth Density colours; code push time from `date` in the ETA row)
+
+Timeline Visual Style > Smooth Density now reflects the album colour modes' vertical colours: for Stacked Albums, Palette Gradient and Vivid
+Dominant Gradient each bar-wide strip of the density area is painted with that bar's own vertical colours (scaled to the area's height there),
+clipped to the curve. Single-colour modes keep the smooth horizontal gradient. Verified in the built-in browser: distinct colours in one column
+(5-bit quantised) 5 for Average, 41 for Stacked, 127 for Vivid Dominant Gradient; not checked by eye on a phone.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
