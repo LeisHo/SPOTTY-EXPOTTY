@@ -521,6 +521,12 @@ buttons: no background, plain triangles (end-cap bars removed). Cover play glyph
 the bare icons legible on any background. Checked in the built-in browser (screenshot). Not verified on a real phone.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  04:10 AM (correction)
+
+CORRECTION to the entry above: its header said 04:10 AM - 04:13 AM; measured times are 04:10:13 to 04:10:48 (35 s) for the
+code push. The 04:13 was a guess, not a measurement.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
