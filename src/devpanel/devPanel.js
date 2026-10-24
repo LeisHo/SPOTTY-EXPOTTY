@@ -6618,10 +6618,15 @@
             devVisibility: { ...devVisibility },
             devIndependence: { mobile: { ...devIndependence.mobile }, landscape: { ...devIndependence.landscape } },
             devDeviceValues: { mobile: { ...devDeviceValues.mobile }, landscape: { ...devDeviceValues.landscape } },
+            // Per-mode memory of shared sliders (SPOTTY EXPOTTY, see "Per-mode settings memory" in renderSpottyDevControls):
+            // rides along with Copy / Sync / Reset / Undo / Saved Dev Settings like every other captured field.
+            perMode: typeof window.spxCapturePerMode === 'function' ? window.spxCapturePerMode() : undefined,
         };
     }
     function applyFullDevPanelState(state) {
         if (!state) return;
+        window.__spxPerModeRestoring = true; // restore events must not be recorded as the user changing a mode's values
+        setTimeout(() => { window.__spxPerModeRestoring = false; }, 1000); // safety net if anything below throws
         applyControlValues(state.controls);
         // Restore BEFORE syncTabOrderToDesktop() runs below (via
         // applySectionOrder() -> nothing yet, this is a separate call) -
@@ -6673,6 +6678,8 @@
         refreshEmptyGroupVisibility('mobile');
         refreshEmptyGroupVisibility('landscape');
         refreshAllGroupCascadeCheckboxes();
+        if (state.perMode && typeof window.spxApplyPerMode === 'function') window.spxApplyPerMode(state.perMode);
+        window.__spxPerModeRestoring = false;
     }
     function copyDevPanelSettings() {
         const text = JSON.stringify(captureFullDevPanelState(), null, 2);
@@ -7782,6 +7789,63 @@
         document.addEventListener('input', refreshSpottyModeVisibility2);
         setInterval(refreshSpottyModeVisibility2, 700);
         refreshSpottyModeVisibility2();
+
+        // ---- Per-mode settings memory ---------------------------------------------------------------------------
+        // Wherever a mode select drives settings that several modes SHARE (Background's opacity / brightness / saturation /
+        // crossfade / border depth, the bar colour mode's saturation / brightness, the title animation's time / easing),
+        // each mode keeps its OWN values for them: switching mode loads that mode's values into the sliders, and editing a
+        // slider records it for the mode that is showing. A mode visited for the first time inherits the current values and
+        // diverges from then on. Settings that only one mode uses already have their own controls, so they need nothing.
+        // Per device: a Mobile / Landscape twin is remembered under the same mode. Saved with every captured panel state
+        // (captureFullDevPanelState().perMode), so Copy / Sync / Reset / Undo carry it.
+        const PER_MODE = [
+            { select: 'selectBackgroundMode', ids: ['sliderBackgroundOpacity', 'sliderBackgroundBrightness', 'sliderBackgroundSaturation', 'sliderBackgroundTransition', 'sliderBorderDepth'] },
+            { select: 'selectAlbumColorMode', ids: ['sliderAlbumColorSaturation', 'sliderAlbumColorBrightness'] },
+            { select: 'selectTitleAnimMode', ids: ['sliderTitleAnimDuration', 'selectTitleAnimEasing'] },
+        ];
+        let perModeStore = {}; // { selectId: { mode: { elementId: value } } }
+        const PM_DEVS = ['', 'Mobile', 'Landscape'];
+        const pmRead = el => (el.type === 'checkbox' ? el.checked : el.value);
+        const pmWrite = (el, v) => {
+            if (el.type === 'checkbox') el.checked = !!v; else el.value = v;
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+        };
+        const pmSplit = id => { const m = id.match(/^(slider|color|select|checkbox)(Mobile|Landscape)?(.+)$/); return m ? { base: m[1] + m[3], dev: m[2] || '' } : null; };
+        const pmModeOf = (pm, dev) => { const s = document.getElementById(wd(pm.select, dev)) || document.getElementById(pm.select); return s ? s.value : null; };
+        document.addEventListener('input', e => {
+            const el = e.target;
+            if (window.__spxPerModeRestoring || !el || !el.id) return;
+            const sp = pmSplit(el.id);
+            if (!sp) return;
+            PER_MODE.forEach(pm => {
+                if (!pm.ids.includes(sp.base)) return;
+                const mode = pmModeOf(pm, sp.dev);
+                if (mode) ((perModeStore[pm.select] = perModeStore[pm.select] || {})[mode] = perModeStore[pm.select][mode] || {})[el.id] = pmRead(el);
+            });
+        });
+        document.addEventListener('change', e => {
+            const selEl = e.target;
+            if (window.__spxPerModeRestoring || !selEl || selEl.tagName !== 'SELECT') return;
+            const pm = PER_MODE.find(p => PM_DEVS.some(d => wd(p.select, d) === selEl.id));
+            if (!pm) return;
+            const dev = PM_DEVS.find(d => wd(pm.select, d) === selEl.id);
+            // devices this select governs: its own, plus (for Desktop) any twin that has no select of its own
+            const devs = [dev, ...(dev === '' ? PM_DEVS.slice(1).filter(d => !document.getElementById(wd(pm.select, d))) : [])];
+            const mode = selEl.value;
+            const entry = (perModeStore[pm.select] || {})[mode];
+            if (entry) {
+                Object.entries(entry).forEach(([elId, val]) => {
+                    const sp = pmSplit(elId), el = document.getElementById(elId);
+                    if (el && sp && devs.includes(sp.dev) && pmRead(el) !== val) pmWrite(el, val);
+                });
+            } else { // first visit: this mode starts as a copy of what is showing now
+                const store = ((perModeStore[pm.select] = perModeStore[pm.select] || {})[mode] = {});
+                devs.forEach(d => pm.ids.forEach(id => { const el = document.getElementById(wd(id, d)); if (el) store[el.id] = pmRead(el); }));
+            }
+        });
+        window.spxCapturePerMode = () => JSON.parse(JSON.stringify(perModeStore));
+        window.spxApplyPerMode = obj => { perModeStore = obj && typeof obj === 'object' ? JSON.parse(JSON.stringify(obj)) : {}; };
 
         // Show only the settings that belong to the selected Timeline Visual Style.
         const STYLE_CONTROLS = {
