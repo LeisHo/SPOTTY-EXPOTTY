@@ -493,6 +493,26 @@ new songs; the icon was 14 px from the top and right edges at 375 px. Not verifi
 sound (checked through the audio element's volume and the player state, not by ear).
 
 --------------------------------------------------------------------------------
+2026-10-24  -  03:53 AM - 03:56 AM EDT  (six UI changes; times are for the code, docs followed)
+
+1. Previous / next song buttons either side of the album cover (engine elements "Previous Song Button" / "Next Song Button",
+   relative to the cover, 28 px gap; step one song and apply the start-span rule like the arrow keys).
+2. Background transition: the slider already existed (Background > "Crossfade Between Songs (Ms)", shown for every mode
+   except None); nothing added. It cross-fades from the previous frame when the new cover loads.
+3. The exact add date AND time (viewer's local time zone, with seconds) is bold text drawn inside the timeline canvas,
+   under the playlist rows and above the scale text (the strip is 18 px, pinned to the bottom with the axis). Removed
+   "added ..." from the album line. Only the date is shown if an export ever lacks a time of day.
+4. UI Layout > new subgroup "Font": "Font For All Text", 20 options (System Default + 19 Google Fonts, loaded by a link
+   in index.html). Applies to title, artist, album line and the date line. Not applied to the dev panel.
+5. Border Radial: "Stripe Granularity (Color Bands Around Cover)" (colour bands; rays drawn are max(Ray Count, bands)) and
+   "Completely Smooth Colors (No Stripes)" (one conic gradient with a stop per band, blends around the cover).
+6. Mobile title: tap highlight transparent, callout off, and no text selection on touch (coarse-pointer) devices.
+
+Verified in the built-in browser: next/prev moved the song 0 -> 1 -> 0; buttons 28 px from the cover edges; font select
+has 20 options and Pacifico applied; smooth border rendered (screenshot). Not verified: the blue highlight on a real
+phone (the emulated browser cannot reproduce it); the date line's text on a phone-width canvas.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
