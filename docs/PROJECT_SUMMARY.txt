@@ -35,12 +35,24 @@ Built (2026-10-23/24) and tested in the built-in browser:
 - data/processed/timeline.json: 6,345 add events across 42 playlists, 5,450
   (85.9%) with a Deezer clip id. 5,776 unique tracks; 4,939 (85.5%) have an
   exact Deezer-by-ISRC clip, 837 do not (no iTunes fallback used).
-- Scrubbing: click-drag (or one-finger drag) is a RELATIVE scrub along the
-  timeline; mouse wheel / two-finger pinch zooms the timeline (sets how far a
-  drag moves; starts at a 120-day window); arrow keys. Song card shows a cleaned
-  title (remaster/live/feat/year decoration removed; 904 of 5,042 unique titles
-  changed), artist, album and date; the album cover (Spotify oEmbed) is the
-  play/pause button; the Spotify player is invisible and loops when it ends.
+- Input (owner's scheme, 2026-10-24): desktop wheel = scrub, click on the timeline
+  = jump there, click-drag = zoom with the playhead as origin; touch: one-finger
+  drag = scrub, tap = jump, pinch = zoom; arrow keys. Zoom limits are a dev-panel
+  range bar (0-100 % log scale, 2 minutes .. whole timeline). Landing in an empty
+  stretch plays the last song added before that time. The title is a link to the
+  track on Spotify and is cleaned (remaster/live/feat/year decoration removed; 904
+  of 5,042 unique titles changed); the album cover (Spotify oEmbed) is the
+  play/pause button; the Spotify player is invisible and loops when it ends
+  (verified: position reached 29,713 ms, wrapped back and kept playing).
+- Timeline visuals: Bar Width slider; Timeline Visual Style dropdown (None, Glow
+  Stems, Smooth Density, Feature Line, Mood Ribbon) with per-style settings shown
+  only for the selected style; nested toggleable "Album Cover Colors" group (4
+  colour modes: stacked per song, average, vivid dominant, palette gradient).
+- Layout: all on-screen elements (title, artist, album line, cover, timeline) are
+  registered with the UI Layout Engine with per-device overrides, editable in the
+  engine Inspector (dev panel > UI Layout); layout saves with Sync as extra.uiLayout.
+  Tested: Inspector edit moved the cover 158 -> 216 px (30vmin of 720), Sync-payload
+  round trip restored it, phone (375x812) layout fits.
 - Dev-panel Save/Reset go to GitHub through /api/save-settings (ported from
   HANDO); not yet tested end to end on Vercel (needs the save secret).
 - Clip pool (measured 2026-10-24 as time from play() to the 'playing' event,
@@ -51,8 +63,10 @@ Built (2026-10-23/24) and tested in the built-in browser:
 - Spotify embed handoff after scrubbing stops: confirmed the embed switched to
   the right song and played (a 30 s "Preview" because that browser pane wasn't
   logged in to Spotify).
-- 19 dev-panel controls in 5 groups; Mobile twin row confirmed to appear when
-  "Show in Mobile/Landscape" is checked.
+- ~55 dev-panel controls in 7 groups (Scrub Audio, Scrub Preload, Scrub Input,
+  Spotify Handoff, Timeline Look with nested Album Cover Colors, UI Layout);
+  Mobile twin rows confirmed to appear when "Show in Mobile/Landscape" is checked.
+  The scaffold's Component Gallery groups were removed.
 Not tested: real phones/touch, Vercel deployment, logged-in full-song playback.
 
 --------------------------------------------------------------------------------
@@ -67,7 +81,10 @@ DECISIONS
   API key or Premium needed.
 - iTunes fallback not used -- its matches are by title/artist (loose,
   unverified) and its rate limit makes a full pass ~1 hour.
-- Plain-CSS app layout, UI engine only for #appStage (see CLAUDE.md).
+- Position and scale of every element belongs to the UI Layout Engine (owner's
+  request); the engine excludes typography, so text size is three scale sliders.
+- Album cover colours are precomputed offline (Spotify oEmbed + Pillow) because the
+  timeline needs the colours of every song in a bar at any zoom.
 
 --------------------------------------------------------------------------------
 DATA SOURCES

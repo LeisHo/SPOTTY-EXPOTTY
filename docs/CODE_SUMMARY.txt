@@ -14,17 +14,19 @@ duplicated in two places). Summary by folder:
 - `src/app/`, `src/main.js`, `src/app.css` -- the project's own app: scrubbing input, clip pool, Spotify handoff, timeline canvas.
 - `src/devpanel/`, `src/style.css`, `lib/ui-engine/` -- template/engine code, vendored; project settings are added via `renderSpottyDevControls()`.
 - `api/` + `scripts/active/serve.py` -- the preview-link proxy (Vercel / local) and the scaffold's optional settings-save endpoint.
-- `scripts/active/resolve_previews.py`, `build_timeline.py` -- one-off data pipeline (Deezer ids -> `data/processed/timeline.json`).
-- Dead/leftover: the "Component Gallery" demo groups in devPanel.js (reference only).
+- `scripts/active/resolve_previews.py`, `build_timeline.py`, `build_cover_colors.py`, `merge_cover_colors.py` -- one-off data pipeline (Deezer ids, album cover colours -> `data/processed/timeline.json`).
+- Dead/leftover: none known (the scaffold's Component Gallery groups were removed).
 
 --------------------------------------------------------------------------------
 ARCHITECTURE
 
 Offline: Exportify CSVs -> resolve_previews.py (Deezer track ids by ISRC)
 -> build_timeline.py -> data/processed/timeline.json (sorted by Added At).
-Runtime: main.js loads timeline.json; a scrub (wheel / touch drag / arrow keys
-/ dragging the timeline) moves a float position; each change of the rounded
-index re-renders the song card + timeline, plays that song's preload-pool
+Runtime: main.js registers every element with the UI Layout Engine (position/size
+from lib/ui-engine; Inspector for edits), loads timeline.json; a scrub (wheel /
+touch drag / arrow keys / click on the timeline) moves a float position; each
+change of floor(position) (the last song added at or before it) re-renders the
+song card + timeline, plays that song's preload-pool
 clip from a random offset, and re-centers the preload window (wider when
 scrubbing fast). After `Handoff Delay` ms of no movement the clip stops and
 the Spotify embed plays the real song. clipPlayer asks /api/preview for fresh

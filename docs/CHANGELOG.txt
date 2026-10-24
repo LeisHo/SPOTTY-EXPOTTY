@@ -218,6 +218,130 @@ Question to owner: the "green texture" under the bars is the one-row-per-playlis
 strips (thin rows, ~1.9 px each at 35% opacity); left as is.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  ~1:30 AM EDT (end time not measured)
+
+Owner request: songs added to a playlist long after its active period should be moved into
+the appropriate playlist, or just removed from the wrong one if the right one already has them.
+
+Added:
+- scripts/active/fix_stragglers.py: finds those songs and writes the plan to
+  data/processed/playlist-corrections.json (every move: song, from, to, action, reason).
+  Rule: core = densest 190-day window of a playlist's add dates; home = core +/- 45 days;
+  a song dated outside its own playlist's home window is a straggler; its destination is the
+  playlist whose core window contains its date (nearest core edge if only a home window does).
+  Skipped on purpose: MMXIX and MMXX (year-long playlists by name; songs added by 3 accounts)
+  and Treinta.Cero_(2) (all songs stamped 2023-09-30, apparently a copy).
+- build_timeline.py applies the corrections (the source CSVs are NOT modified) and can take
+  the existing timeline.json as its argument to keep the Deezer ids.
+
+Result (data/processed/timeline.json rebuilt): 15 stragglers in 10 playlists: 11 moved and
+4 removed because the destination already had the track. 6,345 -> 6,341 entries. Playlists
+whose first-to-last span exceeds 190 days: 15 -> 6 (the remaining six: MMXIX 609 d, MMXX 348 d,
+Tiga Puluh Dua Nol 227 d, 11101.0001 225 d, 27.Do 201 d, 31.Il 191 d; the last four are real
+tails within a few weeks of the next playlist starting).
+Moves: Junior's 3 songs dated 2014-06-04 -> Junior Sr; Dil Se Re (dated 2026-11-10) -> Trideset Tri Nula;
+Mahler Adagietto (Te Quiero, 2024-01-16) removed (already in Treinta Dos); Turquoise (Vingt-Huit Un,
+2023-10-10) removed (already in Treinta Cero); My Buddy (Treinta Una, 2024-10-18) and Hey Now
+(11101.0001, 2024-08-10) removed (already in the 31.Il playlist); others moved by date.
+
+Not verified: that each destination is the playlist the owner actually intended (the rule is by
+date only; the early college-era playlists overlap heavily). The full list is in the corrections file.
+
+--------------------------------------------------------------------------------
+2026-10-24  -  1:14 AM - ~1:50 AM EDT (end time approximate)
+
+Owner's 11-item round (input redesign, gap rule, album colours, visual styles, gallery, loop, UI engine,
+title link, zoom limits, bar width, selection behaviour). Item 12 of the first message was cut off.
+
+Changed:
+- Input (owner's scheme): wheel = scrub (a notch moves the playhead N px along the current scale,
+  setting "Wheel Scrub Per Notch"), click on the timeline = jump, click-drag = zoom with the playhead as
+  origin (drag right = in; "Drag Zoom Speed", "Invert Drag Zoom Direction"). Touch: one-finger drag scrubs,
+  tap jumps, two-finger pinch zooms. Replaces the earlier relative-drag-scrub + wheel-zoom.
+- The current song is floor(position): the last song added AT OR BEFORE the playhead's time, so an empty
+  stretch plays the most recent earlier song. Verified: playhead set to the middle of an 80-day gap
+  selected the song before the gap.
+- Timeline: Bar Width slider (1-40 px); zoom limits as a dual-handle range bar (0-100 % on a log scale,
+  2 minutes .. whole timeline; verified 40-60 % -> 0.58..11.8 days, full -> 2 min..4,901 days);
+  5 visual styles with per-style settings shown only while selected (None, Glow Stems, Smooth Density,
+  Feature Line [valence/energy/danceability], Mood Ribbon); nested toggleable group "Album Cover Colors"
+  inside Timeline Look with 4 modes (stacked per song, average, vivid dominant, palette gradient) plus
+  saturation and brightness. All 4 styles rendered and checked by eye; 80 style x bar-width x zoom
+  combinations drew without errors.
+- Component Gallery groups removed from devPanel.js.
+- Loop FIXED. Measured via the new window.__spxEvents log: at the end of a 29.7 s preview the embed sends
+  one last update with position == duration and isPaused still false, then nothing, so the old
+  pause-based restart never fired (and the earlier "playing for 52 s, consistent with looping" in the
+  12:54 AM entry was a stuck flag, not playback: CORRECTION to that entry). Now detected by position and
+  restarted with seek(0)+resume(). Verified: position 29,713 -> wrapped to 4,862..9,128 ms and kept
+  climbing.
+- Song title is a link to https://open.spotify.com/track/<id> (new tab).
+- UI Layout Engine: title, artist, album/date line, album cover, timeline and the stage are all registered
+  with createUIElement (group/propertyLabel set; mobilePortrait/mobileLandscape overrides for the timeline
+  height and cover size). Title and timeline use `anchor` mode and the timeline precedes the cover in the
+  DOM because CSS Anchor Positioning (relative mode) needs a shared containing block and an earlier anchor
+  target; both were found by watching elements land at the top-left. The engine's own Inspector opens
+  from dev panel > UI Layout; layout saves/restores with Sync as extra.uiLayout and is removed from
+  the old Timeline Height / Album Cover Size sliders. Added 3 text-scale sliders (the engine excludes typography).
+- engine.css is now linked in index.html (it was not).
+- Selection: the page is unselectable (no blue overlay when dragging over the cover/timeline); the cover
+  is also non-draggable; title/artist/album lines are selectable and copyable, and a drag that starts on
+  them selects instead of zooming. Verified with real drags: title drag selected "Catamaran" without
+  zooming; a drag across the cover left no selection and no highlight.
+- serve.py: reads the POST body before any early return (an unread body made the next request a bogus 501).
+
+Verified in the built-in browser: wheel scrub moved forward/back; 5 of 5 clicks on the timeline landed on
+the expected song; drag-zoom kept the playhead fixed (span 120 -> 45.9 -> 120 days); pinch zoomed on
+spread; one-finger drag moved forward/back; Inspector edit of the cover's preferred width changed it
+158 -> 216 px (30vmin of 720) and a capture/reset/apply round trip restored it; 375x812 layout fits with
+the mobile overrides applied (timeline 150 px, cover 128 px).
+
+Not verified: album cover colours on real data (the colour extraction job,
+scripts/active/build_cover_colors.py, was still running when this was written), a real phone,
+a real Save to GitHub on Vercel. Spotify's oEmbed answers HTTP 429 above a modest request rate, which is
+why the colour job is slow.
+
+--------------------------------------------------------------------------------
+2026-10-24  -  ~1:28 AM - ~2:00 AM EDT (end time approximate)
+
+Finishing pass on the owner's list, plus two late requests (do not clip the album cover; size the
+timeline height without moving anything else). Code pushed first as 433337b, these notes after.
+
+Changed:
+- Album cover: no size ceiling (width clamp max 400 px -> 9999 px), z-index 0 so it renders BEHIND the
+  title/artist/meta/timeline (z-index 2) when scaled up. Positioned from the stage bottom by a fixed
+  offset (228 px; 178 / 138 px on phone portrait / landscape) instead of `relative` to the timeline, so
+  resizing the timeline can no longer move it.
+- Timeline height: new "Timeline Height (Px)" slider (Timeline Look), applied through the layout engine
+  (updateElement on spxTimeline). timeline.js now pins the playlist rows (<= 76 px) and the axis (18 px)
+  to the bottom and gives ALL extra height to the bars. Verified at a 1100x720 viewport: 200 -> 420 px
+  moved no other element (cover, title, artist, meta identical) and the timeline's bottom edge stayed put;
+  at a phone width the timeline height comes from the engine's phone override (150 px), so the slider only
+  changes desktop.
+- Loop re-fixed. The earlier restart (seek(0)+resume() in the same instant as the end-of-track update)
+  was ignored when driven through the app: last update 29.7/29.7 s, then silence. The restart now waits
+  500 ms and uses seek(0)+play(), with a reload-and-play fallback. Verified via the cover button: ended at
+  41.7 s, position back to 0 at 42.2 s and climbing (1, 2, 3.1 s). CORRECTION: the 12:54 AM "~52 s of
+  playback = looping" claim and this morning's "wrapped to 4,862..9,128 ms" were not reproduced; the
+  numbers above are the ones measured through the app.
+- Cover play button: toggleTrack() called controller.resume() on an already-loaded track, which does
+  nothing for an embed that never started; it calls play().
+- build_cover_colors.py: oEmbed returned HTTP 429 (30 of 30 serial lookups) after two copies of the job ran at
+  4-14 requests/s; plain 1 request/s worked. Now 2.5 requests/s on 3 workers, a 60 s pause of all workers on a
+  429, and 404/400/persistent errors recorded as "no cover" after 3 tries (the old loop retried ANY error 60
+  times at 1.5 s, ~90 s per bad track). Progress: ~170 lookups/min; 600 of 2,780 album lookups done at 01:50.
+- The embedded player produced no events at all while the Browser pane was hidden; tests of playback were
+  redone with the pane showing.
+
+Verified (built-in browser): bar width 1 / 3 / 12 / 30 px -> 53 / 31 / 2 / 1 separate bars in a ~1.3-year
+window; zoom limits 0-100 % -> 2 minutes .. 4,901 days, 40-60 % -> 0.58 .. 11.8 days; each style's settings
+visible only while that style is selected; Layout Inspector lists Song Title, Artist, Album & Date Line,
+Timeline, Album Cover; layout capture returns the 6 registered elements.
+
+Not verified: album cover colors on real data (job still running), a real phone, Vercel deployment, a real
+Save to GitHub (needs the secret). Not run: a full-length song loop (only the 30 s preview).
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
