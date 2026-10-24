@@ -56,9 +56,19 @@ async function boot() {
         id: 'appStage', role: 'container', domNode: appStage,
         layout: {
             position: { mode: 'fixed', viewportAnchor: 'top-left', offset: { x: '0px', y: '0px' } },
-            size: { width: { mode: 'fixed', value: '100vw' }, height: { mode: 'fixed', value: '100vh' } },
+            // 100dvh, not 100vh: on a phone 100vh is the height WITH the browser's address bar / bottom toolbar
+            // hidden, so a stage that tall (everything is anchored to its bottom edge) has its bottom under the toolbar.
+            // dvh is the part actually visible, and follows the toolbars as they show and hide.
+            size: { width: { mode: 'fixed', value: '100vw' }, height: { mode: 'fixed', value: '100dvh' } },
         },
     });
+    // Browsers without dvh support (before ~2022): size the stage from the visual viewport instead.
+    if (!(window.CSS && CSS.supports && CSS.supports('height', '100dvh'))) {
+        const fitStage = () => { appStage.style.height = ((window.visualViewport && window.visualViewport.height) || innerHeight) + 'px'; };
+        fitStage();
+        window.addEventListener('resize', fitStage);
+        if (window.visualViewport) window.visualViewport.addEventListener('resize', fitStage);
+    }
     const ctx = (o = {}) => ({
         mobilePortrait: { enabled: true, overrides: o.mobilePortrait || {} },
         mobileLandscape: { enabled: true, overrides: o.mobileLandscape || {} },
@@ -93,7 +103,8 @@ async function boot() {
             position: { mode: 'anchor', horizontal: { anchor: 'center', offset: '0px' }, vertical: { anchor: 'bottom', offset: '14px' } },
             size: { width: { mode: 'fixed', value: '96vw' }, height: { mode: 'fixed', value: '200px' } },
         },
-        contexts: ctx({ mobilePortrait: { heightValue: '150px' }, mobileLandscape: { heightValue: '110px' } }),
+        // phone portrait: lifted 28 px (desktop 14 px) off the bottom edge, clear of the system gesture bar
+        contexts: ctx({ mobilePortrait: { heightValue: '150px', offsetY: '28px' }, mobileLandscape: { heightValue: '110px' } }),
     });
     createUIElement({
         id: 'spxCover', role: 'button', domNode: el('spxCover'), group: 'Album Cover', propertyLabel: 'Position & Size',
@@ -108,7 +119,7 @@ async function boot() {
             },
         },
         contexts: ctx({
-            mobilePortrait: { widthPreferred: '34vmin', offsetY: '178px' },
+            mobilePortrait: { widthPreferred: '34vmin', offsetY: '192px' }, // timeline 28 + 150 high + 14 gap
             mobileLandscape: { widthPreferred: '24vmin', offsetY: '138px' },
         }),
     });
