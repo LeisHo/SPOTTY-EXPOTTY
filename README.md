@@ -22,7 +22,10 @@ py scripts/active/serve.py 8000
 ```
 
 Then open `http://localhost:8000/index.html`, click "Click to enable sound",
-and scroll. Press `D` for the dev panel. Full Spotify playback needs you to be
+and click-drag along the timeline to scrub (mouse wheel or a two-finger pinch
+zooms the timeline; the album cover plays/pauses the song). Press `D` for the
+dev panel. Its Save button commits to GitHub, so it only works on the Vercel
+site (`https://spottypotty.vercel.app/?dev=1`), where it asks once for the save secret. Full Spotify playback needs you to be
 logged in to Spotify in the same browser; otherwise the embed plays a
 30-second preview. On Vercel, `api/preview.js` serves the same proxy route.
 

@@ -6352,6 +6352,86 @@
     // ----------------------------------------------------------------
     const DEV_PANEL_LOCALSTORAGE_KEY = 'devPanelSettings';
 
+    // ---- Remote (git-tracked) Save: CLAUDE.md S12l -----------------------------
+    // Sync (Save) POSTs the whole panel state to /api/save-settings, which commits it to
+    // data/processed/dev-panel-settings.json in GitHub; page load and Reset GET it back.
+    // Behaviour ported from HANDO / HANDY DANDIES (their working save): SINGLE-TIER --
+    // when the endpoint is unreachable or misconfigured Save shows an honest error rather
+    // than silently writing to localStorage, so a broken remote save is never mistaken
+    // for a working one. localStorage only holds a pre-existing local copy for boot.
+    const DEV_PANEL_REMOTE_ENDPOINT = '/api/save-settings';
+    // The anti-abuse token (= the DEV_PANEL_SAVE_SECRET env var on Vercel). HANDO and
+    // HANDY DANDIES commit this value as a constant in main.js; this project does not,
+    // because workspace CLAUDE.md S12l says never to put it in committed/client code.
+    // So it's asked for once per browser and kept in localStorage (never in the repo).
+    // Set this constant only if you deliberately choose the HANDO-style embedded token.
+    const DEV_PANEL_SAVE_SECRET = '';
+    const DEV_PANEL_SECRET_LS_KEY = 'devPanelSaveSecret';
+    function getDevPanelSaveSecret(forcePrompt) {
+        if (DEV_PANEL_SAVE_SECRET) return DEV_PANEL_SAVE_SECRET;
+        let s = '';
+        try { if (!forcePrompt) s = localStorage.getItem(DEV_PANEL_SECRET_LS_KEY) || ''; } catch (e) { /* storage blocked */ }
+        if (!s) {
+            s = (window.prompt('Dev panel save secret (the DEV_PANEL_SAVE_SECRET value set on Vercel). It is stored in this browser only, never in the repo:') || '').trim();
+            if (s) { try { localStorage.setItem(DEV_PANEL_SECRET_LS_KEY, s); } catch (e) { /* storage blocked */ } }
+        }
+        return s;
+    }
+    // gzip + base64 transport (Vercel caps bodies at 4.5 MB); plain JSON when CompressionStream is missing.
+    async function devPanelGzipBase64(text) {
+        const stream = new Blob([text]).stream().pipeThrough(new CompressionStream('gzip'));
+        const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+        let bin = '';
+        for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+        return btoa(bin);
+    }
+    async function devPanelGunzipBase64(b64) {
+        const bin = atob(b64);
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+        return JSON.parse(await new Response(stream).text());
+    }
+    // Resolves { ok, settings, status, error }; status 0 = network failure. Never throws.
+    async function fetchRemoteDevSettings() {
+        try {
+            const resp = await fetch(DEV_PANEL_REMOTE_ENDPOINT + '?gz=1', { cache: 'no-store' });
+            const body = await resp.json().catch(() => ({}));
+            if (!resp.ok || body.ok !== true) return { ok: false, settings: null, status: resp.status, error: body.error };
+            if (typeof body.gz === 'string') return { ok: true, settings: await devPanelGunzipBase64(body.gz), status: 200 };
+            return { ok: true, settings: body.settings || null, status: 200 };
+        } catch (e) { return { ok: false, settings: null, status: 0, error: 'offline/unreachable' }; }
+    }
+    // Resolves { ok, status, error }. Never throws.
+    async function postRemoteDevSettings(secret, obj) {
+        try {
+            const json = JSON.stringify(obj);
+            const payload = (typeof CompressionStream === 'function') ? JSON.stringify({ gz: await devPanelGzipBase64(json) }) : json;
+            const resp = await fetch(DEV_PANEL_REMOTE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Dev-Panel-Secret': secret },
+                body: payload,
+            });
+            const body = await resp.json().catch(() => ({}));
+            if (resp.ok && body.ok === true) return { ok: true, status: resp.status };
+            return { ok: false, status: resp.status, error: body.error || ('HTTP ' + resp.status) };
+        } catch (e) { return { ok: false, status: 0, error: 'offline/unreachable' }; }
+    }
+    // Boot-time restore: retries (500 ms doubling to a 10 s cap) ONLY while the network
+    // itself is failing -- the fetch can lose to a flaky mobile connection. Once the
+    // server answers at all (even "not configured" or "nothing saved yet") it stops, so a
+    // local dev server without GitHub credentials doesn't poll forever.
+    async function fetchRemoteDevSettingsWhenReachable(onDone) {
+        if (location.protocol === 'file:') return;
+        let delay = 500;
+        for (;;) {
+            const got = await fetchRemoteDevSettings();
+            if (got.status !== 0) { onDone(got); return; }
+            await new Promise(resolve => setTimeout(resolve, delay));
+            delay = Math.min(delay * 2, 10000);
+        }
+    }
+
     function captureAllRegisteredControlValues() {
         const out = {};
         DEV_PANEL_REGISTERED_ARRAYS.forEach(({ array }) => {
@@ -6506,7 +6586,7 @@
             btn.title = 'Sync (Save)';
         }, 1800);
     }
-    function saveDevPanelSettings() {
+    async function saveDevPanelSettings() {
         const status = document.getElementById('devSaveSyncStatus');
         try {
             const payload = captureFullDevPanelState();
@@ -6514,7 +6594,20 @@
             // registered controls (devSaveCaptureExtra, above) so Save
             // captures it too, not just Undo/Redo.
             if (devSaveCaptureExtra) payload.extra = devSaveCaptureExtra();
-            localStorage.setItem(DEV_PANEL_LOCALSTORAGE_KEY, JSON.stringify(payload));
+            // Remote save (see the [Remote Save] block above): GitHub via /api/save-settings,
+            // NOT localStorage. A 401 means the stored secret is wrong: ask again once.
+            if (status) status.textContent = 'saving...';
+            let secret = getDevPanelSaveSecret(false);
+            if (!secret) throw new Error('no save secret entered');
+            let result = await postRemoteDevSettings(secret, payload);
+            if (!result.ok && result.status === 401) {
+                secret = getDevPanelSaveSecret(true);
+                if (!secret) throw new Error('no save secret entered');
+                result = await postRemoteDevSettings(secret, payload);
+            }
+            if (!result.ok) throw new Error(result.error || 'save failed');
+            // Saved remotely: drop any stale local copy so it can't override the GitHub one on boot.
+            try { localStorage.removeItem(DEV_PANEL_LOCALSTORAGE_KEY); } catch (e) { /* storage blocked */ }
             // A real gap, found and fixed 2026-09-28: this function was
             // ALWAYS meant to draw a hard undo/redo line at every Save
             // ("until i click save, then it starts new again" — see
@@ -6526,11 +6619,12 @@
             // git-tracked settings log, §12l, is that history — Undo/Redo
             // are session-only and were never meant to reach past a Save).
             clearDevPanelUndoStack();
-            if (status) { status.textContent = 'saved'; setTimeout(() => { status.textContent = ''; }, 1500); }
-            flashDevHeaderSyncStatus(true, 'Saved!');
+            if (status) { status.textContent = 'saved to GitHub'; setTimeout(() => { status.textContent = ''; }, 2500); }
+            flashDevHeaderSyncStatus(true, 'Saved to GitHub!');
         } catch (e) {
-            if (status) status.textContent = 'save failed';
-            flashDevHeaderSyncStatus(false, 'Save failed');
+            const msg = (e && e.message) || 'save failed';
+            if (status) status.textContent = 'save failed: ' + msg;
+            flashDevHeaderSyncStatus(false, 'Save failed: ' + msg);
         }
     }
     function loadDevPanelSettings() {
@@ -6548,8 +6642,11 @@
         applyFullDevPanelState(data);
         if (data && data.extra !== undefined && devSaveApplyExtra) devSaveApplyExtra(data.extra);
     }
-    function resetDevPanelSettings() {
-        applyDevPanelStateWithExtra(loadDevPanelSettings());
+    async function resetDevPanelSettings() {
+        // Restore from GitHub (the saved source of truth); fall back to a local copy only
+        // when the server can't be reached or has nothing saved yet.
+        const got = await fetchRemoteDevSettings();
+        applyDevPanelStateWithExtra(got.ok && got.settings ? got.settings : loadDevPanelSettings());
         renderAllHotkeyBadges();
     }
 
@@ -7284,15 +7381,16 @@
             { tab, group: 'Scrub Preload', id: 'sliderPreloadAhead', type: 'slider', label: 'Preload Ahead (Songs):', min: 0, max: 30, step: 1, value: 8 },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadBehind', type: 'slider', label: 'Preload Behind (Songs):', min: 0, max: 30, step: 1, value: 3 },
             { tab, group: 'Scrub Preload', id: 'checkboxShowPoolOverlay', type: 'checkbox', label: 'Show Preload Pool Overlay:', value: false },
-            { tab, group: 'Scrub Input', id: 'sliderSongsPerWheelNotch', type: 'slider', label: 'Songs Per Wheel Notch (Songs):', min: 0.1, max: 20, step: 0.1, value: 1 },
-            { tab, group: 'Scrub Input', id: 'sliderSongsPerDrag100', type: 'slider', label: 'Songs Per 100 Px Touch Drag (Songs):', min: 1, max: 60, step: 1, value: 12 },
-            { tab, group: 'Scrub Input', id: 'checkboxInvertScroll', type: 'checkbox', label: 'Invert Scroll Direction:', value: false },
+            { tab, group: 'Scrub Input', id: 'sliderTimelineZoomSpeed', type: 'slider', label: 'Zoom Speed (x):', min: 0.1, max: 5, step: 0.1, value: 1 },
+            { tab, group: 'Scrub Input', id: 'sliderDefaultTimelineSpanDays', type: 'slider', label: 'Starting Timeline Span (Days):', min: 1, max: 5000, step: 1, value: 120 },
+            { tab, group: 'Scrub Input', id: 'checkboxInvertScroll', type: 'checkbox', label: 'Invert Drag Direction:', value: false },
             { tab, group: 'Spotify Handoff', id: 'checkboxHandoffEnabled', type: 'checkbox', label: 'Play Real Song When Scrubbing Stops:', value: true },
             { tab, group: 'Spotify Handoff', id: 'sliderHandoffDelay', type: 'slider', label: 'Handoff Delay After Scrubbing Stops (Ms):', min: 100, max: 3000, step: 50, value: 600 },
             { tab, group: 'Timeline Look', id: 'colorTimelineAccent', type: 'color', label: 'Timeline Accent Color:', value: '#1db954' },
             { tab, group: 'Timeline Look', id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
             { tab, group: 'Timeline Look', id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 80, max: 500, step: 5, value: 200 },
             { tab, group: 'Timeline Look', id: 'sliderTimelineBarOpacity', type: 'slider', label: 'Timeline Bar Opacity (x):', min: 0.1, max: 1, step: 0.05, value: 0.8 },
+            { tab, group: 'Timeline Look', id: 'sliderCoverSize', type: 'slider', label: 'Album Cover Size (Px):', min: 80, max: 400, step: 5, value: 180 },
         ];
         renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_CONTROLS', SPOTTY_CONTROLS);
@@ -7436,7 +7534,12 @@
         syncSlidersFromState();
         syncColorPickersFromState();
 
+        // Any pre-existing local copy first (instant), then the GitHub copy replaces it as soon
+        // as it arrives (it is the source of truth; ported from HANDO's boot restore).
         applyDevPanelStateWithExtra(loadDevPanelSettings());
+        fetchRemoteDevSettingsWhenReachable(got => {
+            if (got.ok && got.settings) { applyDevPanelStateWithExtra(got.settings); renderAllHotkeyBadges(); }
+        });
 
         // Render hotkey badges for all controls once panel is built
         renderAllHotkeyBadges();

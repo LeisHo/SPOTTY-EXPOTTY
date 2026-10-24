@@ -1,13 +1,15 @@
 // SPOTTY EXPOTTY -- host entry point.
-// Scroll (wheel / touch drag / arrow keys) or drag the timeline to scrub through
-// every song added to the diary playlists, in the order they were added. While
-// scrubbing, 30-second preview clips flash past from a preloaded pool; when
-// scrubbing stops, the real song plays in Spotify's embedded player.
+// Click-drag (or one-finger drag) along the timeline to scrub through every song added to
+// the diary playlists, in the order they were added; the mouse wheel / two-finger pinch zooms
+// the timeline, which sets how far a drag moves. While scrubbing, 30-second preview clips
+// flash past from a preloaded pool; when scrubbing stops, the real song plays in Spotify's
+// (invisible) embedded player. The album cover is the play/pause button.
 import { createUIElement, resolveAndApplyAll } from '../lib/ui-engine/registry.mjs';
 import { setting } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo } from './app/clipPlayer.js';
-import { initEmbed, playTrack, pauseEmbed, embedStatus } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, embedStatus } from './app/handoff.js';
+import { cleanTitle } from './app/title.mjs';
 
 const appStage = document.getElementById('appStage');
 if (appStage) {
@@ -34,12 +36,14 @@ async function boot() {
     appStage.innerHTML = `
         <div class="spx-app">
             <div class="spx-zone" id="spxZone">
-                <div class="spx-kicker" id="spxKicker"></div>
                 <div class="spx-title" id="spxTitle">Loading…</div>
                 <div class="spx-artist" id="spxArtist"></div>
                 <div class="spx-meta" id="spxMeta"></div>
-                <div class="spx-hint">Scroll, drag, or use ← → to scrub through the songs in the order you added them.</div>
             </div>
+            <button class="spx-cover" id="spxCover" type="button" aria-label="Play">
+                <img id="spxCoverImg" alt="">
+                <span class="spx-cover-glyph" id="spxGlyph">▶</span>
+            </button>
             <canvas class="spx-timeline" id="spxTimeline"></canvas>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
             <div class="spx-pool" id="spxPool" hidden></div>
@@ -56,20 +60,43 @@ async function boot() {
     const songs = data.songs;
     let pos = 0, idx = 0, dir = 1, handedOff = false, handoffTimer = 0, preloadQueued = false, moveLog = [];
 
-    const timeline = createTimeline(el('spxTimeline'), data, i => seek(i));
+    const timeline = createTimeline(el('spxTimeline'), data);
     const applyLook = () => {
         el('spxTimeline').style.height = setting('sliderTimelineHeight') + 'px';
-        timeline.draw(idx);
+        const cover = el('spxCover');
+        cover.style.width = setting('sliderCoverSize') + 'px';
+        timeline.draw();
         el('spxPool').hidden = !setting('checkboxShowPoolOverlay');
     };
 
+    // ---- album cover (Spotify oEmbed; allows browser access) ----------------
+    const coverCache = new Map();
+    let coverTimer = 0;
+    async function coverUrl(id) {
+        if (coverCache.has(id)) return coverCache.get(id);
+        let url = '';
+        try {
+            const r = await fetch('https://open.spotify.com/oembed?url=' + encodeURIComponent('https://open.spotify.com/track/' + id));
+            url = (await r.json()).thumbnail_url || '';
+        } catch (e) { /* offline or blocked: no cover */ }
+        coverCache.set(id, url);
+        return url;
+    }
+    function scheduleCover() {
+        clearTimeout(coverTimer); // don't fetch a cover for every song flashing past
+        coverTimer = setTimeout(async () => {
+            const id = songs[idx].id;
+            const url = await coverUrl(id);
+            if (songs[idx].id === id && url) el('spxCoverImg').src = url;
+        }, 150);
+    }
+
     function render() {
         const s = songs[idx];
-        el('spxKicker').textContent = `${data.playlists[s.p].name}  ·  ${idx + 1} / ${songs.length}`;
-        el('spxTitle').textContent = s.n;
+        el('spxTitle').textContent = cleanTitle(s.n);
         el('spxArtist').textContent = s.a;
         el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}  ·  added ${fmtDate(s.t)}${s.d ? '' : '  ·  no preview clip'}`;
-        timeline.draw(idx);
+        scheduleCover();
     }
 
     function schedulePreload() {
@@ -114,33 +141,54 @@ async function boot() {
 
     function moveTo(p) {
         pos = clamp(p, 0, songs.length - 1);
+        timeline.setPos(pos);
         const n = Math.round(pos);
         if (n !== idx) onIndexChange(n);
+        timeline.draw();
     }
-    function seek(i) { moveTo(i); }
+    const seek = i => moveTo(i);
 
-    // wheel
+    // ---- input ---------------------------------------------------------------
+    // Wheel = zoom (changes the scrub scale). Drag = relative scrub: moving the pointer dx px
+    // moves the playhead dx px along the current scale, wherever the drag started, so it
+    // advances song by song through the preloaded clips instead of jumping to the cursor.
     window.addEventListener('wheel', e => {
         if (e.target.closest && e.target.closest('#devPanel')) return;
         e.preventDefault();
         const unit = e.deltaMode === 1 ? e.deltaY / 3 : e.deltaY / 100;
-        moveTo(pos + unit * setting('sliderSongsPerWheelNotch') * (setting('checkboxInvertScroll') ? -1 : 1));
+        timeline.zoomBy(Math.exp(unit * 0.25 * setting('sliderTimelineZoomSpeed')));
+        timeline.draw();
     }, { passive: false });
 
-    // touch drag (vertical)
-    let touchY = null;
-    el('spxZone').addEventListener('pointerdown', e => { if (e.pointerType === 'touch') touchY = e.clientY; });
-    window.addEventListener('pointermove', e => {
-        if (touchY === null || e.pointerType !== 'touch') return;
-        const dy = touchY - e.clientY;
-        touchY = e.clientY;
-        moveTo(pos + (dy / 100) * setting('sliderSongsPerDrag100') * (setting('checkboxInvertScroll') ? -1 : 1));
+    const ptrs = new Map();
+    let pinchDist = 0;
+    const pinchSpan = () => { const [a, b] = [...ptrs.values()]; return Math.hypot(a.x - b.x, a.y - b.y) || 1; };
+    window.addEventListener('pointerdown', e => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        if (!e.target.closest || !e.target.closest('#spxZone, #spxTimeline')) return;
+        ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (ptrs.size === 2) pinchDist = pinchSpan();
     });
-    const endTouch = () => { touchY = null; };
-    window.addEventListener('pointerup', endTouch);
-    window.addEventListener('pointercancel', endTouch);
+    window.addEventListener('pointermove', e => {
+        const prev = ptrs.get(e.pointerId);
+        if (!prev) return;
+        const cur = { x: e.clientX, y: e.clientY };
+        if (ptrs.size === 1) {
+            const sign = setting('checkboxInvertScroll') ? -1 : 1;
+            moveTo(timeline.scrubFromDrag((cur.x - prev.x) * sign));
+            ptrs.set(e.pointerId, cur);
+        } else if (ptrs.size === 2) {
+            ptrs.set(e.pointerId, cur);
+            const d = pinchSpan();
+            timeline.zoomBy(pinchDist / d); // fingers apart = zoom in (smaller span)
+            pinchDist = d;
+            timeline.draw();
+        }
+    });
+    const endPointer = e => { ptrs.delete(e.pointerId); if (ptrs.size === 2) pinchDist = pinchSpan(); };
+    window.addEventListener('pointerup', endPointer);
+    window.addEventListener('pointercancel', endPointer);
 
-    // keyboard
     window.addEventListener('keydown', e => {
         if (e.target.closest && e.target.closest('input, select, textarea, #devPanel')) return;
         const step = e.shiftKey ? 10 : 1;
@@ -152,9 +200,10 @@ async function boot() {
         e.preventDefault();
     });
 
-    // Sound unlock: browsers require a user gesture before audio can start. The first
-    // click or key press ANYWHERE counts (not just the button), so the overlay can't
-    // get stuck behind the dev panel or on a small screen.
+    // ---- sound unlock + album-cover play button ------------------------------
+    // Browsers require a user gesture before audio can start. The first click or key press
+    // ANYWHERE counts (not just the button), so the overlay can't get stuck behind the dev
+    // panel or on a small screen.
     const unlockSound = () => {
         if (isUnlocked()) return;
         unlock();
@@ -165,6 +214,18 @@ async function boot() {
     document.addEventListener('pointerdown', unlockSound, { capture: true, once: true });
     document.addEventListener('keydown', unlockSound, { capture: true, once: true });
     el('spxStartBtn').addEventListener('click', unlockSound);
+
+    el('spxCover').addEventListener('click', () => {
+        unlockSound();
+        clearTimeout(handoffTimer);
+        stopClip();
+        toggleTrack(songs[idx].id);
+    });
+    onPlayState(playing => {
+        el('spxGlyph').textContent = playing ? '❚❚' : '▶';
+        el('spxCover').classList.toggle('playing', playing);
+        el('spxCover').setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    });
 
     // settings changes (dev panel controls fire input/change)
     document.addEventListener('input', applyLook);
@@ -180,8 +241,10 @@ async function boot() {
     initEmbed(el('spxEmbed'), songs[0].id);
     applyLook();
     render();
+    timeline.setPos(0);
+    timeline.draw();
     schedulePreload();
-    window.spotty = { songs, seek, moveTo, get idx() { return idx; }, poolInfo, playClip, unlock };
+    window.spotty = { songs, seek, moveTo, timeline, get idx() { return idx; }, get pos() { return pos; }, poolInfo, playClip, unlock };
 }
 
 boot();

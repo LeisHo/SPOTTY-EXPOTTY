@@ -160,6 +160,64 @@ Not verified: real phone/touch, Vercel deployment, a real mouse wheel at the
 owner's actual scroll speed.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  12:44 AM - 12:54 AM EDT
+
+Owner's feedback round: scrub input, cover button, cleaner display, GitHub save.
+
+Changed:
+- Removed the "N / 6,345" counter and playlist name line, and the instruction text.
+- Album cover (Spotify oEmbed thumbnail; allows browser access) sits between the
+  text and the timeline and is the play/pause button.
+- Spotify player is invisible; it loops when the track/preview ends (handoff.js
+  restarts on an unrequested end-of-track pause).
+- Track titles cleaned by src/app/title.mjs (checked against all 5,042 unique
+  titles: 904 changed; real parentheticals like "(I'm Afraid) The Masquerade Is
+  Over" kept).
+- Desktop click-drag is now a RELATIVE scrub (dx px moves the playhead dx px) instead
+  of jumping to the cursor's date; a click without movement does nothing.
+- Timeline rewritten as a zoomable date window (timeline.js): wheel / two-finger
+  pinch zoom (anchored on the playhead) set the scrub scale; starts at 120 days.
+  Wheel no longer scrubs. Dev controls: removed Songs Per Wheel Notch and Songs Per
+  100 Px Touch Drag; added Zoom Speed, Starting Timeline Span (Days), Album Cover
+  Size (Px); "Invert Scroll Direction" relabelled "Invert Drag Direction" (same id).
+- Dev-panel Save/Reset now go to GitHub (see below), not localStorage.
+
+Dev-panel save (owner: "look at HANDO, HANDY DANDIES, their save works"):
+- Read HANDO's api/save-settings.js and devPanel.js. Ported its server version to
+  api/save-settings.js (repo/branch defaults LeisHo/SPOTTY-EXPOTTY and main; GET needs
+  only the token; gzip transport; download_url fallback for >1 MB files). Probe of
+  https://spottypotty.vercel.app/api/save-settings before this change: HTTP 503
+  "GITHUB_TOKEN/GITHUB_REPO not configured" (the scaffold's version required GITHUB_REPO).
+- devPanel.js: saveDevPanelSettings() POSTs the full panel state (gzip+base64) and shows
+  an honest error on failure instead of writing localStorage; a stale local copy is
+  removed after a successful save. Boot loads any local copy, then the GitHub copy
+  replaces it (retrying only while the network fails); Reset re-fetches from GitHub.
+- Deliberate difference from HANDO/HANDY DANDIES: they commit the save secret as a
+  constant in main.js; this project does not (workspace CLAUDE.md S12l). The panel
+  asks for it once per browser and stores it in localStorage. Decision for the owner.
+
+Fixed:
+- The invisible embed produced no audio when parked at left:-10000px; it now sits on
+  screen at 1% opacity behind the page.
+
+Verified (built-in browser, 1100x720 emulated):
+- No kicker/hint elements; cover between text and timeline; cover image loaded.
+- Drag 300 px at the 120-day scale moved 0 -> 23 songs in small steps; a click with
+  no movement did not move; wheel up/down changed the span 120 -> 56.7 -> 537.8 days
+  without changing the current song.
+- Cover click started playback once the embed was on-screen; playback continued
+  ~52 s past its start (a preview is 30 s), consistent with looping; the restart
+  event itself was not observed.
+- Save with a fake secret against the local server showed "Save failed: GITHUB_TOKEN/
+  GITHUB_REPO not set..." and wrote nothing to localStorage.
+
+Not verified: a real Save to GitHub on Vercel (needs the secret), pinch on a real
+touch screen, logged-in full-song playback (looping of a full song).
+Not done: item 12 of the owner's message was cut off and never received.
+Question to owner: the "green texture" under the bars is the one-row-per-playlist
+strips (thin rows, ~1.9 px each at 35% opacity); left as is.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
