@@ -47,8 +47,8 @@ async function boot() {
                 <span class="spx-cover-glyph" id="spxGlyph">▶</span>
             </button>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
-            <button class="ui-element spx-nav" id="spxPrev" type="button" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
-            <button class="ui-element spx-nav" id="spxNext" type="button" aria-label="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+            <button class="ui-element spx-nav" id="spxPrev" type="button" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14L6 12z"/></svg></button>
+            <button class="ui-element spx-nav" id="spxNext" type="button" aria-label="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14l12-7z"/></svg></button>
             <div class="ui-element spx-volume" id="spxVolume">
                 <button type="button" class="spx-vol-btn" aria-label="Volume" aria-expanded="false" data-level="high">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="w3" d="M21 4.5a11 11 0 0 1 0 15"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>
