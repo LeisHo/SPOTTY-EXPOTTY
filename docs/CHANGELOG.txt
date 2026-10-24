@@ -416,6 +416,29 @@ CORRECTION to the entry above: its header said "~2:20 AM - ~3:05 AM EDT"; the me
 Pushed in order: code bb0da93, then docs f31e452.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  03:16 AM - 03:19 AM EDT
+
+Owner checked the app on a real phone: (1) album cover and timeline too low, timeline cropped by the bottom
+edge; (2) the Timeline Height slider did nothing on the phone. Code pushed first (5869c38, 0cf3b82).
+
+1. Cropping. The stage was `100vh` tall and everything is anchored to its bottom edge. On a phone 100vh is
+   the height WITH the browser's address bar / bottom toolbar hidden, so the bottom of the stage sat under
+   the toolbar. The stage is now `100dvh` (dynamic viewport height = what is actually visible; it follows the
+   toolbars as they show/hide), with a visualViewport-based fallback for browsers without dvh. Phone
+   portrait also moved up a little: the timeline sits 28 px off the bottom (was 14), the cover 192 px (was 178).
+   Verified in the 375x812 emulation: stage = 100dvh = 812 px, timeline bottom gap 28 px, cover 14 px above
+   the timeline. NOT reproduced: the real browser toolbar cannot be emulated in this pane, so the crop itself
+   was not seen or confirmed fixed on a real phone; the fix follows from what 100vh vs 100dvh mean.
+2. Slider. On a phone the engine's own per-device timeline height (150 px portrait / 110 px landscape) overrides
+   the base height that the slider wrote, so the slider only changed desktop (I had noted this limitation
+   in the 12:44 AM entry and should have fixed it then). The slider now writes to the ACTIVE context with
+   setContextValue, once it has been touched (until then a phone keeps its 150 / 110 px defaults). Verified at
+   375 px: default 150; the slider 260 -> 260; the phone twin 320 -> 320 and 120 -> 120; the bottom gap stays
+   28 px and the cover does not move. Desktop unchanged (200 -> 400 -> 200, gap 14 px).
+
+Not verified: a real phone (iOS Safari / Chrome Android), landscape phone by eye.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
