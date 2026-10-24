@@ -587,6 +587,21 @@ CORRECTION to the Smooth Density entry above: its header said ~05:28; the measur
 The "~05:28" was written before the clock was read. (Third time: write the end time only after running `date`.)
 
 --------------------------------------------------------------------------------
+2026-10-24  -  05:28:38 - 05:30:24 EDT  (per-mode settings memory; measured from `date`, code push)
+
+Request: wherever a mode select drives settings, save the relevant settings per mode so the sliders sync when switching modes.
+Done in devPanel.js (renderSpottyDevControls, "Per-mode settings memory"): for each mode select, the sliders SHARED between its modes keep their own value per
+mode - Background mode: Opacity, Brightness, Saturation, Crossfade, Border Sample Depth; Album Cover Colors mode (the bar colour mode): Saturation Boost,
+Brightness; Track Title Animation mode: Animation Time, Easing. Editing a slider records it for the mode showing; switching mode loads that mode's values
+(Desktop + Mobile/Landscape twins); a mode visited for the first time inherits the current values and diverges from then on. Settings that only one mode
+uses (e.g. Blur Radius, Spotlight Radius, each timeline style's own sliders) already had their own controls, so they need nothing. The store is saved with
+captureFullDevPanelState().perMode (so Copy / Sync / Reset / Undo / Saved Dev Settings carry it); restore events are ignored while __spxPerModeRestoring.
+Not covered (say so if wanted): the Timeline Visual Style select (its sliders are already per style), Bar Width / Bar Opacity (global to every style),
+the gradient/palette type selects. Verified in the built-in browser: switching Background modes color -> gradient -> borderRadial -> borderAverage and back
+restored 0.5 / 0.9 / 33 / 5 as set; same check for the bar colour mode (stacked 1.8 vs average 0.4) and title animation time (bold 500 vs pulse 90);
+a captured state round-trips. Not verified: a real Sync/Reset round trip through GitHub, Mobile/Landscape twins.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
