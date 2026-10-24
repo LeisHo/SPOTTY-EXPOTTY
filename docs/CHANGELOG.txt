@@ -474,6 +474,25 @@ CORRECTION to the entry above: its header said 03:22 AM - 03:28 AM; the measured
 the end time from `date`, never from an estimate).
 
 --------------------------------------------------------------------------------
+2026-10-24  -  03:33 AM - 03:36 AM EDT  (volume control; times are for the code, docs followed)
+
+Request: "On the top right on the page add a volume icon. When clicked it expands into a vertical slider for volume".
+
+Added src/app/volume.js plus .spx-volume styles (app.css). A 44 px round speaker button sits 14 px from the
+top-right corner (registered with the UI engine, so it is in the Inspector and works on phone contexts). Clicking
+it opens a vertical slider (drag or tap the track, arrow keys / Home / End when focused); outside click or Escape
+closes it. The icon shows mute / low / mid / high. The value is remembered in localStorage (spxVolume).
+
+What it controls: it is a master multiplier on the scrub preview clips (clip volume = dev panel "Clip Volume" x
+master). Spotify's embedded player has NO volume method, so the real song / Spotify preview is NOT scaled by the
+slider. At exactly 0% the app treats everything as muted: it pauses the Spotify player and does not start it.
+
+Verified in the built-in browser (1100x720 and 375x812): clip volume 0.7 at 100%, 0.35 at 50%; 30% restored after
+reload; at 60% the Spotify player started (9 embed events), at 0% it stopped and stayed off while scrubbing to
+new songs; the icon was 14 px from the top and right edges at 375 px. Not verified: a real phone; hearing the
+sound (checked through the audio element's volume and the player state, not by ear).
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
