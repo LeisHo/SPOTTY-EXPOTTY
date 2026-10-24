@@ -4927,7 +4927,136 @@
         row.appendChild(btn);
         return row;
     }
-    const UNIFORM_ROW_BUILDERS = { slider: buildSliderRow, color: buildColorRow, select: buildSelectRow, checkbox: buildCheckboxRow, button: buildButtonRow, 'list-picker': buildListPickerRow, 'curve-editor': buildCurveEditorRow, 'range-bar': buildRangeBarRow };
+    // ---- Gradient editor: a multi-stop color gradient control (project addition, not in the template) ----
+    // A preview bar: click it to add a stop (colored from the gradient at that point), drag a stop to move
+    // it, click a stop to select it and edit its color / position below, plus Remove (keeps >= 2) and
+    // Reverse. The value is {stops:[{p:0..1, c:'#rrggbb'}, ...]} in a hidden input with id = ctrl.id, so
+    // Copy / Save / Reset / Undo and the Mobile/Landscape mirroring treat it like the curve editor does
+    // (its id therefore starts with `curveEditor`: that prefix is what the per-device mirroring matches).
+    function buildGradientEditorRow(ctrl) {
+        const row = document.createElement('div');
+        row.className = 'dev-row dev-gradient-row-container';
+        const label = document.createElement('span');
+        label.className = 'dev-label';
+        label.textContent = ctrl.label;
+        row.appendChild(label);
+        const body = document.createElement('div');
+        body.className = 'dev-gradient-body';
+        row.appendChild(body);
+        const bar = document.createElement('div');
+        bar.className = 'dev-gradient-bar';
+        body.appendChild(bar);
+        const edit = document.createElement('div');
+        edit.className = 'dev-gradient-edit';
+        const colorIn = document.createElement('input');
+        colorIn.type = 'color';
+        const posIn = document.createElement('input');
+        posIn.type = 'number'; posIn.min = '0'; posIn.max = '100'; posIn.step = '1';
+        posIn.className = 'dev-value-edit-input';
+        const posUnit = document.createElement('span');
+        posUnit.textContent = '%';
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button'; removeBtn.textContent = 'Remove Stop';
+        const reverseBtn = document.createElement('button');
+        reverseBtn.type = 'button'; reverseBtn.textContent = 'Reverse';
+        edit.append(colorIn, posIn, posUnit, removeBtn, reverseBtn);
+        body.appendChild(edit);
+
+        const hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.id = ctrl.id;
+        row.appendChild(hidden);
+
+        const norm = (list) => list.map(s => ({ p: Math.min(1, Math.max(0, +s.p)), c: String(s.c) })).sort((a, b) => a.p - b.p);
+        let stops = norm((ctrl.defaultValue && ctrl.defaultValue.stops) || [{ p: 0, c: '#1db954' }, { p: 1, c: '#0d0f12' }]);
+        // Sort in place (norm() makes NEW objects, which would lose which stop is selected).
+        const sortStops = () => { stops.forEach(s => { s.p = Math.min(1, Math.max(0, +s.p)); }); stops.sort((a, b) => a.p - b.p); };
+        let selected = 0;
+        let lastCommitted = '';
+        const hexToRgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+        const rgbToHex = a => '#' + a.map(v => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, '0')).join('');
+        function colorAt(p) {
+            if (p <= stops[0].p) return stops[0].c;
+            if (p >= stops[stops.length - 1].p) return stops[stops.length - 1].c;
+            for (let i = 0; i < stops.length - 1; i++) {
+                const a = stops[i], b = stops[i + 1];
+                if (p >= a.p && p <= b.p) {
+                    const t = b.p === a.p ? 0 : (p - a.p) / (b.p - a.p);
+                    const ca = hexToRgb(a.c), cb = hexToRgb(b.c);
+                    return rgbToHex(ca.map((v, k) => v + (cb[k] - v) * t));
+                }
+            }
+            return stops[0].c;
+        }
+        function commit() {
+            sortStops();
+            lastCommitted = JSON.stringify({ stops });
+            hidden.value = lastCommitted;
+            hidden.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        function render() {
+            bar.style.background = 'linear-gradient(90deg, ' + stops.map(s => s.c + ' ' + (s.p * 100) + '%').join(', ') + ')';
+            bar.querySelectorAll('.dev-gradient-stop').forEach(n => n.remove());
+            stops.forEach((s, i) => {
+                const h = document.createElement('div');
+                h.className = 'dev-gradient-stop' + (i === selected ? ' selected' : '');
+                h.style.left = (s.p * 100) + '%';
+                h.style.background = s.c;
+                h.addEventListener('pointerdown', ev => {
+                    ev.preventDefault(); ev.stopPropagation();
+                    selected = i; render();
+                    const move = mv => {
+                        const rect = bar.getBoundingClientRect();
+                        if (rect.width <= 0) return;
+                        const keep = stops[selected];
+                        keep.p = Math.min(1, Math.max(0, (mv.clientX - rect.left) / rect.width));
+                        sortStops();
+                        selected = stops.indexOf(keep);
+                        render();
+                    };
+                    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); commit(); };
+                    window.addEventListener('pointermove', move);
+                    window.addEventListener('pointerup', up);
+                });
+                bar.appendChild(h);
+            });
+            const s = stops[selected] || stops[0];
+            colorIn.value = /^#[0-9a-f]{6}$/i.test(s.c) ? s.c : '#ffffff';
+            posIn.value = Math.round(s.p * 100);
+            removeBtn.disabled = stops.length <= 2;
+        }
+        bar.addEventListener('pointerdown', ev => {
+            if (ev.target !== bar) return;
+            const rect = bar.getBoundingClientRect();
+            const p = Math.min(1, Math.max(0, (ev.clientX - rect.left) / rect.width));
+            const added = { p, c: colorAt(p) };
+            stops.push(added);
+            sortStops();
+            selected = stops.indexOf(added);
+            render(); commit();
+        });
+        colorIn.addEventListener('input', () => { stops[selected].c = colorIn.value; render(); commit(); });
+        posIn.addEventListener('change', () => {
+            const keep = stops[selected];
+            keep.p = Math.min(1, Math.max(0, (parseFloat(posIn.value) || 0) / 100));
+            sortStops(); selected = stops.indexOf(keep); render(); commit();
+        });
+        removeBtn.addEventListener('click', () => { if (stops.length > 2) { stops.splice(selected, 1); selected = Math.min(selected, stops.length - 1); render(); commit(); } });
+        reverseBtn.addEventListener('click', () => { stops = norm(stops.map(s => ({ p: 1 - s.p, c: s.c }))); selected = 0; render(); commit(); });
+        // An outside write (Reset / Load / Undo / per-device mirror) sets hidden.value and fires 'input'.
+        hidden.addEventListener('input', () => {
+            if (hidden.value === lastCommitted) return;
+            try {
+                const parsed = JSON.parse(hidden.value);
+                if (parsed && Array.isArray(parsed.stops) && parsed.stops.length >= 2) { stops = norm(parsed.stops); selected = Math.min(selected, stops.length - 1); lastCommitted = hidden.value; render(); }
+            } catch (e) { /* ignore a malformed value */ }
+        });
+        lastCommitted = JSON.stringify({ stops });
+        hidden.value = lastCommitted;
+        render();
+        return row;
+    }
+    const UNIFORM_ROW_BUILDERS = { slider: buildSliderRow, color: buildColorRow, select: buildSelectRow, checkbox: buildCheckboxRow, button: buildButtonRow, 'list-picker': buildListPickerRow, 'curve-editor': buildCurveEditorRow, 'range-bar': buildRangeBarRow, 'gradient-editor': buildGradientEditorRow };
 
     // ================================================================
     // TOGGLEABLE SETTINGS GROUP
@@ -6363,12 +6492,14 @@
     // than silently writing to localStorage, so a broken remote save is never mistaken
     // for a working one. localStorage only holds a pre-existing local copy for boot.
     const DEV_PANEL_REMOTE_ENDPOINT = '/api/save-settings';
-    // The anti-abuse token (= the DEV_PANEL_SAVE_SECRET env var on Vercel). HANDO and
-    // HANDY DANDIES commit this value as a constant in main.js; this project does not,
-    // because workspace CLAUDE.md S12l says never to put it in committed/client code.
-    // So it's asked for once per browser and kept in localStorage (never in the repo).
-    // Set this constant only if you deliberately choose the HANDO-style embedded token.
-    const DEV_PANEL_SAVE_SECRET = '';
+    // The anti-abuse shared token: must equal the DEV_PANEL_SAVE_SECRET environment variable on Vercel.
+    // Same arrangement as HANDO / HANDY DANDIES (their working save), at the owner's explicit request:
+    //   - reference copy: J:\CLAUDE\PROJECTS\keyps.txt, label DEV_PANEL_SAVE_SECRET (untracked, outside this repo)
+    //   - Vercel environment variable DEV_PANEL_SAVE_SECRET (read by api/save-settings.js)
+    //   - this client constant (sent with every Save). It is visible to anyone who opens the page source;
+    //     it only gates commits to the settings file, it is not a GitHub credential.
+    // The GitHub token (keyps.txt label GOTHOT = env var GITHUB_TOKEN) is NEVER in client code: only the Vercel function uses it.
+    const DEV_PANEL_SAVE_SECRET = 'PkrbMti03M6xm3FEThYXa8gGW_08BOGj';
     const DEV_PANEL_SECRET_LS_KEY = 'devPanelSaveSecret';
     function getDevPanelSaveSecret(forcePrompt) {
         if (DEV_PANEL_SAVE_SECRET) return DEV_PANEL_SAVE_SECRET;
@@ -7393,6 +7524,202 @@
         renderControlArray(ALBUM_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_ALBUM_CONTROLS', ALBUM_CONTROLS);
         makeDevGroupToggleable(tab, AC, 'checkboxAlbumColorsEnabled');
+
+        // ---- Scrub Input: two toggleable curve groups --------------------------------------------------
+        const WC = 'Wheel Scrub Per Notch Curve', SC = 'Starting Timeline Span Curve';
+        const scrubInputContent = findGroupContent(tab, 'Scrub Input', 'renderSpottyDevControls', WC);
+        scrubInputContent.appendChild(createDevGroupElement(WC, tab));
+        scrubInputContent.appendChild(createDevGroupElement(SC, tab));
+        const CURVE_CONTROLS = [
+            { tab, group: WC, id: 'checkboxWheelCurveEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: WC, id: 'curveEditorWheelScrubCurve', type: 'curve-editor', label: 'Curve (X: Zoom Scale, Y: Px Per Notch):', defaultPoints: [{ x: 0, y: 0.2 }, { x: 1, y: 0.7 }], defaultMethod: 'monotone' },
+            {
+                tab, group: WC, id: 'selectWheelCurveXRange', type: 'select', label: 'X Axis (Zoom Scale) Spans:', value: 'limits',
+                options: [{ value: 'limits', text: 'Zoom Limits Min to Max' }, { value: 'full', text: 'Whole Range (2 Min to Full Timeline)' }],
+            },
+            { tab, group: WC, id: 'sliderWheelCurveMinPx', type: 'slider', label: 'Y Bottom: Px Per Notch At Curve 0 (Px):', min: 1, max: 400, step: 1, value: 4 },
+            { tab, group: WC, id: 'sliderWheelCurveMaxPx', type: 'slider', label: 'Y Top: Px Per Notch At Curve 1 (Px):', min: 1, max: 800, step: 1, value: 160 },
+            { tab, group: SC, id: 'checkboxStartSpanCurveEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: SC, id: 'curveEditorStartSpanCurve', type: 'curve-editor', label: 'Curve (X: Timeline Position, Y: Starting Span):', defaultPoints: [{ x: 0, y: 0.55 }, { x: 1, y: 0.55 }], defaultMethod: 'monotone' },
+            { tab, group: SC, id: 'sliderStartSpanCurveMinDays', type: 'slider', label: 'Y Bottom: Span At Curve 0 (Days):', min: 0.01, max: 5000, step: 0.01, value: 7 },
+            { tab, group: SC, id: 'sliderStartSpanCurveMaxDays', type: 'slider', label: 'Y Top: Span At Curve 1 (Days):', min: 0.01, max: 6000, step: 0.01, value: 1200 },
+            { tab, group: SC, id: 'checkboxStartSpanApplyOnJump', type: 'checkbox', label: 'Also Apply On Double-Click, Home And End:', value: true },
+        ];
+        renderControlArray(CURVE_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_CURVE_CONTROLS', CURVE_CONTROLS);
+        makeDevGroupToggleable(tab, WC, 'checkboxWheelCurveEnabled');
+        makeDevGroupToggleable(tab, SC, 'checkboxStartSpanCurveEnabled');
+
+        // ---- UI Layout: Track Title Button Animation (toggleable) + Background (subgroup) ------------------
+        const TA = 'Track Title Button Animation', BG = 'Background';
+        const uiLayoutContent = findGroupContent(tab, 'UI Layout', 'renderSpottyDevControls', TA);
+        uiLayoutContent.appendChild(createDevGroupElement(TA, tab));
+        uiLayoutContent.appendChild(createDevGroupElement(BG, tab));
+        const EASINGS = [
+            { value: 'ease-out', text: 'Ease Out' }, { value: 'ease', text: 'Ease' }, { value: 'ease-in-out', text: 'Ease In-Out' },
+            { value: 'linear', text: 'Linear' }, { value: 'spring', text: 'Spring (Overshoot)' }, { value: 'snap', text: 'Snap (Fast Start)' },
+        ];
+        const GRAD_TYPES = [{ value: 'linear', text: 'Linear' }, { value: 'radial', text: 'Radial' }, { value: 'conic', text: 'Conic' }];
+        const TITLE_BG_CONTROLS = [
+            { tab, group: TA, id: 'checkboxTitleAnimEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            {
+                tab, group: TA, id: 'selectTitleAnimMode', type: 'select', label: 'Animation:', value: 'bold',
+                options: [
+                    { value: 'bold', text: 'A: Bold On Hover (Unbolds On Press)' },
+                    { value: 'pulse', text: 'B: Pulse On Click' },
+                    { value: 'grow', text: 'C: Grow On Hover (Normal On Press)' },
+                    { value: 'glow', text: 'D: Glow On Hover (Dims On Press)' },
+                    { value: 'tracking', text: 'E: Letter-Spacing Expand On Hover' },
+                    { value: 'lift', text: 'F: Lift On Hover, Push Down On Press' },
+                ],
+            },
+            { tab, group: TA, id: 'sliderTitleAnimDuration', type: 'slider', label: 'Transition Duration (Ms):', min: 0, max: 1500, step: 10, value: 160 },
+            { tab, group: TA, id: 'selectTitleAnimEasing', type: 'select', label: 'Easing:', value: 'ease-out', options: EASINGS },
+            // A: bold
+            { tab, group: TA, id: 'sliderTitleBoldRestWeight', type: 'slider', label: 'Rest Font Weight (100-900):', min: 100, max: 900, step: 100, value: 500 },
+            { tab, group: TA, id: 'sliderTitleBoldHoverWeight', type: 'slider', label: 'Hover Font Weight (100-900):', min: 100, max: 900, step: 100, value: 800 },
+            { tab, group: TA, id: 'sliderTitleBoldPressWeight', type: 'slider', label: 'Pressed Font Weight (100-900):', min: 100, max: 900, step: 100, value: 500 },
+            // B: pulse
+            { tab, group: TA, id: 'sliderTitlePulseScale', type: 'slider', label: 'Pulse Scale On Click (x):', min: 1, max: 2, step: 0.01, value: 1.08 },
+            { tab, group: TA, id: 'sliderTitlePulseInDuration', type: 'slider', label: 'Grow Duration On Press (Ms):', min: 0, max: 800, step: 5, value: 90 },
+            { tab, group: TA, id: 'sliderTitlePulseOutDuration', type: 'slider', label: 'Return Duration On Release (Ms):', min: 0, max: 1200, step: 5, value: 180 },
+            // C: grow
+            { tab, group: TA, id: 'sliderTitleGrowScale', type: 'slider', label: 'Hover Scale (x):', min: 1, max: 2, step: 0.01, value: 1.1 },
+            { tab, group: TA, id: 'sliderTitleGrowPressScale', type: 'slider', label: 'Pressed Scale (x):', min: 0.6, max: 1.5, step: 0.01, value: 1 },
+            // D: glow
+            { tab, group: TA, id: 'sliderTitleGlowRadius', type: 'slider', label: 'Glow Radius On Hover (Px):', min: 0, max: 80, step: 1, value: 18 },
+            { tab, group: TA, id: 'sliderTitleGlowOpacity', type: 'slider', label: 'Glow Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.8 },
+            { tab, group: TA, id: 'colorTitleGlowColor', type: 'color', label: 'Glow Color:', value: '#1db954' },
+            { tab, group: TA, id: 'sliderTitleGlowPressRadius', type: 'slider', label: 'Glow Radius While Pressed (Px):', min: 0, max: 80, step: 1, value: 4 },
+            // E: letter-spacing
+            { tab, group: TA, id: 'sliderTitleTrackingHover', type: 'slider', label: 'Letter Spacing On Hover (Em):', min: -0.1, max: 0.5, step: 0.005, value: 0.05 },
+            { tab, group: TA, id: 'sliderTitleTrackingPress', type: 'slider', label: 'Letter Spacing While Pressed (Em):', min: -0.1, max: 0.5, step: 0.005, value: 0 },
+            // F: lift
+            { tab, group: TA, id: 'sliderTitleLiftPx', type: 'slider', label: 'Lift On Hover (Px):', min: 0, max: 40, step: 0.5, value: 6 },
+            { tab, group: TA, id: 'sliderTitleLiftPressPx', type: 'slider', label: 'Push Down While Pressed (Px):', min: 0, max: 30, step: 0.5, value: 2 },
+            { tab, group: TA, id: 'sliderTitleLiftShadowBlur', type: 'slider', label: 'Lift Shadow Blur (Px):', min: 0, max: 60, step: 1, value: 14 },
+            { tab, group: TA, id: 'sliderTitleLiftShadowOpacity', type: 'slider', label: 'Lift Shadow Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.5 },
+
+            {
+                tab, group: BG, id: 'selectBackgroundMode', type: 'select', label: 'Background Mode:', value: 'none',
+                options: [
+                    { value: 'none', text: 'None (Default Dark)' },
+                    { value: 'color', text: 'A: Color' },
+                    { value: 'gradient', text: 'B: Gradient' },
+                    { value: 'albumAverage', text: 'C: Album Cover Average Color' },
+                    { value: 'borderRadial', text: 'D: Album Cover Border Radial' },
+                    { value: 'borderAverage', text: 'E: Album Cover Border Average' },
+                    { value: 'albumChroma', text: 'F: Album Cover Average Color Only (Ignore Grays)' },
+                    { value: 'blurCover', text: 'G: Blurred Cover Art' },
+                    { value: 'palette', text: 'H: Cover Palette Gradient (Top 3 Colors)' },
+                    { value: 'spotlight', text: 'I: Cover Spotlight Glow' },
+                ],
+            },
+            { tab, group: BG, id: 'sliderBackgroundOpacity', type: 'slider', label: 'Opacity (x):', min: 0, max: 1, step: 0.01, value: 1 },
+            { tab, group: BG, id: 'sliderBackgroundBrightness', type: 'slider', label: 'Brightness (x):', min: 0.1, max: 2.5, step: 0.01, value: 1 },
+            { tab, group: BG, id: 'sliderBackgroundSaturation', type: 'slider', label: 'Saturation (x):', min: 0, max: 3, step: 0.01, value: 1 },
+            { tab, group: BG, id: 'sliderBackgroundTransition', type: 'slider', label: 'Crossfade Between Songs (Ms):', min: 0, max: 3000, step: 10, value: 400 },
+            // A: color
+            { tab, group: BG, id: 'colorBackgroundColor', type: 'color', label: 'Background Color:', value: '#0d0f12' },
+            // B: gradient
+            { tab, group: BG, id: 'curveEditorBackgroundGradient', type: 'gradient-editor', label: 'Gradient Stops (Click Bar To Add):', defaultValue: { stops: [{ p: 0, c: '#1db954' }, { p: 1, c: '#0d0f12' }] } },
+            { tab, group: BG, id: 'selectBackgroundGradientType', type: 'select', label: 'Gradient Type:', value: 'linear', options: GRAD_TYPES },
+            { tab, group: BG, id: 'sliderBackgroundGradientRotation', type: 'slider', label: 'Gradient Rotation (Deg):', min: 0, max: 360, step: 1, value: 135 },
+            { tab, group: BG, id: 'sliderBackgroundGradientScale', type: 'slider', label: 'Gradient Scale (x):', min: 0.1, max: 6, step: 0.05, value: 1 },
+            { tab, group: BG, id: 'sliderBackgroundGradientCenterX', type: 'slider', label: 'Gradient Center X, Radial/Conic (%):', min: -50, max: 150, step: 1, value: 50 },
+            { tab, group: BG, id: 'sliderBackgroundGradientCenterY', type: 'slider', label: 'Gradient Center Y, Radial/Conic (%):', min: -50, max: 150, step: 1, value: 50 },
+            // D + E: cover border
+            { tab, group: BG, id: 'sliderBorderDepth', type: 'slider', label: 'Border Sample Depth (% Of Cover):', min: 1, max: 40, step: 0.5, value: 8 },
+            { tab, group: BG, id: 'sliderBorderRadialRays', type: 'slider', label: 'Ray Count (Angular Resolution):', min: 8, max: 720, step: 1, value: 180 },
+            { tab, group: BG, id: 'sliderBorderRadialSmoothing', type: 'slider', label: 'Ray Smoothing (Deg):', min: 0, max: 90, step: 0.5, value: 4 },
+            { tab, group: BG, id: 'sliderBorderRadialStart', type: 'slider', label: 'Rays Start At (% Of Cover Radius):', min: 0, max: 150, step: 1, value: 100 },
+            { tab, group: BG, id: 'sliderBorderRadialFade', type: 'slider', label: 'Fade Rays Toward Edge (%):', min: 0, max: 100, step: 1, value: 0 },
+            { tab, group: BG, id: 'colorBorderRadialFadeColor', type: 'color', label: 'Fade Color:', value: '#0d0f12' },
+            {
+                tab, group: BG, id: 'selectBorderAverageEdges', type: 'select', label: 'Average Which Edges:', value: 'all',
+                options: [
+                    { value: 'all', text: 'All Four Edges' }, { value: 'top', text: 'Top Only' }, { value: 'bottom', text: 'Bottom Only' },
+                    { value: 'left', text: 'Left Only' }, { value: 'right', text: 'Right Only' },
+                    { value: 'topBottom', text: 'Top And Bottom' }, { value: 'leftRight', text: 'Left And Right' },
+                ],
+            },
+            // F: chroma average
+            { tab, group: BG, id: 'sliderChromaMinSaturation', type: 'slider', label: 'Ignore Pixels Below Saturation (x):', min: 0, max: 1, step: 0.01, value: 0.2 },
+            { tab, group: BG, id: 'sliderChromaMinBrightness', type: 'slider', label: 'Ignore Pixels Below Brightness (x):', min: 0, max: 1, step: 0.01, value: 0.12 },
+            { tab, group: BG, id: 'sliderChromaGrayscaleThreshold', type: 'slider', label: 'Treat Cover As Grayscale Above (% Gray Pixels):', min: 0, max: 100, step: 1, value: 85 },
+            // G: blurred cover
+            { tab, group: BG, id: 'sliderBlurRadius', type: 'slider', label: 'Blur Radius (Px):', min: 0, max: 250, step: 1, value: 60 },
+            { tab, group: BG, id: 'sliderBlurScale', type: 'slider', label: 'Cover Zoom (x):', min: 0.5, max: 6, step: 0.05, value: 1.6 },
+            { tab, group: BG, id: 'sliderBlurDarken', type: 'slider', label: 'Darken (x):', min: 0, max: 1, step: 0.01, value: 0.45 },
+            // H: palette gradient
+            { tab, group: BG, id: 'selectPaletteGradientType', type: 'select', label: 'Palette Gradient Type:', value: 'linear', options: GRAD_TYPES },
+            { tab, group: BG, id: 'sliderPaletteRotation', type: 'slider', label: 'Palette Rotation (Deg):', min: 0, max: 360, step: 1, value: 160 },
+            { tab, group: BG, id: 'sliderPaletteScale', type: 'slider', label: 'Palette Scale (x):', min: 0.1, max: 6, step: 0.05, value: 1 },
+            // I: spotlight
+            {
+                tab, group: BG, id: 'selectSpotlightColorSource', type: 'select', label: 'Spotlight Color From:', value: 'vivid',
+                options: [{ value: 'vivid', text: 'Vivid Dominant Color' }, { value: 'average', text: 'Average Color' }, { value: 'palette1', text: 'Most Common Color' }],
+            },
+            { tab, group: BG, id: 'sliderSpotlightRadius', type: 'slider', label: 'Spotlight Radius (% Of Screen):', min: 5, max: 200, step: 1, value: 70 },
+            { tab, group: BG, id: 'sliderSpotlightIntensity', type: 'slider', label: 'Spotlight Intensity (x):', min: 0, max: 1, step: 0.01, value: 0.9 },
+            { tab, group: BG, id: 'checkboxSpotlightFollowCover', type: 'checkbox', label: 'Center On The Album Cover:', value: true },
+            { tab, group: BG, id: 'sliderSpotlightCenterX', type: 'slider', label: 'Spotlight Center X (%):', min: -50, max: 150, step: 1, value: 50 },
+            { tab, group: BG, id: 'sliderSpotlightCenterY', type: 'slider', label: 'Spotlight Center Y (%):', min: -50, max: 150, step: 1, value: 40 },
+            { tab, group: BG, id: 'colorSpotlightEdgeColor', type: 'color', label: 'Spotlight Edge Color:', value: '#0d0f12' },
+        ];
+        renderControlArray(TITLE_BG_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_TITLE_BG_CONTROLS', TITLE_BG_CONTROLS);
+        makeDevGroupToggleable(tab, TA, 'checkboxTitleAnimEnabled');
+
+        // Show only the settings that belong to the selected mode of the title animation / background.
+        // A control used by several modes (e.g. Border Sample Depth) is shown when ANY of them is selected.
+        const MODE_MAPS = [
+            {
+                select: 'selectTitleAnimMode', map: {
+                    bold: ['sliderTitleBoldRestWeight', 'sliderTitleBoldHoverWeight', 'sliderTitleBoldPressWeight'],
+                    pulse: ['sliderTitlePulseScale', 'sliderTitlePulseInDuration', 'sliderTitlePulseOutDuration'],
+                    grow: ['sliderTitleGrowScale', 'sliderTitleGrowPressScale'],
+                    glow: ['sliderTitleGlowRadius', 'sliderTitleGlowOpacity', 'colorTitleGlowColor', 'sliderTitleGlowPressRadius'],
+                    tracking: ['sliderTitleTrackingHover', 'sliderTitleTrackingPress'],
+                    lift: ['sliderTitleLiftPx', 'sliderTitleLiftPressPx', 'sliderTitleLiftShadowBlur', 'sliderTitleLiftShadowOpacity'],
+                },
+            },
+            {
+                select: 'selectBackgroundMode', map: {
+                    color: ['colorBackgroundColor'],
+                    gradient: ['curveEditorBackgroundGradient', 'selectBackgroundGradientType', 'sliderBackgroundGradientRotation', 'sliderBackgroundGradientScale', 'sliderBackgroundGradientCenterX', 'sliderBackgroundGradientCenterY'],
+                    borderRadial: ['sliderBorderDepth', 'sliderBorderRadialRays', 'sliderBorderRadialSmoothing', 'sliderBorderRadialStart', 'sliderBorderRadialFade', 'colorBorderRadialFadeColor'],
+                    borderAverage: ['sliderBorderDepth', 'selectBorderAverageEdges'],
+                    albumChroma: ['sliderChromaMinSaturation', 'sliderChromaMinBrightness', 'sliderChromaGrayscaleThreshold'],
+                    blurCover: ['sliderBlurRadius', 'sliderBlurScale', 'sliderBlurDarken'],
+                    palette: ['selectPaletteGradientType', 'sliderPaletteRotation', 'sliderPaletteScale'],
+                    spotlight: ['selectSpotlightColorSource', 'sliderSpotlightRadius', 'sliderSpotlightIntensity', 'checkboxSpotlightFollowCover', 'sliderSpotlightCenterX', 'sliderSpotlightCenterY', 'colorSpotlightEdgeColor'],
+                },
+                // controls shown for every mode except "none"
+                always: ['sliderBackgroundOpacity', 'sliderBackgroundBrightness', 'sliderBackgroundSaturation', 'sliderBackgroundTransition'],
+            },
+        ];
+        const wd = (id, dev) => id.replace(/^(slider|color|select|checkbox|rangeBar|curveEditor)(.+)$/, '$1' + dev + '$2');
+        function refreshSpottyModeVisibility2() {
+            ['', 'Mobile', 'Landscape'].forEach(dev => {
+                MODE_MAPS.forEach(({ select, map, always }) => {
+                    const sel = document.getElementById(wd(select, dev)) || document.getElementById(select);
+                    if (!sel) return;
+                    const show = new Set(map[sel.value] || []);
+                    if (always && sel.value !== 'none') always.forEach(id => show.add(id));
+                    const all = new Set([...Object.values(map).flat(), ...(always || [])]);
+                    all.forEach(id => {
+                        const el = document.getElementById(wd(id, dev));
+                        const r = el && el.closest('.dev-row');
+                        if (r) r.style.display = show.has(id) ? '' : 'none';
+                    });
+                });
+            });
+        }
+        document.addEventListener('change', refreshSpottyModeVisibility2);
+        document.addEventListener('input', refreshSpottyModeVisibility2);
+        setInterval(refreshSpottyModeVisibility2, 700);
+        refreshSpottyModeVisibility2();
 
         // Show only the settings that belong to the selected Timeline Visual Style.
         const STYLE_CONTROLS = {

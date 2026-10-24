@@ -32,6 +32,80 @@ export const DEFAULTS = {
     sliderBarWidth: 3,
     sliderTimelineHeight: 200,
     rangeBarTimelineZoomLimits: { min: 0, max: 100 }, // % on a log scale: 0 = 2 min visible, 100 = whole timeline
+
+    // Wheel scrub per notch curve (X: zoom scale, Y: px per notch between Min and Max)
+    checkboxWheelCurveEnabled: false,
+    curveEditorWheelScrubCurve: { points: [{ x: 0, y: 0.2 }, { x: 1, y: 0.7 }], method: 'monotone' },
+    selectWheelCurveXRange: 'limits',
+    sliderWheelCurveMinPx: 4,
+    sliderWheelCurveMaxPx: 160,
+    // Starting timeline span curve (X: playhead position along the timeline, Y: span between Min and Max days, log scale)
+    checkboxStartSpanCurveEnabled: false,
+    curveEditorStartSpanCurve: { points: [{ x: 0, y: 0.55 }, { x: 1, y: 0.55 }], method: 'monotone' },
+    sliderStartSpanCurveMinDays: 7,
+    sliderStartSpanCurveMaxDays: 1200,
+    checkboxStartSpanApplyOnJump: true,
+
+    // Track title button animation
+    checkboxTitleAnimEnabled: false,
+    selectTitleAnimMode: 'bold',
+    sliderTitleAnimDuration: 160,
+    selectTitleAnimEasing: 'ease-out',
+    sliderTitleBoldRestWeight: 500,
+    sliderTitleBoldHoverWeight: 800,
+    sliderTitleBoldPressWeight: 500,
+    sliderTitlePulseScale: 1.08,
+    sliderTitlePulseInDuration: 90,
+    sliderTitlePulseOutDuration: 180,
+    sliderTitleGrowScale: 1.1,
+    sliderTitleGrowPressScale: 1,
+    sliderTitleGlowRadius: 18,
+    sliderTitleGlowOpacity: 0.8,
+    colorTitleGlowColor: '#1db954',
+    sliderTitleGlowPressRadius: 4,
+    sliderTitleTrackingHover: 0.05,
+    sliderTitleTrackingPress: 0,
+    sliderTitleLiftPx: 6,
+    sliderTitleLiftPressPx: 2,
+    sliderTitleLiftShadowBlur: 14,
+    sliderTitleLiftShadowOpacity: 0.5,
+
+    // Background
+    selectBackgroundMode: 'none',
+    sliderBackgroundOpacity: 1,
+    sliderBackgroundBrightness: 1,
+    sliderBackgroundSaturation: 1,
+    sliderBackgroundTransition: 400,
+    colorBackgroundColor: '#0d0f12',
+    curveEditorBackgroundGradient: { stops: [{ p: 0, c: '#1db954' }, { p: 1, c: '#0d0f12' }] },
+    selectBackgroundGradientType: 'linear',
+    sliderBackgroundGradientRotation: 135,
+    sliderBackgroundGradientScale: 1,
+    sliderBackgroundGradientCenterX: 50,
+    sliderBackgroundGradientCenterY: 50,
+    sliderBorderDepth: 8,
+    sliderBorderRadialRays: 180,
+    sliderBorderRadialSmoothing: 4,
+    sliderBorderRadialStart: 100,
+    sliderBorderRadialFade: 0,
+    colorBorderRadialFadeColor: '#0d0f12',
+    selectBorderAverageEdges: 'all',
+    sliderChromaMinSaturation: 0.2,
+    sliderChromaMinBrightness: 0.12,
+    sliderChromaGrayscaleThreshold: 85,
+    sliderBlurRadius: 60,
+    sliderBlurScale: 1.6,
+    sliderBlurDarken: 0.45,
+    selectPaletteGradientType: 'linear',
+    sliderPaletteRotation: 160,
+    sliderPaletteScale: 1,
+    selectSpotlightColorSource: 'vivid',
+    sliderSpotlightRadius: 70,
+    sliderSpotlightIntensity: 0.9,
+    checkboxSpotlightFollowCover: true,
+    sliderSpotlightCenterX: 50,
+    sliderSpotlightCenterY: 40,
+    colorSpotlightEdgeColor: '#0d0f12',
     selectTimelineStyle: 'none',
     sliderGlowStemWidth: 2,
     sliderGlowRadius: 12,
@@ -67,14 +141,14 @@ function readEl(el) {
     if (!el) return undefined;
     if (el.type === 'checkbox') return el.checked;
     if (el.type === 'range' || el.type === 'number') return parseFloat(el.value);
-    if (el.id && el.id.startsWith('rangeBar')) { // dual-handle range control: hidden input holding {min,max} JSON
+    if (el.id && /^(rangeBar|curveEditor)/.test(el.id)) { // hidden input holding JSON: {min,max}, a curve's {points,method}, or a gradient's {stops}
         try { return JSON.parse(el.value); } catch (e) { return undefined; }
     }
     return el.value;
 }
 
 export function setting(id) {
-    const m = id.match(/^(slider|color|select|checkbox|rangeBar)(.+)$/);
+    const m = id.match(/^(slider|color|select|checkbox|rangeBar|curveEditor)(.+)$/);
     const dev = activeDevice();
     if (dev && m) {
         const v = readEl(document.getElementById(m[1] + dev + m[2]));

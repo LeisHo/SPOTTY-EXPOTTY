@@ -14,6 +14,8 @@ import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo } from './app/clipPlayer.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, embedStatus } from './app/handoff.js';
 import { cleanTitle } from './app/title.mjs';
+import { initTitleAnim } from './app/titleAnim.js';
+import { createBackground } from './app/background.js';
 
 const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
@@ -23,6 +25,8 @@ async function boot() {
     if (!appStage) return;
     appStage.innerHTML = `
         <div class="spx-app" id="spxApp">
+            <canvas class="spx-bg spx-bg-prev" id="spxBgPrev"></canvas>
+            <canvas class="spx-bg" id="spxBg"></canvas>
             <div class="ui-element spx-title" id="spxTitle"><a id="spxTitleLink" target="_blank" rel="noopener noreferrer">Loading…</a></div>
             <div class="ui-element spx-artist" id="spxArtist"></div>
             <div class="ui-element spx-meta" id="spxMeta"></div>
@@ -30,7 +34,7 @@ async function boot() {
                 requires the anchor target to come earlier in tree order than the element anchored to it -->
             <canvas class="ui-element spx-timeline" id="spxTimeline"></canvas>
             <button class="ui-element spx-cover" id="spxCover" type="button" aria-label="Play">
-                <img id="spxCoverImg" alt="" draggable="false">
+                <img id="spxCoverImg" alt="" draggable="false" crossorigin="anonymous">
                 <span class="spx-cover-glyph" id="spxGlyph">▶</span>
             </button>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
@@ -138,6 +142,53 @@ async function boot() {
     if (window.__spxPendingLayout) { window.spxApplyLayout(window.__spxPendingLayout); window.__spxPendingLayout = null; }
     new ResizeObserver(() => timeline.draw()).observe(el('spxTimeline'));
 
+    // Page background (full-viewport canvas behind everything) and the track title's hover/press animation.
+    const covers = data.covers || [];
+    const background = createBackground({
+        canvas: el('spxBg'), prevCanvas: el('spxBgPrev'), coverEl: el('spxCover'), coverImg: el('spxCoverImg'),
+        getPalette: () => { const c = songs[idx] && songs[idx].c; return c !== undefined ? covers[c] : null; },
+    });
+    initTitleAnim(el('spxTitleLink'));
+
+    // Evaluate a dev-panel curve ({points, method}) at x in 0..1 -> y in 0..1, with the dev panel's own
+    // evaluator when available (same math as the editor draws), else a plain linear interpolation.
+    const curveY = (curve, x) => {
+        const pts = (curve && curve.points && curve.points.length ? curve.points : [{ x: 0, y: 0 }, { x: 1, y: 1 }]);
+        if (typeof window.evaluateCurveEditorPoints === 'function') return clamp(window.evaluateCurveEditorPoints(pts, x, (curve && curve.method) || 'monotone'), 0, 1);
+        const s = [...pts].sort((a, b) => a.x - b.x);
+        if (x <= s[0].x) return s[0].y;
+        for (let i = 0; i < s.length - 1; i++) if (x <= s[i + 1].x) return s[i].y + ((x - s[i].x) / ((s[i + 1].x - s[i].x) || 1)) * (s[i + 1].y - s[i].y);
+        return s[s.length - 1].y;
+    };
+    // Px the playhead moves per wheel notch: the plain slider, or (curve group enabled) the curve evaluated at
+    // the current zoom scale, scaled between the curve's Y Bottom and Y Top.
+    const wheelPixels = () => {
+        if (!setting('checkboxWheelCurveEnabled')) return setting('sliderWheelScrubPixels');
+        const y = curveY(setting('curveEditorWheelScrubCurve'), timeline.zoomFraction(setting('selectWheelCurveXRange')));
+        const lo = setting('sliderWheelCurveMinPx'), hi = setting('sliderWheelCurveMaxPx');
+        return lo + (hi - lo) * y;
+    };
+    // The span the timeline starts at: the curve (enabled) evaluated at the playhead's position along the
+    // whole timeline, mapped on a log scale between its Y Bottom and Y Top days; else the plain slider.
+    // Applied at load, on double-click on the timeline, and (optionally) on Home / End.
+    const DAY_MS = 864e5;
+    function applyStartSpan(force) {
+        let days;
+        if (setting('checkboxStartSpanCurveEnabled')) {
+            const lo = Math.max(0.001, setting('sliderStartSpanCurveMinDays')), hi = Math.max(lo, setting('sliderStartSpanCurveMaxDays'));
+            days = lo * Math.pow(hi / lo, curveY(setting('curveEditorStartSpanCurve'), timeline.timeFraction()));
+        } else if (force) days = setting('sliderDefaultTimelineSpanDays');
+        else return;
+        timeline.setSpanMs(days * DAY_MS);
+        timeline.centerOnPlayhead();
+        timeline.draw();
+    }
+    // the saved dev-panel state arrives a moment after load, so apply the curve once it has had time to restore
+    setTimeout(() => applyStartSpan(false), 1500);
+    document.addEventListener('input', e => { if (/StartSpanCurve/.test((e.target && e.target.id) || '')) applyStartSpan(false); });
+    window.addEventListener('dblclick', e => { if (e.target.id === 'spxTimeline') applyStartSpan(true); });
+    const afterJump = () => { if (setting('checkboxStartSpanApplyOnJump')) applyStartSpan(false); };
+
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
         scale('--spx-title-scale', setting('sliderTitleScale'));
@@ -185,6 +236,7 @@ async function boot() {
         el('spxArtist').textContent = s.a;
         el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}  ·  added ${fmtDate(s.t)}${s.d ? '' : '  ·  no preview clip'}`;
         scheduleCover();
+        background.refresh(); // palette-driven modes change with the song even if the cover image did not
     }
 
     function schedulePreload() {
@@ -248,7 +300,7 @@ async function boot() {
         if (inUi(e.target)) return;
         e.preventDefault();
         const unit = e.deltaMode === 1 ? e.deltaY / 3 : e.deltaY / 100;
-        moveTo(timeline.scrubByPixels(unit * setting('sliderWheelScrubPixels') * (setting('checkboxInvertScroll') ? -1 : 1)));
+        moveTo(timeline.scrubByPixels(unit * wheelPixels() * (setting('checkboxInvertScroll') ? -1 : 1)));
     }, { passive: false });
 
     const ptrs = new Map(); // pointerId -> { x, y, startX, startY, type, onTimeline, moved }
@@ -296,8 +348,8 @@ async function boot() {
         const step = e.shiftKey ? 10 : 1;
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') moveTo(timeline.currentIndex() + step);
         else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') moveTo(timeline.currentIndex() - step);
-        else if (e.key === 'Home') moveTo(0);
-        else if (e.key === 'End') moveTo(songs.length - 1);
+        else if (e.key === 'Home') { moveTo(0); afterJump(); }
+        else if (e.key === 'End') { moveTo(songs.length - 1); afterJump(); }
         else return;
         e.preventDefault();
     });

@@ -51,6 +51,13 @@ export function createTimeline(canvas, data) {
         r.hi = Math.max(r.hi, vt[i]);
     });
 
+    // Playlist rows are stacked in order of when each playlist STARTED (its first add), earliest at the
+    // top, so they form a staircase. (They used to follow the files' alphabetical order, which meant the
+    // vertical position said nothing.)
+    const rowOf = data.playlists.map((_, i) => i).sort((a, b) => ranges[a].lo - ranges[b].lo || a - b)
+        .reduce((m, pl, rank) => { m[pl] = rank; return m; }, []);
+    let bandGeom = { ganttTop: 0, rowH: 1 };
+
     // ---- zoom limits: a 0-100 % log scale from "2 minutes visible" to "whole timeline" ----
     function zoomLimits() {
         const lim = setting('rangeBarTimelineZoomLimits') || { min: 0, max: 100 };
@@ -388,13 +395,14 @@ export function createTimeline(canvas, data) {
 
         // playlist rows
         const rowH = ganttH / ranges.length;
+        bandGeom = { ganttTop, rowH };
         const curP = songs[currentIndex()].p;
         ranges.forEach((r, i) => {
             if (r.hi < viewStart || r.lo > viewEnd) return;
             const x0 = Math.max(0, xOf(r.lo)), x1 = Math.min(w, xOf(r.hi));
             ctx.globalAlpha = i === curP ? 1 : 0.35;
             ctx.fillStyle = i === curP ? playheadColor : accent;
-            ctx.fillRect(x0, ganttTop + i * rowH, Math.max(2, x1 - x0), Math.max(1, rowH - 1));
+            ctx.fillRect(x0, ganttTop + rowOf[i] * rowH, Math.max(2, x1 - x0), Math.max(1, rowH - 1));
         });
 
         // axis
@@ -416,8 +424,41 @@ export function createTimeline(canvas, data) {
         ctx.fillRect(Math.round(xOf(posToVt(pos))) - 1, 0, 2, h - axisH);
     }
 
+    // Hovering a playlist row shows that playlist's name and date range as the canvas tooltip.
+    const rowToPlaylist = [];
+    rowOf.forEach((rank, pl) => { rowToPlaylist[rank] = pl; });
+    canvas.addEventListener('pointermove', e => {
+        if (e.buttons) return; // not while dragging
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left, y = e.clientY - rect.top;
+        const rank = Math.floor((y - bandGeom.ganttTop) / bandGeom.rowH);
+        let tip = '';
+        if (y >= bandGeom.ganttTop && rank >= 0 && rank < rowToPlaylist.length) {
+            const pl = rowToPlaylist[rank], r = ranges[pl];
+            if (x >= xOf(r.lo) - 2 && x <= xOf(r.hi) + 2) {
+                const fmt = t => new Date(real[Math.min(n - 1, Math.max(0, Math.round(vtToPos(t))))]).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+                tip = `${data.playlists[pl].name}  ·  ${fmt(r.lo)} to ${fmt(r.hi)}`;
+            }
+        }
+        if (canvas.title !== tip) canvas.title = tip;
+    });
+
+    // Where the current zoom sits between the smallest and largest span, 0 = fully zoomed in, 1 = fully zoomed
+    // out, on the same log scale as the Zoom Limits slider. range 'limits' (default) spans the slider's
+    // min..max; 'full' spans everything (2 minutes .. the whole timeline).
+    function zoomFraction(range) {
+        let lo = MIN_SPAN_MS, hi = FULL_SPAN;
+        if (range !== 'full') ({ lo, hi } = zoomLimits());
+        if (hi <= lo * 1.0001) return 0;
+        return clamp((Math.log(span) - Math.log(lo)) / (Math.log(hi) - Math.log(lo)), 0, 1);
+    }
+    // How far along the whole timeline the playhead is (0 = first add, 1 = last add), by time.
+    const timeFraction = () => clamp((posToVt(pos) - vMin) / total, 0, 1);
+    // Set the visible span directly (clamped to the zoom limits), keeping the playhead where it is on screen.
+    function setSpanMs(ms) { zoomBy(clampSpan(ms) / span); }
+
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, width: W, get span() { return span; } };
+    return { draw, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }
