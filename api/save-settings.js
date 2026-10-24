@@ -38,14 +38,19 @@ export default async function handler(req, res) {
     // The env var may hold several whitespace-separated tokens (it was once saved with two pasted together, which
     // as ONE header value made GitHub reject every request). Each is tried in order: a fine-grained token can read
     // a public repo but answer 403 on a write, and then the next token (e.g. a classic "repo"-scope one) is used.
-    const tokens = (process.env.GITHUB_TOKEN || '').split(/s+/).filter(Boolean);
+    // Anything that is not shaped like a GitHub token (stray label text, a smart quote, ...) is ignored: a value
+    // with a character that cannot be sent in a header made the whole request fail ("invalid header value").
+    const rawTokens = (process.env.GITHUB_TOKEN || '').split(/s+/).filter(t => /^[!-~]+$/.test(t));
+    const shaped = rawTokens.filter(t => /^(github_pat_|gh[pousr]_)[A-Za-z0-9_]{20,}$/.test(t));
+    const tokens = shaped.length ? shaped : rawTokens;
     const token = tokens[0] || '';
     const ghFetch = async (url, init = {}) => {
         let r;
         for (const t of tokens) {
-            r = await fetch(url, { ...init, headers: { ...(init.headers || {}), Authorization: `Bearer ${t}` } });
+            try { r = await fetch(url, { ...init, headers: { ...(init.headers || {}), Authorization: `Bearer ${t}` } }); } catch (e) { continue; }
             if (r.status !== 401 && r.status !== 403) return r;
         }
+        if (!r) throw new Error('no usable GitHub token in GITHUB_TOKEN');
         return r;
     };
     const secret = process.env.DEV_PANEL_SAVE_SECRET;
