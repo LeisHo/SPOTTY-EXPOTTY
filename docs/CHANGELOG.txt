@@ -120,6 +120,46 @@ Not verified: real phones/touch, Vercel deployment of api/preview.js,
 logged-in full-song playback, Deezer's terms of use for this.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  12:16 AM - 12:23 AM EDT
+
+Fixed silent / "loading" scrubbing reported by the owner.
+
+Root causes found:
+- A clip was started as soon as `canplay` fired (a few seconds buffered) and
+  then seeked to a random 2-22 s offset; seeking past the buffered part stalls
+  while the browser re-fetches. In the test, 9 play() calls produced 0 sounds
+  within ~1.2 s.
+- Bursts of preload lookups exceeded Deezer's ~50 / 5 s limit (error code 4);
+  after a fast scroll 27 of 27 pool entries were dead.
+- One wheel notch moved 3 songs, so a normal scroll outran loading.
+- At narrow widths the dev panel covered the "Click to enable sound" button,
+  so sound could never unlock (found when my own test click landed on the panel).
+
+Changed:
+- clipPlayer.js: start only once >=2 s are buffered and pick the offset inside
+  the buffered range; one request per song, nearest-first, in-flight guarded.
+- serve.py / api/preview.js: process-wide 8 lookups/s limiter (serve.py),
+  groups of 4 (api), retry on Deezer error code 4.
+- main.js: preload ordered nearest-first in the direction of travel, ahead
+  capped at 16 (was 40); sound unlocks on the first click or key anywhere.
+- app.css: start overlay is position:fixed above the dev panel, only the button
+  clickable. Default Songs Per Wheel Notch 3 -> 1 (setting + dev-panel control).
+
+Verified (built-in browser, 279 px wide pane, real play()->'playing' timing,
+one wheel notch = 1 song):
+- ~3 songs/s: 9 of 9 songs that have a clip made sound, median 34 ms, max 94 ms.
+- ~7 songs/s: 19 of 19, median 5 ms, max 108 ms.
+- ~12 songs/s: 6 of 37 (16%) - lookup throughput is the limit. 0 dead lookups.
+- Start button is the topmost element at its centre point.
+
+Correction: the 2026-10-24 12:06 AM entry's "clips started for 10 of 10 / 23 of
+23 / 25 of 39" counted play() calls, not sound; those numbers over-reported.
+The measurements above replace them.
+
+Not verified: real phone/touch, Vercel deployment, a real mouse wheel at the
+owner's actual scroll speed.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================

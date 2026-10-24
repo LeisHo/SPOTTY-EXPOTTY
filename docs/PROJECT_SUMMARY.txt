@@ -37,9 +37,11 @@ Built (2026-10-23/24) and tested in the built-in browser:
   exact Deezer-by-ISRC clip, 837 do not (no iTunes fallback used).
 - Scrubbing by wheel / touch drag / arrow keys / dragging the timeline; song
   card; canvas timeline (weekly histogram, one row per playlist, playhead).
-- Clip pool: with sound enabled, slow (2 songs/s) and medium (6 songs/s)
-  scrubbing started a clip for 10/10 and 23/23 songs that have one; fast
-  (15 songs/s) started 25 of 39 (64%). 0 failed lookups in that run.
+- Clip pool (measured 2026-10-24 as time from play() to the 'playing' event,
+  one wheel notch = 1 song): ~3 songs/s -> 9 of 9 songs-with-a-clip made sound
+  (median 34 ms, max 94 ms); ~7 songs/s -> 19 of 19 (median 5 ms, max 108 ms);
+  ~12 songs/s -> 6 of 37 (16%). 0 failed lookups. (An earlier version counted
+  play() calls instead of real sound and over-reported; see CHANGELOG.)
 - Spotify embed handoff after scrubbing stops: confirmed the embed switched to
   the right song and played (a 30 s "Preview" because that browser pane wasn't
   logged in to Spotify).
@@ -74,7 +76,10 @@ Release Date, Added At, Genres, Record Label, and Spotify audio features.
 KNOWN LIMITATIONS
 
 - 14.5% of unique songs (837 of 5,776) have no clip; they're silent while scrubbing.
-- Very fast scrubbing can't keep up with Deezer's rate limit; some songs are skipped.
+- Above roughly 7 songs/s scrubbing outruns the clip lookups (the proxy serves
+  Deezer at ~8 lookups/s to stay under its limit), so most songs are silent
+  (16% made sound at ~12 songs/s). Not built: playing the nearest already-loaded
+  clip instead (would put the wrong song's audio under the title).
 - Preview clips are Deezer's 30 s cut, so the "mid-song" start is within that cut.
 - Mobile/touch, Vercel deploy and full-song (logged-in) playback are untested.
 - Deezer's terms for this use weren't checked.

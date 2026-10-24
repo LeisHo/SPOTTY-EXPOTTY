@@ -16,7 +16,7 @@ export const DEFAULTS = {
     sliderPreloadAhead: 8,
     sliderPreloadBehind: 3,
     checkboxShowPoolOverlay: false,
-    sliderSongsPerWheelNotch: 3,
+    sliderSongsPerWheelNotch: 1,
     sliderSongsPerDrag100: 12,
     checkboxInvertScroll: false,
     checkboxHandoffEnabled: true,

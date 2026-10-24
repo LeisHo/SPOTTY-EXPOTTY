@@ -62,7 +62,10 @@ Source: owner's own account of how the playlists are made (2026-10-23).
 
 - **Deezer preview links expire in ~15 minutes** (measured 14.98 min) and Deezer's API sends no CORS header. Never save preview URLs to a file; save Deezer track ids and resolve fresh URLs through `/api/preview`.
 - **Don't cache failed lookups.** A Deezer quota error once got cached as "no clip" for 10 minutes, so most songs went silent while scrubbing fast. Only real URLs are cached; a null is retried after 20 s.
-- **Deezer's rate limit is shared.** Running `resolve_previews.py` while testing scrubbing makes live lookups fail; finish the crawl first.
+- **Deezer allows ~50 lookups / 5 s per IP; bursts return error code 4.** The proxy (serve.py and api/preview.js) rate-limits to 8/s and retries code 4; the client requests one song at a time, nearest the playhead first, and caps preload-ahead at 16. Running `resolve_previews.py` at the same time shares the limit and makes live lookups fail.
+- **Never seek into an unbuffered part of a clip.** `canplay` fires after only a few seconds are buffered; seeking to a random 2-22 s offset then stalls while the browser re-fetches, which sounds like "loading". `clipPlayer.js` starts only after >=2 s are buffered and picks the offset inside the buffered range.
+- **Measure latency with a listener on the audio element itself.** The clips are detached `Audio()` objects, so a document-level `playing` listener never sees them, and counting `play()` calls over-reports (it hid the stall above).
+- **Unlock sound on the first click/key anywhere**, not only the overlay button: at narrow widths the dev panel covered the button and sound never unlocked. The overlay is `position: fixed` above the panel with only the button clickable. The listeners attach after the data finishes loading, so a click in the first moment after load is ignored.
 - **Spotify's iFrame API replaces the element you give it** with its iframe. Pass it an inner placeholder inside a wrapper, or the wrapper's styles vanish.
 - **Test pointer interactions with real `pointerdown` + `click`, not a bare `.click()`** (§12 undo lesson); a bare click skips the pointerdown path.
 - **Don't kill the dev server with a command-line pattern** matching `serve.py`: it also matches your own shell wrapper. Use the PID from `netstat -ano | grep :8000`.

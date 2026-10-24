@@ -82,10 +82,17 @@ async function boot() {
             const now = performance.now();
             moveLog = moveLog.filter(m => now - m.t < 400);
             const speed = moveLog.length ? Math.abs(moveLog[moveLog.length - 1].i - moveLog[0].i) / 0.4 : 0;
-            const ahead = Math.min(40, Math.max(setting('sliderPreloadAhead'), Math.ceil(speed))), behind = setting('sliderPreloadBehind');
-            const fwd = dir >= 0 ? ahead : behind, back = dir >= 0 ? behind : ahead;
+            // Capped at 16: the proxy serves Deezer lookups at ~8/s, so asking for more
+            // than a couple of seconds of travel only queues requests that go stale.
+            const ahead = Math.min(16, Math.max(setting('sliderPreloadAhead'), Math.ceil(speed))), behind = setting('sliderPreloadBehind');
+            // Nearest the playhead first, in the direction of travel first.
             const dids = [];
-            for (let i = idx - back; i <= idx + fwd; i++) if (i >= 0 && i < songs.length && songs[i].d) dids.push(songs[i].d);
+            const add = i => { if (i >= 0 && i < songs.length && songs[i].d && !dids.includes(songs[i].d)) dids.push(songs[i].d); };
+            add(idx);
+            for (let k = 1; k <= Math.max(ahead, behind); k++) {
+                if (k <= ahead) add(idx + dir * k);
+                if (k <= behind) add(idx - dir * k);
+            }
             preload(dids);
         });
     }
@@ -145,13 +152,19 @@ async function boot() {
         e.preventDefault();
     });
 
-    // sound unlock (browsers require one click before audio can start)
-    el('spxStartBtn').addEventListener('click', () => {
+    // Sound unlock: browsers require a user gesture before audio can start. The first
+    // click or key press ANYWHERE counts (not just the button), so the overlay can't
+    // get stuck behind the dev panel or on a small screen.
+    const unlockSound = () => {
+        if (isUnlocked()) return;
         unlock();
         el('spxStart').hidden = true;
         playClip(songs[idx].d);
         schedulePreload();
-    });
+    };
+    document.addEventListener('pointerdown', unlockSound, { capture: true, once: true });
+    document.addEventListener('keydown', unlockSound, { capture: true, once: true });
+    el('spxStartBtn').addEventListener('click', unlockSound);
 
     // settings changes (dev panel controls fire input/change)
     document.addEventListener('input', applyLook);

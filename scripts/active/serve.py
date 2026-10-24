@@ -19,6 +19,7 @@ import http.server
 import json
 import os
 import sys
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -27,6 +28,20 @@ from concurrent.futures import ThreadPoolExecutor
 
 GITHUB_API = 'https://api.github.com'
 _PREVIEW_CACHE = {}  # deezer id -> (url, fetched_at); links expire ~15 min, refreshed after 10
+# Deezer allows ~50 requests / 5 s per IP (observed: bursts beyond that return error code 4).
+# One process-wide limiter keeps all lookups, across requests, under 8 per second.
+_DEEZER_PER_SEC = 8
+_deezer_lock = threading.Lock()
+_deezer_next = [0.0]
+
+
+def _deezer_wait():
+    with _deezer_lock:
+        now = time.time()
+        t = max(now, _deezer_next[0])
+        _deezer_next[0] = t + 1.0 / _DEEZER_PER_SEC
+    if t > now:
+        time.sleep(t - now)
 
 
 def _gh_config():
@@ -124,17 +139,23 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             hit = _PREVIEW_CACHE.get(i)
             if hit and time.time() - hit[1] < 600:
                 return hit[0]
-            try:
-                req = urllib.request.Request(f'https://api.deezer.com/track/{i}', headers={'User-Agent': 'Mozilla/5.0'})
-                with urllib.request.urlopen(req, timeout=15) as resp:
-                    body = json.loads(resp.read().decode('utf-8'))
-            except Exception:  # noqa: BLE001
-                return None  # transient failure: don't cache, the client retries
-            url = body.get('preview') or None
-            if url:  # only cache real URLs; a Deezer quota error must not stick for 10 min
-                _PREVIEW_CACHE[i] = (url, time.time())
-            return url
-        with ThreadPoolExecutor(8) as ex:
+            for attempt in range(3):
+                _deezer_wait()
+                try:
+                    req = urllib.request.Request(f'https://api.deezer.com/track/{i}', headers={'User-Agent': 'Mozilla/5.0'})
+                    with urllib.request.urlopen(req, timeout=15) as resp:
+                        body = json.loads(resp.read().decode('utf-8'))
+                except Exception:  # noqa: BLE001
+                    return None  # transient failure: don't cache, the client retries
+                if body.get('error', {}).get('code') == 4:  # Deezer quota exceeded: back off, retry
+                    time.sleep(0.7 * (attempt + 1))
+                    continue
+                url = body.get('preview') or None
+                if url:  # only cache real URLs
+                    _PREVIEW_CACHE[i] = (url, time.time())
+                return url
+            return None
+        with ThreadPoolExecutor(4) as ex:
             out = dict(zip(ids, ex.map(one, ids)))
         return self._json(200, out)
 

@@ -7284,7 +7284,7 @@
             { tab, group: 'Scrub Preload', id: 'sliderPreloadAhead', type: 'slider', label: 'Preload Ahead (Songs):', min: 0, max: 30, step: 1, value: 8 },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadBehind', type: 'slider', label: 'Preload Behind (Songs):', min: 0, max: 30, step: 1, value: 3 },
             { tab, group: 'Scrub Preload', id: 'checkboxShowPoolOverlay', type: 'checkbox', label: 'Show Preload Pool Overlay:', value: false },
-            { tab, group: 'Scrub Input', id: 'sliderSongsPerWheelNotch', type: 'slider', label: 'Songs Per Wheel Notch (Songs):', min: 0.1, max: 20, step: 0.1, value: 3 },
+            { tab, group: 'Scrub Input', id: 'sliderSongsPerWheelNotch', type: 'slider', label: 'Songs Per Wheel Notch (Songs):', min: 0.1, max: 20, step: 0.1, value: 1 },
             { tab, group: 'Scrub Input', id: 'sliderSongsPerDrag100', type: 'slider', label: 'Songs Per 100 Px Touch Drag (Songs):', min: 1, max: 60, step: 1, value: 12 },
             { tab, group: 'Scrub Input', id: 'checkboxInvertScroll', type: 'checkbox', label: 'Invert Scroll Direction:', value: false },
             { tab, group: 'Spotify Handoff', id: 'checkboxHandoffEnabled', type: 'checkbox', label: 'Play Real Song When Scrubbing Stops:', value: true },

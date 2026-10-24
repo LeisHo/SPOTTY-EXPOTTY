@@ -22,8 +22,11 @@ async function fetchUrls(ids) {
         // a null (lookup failed or rate-limited) is retried after 20 s, a real URL after 10 min
         return !c || Date.now() - c.at > (c.url ? URL_TTL_MS : NULL_TTL_MS);
     });
-    for (let i = 0; i < need.length; i += 20) {
-        const chunk = need.slice(i, i + 20);
+    // Small chunks, all requested at once in priority order: the nearest songs come
+    // back first instead of waiting for one big batch (the server rate-limits Deezer).
+    const chunks = [];
+    for (let i = 0; i < need.length; i += 4) chunks.push(need.slice(i, i + 4));
+    await Promise.all(chunks.map(async chunk => {
         try {
             const res = await fetch('/api/preview?ids=' + chunk.join(','));
             const body = await res.json();
@@ -31,8 +34,14 @@ async function fetchUrls(ids) {
         } catch (e) {
             chunk.forEach(id => urlCache.set(id, { url: null, at: Date.now() }));
         }
-    }
+    }));
 }
+
+// Seconds of audio buffered from the start of the clip. A clip is only startable
+// once it has a couple of seconds: seeking to a random offset past the buffered
+// part makes the browser re-fetch from there, which is the "loading" silence.
+const bufferedEnd = a => (a.buffered.length ? a.buffered.end(a.buffered.length - 1) : 0);
+const MIN_BUFFERED_S = 2;
 
 function drop(p) {
     clearInterval(p.fade);
@@ -56,8 +65,10 @@ function entry(did) {
 }
 
 async function attach(p) {
-    if (p.audio.getAttribute('src') || p.dead) return;
+    if (p.audio.getAttribute('src') || p.dead || p.fetching) return;
+    p.fetching = true;
     await fetchUrls([p.did]);
+    p.fetching = false;
     const c = urlCache.get(p.did);
     if (c && c.url) { p.audio.src = c.url; p.urlAt = c.at; } else { p.dead = true; p.deadAt = Date.now(); }
 }
@@ -69,7 +80,8 @@ export async function preload(dids) {
     const keep = new Set(want);
     if (current) keep.add(current.did);
     [...pool.values()].forEach(p => { if (!keep.has(p.did)) drop(p); });
-    await fetchUrls(want);
+    // One request per song, in priority order (nearest the playhead first), so the
+    // closest clips resolve first rather than waiting on the whole window.
     want.forEach(did => { attach(entry(did)); });
 }
 
@@ -108,14 +120,27 @@ export function playClip(did) {
         const dur = a.duration && isFinite(a.duration) ? a.duration : 30;
         let lo = setting('sliderClipStartMin'), hi = setting('sliderClipStartMax');
         if (hi < lo) [lo, hi] = [hi, lo];
-        const start = Math.min(lo + Math.random() * (hi - lo), Math.max(0, dur - 1.5));
+        // Start inside what's already buffered so sound begins immediately; a fully
+        // preloaded clip (buffered ~30 s) uses the whole configured range.
+        const cap = Math.max(0, Math.min(dur, bufferedEnd(a)) - 1.5);
+        hi = Math.min(hi, cap);
+        lo = Math.min(lo, hi);
+        const start = lo + Math.random() * (hi - lo);
         try { a.currentTime = start; } catch (e) { /* metadata not ready */ }
         current = p;
         a.play().catch(() => {});
     };
-    if (p.audio.readyState >= 3) { go(); return 'playing'; }
+    if (bufferedEnd(p.audio) >= MIN_BUFFERED_S) { go(); return 'playing'; }
     if (!setting('checkboxColdStartClips')) return 'skipped';
-    p.audio.addEventListener('canplay', go, { once: true });
+    const tryGo = () => {
+        if (my !== token || bufferedEnd(p.audio) >= MIN_BUFFERED_S) {
+            p.audio.removeEventListener('progress', tryGo);
+            p.audio.removeEventListener('canplay', tryGo);
+            if (my === token) go();
+        }
+    };
+    p.audio.addEventListener('progress', tryGo);
+    p.audio.addEventListener('canplay', tryGo);
     attach(p);
     return 'pending';
 }
@@ -124,7 +149,7 @@ export function poolInfo() {
     const ps = [...pool.values()];
     return {
         size: ps.length,
-        ready: ps.filter(p => p.audio.readyState >= 3).length,
+        ready: ps.filter(p => bufferedEnd(p.audio) >= MIN_BUFFERED_S).length,
         dead: ps.filter(p => p.dead).length,
         playing: current ? current.did : null,
     };
