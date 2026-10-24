@@ -35,10 +35,19 @@ export default async function handler(req, res) {
         return;
     }
 
-    // The env var must hold exactly ONE token. It was once saved with two tokens separated by blank lines, and
-    // GitHub rejected every request ("invalid header value"). Use the first whitespace-separated token so a
-    // stray paste cannot break saving; the Vercel setting should still be fixed to a single token.
-    const token = (process.env.GITHUB_TOKEN || '').split(/\s+/).find(Boolean) || '';
+    // The env var may hold several whitespace-separated tokens (it was once saved with two pasted together, which
+    // as ONE header value made GitHub reject every request). Each is tried in order: a fine-grained token can read
+    // a public repo but answer 403 on a write, and then the next token (e.g. a classic "repo"-scope one) is used.
+    const tokens = (process.env.GITHUB_TOKEN || '').split(/s+/).filter(Boolean);
+    const token = tokens[0] || '';
+    const ghFetch = async (url, init = {}) => {
+        let r;
+        for (const t of tokens) {
+            r = await fetch(url, { ...init, headers: { ...(init.headers || {}), Authorization: `Bearer ${t}` } });
+            if (r.status !== 401 && r.status !== 403) return r;
+        }
+        return r;
+    };
     const secret = process.env.DEV_PANEL_SAVE_SECRET;
     // Report exactly which var is missing. DEV_PANEL_SAVE_SECRET only gates POST.
     const missing = [];
@@ -66,7 +75,7 @@ export default async function handler(req, res) {
 
     if (req.method === 'GET') {
         try {
-            const getResp = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers, cache: 'no-store' });
+            const getResp = await ghFetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers, cache: 'no-store' });
             if (getResp.status === 404) {
                 res.status(200).json({ ok: true, settings: null }); // nothing saved yet -- not an error
                 return;
@@ -82,7 +91,7 @@ export default async function handler(req, res) {
                 jsonText = Buffer.from(getData.content, 'base64').toString('utf-8');
             } else if (getData.download_url) {
                 // Above ~1 MB the Contents API omits `content`; fetch the raw file instead.
-                const rawResp = await fetch(getData.download_url, { headers: { Authorization: headers.Authorization }, cache: 'no-store' });
+                const rawResp = await ghFetch(getData.download_url, { headers: { Authorization: headers.Authorization }, cache: 'no-store' });
                 if (!rawResp.ok) {
                     res.status(502).json({ ok: false, error: `download_url fetch failed (${rawResp.status})` });
                     return;
@@ -121,7 +130,7 @@ export default async function handler(req, res) {
     try {
         // The current file's sha is required to update an existing file (a 404 just means "create").
         let sha;
-        const getResp = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers });
+        const getResp = await ghFetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers });
         if (getResp.ok) {
             const getData = await getResp.json();
             sha = getData.sha;
@@ -132,7 +141,7 @@ export default async function handler(req, res) {
         }
 
         const content = Buffer.from(JSON.stringify(body, null, 2) + '\n', 'utf-8').toString('base64');
-        const putResp = await fetch(apiUrl, {
+        const putResp = await ghFetch(apiUrl, {
             method: 'PUT',
             headers,
             body: JSON.stringify({
