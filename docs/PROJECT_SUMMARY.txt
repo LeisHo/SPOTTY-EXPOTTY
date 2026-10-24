@@ -47,7 +47,8 @@ Built (2026-10-23/24) and tested in the built-in browser:
 - Timeline visuals: Bar Width slider; Timeline Visual Style dropdown (None, Glow
   Stems, Smooth Density, Feature Line, Mood Ribbon) with per-style settings shown
   only for the selected style; nested toggleable "Album Cover Colors" group (4
-  colour modes: stacked per song, average, vivid dominant, palette gradient).
+  colour modes: stacked per song, average, vivid dominant, palette gradient). Data: 6,295 of 6,341 timeline entries (99.3%) have cover colours
+  (5,730 of 5,773 tracks; 4,164 distinct palettes); all four modes were checked by eye on real data.
 - Layout: all on-screen elements (title, artist, album line, cover, timeline) are
   registered with the UI Layout Engine with per-device overrides, editable in the
   engine Inspector (dev panel > UI Layout); layout saves with Sync as extra.uiLayout.
