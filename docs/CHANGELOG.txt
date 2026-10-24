@@ -581,6 +581,12 @@ clipped to the curve. Single-colour modes keep the smooth horizontal gradient. V
 (5-bit quantised) 5 for Average, 41 for Stacked, 127 for Vivid Dominant Gradient; not checked by eye on a phone.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  05:26 AM (correction)
+
+CORRECTION to the Smooth Density entry above: its header said ~05:28; the measured times are 05:25:19 to 05:26:22 (1m 3s) for the code push.
+The "~05:28" was written before the clock was read. (Third time: write the end time only after running `date`.)
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
