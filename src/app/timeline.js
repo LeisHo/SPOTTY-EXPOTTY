@@ -321,8 +321,25 @@ export function createTimeline(canvas, data) {
             ctx.closePath();
             ctx.save();
             ctx.globalAlpha = fillA;
-            ctx.fillStyle = grad; // hue comes from the horizontal gradient
-            ctx.fill();
+            // Colour modes whose bars have vertical colour (Stacked Albums, Palette Gradient, Vivid Dominant Gradient): paint each
+            // bar-wide strip of the area with that bar's own vertical colours, scaled to the area's height there, so the density
+            // curve shows the same colours the bars would. Single-colour modes keep the smooth horizontal gradient.
+            const paints = bins.map(bn => (colorOpts.on && bn ? binColorOf(bn) : null));
+            if (paints.some(p => p && (p.stack || p.gradient))) {
+                ctx.clip();
+                const fallbackCss = rgbCss(hexToRgb(accent), 1);
+                for (let b = 0; b < nb; b++) {
+                    let p = paints[b];
+                    for (let d = 1; !p && d < nb; d++) p = paints[b - d] || paints[b + d] || null; // nearest bar that has colours
+                    const x0 = b * bw, x1 = Math.min(ys.length, Math.ceil((b + 1) * bw) + 1);
+                    let top = topH;
+                    for (let x = Math.floor(x0); x < x1; x++) top = Math.min(top, ys[x] === undefined ? topH : ys[x]);
+                    paintFill(ctx, p, x0, top, bw + 0.5, Math.max(1, topH - top), fallbackCss, 1);
+                }
+            } else {
+                ctx.fillStyle = grad; // hue comes from the horizontal gradient
+                ctx.fill();
+            }
             if (setting('checkboxDensityGradientFill')) { // optional vertical fade toward the baseline
                 ctx.globalCompositeOperation = 'destination-out';
                 const fade = ctx.createLinearGradient(0, 0, 0, topH);
