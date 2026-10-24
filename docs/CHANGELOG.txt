@@ -467,6 +467,13 @@ change the finger; the phone twin ("Show in Mobile") of the speed slider (4) -> 
 (inverted). Not verified: a real finger on a real phone.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  03:26 AM EDT (correction)
+
+CORRECTION to the entry above: its header said 03:22 AM - 03:28 AM; the measured times are 03:22:41 to 03:26:14
+(3m33s). The 03:28 was a guess written as if it were a time (the same mistake as in the previous round: take
+the end time from `date`, never from an estimate).
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
