@@ -7266,6 +7266,37 @@
         // bespoke one.
         makeDevGroupToggleable(tab, 'Component Gallery — Toggleable Group Demo', 'galleryToggleGroupEnabled');
     }
+    // SPOTTY EXPOTTY's own settings. The app (src/app/settings.js) reads these
+    // controls' live DOM values by id -- no separate state copy. Mobile/Landscape
+    // twins are created by the template's dynamic per-device mechanism, so every
+    // id keeps the `slider|color|checkbox` prefix that mechanism relies on.
+    function renderSpottyDevControls() {
+        const tab = 'desktop';
+        const groups = ['Scrub Audio', 'Scrub Preload', 'Scrub Input', 'Spotify Handoff', 'Timeline Look'];
+        groups.forEach(g => document.getElementById('desktopTabContent').appendChild(createDevGroupElement(g, tab)));
+        const SPOTTY_CONTROLS = [
+            { tab, group: 'Scrub Audio', id: 'checkboxScrubAudioEnabled', type: 'checkbox', label: 'Play Clips While Scrubbing:', value: true },
+            { tab, group: 'Scrub Audio', id: 'sliderScrubVolume', type: 'slider', label: 'Clip Volume (x):', min: 0, max: 1, step: 0.05, value: 0.7 },
+            { tab, group: 'Scrub Audio', id: 'sliderClipStartMin', type: 'slider', label: 'Clip Start Min (S):', min: 0, max: 28, step: 0.5, value: 2 },
+            { tab, group: 'Scrub Audio', id: 'sliderClipStartMax', type: 'slider', label: 'Clip Start Max (S):', min: 0, max: 28, step: 0.5, value: 22 },
+            { tab, group: 'Scrub Audio', id: 'sliderClipFadeOut', type: 'slider', label: 'Clip Fade Out (Ms):', min: 0, max: 500, step: 5, value: 30 },
+            { tab, group: 'Scrub Audio', id: 'checkboxColdStartClips', type: 'checkbox', label: 'Play Clips Not Yet Preloaded:', value: true },
+            { tab, group: 'Scrub Preload', id: 'sliderPreloadAhead', type: 'slider', label: 'Preload Ahead (Songs):', min: 0, max: 30, step: 1, value: 8 },
+            { tab, group: 'Scrub Preload', id: 'sliderPreloadBehind', type: 'slider', label: 'Preload Behind (Songs):', min: 0, max: 30, step: 1, value: 3 },
+            { tab, group: 'Scrub Preload', id: 'checkboxShowPoolOverlay', type: 'checkbox', label: 'Show Preload Pool Overlay:', value: false },
+            { tab, group: 'Scrub Input', id: 'sliderSongsPerWheelNotch', type: 'slider', label: 'Songs Per Wheel Notch (Songs):', min: 0.1, max: 20, step: 0.1, value: 3 },
+            { tab, group: 'Scrub Input', id: 'sliderSongsPerDrag100', type: 'slider', label: 'Songs Per 100 Px Touch Drag (Songs):', min: 1, max: 60, step: 1, value: 12 },
+            { tab, group: 'Scrub Input', id: 'checkboxInvertScroll', type: 'checkbox', label: 'Invert Scroll Direction:', value: false },
+            { tab, group: 'Spotify Handoff', id: 'checkboxHandoffEnabled', type: 'checkbox', label: 'Play Real Song When Scrubbing Stops:', value: true },
+            { tab, group: 'Spotify Handoff', id: 'sliderHandoffDelay', type: 'slider', label: 'Handoff Delay After Scrubbing Stops (Ms):', min: 100, max: 3000, step: 50, value: 600 },
+            { tab, group: 'Timeline Look', id: 'colorTimelineAccent', type: 'color', label: 'Timeline Accent Color:', value: '#1db954' },
+            { tab, group: 'Timeline Look', id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
+            { tab, group: 'Timeline Look', id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 80, max: 500, step: 5, value: 200 },
+            { tab, group: 'Timeline Look', id: 'sliderTimelineBarOpacity', type: 'slider', label: 'Timeline Bar Opacity (x):', min: 0.1, max: 1, step: 0.05, value: 0.8 },
+        ];
+        renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_CONTROLS', SPOTTY_CONTROLS);
+    }
     function ensureDevPanelBuilt() {
         if (devPanelBuilt) return;
 
@@ -7292,6 +7323,7 @@
         // project never copies this call, or the function it calls,
         // when vendoring this file per step 1/2 of the top-of-file usage
         // note.
+        renderSpottyDevControls();
         renderComponentGalleryControls();
 
         setupDevPanelStyleControls();

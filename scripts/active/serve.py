@@ -19,10 +19,14 @@ import http.server
 import json
 import os
 import sys
+import time
 import urllib.error
+import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 
 GITHUB_API = 'https://api.github.com'
+_PREVIEW_CACHE = {}  # deezer id -> (url, fetched_at); links expire ~15 min, refreshed after 10
 
 
 def _gh_config():
@@ -110,7 +114,33 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def _is_api(self):
         return self.path.split('?')[0].rstrip('/') == '/api/save-settings'
 
+    def _preview(self):
+        """Local stand-in for api/preview.js: Deezer ids -> fresh preview URLs."""
+        qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+        ids = [i for i in (qs.get('ids', [''])[0].split(',')) if i.strip().isdigit()][:40]
+        if not ids:
+            return self._json(400, {'error': 'ids=comma,separated,deezer,ids required'})
+        def one(i):
+            hit = _PREVIEW_CACHE.get(i)
+            if hit and time.time() - hit[1] < 600:
+                return hit[0]
+            try:
+                req = urllib.request.Request(f'https://api.deezer.com/track/{i}', headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req, timeout=15) as resp:
+                    body = json.loads(resp.read().decode('utf-8'))
+            except Exception:  # noqa: BLE001
+                return None  # transient failure: don't cache, the client retries
+            url = body.get('preview') or None
+            if url:  # only cache real URLs; a Deezer quota error must not stick for 10 min
+                _PREVIEW_CACHE[i] = (url, time.time())
+            return url
+        with ThreadPoolExecutor(8) as ex:
+            out = dict(zip(ids, ex.map(one, ids)))
+        return self._json(200, out)
+
     def do_GET(self):
+        if self.path.split('?')[0].rstrip('/') == '/api/preview':
+            return self._preview()
         if not self._is_api():
             return super().do_GET()
         cfg = _gh_config()

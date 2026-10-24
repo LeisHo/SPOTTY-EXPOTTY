@@ -8,38 +8,39 @@ duplicate of the README's tree.
 --------------------------------------------------------------------------------
 FILE MAP
 
-<One entry per real top-level module/folder -- what it contains and what it's
-responsible for. Enough for a new session to know where to look for a given
-concern without reading the whole codebase (per CLAUDE.md §0b's file-reading
-efficiency guidance). Flag anything unused/leftover/dead explicitly rather
-than silently listing it as if it were live -- e.g. "kept for reference, not
-actively run.">
+See ../CLAUDE.md "File map" for the per-file list (kept there so it isn't
+duplicated in two places). Summary by folder:
 
-- `<path>` -- <what it does, what it's responsible for.>
+- `src/app/`, `src/main.js`, `src/app.css` -- the project's own app: scrubbing input, clip pool, Spotify handoff, timeline canvas.
+- `src/devpanel/`, `src/style.css`, `lib/ui-engine/` -- template/engine code, vendored; project settings are added via `renderSpottyDevControls()`.
+- `api/` + `scripts/active/serve.py` -- the preview-link proxy (Vercel / local) and the scaffold's optional settings-save endpoint.
+- `scripts/active/resolve_previews.py`, `build_timeline.py` -- one-off data pipeline (Deezer ids -> `data/processed/timeline.json`).
+- Dead/leftover: the "Component Gallery" demo groups in devPanel.js (reference only).
 
 --------------------------------------------------------------------------------
 ARCHITECTURE
 
-<The real shape of how the pieces fit together -- data flow, pipeline stages,
-what depends on what and, just as importantly, what deliberately does NOT
-depend on what (e.g. "analysis only ever reads the table ingestion already
-wrote, never the other way around"). This is the section that saves a later
-session from re-deriving the architecture by reading every file.>
+Offline: Exportify CSVs -> resolve_previews.py (Deezer track ids by ISRC)
+-> build_timeline.py -> data/processed/timeline.json (sorted by Added At).
+Runtime: main.js loads timeline.json; a scrub (wheel / touch drag / arrow keys
+/ dragging the timeline) moves a float position; each change of the rounded
+index re-renders the song card + timeline, plays that song's preload-pool
+clip from a random offset, and re-centers the preload window (wider when
+scrubbing fast). After `Handoff Delay` ms of no movement the clip stops and
+the Spotify embed plays the real song. clipPlayer asks /api/preview for fresh
+clip URLs; nothing about URLs is ever persisted. The app reads dev-panel
+values live from the controls' DOM (settings.js) -- there is no second copy of
+any setting. The dev panel never depends on the app.
 
 --------------------------------------------------------------------------------
 UNTOUCHABLE SYSTEMS
 
-<Subsystems that must not be touched incidentally -- live pipelines,
-classification logic, tracking state, indexes, anything a casual edit could
-silently break. State "None formally designated yet" if genuinely true for
-an early-stage project, rather than leaving the section looking incomplete.>
+None formally designated yet. Don't hand-edit lib/ui-engine/ or the
+template-derived parts of src/devpanel/devPanel.js.
 
 --------------------------------------------------------------------------------
 GOTCHAS
 
-<Real bugs already hit and fixed, pinned-dependency reasons, ordering
-requirements, non-obvious constraints -- anything a later session would
-otherwise rediscover the hard way. One bullet per gotcha, concrete enough to
-actually prevent the mistake:>
-
-- <Gotcha> -- <why it matters, what breaks if ignored.>
+See ../CLAUDE.md "Known gotchas" (Deezer link expiry, failed-lookup caching,
+shared Deezer rate limit, Spotify iFrame API replacing its element, real
+pointer events in tests, safe dev-server shutdown).

@@ -1,8 +1,8 @@
 SPOTTY EXPOTTY -- PROJECT SUMMARY
 ================================================================================
 
-Status: <one-line current state + date, e.g. "working research-prototype
-pipeline (ingest -> detect -> export), as of YYYY-MM-DD".> See
+Status: working timeline-scrub prototype (scrub, preview-clip jumble, Spotify
+handoff), as of 2026-10-24. See
 PROJECT_PROGRESS.md for what's actively being worked on right now, and
 CHANGELOG.txt for the full historical log -- this file stays a mid-altitude
 snapshot, not a duplicate of either.
@@ -10,57 +10,81 @@ snapshot, not a duplicate of either.
 --------------------------------------------------------------------------------
 OBJECTIVE
 
-<What this project is for, in plain terms. What does it take as input, what
-does it produce, who/what is it for. State explicitly what it deliberately
-is NOT (e.g. "no frontend, no auth, no cloud APIs" if that's a real boundary)
--- a stated non-goal prevents a later session from silently expanding scope.>
+An HTML project to visualize, analyze and interpret the owner's Spotify
+diary playlists (Exportify CSVs). Which specific views and analyses to build
+has not been decided yet.
 
 --------------------------------------------------------------------------------
 SCOPE
 
-In scope: <what's actively maintained and iterated on.>
+In scope: the timeline scrub player (scrub through every song-add event in
+order, with preview-clip jumble and real-song handoff). Further visualizations
+and analyses (audio-feature trends, genres, artists, repeats) are planned but
+not chosen yet.
 
-Out of scope / dormant: <anything deliberately excluded, deferred, or that
-used to be part of this project but no longer is. If something was removed,
-say so plainly rather than leaving stale references elsewhere to rot.>
+Out of scope / dormant: the non-diary playlists directly in
+data/Exportify Export/ (only the Tingo Tango subfolder is loaded).
 
-Audience / how it's used: <single-user prototype? end-user-facing product?
-internal tool? Say who actually uses this and how.>
+Audience / how it's used: single-user personal prototype (the playlist
+owner), run locally or on Vercel.
 
 --------------------------------------------------------------------------------
 CURRENT STATE
 
-<What's actually built and working right now, in enough detail that someone
-could verify the claim. Reference real numbers where meaningful (test counts,
-commit counts, data volume) -- per CLAUDE.md §0c, no rounding, state what was
-actually measured.>
+Built (2026-10-23/24) and tested in the built-in browser:
+- data/processed/timeline.json: 6,345 add events across 42 playlists, 5,450
+  (85.9%) with a Deezer clip id. 5,776 unique tracks; 4,939 (85.5%) have an
+  exact Deezer-by-ISRC clip, 837 do not (no iTunes fallback used).
+- Scrubbing by wheel / touch drag / arrow keys / dragging the timeline; song
+  card; canvas timeline (weekly histogram, one row per playlist, playhead).
+- Clip pool: with sound enabled, slow (2 songs/s) and medium (6 songs/s)
+  scrubbing started a clip for 10/10 and 23/23 songs that have one; fast
+  (15 songs/s) started 25 of 39 (64%). 0 failed lookups in that run.
+- Spotify embed handoff after scrubbing stops: confirmed the embed switched to
+  the right song and played (a 30 s "Preview" because that browser pane wasn't
+  logged in to Spotify).
+- 18 dev-panel controls in 5 groups; Mobile twin row confirmed to appear when
+  "Show in Mobile/Landscape" is checked.
+Not tested: real phones/touch, Vercel deployment, logged-in full-song playback.
 
 --------------------------------------------------------------------------------
 DECISIONS
 
-<Real architectural/scope decisions made and why -- especially ones that
-would look wrong out of context, or that a later session might otherwise
-"fix" without knowing they were deliberate. One bullet per decision:>
-
-- <Decision> -- <why, and what it was chosen over.>
+- Preview clips come from Deezer (by ISRC), not Spotify -- Spotify stopped
+  providing preview_url to newer apps (from memory of its 2024 API changes,
+  not re-verified), and an embed alone loads too
+  slowly (456-948 ms cold) to flick through; preloaded clips start in ~1 ms.
+- Save Deezer track ids, never URLs -- links expire in ~14.98 min.
+- Handoff to the Spotify embed on stop rather than a Spotify login/SDK -- no
+  API key or Premium needed.
+- iTunes fallback not used -- its matches are by title/artist (loose,
+  unverified) and its rate limit makes a full pass ~1 hour.
+- Plain-CSS app layout, UI engine only for #appStage (see CLAUDE.md).
 
 --------------------------------------------------------------------------------
 DATA SOURCES
 
-<Where the project's data comes from. Omit this section entirely for
-projects with no meaningful external/acquired data.>
+Exportify CSV exports of the owner's Spotify playlists, in
+data/Exportify Export/. The diary playlists are in the Tingo Tango subfolder
+(42 files as of 2026-10-23). See CLAUDE.md "Vocabulary" for how the playlists
+are made and named. Columns include Track Name, Album Name, Artist Name(s),
+Release Date, Added At, Genres, Record Label, and Spotify audio features.
 
 --------------------------------------------------------------------------------
 KNOWN LIMITATIONS
 
-<Honest, current list of what doesn't work yet, what's untested, what's a
-known gap. This is a living list -- remove an item once it's actually
-resolved, don't leave it here as stale history.>
+- 14.5% of unique songs (837 of 5,776) have no clip; they're silent while scrubbing.
+- Very fast scrubbing can't keep up with Deezer's rate limit; some songs are skipped.
+- Preview clips are Deezer's 30 s cut, so the "mid-song" start is within that cut.
+- Mobile/touch, Vercel deploy and full-song (logged-in) playback are untested.
+- Deezer's terms for this use weren't checked.
+- Data oddities not investigated: a song in Junior.csv dated 2026-11-10;
+  Treinta.Cero_(2).csv looks like a copy of Treinta._Cero.
+- data/processed/timeline.json is generated from a lookup output kept outside
+  the repo; re-running the lookup is needed to regenerate it.
 
 --------------------------------------------------------------------------------
 NEXT ACTION
 
-<The single most concrete next step, or "no specific next action is
-currently pending" if genuinely true. Keep this in sync with
-PROJECT_PROGRESS.md's "What's next" section rather than letting the two
-drift apart.>
+Owner tries the scrub player (feel of the jumble, handoff delay, touch on a
+phone) and decides which visualization/analysis to build next.

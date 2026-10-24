@@ -30,6 +30,96 @@ Not verified:
 - The dev panel has not yet been opened in a browser to confirm it renders.
 
 --------------------------------------------------------------------------------
+2026-10-23  -  09:56 PM - 09:57 PM EDT
+
+Correction to the entry above: its "nothing committed" line was true when
+written but is now stale. The scaffold plus all 88 files in data/ were
+committed (3858a1d) and pushed to origin main
+(https://github.com/LeisHo/SPOTTY-EXPOTTY). The 88 files were confirmed
+tracked, 88 on disk, working tree clean, HEAD == origin/main.
+
+--------------------------------------------------------------------------------
+2026-10-23  -  11:08 PM - 11:09 PM EDT
+
+Recorded the owner's description of the playlist-diary data (CLAUDE.md
+Vocabulary, docs/PROJECT_SUMMARY.txt OBJECTIVE and DATA SOURCES, README
+tagline). Inspected the Tingo Tango CSVs: 42 files, Exportify schema with
+Added At and audio-feature columns. No visualization code written yet; the
+first view has not been chosen. Not yet committed.
+
+Observed (not investigated): Junior.csv has an Added At date of 2026-11-10;
+Treinta.Cero_(2).csv has 119 rows all dated 2023-09-30. A listing script
+crashed on non-Latin filenames after 33 of 42 files, so per-file stats for
+the remaining 9 were not collected.
+
+--------------------------------------------------------------------------------
+2026-10-23  -  11:36 PM - 11:42 PM EDT
+
+Researched whether a timeline scrub can play songs instantly. Added
+scripts/active/resolve_previews.py (resumable; Deezer preview lookup by ISRC,
+iTunes title+artist fallback). Output goes to a scratchpad JSON, not data/.
+
+Measured:
+- 100-song random sample: Deezer by ISRC 87 hits, iTunes fallback 11 more,
+  combined 98 of 100, 0 errors. iTunes matches are loose and unverified.
+- Library: 6,345 rows, 5,776 unique tracks, 5,738 with ISRC.
+- Deezer preview links carry an exp= token and are valid ~15 min (14.98 min
+  measured). The audio CDN sends Access-Control-Allow-Origin: *; the Deezer
+  API does not, so lookups need a proxy or a pre-resolved ID list.
+- Playback in the built-in browser, 8 clips: cold canplay 456/507/591/948 ms;
+  preloaded play() 1/1/1/184 ms (started at 12 s into a 30 s clip).
+
+Not finished: the full 5,776-song lookup was still running when this entry
+was written (200 done, 14 misses at last check), so full-library coverage is
+unknown. Not committed.
+
+--------------------------------------------------------------------------------
+2026-10-23 11:53 PM  -  2026-10-24 12:06 AM EDT
+
+Built the timeline scrub player and the data behind it.
+
+Added:
+- data/processed/timeline.json (build_timeline.py): 6,345 playlist-add events
+  across 42 playlists sorted by Added At; 5,450 (85.9%) carry a Deezer clip id.
+- Full Deezer lookup via resolve_previews.py (Deezer-only, --no-itunes): 5,776
+  unique tracks, 4,939 (85.5%) with an exact ISRC clip, 837 without.
+- src/main.js + src/app/{settings,clipPlayer,handoff,timeline}.js + src/app.css:
+  scrub by wheel / touch drag / arrow keys / dragging the timeline; preload pool
+  with random-start 30 s clips; Spotify embed handoff after a configurable idle
+  delay; canvas timeline.
+- api/preview.js and a matching /api/preview route in scripts/active/serve.py
+  (Deezer ids -> fresh preview URLs; links expire ~15 min).
+- renderSpottyDevControls() in src/devpanel/devPanel.js: 18 controls in 5
+  groups (Scrub Audio, Scrub Preload, Scrub Input, Spotify Handoff, Timeline
+  Look), registered with registerDevControlArray().
+- README, CLAUDE.md, PROJECT_SUMMARY, CODE_SUMMARY, PROJECT_PROGRESS filled in.
+
+Fixed (found while testing):
+- resolve_previews.py crashed ("dictionary changed size during iteration")
+  because save() copied the cache while worker threads wrote to it; save() now
+  takes a dict() snapshot. The run resumed from its cache.
+- A Deezer quota error was cached as "no clip" for 10 minutes, silencing most
+  songs during fast scrubbing; only real URLs are cached now and a null is
+  retried after 20 s.
+- The local proxy looked up ids one at a time; it now uses 8 threads.
+- Spotify's iFrame API replaced #spxEmbed with its iframe, dropping the
+  wrapper's styles; the placeholder now sits inside a wrapper div.
+- Preload distance now grows with scroll speed (~1 s of travel).
+- A broad process-kill pattern ("serve.py") also killed my own shell wrapper;
+  the server is now stopped by PID.
+
+Verified (built-in browser, 1024x768, no logged-in Spotify session):
+- With the lookup finished: 2 songs/s -> clips started for 10 of 10 songs
+  that have one; 6 songs/s -> 23 of 23; 15 songs/s -> 25 of 39. 0 failed
+  lookups. No console errors other than Spotify's "allowfullscreen" warning.
+- Spotify embed switched to the scrubbed-to song and played (30 s "Preview").
+- Dev panel: clicking a control's "Show in Mobile/Landscape" checkbox (real
+  pointerdown + click) created its Mobile row.
+
+Not verified: real phones/touch, Vercel deployment of api/preview.js,
+logged-in full-song playback, Deezer's terms of use for this.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================

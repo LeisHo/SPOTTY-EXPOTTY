@@ -18,28 +18,22 @@ work seamlessly from there.
 
 ## Currently working on
 
-<What's actively in progress right now. If nothing is actively in progress,
-say "Nothing in progress — see What's next" rather than leaving this blank
-or stale.>
+Nothing in progress — see What's next.
 
 ## Recently completed
 
-<A short list of what was *just* finished — enough to explain how the
-project got to its current state, not a full history. A handful of bullets
-at most. Once something here stops being relevant context for what's
-current or next, drop it — it's already permanently recorded in
-CHANGELOG.txt, so nothing is lost by removing it from here.>
+- Scaffolded the project and pushed it to GitHub (LeisHo/SPOTTY-EXPOTTY).
+- Measured preview-clip coverage, link expiry and playback latency.
+- Built the scrub player: timeline, clip pool, Spotify handoff, preview proxy, 18 dev-panel controls, data file (6,345 events).
 
 ## What's next
 
-<The concrete next step(s), ordered by what actually comes first. Keep this
-in sync with PROJECT_SUMMARY.txt's "Next Action" rather than letting the two
-drift apart — this section can go into more operational detail; that one
-stays a one-line pointer.>
+1. Owner tries it locally (`py scripts/active/serve.py 8000`) and tunes the dev-panel settings (handoff delay, clip start range, preload, songs per wheel notch).
+2. Test on a phone and on Vercel (the preview proxy and touch scrubbing are untested there).
+3. Decide the next visualization/analysis (audio-feature trends over time, artists/genres, repeats across playlists, release year vs added date).
+4. Optional: iTunes fallback for the 837 songs with no Deezer clip (loose matches; ~1 h at its rate limit).
 
 ## Open questions / blockers
 
-<Anything genuinely unresolved that the next session needs to know about
-before proceeding — a decision waiting on the user, an external dependency,
-a known bug without a fix yet. Remove an item once it's resolved; don't
-leave it here as stale history either.>
+- Which visualization/analysis to build next (owner's call).
+- Whether to keep the scaffold's reference-only "Component Gallery" in the dev panel.

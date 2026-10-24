@@ -1,8 +1,10 @@
-# SPOTTY EXPOTTY — <one-line tagline>
+# SPOTTY EXPOTTY — visualizing a Spotify playlist diary
 
-<1-3 sentence description: what this project is, what it does. If it's a
-prototype/research project rather than a production app, say so plainly here
-(see DOGGO's README for an example: "This is not a production app.").>
+A single-user personal tool for exploring a Spotify playlist diary (about
+6,300 song-add events across 42 playlists). Scroll or drag through a timeline
+and the songs flash past as short preview clips; stop, and the real song plays
+in Spotify's embedded player. This is a personal prototype, not a production
+app.
 
 See `docs/PROJECT_SUMMARY.txt` for the current state (objective, scope,
 current state, recent decisions, known limitations, next action — the part
@@ -12,34 +14,40 @@ don't let real content drift into this file instead of those.
 
 ## How to run it
 
-<Exact steps to run/use the project. No build step? Say so. Needs a server,
-an API key, a specific Python/Node version? State it here precisely — this
-is the one doc a new person (or a fresh AI chat) needs to get the thing
-running without guessing.>
+No build step. It needs the local server (plain `file://` can't load the
+data file or the preview proxy). With Python 3 installed:
+
+```bash
+py scripts/active/serve.py 8000
+```
+
+Then open `http://localhost:8000/index.html`, click "Click to enable sound",
+and scroll. Press `D` for the dev panel. Full Spotify playback needs you to be
+logged in to Spotify in the same browser; otherwise the embed plays a
+30-second preview. On Vercel, `api/preview.js` serves the same proxy route.
+
+To rebuild the data file after changing the CSVs:
+
+```bash
+py -I scripts/active/resolve_previews.py <links.json> --no-itunes
+py -I scripts/active/build_timeline.py <links.json>
+```
 
 ## Project structure
 
 ```
 SPOTTY EXPOTTY/
-├── src/                     <what actually ships — see docs/CODE_SUMMARY.txt>
+├── index.html, src/         the app (src/app/ = project code; src/devpanel/ = dev panel)
+├── api/                     Vercel functions (preview-link proxy, optional settings save)
+├── lib/ui-engine/           vendored UI Layout Engine
 ├── data/
-│   ├── raw/                 <scraped/dumped/regenerable inputs — gitignored>
-│   └── processed/           <data the app actually reads>
-├── docs/                    <README (pointer only — this file), PROJECT_SUMMARY.txt,
-│                             CODE_SUMMARY.txt, PROJECT_PROGRESS.md, CHANGELOG.txt,
-│                             and any HANDOFF doc(s)>
-├── scripts/
-│   ├── active/               <scripts still run regularly>
-│   └── archive/               <one-off scripts that already did their job>
-├── logs/                    <log entries from tests, audits, queries, etc>
-├── results/                 <raw results of tests/runs>
-└── tests/                   <if a real test suite exists>
+│   ├── Exportify Export/    source CSVs (read-only inputs)
+│   └── processed/           timeline.json (what the app loads)
+├── docs/                    PROJECT_SUMMARY, CODE_SUMMARY, PROJECT_PROGRESS, CHANGELOG, HANDOFF
+└── scripts/active/          serve.py, resolve_previews.py, build_timeline.py
 ```
 
-<Adjust this tree to the project's actual layout — this is the standard
-skeleton (CLAUDE.md §11), not every project needs every folder. A project
-small enough to justify a single-file architecture can skip most of this
-and say so explicitly in its own CLAUDE.md instead.>
+See `CLAUDE.md` for the per-file map.
 
 ## Known limitations
 
