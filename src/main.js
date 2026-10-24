@@ -1,75 +1,161 @@
 // SPOTTY EXPOTTY -- host entry point.
-// Click-drag (or one-finger drag) along the timeline to scrub through every song added to
-// the diary playlists, in the order they were added; the mouse wheel / two-finger pinch zooms
-// the timeline, which sets how far a drag moves. While scrubbing, 30-second preview clips
-// flash past from a preloaded pool; when scrubbing stops, the real song plays in Spotify's
-// (invisible) embedded player. The album cover is the play/pause button.
-import { createUIElement, resolveAndApplyAll } from '../lib/ui-engine/registry.mjs';
+// Desktop: the mouse wheel scrubs through every song added to the diary playlists (in the order
+// they were added); a click on the timeline jumps there; click-and-drag zooms the timeline with the
+// playhead as the zoom origin. Touch: one-finger drag scrubs, two-finger pinch zooms, tap jumps.
+// While scrubbing, 30-second preview clips flash past from a preloaded pool; when scrubbing stops,
+// the real song plays in Spotify's (invisible) embedded player. The album cover is the play/pause
+// button. Every on-screen element's position and scale is owned by the UI Layout Engine (lib/ui-engine).
+import {
+    createUIElement, updateElement, resolveAndApplyAll, captureAllLayoutConfigs, registerStorageBackend, loadLayoutConfig,
+    resetLayoutConfig,
+} from '../lib/ui-engine/registry.mjs';
 import { setting } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo } from './app/clipPlayer.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, embedStatus } from './app/handoff.js';
 import { cleanTitle } from './app/title.mjs';
 
-const appStage = document.getElementById('appStage');
-if (appStage) {
-    createUIElement({
-        id: 'appStage',
-        role: 'container',
-        layout: {
-            position: { mode: 'fixed', viewportAnchor: 'top-left', offset: { x: '0px', y: '0px' } },
-            size: {
-                width: { mode: 'fixed', value: '100vw' },
-                height: { mode: 'fixed', value: '100vh' },
-            },
-        },
-        domNode: appStage,
-    });
-    resolveAndApplyAll();
-}
-
 const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 async function boot() {
+    const appStage = document.getElementById('appStage');
     if (!appStage) return;
     appStage.innerHTML = `
-        <div class="spx-app">
-            <div class="spx-zone" id="spxZone">
-                <div class="spx-title" id="spxTitle">Loading…</div>
-                <div class="spx-artist" id="spxArtist"></div>
-                <div class="spx-meta" id="spxMeta"></div>
-            </div>
-            <button class="spx-cover" id="spxCover" type="button" aria-label="Play">
-                <img id="spxCoverImg" alt="">
+        <div class="spx-app" id="spxApp">
+            <div class="ui-element spx-title" id="spxTitle"><a id="spxTitleLink" target="_blank" rel="noopener noreferrer">Loading…</a></div>
+            <div class="ui-element spx-artist" id="spxArtist"></div>
+            <div class="ui-element spx-meta" id="spxMeta"></div>
+            <!-- the timeline precedes the cover in the DOM: CSS anchor positioning (the cover is placed relative to it)
+                requires the anchor target to come earlier in tree order than the element anchored to it -->
+            <canvas class="ui-element spx-timeline" id="spxTimeline"></canvas>
+            <button class="ui-element spx-cover" id="spxCover" type="button" aria-label="Play">
+                <img id="spxCoverImg" alt="" draggable="false">
                 <span class="spx-cover-glyph" id="spxGlyph">▶</span>
             </button>
-            <canvas class="spx-timeline" id="spxTimeline"></canvas>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart"><button type="button" id="spxStartBtn">Click to enable sound</button></div>
+            <div class="spx-inspector" id="spxInspectorPanel" hidden>
+                <div class="spx-inspector-head"><span>UI LAYOUT INSPECTOR</span><button type="button" id="spxInspectorClose">✕</button></div>
+                <div id="spxInspectorMount"></div>
+            </div>
         </div>`;
     const el = id => document.getElementById(id);
+
+    // ---- UI Layout Engine: position + scale of every on-screen element ------------------
+    // (docs: HTML UI ENGINE/docs/ENGINE_API.md, UI_LAYOUT.md.) The stage fills the viewport; each
+    // element is registered with group/propertyLabel so the Inspector lists them as objects.
+    // Title/timeline use `anchor` mode (absolute inside the full-screen stage), not `fixed`: CSS Anchor
+    // Positioning, which `relative` mode uses, needs the target and the element to share a containing block.
+    createUIElement({
+        id: 'appStage', role: 'container', domNode: appStage,
+        layout: {
+            position: { mode: 'fixed', viewportAnchor: 'top-left', offset: { x: '0px', y: '0px' } },
+            size: { width: { mode: 'fixed', value: '100vw' }, height: { mode: 'fixed', value: '100vh' } },
+        },
+    });
+    const ctx = (o = {}) => ({
+        mobilePortrait: { enabled: true, overrides: o.mobilePortrait || {} },
+        mobileLandscape: { enabled: true, overrides: o.mobileLandscape || {} },
+    });
+    createUIElement({
+        id: 'spxTitle', role: 'text', domNode: el('spxTitle'), group: 'Song Title', propertyLabel: 'Position & Size',
+        layout: {
+            position: { mode: 'anchor', horizontal: { anchor: 'center', offset: '0px' }, vertical: { anchor: 'top', offset: '12vh' } },
+            size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
+        },
+        contexts: ctx({ mobileLandscape: { offsetY: '5vh' } }),
+    });
+    createUIElement({
+        id: 'spxArtist', role: 'text', domNode: el('spxArtist'), group: 'Artist', propertyLabel: 'Position & Size',
+        layout: {
+            position: { mode: 'relative', relativeTo: 'spxTitle', myAnchor: 'top-center', targetAnchor: 'bottom-center', gap: '10px' },
+            size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
+        },
+        contexts: ctx(),
+    });
+    createUIElement({
+        id: 'spxMeta', role: 'text', domNode: el('spxMeta'), group: 'Album & Date Line', propertyLabel: 'Position & Size',
+        layout: {
+            position: { mode: 'relative', relativeTo: 'spxArtist', myAnchor: 'top-center', targetAnchor: 'bottom-center', gap: '12px' },
+            size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
+        },
+        contexts: ctx(),
+    });
+    createUIElement({
+        id: 'spxTimeline', role: 'container', domNode: el('spxTimeline'), group: 'Timeline', propertyLabel: 'Position & Size',
+        layout: {
+            position: { mode: 'anchor', horizontal: { anchor: 'center', offset: '0px' }, vertical: { anchor: 'bottom', offset: '14px' } },
+            size: { width: { mode: 'fixed', value: '96vw' }, height: { mode: 'fixed', value: '200px' } },
+        },
+        contexts: ctx({ mobilePortrait: { heightValue: '150px' }, mobileLandscape: { heightValue: '110px' } }),
+    });
+    createUIElement({
+        id: 'spxCover', role: 'button', domNode: el('spxCover'), group: 'Album Cover', propertyLabel: 'Position & Size',
+        // Positioned from the stage's bottom edge by a fixed offset (timeline bottom 14 px + its default
+        // height + a 14 px gap), NOT relative to the timeline: resizing the timeline must not move the
+        // cover. No size ceiling (max is effectively unbounded): scaled up, it renders behind the rest of the UI.
+        layout: {
+            position: { mode: 'anchor', horizontal: { anchor: 'center', offset: '0px' }, vertical: { anchor: 'bottom', offset: '228px' } },
+            size: {
+                width: { mode: 'clamp', min: '80px', preferred: '22vmin', max: '9999px' },
+                height: { mode: 'aspect', ratio: '1/1', basis: 'width' },
+            },
+        },
+        contexts: ctx({
+            mobilePortrait: { widthPreferred: '34vmin', offsetY: '178px' },
+            mobileLandscape: { widthPreferred: '24vmin', offsetY: '138px' },
+        }),
+    });
+    resolveAndApplyAll();
+    const shippedLayout = captureAllLayoutConfigs();
+
+    // Layout persistence rides on the dev panel's own Sync/Reset (devSaveCaptureExtra/ApplyExtra in
+    // devPanel.js): the engine's saved state is stored under `extra.uiLayout` in the same GitHub file.
+    let pendingLayout = null;
+    registerStorageBackend({
+        save() { if (typeof saveDevPanelSettings === 'function') saveDevPanelSettings(); },
+        load() { return pendingLayout; },
+    });
+    window.spxCaptureLayout = () => captureAllLayoutConfigs();
+    window.spxApplyLayout = state => { pendingLayout = state; loadLayoutConfig(); timeline.draw(); };
+    window.spxResetLayout = () => { resetLayoutConfig(shippedLayout); resolveAndApplyAll(); timeline.draw(); };
+
+    // ---- data ----------------------------------------------------------------------
     let data;
     try {
         data = await (await fetch('data/processed/timeline.json')).json();
     } catch (e) {
-        el('spxTitle').textContent = 'Could not load data/processed/timeline.json';
+        el('spxTitleLink').textContent = 'Could not load data/processed/timeline.json';
         return;
     }
     const songs = data.songs;
     let pos = 0, idx = 0, dir = 1, handedOff = false, handoffTimer = 0, preloadQueued = false, moveLog = [];
+    let lastTimelineHeight = null;
 
     const timeline = createTimeline(el('spxTimeline'), data);
+    if (window.__spxPendingLayout) { window.spxApplyLayout(window.__spxPendingLayout); window.__spxPendingLayout = null; }
+    new ResizeObserver(() => timeline.draw()).observe(el('spxTimeline'));
+
     const applyLook = () => {
-        el('spxTimeline').style.height = setting('sliderTimelineHeight') + 'px';
-        const cover = el('spxCover');
-        cover.style.width = setting('sliderCoverSize') + 'px';
+        const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
+        scale('--spx-title-scale', setting('sliderTitleScale'));
+        scale('--spx-artist-scale', setting('sliderArtistScale'));
+        scale('--spx-meta-scale', setting('sliderMetaScale'));
+        // Timeline height goes through the layout engine; the timeline is pinned by its bottom edge and
+        // nothing else is positioned from it, so only the bars grow (upward).
+        const wantH = setting('sliderTimelineHeight') + 'px';
+        if (wantH !== lastTimelineHeight) {
+            lastTimelineHeight = wantH;
+            updateElement('spxTimeline', { size: { height: { value: wantH } } });
+            resolveAndApplyAll();
+        }
         timeline.draw();
         el('spxPool').hidden = !setting('checkboxShowPoolOverlay');
     };
 
-    // ---- album cover (Spotify oEmbed; allows browser access) ----------------
+    // ---- album cover (Spotify oEmbed; allows browser access) --------------------------------
     const coverCache = new Map();
     let coverTimer = 0;
     async function coverUrl(id) {
@@ -93,7 +179,9 @@ async function boot() {
 
     function render() {
         const s = songs[idx];
-        el('spxTitle').textContent = cleanTitle(s.n);
+        const link = el('spxTitleLink');
+        link.textContent = cleanTitle(s.n);
+        link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         el('spxArtist').textContent = s.a;
         el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}  ·  added ${fmtDate(s.t)}${s.d ? '' : '  ·  no preview clip'}`;
         scheduleCover();
@@ -139,68 +227,82 @@ async function boot() {
         }, setting('sliderHandoffDelay'));
     }
 
+    // The current song is the LAST one added at or before the playhead's time (timeline.currentIndex()
+    // = floor(pos)): landing in an empty stretch of the timeline plays the most recent earlier song.
     function moveTo(p) {
         pos = clamp(p, 0, songs.length - 1);
         timeline.setPos(pos);
-        const n = Math.round(pos);
+        const n = timeline.currentIndex();
         if (n !== idx) onIndexChange(n);
         timeline.draw();
     }
     const seek = i => moveTo(i);
 
-    // ---- input ---------------------------------------------------------------
-    // Wheel = zoom (changes the scrub scale). Drag = relative scrub: moving the pointer dx px
-    // moves the playhead dx px along the current scale, wherever the drag started, so it
-    // advances song by song through the preloaded clips instead of jumping to the cursor.
+    // ---- input ---------------------------------------------------------------------------
+    // Desktop: wheel = scrub (a notch moves the playhead N px along the current scale), click on the
+    // timeline = jump, click-drag = zoom around the playhead. Touch: drag = scrub, pinch = zoom, tap = jump.
+    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxStart, #spxCover, a, button, input, select, textarea');
+    // The title/artist/album lines are selectable text: a drag that starts on them selects it instead of zooming.
+    const inText = t => t.closest && t.closest('.spx-title, .spx-artist, .spx-meta');
     window.addEventListener('wheel', e => {
-        if (e.target.closest && e.target.closest('#devPanel')) return;
+        if (inUi(e.target)) return;
         e.preventDefault();
         const unit = e.deltaMode === 1 ? e.deltaY / 3 : e.deltaY / 100;
-        timeline.zoomBy(Math.exp(unit * 0.25 * setting('sliderTimelineZoomSpeed')));
-        timeline.draw();
+        moveTo(timeline.scrubByPixels(unit * setting('sliderWheelScrubPixels') * (setting('checkboxInvertScroll') ? -1 : 1)));
     }, { passive: false });
 
-    const ptrs = new Map();
+    const ptrs = new Map(); // pointerId -> { x, y, startX, startY, type, onTimeline, moved }
     let pinchDist = 0;
     const pinchSpan = () => { const [a, b] = [...ptrs.values()]; return Math.hypot(a.x - b.x, a.y - b.y) || 1; };
     window.addEventListener('pointerdown', e => {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
-        if (!e.target.closest || !e.target.closest('#spxZone, #spxTimeline')) return;
-        ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if ((inUi(e.target) || inText(e.target)) && e.target.id !== 'spxTimeline') return;
+        ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: e.pointerType, onTimeline: e.target.id === 'spxTimeline', moved: false });
         if (ptrs.size === 2) pinchDist = pinchSpan();
     });
     window.addEventListener('pointermove', e => {
-        const prev = ptrs.get(e.pointerId);
-        if (!prev) return;
-        const cur = { x: e.clientX, y: e.clientY };
-        if (ptrs.size === 1) {
-            const sign = setting('checkboxInvertScroll') ? -1 : 1;
-            moveTo(timeline.scrubFromDrag((cur.x - prev.x) * sign));
-            ptrs.set(e.pointerId, cur);
-        } else if (ptrs.size === 2) {
-            ptrs.set(e.pointerId, cur);
+        const p = ptrs.get(e.pointerId);
+        if (!p) return;
+        const dx = e.clientX - p.x;
+        if (Math.hypot(e.clientX - p.startX, e.clientY - p.startY) > 4) p.moved = true;
+        p.x = e.clientX; p.y = e.clientY;
+        if (ptrs.size === 2) {
             const d = pinchSpan();
-            timeline.zoomBy(pinchDist / d); // fingers apart = zoom in (smaller span)
+            timeline.zoomBy(pinchDist / d); // fingers apart = zoom in (smaller span), origin = playhead
             pinchDist = d;
             timeline.draw();
+        } else if (p.moved) {
+            if (p.type === 'mouse') { // click-drag zooms, drag right = zoom in
+                timeline.zoomBy(Math.exp(-dx * 0.008 * setting('sliderTimelineZoomSpeed') * (setting('checkboxInvertZoomDrag') ? -1 : 1)));
+                timeline.draw();
+            } else { // one finger: scrub
+                moveTo(timeline.scrubByPixels(dx * (setting('checkboxInvertScroll') ? -1 : 1)));
+            }
         }
     });
-    const endPointer = e => { ptrs.delete(e.pointerId); if (ptrs.size === 2) pinchDist = pinchSpan(); };
+    const endPointer = e => {
+        const p = ptrs.get(e.pointerId);
+        if (p && !p.moved && p.onTimeline && e.type === 'pointerup') { // a click/tap on the timeline jumps there
+            moveTo(timeline.posAtX(e.clientX - el('spxTimeline').getBoundingClientRect().left));
+        }
+        ptrs.delete(e.pointerId);
+        if (ptrs.size === 2) pinchDist = pinchSpan();
+    };
     window.addEventListener('pointerup', endPointer);
     window.addEventListener('pointercancel', endPointer);
 
     window.addEventListener('keydown', e => {
         if (e.target.closest && e.target.closest('input, select, textarea, #devPanel')) return;
         const step = e.shiftKey ? 10 : 1;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') moveTo(Math.round(pos) + step);
-        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') moveTo(Math.round(pos) - step);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') moveTo(timeline.currentIndex() + step);
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') moveTo(timeline.currentIndex() - step);
         else if (e.key === 'Home') moveTo(0);
         else if (e.key === 'End') moveTo(songs.length - 1);
         else return;
         e.preventDefault();
     });
 
-    // ---- sound unlock + album-cover play button ------------------------------
+    // ---- sound unlock + album-cover play button ---------------------------------------------
     // Browsers require a user gesture before audio can start. The first click or key press
     // ANYWHERE counts (not just the button), so the overlay can't get stuck behind the dev
     // panel or on a small screen.
@@ -227,11 +329,24 @@ async function boot() {
         el('spxCover').setAttribute('aria-label', playing ? 'Pause' : 'Play');
     });
 
+    // ---- UI Layout Inspector (dev only): the engine's own Inspector in a floating panel ------
+    let inspectorMounted = false;
+    document.addEventListener('click', async e => {
+        if (e.target.id !== 'buttonOpenLayoutInspector') return;
+        const panel = el('spxInspectorPanel');
+        panel.hidden = !panel.hidden;
+        if (!panel.hidden && !inspectorMounted) {
+            const { mountInspector } = await import('../lib/ui-engine/inspector.mjs');
+            mountInspector(el('spxInspectorMount'));
+            inspectorMounted = true;
+        }
+    });
+    el('spxInspectorClose').addEventListener('click', () => { el('spxInspectorPanel').hidden = true; });
+
     // settings changes (dev panel controls fire input/change)
     document.addEventListener('input', applyLook);
     document.addEventListener('change', applyLook);
 
-    // debug overlay
     setInterval(() => {
         if (el('spxPool').hidden) return;
         const p = poolInfo();

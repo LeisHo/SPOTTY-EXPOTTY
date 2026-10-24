@@ -2991,7 +2991,9 @@
     // warning on 0 matches (group not found) or 2+ matches (a data-sid
     // collision — e.g. 2 groups both named "New Group").
     function findGroupContent(tabId, groupSid, callerName, ctrlId) {
-        const matches = document.querySelectorAll('#' + tabId + 'TabContent > .dev-section > .dev-section-title[data-sid="' + groupSid.replace(/"/g, '\\"') + '"]');
+        // Descendant (not direct-child) selector: a group nested inside another group
+        // (e.g. "Album Cover Colors" inside "Timeline Look") has to be findable too.
+        const matches = document.querySelectorAll('#' + tabId + 'TabContent .dev-section-title[data-sid="' + groupSid.replace(/"/g, '\\"') + '"]');
         if (matches.length === 0) {
             console.warn(callerName + ': group not found', groupSid, ctrlId);
             return null;
@@ -4954,7 +4956,8 @@
     // that group's settings — this function only owns the UI/visibility
     // side, not the "applied" half of the request.
     function makeDevGroupToggleable(tab, groupSid, ctrlId) {
-        const titleEl = document.querySelector('#' + tab + 'TabContent > .dev-section > .dev-section-title[data-sid="' + groupSid.replace(/"/g, '\\"') + '"]');
+        // Descendant selector so a NESTED group can be made toggleable too.
+        const titleEl = document.querySelector('#' + tab + 'TabContent .dev-section-title[data-sid="' + groupSid.replace(/"/g, '\\"') + '"]');
         const cb = document.getElementById(ctrlId);
         if (!titleEl || !cb || cb.type !== 'checkbox') { console.warn('makeDevGroupToggleable: group or checkbox control not found', groupSid, ctrlId); return; }
         const section = titleEl.closest('.dev-section');
@@ -7289,88 +7292,26 @@
     //   5. setupDragReorder() (x2 — groups, then settings).
     //   6. Load saved state (localStorage by default) and apply it.
     // ----------------------------------------------------------------
-    // ================================================================
-    // COMPONENT GALLERY — REFERENCE/DEMO ONLY
-    // ================================================================
-    // A live example of every standardized control type this template
-    // provides, using stand-in data — direct request 2026-09-28 ("in our
-    // demo, provide me the ability to view all these. You can use stand-
-    // in data and items for the demoing of these uis"). This section is
-    // NOT part of what a project vendors into its own files — per this
-    // file's own top-of-file "HOW A NEW PROJECT USES THIS" convention
-    // (copy specific pieces you need, not the whole file byte-for-byte),
-    // a project simply never copies this function or its call site
-    // below. Opening this template file directly (already how you
-    // review any change to it) shows the gallery, always using the SAME
-    // real control-building code a real project would — so it can never
-    // silently drift out of sync with what's actually implemented, the
-    // way a hand-maintained separate demo file could.
-    function renderComponentGalleryControls() {
-        const tab = 'desktop';
-        const section = createDevGroupElement('Component Gallery', tab);
-        document.getElementById('desktopTabContent').appendChild(section);
-        // A SEPARATE small group for the Toggleable Settings Group demo
-        // — deliberately not folded into 'Component Gallery' above,
-        // since switching THAT group's own enable checkbox off would
-        // hide every other control in the gallery along with it.
-        const toggleGroupSection = createDevGroupElement('Component Gallery — Toggleable Group Demo', tab);
-        document.getElementById('desktopTabContent').appendChild(toggleGroupSection);
-
-
-    // PROJECT: splice point -- call your own render*DevGroups() function(s) here.
-    // (added by the new-project-scaffold skill for SPOTTY EXPOTTY; see [JS-14] above)
-        renderControlArray([
-            { tab, group: 'Component Gallery', id: 'gallerySlider', type: 'slider', label: 'Slider (click min/max to edit):', min: 0, max: 100, step: 1, value: 42 },
-            { tab, group: 'Component Gallery', id: 'galleryColor', type: 'color', label: 'Color Picker:', value: '#7ec8e3' },
-            {
-                tab, group: 'Component Gallery', id: 'gallerySelect', type: 'select', label: 'Select / Dropdown:', value: 'b',
-                options: [{ value: 'a', text: 'Option A' }, { value: 'b', text: 'Option B' }, { value: 'c', text: 'Option C' }],
-            },
-            { tab, group: 'Component Gallery', id: 'galleryCheckbox', type: 'checkbox', label: 'Checkbox:', value: false },
-            { tab, group: 'Component Gallery', id: 'galleryButton', type: 'button', label: 'Action Button' },
-            {
-                tab, group: 'Component Gallery', id: 'galleryListPicker', type: 'list-picker',
-                label: 'List Picker (Saved Presets UI):', itemLabel: 'Preset', exportable: true, importable: true,
-                value: [
-                    { name: 'Sunrise', hue: 24, brightness: 0.8, group: 'Lighting Presets' },
-                    { name: 'Midday', hue: 50, brightness: 1.0, group: 'Lighting Presets' },
-                    { name: 'Dusk', hue: 260, brightness: 0.4, group: 'Lighting Presets' },
-                    { name: 'Wide Shot', fov: 60, group: 'Camera Presets' },
-                    { name: 'Close-Up', fov: 24, group: 'Camera Presets' },
-                    { name: 'Default', note: 'ungrouped example' },
-                ],
-                captureCurrent: () => ({ hue: 0, brightness: 1, note: 'stand-in captured value' }),
-                onUse: () => {},
-            },
-            {
-                tab, group: 'Component Gallery', id: 'galleryCurveEditor', type: 'curve-editor',
-                label: 'Curve Editor (X: Progress -> Y: Value):',
-                caption: 'Stand-in example — try the interpolation-method dropdown, drag a handle, or Mirror X/Y.',
-                defaultPoints: [{ x: 0, y: 0.1 }, { x: 0.3, y: 0.8 }, { x: 0.7, y: 0.3 }, { x: 1, y: 1 }],
-            },
-            {
-                tab, group: 'Component Gallery', id: 'galleryRangeBar', type: 'range-bar',
-                label: 'Range Bar (Min/Max Slider):', trackMin: 0, trackMax: 2000, unit: 'ms',
-                defaultValue: { min: 200, max: 1500 },
-            },
-            { tab, group: 'Component Gallery — Toggleable Group Demo', id: 'galleryToggleGroupEnabled', type: 'checkbox', label: 'Enabled', value: true },
-            { tab, group: 'Component Gallery — Toggleable Group Demo', id: 'galleryToggleGroupDummy', type: 'slider', label: 'Example Setting Inside:', min: 0, max: 10, step: 1, value: 5 },
-        ], 'renderComponentGalleryControls');
-
-        // Relocates the checkbox registered above into this SAME group's
-        // own title bar — see makeDevGroupToggleable()'s own doc comment
-        // for why it needs a real registered checkbox rather than a
-        // bespoke one.
-        makeDevGroupToggleable(tab, 'Component Gallery — Toggleable Group Demo', 'galleryToggleGroupEnabled');
-    }
     // SPOTTY EXPOTTY's own settings. The app (src/app/settings.js) reads these
     // controls' live DOM values by id -- no separate state copy. Mobile/Landscape
     // twins are created by the template's dynamic per-device mechanism, so every
     // id keeps the `slider|color|checkbox` prefix that mechanism relies on.
     function renderSpottyDevControls() {
         const tab = 'desktop';
-        const groups = ['Scrub Audio', 'Scrub Preload', 'Scrub Input', 'Spotify Handoff', 'Timeline Look'];
-        groups.forEach(g => document.getElementById('desktopTabContent').appendChild(createDevGroupElement(g, tab)));
+        const TL = 'Timeline Look', AC = 'Album Cover Colors';
+        ['Scrub Audio', 'Scrub Preload', 'Scrub Input', 'Spotify Handoff', TL, 'UI Layout'].forEach(g =>
+            document.getElementById('desktopTabContent').appendChild(createDevGroupElement(g, tab)));
+        // The UI Layout Engine's saved element layouts ride along with Sync/Reset as `extra.uiLayout`.
+        devSaveCaptureExtra = () => ({ uiLayout: typeof window.spxCaptureLayout === 'function' ? window.spxCaptureLayout() : undefined });
+        devSaveApplyExtra = extra => {
+            if (!extra || !extra.uiLayout) return;
+            if (typeof window.spxApplyLayout === 'function') window.spxApplyLayout(extra.uiLayout); else window.__spxPendingLayout = extra.uiLayout;
+        };
+        const FEATURES = [
+            { value: 'valence', text: 'Valence (mood)' },
+            { value: 'energy', text: 'Energy' },
+            { value: 'danceability', text: 'Danceability' },
+        ];
         const SPOTTY_CONTROLS = [
             { tab, group: 'Scrub Audio', id: 'checkboxScrubAudioEnabled', type: 'checkbox', label: 'Play Clips While Scrubbing:', value: true },
             { tab, group: 'Scrub Audio', id: 'sliderScrubVolume', type: 'slider', label: 'Clip Volume (x):', min: 0, max: 1, step: 0.05, value: 0.7 },
@@ -7381,19 +7322,101 @@
             { tab, group: 'Scrub Preload', id: 'sliderPreloadAhead', type: 'slider', label: 'Preload Ahead (Songs):', min: 0, max: 30, step: 1, value: 8 },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadBehind', type: 'slider', label: 'Preload Behind (Songs):', min: 0, max: 30, step: 1, value: 3 },
             { tab, group: 'Scrub Preload', id: 'checkboxShowPoolOverlay', type: 'checkbox', label: 'Show Preload Pool Overlay:', value: false },
-            { tab, group: 'Scrub Input', id: 'sliderTimelineZoomSpeed', type: 'slider', label: 'Zoom Speed (x):', min: 0.1, max: 5, step: 0.1, value: 1 },
+            { tab, group: 'Scrub Input', id: 'sliderWheelScrubPixels', type: 'slider', label: 'Wheel Scrub Per Notch (Px):', min: 2, max: 300, step: 1, value: 40 },
+            { tab, group: 'Scrub Input', id: 'checkboxInvertScroll', type: 'checkbox', label: 'Invert Wheel / Touch Scrub Direction:', value: false },
+            { tab, group: 'Scrub Input', id: 'sliderTimelineZoomSpeed', type: 'slider', label: 'Drag Zoom Speed (x):', min: 0.1, max: 5, step: 0.1, value: 1 },
+            { tab, group: 'Scrub Input', id: 'checkboxInvertZoomDrag', type: 'checkbox', label: 'Invert Drag Zoom Direction:', value: false },
             { tab, group: 'Scrub Input', id: 'sliderDefaultTimelineSpanDays', type: 'slider', label: 'Starting Timeline Span (Days):', min: 1, max: 5000, step: 1, value: 120 },
-            { tab, group: 'Scrub Input', id: 'checkboxInvertScroll', type: 'checkbox', label: 'Invert Drag Direction:', value: false },
             { tab, group: 'Spotify Handoff', id: 'checkboxHandoffEnabled', type: 'checkbox', label: 'Play Real Song When Scrubbing Stops:', value: true },
             { tab, group: 'Spotify Handoff', id: 'sliderHandoffDelay', type: 'slider', label: 'Handoff Delay After Scrubbing Stops (Ms):', min: 100, max: 3000, step: 50, value: 600 },
-            { tab, group: 'Timeline Look', id: 'colorTimelineAccent', type: 'color', label: 'Timeline Accent Color:', value: '#1db954' },
-            { tab, group: 'Timeline Look', id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
-            { tab, group: 'Timeline Look', id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 80, max: 500, step: 5, value: 200 },
-            { tab, group: 'Timeline Look', id: 'sliderTimelineBarOpacity', type: 'slider', label: 'Timeline Bar Opacity (x):', min: 0.1, max: 1, step: 0.05, value: 0.8 },
-            { tab, group: 'Timeline Look', id: 'sliderCoverSize', type: 'slider', label: 'Album Cover Size (Px):', min: 80, max: 400, step: 5, value: 180 },
+            { tab, group: TL, id: 'colorTimelineAccent', type: 'color', label: 'Timeline Accent Color:', value: '#1db954' },
+            { tab, group: TL, id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
+            { tab, group: TL, id: 'sliderTimelineBarOpacity', type: 'slider', label: 'Timeline Bar Opacity (x):', min: 0.1, max: 1, step: 0.05, value: 0.8 },
+            { tab, group: TL, id: 'sliderBarWidth', type: 'slider', label: 'Bar Width / Granularity (Px):', min: 1, max: 40, step: 1, value: 3 },
+            // Only the bars stretch (upward); nothing else moves, the cover is positioned independently of the timeline.
+            { tab, group: TL, id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 60, max: 900, step: 5, value: 200 },
+            // Integer-valued dual-handle control, so it is a 0-100 % log scale: 0 = 2 minutes visible, 100 = the whole timeline.
+            { tab, group: TL, id: 'rangeBarTimelineZoomLimits', type: 'range-bar', label: 'Zoom Limits (% zoomed out, log scale):', trackMin: 0, trackMax: 100, unit: '%', defaultValue: { min: 0, max: 100 } },
+            {
+                tab, group: TL, id: 'selectTimelineStyle', type: 'select', label: 'Timeline Visual Style:', value: 'none',
+                options: [
+                    { value: 'none', text: 'None (plain bars)' },
+                    { value: 'glow', text: 'Glow Stems' },
+                    { value: 'density', text: 'Smooth Density' },
+                    { value: 'line', text: 'Feature Line' },
+                    { value: 'ribbon', text: 'Mood Ribbon' },
+                ],
+            },
+            // settings shown only while their style is selected (see refreshSpottyModeVisibility)
+            { tab, group: TL, id: 'sliderGlowStemWidth', type: 'slider', label: 'Glow Stem Width (Px):', min: 1, max: 10, step: 0.5, value: 2 },
+            { tab, group: TL, id: 'sliderGlowRadius', type: 'slider', label: 'Glow Radius (Px):', min: 0, max: 50, step: 1, value: 12 },
+            { tab, group: TL, id: 'sliderGlowDotSize', type: 'slider', label: 'Glow Dot Size (Px):', min: 0, max: 14, step: 0.5, value: 4 },
+            { tab, group: TL, id: 'sliderGlowIntensity', type: 'slider', label: 'Glow Intensity (x):', min: 0, max: 1, step: 0.05, value: 0.8 },
+            { tab, group: TL, id: 'sliderDensitySmoothing', type: 'slider', label: 'Density Smoothing (Px):', min: 2, max: 80, step: 1, value: 14 },
+            { tab, group: TL, id: 'sliderDensityFillOpacity', type: 'slider', label: 'Density Fill Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.55 },
+            { tab, group: TL, id: 'sliderDensityOutlineWidth', type: 'slider', label: 'Density Outline Width (Px):', min: 0, max: 8, step: 0.5, value: 2 },
+            { tab, group: TL, id: 'checkboxDensityGradientFill', type: 'checkbox', label: 'Fade Fill Toward Baseline:', value: true },
+            { tab, group: TL, id: 'selectLineFeature', type: 'select', label: 'Line Height Shows:', value: 'valence', options: FEATURES },
+            { tab, group: TL, id: 'sliderLineWidth', type: 'slider', label: 'Line Width (Px):', min: 1, max: 8, step: 0.5, value: 2 },
+            { tab, group: TL, id: 'sliderLineDotSize', type: 'slider', label: 'Line Dot Size (Px):', min: 0, max: 10, step: 0.5, value: 3 },
+            { tab, group: TL, id: 'sliderLineFillOpacity', type: 'slider', label: 'Line Area Fill Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.2 },
+            { tab, group: TL, id: 'checkboxLineSmooth', type: 'checkbox', label: 'Smooth Line Curves:', value: true },
+            { tab, group: TL, id: 'selectRibbonFeature', type: 'select', label: 'Ribbon Color Shows:', value: 'valence', options: FEATURES },
+            { tab, group: TL, id: 'sliderRibbonThickness', type: 'slider', label: 'Ribbon Thickness (Px):', min: 6, max: 120, step: 1, value: 28 },
+            { tab, group: TL, id: 'sliderRibbonSmoothing', type: 'slider', label: 'Ribbon Smoothing (Px):', min: 2, max: 120, step: 1, value: 24 },
+            { tab, group: TL, id: 'sliderRibbonBarsOpacity', type: 'slider', label: 'Ribbon Underlay Bars Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.25 },
+            { tab, group: 'UI Layout', id: 'sliderTitleScale', type: 'slider', label: 'Song Title Text Scale (x):', min: 0.3, max: 3, step: 0.05, value: 1 },
+            { tab, group: 'UI Layout', id: 'sliderArtistScale', type: 'slider', label: 'Artist Text Scale (x):', min: 0.3, max: 3, step: 0.05, value: 1 },
+            { tab, group: 'UI Layout', id: 'sliderMetaScale', type: 'slider', label: 'Album & Date Text Scale (x):', min: 0.3, max: 3, step: 0.05, value: 1 },
+            { tab, group: 'UI Layout', id: 'buttonOpenLayoutInspector', type: 'button', label: 'Open UI Layout Inspector', skipDeviceCheckbox: true },
         ];
         renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_CONTROLS', SPOTTY_CONTROLS);
+
+        // "Album Cover Colors": a toggleable group nested inside Timeline Look (created after
+        // Timeline Look's own rows so it sits below them).
+        findGroupContent(tab, TL, 'renderSpottyDevControls', AC).appendChild(createDevGroupElement(AC, tab));
+        const ALBUM_CONTROLS = [
+            { tab, group: AC, id: 'checkboxAlbumColorsEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            {
+                tab, group: AC, id: 'selectAlbumColorMode', type: 'select', label: 'Color Mode:', value: 'stacked',
+                options: [
+                    { value: 'stacked', text: 'Stacked Albums (one segment per song)' },
+                    { value: 'average', text: 'Average Color (mean of covers)' },
+                    { value: 'vivid', text: 'Vivid Dominant (most common hue)' },
+                    { value: 'palette', text: 'Palette Gradient (top 3 colors)' },
+                ],
+            },
+            { tab, group: AC, id: 'sliderAlbumColorSaturation', type: 'slider', label: 'Saturation Boost (x):', min: 0, max: 2.5, step: 0.05, value: 1 },
+            { tab, group: AC, id: 'sliderAlbumColorBrightness', type: 'slider', label: 'Brightness (x):', min: 0.4, max: 1.8, step: 0.05, value: 1 },
+        ];
+        renderControlArray(ALBUM_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_ALBUM_CONTROLS', ALBUM_CONTROLS);
+        makeDevGroupToggleable(tab, AC, 'checkboxAlbumColorsEnabled');
+
+        // Show only the settings that belong to the selected Timeline Visual Style.
+        const STYLE_CONTROLS = {
+            glow: ['sliderGlowStemWidth', 'sliderGlowRadius', 'sliderGlowDotSize', 'sliderGlowIntensity'],
+            density: ['sliderDensitySmoothing', 'sliderDensityFillOpacity', 'sliderDensityOutlineWidth', 'checkboxDensityGradientFill'],
+            line: ['selectLineFeature', 'sliderLineWidth', 'sliderLineDotSize', 'sliderLineFillOpacity', 'checkboxLineSmooth'],
+            ribbon: ['selectRibbonFeature', 'sliderRibbonThickness', 'sliderRibbonSmoothing', 'sliderRibbonBarsOpacity'],
+        };
+        const withDevice = (id, dev) => id.replace(/^(slider|color|select|checkbox|rangeBar)(.+)$/, '$1' + dev + '$2');
+        function refreshSpottyModeVisibility() {
+            ['', 'Mobile', 'Landscape'].forEach(dev => {
+                const sel = document.getElementById(withDevice('selectTimelineStyle', dev)) || document.getElementById('selectTimelineStyle');
+                if (!sel) return;
+                Object.entries(STYLE_CONTROLS).forEach(([style, ids]) => ids.forEach(id => {
+                    const el = document.getElementById(withDevice(id, dev));
+                    const row = el && el.closest('.dev-row');
+                    if (row) row.style.display = style === sel.value ? '' : 'none';
+                }));
+            });
+        }
+        document.addEventListener('change', refreshSpottyModeVisibility);
+        document.addEventListener('input', refreshSpottyModeVisibility);
+        setInterval(refreshSpottyModeVisibility, 700); // catches the per-device rows created later and restored state
+        refreshSpottyModeVisibility();
     }
     function ensureDevPanelBuilt() {
         if (devPanelBuilt) return;
@@ -7415,14 +7438,7 @@
         // called once, unconditionally, before initDevPanelEngine() —
         // now they belong HERE, inside the guarded function, so they
         // only ever run when the panel is actually being built.
-        //
-        // COMPONENT GALLERY (reference/demo only — see
-        // renderComponentGalleryControls()'s own doc comment) — a real
-        // project never copies this call, or the function it calls,
-        // when vendoring this file per step 1/2 of the top-of-file usage
-        // note.
         renderSpottyDevControls();
-        renderComponentGalleryControls();
 
         setupDevPanelStyleControls();
         makeDevValuesEditable();

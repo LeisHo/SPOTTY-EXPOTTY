@@ -175,6 +175,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self._json(502, {'ok': False, 'error': str(e)})
 
     def do_POST(self):
+        # Always consume the request body first: an early error return that leaves it unread makes the
+        # next keep-alive request parse the leftover bytes as a request line (a bogus 501).
+        try:
+            length = int(self.headers.get('Content-Length') or 0)
+            raw_body = self.rfile.read(length) if length else b''
+        except Exception:  # noqa: BLE001
+            raw_body = b''
         if not self._is_api():
             return self._json(404, {'ok': False, 'error': 'Not found'})
         cfg = _gh_config()
@@ -184,8 +191,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if secret and self.headers.get('x-dev-panel-secret') != secret:
             return self._json(401, {'ok': False, 'error': 'Unauthorized'})
         try:
-            length = int(self.headers.get('Content-Length') or 0)
-            body = json.loads(self.rfile.read(length).decode('utf-8') or '{}')
+            body = json.loads(raw_body.decode('utf-8') or '{}')
         except Exception as e:  # noqa: BLE001
             return self._json(400, {'ok': False, 'error': f'Bad JSON body: {e}'})
         try:
