@@ -4,7 +4,7 @@
    (lib/ui-engine/engine.css + the createUIElement() calls in main.js); this file holds only
    non-layout styling (colours, type, borders), as the engine's host/engine split requires. */
 #appStage { background: #0d0f12; color: #f2f2f2; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; overflow: hidden; }
-.spx-app { position: absolute; inset: 0; touch-action: none; user-select: none; --spx-title-scale: 1; --spx-artist-scale: 1; --spx-meta-scale: 1; }
+.spx-app { position: absolute; inset: 0; touch-action: none; user-select: none; -webkit-tap-highlight-color: transparent; font-family: var(--spx-font, inherit); --spx-title-scale: 1; --spx-artist-scale: 1; --spx-meta-scale: 1; }
 
 /* The page is not selectable (so click-drag scrubbing never paints blue selection over the cover or
    timeline), EXCEPT these three text lines, which can be highlighted and copied. A drag that starts
@@ -15,7 +15,9 @@
 .spx-title { font-size: calc(clamp(26px, 5.5vw, 60px) * var(--spx-title-scale)); font-weight: 700; line-height: 1.1; }
 /* The track title is a link to the song on Spotify. Never underlined (hover included); inline-block so
    transform animations (pulse / grow / lift) work on it. Animation styles are set from titleAnim.js. */
-.spx-title a, .spx-title a:hover, .spx-title a:active, .spx-title a:focus { color: inherit; text-decoration: none; cursor: pointer; outline: none; }
+.spx-title a, .spx-title a:hover, .spx-title a:active, .spx-title a:focus { color: inherit; text-decoration: none; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
+/* No selection highlight on a tap/long-press of the title on a phone (desktop can still drag-select it) */
+@media (pointer: coarse) { .spx-title, .spx-title a { user-select: none; -webkit-user-select: none; } }
 .spx-title a { display: inline-block; transform-origin: center; }
 
 /* Background layers (background.js). Two stacked full-viewport canvases: the previous frame fades out over the
@@ -97,3 +99,8 @@
 .spx-vol-fill { position: absolute; left: 0; right: 0; bottom: 0; border-radius: 4px; background: #1db954; }
 .spx-vol-thumb { position: absolute; left: -3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px #000a; pointer-events: none; }
 .spx-vol-label { font: 600 11px/1 system-ui, sans-serif; color: #c9d1d9; }
+
+/* Previous / next song buttons beside the album cover */
+.spx-nav { z-index: 1; width: 48px; height: 48px; border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: #0d0f12aa; cursor: pointer; backdrop-filter: blur(4px); -webkit-tap-highlight-color: transparent; }
+.spx-nav:hover { background: #1b1f26cc; }
+.spx-nav svg { width: 26px; height: 26px; fill: currentColor; }

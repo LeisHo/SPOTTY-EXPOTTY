@@ -153,15 +153,29 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
         else if (mode === 'borderAverage') solid(meanOf(edgePred(setting('sliderBorderDepth'), setting('selectBorderAverageEdges'))));
         else if (mode === 'albumChroma') solid(chromaMean());
         else if (mode === 'borderRadial') {
-            const N = Math.round(setting('sliderBorderRadialRays'));
-            const ring = ringColors(N, setting('sliderBorderDepth'), setting('sliderBorderRadialSmoothing'));
+            const G = Math.round(setting('sliderBorderRadialGranularity'));       // distinct colour bands around the cover
+            const N = Math.max(Math.round(setting('sliderBorderRadialRays')), G); // rays drawn (never fewer than bands)
+            const ringG = ringColors(G, setting('sliderBorderDepth'), setting('sliderBorderRadialSmoothing'));
+            const ring = ringG && Array.from({ length: N }, (_, i) => ringG[Math.min(G - 1, Math.floor((i * G) / N))]);
             if (!ring) { solid(null); }
             else {
                 const { cx, cy, half } = coverGeometry();
                 const start = setting('sliderBorderRadialStart') / 100, step = (2 * Math.PI) / N, far = Math.hypot(w, h) + half;
                 const r0 = th => (half / Math.max(Math.abs(Math.cos(th)), Math.abs(Math.sin(th)), 1e-3)) * start; // cover edge along this ray
                 ctx.fillStyle = css(meanOf(null) || fallback); ctx.fillRect(0, 0, w, h);
-                for (let i = 0; i < N; i++) {
+                if (setting('checkboxBorderRadialSmooth') && ctx.createConicGradient) {
+                    // one conic gradient with a stop per band: colours blend continuously around the cover
+                    const cg = ctx.createConicGradient(-Math.PI, cx, cy);
+                    for (let i = 0; i < G; i++) cg.addColorStop((i + 0.5) / G, css(ringG[i]));
+                    const wrap = [0, 1, 2].map(k => (ringG[0][k] + ringG[G - 1][k]) / 2);
+                    cg.addColorStop(0, css(wrap)); cg.addColorStop(1, css(wrap));
+                    ctx.save();
+                    ctx.beginPath(); ctx.rect(0, 0, w, h);                      // everything except the cover-shaped hole
+                    const hole = half * start; ctx.rect(cx - hole, cy - hole, hole * 2, hole * 2);
+                    ctx.clip('evenodd');
+                    ctx.fillStyle = cg; ctx.fillRect(0, 0, w, h);
+                    ctx.restore();
+                } else for (let i = 0; i < N; i++) {
                     const t0 = -Math.PI + i * step, t1 = t0 + step * 1.35; // slight overlap hides seams
                     const a = r0(t0), b = r0(t1);
                     ctx.beginPath();

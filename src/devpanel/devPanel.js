@@ -7564,6 +7564,20 @@
         const uiLayoutContent = findGroupContent(tab, 'UI Layout', 'renderSpottyDevControls', TA);
         uiLayoutContent.appendChild(createDevGroupElement(TA, tab));
         uiLayoutContent.appendChild(createDevGroupElement(BG, tab));
+        const FT = 'Font';
+        uiLayoutContent.appendChild(createDevGroupElement(FT, tab));
+        const FONT_CONTROLS = [{
+            tab, group: FT, id: 'selectUiFont', type: 'select', label: 'Font For All Text:', value: 'system',
+            options: [
+                ['system', 'System Default'], ['Inter', 'Inter'], ['Roboto', 'Roboto'], ['Montserrat', 'Montserrat'], ['Poppins', 'Poppins'],
+                ['Lato', 'Lato'], ['Raleway', 'Raleway'], ['Nunito', 'Nunito'], ['Space Grotesk', 'Space Grotesk'], ['Oswald', 'Oswald'],
+                ['Bebas Neue', 'Bebas Neue'], ['Playfair Display', 'Playfair Display'], ['Merriweather', 'Merriweather'], ['Lora', 'Lora'],
+                ['DM Serif Display', 'DM Serif Display'], ['Pacifico', 'Pacifico (Script)'], ['Permanent Marker', 'Permanent Marker'],
+                ['Caveat', 'Caveat (Handwriting)'], ['Orbitron', 'Orbitron (Futuristic)'], ['Space Mono', 'Space Mono (Monospace)'],
+            ].map(([value, text]) => ({ value, text })),
+        }];
+        renderControlArray(FONT_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_FONT_CONTROLS', FONT_CONTROLS);
         const EASINGS = [
             { value: 'ease-out', text: 'Ease Out' }, { value: 'ease', text: 'Ease' }, { value: 'ease-in-out', text: 'Ease In-Out' },
             { value: 'linear', text: 'Linear' }, { value: 'spring', text: 'Spring (Overshoot)' }, { value: 'snap', text: 'Snap (Fast Start)' },
@@ -7640,6 +7654,8 @@
             // D + E: cover border
             { tab, group: BG, id: 'sliderBorderDepth', type: 'slider', label: 'Border Sample Depth (% Of Cover):', min: 1, max: 40, step: 0.5, value: 8 },
             { tab, group: BG, id: 'sliderBorderRadialRays', type: 'slider', label: 'Ray Count (Angular Resolution):', min: 8, max: 720, step: 1, value: 180 },
+            { tab, group: BG, id: 'sliderBorderRadialGranularity', type: 'slider', label: 'Stripe Granularity (Color Bands Around Cover):', min: 4, max: 720, step: 1, value: 180 },
+            { tab, group: BG, id: 'checkboxBorderRadialSmooth', type: 'checkbox', label: 'Completely Smooth Colors (No Stripes)', value: false },
             { tab, group: BG, id: 'sliderBorderRadialSmoothing', type: 'slider', label: 'Ray Smoothing (Deg):', min: 0, max: 90, step: 0.5, value: 4 },
             { tab, group: BG, id: 'sliderBorderRadialStart', type: 'slider', label: 'Rays Start At (% Of Cover Radius):', min: 0, max: 150, step: 1, value: 100 },
             { tab, group: BG, id: 'sliderBorderRadialFade', type: 'slider', label: 'Fade Rays Toward Edge (%):', min: 0, max: 100, step: 1, value: 0 },
@@ -7697,7 +7713,7 @@
                 select: 'selectBackgroundMode', map: {
                     color: ['colorBackgroundColor'],
                     gradient: ['curveEditorBackgroundGradient', 'selectBackgroundGradientType', 'sliderBackgroundGradientRotation', 'sliderBackgroundGradientScale', 'sliderBackgroundGradientCenterX', 'sliderBackgroundGradientCenterY'],
-                    borderRadial: ['sliderBorderDepth', 'sliderBorderRadialRays', 'sliderBorderRadialSmoothing', 'sliderBorderRadialStart', 'sliderBorderRadialFade', 'colorBorderRadialFadeColor'],
+                    borderRadial: ['sliderBorderDepth', 'sliderBorderRadialRays', 'sliderBorderRadialGranularity', 'checkboxBorderRadialSmooth', 'sliderBorderRadialSmoothing', 'sliderBorderRadialStart', 'sliderBorderRadialFade', 'colorBorderRadialFadeColor'],
                     borderAverage: ['sliderBorderDepth', 'selectBorderAverageEdges'],
                     albumChroma: ['sliderChromaMinSaturation', 'sliderChromaMinBrightness', 'sliderChromaGrayscaleThreshold'],
                     blurCover: ['sliderBlurRadius', 'sliderBlurScale', 'sliderBlurDarken'],

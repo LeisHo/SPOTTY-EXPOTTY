@@ -248,7 +248,7 @@ export function createTimeline(canvas, data) {
         // Only the bar band stretches with the canvas height. The playlist rows and the axis keep a
         // fixed pixel height pinned to the bottom (a short canvas shrinks the rows a little), so
         // making the timeline taller just makes the bars taller, upward.
-        const axisH = 18, ganttH = Math.min(76, Math.max(20, h * 0.4)), ganttTop = h - axisH - ganttH, topH = Math.max(12, ganttTop - 4);
+        const axisH = 18, dateH = 18, ganttH = Math.min(76, Math.max(20, h * 0.4)), ganttTop = h - axisH - dateH - ganttH, topH = Math.max(12, ganttTop - 4);
         const viewEnd = viewStart + span;
         const i0 = lowerBound(vt, viewStart), i1 = lowerBound(vt, viewEnd);
         const accentCss = rgbCss(hexToRgb(accent), baseAlpha);
@@ -405,6 +405,16 @@ export function createTimeline(canvas, data) {
             ctx.fillRect(x0, ganttTop + rowOf[i] * rowH, Math.max(2, x1 - x0), Math.max(1, rowH - 1));
         });
 
+        // exact add date/time of the current song: under the playlist rows, above the scale text
+        if (dateLine) {
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = playheadColor;
+            ctx.font = `bold 13px ${getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif'}`;
+            ctx.textAlign = 'center';
+            ctx.fillText(dateLine, w / 2, h - axisH - 4);
+            ctx.textAlign = 'start';
+        }
+
         // axis
         ctx.globalAlpha = 0.6;
         ctx.fillStyle = playheadColor;
@@ -457,8 +467,10 @@ export function createTimeline(canvas, data) {
     // Set the visible span directly (clamped to the zoom limits), keeping the playhead where it is on screen.
     function setSpanMs(ms) { zoomBy(clampSpan(ms) / span); }
 
+    let dateLine = '';
+    function setDateLine(t) { if (t !== dateLine) { dateLine = t; draw(); } }
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
+    return { draw, setDateLine, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }

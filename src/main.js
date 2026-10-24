@@ -19,6 +19,14 @@ import { initTitleAnim } from './app/titleAnim.js';
 import { createBackground } from './app/background.js';
 
 const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+// exact add moment, in the viewer's local time; date only when the export has no time of day
+const fmtAdded = iso => {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d)) return '';
+    if (!/Tdd:dd/.test(iso) || /T00:00:00/.test(iso)) return fmtDate(iso);
+    return d.toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit', timeZoneName: 'short' });
+};
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 async function boot() {
@@ -39,6 +47,8 @@ async function boot() {
                 <span class="spx-cover-glyph" id="spxGlyph">▶</span>
             </button>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
+            <button class="ui-element spx-nav" id="spxPrev" type="button" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+            <button class="ui-element spx-nav" id="spxNext" type="button" aria-label="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
             <div class="ui-element spx-volume" id="spxVolume">
                 <button type="button" class="spx-vol-btn" aria-label="Volume" aria-expanded="false" data-level="high">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="w3" d="M21 4.5a11 11 0 0 1 0 15"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>
@@ -133,6 +143,14 @@ async function boot() {
             mobileLandscape: { widthPreferred: '24vmin', offsetY: '138px' },
         }),
     });
+    [['spxPrev', 'Previous Song Button', 'center-right', 'center-left', '28px'], ['spxNext', 'Next Song Button', 'center-left', 'center-right', '28px']].forEach(([id, group, my, target, gap]) => createUIElement({
+        id, role: 'button', domNode: el(id), group, propertyLabel: 'Position & Size',
+        layout: {
+            position: { mode: 'relative', relativeTo: 'spxCover', myAnchor: my, targetAnchor: target, gap },
+            size: { width: { mode: 'fixed', value: '48px' }, height: { mode: 'fixed', value: '48px' } },
+        },
+        contexts: ctx(),
+    }));
     createUIElement({
         id: 'spxVolume', role: 'container', domNode: el('spxVolume'), group: 'Volume Control', propertyLabel: 'Position & Size',
         layout: {
@@ -231,6 +249,8 @@ async function boot() {
         scale('--spx-title-scale', setting('sliderTitleScale'));
         scale('--spx-artist-scale', setting('sliderArtistScale'));
         scale('--spx-meta-scale', setting('sliderMetaScale'));
+        const uiFont = setting('selectUiFont');
+        scale('--spx-font', !uiFont || uiFont === 'system' ? 'inherit' : `'${uiFont}', system-ui, sans-serif`);
         // Timeline height goes through the layout engine; the timeline is pinned by its bottom edge and
         // nothing else is positioned from it, so only the bars grow (upward).
         // On a phone the engine's own per-device height (150 px portrait / 110 px landscape) overrides the base
@@ -277,7 +297,8 @@ async function boot() {
         link.textContent = cleanTitle(s.n);
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         el('spxArtist').textContent = s.a;
-        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}  ·  added ${fmtDate(s.t)}${s.d ? '' : '  ·  no preview clip'}`;
+        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${s.d ? '' : '  ·  no preview clip'}`;
+        timeline.setDateLine(fmtAdded(s.t));
         scheduleCover();
         background.refresh(); // palette-driven modes change with the song even if the cover image did not
     }
@@ -394,6 +415,10 @@ async function boot() {
     };
     window.addEventListener('pointerup', endPointer);
     window.addEventListener('pointercancel', endPointer);
+
+    const stepSong = d => { moveTo(timeline.currentIndex() + d); afterJump(); };
+    el('spxPrev').addEventListener('click', () => stepSong(-1));
+    el('spxNext').addEventListener('click', () => stepSong(1));
 
     window.addEventListener('keydown', e => {
         if (e.target.closest && e.target.closest('input, select, textarea, #devPanel')) return;
