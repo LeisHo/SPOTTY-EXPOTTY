@@ -12,8 +12,13 @@ const pool = new Map(); // deezerId -> { did, audio, dead, urlAt, fade }
 let current = null;
 let token = 0;
 let unlocked = false;
+let masterVolume = 1; // the top-right volume control, 0..1, multiplies the dev panel's Clip Volume
 
 export function unlock() { unlocked = true; }
+export function setMasterVolume(v) {
+    masterVolume = Math.min(1, Math.max(0, v));
+    if (current) current.audio.volume = Math.min(1, Math.max(0, setting('sliderScrubVolume'))) * masterVolume; // live, on the clip playing now
+}
 export function isUnlocked() { return unlocked; }
 
 async function fetchUrls(ids) {
@@ -116,7 +121,7 @@ export function playClip(did) {
         if (my !== token) return; // user already scrubbed past this song
         const a = p.audio;
         clearInterval(p.fade);
-        a.volume = Math.min(1, Math.max(0, setting('sliderScrubVolume')));
+        a.volume = Math.min(1, Math.max(0, setting('sliderScrubVolume'))) * masterVolume;
         const dur = a.duration && isFinite(a.duration) ? a.duration : 30;
         let lo = setting('sliderClipStartMin'), hi = setting('sliderClipStartMax');
         if (hi < lo) [lo, hi] = [hi, lo];

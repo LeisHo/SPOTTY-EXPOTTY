@@ -79,3 +79,21 @@
 .dev-gradient-edit input[type=color] { width: 34px; height: 24px; padding: 0; border: 1px solid rgba(255,255,255,.3); background: none; }
 .dev-gradient-edit input[type=number] { width: 52px; }
 .dev-gradient-edit button { font-size: 11px; padding: 2px 6px; cursor: pointer; }
+
+/* Volume control (volume.js): a speaker button, top right, that opens a vertical slider below it. */
+.spx-volume { z-index: 5; display: flex; flex-direction: column; align-items: center; user-select: none; }
+.spx-vol-btn { width: 44px; height: 44px; border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: #0d0f12aa; cursor: pointer; backdrop-filter: blur(4px); }
+.spx-vol-btn:hover { background: #1b1f26cc; }
+.spx-vol-btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spx-vol-btn svg .spk { fill: currentColor; stroke: none; }
+.spx-vol-btn .w1, .spx-vol-btn .w2, .spx-vol-btn .w3, .spx-vol-btn .x { display: none; }
+.spx-vol-btn[data-level="low"] .w1, .spx-vol-btn[data-level="mid"] .w1, .spx-vol-btn[data-level="mid"] .w2,
+.spx-vol-btn[data-level="high"] .w1, .spx-vol-btn[data-level="high"] .w2, .spx-vol-btn[data-level="high"] .w3 { display: inline; }
+.spx-vol-btn[data-level="mute"] .x { display: inline; }
+.spx-vol-panel { margin-top: 8px; width: 44px; padding: 12px 0 10px; border-radius: 22px; background: #0d0f12cc; backdrop-filter: blur(4px); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.spx-vol-panel[hidden] { display: none; }
+.spx-vol-track { position: relative; width: 8px; height: 130px; border-radius: 4px; background: #ffffff33; cursor: pointer; touch-action: none; outline: none; }
+.spx-vol-track:focus-visible { box-shadow: 0 0 0 2px #1db954; }
+.spx-vol-fill { position: absolute; left: 0; right: 0; bottom: 0; border-radius: 4px; background: #1db954; }
+.spx-vol-thumb { position: absolute; left: -3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px #000a; pointer-events: none; }
+.spx-vol-label { font: 600 11px/1 system-ui, sans-serif; color: #c9d1d9; }

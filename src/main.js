@@ -11,7 +11,8 @@ import {
 } from '../lib/ui-engine/registry.mjs';
 import { setting } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
-import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo } from './app/clipPlayer.js';
+import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume } from './app/clipPlayer.js';
+import { initVolume } from './app/volume.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, embedStatus } from './app/handoff.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
@@ -38,6 +39,15 @@ async function boot() {
                 <span class="spx-cover-glyph" id="spxGlyph">▶</span>
             </button>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
+            <div class="ui-element spx-volume" id="spxVolume">
+                <button type="button" class="spx-vol-btn" aria-label="Volume" aria-expanded="false" data-level="high">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="w3" d="M21 4.5a11 11 0 0 1 0 15"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>
+                </button>
+                <div class="spx-vol-panel" hidden>
+                    <div class="spx-vol-track" role="slider" tabindex="0" aria-label="Volume" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="spx-vol-fill"></div><div class="spx-vol-thumb"></div></div>
+                    <div class="spx-vol-label">100%</div>
+                </div>
+            </div>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart"><button type="button" id="spxStartBtn">Click to enable sound</button></div>
             <div class="spx-inspector" id="spxInspectorPanel" hidden>
@@ -123,6 +133,14 @@ async function boot() {
             mobileLandscape: { widthPreferred: '24vmin', offsetY: '138px' },
         }),
     });
+    createUIElement({
+        id: 'spxVolume', role: 'container', domNode: el('spxVolume'), group: 'Volume Control', propertyLabel: 'Position & Size',
+        layout: {
+            position: { mode: 'anchor', horizontal: { anchor: 'right', offset: '14px' }, vertical: { anchor: 'top', offset: '14px' } },
+            size: { width: { mode: 'fixed', value: '44px' }, height: { mode: 'content' } },
+        },
+        contexts: ctx(),
+    });
     resolveAndApplyAll();
     const shippedLayout = captureAllLayoutConfigs();
 
@@ -162,6 +180,12 @@ async function boot() {
         getPalette: () => { const c = songs[idx] && songs[idx].c; return c !== undefined ? covers[c] : null; },
     });
     initTitleAnim(el('spxTitleLink'));
+    // Volume (top right): scales the scrub clips. Spotify's embedded player has no volume method, so at exactly
+    // 0 % the song player is simply stopped and not started (a full mute); above 0 it plays at its own level.
+    const volume = initVolume({
+        root: el('spxVolume'),
+        onChange: v => { setMasterVolume(v); if (v === 0) { clearTimeout(handoffTimer); pauseEmbed(); handedOff = false; } },
+    });
 
     // Evaluate a dev-panel curve ({points, method}) at x in 0..1 -> y in 0..1, with the dev panel's own
     // evaluator when available (same math as the editor draws), else a plain linear interpolation.
@@ -294,7 +318,7 @@ async function boot() {
         clearTimeout(handoffTimer);
         handoffTimer = setTimeout(() => {
             stopClip();
-            if (isUnlocked() && setting('checkboxHandoffEnabled')) { playTrack(songs[idx].id); handedOff = true; }
+            if (isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0) { playTrack(songs[idx].id); handedOff = true; }
         }, setting('sliderHandoffDelay'));
     }
 
@@ -312,7 +336,7 @@ async function boot() {
     // ---- input ---------------------------------------------------------------------------
     // Desktop: wheel = scrub (a notch moves the playhead N px along the current scale), click on the
     // timeline = jump, click-drag = zoom around the playhead. Touch: drag = scrub, pinch = zoom, tap = jump.
-    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxStart, #spxCover, a, button, input, select, textarea');
+    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxStart, #spxCover, #spxVolume, a, button, input, select, textarea');
     // The title/artist/album lines are selectable text: a drag that starts on them selects it instead of zooming.
     const inText = t => t.closest && t.closest('.spx-title, .spx-artist, .spx-meta');
     window.addEventListener('wheel', e => {
