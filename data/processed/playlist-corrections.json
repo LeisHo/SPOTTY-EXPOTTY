@@ -1,0 +1,155 @@
+{
+ "rule": "Rule (documented, deterministic):\n  * A playlist's CORE window is its densest 190-day window of add dates.\n  * Its HOME window is the core extended by 45 days on each side (a playlist is normally\n    still being added to for a few weeks around its core).\n  * A song whose Added At is outside its own playlist's HOME window is a STRAGGLER.\n  * A straggler belongs to the playlist whose HOME window contains its date (if several,\n    the one whose core is closest; a date after every window - e.g. the future-dated song -\n    goes to the latest playlist).\n  * If the target playlist already contains that track (same Track URI), the straggler is\n    simply REMOVED from the wrong playlist (action \"remove-duplicate\"); otherwise it is\n    MOVED (action \"move\").\n  * MMXIX / MMXX are year-long playlists by name (2019 / 2020), so their late-year songs\n    are legitimate and are left alone; Treinta.Cero_(2) (every song stamped one day) is\n    a copy and is left alone.",
+ "moves": [
+  {
+   "uri": "spotify:track:3R0X4c56q9aX4RxrBqxAGB",
+   "name": "Where Or When",
+   "artist": "Artie Shaw",
+   "addedAt": "2023-03-19T01:03:35Z",
+   "from": "11101.0001100110011001101.csv",
+   "to": "11101.01001100110011001101.csv",
+   "action": "move",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:3MYUHaITeEQh3WjMkHr67z",
+   "name": "Hey Now - When I Give You All My Lovin'",
+   "artist": "Romare",
+   "addedAt": "2024-08-10T23:26:53Z",
+   "from": "11101.0001100110011001101.csv",
+   "to": "삼십일.일.csv",
+   "action": "remove-duplicate",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:4KhuernnobE4BzS0P1Viz8",
+   "name": "Laughing",
+   "artist": "The Guess Who",
+   "addedAt": "2018-10-30T05:46:05Z",
+   "from": "24_._2.csv",
+   "to": "XXV_._I.csv",
+   "action": "move",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:0dYn6NGJE0NH93puR4rvmY",
+   "name": "Let's Misbehave",
+   "artist": "Irving Aaronson and His Commanders",
+   "addedAt": "2015-02-03T15:42:08Z",
+   "from": "Begin_the_Beguine.csv",
+   "to": "Senior_Jr..csv",
+   "action": "move",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:0H8FBsHkXsyhEIIsDq76uQ",
+   "name": "Victoria",
+   "artist": "The Kinks",
+   "addedAt": "2014-06-04T15:22:38Z",
+   "from": "Junior.csv",
+   "to": "Junior_Sr..csv",
+   "action": "move",
+   "why": "date falls in this playlist's home window (core +/- 45 days)"
+  },
+  {
+   "uri": "spotify:track:4hNKm844QktyaKubGM8Ggk",
+   "name": "Crazy Little Thing Called Love - Remastered",
+   "artist": "Queen",
+   "addedAt": "2014-06-04T15:22:37Z",
+   "from": "Junior.csv",
+   "to": "Junior_Sr..csv",
+   "action": "move",
+   "why": "date falls in this playlist's home window (core +/- 45 days)"
+  },
+  {
+   "uri": "spotify:track:2AJn5MQ03C3v0EN5ynGaKY",
+   "name": "Dil Se Re",
+   "artist": "A.R. Rahman",
+   "addedAt": "2026-11-10T06:17:54Z",
+   "from": "Junior.csv",
+   "to": "Trideset_Tri._Nula.csv",
+   "action": "move",
+   "why": "date falls in this playlist's home window (core +/- 45 days)"
+  },
+  {
+   "uri": "spotify:local:Nicolas+Jaar::The+Ego:273",
+   "name": "The Ego",
+   "artist": "Nicolas Jaar",
+   "addedAt": "2014-06-04T15:22:38Z",
+   "from": "Junior.csv",
+   "to": "Junior_Sr..csv",
+   "action": "move",
+   "why": "date falls in this playlist's home window (core +/- 45 days)"
+  },
+  {
+   "uri": "spotify:track:4PDzCpAmb4ZuSqxZn9IseZ",
+   "name": "Felicia No Capicia - Remastered 1999",
+   "artist": "Louis Prima;Sam Butera & The Witnesses",
+   "addedAt": "2014-08-01T12:27:11Z",
+   "from": "Junior_Jr..csv",
+   "to": "Begin_the_Beguine.csv",
+   "action": "move",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:0n9TMF5hbrMLf7h3Ry7Pll",
+   "name": "Stardust",
+   "artist": "Louis Armstrong",
+   "addedAt": "2015-02-03T17:40:50Z",
+   "from": "Junior_Jr..csv",
+   "to": "Senior_Jr..csv",
+   "action": "move",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:0cpEhkrQAzSp0YSLoDWbYy",
+   "name": "House of the Rising Sun - Live at the Village Gate",
+   "artist": "Nina Simone",
+   "addedAt": "2016-04-18T01:30:10Z",
+   "from": "Super_Senior.csv",
+   "to": "Super_Senior_Sr..csv",
+   "action": "move",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:0AyL01xejvrvvS0qqLODgr",
+   "name": "Symphony No. 5: IV. Adagietto. Sehr langsam",
+   "artist": "Gustav Mahler;London Symphony Orchestra;James DePreist",
+   "addedAt": "2024-01-16T17:45:52Z",
+   "from": "Te_Quiero.csv",
+   "to": "Treinta._Dos.csv",
+   "action": "remove-duplicate",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:29DQZscILU0D4b9ZykKIc2",
+   "name": "My Buddy - Vocal Version",
+   "artist": "Chet Baker",
+   "addedAt": "2024-10-18T23:50:22Z",
+   "from": "Treinta._Una.csv",
+   "to": "삼십일.일.csv",
+   "action": "remove-duplicate",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:1qqckYPcp4092m12rM5l4a",
+   "name": "Turquoise - 1996 Digital Remaster",
+   "artist": "Milt Buckner",
+   "addedAt": "2023-10-10T21:07:59Z",
+   "from": "Vingt-Huit._Un.csv",
+   "to": "Treinta._Cero.csv",
+   "action": "remove-duplicate",
+   "why": "date falls inside this playlist's core window"
+  },
+  {
+   "uri": "spotify:track:2BrrtZHzZPtbT84FYrdSYP",
+   "name": "Apple Scruffs - 2014 Remaster",
+   "artist": "George Harrison",
+   "addedAt": "2025-09-22T01:26:21Z",
+   "from": "삼십일.하나.csv",
+   "to": "Tiga_Puluh_Dua._Nol.csv",
+   "action": "move",
+   "why": "date falls inside this playlist's core window"
+  }
+ ]
+}

@@ -15,9 +15,15 @@ BASE = os.path.join(ROOT, "data", "Exportify Export", "Tingo Tango")
 OUT = os.path.join(ROOT, "data", "processed", "timeline.json")
 
 links = {}
+d_by_id = {}  # Spotify track id -> Deezer id, when the "links" argument is an existing timeline.json
 if len(sys.argv) > 1 and os.path.exists(sys.argv[1]):
     with open(sys.argv[1], encoding="utf-8") as fh:
         links = json.load(fh)
+    if "songs" in links:  # an existing timeline.json: reuse its Deezer ids instead of the raw lookup output
+        d_by_id = {s["id"]: s["d"] for s in links["songs"]}
+        links = {}
+
+CORRECTIONS = os.path.join(ROOT, "data", "processed", "playlist-corrections.json")
 
 
 def pretty(fname):
@@ -42,7 +48,7 @@ for f in sorted(glob.glob(os.path.join(BASE, "*.csv"))):
                 continue
             uri = r["Track URI"]
             link = links.get(uri) or {}
-            d = link.get("id") if link.get("src") == "deezer" else 0
+            d = link.get("id") if link.get("src") == "deezer" else d_by_id.get(uri.split(":")[-1], 0)
             rows.append({
                 "id": uri.split(":")[-1],
                 "n": r["Track Name"],
@@ -58,6 +64,31 @@ for f in sorted(glob.glob(os.path.join(BASE, "*.csv"))):
             })
             n += 1
     playlists.append({"name": pretty(os.path.basename(f)), "file": os.path.basename(f), "count": n})
+
+# Apply data/processed/playlist-corrections.json (written by fix_stragglers.py): songs added to a
+# playlist long after its active period are moved to the playlist active on their date, or just
+# dropped from the wrong playlist when the target already has that track. The source CSVs are
+# never modified; delete the corrections file (or an entry) to undo.
+file_to_idx = {p["file"]: i for i, p in enumerate(playlists)}
+applied = {"move": 0, "remove-duplicate": 0}
+if os.path.exists(CORRECTIONS):
+    with open(CORRECTIONS, encoding="utf-8") as fh:
+        moves = json.load(fh)["moves"]
+    for m in moves:
+        src, dst = file_to_idx[m["from"]], file_to_idx[m["to"]]
+        tid = m["uri"].split(":")[-1]
+        hit = next((r for r in rows if r["p"] == src and r["id"] == tid and r["t"] == m["addedAt"]), None)
+        if hit is None:
+            print(f"  warning: correction not found in {m['from']}: {m['name']} ({m['addedAt']})")
+            continue
+        if m["action"] == "remove-duplicate":
+            rows.remove(hit)
+        else:
+            hit["p"] = dst
+        applied[m["action"]] += 1
+    for i, p in enumerate(playlists):
+        p["count"] = sum(1 for r in rows if r["p"] == i)
+    print(f"applied corrections: {applied['move']} moved, {applied['remove-duplicate']} removed as duplicates")
 
 rows.sort(key=lambda s: s["t"])
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
