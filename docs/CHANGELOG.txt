@@ -359,6 +359,56 @@ Note: re-running build_timeline.py overwrites these fields, so run merge_cover_c
 Not verified: colours at other zoom levels beyond a quick look, a real phone, Vercel.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  ~2:20 AM - ~3:05 AM EDT (end time approximate)
+
+Owner's list: playlist row order, save-secret arrangement, two curve groups, title animations, backgrounds.
+Code pushed first as bb0da93; these notes after.
+
+Owner question first: "what does the y axis of the green lines mean" - nothing: rows followed the playlist
+FILES' alphabetical order (build_timeline.py sorts the glob). Now ordered by each playlist's first add
+(a downward staircase) and hovering a row shows "name · first date to last date".
+
+Save secret / token (owner's explicit instruction, "make sure it's like this"): DEV_PANEL_SAVE_SECRET is now a
+client constant in src/devpanel/devPanel.js (value read from keyps.txt, label DEV_PANEL_SAVE_SECRET, never
+printed), plus the Vercel env var and the keyps.txt reference copy. This REVERSES the 12:00 AM decision to keep
+it out of client code (the prompt-once-per-browser fallback is still there but never used). GITHUB_TOKEN stays
+server-side only. Verified the token string does not appear in src/ or api/ (api reads process.env).
+MY MISTAKE: a command meant to list keyps.txt's labels printed the values too, exposing unrelated API keys and
+GitHub tokens in this session's output (nothing was sent anywhere; the file was not modified).
+
+Added:
+- Scrub Input > "Wheel Scrub Per Notch Curve" (toggleable): curve X = zoom scale (0 fully zoomed in .. 1 fully
+  zoomed out; across the Zoom Limits slider range or the whole range), Y = px per notch between Y Bottom / Y
+  Top. Verified with a linear curve (10..110 px): 10 px zoomed in, 55.8 px at fraction 0.458, 110 px zoomed out;
+  disabled -> the plain slider (40 px).
+- Scrub Input > "Starting Timeline Span Curve" (toggleable): X = playhead position along the whole timeline,
+  Y = span between Y Bottom and Y Top days (log scale). INTERPRETATION (the request was ambiguous): applied at
+  load, on double-click on the timeline, and on Home/End (option). Verified: flat 0.5 curve -> 100 days; ramp ->
+  10 days at Home, 1000 days at End; double-click with the curve off -> the plain slider (60 days).
+- Track title: no underline in any state (computed text-decoration none on hover). UI Layout > "Track Title
+  Button Animation" (toggleable) with 6 modes and per-mode settings (shown only for the selected mode):
+  A bold on hover / unbold on press, B pulse on click, C grow on hover / normal on press, and 3 of my own:
+  D glow, E letter-spacing expand, F lift & push down. Verified every state sequence (rest, hover, press,
+  release while still over, leave) for all 6 and that disabling clears the inline styles.
+- UI Layout > "Background" subgroup, 10 modes: none, A color, B gradient (new multi-stop gradient-editor control
+  + type linear/radial/conic, rotation, scale, centre X/Y), C cover average, D cover border radial (rays from
+  the cover's centre coloured by the sampled border; ray count, smoothing, start radius, fade), E cover border
+  average (sample depth, which edges), F colourful-only average (saturation / brightness thresholds, grayscale
+  cutoff), and 3 of my own: G blurred cover, H palette gradient (top 3 colours), I spotlight glow. Common:
+  opacity, brightness, saturation, crossfade between songs. Cover pixels are read live from the cover <img>
+  (crossorigin=anonymous; Spotify's image CDN sends CORS headers: tested, pixels readable).
+  Verified: all 10 drew distinct, sensible output; border radial and spotlight redrew when the cover was resized
+  and when it was moved; the gradient editor adds, recolours, drags and removes stops; new controls get working
+  Mobile/Landscape twins. Seen by eye: border radial, spotlight, blur, gradient.
+- Gradient editor bug found and fixed in testing: after dragging a stop, Remove deleted the wrong one (the
+  selection followed object identity that norm() destroyed); the editor now sorts in place.
+
+Not verified: a real phone, the Vercel site, a real Save to GitHub (needs the Vercel env vars to be set; the
+earlier probe of /api/save-settings returned 503), colour crossfade by eye (only the code path was exercised).
+Note: the playlist ending "Nov 10, 2026" is the future-dated song's date after the straggler fix moved it
+to the latest playlist; the date itself is untouched.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================

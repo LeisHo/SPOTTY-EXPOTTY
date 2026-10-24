@@ -26,7 +26,7 @@ and scroll the mouse wheel to scrub (click the timeline to jump; click-drag to
 zoom around the playhead; on touch, drag scrubs and pinch zooms; the album cover
 plays/pauses the song and the title links to Spotify). Press `D` for the
 dev panel. Its Save button commits to GitHub, so it only works on the Vercel
-site (`https://spottypotty.vercel.app/?dev=1`), where it asks once for the save secret. Full Spotify playback needs you to be
+site (`https://spottypotty.vercel.app/?dev=1`), where the save secret is already built into the page (see CLAUDE.md for where it lives). Full Spotify playback needs you to be
 logged in to Spotify in the same browser; otherwise the embed plays a
 30-second preview. On Vercel, `api/preview.js` serves the same proxy route.
 

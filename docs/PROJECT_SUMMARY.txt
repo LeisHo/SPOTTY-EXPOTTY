@@ -55,7 +55,14 @@ Built (2026-10-23/24) and tested in the built-in browser:
   Tested: Inspector edit moved the cover 158 -> 216 px (30vmin of 720), Sync-payload
   round trip restored it, phone (375x812) layout fits.
 - Dev-panel Save/Reset go to GitHub through /api/save-settings (ported from
-  HANDO); not yet tested end to end on Vercel (needs the save secret).
+  HANDO); not yet tested end to end on Vercel. The save secret is a client constant (owner's
+  instruction, same as HANDO); the GitHub token is server-side only (Vercel env).
+- Added 2026-10-24: timeline playlist rows ordered by start date with hover names; toggleable curve
+  groups for wheel scrub px per notch (by zoom scale) and for the starting span (by position along the
+  timeline); track title never underlined, with a toggleable 6-mode hover/press animation group; a
+  Background subgroup with 10 modes (color, multi-stop gradient, cover average / border radial / border
+  average / colour-only average, blurred cover, palette gradient, spotlight) that follows the cover live.
+  Tested in the built-in browser (see CHANGELOG); not tested on a real phone or on Vercel.
 - Clip pool (measured 2026-10-24 as time from play() to the 'playing' event,
   one wheel notch = 1 song): ~3 songs/s -> 9 of 9 songs-with-a-clip made sound
   (median 34 ms, max 94 ms); ~7 songs/s -> 19 of 19 (median 5 ms, max 108 ms);
