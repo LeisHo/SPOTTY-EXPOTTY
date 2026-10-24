@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+package-lock.json
+
+# Scraped/dumped/regenerable inputs, per CLAUDE.md S11. data/processed/ is
+# deliberately NOT ignored -- small curated/generated data the app reads,
+# and (in HTML-mode projects) the dev-panel settings + UI-layout config
+# logs, are meant to be tracked (S12l/S13).
+data/raw/
+
+# Local scratch/log output (screen recordings, one-off dumps) -- never
+# meant to be tracked.
+datalog/

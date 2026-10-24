@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+"""Local static server for SPOTTY EXPOTTY.
+
+Required instead of `python -m http.server`: that server sends .mjs as
+text/plain, and browsers reject a <script type="module"> import with that
+MIME type -- every lib/ui-engine/*.mjs import would fail. Adapted from
+LENTICULOSO's own scripts/active/serve.py (itself adapted from the UI
+Layout Engine's demo/serve.py), which documents the same gotcha.
+
+Usage: python scripts/active/serve.py [port] [--open]   (port defaults to 8000 -- change this if it collides with a sibling project's own server)
+
+The optional /api/save-settings local stand-in for CLAUDE.md S12l's
+git-tracked settings upgrade only activates if GITHUB_TOKEN and
+GITHUB_REPO are set in this server's own environment; without them the
+dev panel's Save/Sync correctly falls back to localStorage.
+"""
+import base64
+import http.server
+import json
+import os
+import sys
+import urllib.error
+import urllib.request
+
+GITHUB_API = 'https://api.github.com'
+
+
+def _gh_config():
+    return {
+        'token': os.environ.get('GITHUB_TOKEN'),
+        'repo': os.environ.get('GITHUB_REPO'),
+        'branch': os.environ.get('GITHUB_BRANCH', 'main'),
+        'settings_path': os.environ.get('SETTINGS_FILE_PATH', 'data/processed/dev-panel-settings.json'),
+    }
+
+
+def _gh_request(url, token, method='GET', payload=None):
+    req = urllib.request.Request(url, method=method)
+    req.add_header('Authorization', 'Bearer ' + token)
+    req.add_header('Accept', 'application/vnd.github+json')
+    req.add_header('X-GitHub-Api-Version', '2022-11-28')
+    data = None
+    if payload is not None:
+        data = json.dumps(payload).encode('utf-8')
+        req.add_header('Content-Type', 'application/json')
+    try:
+        with urllib.request.urlopen(req, data) as resp:
+            return resp.getcode(), json.loads(resp.read().decode('utf-8') or '{}')
+    except urllib.error.HTTPError as e:
+        body = e.read().decode('utf-8', 'replace')
+        try:
+            return e.code, json.loads(body or '{}')
+        except json.JSONDecodeError:
+            return e.code, {'message': body[:400]}
+
+
+def _gh_put_file(cfg, path, content_b64, message):
+    url = f"{GITHUB_API}/repos/{cfg['repo']}/contents/{path}"
+    code, body = _gh_request(f"{url}?ref={cfg['branch']}", cfg['token'])
+    sha = body.get('sha') if code == 200 else None
+    payload = {'message': message, 'content': content_b64, 'branch': cfg['branch']}
+    if sha:
+        payload['sha'] = sha
+    return _gh_request(url, cfg['token'], 'PUT', payload)
+
+
+def _gh_get_file(cfg, path):
+    url = f"{GITHUB_API}/repos/{cfg['repo']}/contents/{path}?ref={cfg['branch']}"
+    code, body = _gh_request(url, cfg['token'])
+    if code == 404:
+        return None
+    if code != 200:
+        raise RuntimeError(f'GitHub read failed ({code}): {body.get("message")}')
+    return base64.b64decode(body.get('content', '') or '')
+
+
+_args = [a for a in sys.argv[1:] if not a.startswith('--')]
+PORT = int(_args[0]) if _args else 8000
+OPEN_BROWSER = '--open' in sys.argv
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+class Handler(http.server.SimpleHTTPRequestHandler):
+    extensions_map = {
+        **http.server.SimpleHTTPRequestHandler.extensions_map,
+        '.mjs': 'text/javascript',
+        '.js': 'text/javascript',
+        '.json': 'application/json',
+    }
+    protocol_version = 'HTTP/1.1'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=ROOT, **kwargs)
+
+    def end_headers(self):
+        if '/lib/' in self.path:
+            self.send_header('Cache-Control', 'public, max-age=3600')
+        else:
+            self.send_header('Cache-Control', 'no-store, must-revalidate')
+        super().end_headers()
+
+    def _json(self, code, obj):
+        raw = json.dumps(obj).encode('utf-8')
+        self.send_response(code)
+        self.send_header('Content-Type', 'application/json')
+        self.send_header('Content-Length', str(len(raw)))
+        self.end_headers()
+        self.wfile.write(raw)
+
+    def _is_api(self):
+        return self.path.split('?')[0].rstrip('/') == '/api/save-settings'
+
+    def do_GET(self):
+        if not self._is_api():
+            return super().do_GET()
+        cfg = _gh_config()
+        if not cfg['token'] or not cfg['repo']:
+            return self._json(503, {'ok': False, 'error': "GITHUB_TOKEN/GITHUB_REPO not set; falling back to localStorage."})
+        try:
+            raw = _gh_get_file(cfg, cfg['settings_path'])
+            settings = json.loads(raw.decode('utf-8')) if raw else None
+            return self._json(200, {'ok': True, 'settings': settings})
+        except Exception as e:  # noqa: BLE001
+            return self._json(502, {'ok': False, 'error': str(e)})
+
+    def do_POST(self):
+        if not self._is_api():
+            return self._json(404, {'ok': False, 'error': 'Not found'})
+        cfg = _gh_config()
+        if not cfg['token'] or not cfg['repo']:
+            return self._json(503, {'ok': False, 'error': "GITHUB_TOKEN/GITHUB_REPO not set; falling back to localStorage."})
+        secret = os.environ.get('DEV_PANEL_SAVE_SECRET')
+        if secret and self.headers.get('x-dev-panel-secret') != secret:
+            return self._json(401, {'ok': False, 'error': 'Unauthorized'})
+        try:
+            length = int(self.headers.get('Content-Length') or 0)
+            body = json.loads(self.rfile.read(length).decode('utf-8') or '{}')
+        except Exception as e:  # noqa: BLE001
+            return self._json(400, {'ok': False, 'error': f'Bad JSON body: {e}'})
+        try:
+            settings = body.get('settings')
+            if settings is None:
+                return self._json(400, {'ok': False, 'error': 'Missing settings'})
+            content = base64.b64encode(
+                (json.dumps(settings, indent=2) + '\n').encode('utf-8')).decode('ascii')
+            code, resp = _gh_put_file(cfg, cfg['settings_path'], content,
+                                      'Update dev-panel-settings.json via dev panel')
+            if code not in (200, 201):
+                return self._json(502, {'ok': False, 'error': f'Settings write failed: {resp.get("message")}'})
+            return self._json(200, {'ok': True, 'written': [cfg['settings_path']]})
+        except Exception as e:  # noqa: BLE001
+            return self._json(500, {'ok': False, 'error': str(e)})
+
+    def copyfile(self, source, outputfile):
+        try:
+            super().copyfile(source, outputfile)
+        except (ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
+            pass
+
+    def log_message(self, fmt, *args):
+        if args and str(args[0]).startswith(('4', '5')):
+            super().log_message(fmt, *args)
+
+
+if __name__ == '__main__':
+    url = f'http://localhost:{PORT}/index.html'
+    try:
+        httpd = http.server.ThreadingHTTPServer(('', PORT), Handler)
+    except OSError:
+        print(f'Port {PORT} is already in use. Pass another port: python scripts/active/serve.py <port> --open')
+        sys.exit(1)
+    with httpd:
+        print(f'SPOTTY EXPOTTY: {url}   (serving {ROOT})')
+        print('Keep this window open. Ctrl+C stops it.')
+        if OPEN_BROWSER:
+            import webbrowser
+            webbrowser.open(url)
+        httpd.serve_forever()

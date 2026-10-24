@@ -1,0 +1,39 @@
+SPOTTY EXPOTTY -- CHANGELOG
+================================================================================
+
+PROJECT START: 2026-10-23  -  09:48 PM EDT
+
+--------------------------------------------------------------------------------
+2026-10-23  -  09:48 PM - 09:50 PM EDT
+
+Scaffolded the project with the /new-project-scaffold skill in HTML mode
+(dev panel + UI Layout Engine). The pre-existing data/ folder (104 files,
+Exportify Export CSVs) was deliberately NOT touched: no data/raw or
+data/processed subfolders were created, no .gitkeep written, no files
+modified. Verified by file count (104) and by a `find data -newer CLAUDE.md`
+check returning nothing.
+
+Added:
+- README.md, CLAUDE.md, .gitignore, and docs/ (PROJECT_SUMMARY.txt,
+  CODE_SUMMARY.txt, PROJECT_PROGRESS.md, CHANGELOG.txt, HANDOFF.md), all
+  from the standard .claude/TEMPLATE_* files with the project name filled in
+  and every other <...> placeholder left as templated.
+- index.html, src/style.css, src/devpanel/devPanel.js, src/main.js: the
+  TEMPLATE_DEV_PANEL.html split per CLAUDE.md S12.
+- lib/ui-engine/ (11 vendored files from HTML UI ENGINE/), per S13.
+- scripts/active/serve.py, vercel.json, api/save-settings.js.
+- scripts/active/.gitkeep and scripts/archive/.gitkeep. The data/ folder is
+  the only part of the standard skeleton that was skipped.
+- `git init` only; nothing committed.
+
+Not verified:
+- The dev panel has not yet been opened in a browser to confirm it renders.
+
+--------------------------------------------------------------------------------
+<next entry follows the same divider + dated-header pattern>
+
+================================================================================
+APPEND-ONLY. Never rewrite, reorder, or delete a prior entry, even to fix
+formatting (CLAUDE.md §4a / Never-Skip rule #3). If an entry needs a
+correction, add a new entry noting the correction rather than editing the
+old one in place.

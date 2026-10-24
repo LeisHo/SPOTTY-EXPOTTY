@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SPOTTY EXPOTTY</title>
+<!-- Dev-mode gating script, copied verbatim from .claude/TEMPLATE_DEV_PANEL.html
+     (search "isDevAllowed" there if this ever needs to change -- keep both
+     copies in sync, they can't share one declaration; see the template's own
+     MAINTENANCE note). -->
+<script>
+    (function() {
+        var isDevAllowed = location.protocol === 'file:' ||
+            location.hostname === 'localhost' ||
+            location.hostname === '127.0.0.1' ||
+            new URLSearchParams(location.search).get('dev') === '1';
+        if (isDevAllowed) document.documentElement.classList.add('dev-mode');
+    })();
+</script>
+<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+
+
+    <!-- PROJECT: your own game content goes above this block. -->
+
+    <div id="appStage"></div>
+
+
+    <button class="dev-toggle-btn" id="devToggleBtn" onclick="ensureDevPanelBuilt(); devPanel.classList.toggle('hidden')">DEV</button>
+
+    <div class="dev-panel" id="devPanel">
+        <div class="dev-panel-scroll-content">
+            <div class="dev-header" id="devPanelHeader">
+                <!-- Layout 2026-09-30: Sync | Copy | Reset | DEV label | Hotkey, Text Edit, Add Group, Delete, Undo, Redo, Collapse All, Collapse, Close (right). -->
+                <button class="dev-header-icon-btn" id="devHeaderSyncBtn" onclick="saveDevPanelSettings()" title="Sync (Save) (S key)" data-hotkey-default="s">💾</button>
+                <button class="dev-header-icon-btn" id="devHeaderCopyBtn" onclick="copyDevPanelSettings()" title="Copy Settings (C key)" data-hotkey-default="c">📋</button>
+                <button class="dev-header-icon-btn" id="devHeaderResetBtn" onclick="resetDevPanelSettings()" title="Reset (R key)" data-hotkey-default="r">↺</button>
+                <span class="dev-panel-title">DEV</span>
+                <div class="dev-header-buttons">
+                    <div class="dev-header-buttons-primary">
+                    </div>
+                    <div class="dev-header-buttons-secondary">
+                        <button class="dev-header-icon-btn" id="devSetHotkeyBtn" title="Assign custom hotkeys to controls (click, then click a control to assign a hotkey)">⌨</button>
+                        <button class="dev-header-icon-btn" id="devTextEditModeBtn" title="Toggle Label Rename Mode">✎</button>
+                        <button class="dev-header-icon-btn" id="devAddGroupBtn" title="Add Group (right-click: select settings/groups to fold in)">+</button>
+                        <button class="dev-header-icon-btn" id="devDeleteGroupBtn" title="Delete Group/Setting (click, then click a group or setting to delete it)">🗑</button>
+                        <button class="dev-header-icon-btn" id="devUndoBtn" title="Undo (Ctrl+Z or U key) - undoes any dev panel change back to the last Sync" data-hotkey-default="u">↶</button>
+                        <button class="dev-header-icon-btn" id="devRedoBtn" title="Redo (Ctrl+Shift+Z / Ctrl+Y or Y key) - redoes the last undone change" data-hotkey-default="y">↷</button>
+                        <button class="dev-header-icon-btn" id="devCollapseAllBtn" title="Collapse All Groups">⊟</button>
+                        <button class="dev-collapse-btn" id="devCollapseBtn" onclick="toggleDevPanelCollapsed()">▁</button>
+                        <button class="dev-hide-btn" onclick="devPanel.classList.add('hidden')">X</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search (2026-09-17) - Ctrl+F-style finder for group/setting
+                 names in the currently active tab, ported from DickoClicko.
+                 See setupDevSearch()'s own comment for the full mechanism. -->
+            <div class="dev-search-row">
+                <input type="text" id="devSearchInput" class="dev-search-input" placeholder="Search..." autocomplete="off">
+                <span class="dev-search-count" id="devSearchCount"></span>
+            </div>
+
+            <!-- Named Setting States (Save/Use/Rename/Delete/Set Default) -
+                 per direct request, modeled on Hando's own preset
+                 picker generalized to the whole panel's state - see
+                 [JS-13b]'s own comment for the full account. Sits right
+                 under Copy/Sync/Reset per that same request, and ABOVE
+                 the Desktop/Mobile/Landscape tabs below so it stays put
+                 regardless of which tab is active (direct request
+                 2026-10-15). Wrapped in a collapsible "Saved Dev Settings"
+                 group (2026-09-14, direct request, also making this whole
+                 feature mandatory standard scaffolding - CLAUDE.md §12d)
+                 - a single, PANEL-LEVEL group (not tripled per tab, unlike
+                 Dev Panel/Debug - a saved state snapshot covers the whole
+                 panel across all 3 tabs at once, so there's only ever one
+                 of these, and the 3 tabs already share this one list by
+                 construction). Deliberately NOT part of the per-tab
+                 reorderable group system (setupDragReorder/section-order
+                 persistence/drag-handle-injection are all scoped to
+                 search inside #desktopTabContent etc. - this sits outside
+                 all 3, same level as Copy/Sync/Reset and Text Edit Mode
+                 below) - just reuses the plain .dev-section/-title/
+                 -content markup for its collapse/expand behavior, since
+                 toggleSection() itself has no dependency on where in the
+                 DOM its target lives.
+                 CORRECTED 2026-10-15: migrated off a bespoke <select> +
+                 5 onclick-wired functions onto the SAME generic
+                 type:'list-picker' control every Saved Poses/Cameras/etc.
+                 already uses (buildSavedDevSettingsListPicker(), [JS-13b]
+                 below) - gets Rename, multi-select Delete, and the new
+                 runtime Default (CLAUDE.md §12r-adjacent) for free,
+                 instead of re-deriving each one a second time for this
+                 one bespoke control. The empty content div below is
+                 populated by that function at init time. -->
+            <div class="dev-section">
+                <div class="dev-section-title" id="devSavedSettingsGroupTitle" onclick="toggleSection(this)">▶ Saved Dev Settings</div>
+                <div class="dev-section-content collapsed" id="devSavedSettingsGroupContent"></div>
+            </div>
+
+            <!-- Text Edit Mode moved to a header icon button
+                 (#devTextEditModeBtn, 2026-09-16) - no longer a standalone
+                 checkbox row here. captureFullDevPanelState()/
+                 applyFullDevPanelState() already track textEditModeEnabled
+                 as its own top-level field regardless of where its control
+                 lives in the DOM, so this move needed no change to
+                 Copy/Sync/Reset. -->
+            <div class="dev-tabs">
+                <button class="dev-tab-btn active" id="devTabDesktopBtn" onclick="switchDevPanelTab('desktop')">DESKTOP</button>
+                <button class="dev-tab-btn" id="devTabMobileBtn" onclick="switchDevPanelTab('mobile')">MOBILE</button>
+                <button class="dev-tab-btn" id="devTabLandscapeBtn" onclick="switchDevPanelTab('landscape')">LANDSCAPE</button>
+            </div>
+
+            <div id="desktopTabContent">
+                <!-- The built-in "Dev Panel" group is always placed FIRST
+                     by default (its own static markup position, first
+                     child of this tab, per CLAUDE.md Section 12i) - a
+                     project's own render*Controls() calls only ever
+                     APPEND new groups after it (see this file's own
+                     top-of-file usage note step 3), so it stays first
+                     unless a user explicitly drags it elsewhere. -->
+                <div class="dev-section">
+                    <div class="dev-section-title" onclick="toggleSection(this)" data-sid="Dev Panel">▶ Dev Panel</div>
+                    <div class="dev-section-content collapsed"></div>
+                </div>
+                <!-- 2nd mandatory built-in group, same standing-scaffolding
+                     status as "Dev Panel" above (CLAUDE.md §12i-1, added
+                     2026-09-14, direct request: "any new project MUST
+                     include the Dev Panel settings group as well as the
+                     Debug Group") - holds the built-in Mouse Log feature
+                     ([JS-13c], desktop-tab-only instance) plus whatever
+                     debug toggles a project adds later. -->
+                <div class="dev-section">
+                    <div class="dev-section-title" onclick="toggleSection(this)" data-sid="Debug">▶ Debug</div>
+                    <div class="dev-section-content collapsed"></div>
+                </div>
+                <!-- PROJECT: your own groups go here, or are appended by your own render*Controls() calls. -->
+            </div>
+
+            <div id="mobileTabContent" class="hidden">
+                <div class="dev-section">
+                    <div class="dev-section-title" onclick="toggleSection(this)" data-sid="Dev Panel">▶ Dev Panel</div>
+                    <div class="dev-section-content collapsed"></div>
+                </div>
+                <div class="dev-section">
+                    <div class="dev-section-title" onclick="toggleSection(this)" data-sid="Debug">▶ Debug</div>
+                    <div class="dev-section-content collapsed"></div>
+                </div>
+            </div>
+
+            <div id="landscapeTabContent" class="hidden">
+                <div class="dev-section">
+                    <div class="dev-section-title" onclick="toggleSection(this)" data-sid="Dev Panel">▶ Dev Panel</div>
+                    <div class="dev-section-content collapsed"></div>
+                </div>
+                <div class="dev-section">
+                    <div class="dev-section-title" onclick="toggleSection(this)" data-sid="Debug">▶ Debug</div>
+                    <div class="dev-section-content collapsed"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dev-panel-resize-edge edge-top" id="devPanelResizeTop"></div>
+        <div class="dev-panel-resize-edge edge-bottom" id="devPanelResizeBottom"></div>
+        <div class="dev-panel-resize-edge edge-left" id="devPanelResizeLeft"></div>
+        <div class="dev-panel-resize-edge edge-right" id="devPanelResizeRight"></div>
+        <div class="dev-panel-resize-corner corner-tl" id="devPanelResizeTL"></div>
+        <div class="dev-panel-resize-corner corner-tr" id="devPanelResizeTR"></div>
+        <div class="dev-panel-resize-corner corner-bl" id="devPanelResizeBL"></div>
+        <div class="dev-panel-resize-corner corner-br" id="devPanelResizeBR"></div>
+    </div>
+
+    <!-- PROJECT: your own game content goes below this block. -->
+
+
+    <script type="module" src="src/main.js"></script>
+    <script src="src/devpanel/devPanel.js?v=1"></script>
+</body>
+</html>
