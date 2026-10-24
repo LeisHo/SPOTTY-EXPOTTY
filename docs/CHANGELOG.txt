@@ -439,6 +439,34 @@ edge; (2) the Timeline Height slider did nothing on the phone. Code pushed first
 Not verified: a real phone (iOS Safari / Chrome Android), landscape phone by eye.
 
 --------------------------------------------------------------------------------
+2026-10-24  -  03:22 AM - 03:28 AM EDT
+
+Owner: "Git saving doesn't work", then "wheel scrub settings on mobile?" then "give it its own sliders".
+Code pushed first (dae0f40); these notes after.
+
+SAVE. Read-only probe of the live site: GET /api/save-settings answered HTTP 500 and the error text was the
+whole GITHUB_TOKEN value ("Headers.append: 'Bearer <token>...' is an invalid header value"). Cause: the Vercel
+env var held TWO tokens (keyps.txt lines 15 and 17) separated by blank lines, so the Authorization header was
+invalid and every GitHub call (GET and the PUT behind Save) failed. SECURITY: because the function returned the
+exception message verbatim and the GET needs no secret, both tokens were publicly readable at that URL while the
+variable was set. Fixed in api/save-settings.js: use the first whitespace-separated token, and scrub token-shaped
+strings from every error returned. After redeploy: GET -> HTTP 200 {"ok":true,"settings":null}, 0 tokens in the
+body. NOT done / needs the owner: correct the Vercel variable to a single token and ROTATE both tokens (they were
+exposed in that response and, via my own command, in this session's output). NOT verified: an actual Save (a POST
+would commit a settings file to the repo; the owner should press Save and report any error, which now shows in the
+dev panel's status text).
+
+TOUCH SETTINGS. There is no wheel on a phone: one-finger scrub moved the playhead 1:1 with the finger and ignored the
+wheel settings entirely (and the pinch ignored Zoom Speed), which is why changing them "didn't matter". First I
+tried driving fingers from the wheel settings; the owner said no and asked for dedicated sliders. Now: Scrub Input >
+"Touch Scrub And Pinch": One-Finger Scrub Speed (x), Scrub Acceleration With Finger Speed (x), Drag Start Threshold
+(Px), Invert One-Finger Scrub Direction, Pinch Zoom Speed (x, the exponent), Invert Pinch Direction. Verified at
+375 px with synthetic touch events: dx 40 px -> 40 px (default), speed 2.5 -> 100, acceleration 1 fast swipe -> 500,
+slow swipe -> 113, invert -> -100, threshold 20: a 10 px drag -> none, 30 px -> 75; changing the WHEEL slider did not
+change the finger; the phone twin ("Show in Mobile") of the speed slider (4) -> 160; pinch 0.5 / 0.25 (speed 2) / 2.0
+(inverted). Not verified: a real finger on a real phone.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
