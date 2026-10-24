@@ -200,7 +200,7 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
                 const s = Math.max(w / coverImg.naturalWidth, h / coverImg.naturalHeight) * setting('sliderBlurScale');
                 const iw = coverImg.naturalWidth * s, ih = coverImg.naturalHeight * s;
                 ctx.filter = `blur(${setting('sliderBlurRadius')}px)`;
-                ctx.drawImage(coverImg, (w - iw) / 2, (h - ih) / 2, iw, ih);
+                ctx.drawImage(coverImg, (w - iw) / 2 + (setting('sliderBlurOffsetX') / 100) * w, (h - ih) / 2 + (setting('sliderBlurOffsetY') / 100) * h, iw, ih);
                 ctx.filter = 'none';
             }
             ctx.fillStyle = `rgba(0,0,0,${setting('sliderBlurDarken')})`; ctx.fillRect(0, 0, w, h);
@@ -210,8 +210,10 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
                 cols.map((c, i) => ({ p: i / 2, c: css(c) })));
         } else if (mode === 'spotlight') {
             const src = setting('selectSpotlightColorSource');
-            const col = (src === 'vivid' && palRgb && palRgb[1]) || (src === 'palette1' && palRgb && palRgb[2]) || meanOf(null) || chromaMean() || fallback;
+            const col = Array.from((src === 'vivid' && palRgb && palRgb[1]) || (src === 'palette1' && palRgb && palRgb[2]) || meanOf(null) || chromaMean() || fallback); // a copy: the cap below must not edit the shared palette
             const edge = hexToRgb(setting('colorSpotlightEdgeColor'));
+            const capB = (setting('sliderSpotlightMaxBrightness') / 100) * 255, peak = Math.max(col[0], col[1], col[2]);
+            if (peak > capB && peak > 0) { const k = capB / peak; col[0] *= k; col[1] *= k; col[2] *= k; } // keep the colour, cap how bright it gets
             ctx.fillStyle = css(edge); ctx.fillRect(0, 0, w, h);
             let cx = (setting('sliderSpotlightCenterX') / 100) * w, cy = (setting('sliderSpotlightCenterY') / 100) * h;
             if (setting('checkboxSpotlightFollowCover')) ({ cx, cy } = coverGeometry());
@@ -225,13 +227,24 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
     }
 
     // A new cover arrived: crossfade from what was on screen to the new frame.
+    // What is on screen right now = the fading old frame (prevCanvas, at its current opacity) over the new frame
+    // (canvas). When a new fade starts in the middle of an earlier one, the old frame handed to it must be that blend,
+    // or the picture would jump.
+    let snapTmp = null;
     function crossfadeThenRender() {
         const ms = setting('sliderBackgroundTransition');
         if (drawn && ms > 0 && setting('selectBackgroundMode') !== 'none') {
             const w = prevCanvas.width, h = prevCanvas.height;
+            const op = parseFloat(canvas.style.opacity) || 1;
+            const a = Math.min(1, (parseFloat(getComputedStyle(prevCanvas).opacity) || 0) / op); // fade left, relative to the layer opacity
+            snapTmp = snapTmp || document.createElement('canvas');
+            snapTmp.width = w; snapTmp.height = h;
+            const t = snapTmp.getContext('2d');
+            if (canvas.width === w && canvas.height === h) t.drawImage(canvas, 0, 0);
+            t.globalAlpha = a; t.drawImage(prevCanvas, 0, 0);
             pctx.setTransform(1, 0, 0, 1, 0, 0);
             pctx.clearRect(0, 0, w, h);
-            if (canvas.width === w && canvas.height === h) pctx.drawImage(canvas, 0, 0);
+            pctx.drawImage(snapTmp, 0, 0);
             prevCanvas.style.transition = 'none';
             prevCanvas.style.opacity = canvas.style.opacity || '1';
             void prevCanvas.offsetWidth; // commit the starting opacity before animating it away
@@ -259,5 +272,12 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
 
     analyseCover();
     render();
-    return { refresh: render, onCoverChanged: () => { analyseCover(); crossfadeThenRender(); } };
+    // A different song became current (scrub, click, next/back button): fade to its background. Modes that look the
+    // same for every song (None / Color / Gradient) have nothing to fade.
+    const SONG_INDEPENDENT = new Set(['none', 'color', 'gradient']);
+    return {
+        refresh: render,
+        onCoverChanged: () => { analyseCover(); crossfadeThenRender(); },
+        onSongChanged: () => { if (SONG_INDEPENDENT.has(setting('selectBackgroundMode'))) render(); else crossfadeThenRender(); },
+    };
 }

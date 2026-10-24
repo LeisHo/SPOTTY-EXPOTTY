@@ -44,7 +44,6 @@ async function boot() {
             <canvas class="ui-element spx-timeline" id="spxTimeline"></canvas>
             <button class="ui-element spx-cover" id="spxCover" type="button" aria-label="Play">
                 <img id="spxCoverImg" alt="" draggable="false" crossorigin="anonymous">
-                <span class="spx-cover-glyph" id="spxGlyph">▶</span>
             </button>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
             <button class="ui-element spx-nav" id="spxPrev" type="button" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14L6 12z"/></svg></button>
@@ -53,10 +52,10 @@ async function boot() {
                 <button type="button" class="spx-vol-btn" aria-label="Volume" aria-expanded="false" data-level="high">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="w3" d="M21 4.5a11 11 0 0 1 0 15"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>
                 </button>
-                <div class="spx-vol-panel" hidden>
+                <div class="spx-vol-clip"><div class="spx-vol-panel">
                     <div class="spx-vol-track" role="slider" tabindex="0" aria-label="Volume" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="spx-vol-fill"></div><div class="spx-vol-thumb"></div></div>
                     <div class="spx-vol-label">100%</div>
-                </div>
+                </div></div>
             </div>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart"><button type="button" id="spxStartBtn">Click to enable sound</button></div>
@@ -143,7 +142,9 @@ async function boot() {
             mobileLandscape: { widthPreferred: '24vmin', offsetY: '138px' },
         }),
     });
-    [['spxPrev', 'Previous Song Button', 'center-right', 'center-left', '28px'], ['spxNext', 'Next Song Button', 'center-left', 'center-right', '28px']].forEach(([id, group, my, target, gap]) => createUIElement({
+    // Placed relative to the cover (so they stay vertically centred on it), then pushed out sideways by placeNav() below
+    // to 14 px from the browser edges. (A calc() gap cannot be used: the engine negates the left one into invalid CSS.)
+    [['spxPrev', 'Previous Song Button', 'center-right', 'center-left', '0px'], ['spxNext', 'Next Song Button', 'center-left', 'center-right', '0px']].forEach(([id, group, my, target, gap]) => createUIElement({
         id, role: 'button', domNode: el(id), group, propertyLabel: 'Position & Size',
         layout: {
             position: { mode: 'relative', relativeTo: 'spxCover', myAnchor: my, targetAnchor: target, gap },
@@ -155,7 +156,7 @@ async function boot() {
         id: 'spxVolume', role: 'container', domNode: el('spxVolume'), group: 'Volume Control', propertyLabel: 'Position & Size',
         layout: {
             position: { mode: 'anchor', horizontal: { anchor: 'right', offset: '14px' }, vertical: { anchor: 'top', offset: '14px' } },
-            size: { width: { mode: 'fixed', value: '44px' }, height: { mode: 'content' } },
+            size: { width: { mode: 'content' }, height: { mode: 'content' } },
         },
         contexts: ctx(),
     });
@@ -240,6 +241,16 @@ async function boot() {
     }
     // the saved dev-panel state arrives a moment after load, so apply the curve once it has had time to restore
     setTimeout(() => applyStartSpan(false), 1500);
+    // "Randomize Starting Song": once the saved settings have arrived, jump to a random song unless the visitor already moved.
+    let interacted = false;
+    ['pointerdown', 'wheel', 'keydown'].forEach(t => window.addEventListener(t, () => { interacted = true; }, { once: true, capture: true }));
+    setTimeout(() => {
+        if (interacted || !setting('checkboxRandomStartSong')) return;
+        moveTo(Math.floor(Math.random() * songs.length));
+        applyStartSpan(false);
+        timeline.centerOnPlayhead();
+        timeline.draw();
+    }, 1600);
     document.addEventListener('input', e => { if (/StartSpanCurve/.test((e.target && e.target.id) || '')) applyStartSpan(false); });
     window.addEventListener('dblclick', e => { if (e.target.id === 'spxTimeline') applyStartSpan(true); });
     const afterJump = () => { if (setting('checkboxStartSpanApplyOnJump')) applyStartSpan(false); };
@@ -249,6 +260,18 @@ async function boot() {
         scale('--spx-title-scale', setting('sliderTitleScale'));
         scale('--spx-artist-scale', setting('sliderArtistScale'));
         scale('--spx-meta-scale', setting('sliderMetaScale'));
+        volume.configure({
+            enabled: setting('checkboxVolumeButtonEnabled'),
+            icon: setting('sliderVolIconSize'), radius: setting('sliderVolCircleRadius'), barW: setting('sliderVolBarWidth'), barL: setting('sliderVolBarLength'),
+            fill: setting('colorVolBarFill'), track: setting('colorVolBarTrack'), thumb: setting('colorVolCircle'),
+            tol: setting('sliderVolHoverTolerance'), duration: setting('sliderVolAnimDuration'),
+            speedAt: s => curveY(setting('curveEditorVolAnimSpeedCurve'), s),
+        });
+        // Album cover scale + offset are visual only (they never move other elements); the prev/next buttons follow its Y offset.
+        const cvEl = el('spxCover');
+        cvEl.style.scale = String(setting('sliderCoverScale'));
+        cvEl.style.translate = `${setting('sliderCoverOffsetX')}px ${setting('sliderCoverOffsetY')}px`;
+        placeNav();
         const uiFont = setting('selectUiFont');
         scale('--spx-font', !uiFont || uiFont === 'system' ? 'inherit' : `'${uiFont}', system-ui, sans-serif`);
         // Timeline height goes through the layout engine; the timeline is pinned by its bottom edge and
@@ -300,7 +323,7 @@ async function boot() {
         el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${s.d ? '' : '  ·  no preview clip'}`;
         timeline.setDateLine(fmtAdded(s.t));
         scheduleCover();
-        background.refresh(); // palette-driven modes change with the song even if the cover image did not
+        background.onSongChanged(); // palette-driven modes change with the song even if the cover image did not; fades like a new cover
     }
 
     function schedulePreload() {
@@ -370,7 +393,28 @@ async function boot() {
     const ptrs = new Map(); // pointerId -> { x, y, startX, startY, type, onTimeline, moved }
     let pinchDist = 0;
     const pinchSpan = () => { const [a, b] = [...ptrs.values()]; return Math.hypot(a.x - b.x, a.y - b.y) || 1; };
+    // A button can sit UNDER the timeline canvas or a text line (a tall timeline, a scaled-up cover). A press that lands
+    // on such a cover-up but inside a button's rectangle is the button's click, not a scrub: remember it here and
+    // re-dispatch it as a click on that button.
+    let redirectBtn = null;
+    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover')].find(b => {
+        const r = b.getBoundingClientRect();
+        return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    });
     window.addEventListener('pointerdown', e => {
+        redirectBtn = null;
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxVolume, #spxStart')) return;
+        redirectBtn = buttonUnder(e.clientX, e.clientY) || null;
+    }, true);
+    window.addEventListener('click', e => {
+        if (!redirectBtn) return;
+        const b = redirectBtn; redirectBtn = null;
+        e.stopPropagation(); e.preventDefault();
+        b.click();
+    }, true);
+    window.addEventListener('pointerdown', e => {
+        if (redirectBtn) return;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         if ((inUi(e.target) || inText(e.target)) && e.target.id !== 'spxTimeline') return;
         ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: e.pointerType, onTimeline: e.target.id === 'spxTimeline', moved: false, t: performance.now() });
@@ -420,11 +464,16 @@ async function boot() {
     el('spxPrev').addEventListener('click', () => stepSong(-1));
     el('spxNext').addEventListener('click', () => stepSong(1));
 
+    // Keys: Space = play / pause, Left / Right = previous / next song (Shift = 10), Up / Down = volume (Shift = bigger step).
     window.addEventListener('keydown', e => {
         if (e.target.closest && e.target.closest('input, select, textarea, #devPanel')) return;
         const step = e.shiftKey ? 10 : 1;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') moveTo(timeline.currentIndex() + step);
-        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') moveTo(timeline.currentIndex() - step);
+        if (e.key === ' ' || e.code === 'Space') {
+            if (!e.repeat) { if (document.activeElement && document.activeElement.tagName === 'BUTTON') document.activeElement.blur(); togglePlayback(); }
+        } else if (e.key === 'ArrowRight') moveTo(timeline.currentIndex() + step);
+        else if (e.key === 'ArrowLeft') moveTo(timeline.currentIndex() - step);
+        else if (e.key === 'ArrowUp') volume.nudge(e.shiftKey ? 0.1 : 0.05);
+        else if (e.key === 'ArrowDown') volume.nudge(e.shiftKey ? -0.1 : -0.05);
         else if (e.key === 'Home') { moveTo(0); afterJump(); }
         else if (e.key === 'End') { moveTo(songs.length - 1); afterJump(); }
         else return;
@@ -446,14 +495,26 @@ async function boot() {
     document.addEventListener('keydown', unlockSound, { capture: true, once: true });
     el('spxStartBtn').addEventListener('click', unlockSound);
 
-    el('spxCover').addEventListener('click', () => {
+    function togglePlayback() {
         unlockSound();
         clearTimeout(handoffTimer);
         stopClip();
         toggleTrack(songs[idx].id);
-    });
+    }
+    el('spxCover').addEventListener('click', togglePlayback);
+    // prev/next are placed by the engine relative to the cover (so they follow it, scale and offset included, and stay level with
+    // its centre); this shifts each one sideways until it is 14 px from the browser edge (the button is 48 px wide). Read from
+    // the cover's real on-screen box, so a scaled / moved cover is handled too. (The previous button's own left edge sits at
+    // the cover's left edge - 48, the next one's at the cover's right edge.)
+    function placeNav() {
+        const r = el('spxCover').getBoundingClientRect();
+        el('spxPrev').style.translate = `${14 - (r.left - 48)}px 0px`;
+        el('spxNext').style.translate = `${(innerWidth - 14 - 48) - r.right}px 0px`;
+    }
+    new ResizeObserver(placeNav).observe(el('spxCover'));
+    window.addEventListener('resize', placeNav);
+    placeNav();
     onPlayState(playing => {
-        el('spxGlyph').textContent = playing ? '❚❚' : '▶';
         el('spxCover').classList.toggle('playing', playing);
         el('spxCover').setAttribute('aria-label', playing ? 'Pause' : 'Play');
     });

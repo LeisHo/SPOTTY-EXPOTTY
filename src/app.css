@@ -23,7 +23,7 @@
 /* Background layers (background.js). Two stacked full-viewport canvases: the previous frame fades out over the
    new one for the crossfade between songs. They sit behind everything (z-index -1 inside the stage). */
 .spx-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; display: block; }
-.spx-bg-prev { opacity: 0; }
+.spx-bg-prev { opacity: 0; z-index: 0; }
 .spx-artist { font-size: calc(clamp(17px, 3vw, 28px) * var(--spx-artist-scale)); color: #c9d1d9; }
 .spx-meta { font-size: calc(14px * var(--spx-meta-scale)); color: #8b94a1; }
 
@@ -83,21 +83,25 @@
 .dev-gradient-edit button { font-size: 11px; padding: 2px 6px; cursor: pointer; }
 
 /* Volume control (volume.js): a speaker button, top right, that opens a vertical slider below it. */
-.spx-volume { z-index: 5; display: flex; flex-direction: column; align-items: center; user-select: none; }
-.spx-vol-btn { width: 44px; height: 44px; border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: drop-shadow(0 1px 3px #000a); -webkit-tap-highlight-color: transparent; }
+.spx-volume { z-index: 5; display: flex; flex-direction: column; align-items: center; user-select: none;
+    /* set from the dev panel (UI Layout > Volume Button) by volume.js */
+    --spx-vol-icon: 24px; --spx-vol-r: 7px; --spx-vol-bw: 8px; --spx-vol-bl: 130px; --spx-vol-fill: #1db954; --spx-vol-track: #ffffff; --spx-vol-thumb: #ffffff; }
+.spx-vol-btn { width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px); border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: drop-shadow(0 1px 3px #000a); -webkit-tap-highlight-color: transparent; }
 .spx-vol-btn:hover { color: #fff; }
-.spx-vol-btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spx-vol-btn svg { width: var(--spx-vol-icon); height: var(--spx-vol-icon); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-vol-btn svg .spk { fill: currentColor; stroke: none; }
 .spx-vol-btn .w1, .spx-vol-btn .w2, .spx-vol-btn .w3, .spx-vol-btn .x { display: none !important; } /* speaker only: no waves, no cross */
 .spx-vol-btn[data-level="low"] .w1, .spx-vol-btn[data-level="mid"] .w1, .spx-vol-btn[data-level="mid"] .w2,
 .spx-vol-btn[data-level="high"] .w1, .spx-vol-btn[data-level="high"] .w2, .spx-vol-btn[data-level="high"] .w3 { display: inline; }
 .spx-vol-btn[data-level="mute"] .x { display: inline; }
-.spx-vol-panel { margin-top: 8px; width: 44px; padding: 12px 0 10px; border-radius: 22px; background: none; backdrop-filter: none; filter: drop-shadow(0 1px 3px #000a); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.spx-vol-clip { overflow: hidden; height: 0; visibility: hidden; }
+.spx-vol-panel { margin: 8px auto 0; width: calc(max(var(--spx-vol-bw), 2 * var(--spx-vol-r)) + 24px); padding: 12px 0 10px; border-radius: 22px; background: none; backdrop-filter: none; filter: drop-shadow(0 1px 3px #000a); display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .spx-vol-panel[hidden] { display: none; }
-.spx-vol-track { position: relative; width: 8px; height: 130px; border-radius: 4px; background: #ffffff33; cursor: pointer; touch-action: none; outline: none; }
+.spx-vol-track { position: relative; width: var(--spx-vol-bw); height: var(--spx-vol-bl); border-radius: calc(var(--spx-vol-bw) / 2); background: color-mix(in srgb, var(--spx-vol-track) 20%, transparent); cursor: pointer; touch-action: none; outline: none; }
 .spx-vol-track:focus-visible { box-shadow: 0 0 0 2px #1db954; }
-.spx-vol-fill { position: absolute; left: 0; right: 0; bottom: 0; border-radius: 4px; background: #1db954; }
-.spx-vol-thumb { position: absolute; left: -3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px #000a; pointer-events: none; }
+.spx-vol-fill { position: absolute; left: 0; right: 0; bottom: 0; border-radius: calc(var(--spx-vol-bw) / 2); background: var(--spx-vol-fill); }
+.spx-vol-track::before { content: ''; position: absolute; inset: -6px -12px; } /* wider grab area than the thin bar */
+.spx-vol-thumb { position: absolute; left: calc(50% - var(--spx-vol-r)); width: calc(2 * var(--spx-vol-r)); height: calc(2 * var(--spx-vol-r)); border-radius: 50%; background: var(--spx-vol-thumb); box-shadow: 0 1px 4px #000a; pointer-events: none; }
 .spx-vol-label { display: none; font: 600 11px/1 system-ui, sans-serif; color: #c9d1d9; }
 
 /* Previous / next song buttons beside the album cover */

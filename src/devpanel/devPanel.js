@@ -7450,6 +7450,7 @@
             { tab, group: 'Scrub Audio', id: 'sliderClipStartMax', type: 'slider', label: 'Clip Start Max (S):', min: 0, max: 28, step: 0.5, value: 22 },
             { tab, group: 'Scrub Audio', id: 'sliderClipFadeOut', type: 'slider', label: 'Clip Fade Out (Ms):', min: 0, max: 500, step: 5, value: 30 },
             { tab, group: 'Scrub Audio', id: 'checkboxColdStartClips', type: 'checkbox', label: 'Play Clips Not Yet Preloaded:', value: true },
+            { tab, group: 'Scrub Audio', id: 'checkboxRandomStartSong', type: 'checkbox', label: 'Randomize Starting Song:', value: false },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadAhead', type: 'slider', label: 'Preload Ahead (Songs):', min: 0, max: 30, step: 1, value: 8 },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadBehind', type: 'slider', label: 'Preload Behind (Songs):', min: 0, max: 30, step: 1, value: 3 },
             { tab, group: 'Scrub Preload', id: 'checkboxShowPoolOverlay', type: 'checkbox', label: 'Show Preload Pool Overlay:', value: false },
@@ -7466,6 +7467,8 @@
             { tab, group: TL, id: 'sliderBarWidth', type: 'slider', label: 'Bar Width / Granularity (Px):', min: 1, max: 40, step: 1, value: 3 },
             // Only the bars stretch (upward); nothing else moves, the cover is positioned independently of the timeline.
             { tab, group: TL, id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 60, max: 900, step: 5, value: 200 },
+            { tab, group: TL, id: 'sliderPlayheadWidth', type: 'slider', label: 'Scrub Line Width (Px):', min: 1, max: 24, step: 0.5, value: 2 },
+            { tab, group: TL, id: 'sliderPlayheadHeight', type: 'slider', label: 'Scrub Line Height (% Of Timeline):', min: 5, max: 100, step: 1, value: 100 },
             // Integer-valued dual-handle control, so it is a 0-100 % log scale: 0 = 2 minutes visible, 100 = the whole timeline.
             { tab, group: TL, id: 'rangeBarTimelineZoomLimits', type: 'range-bar', label: 'Zoom Limits (% zoomed out, log scale):', trackMin: 0, trackMax: 100, unit: '%', defaultValue: { min: 0, max: 100 } },
             {
@@ -7543,8 +7546,8 @@
             { tab, group: WC, id: 'sliderWheelCurveMaxPx', type: 'slider', label: 'Y Top: Px Per Notch At Curve 1 (Px):', min: 1, max: 800, step: 1, value: 160 },
             { tab, group: SC, id: 'checkboxStartSpanCurveEnabled', type: 'checkbox', label: 'Enabled', value: false },
             { tab, group: SC, id: 'curveEditorStartSpanCurve', type: 'curve-editor', label: 'Curve (X: Timeline Position, Y: Starting Span):', defaultPoints: [{ x: 0, y: 0.55 }, { x: 1, y: 0.55 }], defaultMethod: 'monotone' },
-            { tab, group: SC, id: 'sliderStartSpanCurveMinDays', type: 'slider', label: 'Y Bottom: Span At Curve 0 (Days):', min: 0.01, max: 5000, step: 0.01, value: 7 },
-            { tab, group: SC, id: 'sliderStartSpanCurveMaxDays', type: 'slider', label: 'Y Top: Span At Curve 1 (Days):', min: 0.01, max: 6000, step: 0.01, value: 1200 },
+            { tab, group: SC, id: 'sliderStartSpanCurveMinDays', type: 'slider', label: 'Y Bottom: Span At Curve 0 (Days):', min: 0.01, max: 4805, step: 0.01, value: 7 },
+            { tab, group: SC, id: 'sliderStartSpanCurveMaxDays', type: 'slider', label: 'Y Top: Span At Curve 1 (Days):', min: 0.01, max: 4805, step: 0.01, value: 1200 },
             { tab, group: SC, id: 'checkboxStartSpanApplyOnJump', type: 'checkbox', label: 'Also Apply On Double-Click, Home And End:', value: true },
             // Phones have no wheel: one finger and a two-finger pinch have their own settings, separate from the wheel's.
             { tab, group: TS, id: 'sliderTouchScrubSpeed', type: 'slider', label: 'One-Finger Scrub Speed (x):', min: 0.05, max: 10, step: 0.05, value: 1 },
@@ -7578,6 +7581,34 @@
         }];
         renderControlArray(FONT_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_FONT_CONTROLS', FONT_CONTROLS);
+
+        // ---- UI Layout: Volume Button (toggleable) + Album Cover ------------------------------------------------
+        const VB = 'Volume Button', AC2 = 'Album Cover';
+        uiLayoutContent.appendChild(createDevGroupElement(VB, tab));
+        uiLayoutContent.appendChild(createDevGroupElement(AC2, tab));
+        const VB_CONTROLS = [
+            { tab, group: VB, id: 'checkboxVolumeButtonEnabled', type: 'checkbox', label: 'Enabled (Off = Click The Icon, Default Look)', value: true },
+            { tab, group: VB, id: 'sliderVolIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 24 },
+            { tab, group: VB, id: 'sliderVolCircleRadius', type: 'slider', label: 'Slider Circle Radius (Px):', min: 2, max: 30, step: 0.5, value: 7 },
+            { tab, group: VB, id: 'sliderVolBarWidth', type: 'slider', label: 'Slider Bar Width (Px):', min: 2, max: 40, step: 0.5, value: 8 },
+            { tab, group: VB, id: 'sliderVolBarLength', type: 'slider', label: 'Slider Bar Length (Px):', min: 40, max: 500, step: 1, value: 130 },
+            { tab, group: VB, id: 'colorVolBarFill', type: 'color', label: 'Slider Bar Fill Color:', value: '#1db954' },
+            { tab, group: VB, id: 'colorVolBarTrack', type: 'color', label: 'Slider Bar Empty Color (Shown At 20%):', value: '#ffffff' },
+            { tab, group: VB, id: 'colorVolCircle', type: 'color', label: 'Slider Circle Color:', value: '#ffffff' },
+            { tab, group: VB, id: 'sliderVolHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Icon And Slider (Px):', min: 0, max: 200, step: 1, value: 30 },
+            { tab, group: VB, id: 'sliderVolAnimDuration', type: 'slider', label: 'Drop Down / Rise Up Animation Time At Speed 1 (Ms):', min: 0, max: 3000, step: 10, value: 350 },
+            { tab, group: VB, id: 'curveEditorVolAnimSpeedCurve', type: 'curve-editor', label: 'Animation Speed Curve (X: Progress Of The Drop / Rise, Y: Speed, 1 = The Time Slider):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 0.35 }], defaultMethod: 'monotone' },
+        ];
+        const AC2_CONTROLS = [
+            { tab, group: AC2, id: 'sliderCoverScale', type: 'slider', label: 'Album Cover Scale (x):', min: 0.2, max: 4, step: 0.05, value: 1 },
+            { tab, group: AC2, id: 'sliderCoverOffsetX', type: 'slider', label: 'Album Cover X Offset (Px):', min: -1500, max: 1500, step: 1, value: 0 },
+            { tab, group: AC2, id: 'sliderCoverOffsetY', type: 'slider', label: 'Album Cover Y Offset (Px):', min: -1500, max: 1500, step: 1, value: 0 },
+        ];
+        renderControlArray(VB_CONTROLS, 'renderSpottyDevControls');
+        renderControlArray(AC2_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_VB_CONTROLS', VB_CONTROLS);
+        registerDevControlArray('SPOTTY_AC2_CONTROLS', AC2_CONTROLS);
+        makeDevGroupToggleable(tab, VB, 'checkboxVolumeButtonEnabled');
         const EASINGS = [
             { value: 'ease-out', text: 'Ease Out' }, { value: 'ease', text: 'Ease' }, { value: 'ease-in-out', text: 'Ease In-Out' },
             { value: 'linear', text: 'Linear' }, { value: 'spring', text: 'Spring (Overshoot)' }, { value: 'snap', text: 'Snap (Fast Start)' },
@@ -7675,6 +7706,8 @@
             // G: blurred cover
             { tab, group: BG, id: 'sliderBlurRadius', type: 'slider', label: 'Blur Radius (Px):', min: 0, max: 250, step: 1, value: 60 },
             { tab, group: BG, id: 'sliderBlurScale', type: 'slider', label: 'Cover Zoom (x):', min: 0.5, max: 6, step: 0.05, value: 1.6 },
+            { tab, group: BG, id: 'sliderBlurOffsetX', type: 'slider', label: 'Blur Image X Offset (% Of Screen Width):', min: -100, max: 100, step: 0.5, value: 0 },
+            { tab, group: BG, id: 'sliderBlurOffsetY', type: 'slider', label: 'Blur Image Y Offset (% Of Screen Height):', min: -100, max: 100, step: 0.5, value: 0 },
             { tab, group: BG, id: 'sliderBlurDarken', type: 'slider', label: 'Darken (x):', min: 0, max: 1, step: 0.01, value: 0.45 },
             // H: palette gradient
             { tab, group: BG, id: 'selectPaletteGradientType', type: 'select', label: 'Palette Gradient Type:', value: 'linear', options: GRAD_TYPES },
@@ -7687,6 +7720,7 @@
             },
             { tab, group: BG, id: 'sliderSpotlightRadius', type: 'slider', label: 'Spotlight Radius (% Of Screen):', min: 5, max: 200, step: 1, value: 70 },
             { tab, group: BG, id: 'sliderSpotlightIntensity', type: 'slider', label: 'Spotlight Intensity (x):', min: 0, max: 1, step: 0.01, value: 0.9 },
+            { tab, group: BG, id: 'sliderSpotlightMaxBrightness', type: 'slider', label: 'Spotlight Max Brightness (%):', min: 5, max: 100, step: 1, value: 100 },
             { tab, group: BG, id: 'checkboxSpotlightFollowCover', type: 'checkbox', label: 'Center On The Album Cover:', value: true },
             { tab, group: BG, id: 'sliderSpotlightCenterX', type: 'slider', label: 'Spotlight Center X (%):', min: -50, max: 150, step: 1, value: 50 },
             { tab, group: BG, id: 'sliderSpotlightCenterY', type: 'slider', label: 'Spotlight Center Y (%):', min: -50, max: 150, step: 1, value: 40 },
@@ -7716,9 +7750,9 @@
                     borderRadial: ['sliderBorderDepth', 'sliderBorderRadialRays', 'sliderBorderRadialGranularity', 'checkboxBorderRadialSmooth', 'sliderBorderRadialSmoothing', 'sliderBorderRadialStart', 'sliderBorderRadialFade', 'colorBorderRadialFadeColor'],
                     borderAverage: ['sliderBorderDepth', 'selectBorderAverageEdges'],
                     albumChroma: ['sliderChromaMinSaturation', 'sliderChromaMinBrightness', 'sliderChromaGrayscaleThreshold'],
-                    blurCover: ['sliderBlurRadius', 'sliderBlurScale', 'sliderBlurDarken'],
+                    blurCover: ['sliderBlurRadius', 'sliderBlurScale', 'sliderBlurOffsetX', 'sliderBlurOffsetY', 'sliderBlurDarken'],
                     palette: ['selectPaletteGradientType', 'sliderPaletteRotation', 'sliderPaletteScale'],
-                    spotlight: ['selectSpotlightColorSource', 'sliderSpotlightRadius', 'sliderSpotlightIntensity', 'checkboxSpotlightFollowCover', 'sliderSpotlightCenterX', 'sliderSpotlightCenterY', 'colorSpotlightEdgeColor'],
+                    spotlight: ['selectSpotlightColorSource', 'sliderSpotlightRadius', 'sliderSpotlightIntensity', 'sliderSpotlightMaxBrightness', 'checkboxSpotlightFollowCover', 'sliderSpotlightCenterX', 'sliderSpotlightCenterY', 'colorSpotlightEdgeColor'],
                 },
                 // controls shown for every mode except "none"
                 always: ['sliderBackgroundOpacity', 'sliderBackgroundBrightness', 'sliderBackgroundSaturation', 'sliderBackgroundTransition'],

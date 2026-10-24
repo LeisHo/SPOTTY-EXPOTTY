@@ -431,7 +431,8 @@ export function createTimeline(canvas, data) {
         // playhead
         ctx.globalAlpha = 1;
         ctx.fillStyle = playheadColor;
-        ctx.fillRect(Math.round(xOf(posToVt(pos))) - 1, 0, 2, h - axisH);
+        const phW = Math.max(1, setting('sliderPlayheadWidth')), phH = Math.max(1, ((h - axisH) * setting('sliderPlayheadHeight')) / 100);
+        ctx.fillRect(Math.round(xOf(posToVt(pos)) - phW / 2), (h - axisH) - phH, phW, phH);
     }
 
     // Hovering a playlist row shows that playlist's name and date range as the canvas tooltip.
