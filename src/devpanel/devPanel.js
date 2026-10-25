@@ -8215,6 +8215,17 @@
                 },
             },
             {
+                // Start Button Animation: the same modes as the title's, with 'Title' replaced by 'StartPlay'
+                select: 'selectStartPlayAnimMode', map: {
+                    bold: ['sliderStartPlayBoldRestWeight', 'sliderStartPlayBoldHoverWeight', 'sliderStartPlayBoldPressWeight'],
+                    pulse: ['sliderStartPlayPulseScale', 'sliderStartPlayPulseInDuration', 'sliderStartPlayPulseOutDuration'],
+                    grow: ['sliderStartPlayGrowScale', 'sliderStartPlayGrowPressScale'],
+                    glow: ['sliderStartPlayGlowRadius', 'sliderStartPlayGlowOpacity', 'colorStartPlayGlowColor', 'sliderStartPlayGlowPressRadius'],
+                    tracking: ['sliderStartPlayTrackingHover', 'sliderStartPlayTrackingPress'],
+                    lift: ['sliderStartPlayLiftPx', 'sliderStartPlayLiftPressPx', 'sliderStartPlayLiftShadowBlur', 'sliderStartPlayLiftShadowOpacity'],
+                },
+            },
+            {
                 select: 'selectBackgroundMode', map: {
                     color: ['colorBackgroundColor'],
                     gradient: ['curveEditorBackgroundGradient', 'selectBackgroundGradientType', 'sliderBackgroundGradientRotation', 'sliderBackgroundGradientScale', 'sliderBackgroundGradientCenterX', 'sliderBackgroundGradientCenterY'],
