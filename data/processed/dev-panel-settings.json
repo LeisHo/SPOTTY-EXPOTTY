@@ -32,7 +32,7 @@
     "sliderTimelineHeight": 175,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
-    "sliderTimelineScaleGap": 0,
+    "sliderTimelineScaleGap": 54,
     "sliderPlayheadWidth": 2,
     "sliderPlayheadHeight": 18,
     "rangeBarTimelineZoomLimits": "{\"min\":76,\"max\":100}",
