@@ -76,7 +76,6 @@ async function boot() {
                 <button type="button" class="spx-shuffle" id="spxShuffle" aria-label="Shuffle" aria-pressed="false" title="Shuffle off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
             </div>
             <div class="spx-pool" id="spxPool" hidden></div>
-            <div class="spx-start" id="spxStart"><button type="button" id="spxStartBtn">Click to enable sound</button></div>
             <div class="spx-inspector" id="spxInspectorPanel" hidden>
                 <div class="spx-inspector-head"><span>UI LAYOUT INSPECTOR</span><button type="button" id="spxInspectorClose">✕</button></div>
                 <div id="spxInspectorMount"></div>
@@ -495,7 +494,7 @@ async function boot() {
     // ---- input ---------------------------------------------------------------------------
     // Desktop: wheel = scrub (a notch moves the playhead N px along the current scale), click on the
     // timeline = jump, click-drag = zoom around the playhead. Touch: drag = scrub, pinch = zoom, tap = jump.
-    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxStart, #spxCover, #spxVolume, a, button, input, select, textarea');
+    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxCover, #spxVolume, a, button, input, select, textarea');
     // The title/artist/album lines are selectable text: a drag that starts on them selects it instead of zooming.
     const inText = t => t.closest && t.closest('.spx-title, .spx-artist, .spx-meta');
     window.addEventListener('wheel', e => {
@@ -519,7 +518,7 @@ async function boot() {
     window.addEventListener('pointerdown', e => {
         redirectBtn = null;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
-        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxVolume, #spxStart')) return;
+        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxVolume')) return;
         redirectBtn = buttonUnder(e.clientX, e.clientY) || null;
     }, true);
     window.addEventListener('click', e => {
@@ -670,13 +669,11 @@ async function boot() {
         if (isUnlocked()) return;
         unlock();
         openSpotifyLogin();
-        el('spxStart').hidden = true;
         playClip(clipKey(songs[idx]));
         schedulePreload();
     };
     document.addEventListener('pointerdown', unlockSound, { capture: true, once: true });
     document.addEventListener('keydown', unlockSound, { capture: true, once: true });
-    el('spxStartBtn').addEventListener('click', unlockSound);
 
     function togglePlayback() {
         logEvent('playback', 'USER play/pause (cover or Space)');

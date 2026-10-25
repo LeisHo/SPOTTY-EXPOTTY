@@ -21,7 +21,7 @@ data file or the preview proxy). With Python 3 installed:
 py scripts/active/serve.py 8000
 ```
 
-Then open `http://localhost:8000/index.html`, click "Click to enable sound",
+Then open `http://localhost:8000/index.html` (the app starts at once; the first click or key press unlocks sound),
 and scroll the mouse wheel to scrub (click the timeline to jump; click-drag to
 zoom around the playhead; on touch, drag scrubs and pinch zooms; the album cover
 plays/pauses the song and the title links to Spotify). Press `D` for the

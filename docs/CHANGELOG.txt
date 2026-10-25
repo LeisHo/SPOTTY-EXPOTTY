@@ -862,3 +862,8 @@ Not verified in a browser: only node --check was run. Not committed.
 
 Direct request: Height Transition under Timeline Height. Off (default): bars and curves snap to the new height when the zoom changes, as before. On: they ease to the new height over Height Transition Duration (Ms, 0-2000, default 300). The duration slider shows only while Height Transition is on. src/app/timeline.js (easedScale, used for the bar, density and ribbon scales), src/devpanel/devPanel.js (controls and the show/hide rule), src/app/settings.js (defaults).
 Not verified in a browser: only node --check was run. Not committed.
+
+--------------------------------------------------------------------------------
+2026-10-25  -  (time not measured)
+
+Direct request: remove the 'Click to enable sound' overlay; the app starts at once. Sound still unlocks on the first click or key press anywhere (unchanged). Removed: the overlay markup and CSS (src/main.js, src/app.css), its button listener, and its references in the input handlers. CLAUDE.md and README updated. Not verified in a browser: only node --check was run. Not committed.
