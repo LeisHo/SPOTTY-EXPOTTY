@@ -610,6 +610,17 @@ double-click. main.js now calls applyStartSpan(true) at load and after a random 
 after load. Home/End still use the curve only (unchanged).
 
 --------------------------------------------------------------------------------
+2026-10-25  -  12:32 AM - 12:36 AM EDT  (span slider max, Shadows group; end time from `date` at the code push)
+
+1) The three starting-span sliders (Starting Timeline Span, and the curve's Y Bottom / Y Top) now always max out at the span that shows the WHOLE data set:
+main.js fitSpanSliders() reads timeline.fullSpanMs (4900.77 days now, = 1.02 x the data span) and sets each slider's max (also the Mobile/Landscape twins), every 1.5 s.
+Note: the earlier static max of 4805 days (data span 4804.6) was too low; the real full span includes the 2 % margin and the 1 s-per-song virtual time.
+2) UI Layout > new "Shadows" group: Album Cover Shadow, Volume Icon / Slider Bar / Circle Shadow, Previous / Next Button Shadow, Song Title Lift Animation Shadow,
+each a checkbox (default on). Done with classes on #spxApp (no-shadow-cover / -vol / -nav) and a check in titleAnim.js. Not included: the Glow Stems timeline style and
+the Glow title animation (those are glows with their own intensity sliders, not drop shadows) and the dev panel's own chrome.
+Verified in the built-in browser: sliders max 4900.8; all four shadows switch off and back on (computed box-shadow / filter). Not verified by eye.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
