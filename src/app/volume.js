@@ -14,7 +14,8 @@
 // player instead (see main.js).
 const KEY = 'spxVolume';
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
-const DEFAULT_LOOK = { icon: 24, radius: 7, barW: 8, barL: 130, fill: '#1db954', track: '#ffffff', thumb: '#ffffff' };
+const PRE_KEY = 'spxVolumeBeforeMute';
+const DEFAULT_LOOK = { muted: 40, icon: 24, radius: 7, barW: 8, barL: 130, fill: '#1db954', track: '#ffffff', thumb: '#ffffff' };
 
 export function initVolume({ root, onChange }) {
     const btn = root.querySelector('.spx-vol-btn');
@@ -96,9 +97,18 @@ export function initVolume({ root, onChange }) {
     const open = o => setOpen(!!o);
 
     btn.addEventListener('pointerdown', e => { lastPointer = e.pointerType || 'mouse'; });
+    // Mute: clicking the icon sets the volume to 0 and clicking again restores what it was before (kept in localStorage so it
+    // also survives a reload while muted). Volume 0 is what the rest of the app treats as muted (see main.js).
+    let beforeMute = 0.5;
+    try { const s = +localStorage.getItem(PRE_KEY); if (s > 0) beforeMute = clamp(s, 0.05, 1); } catch (e) { /* storage blocked */ }
+    function toggleMute() {
+        if (vol > 0) { beforeMute = vol; try { localStorage.setItem(PRE_KEY, String(vol)); } catch (e) { /* storage blocked */ } set(0); }
+        else set(beforeMute);
+    }
     btn.addEventListener('click', e => {
-        if (cfg.enabled && lastPointer === 'mouse' && e.detail > 0) return; // a mouse opens it by hovering, not clicking
-        setOpen(!target);
+        if (!cfg.enabled) { setOpen(!target); return; }              // group off: the original click-to-open behaviour
+        if (lastPointer === 'mouse' && e.detail > 0) { toggleMute(); return; } // a mouse opens the slider by hovering; a click mutes
+        if (target) toggleMute(); else setOpen(true);                // touch / keyboard: first tap opens the slider, a tap on the open icon mutes
     });
     // outside tap / Escape closes it
     document.addEventListener('pointerdown', e => { if (target && !root.contains(e.target)) setOpen(false); });
@@ -130,6 +140,7 @@ export function initVolume({ root, onChange }) {
         set1('--spx-vol-fill', L.fill);
         set1('--spx-vol-track', L.track);
         set1('--spx-vol-thumb', L.thumb);
+        set1('--spx-vol-muted-opacity', String(clamp((L.muted === undefined ? 40 : L.muted) / 100, 0, 1)));
         panelH = panel.offsetHeight + 8;
         if (!cfg.enabled) { target = target; prog = target ? 1 : 0; }
         paint();
@@ -138,5 +149,5 @@ export function initVolume({ root, onChange }) {
     render();
     onChange(vol); // apply the remembered volume
     configure({ enabled: true, ...DEFAULT_LOOK, tol: 30, duration: 350 });
-    return { get: () => vol, set, open, configure, nudge: d => set(vol + d), isOpen: () => target };
+    return { get: () => vol, set, open, configure, toggleMute, nudge: d => set(vol + d), isOpen: () => target };
 }

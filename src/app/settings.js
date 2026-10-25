@@ -57,6 +57,7 @@ export const DEFAULTS = {
     checkboxRandomStartSong: false,
     sliderSpotlightMaxBrightness: 100,
     checkboxVolumeButtonEnabled: true,
+    sliderVolMutedOpacity: 40,
     sliderVolIconSize: 24,
     sliderVolCircleRadius: 7,
     sliderVolBarWidth: 8,

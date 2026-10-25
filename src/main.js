@@ -276,7 +276,7 @@ async function boot() {
         scale('--spx-meta-scale', setting('sliderMetaScale'));
         volume.configure({
             enabled: setting('checkboxVolumeButtonEnabled'),
-            icon: setting('sliderVolIconSize'), radius: setting('sliderVolCircleRadius'), barW: setting('sliderVolBarWidth'), barL: setting('sliderVolBarLength'),
+            muted: setting('sliderVolMutedOpacity'), icon: setting('sliderVolIconSize'), radius: setting('sliderVolCircleRadius'), barW: setting('sliderVolBarWidth'), barL: setting('sliderVolBarLength'),
             fill: setting('colorVolBarFill'), track: setting('colorVolBarTrack'), thumb: setting('colorVolCircle'),
             tol: setting('sliderVolHoverTolerance'), duration: setting('sliderVolAnimDuration'),
             speedAt: s => curveY(setting('curveEditorVolAnimSpeedCurve'), s),

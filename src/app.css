@@ -88,6 +88,8 @@
     --spx-vol-icon: 24px; --spx-vol-r: 7px; --spx-vol-bw: 8px; --spx-vol-bl: 130px; --spx-vol-fill: #1db954; --spx-vol-track: #ffffff; --spx-vol-thumb: #ffffff; }
 .spx-vol-btn { width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px); border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: drop-shadow(0 1px 3px #000a); -webkit-tap-highlight-color: transparent; }
 .spx-vol-btn:hover { color: #fff; }
+.spx-vol-btn { transition: opacity .15s; }
+.spx-vol-btn[data-level="mute"] { opacity: var(--spx-vol-muted-opacity, 0.4); } /* dev panel: UI Layout > Volume Button > Muted Icon Opacity */
 .spx-vol-btn svg { width: var(--spx-vol-icon); height: var(--spx-vol-icon); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-vol-btn svg .spk { fill: currentColor; stroke: none; }
 .spx-vol-btn .w1, .spx-vol-btn .w2, .spx-vol-btn .w3, .spx-vol-btn .x { display: none !important; } /* speaker only: no waves, no cross */
