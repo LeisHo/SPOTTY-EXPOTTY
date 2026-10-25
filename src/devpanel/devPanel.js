@@ -3344,6 +3344,9 @@
         input.id = ctrl.id;
         if (ctrl.inputType === 'number' && ctrl.step !== undefined) input.step = ctrl.step;
         input.value = ctrl.value;
+        if (ctrl.inputType === 'text') { // free-text values: no iPhone smart punctuation (a double space inserts ". ")
+            input.autocomplete = 'off'; input.autocapitalize = 'off'; input.spellcheck = false; input.setAttribute('autocorrect', 'off');
+        }
         row.appendChild(input);
         return row;
     }

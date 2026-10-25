@@ -130,7 +130,7 @@
     "checkboxTxtArtistWordWrap": true,
     "sliderTxtArtistMaxWidth": 900,
     "selectTxtArtistOverflow": "wrap",
-    "textArtistSeparator": "  &. ",
+    "textArtistSeparator": "  &  ",
     "sliderArtistSeparatorPct": 77,
     "checkboxScaleArtistMultiline": true,
     "sliderArtistMaxLines": 2,
