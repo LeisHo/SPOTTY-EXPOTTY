@@ -336,7 +336,7 @@
     "left": 30,
     "top": 6,
     "width": 344,
-    "height": 80
+    "height": 510
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -15643,7 +15643,7 @@
     "mobile:Debug": true,
     "mobile:Snapshot": false,
     "mobile:UI Layout": false,
-    "mobile:Text": true,
+    "mobile:Text": false,
     "mobile:Font": false,
     "mobile:Song Title": false,
     "mobile:Track Title Button Animation": false,
@@ -16427,7 +16427,8 @@
       "checkboxAlbumColorTransition": false,
       "sliderAlbumColorTransitionMs": 300,
       "sliderCoverOffsetY": -99,
-      "sliderNavButtonOpacity": 80
+      "sliderNavButtonOpacity": 80,
+      "textArtistSeparator": ";"
     },
     "landscape": {}
   },
