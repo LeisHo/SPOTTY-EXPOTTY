@@ -698,6 +698,9 @@ async function boot() {
     document.addEventListener('click', e => {
         const b = e.target && e.target.closest && e.target.closest('button');
         if (!b) return;
+        if (b.id === 'buttonRunStartup') { showStartScreen(); return; }
+        // A real mouse/touch click inside the dev panel never plays or skips. Hotkeys still do: they call click(), which is not trusted.
+        if (e.isTrusted && e.target.closest('#devPanel')) return;
         if (b.id === 'buttonPlayPause') togglePlayback();
         else if (b.id === 'buttonNextSong') stepSong(1);
         else if (b.id === 'buttonPrevSong') stepSong(-1);
@@ -748,6 +751,18 @@ async function boot() {
     // which browsers only allow after a gesture.
     const playFromStart = () => { unlock(); playClip(clipKey(songs[idx])); schedulePreload(); };
     const onFirstGesture = () => { el('spxStart').hidden = true; playFromStart(); openSpotifyLogin(); };
+    // Run Startup (dev panel): show the start screen again. The next click or key press outside the dev panel hides it.
+    const showStartScreen = () => {
+        el('spxStart').hidden = false;
+        const hideOnInput = e => {
+            if (e.target && e.target.closest && e.target.closest('#devPanel')) return;
+            el('spxStart').hidden = true;
+            document.removeEventListener('pointerdown', hideOnInput, true);
+            document.removeEventListener('keydown', hideOnInput, true);
+        };
+        document.addEventListener('pointerdown', hideOnInput, true);
+        document.addEventListener('keydown', hideOnInput, true);
+    };
     document.addEventListener('pointerdown', onFirstGesture, { capture: true, once: true });
     document.addEventListener('keydown', onFirstGesture, { capture: true, once: true });
     playFromStart();

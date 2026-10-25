@@ -8180,6 +8180,7 @@
         const SU = 'Startup', SB = 'Start Button', SBA = 'Start Button Animation';
         uiLayoutContent.appendChild(createDevGroupElement(SU, tab));
         const SU_CONTROLS = [
+            { tab, group: SU, id: 'buttonRunStartup', type: 'button', label: 'Run Startup', skipDeviceCheckbox: true },
             { tab, group: SU, id: 'sliderStartOverlayOpacity', type: 'slider', label: 'Darkening Opacity (x):', min: 0, max: 1, step: 0.01, value: 0.8 },
             { tab, group: SU, id: 'colorStartOverlay', type: 'color', label: 'Darkening Color:', value: '#0d0f12' },
         ];
