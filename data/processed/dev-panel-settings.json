@@ -1684,6 +1684,10 @@
         "key": "desktop:UI Layout",
         "items": [
           {
+            "type": "row",
+            "key": "buttonOpenLayoutInspector"
+          },
+          {
             "type": "group",
             "section": {
               "key": "desktop:New Group (3)",
@@ -2606,10 +2610,6 @@
             }
           },
           {
-            "type": "row",
-            "key": "buttonOpenLayoutInspector"
-          },
-          {
             "type": "group",
             "section": {
               "key": "desktop:Background",
@@ -3203,20 +3203,8 @@
                         "type": "group",
                         "section": {
                           "key": "desktop:Outline",
-                          "items": [
-                            {
-                              "type": "row",
-                              "key": "colorTxtSongTitleOutlineColor"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderTxtSongTitleOutlineThickness"
-                            }
-                          ],
-                          "rowKeys": [
-                            "colorTxtSongTitleOutlineColor",
-                            "sliderTxtSongTitleOutlineThickness"
-                          ],
+                          "items": [],
+                          "rowKeys": [],
                           "subgroups": []
                         }
                       }
@@ -3237,20 +3225,8 @@
                     "subgroups": [
                       {
                         "key": "desktop:Outline",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "colorTxtSongTitleOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtSongTitleOutlineThickness"
-                          }
-                        ],
-                        "rowKeys": [
-                          "colorTxtSongTitleOutlineColor",
-                          "sliderTxtSongTitleOutlineThickness"
-                        ],
+                        "items": [],
+                        "rowKeys": [],
                         "subgroups": []
                       }
                     ]
@@ -3309,20 +3285,8 @@
                         "type": "group",
                         "section": {
                           "key": "desktop:Outline",
-                          "items": [
-                            {
-                              "type": "row",
-                              "key": "colorTxtArtistOutlineColor"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderTxtArtistOutlineThickness"
-                            }
-                          ],
-                          "rowKeys": [
-                            "colorTxtArtistOutlineColor",
-                            "sliderTxtArtistOutlineThickness"
-                          ],
+                          "items": [],
+                          "rowKeys": [],
                           "subgroups": []
                         }
                       }
@@ -3343,20 +3307,8 @@
                     "subgroups": [
                       {
                         "key": "desktop:Outline",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "colorTxtArtistOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtArtistOutlineThickness"
-                          }
-                        ],
-                        "rowKeys": [
-                          "colorTxtArtistOutlineColor",
-                          "sliderTxtArtistOutlineThickness"
-                        ],
+                        "items": [],
+                        "rowKeys": [],
                         "subgroups": []
                       }
                     ]
@@ -3423,11 +3375,31 @@
                             {
                               "type": "row",
                               "key": "sliderTxtAlbumDateOutlineThickness"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorTxtArtistOutlineColor"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtArtistOutlineThickness"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorTxtSongTitleOutlineColor"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtSongTitleOutlineThickness"
                             }
                           ],
                           "rowKeys": [
                             "colorTxtAlbumDateOutlineColor",
-                            "sliderTxtAlbumDateOutlineThickness"
+                            "sliderTxtAlbumDateOutlineThickness",
+                            "colorTxtArtistOutlineColor",
+                            "sliderTxtArtistOutlineThickness",
+                            "colorTxtSongTitleOutlineColor",
+                            "sliderTxtSongTitleOutlineThickness"
                           ],
                           "subgroups": []
                         }
@@ -3457,11 +3429,31 @@
                           {
                             "type": "row",
                             "key": "sliderTxtAlbumDateOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtArtistOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtSongTitleOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleOutlineThickness"
                           }
                         ],
                         "rowKeys": [
                           "colorTxtAlbumDateOutlineColor",
-                          "sliderTxtAlbumDateOutlineThickness"
+                          "sliderTxtAlbumDateOutlineThickness",
+                          "colorTxtArtistOutlineColor",
+                          "sliderTxtArtistOutlineThickness",
+                          "colorTxtSongTitleOutlineColor",
+                          "sliderTxtSongTitleOutlineThickness"
                         ],
                         "subgroups": []
                       }
@@ -3522,20 +3514,8 @@
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "colorTxtSongTitleOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtSongTitleOutlineThickness"
-                          }
-                        ],
-                        "rowKeys": [
-                          "colorTxtSongTitleOutlineColor",
-                          "sliderTxtSongTitleOutlineThickness"
-                        ],
+                        "items": [],
+                        "rowKeys": [],
                         "subgroups": []
                       }
                     }
@@ -3556,20 +3536,8 @@
                   "subgroups": [
                     {
                       "key": "desktop:Outline",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "colorTxtSongTitleOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtSongTitleOutlineThickness"
-                        }
-                      ],
-                      "rowKeys": [
-                        "colorTxtSongTitleOutlineColor",
-                        "sliderTxtSongTitleOutlineThickness"
-                      ],
+                      "items": [],
+                      "rowKeys": [],
                       "subgroups": []
                     }
                   ]
@@ -3625,20 +3593,8 @@
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "colorTxtArtistOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtArtistOutlineThickness"
-                          }
-                        ],
-                        "rowKeys": [
-                          "colorTxtArtistOutlineColor",
-                          "sliderTxtArtistOutlineThickness"
-                        ],
+                        "items": [],
+                        "rowKeys": [],
                         "subgroups": []
                       }
                     }
@@ -3659,20 +3615,8 @@
                   "subgroups": [
                     {
                       "key": "desktop:Outline",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "colorTxtArtistOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtArtistOutlineThickness"
-                        }
-                      ],
-                      "rowKeys": [
-                        "colorTxtArtistOutlineColor",
-                        "sliderTxtArtistOutlineThickness"
-                      ],
+                      "items": [],
+                      "rowKeys": [],
                       "subgroups": []
                     }
                   ]
@@ -3736,11 +3680,31 @@
                           {
                             "type": "row",
                             "key": "sliderTxtAlbumDateOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtArtistOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtSongTitleOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleOutlineThickness"
                           }
                         ],
                         "rowKeys": [
                           "colorTxtAlbumDateOutlineColor",
-                          "sliderTxtAlbumDateOutlineThickness"
+                          "sliderTxtAlbumDateOutlineThickness",
+                          "colorTxtArtistOutlineColor",
+                          "sliderTxtArtistOutlineThickness",
+                          "colorTxtSongTitleOutlineColor",
+                          "sliderTxtSongTitleOutlineThickness"
                         ],
                         "subgroups": []
                       }
@@ -3770,11 +3734,31 @@
                         {
                           "type": "row",
                           "key": "sliderTxtAlbumDateOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtArtistOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtSongTitleOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleOutlineThickness"
                         }
                       ],
                       "rowKeys": [
                         "colorTxtAlbumDateOutlineColor",
-                        "sliderTxtAlbumDateOutlineThickness"
+                        "sliderTxtAlbumDateOutlineThickness",
+                        "colorTxtArtistOutlineColor",
+                        "sliderTxtArtistOutlineThickness",
+                        "colorTxtSongTitleOutlineColor",
+                        "sliderTxtSongTitleOutlineThickness"
                       ],
                       "subgroups": []
                     }
@@ -5795,20 +5779,8 @@
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "colorTxtSongTitleOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtSongTitleOutlineThickness"
-                          }
-                        ],
-                        "rowKeys": [
-                          "colorTxtSongTitleOutlineColor",
-                          "sliderTxtSongTitleOutlineThickness"
-                        ],
+                        "items": [],
+                        "rowKeys": [],
                         "subgroups": []
                       }
                     }
@@ -5829,20 +5801,8 @@
                   "subgroups": [
                     {
                       "key": "desktop:Outline",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "colorTxtSongTitleOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtSongTitleOutlineThickness"
-                        }
-                      ],
-                      "rowKeys": [
-                        "colorTxtSongTitleOutlineColor",
-                        "sliderTxtSongTitleOutlineThickness"
-                      ],
+                      "items": [],
+                      "rowKeys": [],
                       "subgroups": []
                     }
                   ]
@@ -5901,20 +5861,8 @@
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "colorTxtArtistOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtArtistOutlineThickness"
-                          }
-                        ],
-                        "rowKeys": [
-                          "colorTxtArtistOutlineColor",
-                          "sliderTxtArtistOutlineThickness"
-                        ],
+                        "items": [],
+                        "rowKeys": [],
                         "subgroups": []
                       }
                     }
@@ -5935,20 +5883,8 @@
                   "subgroups": [
                     {
                       "key": "desktop:Outline",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "colorTxtArtistOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtArtistOutlineThickness"
-                        }
-                      ],
-                      "rowKeys": [
-                        "colorTxtArtistOutlineColor",
-                        "sliderTxtArtistOutlineThickness"
-                      ],
+                      "items": [],
+                      "rowKeys": [],
                       "subgroups": []
                     }
                   ]
@@ -6015,11 +5951,31 @@
                           {
                             "type": "row",
                             "key": "sliderTxtAlbumDateOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtArtistOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtSongTitleOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleOutlineThickness"
                           }
                         ],
                         "rowKeys": [
                           "colorTxtAlbumDateOutlineColor",
-                          "sliderTxtAlbumDateOutlineThickness"
+                          "sliderTxtAlbumDateOutlineThickness",
+                          "colorTxtArtistOutlineColor",
+                          "sliderTxtArtistOutlineThickness",
+                          "colorTxtSongTitleOutlineColor",
+                          "sliderTxtSongTitleOutlineThickness"
                         ],
                         "subgroups": []
                       }
@@ -6049,11 +6005,31 @@
                         {
                           "type": "row",
                           "key": "sliderTxtAlbumDateOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtArtistOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtSongTitleOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleOutlineThickness"
                         }
                       ],
                       "rowKeys": [
                         "colorTxtAlbumDateOutlineColor",
-                        "sliderTxtAlbumDateOutlineThickness"
+                        "sliderTxtAlbumDateOutlineThickness",
+                        "colorTxtArtistOutlineColor",
+                        "sliderTxtArtistOutlineThickness",
+                        "colorTxtSongTitleOutlineColor",
+                        "sliderTxtSongTitleOutlineThickness"
                       ],
                       "subgroups": []
                     }
@@ -6114,20 +6090,8 @@
                     "type": "group",
                     "section": {
                       "key": "desktop:Outline",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "colorTxtSongTitleOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtSongTitleOutlineThickness"
-                        }
-                      ],
-                      "rowKeys": [
-                        "colorTxtSongTitleOutlineColor",
-                        "sliderTxtSongTitleOutlineThickness"
-                      ],
+                      "items": [],
+                      "rowKeys": [],
                       "subgroups": []
                     }
                   }
@@ -6148,20 +6112,8 @@
                 "subgroups": [
                   {
                     "key": "desktop:Outline",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "colorTxtSongTitleOutlineColor"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleOutlineThickness"
-                      }
-                    ],
-                    "rowKeys": [
-                      "colorTxtSongTitleOutlineColor",
-                      "sliderTxtSongTitleOutlineThickness"
-                    ],
+                    "items": [],
+                    "rowKeys": [],
                     "subgroups": []
                   }
                 ]
@@ -6217,20 +6169,8 @@
                     "type": "group",
                     "section": {
                       "key": "desktop:Outline",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "colorTxtArtistOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtArtistOutlineThickness"
-                        }
-                      ],
-                      "rowKeys": [
-                        "colorTxtArtistOutlineColor",
-                        "sliderTxtArtistOutlineThickness"
-                      ],
+                      "items": [],
+                      "rowKeys": [],
                       "subgroups": []
                     }
                   }
@@ -6251,20 +6191,8 @@
                 "subgroups": [
                   {
                     "key": "desktop:Outline",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "colorTxtArtistOutlineColor"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistOutlineThickness"
-                      }
-                    ],
-                    "rowKeys": [
-                      "colorTxtArtistOutlineColor",
-                      "sliderTxtArtistOutlineThickness"
-                    ],
+                    "items": [],
+                    "rowKeys": [],
                     "subgroups": []
                   }
                 ]
@@ -6328,11 +6256,31 @@
                         {
                           "type": "row",
                           "key": "sliderTxtAlbumDateOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtArtistOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtSongTitleOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleOutlineThickness"
                         }
                       ],
                       "rowKeys": [
                         "colorTxtAlbumDateOutlineColor",
-                        "sliderTxtAlbumDateOutlineThickness"
+                        "sliderTxtAlbumDateOutlineThickness",
+                        "colorTxtArtistOutlineColor",
+                        "sliderTxtArtistOutlineThickness",
+                        "colorTxtSongTitleOutlineColor",
+                        "sliderTxtSongTitleOutlineThickness"
                       ],
                       "subgroups": []
                     }
@@ -6362,11 +6310,31 @@
                       {
                         "type": "row",
                         "key": "sliderTxtAlbumDateOutlineThickness"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorTxtArtistOutlineColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistOutlineThickness"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorTxtSongTitleOutlineColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtSongTitleOutlineThickness"
                       }
                     ],
                     "rowKeys": [
                       "colorTxtAlbumDateOutlineColor",
-                      "sliderTxtAlbumDateOutlineThickness"
+                      "sliderTxtAlbumDateOutlineThickness",
+                      "colorTxtArtistOutlineColor",
+                      "sliderTxtArtistOutlineThickness",
+                      "colorTxtSongTitleOutlineColor",
+                      "sliderTxtSongTitleOutlineThickness"
                     ],
                     "subgroups": []
                   }
@@ -8734,6 +8702,268 @@
             }
           },
           {
+            "type": "group",
+            "section": {
+              "key": "mobile:New Group (7)",
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Volume Button",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolCircleRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolBarWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolBarLength"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorMobileVolBarFill"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorMobileVolBarTrack"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorMobileVolCircle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolHoverTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolAnimDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "curveEditorMobileVolAnimSpeedCurve"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileVolIconSize",
+                      "sliderMobileVolCircleRadius",
+                      "sliderMobileVolBarWidth",
+                      "sliderMobileVolBarLength",
+                      "colorMobileVolBarFill",
+                      "colorMobileVolBarTrack",
+                      "colorMobileVolCircle",
+                      "sliderMobileVolHoverTolerance",
+                      "sliderMobileVolAnimDuration",
+                      "curveEditorMobileVolAnimSpeedCurve"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Play Button",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "buttonPlayPause"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:Play Button Animation",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "buttonPlayPause"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "mobile:Play Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Next And Last Song Buttons",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "buttonNextSong"
+                      },
+                      {
+                        "type": "row",
+                        "key": "buttonPrevSong"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:Next And Last Button Animation",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "buttonNextSong",
+                      "buttonPrevSong"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "mobile:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                }
+              ],
+              "rowKeys": [],
+              "subgroups": [
+                {
+                  "key": "mobile:Volume Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolCircleRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolBarWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolBarLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorMobileVolBarFill"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorMobileVolBarTrack"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorMobileVolCircle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolHoverTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorMobileVolAnimSpeedCurve"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileVolIconSize",
+                    "sliderMobileVolCircleRadius",
+                    "sliderMobileVolBarWidth",
+                    "sliderMobileVolBarLength",
+                    "colorMobileVolBarFill",
+                    "colorMobileVolBarTrack",
+                    "colorMobileVolCircle",
+                    "sliderMobileVolHoverTolerance",
+                    "sliderMobileVolAnimDuration",
+                    "curveEditorMobileVolAnimSpeedCurve"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Play Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "buttonPlayPause"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Play Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "buttonPlayPause"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "mobile:Play Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                },
+                {
+                  "key": "mobile:Next And Last Song Buttons",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "buttonNextSong"
+                    },
+                    {
+                      "type": "row",
+                      "key": "buttonPrevSong"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "buttonNextSong",
+                    "buttonPrevSong"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "mobile:Next And Last Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
             "type": "row",
             "key": "buttonOpenLayoutInspector"
           },
@@ -8951,67 +9181,6 @@
           {
             "type": "group",
             "section": {
-              "key": "mobile:Volume Button",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "sliderMobileVolIconSize"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileVolCircleRadius"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileVolBarWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileVolBarLength"
-                },
-                {
-                  "type": "row",
-                  "key": "colorMobileVolBarFill"
-                },
-                {
-                  "type": "row",
-                  "key": "colorMobileVolBarTrack"
-                },
-                {
-                  "type": "row",
-                  "key": "colorMobileVolCircle"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileVolHoverTolerance"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileVolAnimDuration"
-                },
-                {
-                  "type": "row",
-                  "key": "curveEditorMobileVolAnimSpeedCurve"
-                }
-              ],
-              "rowKeys": [
-                "sliderMobileVolIconSize",
-                "sliderMobileVolCircleRadius",
-                "sliderMobileVolBarWidth",
-                "sliderMobileVolBarLength",
-                "colorMobileVolBarFill",
-                "colorMobileVolBarTrack",
-                "colorMobileVolCircle",
-                "sliderMobileVolHoverTolerance",
-                "sliderMobileVolAnimDuration",
-                "curveEditorMobileVolAnimSpeedCurve"
-              ],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
               "key": "mobile:Album Cover",
               "items": [
                 {
@@ -9099,75 +9268,6 @@
                 },
                 {
                   "key": "mobile:Title Lift Shadow",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              ]
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:Play Button",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "buttonPlayPause"
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "mobile:Play Button Animation",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                }
-              ],
-              "rowKeys": [
-                "buttonPlayPause"
-              ],
-              "subgroups": [
-                {
-                  "key": "mobile:Play Button Animation",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              ]
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:Next And Last Song Buttons",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "buttonNextSong"
-                },
-                {
-                  "type": "row",
-                  "key": "buttonPrevSong"
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "mobile:Next And Last Button Animation",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                }
-              ],
-              "rowKeys": [
-                "buttonNextSong",
-                "buttonPrevSong"
-              ],
-              "subgroups": [
-                {
-                  "key": "mobile:Next And Last Button Animation",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
@@ -9651,6 +9751,265 @@
             ]
           },
           {
+            "key": "mobile:New Group (7)",
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Volume Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolCircleRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolBarWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolBarLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorMobileVolBarFill"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorMobileVolBarTrack"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorMobileVolCircle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolHoverTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileVolAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorMobileVolAnimSpeedCurve"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileVolIconSize",
+                    "sliderMobileVolCircleRadius",
+                    "sliderMobileVolBarWidth",
+                    "sliderMobileVolBarLength",
+                    "colorMobileVolBarFill",
+                    "colorMobileVolBarTrack",
+                    "colorMobileVolCircle",
+                    "sliderMobileVolHoverTolerance",
+                    "sliderMobileVolAnimDuration",
+                    "curveEditorMobileVolAnimSpeedCurve"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Play Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "buttonPlayPause"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Play Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "buttonPlayPause"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "mobile:Play Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Next And Last Song Buttons",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "buttonNextSong"
+                    },
+                    {
+                      "type": "row",
+                      "key": "buttonPrevSong"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "buttonNextSong",
+                    "buttonPrevSong"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "mobile:Next And Last Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              }
+            ],
+            "rowKeys": [],
+            "subgroups": [
+              {
+                "key": "mobile:Volume Button",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderMobileVolIconSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileVolCircleRadius"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileVolBarWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileVolBarLength"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorMobileVolBarFill"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorMobileVolBarTrack"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorMobileVolCircle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileVolHoverTolerance"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileVolAnimDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "curveEditorMobileVolAnimSpeedCurve"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderMobileVolIconSize",
+                  "sliderMobileVolCircleRadius",
+                  "sliderMobileVolBarWidth",
+                  "sliderMobileVolBarLength",
+                  "colorMobileVolBarFill",
+                  "colorMobileVolBarTrack",
+                  "colorMobileVolCircle",
+                  "sliderMobileVolHoverTolerance",
+                  "sliderMobileVolAnimDuration",
+                  "curveEditorMobileVolAnimSpeedCurve"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Play Button",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "buttonPlayPause"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:Play Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [
+                  "buttonPlayPause"
+                ],
+                "subgroups": [
+                  {
+                    "key": "mobile:Play Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                ]
+              },
+              {
+                "key": "mobile:Next And Last Song Buttons",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "buttonNextSong"
+                  },
+                  {
+                    "type": "row",
+                    "key": "buttonPrevSong"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:Next And Last Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [
+                  "buttonNextSong",
+                  "buttonPrevSong"
+                ],
+                "subgroups": [
+                  {
+                    "key": "mobile:Next And Last Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "key": "mobile:Background",
             "items": [
               {
@@ -9859,64 +10218,6 @@
             "subgroups": []
           },
           {
-            "key": "mobile:Volume Button",
-            "items": [
-              {
-                "type": "row",
-                "key": "sliderMobileVolIconSize"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileVolCircleRadius"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileVolBarWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileVolBarLength"
-              },
-              {
-                "type": "row",
-                "key": "colorMobileVolBarFill"
-              },
-              {
-                "type": "row",
-                "key": "colorMobileVolBarTrack"
-              },
-              {
-                "type": "row",
-                "key": "colorMobileVolCircle"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileVolHoverTolerance"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileVolAnimDuration"
-              },
-              {
-                "type": "row",
-                "key": "curveEditorMobileVolAnimSpeedCurve"
-              }
-            ],
-            "rowKeys": [
-              "sliderMobileVolIconSize",
-              "sliderMobileVolCircleRadius",
-              "sliderMobileVolBarWidth",
-              "sliderMobileVolBarLength",
-              "colorMobileVolBarFill",
-              "colorMobileVolBarTrack",
-              "colorMobileVolCircle",
-              "sliderMobileVolHoverTolerance",
-              "sliderMobileVolAnimDuration",
-              "curveEditorMobileVolAnimSpeedCurve"
-            ],
-            "subgroups": []
-          },
-          {
             "key": "mobile:Album Cover",
             "items": [
               {
@@ -10001,69 +10302,6 @@
               },
               {
                 "key": "mobile:Title Lift Shadow",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              }
-            ]
-          },
-          {
-            "key": "mobile:Play Button",
-            "items": [
-              {
-                "type": "row",
-                "key": "buttonPlayPause"
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "mobile:Play Button Animation",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              }
-            ],
-            "rowKeys": [
-              "buttonPlayPause"
-            ],
-            "subgroups": [
-              {
-                "key": "mobile:Play Button Animation",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              }
-            ]
-          },
-          {
-            "key": "mobile:Next And Last Song Buttons",
-            "items": [
-              {
-                "type": "row",
-                "key": "buttonNextSong"
-              },
-              {
-                "type": "row",
-                "key": "buttonPrevSong"
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "mobile:Next And Last Button Animation",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              }
-            ],
-            "rowKeys": [
-              "buttonNextSong",
-              "buttonPrevSong"
-            ],
-            "subgroups": [
-              {
-                "key": "mobile:Next And Last Button Animation",
                 "items": [],
                 "rowKeys": [],
                 "subgroups": []
@@ -11358,6 +11596,268 @@
             }
           },
           {
+            "type": "group",
+            "section": {
+              "key": "landscape:New Group (7)",
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Volume Button",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolCircleRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolBarWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolBarLength"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorLandscapeVolBarFill"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorLandscapeVolBarTrack"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorLandscapeVolCircle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolHoverTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolAnimDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "curveEditorLandscapeVolAnimSpeedCurve"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeVolIconSize",
+                      "sliderLandscapeVolCircleRadius",
+                      "sliderLandscapeVolBarWidth",
+                      "sliderLandscapeVolBarLength",
+                      "colorLandscapeVolBarFill",
+                      "colorLandscapeVolBarTrack",
+                      "colorLandscapeVolCircle",
+                      "sliderLandscapeVolHoverTolerance",
+                      "sliderLandscapeVolAnimDuration",
+                      "curveEditorLandscapeVolAnimSpeedCurve"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Play Button",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "buttonPlayPause"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:Play Button Animation",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "buttonPlayPause"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "landscape:Play Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Next And Last Song Buttons",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "buttonNextSong"
+                      },
+                      {
+                        "type": "row",
+                        "key": "buttonPrevSong"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:Next And Last Button Animation",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "buttonNextSong",
+                      "buttonPrevSong"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "landscape:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                }
+              ],
+              "rowKeys": [],
+              "subgroups": [
+                {
+                  "key": "landscape:Volume Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolCircleRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolBarWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolBarLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorLandscapeVolBarFill"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorLandscapeVolBarTrack"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorLandscapeVolCircle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolHoverTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorLandscapeVolAnimSpeedCurve"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeVolIconSize",
+                    "sliderLandscapeVolCircleRadius",
+                    "sliderLandscapeVolBarWidth",
+                    "sliderLandscapeVolBarLength",
+                    "colorLandscapeVolBarFill",
+                    "colorLandscapeVolBarTrack",
+                    "colorLandscapeVolCircle",
+                    "sliderLandscapeVolHoverTolerance",
+                    "sliderLandscapeVolAnimDuration",
+                    "curveEditorLandscapeVolAnimSpeedCurve"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Play Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "buttonPlayPause"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Play Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "buttonPlayPause"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "landscape:Play Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                },
+                {
+                  "key": "landscape:Next And Last Song Buttons",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "buttonNextSong"
+                    },
+                    {
+                      "type": "row",
+                      "key": "buttonPrevSong"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "buttonNextSong",
+                    "buttonPrevSong"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "landscape:Next And Last Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
             "type": "row",
             "key": "buttonOpenLayoutInspector"
           },
@@ -11575,67 +12075,6 @@
           {
             "type": "group",
             "section": {
-              "key": "landscape:Volume Button",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeVolIconSize"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeVolCircleRadius"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeVolBarWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeVolBarLength"
-                },
-                {
-                  "type": "row",
-                  "key": "colorLandscapeVolBarFill"
-                },
-                {
-                  "type": "row",
-                  "key": "colorLandscapeVolBarTrack"
-                },
-                {
-                  "type": "row",
-                  "key": "colorLandscapeVolCircle"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeVolHoverTolerance"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeVolAnimDuration"
-                },
-                {
-                  "type": "row",
-                  "key": "curveEditorLandscapeVolAnimSpeedCurve"
-                }
-              ],
-              "rowKeys": [
-                "sliderLandscapeVolIconSize",
-                "sliderLandscapeVolCircleRadius",
-                "sliderLandscapeVolBarWidth",
-                "sliderLandscapeVolBarLength",
-                "colorLandscapeVolBarFill",
-                "colorLandscapeVolBarTrack",
-                "colorLandscapeVolCircle",
-                "sliderLandscapeVolHoverTolerance",
-                "sliderLandscapeVolAnimDuration",
-                "curveEditorLandscapeVolAnimSpeedCurve"
-              ],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
               "key": "landscape:Album Cover",
               "items": [
                 {
@@ -11723,75 +12162,6 @@
                 },
                 {
                   "key": "landscape:Title Lift Shadow",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              ]
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:Play Button",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "buttonPlayPause"
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "landscape:Play Button Animation",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                }
-              ],
-              "rowKeys": [
-                "buttonPlayPause"
-              ],
-              "subgroups": [
-                {
-                  "key": "landscape:Play Button Animation",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              ]
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:Next And Last Song Buttons",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "buttonNextSong"
-                },
-                {
-                  "type": "row",
-                  "key": "buttonPrevSong"
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "landscape:Next And Last Button Animation",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                }
-              ],
-              "rowKeys": [
-                "buttonNextSong",
-                "buttonPrevSong"
-              ],
-              "subgroups": [
-                {
-                  "key": "landscape:Next And Last Button Animation",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
@@ -12275,6 +12645,265 @@
             ]
           },
           {
+            "key": "landscape:New Group (7)",
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Volume Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolCircleRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolBarWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolBarLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorLandscapeVolBarFill"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorLandscapeVolBarTrack"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorLandscapeVolCircle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolHoverTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeVolAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorLandscapeVolAnimSpeedCurve"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeVolIconSize",
+                    "sliderLandscapeVolCircleRadius",
+                    "sliderLandscapeVolBarWidth",
+                    "sliderLandscapeVolBarLength",
+                    "colorLandscapeVolBarFill",
+                    "colorLandscapeVolBarTrack",
+                    "colorLandscapeVolCircle",
+                    "sliderLandscapeVolHoverTolerance",
+                    "sliderLandscapeVolAnimDuration",
+                    "curveEditorLandscapeVolAnimSpeedCurve"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Play Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "buttonPlayPause"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Play Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "buttonPlayPause"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "landscape:Play Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Next And Last Song Buttons",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "buttonNextSong"
+                    },
+                    {
+                      "type": "row",
+                      "key": "buttonPrevSong"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "buttonNextSong",
+                    "buttonPrevSong"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "landscape:Next And Last Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              }
+            ],
+            "rowKeys": [],
+            "subgroups": [
+              {
+                "key": "landscape:Volume Button",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeVolIconSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeVolCircleRadius"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeVolBarWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeVolBarLength"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorLandscapeVolBarFill"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorLandscapeVolBarTrack"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorLandscapeVolCircle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeVolHoverTolerance"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeVolAnimDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "curveEditorLandscapeVolAnimSpeedCurve"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderLandscapeVolIconSize",
+                  "sliderLandscapeVolCircleRadius",
+                  "sliderLandscapeVolBarWidth",
+                  "sliderLandscapeVolBarLength",
+                  "colorLandscapeVolBarFill",
+                  "colorLandscapeVolBarTrack",
+                  "colorLandscapeVolCircle",
+                  "sliderLandscapeVolHoverTolerance",
+                  "sliderLandscapeVolAnimDuration",
+                  "curveEditorLandscapeVolAnimSpeedCurve"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Play Button",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "buttonPlayPause"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:Play Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [
+                  "buttonPlayPause"
+                ],
+                "subgroups": [
+                  {
+                    "key": "landscape:Play Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                ]
+              },
+              {
+                "key": "landscape:Next And Last Song Buttons",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "buttonNextSong"
+                  },
+                  {
+                    "type": "row",
+                    "key": "buttonPrevSong"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:Next And Last Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [
+                  "buttonNextSong",
+                  "buttonPrevSong"
+                ],
+                "subgroups": [
+                  {
+                    "key": "landscape:Next And Last Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "key": "landscape:Background",
             "items": [
               {
@@ -12483,64 +13112,6 @@
             "subgroups": []
           },
           {
-            "key": "landscape:Volume Button",
-            "items": [
-              {
-                "type": "row",
-                "key": "sliderLandscapeVolIconSize"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeVolCircleRadius"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeVolBarWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeVolBarLength"
-              },
-              {
-                "type": "row",
-                "key": "colorLandscapeVolBarFill"
-              },
-              {
-                "type": "row",
-                "key": "colorLandscapeVolBarTrack"
-              },
-              {
-                "type": "row",
-                "key": "colorLandscapeVolCircle"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeVolHoverTolerance"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeVolAnimDuration"
-              },
-              {
-                "type": "row",
-                "key": "curveEditorLandscapeVolAnimSpeedCurve"
-              }
-            ],
-            "rowKeys": [
-              "sliderLandscapeVolIconSize",
-              "sliderLandscapeVolCircleRadius",
-              "sliderLandscapeVolBarWidth",
-              "sliderLandscapeVolBarLength",
-              "colorLandscapeVolBarFill",
-              "colorLandscapeVolBarTrack",
-              "colorLandscapeVolCircle",
-              "sliderLandscapeVolHoverTolerance",
-              "sliderLandscapeVolAnimDuration",
-              "curveEditorLandscapeVolAnimSpeedCurve"
-            ],
-            "subgroups": []
-          },
-          {
             "key": "landscape:Album Cover",
             "items": [
               {
@@ -12625,69 +13196,6 @@
               },
               {
                 "key": "landscape:Title Lift Shadow",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              }
-            ]
-          },
-          {
-            "key": "landscape:Play Button",
-            "items": [
-              {
-                "type": "row",
-                "key": "buttonPlayPause"
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "landscape:Play Button Animation",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              }
-            ],
-            "rowKeys": [
-              "buttonPlayPause"
-            ],
-            "subgroups": [
-              {
-                "key": "landscape:Play Button Animation",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              }
-            ]
-          },
-          {
-            "key": "landscape:Next And Last Song Buttons",
-            "items": [
-              {
-                "type": "row",
-                "key": "buttonNextSong"
-              },
-              {
-                "type": "row",
-                "key": "buttonPrevSong"
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "landscape:Next And Last Button Animation",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              }
-            ],
-            "rowKeys": [
-              "buttonNextSong",
-              "buttonPrevSong"
-            ],
-            "subgroups": [
-              {
-                "key": "landscape:Next And Last Button Animation",
                 "items": [],
                 "rowKeys": [],
                 "subgroups": []
@@ -13066,7 +13574,7 @@
     "desktop:TABS": true,
     "desktop:BUTTONS": true,
     "desktop:Hot Keys": true,
-    "desktop:Debug": false,
+    "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": false,
     "desktop:UI Layout": false,
@@ -13129,18 +13637,19 @@
     "mobile:New Group (6)": false,
     "mobile:Font": false,
     "mobile:Track Title Button Animation": false,
-    "mobile:Background": false,
+    "mobile:New Group (7)": false,
     "mobile:Volume Button": false,
+    "mobile:Play Button": false,
+    "mobile:Play Button Animation": false,
+    "mobile:Next And Last Song Buttons": false,
+    "mobile:Next And Last Button Animation": false,
+    "mobile:Background": false,
     "mobile:Album Cover": false,
     "mobile:Shadows": false,
     "mobile:Album Cover Shadow": false,
     "mobile:Volume Shadow": false,
     "mobile:Previous / Next Shadow": false,
     "mobile:Title Lift Shadow": false,
-    "mobile:Play Button": false,
-    "mobile:Play Button Animation": false,
-    "mobile:Next And Last Song Buttons": false,
-    "mobile:Next And Last Button Animation": false,
     "mobile:Brackets Smaller Text": false,
     "mobile:Text": false,
     "mobile:Song Title": false,
@@ -13181,18 +13690,19 @@
     "landscape:New Group (6)": false,
     "landscape:Font": false,
     "landscape:Track Title Button Animation": false,
-    "landscape:Background": false,
+    "landscape:New Group (7)": false,
     "landscape:Volume Button": false,
+    "landscape:Play Button": false,
+    "landscape:Play Button Animation": false,
+    "landscape:Next And Last Song Buttons": false,
+    "landscape:Next And Last Button Animation": false,
+    "landscape:Background": false,
     "landscape:Album Cover": false,
     "landscape:Shadows": false,
     "landscape:Album Cover Shadow": false,
     "landscape:Volume Shadow": false,
     "landscape:Previous / Next Shadow": false,
     "landscape:Title Lift Shadow": false,
-    "landscape:Play Button": false,
-    "landscape:Play Button Animation": false,
-    "landscape:Next And Last Song Buttons": false,
-    "landscape:Next And Last Button Animation": false,
     "landscape:Brackets Smaller Text": false,
     "landscape:Text": false,
     "landscape:Song Title": false,
@@ -13525,7 +14035,9 @@
     "landscape:Start Button Animation": null,
     "landscape:Start Button": null,
     "landscape:Startup": null,
-    "desktop:New Group (7)": "AUDIO BUTTONS"
+    "desktop:New Group (7)": "AUDIO BUTTONS",
+    "mobile:New Group (7)": "AUDIO BUTTONS",
+    "landscape:New Group (7)": "AUDIO BUTTONS"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
