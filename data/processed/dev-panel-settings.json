@@ -17315,7 +17315,7 @@
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
-    "desktop:Artist": false,
+    "desktop:Artist": true,
     "desktop:Album & Date": false,
     "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
