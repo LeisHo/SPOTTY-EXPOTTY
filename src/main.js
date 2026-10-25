@@ -9,7 +9,7 @@ import {
     createUIElement, updateElement, setContextValue, getActiveContext, resolveAndApplyAll, captureAllLayoutConfigs, registerStorageBackend, loadLayoutConfig,
     resetLayoutConfig,
 } from '../lib/ui-engine/registry.mjs';
-import { setting } from './app/settings.js';
+import { setting, loadSavedSettings } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
@@ -34,6 +34,12 @@ const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 async function boot() {
     const appStage = document.getElementById('appStage');
     if (!appStage) return;
+    // A normal visitor has no dev panel (it only exists in dev mode), so setting() would see only the code defaults. Load what the dev
+    // panel last saved (Sync) first: settings.js falls back to it, and the saved UI layout is applied below.
+    if (!document.documentElement.classList.contains('dev-mode')) {
+        const st = await loadSavedSettings();
+        if (st && st.extra && st.extra.uiLayout) window.__spxPendingLayout = st.extra.uiLayout;
+    }
     appStage.innerHTML = `
         <div class="spx-app" id="spxApp">
             <canvas class="spx-bg spx-bg-prev" id="spxBgPrev"></canvas>

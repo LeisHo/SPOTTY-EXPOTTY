@@ -211,6 +211,54 @@ function readEl(el) {
     return el.value;
 }
 
+// ---- saved settings for visitors who have no dev panel -------------------------------------------------------------------
+// The dev panel's Sync saves every control's value to GitHub (data/processed/dev-panel-settings.json, read through
+// /api/save-settings). A normal visitor never builds the panel, so setting() found no control and returned the code DEFAULTS:
+// none of the saved settings applied outside dev mode. loadSavedSettings() (called once at boot when the panel will not be
+// built) fetches that saved state, and setting() falls back to it before the defaults. A built panel's live controls still win.
+let savedState = null;
+async function gunzipBase64(b64) {
+    const bin = atob(b64), bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    return new Response(stream).text();
+}
+export async function loadSavedSettings(timeoutMs = 4000) {
+    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), timeoutMs);
+    try {
+        let state = null;
+        try { // the live copy (GitHub, through the Vercel function); not there on the local server
+            const r = await fetch('/api/save-settings', { signal: ctl.signal, cache: 'no-store' });
+            const b = await r.json();
+            if (b && b.ok) state = b.gz ? JSON.parse(await gunzipBase64(b.gz)) : b.settings;
+        } catch (e) { /* fall through to the static copy */ }
+        if (!state) { // the copy committed with the last deployment
+            const r = await fetch('data/processed/dev-panel-settings.json', { signal: ctl.signal, cache: 'no-store' });
+            if (r.ok) state = await r.json();
+        }
+        savedState = state && state.controls ? state : null;
+        return savedState;
+    } catch (e) {
+        return null;
+    } finally { clearTimeout(timer); }
+}
+const coerceSaved = (id, v) => {
+    if (/^(rangeBar|curveEditor)/.test(id)) { if (typeof v === 'string') { try { return JSON.parse(v); } catch (e) { return undefined; } } return v; }
+    if (/^slider/.test(id) && typeof v === 'string') { const n = parseFloat(v); return Number.isNaN(n) ? undefined : n; }
+    return v;
+};
+function savedValue(id) {
+    if (!savedState) return undefined;
+    const dev = activeDevice();
+    if (dev) { // a Mobile / Landscape value that was saved as independent from Desktop
+        const key = dev === 'Mobile' ? 'mobile' : 'landscape';
+        const ind = savedState.devIndependence && savedState.devIndependence[key], vals = savedState.devDeviceValues && savedState.devDeviceValues[key];
+        if (ind && ind[id] && vals && vals[id] !== undefined) return coerceSaved(id, vals[id]);
+    }
+    const v = savedState.controls[id];
+    return v === undefined ? undefined : coerceSaved(id, v);
+}
+
 export function setting(id) {
     const m = id.match(/^(slider|color|select|checkbox|rangeBar|curveEditor)(.+)$/);
     const dev = activeDevice();
@@ -219,5 +267,7 @@ export function setting(id) {
         if (v !== undefined) return v;
     }
     const v = readEl(document.getElementById(id));
-    return v === undefined || (typeof v === 'number' && Number.isNaN(v)) ? DEFAULTS[id] : v;
+    if (v !== undefined && !(typeof v === 'number' && Number.isNaN(v))) return v;
+    const sv = savedValue(id);
+    return sv !== undefined ? sv : DEFAULTS[id];
 }
