@@ -3,6 +3,7 @@
 // viewer to be logged in to Spotify in this browser; otherwise the embed plays a
 // 30-second preview. Whatever is playing (preview or full song) loops when it ends.
 import { logEvent } from './debugLog.js';
+import * as sdk from './sdkPlayer.js';
 let controller = null;
 let lastPausedSeen = null, lastBufSeen = null;
 let queued = null;
@@ -16,6 +17,23 @@ const listeners = new Set();
 const events = (window.__spxEvents = []);
 
 export const onPlayState = fn => listeners.add(fn);
+// ---- Web Playback SDK (full songs + real volume; sdkPlayer.js). Used whenever it is ready; otherwise the iframe embed below plays. ----
+export function initSdkPlayer(onStatus) {
+    sdk.initSdk({
+        onState: (isPlayingNow, info) => { playing = isPlayingNow; if (info && info.duration > 0) lastDur = info.duration; emit(); },
+        onEnded: () => sdkEnded(),
+        onStatus: s => { if (onStatus) onStatus(s); },
+    });
+}
+export const setRealVolume = v => sdk.sdkSetVolume(v);
+export const activateRealPlayer = () => sdk.sdkActivate();
+export const spotifyLoginStatus = () => sdk.sdkStatus();
+function sdkEnded() {
+    if (!wantPlaying) return;
+    if (endedHandler && endedHandler()) return;              // shuffle moves on
+    logEvent('playback', 'SDK song ended: loop (play it again)');
+    if (loadedId) sdk.sdkPlay(loadedId);
+}
 // Called when the playing song reaches its end; return true to say it was handled (shuffle moves on) so the loop restart is skipped.
 let endedHandler = null;
 export const setOnEnded = fn => { endedHandler = fn; };
@@ -80,6 +98,15 @@ export function initEmbed(el, firstTrackId) {
 
 export function playTrack(trackId) {
     wantPlaying = true;
+    if (sdk.sdkReady()) {
+        loadedId = trackId;
+        sdk.sdkPlay(trackId).then(ok => { if (!ok && wantPlaying && loadedId === trackId) playViaEmbed(trackId); }); // SDK refused: the iframe plays it instead
+        return true;
+    }
+    return playViaEmbed(trackId);
+}
+function playViaEmbed(trackId) {
+    wantPlaying = true;
     if (!controller) { queued = trackId; logEvent('playback', `EMBED playTrack ${trackId}: embed not ready yet, queued`); return false; }
     loadedId = trackId;
     logEvent('playback', `EMBED loadUri ${trackId} sent`);
@@ -92,6 +119,7 @@ export function pauseEmbed() {
     queued = null;
     wantPlaying = false;
     logEvent('playback', 'EMBED pause requested');
+    if (sdk.sdkReady()) sdk.sdkPause();
     if (controller) { try { controller.pause(); } catch (e) { /* ignore */ } }
 }
 
@@ -99,6 +127,7 @@ export function pauseEmbed() {
 // loaded, otherwise load and play it.
 export function toggleTrack(trackId) {
     if (playing) { pauseEmbed(); return; }
+    if (sdk.sdkReady() && loadedId === trackId) { wantPlaying = true; sdk.sdkResume(); return; }
     if (controller && loadedId === trackId) {
         wantPlaying = true;
         // play(), not resume(): resume() is a no-op on an embed that was loaded but never started
@@ -113,4 +142,4 @@ export const isPlaying = () => playing;
 export const embedStatus = () => status;
 // 'preview' when the embed reports a ~30 s duration (not logged in, or the iframe can't see the login),
 // 'full' when it reports a longer one, 'unknown' before the first playing update.
-export const embedMode = () => (lastDur <= 0 ? 'unknown' : lastDur <= 31000 ? 'preview(30s)' : 'FULL');
+export const embedMode = () => (sdk.sdkReady() ? 'FULL (Web Playback SDK)' : lastDur <= 0 ? 'unknown' : lastDur <= 31000 ? 'preview(30s)' : 'FULL');

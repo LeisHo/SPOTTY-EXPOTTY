@@ -8,7 +8,7 @@
 // Hand Behaviour / Pose Jump / Render Reordering / Frame Rate Drop logs, hand numbers, grid helper, wireframe etc. are specific
 // to HANDY DANDIES and were left out on purpose.
 import { setting, DEFAULTS, activeDevice } from './settings.js';
-import { embedStatus, isPlaying } from './handoff.js';
+import { embedStatus, isPlaying, embedMode, spotifyLoginStatus } from './handoff.js';
 
 const pageLoadMs = performance.now();
 let paused = false, logsPaused = false, snapshotText = '';
@@ -137,6 +137,7 @@ function buildSnapshot() {
         L.push(`song ${sp.idx + 1} of ${sp.songs.length} (position ${f1(sp.pos)}): ${s.n} - ${s.a} [${s.al}]`);
         L.push(`added ${s.t}, track id ${s.id}, preview clip id ${s.d || 'none'}`);
         L.push(`spotify player: ${isPlaying() ? 'playing' : 'not playing'}, status ${JSON.stringify(embedStatus())}`);
+        L.push(`player mode ${embedMode()}; Spotify login / SDK: ${spotifyLoginStatus()}`);
         L.push(`volume ${sp.volume ? Math.round(sp.volume.get() * 100) + '%' : 'n/a'}`);
     }
     if (setting('checkboxSnapshotAudio') && sp) {

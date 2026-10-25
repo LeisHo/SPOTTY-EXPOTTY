@@ -15,7 +15,8 @@ import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVol
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, embedStatus, embedMode } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus } from './app/handoff.js';
+import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
 import { createBackground } from './app/background.js';
@@ -34,6 +35,12 @@ const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 async function boot() {
     const appStage = document.getElementById('appStage');
     if (!appStage) return;
+    // This page load may be Spotify sending the login popup back with a code: finish the login and close the popup (no app in it).
+    if (await handleRedirectIfAny() && window.opener && !window.opener.closed) {
+        document.body.textContent = 'Logged in to Spotify. You can close this window.';
+        window.close();
+        return;
+    }
     // A normal visitor has no dev panel (it only exists in dev mode), so setting() would see only the code defaults. Load what the dev
     // panel last saved (Sync) first: settings.js falls back to it, and the saved UI layout is applied below.
     if (!document.documentElement.classList.contains('dev-mode')) {
@@ -213,7 +220,7 @@ async function boot() {
     // 0 % the song player is simply stopped and not started (a full mute); above 0 it plays at its own level.
     const volume = initVolume({
         root: el('spxVolume'),
-        onChange: v => { setMasterVolume(v); if (v === 0) { clearTimeout(handoffTimer); pauseEmbed(); handedOff = false; } },
+        onChange: v => { setMasterVolume(v); setRealVolume(v); if (v === 0) { clearTimeout(handoffTimer); pauseEmbed(); handedOff = false; } },
     });
 
     // Evaluate a dev-panel curve ({points, method}) at x in 0..1 -> y in 0..1, with the dev panel's own
@@ -605,6 +612,10 @@ async function boot() {
     const LOGIN_KEY = 'spxLoginOpenedAt';
     function openSpotifyLogin() {
         if (!setting('checkboxSpotifyLoginOnStart')) return;
+        if (hasClientId()) { // the real login (OAuth + Web Playback SDK): needed whenever there is no stored login
+            if (isLoggedIn()) activateRealPlayer(); else loginPopup();
+            return;
+        }
         try {
             const last = +localStorage.getItem(LOGIN_KEY) || 0;
             if (Date.now() - last < 24 * 3600 * 1000) return;
@@ -674,6 +685,23 @@ async function boot() {
     }, 250);
 
     initEmbed(el('spxEmbed'), songs[0].id);
+    // Spotify Web Playback SDK: starts once there is a stored login (and a Client ID in spotifyConfig.js); until then the iframe plays.
+    const refreshLoginButton = () => {
+        const b = document.getElementById('buttonSpotifyLogin');
+        if (!b) return;
+        b.textContent = !hasClientId() ? 'Spotify Login: Client ID Not Set (spotifyConfig.js)'
+            : !isLoggedIn() ? 'Log In With Spotify'
+            : spotifyLoginStatus() === 'ready' ? 'Logged In: Full Songs (Click To Log Out)' : 'Logged In: SDK ' + spotifyLoginStatus() + ' (Click To Log Out)';
+    };
+    initSdkPlayer(refreshLoginButton);
+    onLoginChange(() => { initSdkPlayer(refreshLoginButton); refreshLoginButton(); });
+    setInterval(refreshLoginButton, 1500);
+    document.addEventListener('pointerdown', () => activateRealPlayer(), true); // the SDK wants an activation inside a user gesture
+    document.addEventListener('click', e => {
+        const b = e.target && e.target.closest && e.target.closest('button');
+        if (!b || b.id !== 'buttonSpotifyLogin' || !hasClientId()) return;
+        if (isLoggedIn()) { logout(); setTimeout(() => location.reload(), 150); } else loginPopup();
+    });
     applyLook();
     render();
     timeline.setPos(0);
