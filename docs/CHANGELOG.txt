@@ -799,6 +799,23 @@ clipPlayer.stopClip(fadeMs) takes an optional fade length. Verified in the real 
 (the slider's 0.8) and the preview was stopped with the 250 ms fade (log: HANDOFF full song audible (sdk) after 47ms: crossfading 250ms). Not verified with real audio / the real SDK. The jump in POSITION is a separate matter (the other session's offset logic).
 
 --------------------------------------------------------------------------------
+2026-10-25  -  06:23:22 - 06:28:45 (code pushes: cdb65b9, then the timing line)  Slow song starts outside dev mode / on mobile; startup crash
+
+Report: on mobile, outside dev mode, each song takes very long to start although the play button shows playing; much better in dev mode. Later: on every device and in dev mode the next song takes 1-2 s; wanted immediate.
+Found and fixed:
+1) doHandoff() waits up to 2 s for a preview that has not started ("The handoff reads where the preview is"). With Play Preview Clips OFF (saved) and a login, no preview ever starts, so EVERY song waited the full 2 s. Measured with a fake SDK:
+   song change -> Spotify play request 2028 ms (handoff delay 100 ms) before, 117 ms after; previews ON still waits for the preview (224 ms). Fix: previewClipsOn() (clipPlayer.js) gates the wait.
+2) Preview clips off still PRELOADED dozens of clips (30 s mp3, ~0.5 MB each) that were never played; "behind" was not capped like "ahead" (saved 30 + 30 = ~47 clips per song change). preload() now loads nothing when previews are off; behind is capped at 16 like ahead.
+   On a phone those downloads compete with the Spotify song for the connection.
+3) STARTUP CRASH outside dev mode: the Randomize Starting Song block ran synchronously inside boot() when the saved settings were already loaded (normal mode), calling moveTo() -> render() before "let artistRaw" was initialised
+   ("Cannot access artistRaw before initialization"): the random start never happened and the first song's preload / handoff were never scheduled. Dev mode awaited a fetch first, so it worked there. Fix: await Promise.resolve() first.
+   Verified live (https://spottypotty.vercel.app/ in normal mode): no console errors, random start ok (song 2350, playhead and title in sync).
+4) background.js crossfadeThenRender threw "drawImage ... canvas width or height of 0" when a song changed before the canvases had a size; now it just renders.
+5) If the Spotify SDK does not connect within 8 s (many phone browsers cannot run it) the SDK is given up (sdkGiveUp) so later songs go to the iframe at once instead of waiting 8 s each.
+6) New playback-log line "FULL SONG PLAYING: N ms after the play request, M ms after the song change" to show what is left. What cannot be removed from our side: Spotify needs roughly 0.3-1 s between our play request and sound (not measured on a real phone).
+Not verified: a real phone / real SDK timing. Ideas not built: queue the next song in Spotify so Next is near-instant; keeping preview clips on gives instant sound while the song loads.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
