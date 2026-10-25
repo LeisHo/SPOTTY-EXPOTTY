@@ -149,10 +149,15 @@ export function createTimeline(canvas, data) {
         // start tick's text is left off when a regular tick sits within 40 px of it, so no two labels overlap; the tick mark stays.
         const startX = xOf(vMin);
         if (startX > -10 && startX < W()) {
-            const kept = thinned.filter(t => t.x >= startX - 1);
+            // The first year's tick goes at 1 January of that year, where the year really is on the timeline. If that is off the left
+            // edge (the data starts after 1 January), it stays at the first date so the year is still shown.
+            const firstYear = new Date(realOf(vMin)).getFullYear();
+            const jan1X = xOf(vtOfReal(new Date(firstYear, 0, 1).getTime()));
+            const tickX = jan1X > -10 && jan1X < W() ? jan1X : startX;
+            const kept = thinned.filter(t => t.x >= tickX - 1 && Math.abs(t.x - tickX) >= 1); // the same 1 January tick is not drawn twice
             // a year label printed right beside the start would sit on top of the first year: that label loses its text (its tick stays)
-            kept.forEach(t => { if (Math.abs(t.x - startX) < 30) t.text = ''; });
-            kept.push({ x: startX, text: label(new Date(realOf(vMin))) });
+            kept.forEach(t => { if (Math.abs(t.x - tickX) < 30) t.text = ''; });
+            kept.push({ x: tickX, text: label(new Date(realOf(vMin))) });
             kept.sort((a, b) => a.x - b.x);
             return kept;
         }

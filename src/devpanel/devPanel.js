@@ -7786,7 +7786,7 @@
         if (elementName === 'Artist') add({ tab, id: 'textArtistSeparator', type: 'text', label: 'Artist Name Separator:', value: ';' }, elemContent);
         if (elementName === 'Artist') add({ tab, id: 'sliderArtistSeparatorPct', type: 'slider', label: 'Separator Font Size (% Of Artist):', min: 10, max: 300, step: 1, value: 100 }, elemContent);
         // Scale Down If Multiline (Song Title and Artist): the line limit is only shown while the checkbox is on
-        const MULTI_KEYS = { 'Song Title': 'Title', 'Artist': 'Artist' };
+        const MULTI_KEYS = { 'Song Title': 'Title', 'Artist': 'Artist', 'Album & Date': 'AlbumDate' };
         if (MULTI_KEYS[elementName]) {
             const k = MULTI_KEYS[elementName];
             const multiRow = add({ tab, id: 'checkboxScale' + k + 'Multiline', type: 'checkbox', label: 'Scale Down If Multiline:', value: false }, elemContent);
@@ -7797,6 +7797,9 @@
             setInterval(syncMaxLines, 700); // catches the saved state restored after the panel is built
             syncMaxLines();
         }
+        // Scale Down to Match: this element's font size is capped at the size of the element above it (Artist -> Song Title, Album & Date -> Artist)
+        if (elementName === 'Artist') add({ tab, id: 'checkboxScaleArtistToMatch', type: 'checkbox', label: 'Scale Down to Match Song Title', value: false }, elemContent);
+        if (elementName === 'Album & Date') add({ tab, id: 'checkboxScaleAlbumDateToMatch', type: 'checkbox', label: 'Scale Down to Match Artist', value: false }, elemContent);
         const outlineSec = createDevGroupElement('Outline', tab);
         elemContent.appendChild(outlineSec);
         const outlineContent = outlineSec.querySelector(':scope > .dev-section-content');

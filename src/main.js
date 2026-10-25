@@ -368,13 +368,17 @@ async function boot() {
     // margin/position changes, so it can't fight the Layout Engine for ownership of these boxes.
     const TEXT_ELEMENTS = [['SongTitle', () => el('spxTitle')], ['Artist', () => el('spxArtist')], ['AlbumDate', () => el('spxMeta')]];
     function applyTextElementStyles() {
+        const effective = {}; // the final font size of each element, for the Scale Down to Match options
         TEXT_ELEMENTS.forEach(([p, getNode]) => {
             const node = getNode();
             if (!node) return;
             const enabled = setting('checkboxTxt' + p + 'Enabled');
             node.style.display = enabled ? '' : 'none';
             if (!enabled) return;
-            const size = setting('sliderTxt' + p + 'FontSize');
+            let size = setting('sliderTxt' + p + 'FontSize');
+            // Scale Down to Match: Artist is capped at the Song Title's final size, Album & Date at the Artist's
+            const matchOf = { Artist: 'SongTitle', AlbumDate: 'Artist' }[p];
+            if (matchOf && setting('checkboxScale' + p + 'ToMatch') && effective[matchOf] !== undefined) size = Math.min(size, effective[matchOf]);
             const overflow = setting('selectTxt' + p + 'Overflow');
             const st = node.style;
             st.color = setting('colorTxt' + p + 'Color');
@@ -394,7 +398,7 @@ async function boot() {
             else { st.whiteSpace = setting('checkboxTxt' + p + 'WordWrap') ? 'pre-line' : 'nowrap'; st.overflow = ''; st.textOverflow = ''; }
             st.fontSize = size + 'px';
             // Scale Down If Multiline (Song Title, Artist): shrink the font until the text wraps to at most the line limit
-            const multi = { SongTitle: 'Title', Artist: 'Artist' }[p];
+            const multi = { SongTitle: 'Title', Artist: 'Artist', AlbumDate: 'AlbumDate' }[p];
             if (multi && overflow !== 'scale' && setting('checkboxScale' + multi + 'Multiline')) {
                 const maxLines = setting('slider' + multi + 'MaxLines');
                 const lineMul = parseFloat(st.lineHeight) || 1.2;
@@ -410,6 +414,7 @@ async function boot() {
                 let fs = size;
                 while (fs > 6 && node.scrollWidth > node.clientWidth) { fs -= 1; st.fontSize = fs + 'px'; }
             }
+            effective[p] = parseFloat(st.fontSize);
         });
     }
     // The graph's box: full browser height on desktop (so bars reach the top). On a phone the height comes from that device's

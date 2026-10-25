@@ -151,6 +151,8 @@ export const DEFAULTS = {
     sliderVolIconOffsetX: 0,
     checkboxScaleTitleMultiline: false, sliderTitleMaxLines: 2,
     checkboxScaleArtistMultiline: false, sliderArtistMaxLines: 2,
+    checkboxScaleAlbumDateMultiline: false, sliderAlbumDateMaxLines: 2,
+    checkboxScaleArtistToMatch: false, checkboxScaleAlbumDateToMatch: false,
     textArtistSeparator: ';', // what joins the names when a track has several artists (the data stores them with ';')
     sliderArtistSeparatorPct: 100,
     sliderNavEdgeOffset: 14,
