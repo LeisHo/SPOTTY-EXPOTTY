@@ -130,8 +130,8 @@
     "checkboxTxtArtistWordWrap": true,
     "sliderTxtArtistMaxWidth": 900,
     "selectTxtArtistOverflow": "wrap",
-    "textArtistSeparator": ";",
-    "sliderArtistSeparatorPct": 100,
+    "textArtistSeparator": "  &.  ",
+    "sliderArtistSeparatorPct": 77,
     "checkboxScaleArtistMultiline": true,
     "sliderArtistMaxLines": 2,
     "checkboxTxtArtistOutlineEnabled": false,
@@ -333,10 +333,10 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 30,
-    "top": 6,
+    "left": 26,
+    "top": 95,
     "width": 344,
-    "height": 510
+    "height": 80
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -15586,14 +15586,14 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": true,
+    "desktop:Text": false,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
-    "desktop:Artist": true,
+    "desktop:Artist": false,
     "desktop:Album & Date": true,
-    "desktop:New Group (7)": false,
+    "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:Play Button": false,
     "desktop:Play Button Animation": true,
