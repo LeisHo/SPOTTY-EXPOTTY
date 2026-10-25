@@ -447,20 +447,32 @@ export function createTimeline(canvas, data) {
         }
 
         // exact add date/time of the current song: under the graph, above the scale text
-        if (dateLine) {
-            ctx.globalAlpha = 1;
-            ctx.fillStyle = playheadColor;
-            ctx.font = `bold 13px ${getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif'}`;
+        if (dateLine && setting('checkboxSongAddDateEnabled')) {
+            ctx.globalAlpha = setting('sliderSongAddDateOpacity');
+            ctx.fillStyle = setting('colorSongAddDate');
+            ctx.font = `${setting('checkboxSongAddDateBold') ? 'bold ' : ''}${setting('sliderSongAddDateFontSize')}px ${getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif'}`;
+            ctx.letterSpacing = `${setting('sliderSongAddDateLetterSpacing')}px`;
             ctx.textAlign = 'center';
             ctx.fillText(dateLine, w / 2, h - axisH - dateH / 2 + 4.5); // centred in the strip between the graph and the scale text
             ctx.textAlign = 'start';
+            ctx.letterSpacing = '0px';
         }
 
         // axis
-        ctx.globalAlpha = 0.6;
-        ctx.fillStyle = playheadColor;
-        ctx.font = '11px system-ui, sans-serif';
-        ticks().forEach(t => { ctx.fillRect(t.x, h - axisH, 1, 5); ctx.fillText(t.text, t.x + 3, h - 4); });
+        // Timeline Scale: the scale numbers and the tick marks each have their own settings
+        const numFont = `${setting('checkboxScaleNumbersBold') ? 'bold ' : ''}${setting('sliderScaleNumbersFontSize')}px system-ui, sans-serif`;
+        const tickTop = h - axisH - Math.max(0, setting('sliderTickStartHeight'));
+        ctx.letterSpacing = `${setting('sliderScaleNumbersLetterSpacing')}px`;
+        ticks().forEach(t => {
+            ctx.globalAlpha = setting('sliderTickOpacity');
+            ctx.fillStyle = setting('colorTickMark');
+            ctx.fillRect(t.x, tickTop, setting('sliderTickWidth'), setting('sliderTickHeight'));
+            ctx.globalAlpha = setting('sliderScaleNumbersOpacity');
+            ctx.fillStyle = setting('colorScaleNumbers');
+            ctx.font = numFont;
+            ctx.fillText(t.text, t.x + 3, h - 4);
+        });
+        ctx.letterSpacing = '0px';
 
         // individual song ticks when zoomed in far enough to tell songs apart
         if (i1 - i0 > 0 && (i1 - i0) * 4 < w) {
@@ -473,7 +485,8 @@ export function createTimeline(canvas, data) {
         ctx.globalAlpha = 1;
         ctx.fillStyle = playheadColor;
         const phW = Math.max(1, setting('sliderPlayheadWidth')), phH = Math.max(1, ((h - axisH) * setting('sliderPlayheadHeight')) / 100);
-        ctx.fillRect(Math.round(xOf(posToVt(pos)) - phW / 2), (h - axisH) - phH, phW, phH);
+        const phBottom = (h - axisH) - Math.max(0, setting('sliderPlayheadStartHeight'));
+        ctx.fillRect(Math.round(xOf(posToVt(pos)) - phW / 2), phBottom - phH, phW, phH);
 
         // Album Colour Transition: the frame from before the change, fading out over the duration on top of the new frame
         if (colorFade) {

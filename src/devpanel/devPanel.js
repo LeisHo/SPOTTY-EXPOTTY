@@ -7858,6 +7858,7 @@
             { tab, group: TL, id: 'sliderTimelineScaleGap', type: 'slider', label: 'Space Between Graph And Scale Text (Px):', min: -18, max: 120, step: 1, value: 0 },
             { tab, group: TL, id: 'sliderPlayheadWidth', type: 'slider', label: 'Scrub Line Width (Px):', min: 1, max: 24, step: 0.5, value: 2 },
             { tab, group: TL, id: 'sliderPlayheadHeight', type: 'slider', label: 'Scrub Line Height (% Of Timeline):', min: 5, max: 100, step: 1, value: 100 },
+            { tab, group: TL, id: 'sliderPlayheadStartHeight', type: 'slider', label: 'Scrub Line Start Height (Px Above The Scale Line):', min: 0, max: 400, step: 1, value: 0 },
             // Integer-valued dual-handle control, so it is a 0-100 % log scale: 0 = 2 minutes visible, 100 = the whole timeline.
             { tab, group: TL, id: 'rangeBarTimelineZoomLimits', type: 'range-bar', label: 'Zoom Limits (% zoomed out, log scale):', trackMin: 0, trackMax: 100, unit: '%', defaultValue: { min: 0, max: 100 } },
             { tab, group: 'UI Layout', id: 'buttonOpenLayoutInspector', type: 'button', label: 'Open UI Layout Inspector', skipDeviceCheckbox: true },
@@ -7901,6 +7902,38 @@
         ];
         renderControlArray(VS_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_VISUAL_STYLE_CONTROLS', VS_CONTROLS);
+
+        // Timeline Scale: the scale numbers and tick marks under the graph, and the Song Add Date line
+        const TSC = 'Timeline Scale', SN = 'Scale Numbers', TK = 'Ticks', SAD = 'Song Add Date';
+        findGroupContent(tab, TL, 'renderSpottyDevControls', TSC).appendChild(createDevGroupElement(TSC, tab));
+        findGroupContent(tab, TSC, 'renderSpottyDevControls', SN).appendChild(createDevGroupElement(SN, tab));
+        findGroupContent(tab, TSC, 'renderSpottyDevControls', TK).appendChild(createDevGroupElement(TK, tab));
+        const TS_CONTROLS = [
+            { tab, group: SN, id: 'sliderScaleNumbersFontSize', type: 'slider', label: 'Font Size (Px):', min: 6, max: 60, step: 1, value: 11 },
+            { tab, group: SN, id: 'checkboxScaleNumbersBold', type: 'checkbox', label: 'Bold', value: false },
+            { tab, group: SN, id: 'colorScaleNumbers', type: 'color', label: 'Font Color:', value: '#ffffff' },
+            { tab, group: SN, id: 'sliderScaleNumbersLetterSpacing', type: 'slider', label: 'Letter Spacing (Px):', min: -5, max: 30, step: 0.1, value: 0 },
+            { tab, group: SN, id: 'sliderScaleNumbersOpacity', type: 'slider', label: 'Opacity:', min: 0, max: 1, step: 0.01, value: 0.6 },
+            { tab, group: TK, id: 'colorTickMark', type: 'color', label: 'Color:', value: '#ffffff' },
+            { tab, group: TK, id: 'sliderTickOpacity', type: 'slider', label: 'Opacity:', min: 0, max: 1, step: 0.01, value: 0.6 },
+            { tab, group: TK, id: 'sliderTickWidth', type: 'slider', label: 'Width (Px):', min: 1, max: 10, step: 0.5, value: 1 },
+            { tab, group: TK, id: 'sliderTickHeight', type: 'slider', label: 'Height (Px):', min: 1, max: 60, step: 1, value: 5 },
+            { tab, group: TK, id: 'sliderTickStartHeight', type: 'slider', label: 'Start Height (Px Above The Scale Line):', min: 0, max: 100, step: 1, value: 0 },
+        ];
+        renderControlArray(TS_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_TIMELINE_SCALE_CONTROLS', TS_CONTROLS);
+        findGroupContent(tab, TL, 'renderSpottyDevControls', SAD).appendChild(createDevGroupElement(SAD, tab));
+        const SAD_CONTROLS = [
+            { tab, group: SAD, id: 'checkboxSongAddDateEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: SAD, id: 'sliderSongAddDateFontSize', type: 'slider', label: 'Font Size (Px):', min: 6, max: 60, step: 1, value: 13 },
+            { tab, group: SAD, id: 'checkboxSongAddDateBold', type: 'checkbox', label: 'Bold', value: true },
+            { tab, group: SAD, id: 'colorSongAddDate', type: 'color', label: 'Font Color:', value: '#ffffff' },
+            { tab, group: SAD, id: 'sliderSongAddDateLetterSpacing', type: 'slider', label: 'Letter Spacing (Px):', min: -5, max: 30, step: 0.1, value: 0 },
+            { tab, group: SAD, id: 'sliderSongAddDateOpacity', type: 'slider', label: 'Opacity:', min: 0, max: 1, step: 0.01, value: 1 },
+        ];
+        renderControlArray(SAD_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SONG_ADD_DATE_CONTROLS', SAD_CONTROLS);
+        makeDevGroupToggleable(tab, SAD, 'checkboxSongAddDateEnabled');
 
         // "Album Cover Colors": a toggleable group nested inside Timeline Look (created after
         // Timeline Look's own rows so it sits below them).
