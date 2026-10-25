@@ -7,6 +7,7 @@
     "sliderClipStartMax": 28,
     "sliderClipFadeOut": 500,
     "checkboxColdStartClips": true,
+    "checkboxRandomStartSong": false,
     "sliderPreloadAhead": 21,
     "sliderPreloadBehind": 21,
     "checkboxShowPoolOverlay": false,
@@ -16,12 +17,14 @@
     "checkboxInvertZoomDrag": false,
     "sliderDefaultTimelineSpanDays": 5000,
     "checkboxHandoffEnabled": true,
-    "sliderHandoffDelay": 0,
+    "sliderHandoffDelay": 100,
     "colorTimelineAccent": "#ffffff",
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 10,
     "sliderTimelineHeight": 375,
+    "sliderPlayheadWidth": 2,
+    "sliderPlayheadHeight": 100,
     "rangeBarTimelineZoomLimits": "{\"min\":72,\"max\":100}",
     "selectTimelineStyle": "density",
     "sliderGlowStemWidth": 2,
@@ -59,13 +62,27 @@
     "sliderStartSpanCurveMinDays": 7,
     "sliderStartSpanCurveMaxDays": 1200,
     "checkboxStartSpanApplyOnJump": true,
-    "sliderTouchScrubSpeed": 1,
-    "sliderTouchScrubAcceleration": 0,
+    "sliderTouchScrubSpeed": 0.05,
+    "sliderTouchScrubAcceleration": 3.75,
     "sliderTouchStartThreshold": 4,
     "checkboxInvertTouchScrub": false,
-    "sliderPinchZoomSpeed": 1,
+    "sliderPinchZoomSpeed": 1.75,
     "checkboxInvertPinch": false,
     "selectUiFont": "Poppins",
+    "checkboxVolumeButtonEnabled": true,
+    "sliderVolIconSize": 24,
+    "sliderVolCircleRadius": 7,
+    "sliderVolBarWidth": 8,
+    "sliderVolBarLength": 130,
+    "colorVolBarFill": "#1db954",
+    "colorVolBarTrack": "#ffffff",
+    "colorVolCircle": "#ffffff",
+    "sliderVolHoverTolerance": 30,
+    "sliderVolAnimDuration": 350,
+    "curveEditorVolAnimSpeedCurve": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0.35}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "sliderCoverScale": 1,
+    "sliderCoverOffsetX": 0,
+    "sliderCoverOffsetY": 0,
     "checkboxTitleAnimEnabled": true,
     "selectTitleAnimMode": "grow",
     "sliderTitleAnimDuration": 110,
@@ -114,6 +131,8 @@
     "sliderChromaGrayscaleThreshold": 85,
     "sliderBlurRadius": 165,
     "sliderBlurScale": 0.5,
+    "sliderBlurOffsetX": 0,
+    "sliderBlurOffsetY": 0,
     "sliderBlurDarken": 0.28,
     "selectPaletteGradientType": "linear",
     "sliderPaletteRotation": 160,
@@ -121,14 +140,15 @@
     "selectSpotlightColorSource": "average",
     "sliderSpotlightRadius": 61,
     "sliderSpotlightIntensity": 0.9,
+    "sliderSpotlightMaxBrightness": 100,
     "checkboxSpotlightFollowCover": false,
     "sliderSpotlightCenterX": 50,
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12"
   },
   "layout": {
-    "left": 20,
-    "top": 46,
+    "left": 45,
+    "top": 215,
     "width": 340,
     "height": 494
   },
@@ -1427,6 +1447,10 @@
           {
             "type": "row",
             "key": "checkboxColdStartClips"
+          },
+          {
+            "type": "row",
+            "key": "checkboxRandomStartSong"
           }
         ],
         "rowKeys": [
@@ -1435,7 +1459,8 @@
           "sliderClipStartMin",
           "sliderClipStartMax",
           "sliderClipFadeOut",
-          "checkboxColdStartClips"
+          "checkboxColdStartClips",
+          "checkboxRandomStartSong"
         ],
         "subgroups": []
       },
@@ -1835,6 +1860,14 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "sliderPlayheadWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderPlayheadHeight"
           }
         ],
         "rowKeys": [
@@ -1861,7 +1894,9 @@
           "selectRibbonFeature",
           "sliderRibbonThickness",
           "sliderRibbonSmoothing",
-          "sliderRibbonBarsOpacity"
+          "sliderRibbonBarsOpacity",
+          "sliderPlayheadWidth",
+          "sliderPlayheadHeight"
         ],
         "subgroups": [
           {
@@ -2176,6 +2211,18 @@
                 {
                   "type": "row",
                   "key": "colorSpotlightEdgeColor"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderBlurOffsetX"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderBlurOffsetY"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSpotlightMaxBrightness"
                 }
               ],
               "rowKeys": [
@@ -2215,7 +2262,10 @@
                 "checkboxSpotlightFollowCover",
                 "sliderSpotlightCenterX",
                 "sliderSpotlightCenterY",
-                "colorSpotlightEdgeColor"
+                "colorSpotlightEdgeColor",
+                "sliderBlurOffsetX",
+                "sliderBlurOffsetY",
+                "sliderSpotlightMaxBrightness"
               ],
               "subgroups": []
             }
@@ -2232,6 +2282,93 @@
               ],
               "rowKeys": [
                 "selectUiFont"
+              ],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Volume Button",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderVolIconSize"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderVolCircleRadius"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderVolBarWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderVolBarLength"
+                },
+                {
+                  "type": "row",
+                  "key": "colorVolBarFill"
+                },
+                {
+                  "type": "row",
+                  "key": "colorVolBarTrack"
+                },
+                {
+                  "type": "row",
+                  "key": "colorVolCircle"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderVolHoverTolerance"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderVolAnimDuration"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorVolAnimSpeedCurve"
+                }
+              ],
+              "rowKeys": [
+                "sliderVolIconSize",
+                "sliderVolCircleRadius",
+                "sliderVolBarWidth",
+                "sliderVolBarLength",
+                "colorVolBarFill",
+                "colorVolBarTrack",
+                "colorVolCircle",
+                "sliderVolHoverTolerance",
+                "sliderVolAnimDuration",
+                "curveEditorVolAnimSpeedCurve"
+              ],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Album Cover",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderCoverScale"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderCoverOffsetX"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderCoverOffsetY"
+                }
+              ],
+              "rowKeys": [
+                "sliderCoverScale",
+                "sliderCoverOffsetX",
+                "sliderCoverOffsetY"
               ],
               "subgroups": []
             }
@@ -2507,6 +2644,18 @@
               {
                 "type": "row",
                 "key": "colorSpotlightEdgeColor"
+              },
+              {
+                "type": "row",
+                "key": "sliderBlurOffsetX"
+              },
+              {
+                "type": "row",
+                "key": "sliderBlurOffsetY"
+              },
+              {
+                "type": "row",
+                "key": "sliderSpotlightMaxBrightness"
               }
             ],
             "rowKeys": [
@@ -2546,7 +2695,10 @@
               "checkboxSpotlightFollowCover",
               "sliderSpotlightCenterX",
               "sliderSpotlightCenterY",
-              "colorSpotlightEdgeColor"
+              "colorSpotlightEdgeColor",
+              "sliderBlurOffsetX",
+              "sliderBlurOffsetY",
+              "sliderSpotlightMaxBrightness"
             ],
             "subgroups": []
           },
@@ -2560,6 +2712,87 @@
             ],
             "rowKeys": [
               "selectUiFont"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:Volume Button",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderVolIconSize"
+              },
+              {
+                "type": "row",
+                "key": "sliderVolCircleRadius"
+              },
+              {
+                "type": "row",
+                "key": "sliderVolBarWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderVolBarLength"
+              },
+              {
+                "type": "row",
+                "key": "colorVolBarFill"
+              },
+              {
+                "type": "row",
+                "key": "colorVolBarTrack"
+              },
+              {
+                "type": "row",
+                "key": "colorVolCircle"
+              },
+              {
+                "type": "row",
+                "key": "sliderVolHoverTolerance"
+              },
+              {
+                "type": "row",
+                "key": "sliderVolAnimDuration"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorVolAnimSpeedCurve"
+              }
+            ],
+            "rowKeys": [
+              "sliderVolIconSize",
+              "sliderVolCircleRadius",
+              "sliderVolBarWidth",
+              "sliderVolBarLength",
+              "colorVolBarFill",
+              "colorVolBarTrack",
+              "colorVolCircle",
+              "sliderVolHoverTolerance",
+              "sliderVolAnimDuration",
+              "curveEditorVolAnimSpeedCurve"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:Album Cover",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderCoverScale"
+              },
+              {
+                "type": "row",
+                "key": "sliderCoverOffsetX"
+              },
+              {
+                "type": "row",
+                "key": "sliderCoverOffsetY"
+              }
+            ],
+            "rowKeys": [
+              "sliderCoverScale",
+              "sliderCoverOffsetX",
+              "sliderCoverOffsetY"
             ],
             "subgroups": []
           }
@@ -3256,6 +3489,24 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Volume Button",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Album Cover",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -3276,6 +3527,18 @@
           },
           {
             "key": "mobile:Font",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Volume Button",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Album Cover",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -3973,6 +4236,24 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Volume Button",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Album Cover",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -3996,6 +4277,18 @@
             "items": [],
             "rowKeys": [],
             "subgroups": []
+          },
+          {
+            "key": "landscape:Volume Button",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:Album Cover",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       }
@@ -4004,30 +4297,32 @@
   "sectionCollapseState": {
     "desktop:Saved Dev Settings": true,
     "desktop:Dev Panel": true,
-    "desktop:MECHANICS": false,
-    "desktop:PANEL UI": false,
-    "desktop:TEXT": false,
-    "desktop:Dev Panel Title": false,
-    "desktop:Group Title": false,
-    "desktop:Setting Title": false,
-    "desktop:TABS": false,
-    "desktop:BUTTONS": false,
-    "desktop:Hot Keys": false,
+    "desktop:MECHANICS": true,
+    "desktop:PANEL UI": true,
+    "desktop:TEXT": true,
+    "desktop:Dev Panel Title": true,
+    "desktop:Group Title": true,
+    "desktop:Setting Title": true,
+    "desktop:TABS": true,
+    "desktop:BUTTONS": true,
+    "desktop:Hot Keys": true,
     "desktop:Debug": true,
-    "desktop:Mouse Log": false,
+    "desktop:Mouse Log": true,
     "desktop:Scrub Audio": true,
     "desktop:Scrub Preload": true,
-    "desktop:Scrub Input": true,
-    "desktop:Wheel Scrub Per Notch Curve": false,
+    "desktop:Scrub Input": false,
+    "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Touch Scrub And Pinch": true,
-    "desktop:Spotify Handoff": false,
-    "desktop:Timeline Look": false,
-    "desktop:Album Cover Colors": false,
-    "desktop:UI Layout": false,
+    "desktop:Touch Scrub And Pinch": false,
+    "desktop:Spotify Handoff": true,
+    "desktop:Timeline Look": true,
+    "desktop:Album Cover Colors": true,
+    "desktop:UI Layout": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Background": true,
     "desktop:Font": true,
+    "desktop:Volume Button": true,
+    "desktop:Album Cover": true,
     "mobile:Dev Panel": true,
     "mobile:MECHANICS": false,
     "mobile:PANEL UI": false,
@@ -4052,6 +4347,8 @@
     "mobile:Track Title Button Animation": false,
     "mobile:Background": false,
     "mobile:Font": false,
+    "mobile:Volume Button": false,
+    "mobile:Album Cover": false,
     "landscape:Dev Panel": true,
     "landscape:MECHANICS": false,
     "landscape:PANEL UI": false,
@@ -4075,7 +4372,9 @@
     "landscape:UI Layout": false,
     "landscape:Track Title Button Animation": false,
     "landscape:Background": false,
-    "landscape:Font": false
+    "landscape:Font": false,
+    "landscape:Volume Button": false,
+    "landscape:Album Cover": false
   },
   "devTextOverrides": {
     "sliderMobileDevPanelTitleFontSize": null,
@@ -4156,7 +4455,11 @@
     "landscape:TABS": null,
     "landscape:BUTTONS": null,
     "landscape:TEXT": null,
-    "landscape:Hot Keys": null
+    "landscape:Hot Keys": null,
+    "mobile:Volume Button": null,
+    "mobile:Album Cover": null,
+    "landscape:Volume Button": null,
+    "landscape:Album Cover": null
   },
   "devTextOverridesManual": [],
   "lockedGroups": [
@@ -4200,6 +4503,7 @@
     "mobile": {},
     "landscape": {}
   },
+  "perMode": {},
   "extra": {
     "uiLayout": {
       "appStage": {
