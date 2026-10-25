@@ -16,7 +16,7 @@ import { initVolume } from './app/volume.js';
 import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, getProgress, seekTo } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo } from './app/handoff.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
@@ -60,10 +60,11 @@ async function boot() {
             <canvas class="ui-element spx-timeline" id="spxTimeline"></canvas>
             <button class="ui-element spx-cover bs-host" id="spxCover" type="button" aria-label="Play">
                 <img id="spxCoverImg" alt="" draggable="false" crossorigin="anonymous">
-                <span class="spx-play-glyph"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M7 4l13 8-13 8z"/><path class="ico-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></span><div class="spx-songbar" id="spxSongBar"><div class="spx-songbar-empty"></div><div class="spx-songbar-fill"></div><div class="spx-songbar-hit" id="spxSongBarHit"></div><div class="spx-songbar-marker"></div></div>
+                <span class="spx-play-glyph"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M7 4l13 8-13 8z"/><path class="ico-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></span>
             </button>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
             <div class="spx-sdk-status" id="spxSdkStatus" hidden></div>
+            <div class="spx-songbar" id="spxSongBar"><div class="spx-songbar-empty"></div><div class="spx-songbar-fill"></div><div class="spx-songbar-hit" id="spxSongBarHit"></div><div class="spx-songbar-marker"></div></div>
             <button class="ui-element spx-nav bs-host" id="spxPrev" type="button" aria-label="Previous song"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14L6 12z"/></svg></button>
             <button class="ui-element spx-nav bs-host" id="spxNext" type="button" aria-label="Next song"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14l12-7z"/></svg></button>
             <div class="ui-element spx-volume" id="spxVolume">
@@ -331,7 +332,6 @@ async function boot() {
         timeline.draw();
     })();
     document.addEventListener('input', e => { if (/StartSpanCurve/.test((e.target && e.target.id) || '')) applyStartSpan(false); });
-    window.addEventListener('dblclick', e => { if (e.target.id === 'spxTimeline') applyStartSpan(true); });
     // Only the keys Home and End (and the double-click) apply the Starting Span, and only when that option is on.
     // Next / Last and shuffle never change the zoom: the zoom changes only when you change it.
     const afterJump = () => { if (setting('checkboxStartSpanApplyOnJump')) applyStartSpan(false); };
@@ -536,8 +536,8 @@ async function boot() {
         sbStyle.setProperty('--sb-fill', setting('colorSongBarFill'));
         sbStyle.setProperty('--sb-empty', setting('colorSongBarEmpty'));
         sbStyle.setProperty('--sb-op', String(sbBase));
-        sbStyle.setProperty('--sb-hover-op', String(sbAnim ? setting('sliderSongBarHoverOpacity') / 100 : sbBase));
-        sbStyle.setProperty('--sb-click-op', String(sbAnim ? setting('sliderSongBarClickOpacity') / 100 : sbBase));
+        sbStyle.setProperty('--sb-hover-op', String(setting('sliderSongBarHoverOpacity') / 100));
+        sbStyle.setProperty('--sb-click-op', String(setting('sliderSongBarClickOpacity') / 100));
         sbStyle.setProperty('--sb-time', setting('sliderSongBarAnimTime') + 'ms');
         sbStyle.setProperty('--sb-mr', setting('sliderSongBarMarkerRadius') + 'px');
         sbStyle.setProperty('--sb-mop', String(setting('sliderSongBarMarkerOpacity') / 100));
@@ -683,7 +683,7 @@ async function boot() {
         const doHandoff = () => {
             if (previewClipsOn() && clipKey(songs[idx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
             handoffPending = false;
-            const ok = isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0;
+            const ok = interacted && isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0;
             logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[idx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
             if (ok) {
                 // The full song starts where the preview is now (+ the Full Song Start Offset), not at 0:00
@@ -724,7 +724,7 @@ async function boot() {
     // ---- input ---------------------------------------------------------------------------
     // Desktop: wheel = scrub (a notch moves the playhead N px along the current scale), click on the
     // timeline = jump, click-drag = zoom around the playhead. Touch: drag = scrub, pinch = zoom, tap = jump.
-    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxCover, #spxVolume, a, button, input, select, textarea');
+    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxCover, #spxVolume, #spxSongBar, a, button, input, select, textarea');
     // The title/artist/album lines are selectable text: a drag that starts on them selects it instead of zooming.
     const inText = t => t.closest && t.closest('.spx-title, .spx-artist, .spx-meta');
     window.addEventListener('wheel', e => {
@@ -761,7 +761,7 @@ async function boot() {
     window.addEventListener('pointerdown', e => {
         redirectBtn = null;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
-        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxVolume')) return;
+        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxVolume, #spxSongBar')) return;
         redirectBtn = buttonUnder(e.clientX, e.clientY) || null;
     }, true);
     window.addEventListener('click', e => {
@@ -934,7 +934,7 @@ async function boot() {
     // handoff timer, which only runs after a song change, so nothing played until a second input. Returns false when the preview
     // clip should play instead (handoff off, muted, or sound still locked).
     const startSpotifyNow = () => {
-        if (isPlaying()) return true; // already playing (e.g. Run Startup over a song that plays): leave it alone
+        if (isPlaying() && playingId() === songs[idx].id) return true; // already playing this song: leave it alone
         if (!isUnlocked() || !setting('checkboxHandoffEnabled') || volume.get() <= 0) return false;
         clearTimeout(handoffTimer); handoffPending = false; previewHold = null;
         stopClip(); handedOff = true; toggleTrack(songs[idx].id);
@@ -1006,6 +1006,22 @@ async function boot() {
         sbMarker.style.left = (f * 100) + '%';
     }
     setInterval(() => { if (sbFrac === null) sbRender(); }, 200);
+    // The bar sits on the cover's bottom edge: placed from the cover's real on-screen box (scale and moves included)
+    function sbPlace() {
+        const c = el('spxCover').getBoundingClientRect(), host = sbBar.parentElement.getBoundingClientRect();
+        const h = parseFloat(getComputedStyle(sbBar).height) || 4;
+        sbBar.style.left = (c.left - host.left) + 'px';
+        sbBar.style.width = c.width + 'px';
+        sbBar.style.top = (c.bottom - host.top - h) + 'px';
+        sbBar.style.bottom = 'auto';
+    }
+    sbPlace(); setInterval(sbPlace, 150);
+    // Hover: the pointer is over the album cover (the timeline canvas sits above it, so the cover itself gets no hover)
+    window.addEventListener('pointermove', e => {
+        if (e.pointerType === 'touch') return;
+        const c = el('spxCover').getBoundingClientRect();
+        sbBar.classList.toggle('hov', e.clientX >= c.left && e.clientX <= c.right && e.clientY >= c.top && e.clientY <= c.bottom);
+    });
     function sbSeek(e, force) {
         const now = performance.now();
         if (!force && now - sbSeekAt < 120) return; // a drag seeks at most every 120 ms
@@ -1015,12 +1031,12 @@ async function boot() {
     }
     const sbDown = e => {
         e.stopPropagation(); e.preventDefault();
-        sbFrac = sbPos(e); el('spxCover').classList.add('sb-press');
+        sbFrac = sbPos(e); sbBar.classList.add('press');
         try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) { /* synthetic event: carry on */ }
         sbSeek(e, true); sbRender();
     };
     const sbMove = e => { if (sbFrac === null) return; sbFrac = sbPos(e); sbSeek(e, false); sbRender(); };
-    const sbUp = e => { if (sbFrac === null) return; sbSeek(e, true); sbFrac = null; el('spxCover').classList.remove('sb-press'); sbRender(); };
+    const sbUp = e => { if (sbFrac === null) return; sbSeek(e, true); sbFrac = null; sbBar.classList.remove('press'); sbRender(); };
     [sbHit, sbMarker].forEach(h => {
         h.addEventListener('pointerdown', sbDown);
         h.addEventListener('pointermove', sbMove);

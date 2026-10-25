@@ -8086,7 +8086,6 @@
         registerDevControlArray('SPOTTY_SONGBAR', SONG_CONTROLS);
         makeDevGroupToggleable(tab, SONG, 'checkboxSongBarEnabled');
         const SONGA_CONTROLS = [
-            { tab, group: SONGA, id: 'checkboxSongBarAnimEnabled', type: 'checkbox', label: 'Enabled', value: false },
             { tab, group: SONGA, id: 'sliderSongBarHoverOpacity', type: 'slider', label: 'Opacity On Album Cover Hover (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: SONGA, id: 'sliderSongBarClickOpacity', type: 'slider', label: 'Opacity On Click (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: SONGA, id: 'sliderSongBarAnimTime', type: 'slider', label: 'Animation Duration (Ms):', min: 0, max: 1500, step: 10, value: 160 },
@@ -8094,7 +8093,6 @@
         findGroupContent(tab, SONG, 'renderSpottyDevControls', 'checkboxSongBarEnabled').appendChild(createDevGroupElement(SONGA, tab));
         renderControlArray(SONGA_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_SONGBAR_ANIM', SONGA_CONTROLS);
-        makeDevGroupToggleable(tab, SONGA, 'checkboxSongBarAnimEnabled');
         // The marker's radius and opacity show only while the marker circle is on
         const sbMarkerBox = document.getElementById('checkboxSongBarMarker');
         const sbSync = () => {

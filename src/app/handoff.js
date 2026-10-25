@@ -147,7 +147,7 @@ export function initEmbed(el, firstTrackId) {
             window.__spxController = c; // debugging handle
             status = 'ready';
             c.addListener('playback_update', e => handleUpdate(e.data));
-            if (queued) { const q = queued; queued = null; playTrack(q); }
+            if (queued && !sdk.sdkReady()) { const q = queued; queued = null; playTrack(q); }
         });
     };
     const s = document.createElement('script');
@@ -160,7 +160,8 @@ export function initEmbed(el, firstTrackId) {
 export function playTrack(trackId, positionMs = 0) {
     wantPlaying = true;
     if (sdk.sdkReady()) {
-        loadedId = trackId;
+        loadedId = trackId; queued = null;
+        if (controller) { try { controller.pause(); } catch (e) { /* embed not ready */ } } // only one player plays
         clearPending();
         requestAt = performance.now(); audibleLogged = false;
         sdk.sdkPlay(trackId, positionMs).then(ok => { if (!ok && wantPlaying && loadedId === trackId) playViaEmbed(trackId); }); // SDK refused: the iframe plays it instead
@@ -198,9 +199,11 @@ export function pauseEmbed() {
 // The album cover is the play button: pause if playing, resume if this song is already
 // loaded, otherwise load and play it.
 export function toggleTrack(trackId) {
-    if (playing && (!actualId || actualId === trackId)) { pauseEmbed(); return; }
-    if (sdk.sdkReady() && loadedId === trackId && actualId === trackId) { wantPlaying = true; sdk.sdkResume(); return; }
-    if (controller && loadedId === trackId) {
+    // Pause only the track that is really playing; resume only the track the SDK really has; anything else starts this song.
+    const isThis = (actualId || loadedId) === trackId;
+    if (playing && isThis) { pauseEmbed(); return; }
+    if (sdk.sdkReady() && actualId === trackId) { wantPlaying = true; sdk.sdkResume(); return; }
+    if (controller && loadedId === trackId && !sdk.sdkReady()) {
         wantPlaying = true;
         // play(), not resume(): resume() is a no-op on an embed that was loaded but never started
         // (or whose track ended), which left the cover button doing nothing.
@@ -224,6 +227,7 @@ export function seekTo(ms) {
     return false;
 }
 export const isPlaying = () => playing;
+export const playingId = () => actualId;
 export const embedStatus = () => status;
 // 'preview' when the embed reports a ~30 s duration (not logged in, or the iframe can't see the login),
 // 'full' when it reports a longer one, 'unknown' before the first playing update.

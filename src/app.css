@@ -162,8 +162,8 @@
 .spx-songbar-hit { position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--sb-h, 4px) + var(--sb-tol, 6px)); pointer-events: auto; cursor: pointer; touch-action: none; }
 .spx-songbar-marker { position: absolute; top: 50%; width: calc(var(--sb-mr, 6px) * 2); height: calc(var(--sb-mr, 6px) * 2); margin: calc(var(--sb-mr, 6px) * -1) 0 0 calc(var(--sb-mr, 6px) * -1); border-radius: 50%; background: var(--sb-fill, #1db954); opacity: var(--sb-mop, 1); display: none; pointer-events: auto; cursor: grab; touch-action: none; }
 .spx-songbar.marker .spx-songbar-marker { display: block; }
-.spx-cover:hover .spx-songbar { opacity: var(--sb-hover-op, 1); }
-.spx-cover.sb-press .spx-songbar { opacity: var(--sb-click-op, 1); }
+.spx-songbar.hov { opacity: var(--sb-hover-op, 1); } /* the pointer is over the album cover */
+.spx-songbar.press { opacity: var(--sb-click-op, 1); } /* pressed on the bar */
 /* Shuffle (under the volume icon) */
 .spx-shuffle { z-index: 4; position: absolute; right: var(--spx-shuffle-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2); /* the stage's top-right corner; the volume is at the left edge */ width: calc(var(--spx-shuffle-icon, 20px) + 20px); height: calc(var(--spx-shuffle-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-shuffle-color, #f2f2f2); --bs-op: var(--spx-shuffle-off-op, 0.45); /* the on/off opacity is the icon's own base (the animation group's hover / press values replace it); the button stays at full opacity */ cursor: pointer;
