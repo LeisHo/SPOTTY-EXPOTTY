@@ -865,8 +865,10 @@ async function boot() {
     function placeNav() {
         const r = el('spxCover').getBoundingClientRect();
         const edge = setting('sliderNavEdgeOffset');
-        el('spxPrev').style.translate = `${edge - (r.left - 48)}px 0px`;
-        el('spxNext').style.translate = `${(innerWidth - edge - 48) - r.right}px 0px`;
+        // The buttons are as wide as their own icon (the hit area = the icon), so the real widths place them, not a fixed 48 px
+        const pw = el('spxPrev').offsetWidth, nw = el('spxNext').offsetWidth;
+        el('spxPrev').style.translate = `${edge - (r.left - pw)}px 0px`;
+        el('spxNext').style.translate = `${(innerWidth - edge - nw) - r.right}px 0px`;
     }
     // The cover's scale grows it around transform-origin. When the engine centres the cover (anchor center), it has already moved
     // the box by -50% of its own width / height, so scaling around the box's middle pushes it off centre (at scale 1.5 the centre
