@@ -158,8 +158,6 @@
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-shuffle-color, #f2f2f2); opacity: var(--spx-shuffle-off-op, 0.45); cursor: pointer;
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-shuffle-x, 0px) 0; }
 .spx-shuffle svg { width: var(--spx-shuffle-icon, 20px); height: var(--spx-shuffle-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.spx-shuffle.bs-hover { opacity: var(--spx-shuffle-hover-op, 0.8); } /* the same hover state as the size change (bs-hover), so the tolerance matches */
-.spx-shuffle[aria-pressed="true"].bs-hover { opacity: var(--spx-shuffle-on-hover-op, 1); }
 .spx-shuffle[aria-pressed="true"] { opacity: var(--spx-shuffle-on-op, 1); color: var(--spx-shuffle-on-color, #1db954); }
 .spx-shuffle[hidden] { display: none; }
 .spx-vol-btn[aria-expanded="true"] ~ .spx-shuffle { opacity: 0; pointer-events: none; } /* the slider drops over this spot */

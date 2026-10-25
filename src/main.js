@@ -190,8 +190,9 @@ async function boot() {
         load() { return pendingLayout; },
     });
     window.spxCaptureLayout = () => captureAllLayoutConfigs();
-    window.spxApplyLayout = state => { pendingLayout = state; loadLayoutConfig(); timeline.draw(); };
-    window.spxResetLayout = () => { resetLayoutConfig(shippedLayout); resolveAndApplyAll(); timeline.draw(); };
+    // The saved layout can arrive before the timeline data does (timeline is created later), so the redraw goes through a hook set then.
+    window.spxApplyLayout = state => { pendingLayout = state; loadLayoutConfig(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); };
+    window.spxResetLayout = () => { resetLayoutConfig(shippedLayout); resolveAndApplyAll(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); };
 
     // ---- data ----------------------------------------------------------------------
     let data;
@@ -214,6 +215,7 @@ async function boot() {
     ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; }, true));
 
     const timeline = createTimeline(el('spxTimeline'), data);
+    window.spxRedrawTimeline = () => timeline.draw();
     if (window.__spxPendingLayout) { window.spxApplyLayout(window.__spxPendingLayout); window.__spxPendingLayout = null; }
     new ResizeObserver(() => timeline.draw()).observe(el('spxTimeline'));
 
@@ -516,7 +518,6 @@ async function boot() {
         el('spxApp').style.setProperty('--spx-glyph-op-playing', String(setting('sliderPlayGlyphOpacityPlaying') / 100));
         el('spxApp').style.setProperty('--spx-glyph-op-paused', String(setting('sliderPlayGlyphOpacityPaused') / 100));
         el('spxApp').style.setProperty('--spx-vol-hover-op', String(setting('sliderVolHoverOpacity') / 100));
-        el('spxApp').style.setProperty('--spx-shuffle-hover-op', String(setting('sliderShuffleHoverOpacity') / 100));
         // Icon styles (the dev panel's Icon Style dropdowns; see iconStyles.js)
         applyVolumeIcon(el('spxVolume').querySelector('.spx-vol-btn svg'), iconIndex(setting('selectVolIconStyle')));
         applyShuffleIcon(el('spxShuffle').querySelector('svg'), iconIndex(setting('selectShuffleIconStyle')));
@@ -524,7 +525,6 @@ async function boot() {
         applyVolumeButtonStyle();
         el('spxApp').style.setProperty('--spx-shuffle-edge', setting('sliderShuffleEdgeOffset') + 'px');
         el('spxVolume').style.translate = (setting('sliderVolEdgeOffset') - 14) + 'px 0px'; // the whole volume UI; 14 px is the layout's own left offset
-        el('spxApp').style.setProperty('--spx-shuffle-on-hover-op', String(setting('sliderShuffleOnHoverOpacity') / 100));
         applyNavIcon(el('spxPrev').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), true);
         applyNavIcon(el('spxNext').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), false);
         applyCoverGlyph(el('spxCover').querySelector('.spx-play-glyph svg'), iconIndex(setting('selectPlayIconStyle')), iconIndex(setting('selectPauseIconStyle')));
