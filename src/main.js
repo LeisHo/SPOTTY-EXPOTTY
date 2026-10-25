@@ -460,6 +460,7 @@ async function boot() {
         });
     }
 
+    let noPreviewTimer = 0; // Auto Next Song: the hold on a song with no preview clip
     function onIndexChange(newIdx) {
         dir = newIdx >= idx ? 1 : -1;
         idx = newIdx;
@@ -480,6 +481,14 @@ async function boot() {
             logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[idx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
             if (ok) { playTrack(songs[idx].id); handedOff = true; }
         }, handoffDelay);
+        // Auto Next Song: a song with no preview clip is held for the set time, then the next song plays.
+        // Any song change cancels the hold.
+        clearTimeout(noPreviewTimer);
+        if (!clipKey(songs[idx]) && setting('checkboxAutoNextSong')) {
+            const held = idx, holdS = setting('sliderNoPreviewHoldSeconds');
+            logEvent('playback', `NO PREVIEW: holding ${holdS} s, then the next song`);
+            noPreviewTimer = setTimeout(() => { if (idx === held) stepSong(1); }, holdS * 1000);
+        }
     }
 
     // The current song is the LAST one added at or before the playhead's time (timeline.currentIndex()

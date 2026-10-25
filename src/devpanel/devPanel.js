@@ -7690,6 +7690,16 @@
         registerDevControlArray('SPOTTY_ALBUM_CONTROLS', ALBUM_CONTROLS);
         makeDevGroupToggleable(tab, AC, 'checkboxAlbumColorsEnabled');
 
+        // "No Preview": a nested subgroup of Scrub Audio, for songs that have no preview clip.
+        const NP = 'No Preview';
+        findGroupContent(tab, 'Scrub Audio', 'renderSpottyDevControls', NP).appendChild(createDevGroupElement(NP, tab));
+        const NOPREVIEW_CONTROLS = [
+            { tab, group: NP, id: 'checkboxAutoNextSong', type: 'checkbox', label: 'Auto Next Song:', value: false },
+            { tab, group: NP, id: 'sliderNoPreviewHoldSeconds', type: 'slider', label: 'Hold Time On A Song With No Preview (S):', min: 1, max: 60, step: 0.5, value: 5 },
+        ];
+        renderControlArray(NOPREVIEW_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_NOPREVIEW_CONTROLS', NOPREVIEW_CONTROLS);
+
         // ---- Scrub Input: two toggleable curve groups --------------------------------------------------
         const WC = 'Wheel Scrub Per Notch Curve', SC = 'Starting Timeline Span Curve';
         const scrubInputContent = findGroupContent(tab, 'Scrub Input', 'renderSpottyDevControls', WC);
