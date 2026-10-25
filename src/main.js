@@ -11,7 +11,7 @@ import {
 } from '../lib/ui-engine/registry.mjs';
 import { setting, loadSavedSettings, rgbaOf } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
-import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition } from './app/clipPlayer.js';
+import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
@@ -384,12 +384,26 @@ async function boot() {
             else if (overflow === 'scale') { st.whiteSpace = 'nowrap'; st.overflow = 'visible'; st.textOverflow = ''; }
             else { st.whiteSpace = setting('checkboxTxt' + p + 'WordWrap') ? 'pre-line' : 'nowrap'; st.overflow = ''; st.textOverflow = ''; }
             st.fontSize = size + 'px';
+            // Scale Down If Multiline (Song Title, Artist): shrink the font until the text wraps to at most the line limit
+            const multi = { SongTitle: 'Title', Artist: 'Artist' }[p];
+            if (multi && overflow !== 'scale' && setting('checkboxScale' + multi + 'Multiline')) {
+                const maxLines = setting('slider' + multi + 'MaxLines');
+                const lineMul = parseFloat(st.lineHeight) || 1.2;
+                let fs = size;
+                for (let i = 0; i < 12; i++) {
+                    const lines = Math.round(node.offsetHeight / (fs * lineMul));
+                    if (lines <= maxLines || fs <= 6) break;
+                    fs = Math.max(6, Math.floor(fs * Math.min(0.98, maxLines / lines)));
+                    st.fontSize = fs + 'px';
+                }
+            }
             if (overflow === 'scale') { // Shrink to Fit: back off from the configured size until it fits
                 let fs = size;
                 while (fs > 6 && node.scrollWidth > node.clientWidth) { fs -= 1; st.fontSize = fs + 'px'; }
             }
         });
     }
+    window.addEventListener('resize', () => applyTextElementStyles()); // the line count depends on the width
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
         applyTextElementStyles();
@@ -426,6 +440,14 @@ async function boot() {
         el('spxStartBtn').hidden = !setting('checkboxStartButtonEnabled');
         el('spxStartBtn').style.setProperty('--spx-start-play-size', setting('sliderStartPlaySize') + 'px');
         el('spxArtist').textContent = artistText(); // live: changing the separator re-joins the current song's artists
+        el('spxApp').style.setProperty('--spx-vol-icon-x', setting('sliderVolIconOffsetX') + 'px');
+        el('spxStart').style.transition = `opacity ${setting('sliderStartFadeMs')}ms linear`;
+        el('spxShuffle').hidden = !setting('checkboxShuffleButtonEnabled');
+        el('spxApp').style.setProperty('--spx-shuffle-icon', setting('sliderShuffleIconSize') + 'px');
+        el('spxApp').style.setProperty('--spx-shuffle-x', setting('sliderShuffleIconOffsetX') + 'px');
+        el('spxApp').style.setProperty('--spx-shuffle-off-op', String(setting('sliderShuffleOffOpacity') / 100));
+        el('spxApp').style.setProperty('--spx-shuffle-color', setting('colorShuffleIcon'));
+        el('spxApp').style.setProperty('--spx-shuffle-on-color', setting('colorShuffleOn'));
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
         // Album Cover > Bounding Box: the cover's own box and its centre (see app.css)
@@ -542,7 +564,10 @@ async function boot() {
         previewHold = null;
         const handoffDelay = setting('sliderHandoffDelay');
         handoffPending = true;
-        handoffTimer = setTimeout(() => {
+        // The handoff reads where the preview is, so it waits (up to 2 s after the song change) for a pending preview to start.
+        const handoffWaitUntil = performance.now() + 2000;
+        const doHandoff = () => {
+            if (clipKey(songs[idx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
             handoffPending = false;
             const ok = isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0;
             logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[idx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
@@ -552,7 +577,8 @@ async function boot() {
                 previewHold = songs[idx].id; playTrack(songs[idx].id, startMs); handedOff = true;
             }
             else stopClip();
-        }, handoffDelay);
+        };
+        handoffTimer = setTimeout(doHandoff, handoffDelay);
         // Auto Next Song: a song with no preview clip is held for the set time, then the next song plays.
         // Any song change cancels the hold.
         clearTimeout(noPreviewTimer);
@@ -759,20 +785,23 @@ async function boot() {
     // A press or key press anywhere else starts it as well (sound unlocks on that first input).
     let startedOnce = false;
     const onIconPress = e => !!(e.target && e.target.closest && e.target.closest('#spxStartBtn'));
-    const startFromIcon = () => { el('spxStart').hidden = true; if (!startedOnce) { startedOnce = true; openSpotifyLogin(); } playFromStart(); };
+    // The start screen fades out over Fade Time (Ms), then hides. Showing it again fades it back in.
+    const hideStartScreen = () => { const o = el('spxStart'); o.style.opacity = '0'; setTimeout(() => { if (o.style.opacity === '0') o.hidden = true; }, setting('sliderStartFadeMs')); };
+    const startFromIcon = () => { hideStartScreen(); if (!startedOnce) { startedOnce = true; openSpotifyLogin(); } playFromStart(); };
     const onFirstGesture = e => {
         if (onIconPress(e)) { if (!setting('checkboxStartTransitionAfterRelease')) startFromIcon(); return; }
         if (startedOnce) return;
-        startedOnce = true; el('spxStart').hidden = true; playFromStart(); openSpotifyLogin();
+        startedOnce = true; hideStartScreen(); playFromStart(); openSpotifyLogin();
     };
     el('spxStartBtn').addEventListener('pointerup', () => { if (setting('checkboxStartTransitionAfterRelease') && !el('spxStart').hidden) startFromIcon(); });
     // Run Startup (dev panel): show the start screen again. The next press outside the dev panel hides it (the icon starts it).
     const showStartScreen = () => {
-        el('spxStart').hidden = false;
+        const o = el('spxStart'); o.hidden = false; o.style.opacity = '0';
+        requestAnimationFrame(() => requestAnimationFrame(() => { o.style.opacity = '1'; }));
         const hideOnInput = e => {
             if (e.target && e.target.closest && e.target.closest('#devPanel')) return;
             if (onIconPress(e)) { if (!setting('checkboxStartTransitionAfterRelease')) startFromIcon(); return; }
-            el('spxStart').hidden = true;
+            hideStartScreen();
             document.removeEventListener('pointerdown', hideOnInput, true);
             document.removeEventListener('keydown', hideOnInput, true);
         };

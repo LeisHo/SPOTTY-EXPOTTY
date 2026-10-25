@@ -7778,6 +7778,18 @@
         }, elemContent);
         // Artist only: the separator used when a track has several artists (the data stores them joined with ';')
         if (elementName === 'Artist') add({ tab, id: 'textArtistSeparator', type: 'text', label: 'Artist Name Separator:', value: ';' }, elemContent);
+        // Scale Down If Multiline (Song Title and Artist): the line limit is only shown while the checkbox is on
+        const MULTI_KEYS = { 'Song Title': 'Title', 'Artist': 'Artist' };
+        if (MULTI_KEYS[elementName]) {
+            const k = MULTI_KEYS[elementName];
+            const multiRow = add({ tab, id: 'checkboxScale' + k + 'Multiline', type: 'checkbox', label: 'Scale Down If Multiline:', value: false }, elemContent);
+            const maxRow = add({ tab, id: 'slider' + k + 'MaxLines', type: 'slider', label: 'Max Lines (Scales Down Past This):', min: 1, max: 8, step: 1, value: 2 }, elemContent);
+            const multiBox = multiRow.querySelector('input');
+            const syncMaxLines = () => { maxRow.style.display = multiBox.checked ? '' : 'none'; };
+            multiBox.addEventListener('change', syncMaxLines);
+            setInterval(syncMaxLines, 700); // catches the saved state restored after the panel is built
+            syncMaxLines();
+        }
         const outlineSec = createDevGroupElement('Outline', tab);
         elemContent.appendChild(outlineSec);
         const outlineContent = outlineSec.querySelector(':scope > .dev-section-content');
@@ -7986,6 +7998,7 @@
             { tab, group: VB, id: 'checkboxVolumeButtonEnabled', type: 'checkbox', label: 'Enabled (Off = Click The Icon, Default Look)', value: true },
             { tab, group: VB, id: 'sliderVolMutedOpacity', type: 'slider', label: 'Muted Icon Opacity (%):', min: 0, max: 100, step: 1, value: 40 },
             { tab, group: VB, id: 'sliderVolIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 24 },
+            { tab, group: VB, id: 'sliderVolIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: VB, id: 'sliderVolCircleRadius', type: 'slider', label: 'Slider Circle Radius (Px):', min: 2, max: 30, step: 0.5, value: 7 },
             { tab, group: VB, id: 'sliderVolBarWidth', type: 'slider', label: 'Slider Bar Width (Px):', min: 2, max: 40, step: 0.5, value: 8 },
             { tab, group: VB, id: 'sliderVolBarLength', type: 'slider', label: 'Slider Bar Length (Px):', min: 40, max: 500, step: 1, value: 130 },
@@ -8008,6 +8021,21 @@
         registerDevControlArray('SPOTTY_VB_CONTROLS', VB_CONTROLS);
         registerDevControlArray('SPOTTY_AC2_CONTROLS', AC2_CONTROLS);
         makeDevGroupToggleable(tab, VB, 'checkboxVolumeButtonEnabled');
+
+        // Shuffle Button: the same settings as Volume Button, minus the slider and animation ones
+        const SHB = 'Shuffle Button';
+        uiLayoutContent.appendChild(createDevGroupElement(SHB, tab));
+        const SHB_CONTROLS = [
+            { tab, group: SHB, id: 'checkboxShuffleButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: SHB, id: 'sliderShuffleIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
+            { tab, group: SHB, id: 'sliderShuffleIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: SHB, id: 'sliderShuffleOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
+            { tab, group: SHB, id: 'colorShuffleIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },
+            { tab, group: SHB, id: 'colorShuffleOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
+        ];
+        renderControlArray(SHB_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SHUFFLE_CONTROLS', SHB_CONTROLS);
+        makeDevGroupToggleable(tab, SHB, 'checkboxShuffleButtonEnabled');
 
         // ---- UI Layout: Play Button + Next And Last Song Buttons (same settings; each toggleable, each with a toggleable Button Animation subgroup) ----
         // The button controls (Play / Pause, Next Song, Last Song) exist so a hotkey can be assigned to them in the dev panel.
@@ -8337,6 +8365,7 @@
         const SU_CONTROLS = [
             { tab, group: SU, id: 'buttonRunStartup', type: 'button', label: 'Run Startup', skipDeviceCheckbox: true },
             { tab, group: SU, id: 'sliderStartOverlayOpacity', type: 'slider', label: 'Darkening Opacity (x):', min: 0, max: 1, step: 0.01, value: 0.8 },
+            { tab, group: SU, id: 'sliderStartFadeMs', type: 'slider', label: 'Fade Time (Ms):', min: 0, max: 3000, step: 10, value: 300 },
             { tab, group: SU, id: 'colorStartOverlay', type: 'color', label: 'Darkening Color:', value: '#0d0f12' },
         ];
         renderControlArray(SU_CONTROLS, 'renderSpottyDevControls');
