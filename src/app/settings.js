@@ -11,6 +11,7 @@ export const DEFAULTS = {
     sliderScrubVolume: 0.7,
     sliderClipStartMin: 2,
     sliderClipStartMax: 22,
+    checkboxStartAtBuffer: true,
     sliderClipFadeOut: 30,
     checkboxColdStartClips: true,
     sliderPreloadAhead: 8,

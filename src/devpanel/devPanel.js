@@ -7588,6 +7588,7 @@
             { tab, group: 'Scrub Audio', id: 'sliderScrubVolume', type: 'slider', label: 'Clip Volume (x):', min: 0, max: 1, step: 0.05, value: 0.7 },
             { tab, group: 'Scrub Audio', id: 'sliderClipStartMin', type: 'slider', label: 'Clip Start Min (S):', min: 0, max: 28, step: 0.5, value: 2 },
             { tab, group: 'Scrub Audio', id: 'sliderClipStartMax', type: 'slider', label: 'Clip Start Max (S):', min: 0, max: 28, step: 0.5, value: 22 },
+            { tab, group: 'Scrub Audio', id: 'checkboxStartAtBuffer', type: 'checkbox', label: 'Start At Buffer:', value: true },
             { tab, group: 'Scrub Audio', id: 'sliderClipFadeOut', type: 'slider', label: 'Clip Fade Out (Ms):', min: 0, max: 500, step: 5, value: 30 },
             { tab, group: 'Scrub Audio', id: 'checkboxColdStartClips', type: 'checkbox', label: 'Play Clips Not Yet Preloaded:', value: true },
             { tab, group: 'Scrub Audio', id: 'checkboxRandomStartSong', type: 'checkbox', label: 'Randomize Starting Song:', value: false },

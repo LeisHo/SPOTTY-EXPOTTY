@@ -177,9 +177,16 @@ export function playClip(did) {
         // Start inside what's already buffered so sound begins immediately; a fully
         // preloaded clip (buffered ~30 s) uses the whole configured range.
         const cap = Math.max(0, Math.min(dur, bufferedEnd(a)) - 1.5);
-        hi = Math.min(hi, cap);
-        lo = Math.min(lo, hi);
-        const start = lo + Math.random() * (hi - lo);
+        let start;
+        if (setting('checkboxStartAtBuffer')) {
+            // Start At Buffer: if the buffer has not reached Clip Start Min, start at the latest buffered point;
+            // if it has, start at Clip Start Min.
+            start = cap >= lo ? lo : cap;
+        } else {
+            hi = Math.min(hi, cap);
+            lo = Math.min(lo, hi);
+            start = lo + Math.random() * (hi - lo);
+        }
         try { a.currentTime = start; } catch (e) { /* metadata not ready */ }
         current = p;
         logEvent('playback', `CLIP START ${did} at ${start.toFixed(1)}s (${bufferedEnd(a).toFixed(1)}s buffered, ${Math.round(performance.now() - reqAt)}ms after it was asked for, volume ${a.volume.toFixed(2)})`);
