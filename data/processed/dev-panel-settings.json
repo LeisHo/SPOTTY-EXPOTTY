@@ -134,6 +134,7 @@
     "sliderArtistSeparatorPct": 74,
     "checkboxScaleArtistMultiline": true,
     "sliderArtistMaxLines": 1,
+    "checkboxScaleArtistToMatch": false,
     "checkboxTxtArtistOutlineEnabled": false,
     "colorTxtArtistOutlineColor": "#000000",
     "sliderTxtArtistOutlineThickness": 2,
@@ -149,11 +150,15 @@
     "checkboxTxtAlbumDateWordWrap": true,
     "sliderTxtAlbumDateMaxWidth": 2000,
     "selectTxtAlbumDateOverflow": "wrap",
+    "checkboxScaleAlbumDateMultiline": false,
+    "sliderAlbumDateMaxLines": 2,
+    "checkboxScaleAlbumDateToMatch": false,
     "checkboxTxtAlbumDateOutlineEnabled": false,
     "colorTxtAlbumDateOutlineColor": "#000000",
     "sliderTxtAlbumDateOutlineThickness": 2,
     "checkboxVolumeButtonEnabled": true,
     "sliderVolMutedOpacity": 45,
+    "sliderVolIconOpacity": 100,
     "sliderVolIconSize": 38,
     "sliderVolIconOffsetX": 6,
     "sliderVolCircleRadius": 3,
@@ -163,6 +168,8 @@
     "colorVolBarTrack": "#ffffff",
     "colorVolCircle": "#ffffff",
     "sliderVolHoverTolerance": 37,
+    "sliderVolClickTolerance": 12,
+    "selectVolIconStyle": "0",
     "sliderVolAnimDuration": 190,
     "curveEditorVolAnimSpeedCurve": "{\"points\":[{\"x\":0,\"y\":0.5952784220377605,\"h1\":{\"x\":0.504492481784282,\"y\":0.05047709147135415}},{\"x\":1,\"y\":1,\"h2\":{\"x\":0,\"y\":-0.44892730712890627}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderCoverScale": 1.65,
@@ -173,12 +180,18 @@
     "sliderShuffleIconSize": 20,
     "sliderShuffleIconOffsetX": 0,
     "sliderShuffleOffOpacity": 37,
+    "sliderShuffleOnOpacity": 100,
     "colorShuffleIcon": "#f2f2f2",
     "colorShuffleOn": "#ffffff",
+    "selectShuffleIconStyle": "0",
+    "sliderPlayGlyphOpacityPlaying": 67,
+    "sliderPlayGlyphOpacityPaused": 100,
+    "selectPlayIconStyle": "0",
+    "selectPauseIconStyle": "0",
     "checkboxPlayButtonEnabled": true,
     "colorPlayButton": "#ffffff",
     "sliderPlayButtonSize": 33,
-    "sliderPlayButtonOpacity": 50,
+    "sliderPlayButtonOpacity": 75,
     "sliderPlayButtonHoverOpacity": 100,
     "buttonPlayPause": "",
     "checkboxPlayAnimEnabled": true,
@@ -189,11 +202,12 @@
     "sliderPlayAnimClickOpacity": 70,
     "sliderPlayAnimReleaseSize": 54,
     "sliderNavEdgeOffset": 14,
+    "selectNavIconStyle": "0",
     "checkboxNavButtonEnabled": true,
     "colorNavButton": "#f2f2f2",
     "sliderNavButtonSize": 30,
-    "sliderNavButtonOpacity": 70,
-    "sliderNavButtonHoverOpacity": 54,
+    "sliderNavButtonOpacity": 75,
+    "sliderNavButtonHoverOpacity": 50,
     "buttonNextSong": "",
     "buttonPrevSong": "",
     "checkboxNavAnimEnabled": false,
@@ -2114,6 +2128,10 @@
                         "key": "sliderArtistSeparatorPct"
                       },
                       {
+                        "type": "row",
+                        "key": "checkboxScaleArtistToMatch"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "desktop:Outline",
@@ -2138,7 +2156,8 @@
                       "textArtistSeparator",
                       "checkboxScaleArtistMultiline",
                       "sliderArtistMaxLines",
-                      "sliderArtistSeparatorPct"
+                      "sliderArtistSeparatorPct",
+                      "checkboxScaleArtistToMatch"
                     ],
                     "subgroups": [
                       {
@@ -2239,6 +2258,18 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxScaleAlbumDateMultiline"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAlbumDateMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxScaleAlbumDateToMatch"
                       }
                     ],
                     "rowKeys": [
@@ -2252,7 +2283,10 @@
                       "sliderTxtAlbumDateOpacity",
                       "checkboxTxtAlbumDateWordWrap",
                       "sliderTxtAlbumDateMaxWidth",
-                      "selectTxtAlbumDateOverflow"
+                      "selectTxtAlbumDateOverflow",
+                      "checkboxScaleAlbumDateMultiline",
+                      "sliderAlbumDateMaxLines",
+                      "checkboxScaleAlbumDateToMatch"
                     ],
                     "subgroups": [
                       {
@@ -2694,6 +2728,10 @@
                       "key": "sliderArtistSeparatorPct"
                     },
                     {
+                      "type": "row",
+                      "key": "checkboxScaleArtistToMatch"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -2718,7 +2756,8 @@
                     "textArtistSeparator",
                     "checkboxScaleArtistMultiline",
                     "sliderArtistMaxLines",
-                    "sliderArtistSeparatorPct"
+                    "sliderArtistSeparatorPct",
+                    "checkboxScaleArtistToMatch"
                   ],
                   "subgroups": [
                     {
@@ -2816,6 +2855,18 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxScaleAlbumDateMultiline"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxScaleAlbumDateToMatch"
                     }
                   ],
                   "rowKeys": [
@@ -2829,7 +2880,10 @@
                     "sliderTxtAlbumDateOpacity",
                     "checkboxTxtAlbumDateWordWrap",
                     "sliderTxtAlbumDateMaxWidth",
-                    "selectTxtAlbumDateOverflow"
+                    "selectTxtAlbumDateOverflow",
+                    "checkboxScaleAlbumDateMultiline",
+                    "sliderAlbumDateMaxLines",
+                    "checkboxScaleAlbumDateToMatch"
                   ],
                   "subgroups": [
                     {
@@ -2932,6 +2986,18 @@
                       {
                         "type": "row",
                         "key": "sliderVolIconOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolIconOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolClickTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectVolIconStyle"
                       }
                     ],
                     "rowKeys": [
@@ -2946,7 +3012,10 @@
                       "sliderVolAnimDuration",
                       "curveEditorVolAnimSpeedCurve",
                       "sliderVolMutedOpacity",
-                      "sliderVolIconOffsetX"
+                      "sliderVolIconOffsetX",
+                      "sliderVolIconOpacity",
+                      "sliderVolClickTolerance",
+                      "selectVolIconStyle"
                     ],
                     "subgroups": []
                   }
@@ -3016,6 +3085,22 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayGlyphOpacityPlaying"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayGlyphOpacityPaused"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectPlayIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectPauseIconStyle"
                       }
                     ],
                     "rowKeys": [
@@ -3023,7 +3108,11 @@
                       "sliderPlayButtonSize",
                       "sliderPlayButtonOpacity",
                       "sliderPlayButtonHoverOpacity",
-                      "buttonPlayPause"
+                      "buttonPlayPause",
+                      "sliderPlayGlyphOpacityPlaying",
+                      "sliderPlayGlyphOpacityPaused",
+                      "selectPlayIconStyle",
+                      "selectPauseIconStyle"
                     ],
                     "subgroups": [
                       {
@@ -3140,6 +3229,10 @@
                       {
                         "type": "row",
                         "key": "sliderNavEdgeOffset"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectNavIconStyle"
                       }
                     ],
                     "rowKeys": [
@@ -3149,7 +3242,8 @@
                       "sliderNavButtonHoverOpacity",
                       "buttonNextSong",
                       "buttonPrevSong",
-                      "sliderNavEdgeOffset"
+                      "sliderNavEdgeOffset",
+                      "selectNavIconStyle"
                     ],
                     "subgroups": [
                       {
@@ -3217,6 +3311,14 @@
                       {
                         "type": "row",
                         "key": "colorShuffleOn"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleOnOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectShuffleIconStyle"
                       }
                     ],
                     "rowKeys": [
@@ -3224,7 +3326,9 @@
                       "sliderShuffleIconOffsetX",
                       "sliderShuffleOffOpacity",
                       "colorShuffleIcon",
-                      "colorShuffleOn"
+                      "colorShuffleOn",
+                      "sliderShuffleOnOpacity",
+                      "selectShuffleIconStyle"
                     ],
                     "subgroups": []
                   }
@@ -3282,6 +3386,18 @@
                     {
                       "type": "row",
                       "key": "sliderVolIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderVolIconOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderVolClickTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectVolIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -3296,7 +3412,10 @@
                     "sliderVolAnimDuration",
                     "curveEditorVolAnimSpeedCurve",
                     "sliderVolMutedOpacity",
-                    "sliderVolIconOffsetX"
+                    "sliderVolIconOffsetX",
+                    "sliderVolIconOpacity",
+                    "sliderVolClickTolerance",
+                    "selectVolIconStyle"
                   ],
                   "subgroups": []
                 },
@@ -3363,6 +3482,22 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayGlyphOpacityPlaying"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayGlyphOpacityPaused"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectPlayIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectPauseIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -3370,7 +3505,11 @@
                     "sliderPlayButtonSize",
                     "sliderPlayButtonOpacity",
                     "sliderPlayButtonHoverOpacity",
-                    "buttonPlayPause"
+                    "buttonPlayPause",
+                    "sliderPlayGlyphOpacityPlaying",
+                    "sliderPlayGlyphOpacityPaused",
+                    "selectPlayIconStyle",
+                    "selectPauseIconStyle"
                   ],
                   "subgroups": [
                     {
@@ -3484,6 +3623,10 @@
                     {
                       "type": "row",
                       "key": "sliderNavEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectNavIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -3493,7 +3636,8 @@
                     "sliderNavButtonHoverOpacity",
                     "buttonNextSong",
                     "buttonPrevSong",
-                    "sliderNavEdgeOffset"
+                    "sliderNavEdgeOffset",
+                    "selectNavIconStyle"
                   ],
                   "subgroups": [
                     {
@@ -3558,6 +3702,14 @@
                     {
                       "type": "row",
                       "key": "colorShuffleOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectShuffleIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -3565,7 +3717,9 @@
                     "sliderShuffleIconOffsetX",
                     "sliderShuffleOffOpacity",
                     "colorShuffleIcon",
-                    "colorShuffleOn"
+                    "colorShuffleOn",
+                    "sliderShuffleOnOpacity",
+                    "selectShuffleIconStyle"
                   ],
                   "subgroups": []
                 }
@@ -4519,6 +4673,10 @@
                       "key": "sliderArtistSeparatorPct"
                     },
                     {
+                      "type": "row",
+                      "key": "checkboxScaleArtistToMatch"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -4543,7 +4701,8 @@
                     "textArtistSeparator",
                     "checkboxScaleArtistMultiline",
                     "sliderArtistMaxLines",
-                    "sliderArtistSeparatorPct"
+                    "sliderArtistSeparatorPct",
+                    "checkboxScaleArtistToMatch"
                   ],
                   "subgroups": [
                     {
@@ -4644,6 +4803,18 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxScaleAlbumDateMultiline"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxScaleAlbumDateToMatch"
                     }
                   ],
                   "rowKeys": [
@@ -4657,7 +4828,10 @@
                     "sliderTxtAlbumDateOpacity",
                     "checkboxTxtAlbumDateWordWrap",
                     "sliderTxtAlbumDateMaxWidth",
-                    "selectTxtAlbumDateOverflow"
+                    "selectTxtAlbumDateOverflow",
+                    "checkboxScaleAlbumDateMultiline",
+                    "sliderAlbumDateMaxLines",
+                    "checkboxScaleAlbumDateToMatch"
                   ],
                   "subgroups": [
                     {
@@ -5099,6 +5273,10 @@
                     "key": "sliderArtistSeparatorPct"
                   },
                   {
+                    "type": "row",
+                    "key": "checkboxScaleArtistToMatch"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "desktop:Outline",
@@ -5123,7 +5301,8 @@
                   "textArtistSeparator",
                   "checkboxScaleArtistMultiline",
                   "sliderArtistMaxLines",
-                  "sliderArtistSeparatorPct"
+                  "sliderArtistSeparatorPct",
+                  "checkboxScaleArtistToMatch"
                 ],
                 "subgroups": [
                   {
@@ -5221,6 +5400,18 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxScaleAlbumDateMultiline"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAlbumDateMaxLines"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxScaleAlbumDateToMatch"
                   }
                 ],
                 "rowKeys": [
@@ -5234,7 +5425,10 @@
                   "sliderTxtAlbumDateOpacity",
                   "checkboxTxtAlbumDateWordWrap",
                   "sliderTxtAlbumDateMaxWidth",
-                  "selectTxtAlbumDateOverflow"
+                  "selectTxtAlbumDateOverflow",
+                  "checkboxScaleAlbumDateMultiline",
+                  "sliderAlbumDateMaxLines",
+                  "checkboxScaleAlbumDateToMatch"
                 ],
                 "subgroups": [
                   {
@@ -5334,6 +5528,18 @@
                     {
                       "type": "row",
                       "key": "sliderVolIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderVolIconOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderVolClickTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectVolIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -5348,7 +5554,10 @@
                     "sliderVolAnimDuration",
                     "curveEditorVolAnimSpeedCurve",
                     "sliderVolMutedOpacity",
-                    "sliderVolIconOffsetX"
+                    "sliderVolIconOffsetX",
+                    "sliderVolIconOpacity",
+                    "sliderVolClickTolerance",
+                    "selectVolIconStyle"
                   ],
                   "subgroups": []
                 }
@@ -5418,6 +5627,22 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayGlyphOpacityPlaying"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayGlyphOpacityPaused"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectPlayIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectPauseIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -5425,7 +5650,11 @@
                     "sliderPlayButtonSize",
                     "sliderPlayButtonOpacity",
                     "sliderPlayButtonHoverOpacity",
-                    "buttonPlayPause"
+                    "buttonPlayPause",
+                    "sliderPlayGlyphOpacityPlaying",
+                    "sliderPlayGlyphOpacityPaused",
+                    "selectPlayIconStyle",
+                    "selectPauseIconStyle"
                   ],
                   "subgroups": [
                     {
@@ -5542,6 +5771,10 @@
                     {
                       "type": "row",
                       "key": "sliderNavEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectNavIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -5551,7 +5784,8 @@
                     "sliderNavButtonHoverOpacity",
                     "buttonNextSong",
                     "buttonPrevSong",
-                    "sliderNavEdgeOffset"
+                    "sliderNavEdgeOffset",
+                    "selectNavIconStyle"
                   ],
                   "subgroups": [
                     {
@@ -5619,6 +5853,14 @@
                     {
                       "type": "row",
                       "key": "colorShuffleOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectShuffleIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -5626,7 +5868,9 @@
                     "sliderShuffleIconOffsetX",
                     "sliderShuffleOffOpacity",
                     "colorShuffleIcon",
-                    "colorShuffleOn"
+                    "colorShuffleOn",
+                    "sliderShuffleOnOpacity",
+                    "selectShuffleIconStyle"
                   ],
                   "subgroups": []
                 }
@@ -5684,6 +5928,18 @@
                   {
                     "type": "row",
                     "key": "sliderVolIconOffsetX"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderVolIconOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderVolClickTolerance"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectVolIconStyle"
                   }
                 ],
                 "rowKeys": [
@@ -5698,7 +5954,10 @@
                   "sliderVolAnimDuration",
                   "curveEditorVolAnimSpeedCurve",
                   "sliderVolMutedOpacity",
-                  "sliderVolIconOffsetX"
+                  "sliderVolIconOffsetX",
+                  "sliderVolIconOpacity",
+                  "sliderVolClickTolerance",
+                  "selectVolIconStyle"
                 ],
                 "subgroups": []
               },
@@ -5765,6 +6024,22 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPlayGlyphOpacityPlaying"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPlayGlyphOpacityPaused"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectPlayIconStyle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectPauseIconStyle"
                   }
                 ],
                 "rowKeys": [
@@ -5772,7 +6047,11 @@
                   "sliderPlayButtonSize",
                   "sliderPlayButtonOpacity",
                   "sliderPlayButtonHoverOpacity",
-                  "buttonPlayPause"
+                  "buttonPlayPause",
+                  "sliderPlayGlyphOpacityPlaying",
+                  "sliderPlayGlyphOpacityPaused",
+                  "selectPlayIconStyle",
+                  "selectPauseIconStyle"
                 ],
                 "subgroups": [
                   {
@@ -5886,6 +6165,10 @@
                   {
                     "type": "row",
                     "key": "sliderNavEdgeOffset"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectNavIconStyle"
                   }
                 ],
                 "rowKeys": [
@@ -5895,7 +6178,8 @@
                   "sliderNavButtonHoverOpacity",
                   "buttonNextSong",
                   "buttonPrevSong",
-                  "sliderNavEdgeOffset"
+                  "sliderNavEdgeOffset",
+                  "selectNavIconStyle"
                 ],
                 "subgroups": [
                   {
@@ -5960,6 +6244,14 @@
                   {
                     "type": "row",
                     "key": "colorShuffleOn"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleOnOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectShuffleIconStyle"
                   }
                 ],
                 "rowKeys": [
@@ -5967,7 +6259,9 @@
                   "sliderShuffleIconOffsetX",
                   "sliderShuffleOffOpacity",
                   "colorShuffleIcon",
-                  "colorShuffleOn"
+                  "colorShuffleOn",
+                  "sliderShuffleOnOpacity",
+                  "selectShuffleIconStyle"
                 ],
                 "subgroups": []
               }
@@ -15767,7 +16061,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": true,
+    "desktop:UI Layout": false,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -15775,11 +16069,11 @@
     "desktop:Outline": true,
     "desktop:Artist": false,
     "desktop:Album & Date": false,
-    "desktop:New Group (7)": true,
+    "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:Play Button": true,
     "desktop:Play Button Animation": true,
-    "desktop:Next And Last Song Buttons": true,
+    "desktop:Next And Last Song Buttons": false,
     "desktop:Next And Last Button Animation": true,
     "desktop:Shuffle Button": true,
     "desktop:Background": true,
@@ -15800,7 +16094,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": false,
+    "desktop:Timeline Look": true,
     "desktop:New Group (4)": true,
     "desktop:Visual Style": true,
     "desktop:Album Cover Colors": true,
