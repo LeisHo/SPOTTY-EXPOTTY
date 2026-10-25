@@ -19,7 +19,7 @@
     "checkboxHandoffEnabled": true,
     "checkboxSpotifyLoginOnStart": true,
     "checkboxShowSpotifyPlayer": true,
-    "sliderHandoffDelay": 100,
+    "sliderHandoffDelay": 0,
     "colorTimelineAccent": "#ffffff",
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
@@ -176,7 +176,7 @@
     "left": 26,
     "top": 56,
     "width": 600,
-    "height": 671
+    "height": 402
   },
   "devPanelStyle": {
     "titleFontSize": 17,
