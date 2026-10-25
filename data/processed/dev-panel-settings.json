@@ -192,7 +192,7 @@
     "checkboxNavButtonEnabled": true,
     "colorNavButton": "#f2f2f2",
     "sliderNavButtonSize": 30,
-    "sliderNavButtonOpacity": 100,
+    "sliderNavButtonOpacity": 70,
     "sliderNavButtonHoverOpacity": 54,
     "buttonNextSong": "",
     "buttonPrevSong": "",
@@ -10001,10 +10001,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "sliderMobileNavButtonOpacity"
-                      },
-                      {
-                        "type": "row",
                         "key": "buttonNextSong"
                       },
                       {
@@ -10023,7 +10019,6 @@
                     ],
                     "rowKeys": [
                       "sliderMobileNavButtonSize",
-                      "sliderMobileNavButtonOpacity",
                       "buttonNextSong",
                       "buttonPrevSong"
                     ],
@@ -10155,10 +10150,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderMobileNavButtonOpacity"
-                    },
-                    {
-                      "type": "row",
                       "key": "buttonNextSong"
                     },
                     {
@@ -10177,7 +10168,6 @@
                   ],
                   "rowKeys": [
                     "sliderMobileNavButtonSize",
-                    "sliderMobileNavButtonOpacity",
                     "buttonNextSong",
                     "buttonPrevSong"
                   ],
@@ -11284,10 +11274,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderMobileNavButtonOpacity"
-                    },
-                    {
-                      "type": "row",
                       "key": "buttonNextSong"
                     },
                     {
@@ -11306,7 +11292,6 @@
                   ],
                   "rowKeys": [
                     "sliderMobileNavButtonSize",
-                    "sliderMobileNavButtonOpacity",
                     "buttonNextSong",
                     "buttonPrevSong"
                   ],
@@ -11438,10 +11423,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "sliderMobileNavButtonOpacity"
-                  },
-                  {
-                    "type": "row",
                     "key": "buttonNextSong"
                   },
                   {
@@ -11460,7 +11441,6 @@
                 ],
                 "rowKeys": [
                   "sliderMobileNavButtonSize",
-                  "sliderMobileNavButtonOpacity",
                   "buttonNextSong",
                   "buttonPrevSong"
                 ],
@@ -13579,10 +13559,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "sliderLandscapeNavButtonOpacity"
-                      },
-                      {
-                        "type": "row",
                         "key": "buttonNextSong"
                       },
                       {
@@ -13601,7 +13577,6 @@
                     ],
                     "rowKeys": [
                       "sliderLandscapeNavButtonSize",
-                      "sliderLandscapeNavButtonOpacity",
                       "buttonNextSong",
                       "buttonPrevSong"
                     ],
@@ -13733,10 +13708,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderLandscapeNavButtonOpacity"
-                    },
-                    {
-                      "type": "row",
                       "key": "buttonNextSong"
                     },
                     {
@@ -13755,7 +13726,6 @@
                   ],
                   "rowKeys": [
                     "sliderLandscapeNavButtonSize",
-                    "sliderLandscapeNavButtonOpacity",
                     "buttonNextSong",
                     "buttonPrevSong"
                   ],
@@ -14862,10 +14832,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderLandscapeNavButtonOpacity"
-                    },
-                    {
-                      "type": "row",
                       "key": "buttonNextSong"
                     },
                     {
@@ -14884,7 +14850,6 @@
                   ],
                   "rowKeys": [
                     "sliderLandscapeNavButtonSize",
-                    "sliderLandscapeNavButtonOpacity",
                     "buttonNextSong",
                     "buttonPrevSong"
                   ],
@@ -15016,10 +14981,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "sliderLandscapeNavButtonOpacity"
-                  },
-                  {
-                    "type": "row",
                     "key": "buttonNextSong"
                   },
                   {
@@ -15038,7 +14999,6 @@
                 ],
                 "rowKeys": [
                   "sliderLandscapeNavButtonSize",
-                  "sliderLandscapeNavButtonOpacity",
                   "buttonNextSong",
                   "buttonPrevSong"
                 ],
@@ -15808,16 +15768,16 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": false,
+    "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
     "desktop:Artist": false,
     "desktop:Album & Date": false,
-    "desktop:New Group (7)": true,
+    "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
-    "desktop:Play Button": false,
+    "desktop:Play Button": true,
     "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": false,
     "desktop:Next And Last Button Animation": true,
@@ -16567,7 +16527,7 @@
     "sliderAlbumColorTransitionMs": false,
     "colorNavButton": false,
     "sliderNavButtonSize": true,
-    "sliderNavButtonOpacity": true,
+    "sliderNavButtonOpacity": false,
     "sliderNavButtonHoverOpacity": false,
     "sliderNavEdgeOffset": false,
     "sliderNavAnimTime": false,
