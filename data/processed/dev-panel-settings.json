@@ -164,11 +164,11 @@
     "checkboxTxtAlbumDateOutlineEnabled": false,
     "colorTxtAlbumDateOutlineColor": "#000000",
     "sliderTxtAlbumDateOutlineThickness": 2,
-    "checkboxSongBarEnabled": false,
-    "sliderSongBarHeight": 4,
-    "colorSongBarFill": "#1db954",
+    "checkboxSongBarEnabled": true,
+    "sliderSongBarHeight": 2,
+    "colorSongBarFill": "#ffffff",
     "colorSongBarEmpty": "#3a3f47",
-    "sliderSongBarClickTol": 6,
+    "sliderSongBarClickTol": 34,
     "sliderSongBarOpacity": 100,
     "checkboxSongBarMarker": false,
     "sliderSongBarMarkerRadius": 6,
@@ -3479,6 +3479,107 @@
                 {
                   "type": "group",
                   "section": {
+                    "key": "desktop:Song Timeline",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarHeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorSongBarFill"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorSongBarEmpty"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarClickTol"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxSongBarMarker"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarMarkerRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarMarkerOpacity"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Song Timeline Animation",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderSongBarHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderSongBarClickOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderSongBarAnimTime"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderSongBarHoverOpacity",
+                            "sliderSongBarClickOpacity",
+                            "sliderSongBarAnimTime"
+                          ],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderSongBarHeight",
+                      "colorSongBarFill",
+                      "colorSongBarEmpty",
+                      "sliderSongBarClickTol",
+                      "sliderSongBarOpacity",
+                      "checkboxSongBarMarker",
+                      "sliderSongBarMarkerRadius",
+                      "sliderSongBarMarkerOpacity"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "desktop:Song Timeline Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderSongBarHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderSongBarClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderSongBarAnimTime"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderSongBarHoverOpacity",
+                          "sliderSongBarClickOpacity",
+                          "sliderSongBarAnimTime"
+                        ],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
                     "key": "desktop:Shuffle Button",
                     "items": [
                       {
@@ -4074,6 +4175,104 @@
                         "sliderNavAnimHoverOpacity",
                         "sliderNavAnimClickOpacity",
                         "sliderNavAnimReleaseSize"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
+                },
+                {
+                  "key": "desktop:Song Timeline",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarHeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSongBarFill"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSongBarEmpty"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarClickTol"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxSongBarMarker"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarMarkerRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarMarkerOpacity"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Song Timeline Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderSongBarHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderSongBarClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderSongBarAnimTime"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderSongBarHoverOpacity",
+                          "sliderSongBarClickOpacity",
+                          "sliderSongBarAnimTime"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderSongBarHeight",
+                    "colorSongBarFill",
+                    "colorSongBarEmpty",
+                    "sliderSongBarClickTol",
+                    "sliderSongBarOpacity",
+                    "checkboxSongBarMarker",
+                    "sliderSongBarMarkerRadius",
+                    "sliderSongBarMarkerOpacity"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "desktop:Song Timeline Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderSongBarHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderSongBarClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderSongBarAnimTime"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderSongBarHoverOpacity",
+                        "sliderSongBarClickOpacity",
+                        "sliderSongBarAnimTime"
                       ],
                       "subgroups": []
                     }
@@ -4734,107 +4933,6 @@
                   ],
                   "rowKeys": [
                     "colorShadowTitleLift"
-                  ],
-                  "subgroups": []
-                }
-              ]
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "desktop:Song Timeline",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "sliderSongBarHeight"
-                },
-                {
-                  "type": "row",
-                  "key": "colorSongBarFill"
-                },
-                {
-                  "type": "row",
-                  "key": "colorSongBarEmpty"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderSongBarClickTol"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderSongBarOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxSongBarMarker"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderSongBarMarkerRadius"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderSongBarMarkerOpacity"
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Song Timeline Animation",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderSongBarHoverOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderSongBarClickOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderSongBarAnimTime"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderSongBarHoverOpacity",
-                      "sliderSongBarClickOpacity",
-                      "sliderSongBarAnimTime"
-                    ],
-                    "subgroups": []
-                  }
-                }
-              ],
-              "rowKeys": [
-                "sliderSongBarHeight",
-                "colorSongBarFill",
-                "colorSongBarEmpty",
-                "sliderSongBarClickTol",
-                "sliderSongBarOpacity",
-                "checkboxSongBarMarker",
-                "sliderSongBarMarkerRadius",
-                "sliderSongBarMarkerOpacity"
-              ],
-              "subgroups": [
-                {
-                  "key": "desktop:Song Timeline Animation",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderSongBarHoverOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderSongBarClickOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderSongBarAnimTime"
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderSongBarHoverOpacity",
-                    "sliderSongBarClickOpacity",
-                    "sliderSongBarAnimTime"
                   ],
                   "subgroups": []
                 }
@@ -6555,6 +6653,107 @@
               {
                 "type": "group",
                 "section": {
+                  "key": "desktop:Song Timeline",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarHeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSongBarFill"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSongBarEmpty"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarClickTol"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxSongBarMarker"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarMarkerRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarMarkerOpacity"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Song Timeline Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderSongBarHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderSongBarClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderSongBarAnimTime"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderSongBarHoverOpacity",
+                          "sliderSongBarClickOpacity",
+                          "sliderSongBarAnimTime"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderSongBarHeight",
+                    "colorSongBarFill",
+                    "colorSongBarEmpty",
+                    "sliderSongBarClickTol",
+                    "sliderSongBarOpacity",
+                    "checkboxSongBarMarker",
+                    "sliderSongBarMarkerRadius",
+                    "sliderSongBarMarkerOpacity"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "desktop:Song Timeline Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderSongBarHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderSongBarClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderSongBarAnimTime"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderSongBarHoverOpacity",
+                        "sliderSongBarClickOpacity",
+                        "sliderSongBarAnimTime"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "desktop:Shuffle Button",
                   "items": [
                     {
@@ -7150,6 +7349,104 @@
                       "sliderNavAnimHoverOpacity",
                       "sliderNavAnimClickOpacity",
                       "sliderNavAnimReleaseSize"
+                    ],
+                    "subgroups": []
+                  }
+                ]
+              },
+              {
+                "key": "desktop:Song Timeline",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderSongBarHeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorSongBarFill"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorSongBarEmpty"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSongBarClickTol"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSongBarOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxSongBarMarker"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSongBarMarkerRadius"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSongBarMarkerOpacity"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Song Timeline Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderSongBarHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderSongBarClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderSongBarAnimTime"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderSongBarHoverOpacity",
+                        "sliderSongBarClickOpacity",
+                        "sliderSongBarAnimTime"
+                      ],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [
+                  "sliderSongBarHeight",
+                  "colorSongBarFill",
+                  "colorSongBarEmpty",
+                  "sliderSongBarClickTol",
+                  "sliderSongBarOpacity",
+                  "checkboxSongBarMarker",
+                  "sliderSongBarMarkerRadius",
+                  "sliderSongBarMarkerOpacity"
+                ],
+                "subgroups": [
+                  {
+                    "key": "desktop:Song Timeline Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarClickOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarAnimTime"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderSongBarHoverOpacity",
+                      "sliderSongBarClickOpacity",
+                      "sliderSongBarAnimTime"
                     ],
                     "subgroups": []
                   }
@@ -7801,104 +8098,6 @@
                 ],
                 "rowKeys": [
                   "colorShadowTitleLift"
-                ],
-                "subgroups": []
-              }
-            ]
-          },
-          {
-            "key": "desktop:Song Timeline",
-            "items": [
-              {
-                "type": "row",
-                "key": "sliderSongBarHeight"
-              },
-              {
-                "type": "row",
-                "key": "colorSongBarFill"
-              },
-              {
-                "type": "row",
-                "key": "colorSongBarEmpty"
-              },
-              {
-                "type": "row",
-                "key": "sliderSongBarClickTol"
-              },
-              {
-                "type": "row",
-                "key": "sliderSongBarOpacity"
-              },
-              {
-                "type": "row",
-                "key": "checkboxSongBarMarker"
-              },
-              {
-                "type": "row",
-                "key": "sliderSongBarMarkerRadius"
-              },
-              {
-                "type": "row",
-                "key": "sliderSongBarMarkerOpacity"
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Song Timeline Animation",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderSongBarHoverOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderSongBarClickOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderSongBarAnimTime"
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderSongBarHoverOpacity",
-                    "sliderSongBarClickOpacity",
-                    "sliderSongBarAnimTime"
-                  ],
-                  "subgroups": []
-                }
-              }
-            ],
-            "rowKeys": [
-              "sliderSongBarHeight",
-              "colorSongBarFill",
-              "colorSongBarEmpty",
-              "sliderSongBarClickTol",
-              "sliderSongBarOpacity",
-              "checkboxSongBarMarker",
-              "sliderSongBarMarkerRadius",
-              "sliderSongBarMarkerOpacity"
-            ],
-            "subgroups": [
-              {
-                "key": "desktop:Song Timeline Animation",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "sliderSongBarHoverOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderSongBarClickOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderSongBarAnimTime"
-                  }
-                ],
-                "rowKeys": [
-                  "sliderSongBarHoverOpacity",
-                  "sliderSongBarClickOpacity",
-                  "sliderSongBarAnimTime"
                 ],
                 "subgroups": []
               }
@@ -19776,7 +19975,9 @@
     "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": true,
     "desktop:Next And Last Button Animation": true,
-    "desktop:Shuffle Button": false,
+    "desktop:Song Timeline": false,
+    "desktop:Song Timeline Animation": false,
+    "desktop:Shuffle Button": true,
     "desktop:Shuffle Button Animation": true,
     "desktop:Background": true,
     "desktop:Album Cover": true,
@@ -19785,8 +19986,6 @@
     "desktop:Volume Shadow": true,
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
-    "desktop:Song Timeline": false,
-    "desktop:Song Timeline Animation": false,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
