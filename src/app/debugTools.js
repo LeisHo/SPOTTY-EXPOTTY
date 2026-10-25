@@ -9,6 +9,7 @@
 // to HANDY DANDIES and were left out on purpose.
 import { setting, DEFAULTS, activeDevice } from './settings.js';
 import { embedStatus, isPlaying, embedMode, spotifyLoginStatus } from './handoff.js';
+import { sdkRecentEvents } from './sdkPlayer.js';
 
 const pageLoadMs = performance.now();
 let paused = false, logsPaused = false, snapshotText = '';
@@ -138,6 +139,8 @@ function buildSnapshot() {
         L.push(`added ${s.t}, track id ${s.id}, preview clip id ${s.d || 'none'}`);
         L.push(`spotify player: ${isPlaying() ? 'playing' : 'not playing'}, status ${JSON.stringify(embedStatus())}`);
         L.push(`player mode ${embedMode()}; Spotify login / SDK: ${spotifyLoginStatus()}`);
+        const sdkLines = sdkRecentEvents();
+        L.push('last Spotify SDK events:', sdkLines.length ? sdkLines.slice(-15).join('\n') : '(none: the SDK never started; check Client ID / login)');
         L.push(`volume ${sp.volume ? Math.round(sp.volume.get() * 100) + '%' : 'n/a'}`);
     }
     if (setting('checkboxSnapshotAudio') && sp) {

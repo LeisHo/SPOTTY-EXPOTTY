@@ -60,6 +60,7 @@ export const DEFAULTS = {
     sliderPlayheadWidth: 2,
     sliderPlayheadHeight: 100,
     checkboxRandomStartSong: false,
+    checkboxLoopPreview: true,
     sliderSpotlightMaxBrightness: 100,
     checkboxVolumeButtonEnabled: true,
     sliderVolMutedOpacity: 40,

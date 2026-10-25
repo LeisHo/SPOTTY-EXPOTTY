@@ -120,9 +120,10 @@ export function initVolume({ root, onChange }) {
         const sh = root.querySelector('.spx-shuffle');
         if (sh && e.target && sh.contains(e.target)) { setOpen(false); return; } // over the shuffle icon: it sits where the slider would drop
         const b = btn.getBoundingClientRect(), rr = root.getBoundingClientRect();
-        let l = b.left, r = b.right, t = b.top, bt = b.bottom;
-        if (target) { l = Math.min(l, rr.left); r = Math.max(r, rr.right); bt = b.bottom + panelH; }
-        const tol = cfg.tol;
+        // Closed: only the icon itself counts (no tolerance), so the space under it, where Shuffle sits, never opens the slider.
+        // Open: the icon + the slider, with the tolerance, so the pointer can move onto the slider without it closing.
+        let l = b.left, r = b.right, t = b.top, bt = b.bottom, tol = 0;
+        if (target) { l = Math.min(l, rr.left); r = Math.max(r, rr.right); bt = b.bottom + panelH; tol = cfg.tol; }
         const inside = e.clientX >= l - tol && e.clientX <= r + tol && e.clientY >= t - tol && e.clientY <= bt + tol;
         setOpen(inside);
     });

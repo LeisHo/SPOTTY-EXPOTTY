@@ -273,13 +273,19 @@ async function boot() {
     // "Randomize Starting Song": once the saved settings have arrived, jump to a random song unless the visitor already moved.
     let interacted = false;
     ['pointerdown', 'wheel', 'keydown'].forEach(t => window.addEventListener(t, () => { interacted = true; }, { once: true, capture: true }));
-    setTimeout(() => {
-        if (interacted || !setting('checkboxRandomStartSong')) return;
+    // In dev mode the panel's own live checkbox is still the default until the GitHub copy arrives (it can take longer than
+    // a fixed delay), so read the saved state itself. A visitor's saved state is already loaded at boot, so this costs nothing there.
+    (async () => {
+        const saved = document.documentElement.classList.contains('dev-mode')
+            ? await loadSavedSettings()
+            : null;
+        const randomOn = saved ? !!(saved.controls && saved.controls.checkboxRandomStartSong) : !!setting('checkboxRandomStartSong');
+        if (interacted || !randomOn) return;
         moveTo(Math.floor(Math.random() * songs.length));
         applyStartSpan(true);
         timeline.centerOnPlayhead();
         timeline.draw();
-    }, 1600);
+    })();
     document.addEventListener('input', e => { if (/StartSpanCurve/.test((e.target && e.target.id) || '')) applyStartSpan(false); });
     window.addEventListener('dblclick', e => { if (e.target.id === 'spxTimeline') applyStartSpan(true); });
     const afterJump = () => { if (setting('checkboxStartSpanApplyOnJump')) applyStartSpan(false); };
@@ -572,7 +578,14 @@ async function boot() {
     });
     if (shuffleOn) rebuildShuffle();
     syncShuffleUi();
-    setOnEnded(() => { if (!shuffleOn) return false; logEvent('playback', 'SONG ended: shuffle picks the next song'); stepSong(1); return true; });
+    // The preview ended. Loop Preview on (default): the embed restarts the same song (return false). Off: move on to the next song,
+    // and shuffle always picks the next one, as before.
+    setOnEnded(() => {
+        if (!shuffleOn && setting('checkboxLoopPreview')) return false;
+        logEvent('playback', shuffleOn ? 'SONG ended: shuffle picks the next song' : 'SONG ended: Loop Preview is off, moves to the next song');
+        stepSong(1);
+        return true;
+    });
     const stepSong = d => { if (shuffleOn && Math.abs(d) === 1) shuffleStep(d); else { moveTo(timeline.currentIndex() + d); afterJump(); } };
     // dev-panel buttons (so a hotkey can be assigned to them there)
     document.addEventListener('click', e => {

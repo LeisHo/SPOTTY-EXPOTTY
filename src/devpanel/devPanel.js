@@ -7591,6 +7591,7 @@
             { tab, group: 'Scrub Audio', id: 'sliderClipFadeOut', type: 'slider', label: 'Clip Fade Out (Ms):', min: 0, max: 500, step: 5, value: 30 },
             { tab, group: 'Scrub Audio', id: 'checkboxColdStartClips', type: 'checkbox', label: 'Play Clips Not Yet Preloaded:', value: true },
             { tab, group: 'Scrub Audio', id: 'checkboxRandomStartSong', type: 'checkbox', label: 'Randomize Starting Song:', value: false },
+            { tab, group: 'Scrub Audio', id: 'checkboxLoopPreview', type: 'checkbox', label: 'Loop Preview:', value: true },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadAhead', type: 'slider', label: 'Preload Ahead (Songs):', min: 0, max: 30, step: 1, value: 8 },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadBehind', type: 'slider', label: 'Preload Behind (Songs):', min: 0, max: 30, step: 1, value: 3 },
             { tab, group: 'Scrub Preload', id: 'checkboxShowPoolOverlay', type: 'checkbox', label: 'Show Preload Pool Overlay:', value: false },

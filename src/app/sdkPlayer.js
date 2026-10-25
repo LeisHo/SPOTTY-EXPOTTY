@@ -5,38 +5,42 @@
 import { getAccessToken, isLoggedIn, hasClientId } from './spotifyAuth.js';
 import { logEvent } from './debugLog.js';
 
-let player = null, deviceId = null, ready = false, failed = null, loading = false, volume = 1;
+let player = null, deviceId = null, ready = false, failed = null, loading = false, volume = 1, lastPlayError = null;
+// The last SDK events, kept even when "Log Playback Timing" is off, so the snapshot (Debug > Take Snapshot) can say what the SDK did.
+const recent = [];
+const note = msg => { recent.push(new Date().toISOString().slice(11, 23) + '  ' + msg); if (recent.length > 25) recent.shift(); logEvent('playback', 'SDK ' + msg); };
+export const sdkRecentEvents = () => recent.slice();
 let cb = { onState: () => {}, onEnded: () => {}, onStatus: () => {} };
 let lastState = null, lastEndedAt = 0;
 
 export const sdkReady = () => ready;
-export const sdkStatus = () => (!hasClientId() ? 'no Client ID' : !isLoggedIn() ? 'not logged in' : ready ? 'ready' : failed ? 'failed: ' + failed : 'loading');
+export const sdkStatus = () => (!hasClientId() ? 'no Client ID' : !isLoggedIn() ? 'not logged in' : ready ? (lastPlayError ? 'ready, but the last play failed: ' + lastPlayError : 'ready') : failed ? 'failed: ' + failed : 'loading');
 const setStatus = () => cb.onStatus(sdkStatus());
 
 export function initSdk(callbacks) {
     cb = { ...cb, ...callbacks };
     if (player || loading || !hasClientId() || !isLoggedIn()) { setStatus(); return; }
-    loading = true; failed = null; setStatus();
+    loading = true; failed = null; note('starting (loading the SDK script)'); setStatus();
     window.onSpotifyWebPlaybackSDKReady = create;
     if (window.Spotify && window.Spotify.Player) { create(); return; }
     const s = document.createElement('script');
     s.src = 'https://sdk.scdn.co/spotify-player.js';
     s.async = true;
-    s.onerror = () => { failed = 'the SDK script did not load'; loading = false; setStatus(); };
+    s.onerror = () => { failed = 'the SDK script did not load (blocked?)'; loading = false; note('script did not load'); setStatus(); };
     document.body.appendChild(s);
 }
 function create() {
-    player = new window.Spotify.Player({ name: 'SPOTTY EXPOTTY', getOAuthToken: async done => { try { done(await getAccessToken()); } catch (e) { failed = 'login expired'; setStatus(); } }, volume });
-    player.addListener('ready', ({ device_id }) => { deviceId = device_id; ready = true; loading = false; failed = null; logEvent('playback', 'SDK ready as device ' + device_id); setStatus(); });
-    player.addListener('not_ready', () => { ready = false; logEvent('playback', 'SDK device went offline'); setStatus(); });
+    player = new window.Spotify.Player({ name: 'SPOTTY EXPOTTY', getOAuthToken: async done => { try { done(await getAccessToken()); } catch (e) { failed = 'login expired: ' + e.message; note('token FAILED: ' + e.message); setStatus(); } }, volume });
+    player.addListener('ready', ({ device_id }) => { deviceId = device_id; ready = true; loading = false; failed = null; note('ready as device ' + device_id); setStatus(); transfer(); });
+    player.addListener('not_ready', () => { ready = false; note('device went offline'); setStatus(); });
     player.addListener('initialization_error', e => fail('initialization: ' + e.message));
     player.addListener('authentication_error', e => fail('authentication: ' + e.message));
     player.addListener('account_error', e => fail('account (Premium needed): ' + e.message));
-    player.addListener('playback_error', e => logEvent('playback', 'SDK playback error: ' + e.message));
+    player.addListener('playback_error', e => { lastPlayError = 'playback error: ' + e.message; note('playback error: ' + e.message); setStatus(); });
     player.addListener('player_state_changed', onState);
     player.connect();
 }
-function fail(msg) { failed = msg; ready = false; loading = false; logEvent('playback', 'SDK FAILED: ' + msg); setStatus(); }
+function fail(msg) { failed = msg; ready = false; loading = false; note('FAILED: ' + msg); setStatus(); }
 
 function onState(state) {
     if (!state) return;
@@ -46,21 +50,29 @@ function onState(state) {
         && state.track_window.previous_tracks.some(t => t.id === lastState.track_window.current_track.id) && Date.now() - lastEndedAt > 2000;
     lastState = state;
     cb.onState(!state.paused, { id: cur && cur.id, position: state.position, duration: state.duration });
-    if (ended) { lastEndedAt = Date.now(); logEvent('playback', 'SDK song ended'); cb.onEnded(); }
+    if (ended) { lastEndedAt = Date.now(); note('song ended'); cb.onEnded(); }
 }
 
 async function api(path, method, body) {
     const r = await fetch('https://api.spotify.com/v1' + path, { method, headers: { Authorization: 'Bearer ' + (await getAccessToken()), 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
     if (!r.ok && r.status !== 204) { const t = await r.text().catch(() => ''); throw new Error(method + ' ' + path + ' -> ' + r.status + ' ' + t.slice(0, 120)); }
 }
-// Start a track on this device (the first call also transfers playback to it).
+// Make this browser the active Spotify device (without starting anything). A brand-new device is not always known to Spotify's
+// servers yet, in which case starting a track on it answers 404 "device not found"; transferring first fixes that.
+async function transfer() {
+    try { await api('/me/player', 'PUT', { device_ids: [deviceId], play: false }); note('playback transferred to this device'); return true; }
+    catch (e) { note('transfer failed: ' + e.message); return false; }
+}
+// Start a track on this device. On "device not found" (404) transfer playback and try once more.
 export async function sdkPlay(trackId) {
     if (!ready) return false;
+    const go = () => api('/me/player/play?device_id=' + encodeURIComponent(deviceId), 'PUT', { uris: ['spotify:track:' + trackId] });
     try {
-        await api('/me/player/play?device_id=' + encodeURIComponent(deviceId), 'PUT', { uris: ['spotify:track:' + trackId] });
-        logEvent('playback', 'SDK play ' + trackId + ' requested');
+        try { await go(); }
+        catch (e) { if (!/ 404 /.test(e.message)) throw e; note('play got 404 (device not found yet): transferring and retrying'); await transfer(); await new Promise(r => setTimeout(r, 400)); await go(); }
+        lastPlayError = null; note('play ' + trackId + ' requested'); setStatus();
         return true;
-    } catch (e) { logEvent('playback', 'SDK play FAILED: ' + e.message); return false; }
+    } catch (e) { lastPlayError = e.message.replace(/^PUT \S+ -> /, ''); note('play FAILED: ' + e.message); setStatus(); return false; }
 }
 export const sdkPause = () => { if (ready) player.pause().catch(() => {}); };
 export const sdkResume = () => { if (ready) player.resume().catch(() => {}); };
