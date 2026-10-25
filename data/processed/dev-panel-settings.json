@@ -16727,7 +16727,7 @@
           "position": {
             "mode": "anchor",
             "horizontal": {
-              "anchor": "right",
+              "anchor": "left",
               "offset": "14px"
             },
             "vertical": {
