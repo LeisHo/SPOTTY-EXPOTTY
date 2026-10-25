@@ -816,6 +816,14 @@ Found and fixed:
 Not verified: a real phone / real SDK timing. Ideas not built: queue the next song in Spotify so Next is near-instant; keeping preview clips on gives instant sound while the song loads.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  06:36:55 - code push (see ETA History)  Faster next song (no queue)
+
+Owner: no Spotify queue; is there another way to make the next song start immediately? What we control: (a) the Handoff Delay exists only to stop a fast wheel scrub sending a play request per song, so a single deliberate step
+now skips it: stepSong() (Next / Last buttons, their hotkey buttons, plain Left / Right, a shuffle step, the end of a song, Auto Next Song) sets stepImmediate and onIndexChange uses a 0 ms delay for that one change; wheel / touch scrubbing keeps the setting.
+Measured with a fake SDK (handoff delay set to 400 ms): Next 3-4 ms, Last 10 ms to the play request, a wheel-style jump 410 ms. (b) <link rel="preconnect" href="https://api.spotify.com"> in index.html so the first play request does not pay the TLS handshake.
+What stays: Spotify needs roughly 0.3-1 s between the play request and sound; without queueing / prefetching there is no web-API way to remove it (a second player would interrupt the first). Keeping preview clips on gives instant sound while the song loads (crossfade).
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
