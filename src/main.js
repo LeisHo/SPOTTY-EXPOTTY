@@ -307,6 +307,11 @@ async function boot() {
     let interacted = false;
     const onVisitorInput = e => { if (!(e.target && e.target.closest && e.target.closest('#devPanel'))) interacted = true; };
     ['pointerdown', 'wheel', 'keydown'].forEach(t => window.addEventListener(t, onVisitorInput, { capture: true }));
+    // Full Scale on Startup: the timeline's real width is known only once it is laid out, so the startup scale is applied again
+    // when it first gets a size, until the visitor interacts (and for a few seconds at most).
+    const reFitStart = new ResizeObserver(() => { if (!interacted && setting('checkboxFullScaleOnStartup')) startupSpan(); });
+    reFitStart.observe(el('spxTimeline'));
+    setTimeout(() => reFitStart.disconnect(), 4000);
     // In dev mode the panel's own live checkbox is still the default until the GitHub copy arrives (it can take longer than
     // a fixed delay), so read the saved state itself. A visitor's saved state is already loaded at boot, so this costs nothing there.
     (async () => {
