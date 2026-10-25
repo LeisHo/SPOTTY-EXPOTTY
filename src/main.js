@@ -9,7 +9,7 @@ import {
     createUIElement, updateElement, setContextValue, getActiveContext, resolveAndApplyAll, captureAllLayoutConfigs, registerStorageBackend, loadLayoutConfig,
     resetLayoutConfig,
 } from '../lib/ui-engine/registry.mjs';
-import { setting, loadSavedSettings, rgbaOf } from './app/settings.js';
+import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
@@ -403,7 +403,14 @@ async function boot() {
             }
         });
     }
-    window.addEventListener('resize', () => applyTextElementStyles()); // the line count depends on the width
+    // The graph's box: full browser height on desktop (so bars reach the top). On a phone the height comes from that device's
+    // Timeline Height setting (the engine's per-device value), so the forced height is removed there.
+    function applyTimelineBox() {
+        const tl = el('spxTimeline').style;
+        if (activeDevice() === '') tl.setProperty('height', 'calc(100dvh - 14px)', 'important');
+        else tl.removeProperty('height');
+    }
+    window.addEventListener('resize', () => { applyTextElementStyles(); applyTimelineBox(); }); // the line count and the device depend on the width
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
         applyTextElementStyles();
@@ -443,7 +450,7 @@ async function boot() {
         el('spxApp').style.setProperty('--spx-sep-pct', setting('sliderArtistSeparatorPct') + '%');
         el('spxApp').style.setProperty('--spx-vol-icon-x', setting('sliderVolIconOffsetX') + 'px');
         // The graph reaches the top of the browser: its box is the full height (bottom edge unchanged). Buttons above it take their clicks (buttonUnder).
-        el('spxTimeline').style.setProperty('height', 'calc(100dvh - 14px)', 'important');
+        applyTimelineBox();
         el('spxStart').style.transition = `opacity ${setting('sliderStartFadeMs')}ms linear`;
         el('spxShuffle').hidden = !setting('checkboxShuffleButtonEnabled');
         placeNav(); // the edge offset is a setting
