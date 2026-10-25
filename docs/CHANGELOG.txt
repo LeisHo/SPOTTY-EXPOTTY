@@ -779,6 +779,15 @@ Verified with the fake SDK player: box hidden / iframe visible before the SDK; a
 Not verified: against the real SDK / audio.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  02:10:04 - code push (see ETA History)  First song after startup only 30 s
+
+Owner report: full songs work for every song except the FIRST one after startup (also with "Randomize Starting Song"); scrubbing on gives full songs. Cause: the Web Playback SDK needs a few seconds after page load
+to connect; a song asked for before that (the first one) went to the iframe embed, which can only play the 30 s preview, and an iframe song keeps playing there. Fix (handoff.js): when a login exists and the SDK has not
+failed (sdkExpected()), playTrack() does NOT use the iframe: the song waits (pendingSdkTrack) and plays through the SDK the moment it is ready; if the SDK fails (account / initialization / authentication) the waiting
+song goes to the iframe at once, and after 8 s without the SDK it does too; pausing / a newer song clears the wait. Verified with the fake player: before ready no iframe load and no play request; on ready exactly one
+PUT /me/player/play for the waiting song; account_error while waiting -> iframe fallback. Not verified with the real SDK.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
