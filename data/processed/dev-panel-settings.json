@@ -40,6 +40,13 @@
     "sliderPlayheadStartHeight": 63,
     "rangeBarTimelineZoomLimits": "{\"min\":64,\"max\":100}",
     "buttonOpenLayoutInspector": "",
+    "checkboxScrubLineDrag": false,
+    "sliderScrubLineAnimTime": 160,
+    "sliderScrubLineHoverWidth": 4,
+    "sliderScrubLineClickWidth": 6,
+    "sliderScrubLineReleaseWidth": 3,
+    "sliderScrubLineHoverOpacity": 100,
+    "sliderScrubLineClickOpacity": 100,
     "selectTimelineStyle": "density",
     "sliderGlowStemWidth": 2,
     "sliderGlowRadius": 12,
@@ -160,6 +167,7 @@
     "sliderVolMutedOpacity": 45,
     "sliderVolIconOpacity": 80,
     "sliderVolHoverOpacity": 100,
+    "sliderVolEdgeOffset": 9,
     "sliderVolIconSize": 32,
     "sliderVolIconOffsetX": 6,
     "sliderVolCircleRadius": 6,
@@ -183,6 +191,7 @@
     "sliderShuffleOffOpacity": 49,
     "sliderShuffleOnOpacity": 80,
     "sliderShuffleOnHoverOpacity": 100,
+    "sliderShuffleEdgeOffset": 14,
     "sliderShuffleHoverOpacity": 80,
     "sliderShuffleClickTolerance": 3,
     "sliderShuffleHoverTolerance": 6,
@@ -235,7 +244,7 @@
     "buttonNextSong": "",
     "buttonPrevSong": "",
     "checkboxNavAnimEnabled": true,
-    "sliderNavAnimTime": 90,
+    "sliderNavAnimTime": 50,
     "sliderNavAnimHoverSize": 35,
     "sliderNavAnimClickSize": 30,
     "sliderNavAnimHoverOpacity": 100,
@@ -3067,6 +3076,10 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolEdgeOffset"
                       }
                     ],
                     "rowKeys": [
@@ -3085,7 +3098,8 @@
                       "sliderVolIconOpacity",
                       "sliderVolClickTolerance",
                       "selectVolIconStyle",
-                      "sliderVolHoverOpacity"
+                      "sliderVolHoverOpacity",
+                      "sliderVolEdgeOffset"
                     ],
                     "subgroups": [
                       {
@@ -3510,6 +3524,10 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleEdgeOffset"
                       }
                     ],
                     "rowKeys": [
@@ -3523,7 +3541,8 @@
                       "sliderShuffleHoverOpacity",
                       "sliderShuffleClickTolerance",
                       "sliderShuffleHoverTolerance",
-                      "sliderShuffleOnHoverOpacity"
+                      "sliderShuffleOnHoverOpacity",
+                      "sliderShuffleEdgeOffset"
                     ],
                     "subgroups": [
                       {
@@ -3677,6 +3696,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderVolEdgeOffset"
                     }
                   ],
                   "rowKeys": [
@@ -3695,7 +3718,8 @@
                     "sliderVolIconOpacity",
                     "sliderVolClickTolerance",
                     "selectVolIconStyle",
-                    "sliderVolHoverOpacity"
+                    "sliderVolHoverOpacity",
+                    "sliderVolEdgeOffset"
                   ],
                   "subgroups": [
                     {
@@ -4111,6 +4135,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleEdgeOffset"
                     }
                   ],
                   "rowKeys": [
@@ -4124,7 +4152,8 @@
                     "sliderShuffleHoverOpacity",
                     "sliderShuffleClickTolerance",
                     "sliderShuffleHoverTolerance",
-                    "sliderShuffleOnHoverOpacity"
+                    "sliderShuffleOnHoverOpacity",
+                    "sliderShuffleEdgeOffset"
                   ],
                   "subgroups": [
                     {
@@ -6029,6 +6058,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderVolEdgeOffset"
                     }
                   ],
                   "rowKeys": [
@@ -6047,7 +6080,8 @@
                     "sliderVolIconOpacity",
                     "sliderVolClickTolerance",
                     "selectVolIconStyle",
-                    "sliderVolHoverOpacity"
+                    "sliderVolHoverOpacity",
+                    "sliderVolEdgeOffset"
                   ],
                   "subgroups": [
                     {
@@ -6472,6 +6506,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleEdgeOffset"
                     }
                   ],
                   "rowKeys": [
@@ -6485,7 +6523,8 @@
                     "sliderShuffleHoverOpacity",
                     "sliderShuffleClickTolerance",
                     "sliderShuffleHoverTolerance",
-                    "sliderShuffleOnHoverOpacity"
+                    "sliderShuffleOnHoverOpacity",
+                    "sliderShuffleEdgeOffset"
                   ],
                   "subgroups": [
                     {
@@ -6639,6 +6678,10 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderVolEdgeOffset"
                   }
                 ],
                 "rowKeys": [
@@ -6657,7 +6700,8 @@
                   "sliderVolIconOpacity",
                   "sliderVolClickTolerance",
                   "selectVolIconStyle",
-                  "sliderVolHoverOpacity"
+                  "sliderVolHoverOpacity",
+                  "sliderVolEdgeOffset"
                 ],
                 "subgroups": [
                   {
@@ -7073,6 +7117,10 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleEdgeOffset"
                   }
                 ],
                 "rowKeys": [
@@ -7086,7 +7134,8 @@
                   "sliderShuffleHoverOpacity",
                   "sliderShuffleClickTolerance",
                   "sliderShuffleHoverTolerance",
-                  "sliderShuffleOnHoverOpacity"
+                  "sliderShuffleOnHoverOpacity",
+                  "sliderShuffleEdgeOffset"
                 ],
                 "subgroups": [
                   {
@@ -8864,6 +8913,47 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Click and Drag",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderScrubLineAnimTime"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderScrubLineHoverWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderScrubLineClickWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderScrubLineReleaseWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderScrubLineHoverOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderScrubLineClickOpacity"
+                }
+              ],
+              "rowKeys": [
+                "sliderScrubLineAnimTime",
+                "sliderScrubLineHoverWidth",
+                "sliderScrubLineClickWidth",
+                "sliderScrubLineReleaseWidth",
+                "sliderScrubLineHoverOpacity",
+                "sliderScrubLineClickOpacity"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -9259,6 +9349,44 @@
               "colorSongAddDate",
               "sliderSongAddDateLetterSpacing",
               "sliderSongAddDateOpacity"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:Click and Drag",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderScrubLineAnimTime"
+              },
+              {
+                "type": "row",
+                "key": "sliderScrubLineHoverWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderScrubLineClickWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderScrubLineReleaseWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderScrubLineHoverOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderScrubLineClickOpacity"
+              }
+            ],
+            "rowKeys": [
+              "sliderScrubLineAnimTime",
+              "sliderScrubLineHoverWidth",
+              "sliderScrubLineClickWidth",
+              "sliderScrubLineReleaseWidth",
+              "sliderScrubLineHoverOpacity",
+              "sliderScrubLineClickOpacity"
             ],
             "subgroups": []
           }
@@ -11094,8 +11222,40 @@
                         "type": "group",
                         "section": {
                           "key": "mobile:Volume Button Animation",
-                          "items": [],
-                          "rowKeys": [],
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobileVolBtnAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileVolBtnAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileVolBtnAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileVolBtnAnimReleaseSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileVolBtnAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileVolBtnAnimClickOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobileVolBtnAnimTime",
+                            "sliderMobileVolBtnAnimHoverSize",
+                            "sliderMobileVolBtnAnimClickSize",
+                            "sliderMobileVolBtnAnimReleaseSize",
+                            "sliderMobileVolBtnAnimHoverOpacity",
+                            "sliderMobileVolBtnAnimClickOpacity"
+                          ],
                           "subgroups": []
                         }
                       }
@@ -11115,8 +11275,40 @@
                     "subgroups": [
                       {
                         "key": "mobile:Volume Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileVolBtnAnimTime",
+                          "sliderMobileVolBtnAnimHoverSize",
+                          "sliderMobileVolBtnAnimClickSize",
+                          "sliderMobileVolBtnAnimReleaseSize",
+                          "sliderMobileVolBtnAnimHoverOpacity",
+                          "sliderMobileVolBtnAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     ]
@@ -11143,8 +11335,40 @@
                         "type": "group",
                         "section": {
                           "key": "mobile:Play Button Animation",
-                          "items": [],
-                          "rowKeys": [],
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobilePlayAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobilePlayAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobilePlayAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobilePlayAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobilePlayAnimClickOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobilePlayAnimReleaseSize"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobilePlayAnimTime",
+                            "sliderMobilePlayAnimHoverSize",
+                            "sliderMobilePlayAnimClickSize",
+                            "sliderMobilePlayAnimHoverOpacity",
+                            "sliderMobilePlayAnimClickOpacity",
+                            "sliderMobilePlayAnimReleaseSize"
+                          ],
                           "subgroups": []
                         }
                       }
@@ -11157,8 +11381,40 @@
                     "subgroups": [
                       {
                         "key": "mobile:Play Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimReleaseSize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobilePlayAnimTime",
+                          "sliderMobilePlayAnimHoverSize",
+                          "sliderMobilePlayAnimClickSize",
+                          "sliderMobilePlayAnimHoverOpacity",
+                          "sliderMobilePlayAnimClickOpacity",
+                          "sliderMobilePlayAnimReleaseSize"
+                        ],
                         "subgroups": []
                       }
                     ]
@@ -11230,8 +11486,40 @@
                         "type": "group",
                         "section": {
                           "key": "mobile:Shuffle Button Animation",
-                          "items": [],
-                          "rowKeys": [],
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimReleaseSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimClickOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobileShuffleAnimTime",
+                            "sliderMobileShuffleAnimHoverSize",
+                            "sliderMobileShuffleAnimClickSize",
+                            "sliderMobileShuffleAnimReleaseSize",
+                            "sliderMobileShuffleAnimHoverOpacity",
+                            "sliderMobileShuffleAnimClickOpacity"
+                          ],
                           "subgroups": []
                         }
                       }
@@ -11240,8 +11528,40 @@
                     "subgroups": [
                       {
                         "key": "mobile:Shuffle Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileShuffleAnimTime",
+                          "sliderMobileShuffleAnimHoverSize",
+                          "sliderMobileShuffleAnimClickSize",
+                          "sliderMobileShuffleAnimReleaseSize",
+                          "sliderMobileShuffleAnimHoverOpacity",
+                          "sliderMobileShuffleAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     ]
@@ -11297,8 +11617,40 @@
                       "type": "group",
                       "section": {
                         "key": "mobile:Volume Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileVolBtnAnimTime",
+                          "sliderMobileVolBtnAnimHoverSize",
+                          "sliderMobileVolBtnAnimClickSize",
+                          "sliderMobileVolBtnAnimReleaseSize",
+                          "sliderMobileVolBtnAnimHoverOpacity",
+                          "sliderMobileVolBtnAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -11318,8 +11670,40 @@
                   "subgroups": [
                     {
                       "key": "mobile:Volume Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileVolBtnAnimTime",
+                        "sliderMobileVolBtnAnimHoverSize",
+                        "sliderMobileVolBtnAnimClickSize",
+                        "sliderMobileVolBtnAnimReleaseSize",
+                        "sliderMobileVolBtnAnimHoverOpacity",
+                        "sliderMobileVolBtnAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -11343,8 +11727,40 @@
                       "type": "group",
                       "section": {
                         "key": "mobile:Play Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimReleaseSize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobilePlayAnimTime",
+                          "sliderMobilePlayAnimHoverSize",
+                          "sliderMobilePlayAnimClickSize",
+                          "sliderMobilePlayAnimHoverOpacity",
+                          "sliderMobilePlayAnimClickOpacity",
+                          "sliderMobilePlayAnimReleaseSize"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -11357,8 +11773,40 @@
                   "subgroups": [
                     {
                       "key": "mobile:Play Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimReleaseSize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobilePlayAnimTime",
+                        "sliderMobilePlayAnimHoverSize",
+                        "sliderMobilePlayAnimClickSize",
+                        "sliderMobilePlayAnimHoverOpacity",
+                        "sliderMobilePlayAnimClickOpacity",
+                        "sliderMobilePlayAnimReleaseSize"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -11424,8 +11872,40 @@
                       "type": "group",
                       "section": {
                         "key": "mobile:Shuffle Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileShuffleAnimTime",
+                          "sliderMobileShuffleAnimHoverSize",
+                          "sliderMobileShuffleAnimClickSize",
+                          "sliderMobileShuffleAnimReleaseSize",
+                          "sliderMobileShuffleAnimHoverOpacity",
+                          "sliderMobileShuffleAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -11434,8 +11914,40 @@
                   "subgroups": [
                     {
                       "key": "mobile:Shuffle Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileShuffleAnimTime",
+                        "sliderMobileShuffleAnimHoverSize",
+                        "sliderMobileShuffleAnimClickSize",
+                        "sliderMobileShuffleAnimReleaseSize",
+                        "sliderMobileShuffleAnimHoverOpacity",
+                        "sliderMobileShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -12463,8 +12975,40 @@
                       "type": "group",
                       "section": {
                         "key": "mobile:Volume Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileVolBtnAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileVolBtnAnimTime",
+                          "sliderMobileVolBtnAnimHoverSize",
+                          "sliderMobileVolBtnAnimClickSize",
+                          "sliderMobileVolBtnAnimReleaseSize",
+                          "sliderMobileVolBtnAnimHoverOpacity",
+                          "sliderMobileVolBtnAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -12484,8 +13028,40 @@
                   "subgroups": [
                     {
                       "key": "mobile:Volume Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileVolBtnAnimTime",
+                        "sliderMobileVolBtnAnimHoverSize",
+                        "sliderMobileVolBtnAnimClickSize",
+                        "sliderMobileVolBtnAnimReleaseSize",
+                        "sliderMobileVolBtnAnimHoverOpacity",
+                        "sliderMobileVolBtnAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -12512,8 +13088,40 @@
                       "type": "group",
                       "section": {
                         "key": "mobile:Play Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobilePlayAnimReleaseSize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobilePlayAnimTime",
+                          "sliderMobilePlayAnimHoverSize",
+                          "sliderMobilePlayAnimClickSize",
+                          "sliderMobilePlayAnimHoverOpacity",
+                          "sliderMobilePlayAnimClickOpacity",
+                          "sliderMobilePlayAnimReleaseSize"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -12526,8 +13134,40 @@
                   "subgroups": [
                     {
                       "key": "mobile:Play Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimReleaseSize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobilePlayAnimTime",
+                        "sliderMobilePlayAnimHoverSize",
+                        "sliderMobilePlayAnimClickSize",
+                        "sliderMobilePlayAnimHoverOpacity",
+                        "sliderMobilePlayAnimClickOpacity",
+                        "sliderMobilePlayAnimReleaseSize"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -12599,8 +13239,40 @@
                       "type": "group",
                       "section": {
                         "key": "mobile:Shuffle Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileShuffleAnimTime",
+                          "sliderMobileShuffleAnimHoverSize",
+                          "sliderMobileShuffleAnimClickSize",
+                          "sliderMobileShuffleAnimReleaseSize",
+                          "sliderMobileShuffleAnimHoverOpacity",
+                          "sliderMobileShuffleAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -12609,8 +13281,40 @@
                   "subgroups": [
                     {
                       "key": "mobile:Shuffle Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileShuffleAnimTime",
+                        "sliderMobileShuffleAnimHoverSize",
+                        "sliderMobileShuffleAnimClickSize",
+                        "sliderMobileShuffleAnimReleaseSize",
+                        "sliderMobileShuffleAnimHoverOpacity",
+                        "sliderMobileShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -12666,8 +13370,40 @@
                     "type": "group",
                     "section": {
                       "key": "mobile:Volume Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileVolBtnAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileVolBtnAnimTime",
+                        "sliderMobileVolBtnAnimHoverSize",
+                        "sliderMobileVolBtnAnimClickSize",
+                        "sliderMobileVolBtnAnimReleaseSize",
+                        "sliderMobileVolBtnAnimHoverOpacity",
+                        "sliderMobileVolBtnAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   }
@@ -12687,8 +13423,40 @@
                 "subgroups": [
                   {
                     "key": "mobile:Volume Button Animation",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolBtnAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolBtnAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolBtnAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolBtnAnimReleaseSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolBtnAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileVolBtnAnimClickOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileVolBtnAnimTime",
+                      "sliderMobileVolBtnAnimHoverSize",
+                      "sliderMobileVolBtnAnimClickSize",
+                      "sliderMobileVolBtnAnimReleaseSize",
+                      "sliderMobileVolBtnAnimHoverOpacity",
+                      "sliderMobileVolBtnAnimClickOpacity"
+                    ],
                     "subgroups": []
                   }
                 ]
@@ -12712,8 +13480,40 @@
                     "type": "group",
                     "section": {
                       "key": "mobile:Play Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobilePlayAnimReleaseSize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobilePlayAnimTime",
+                        "sliderMobilePlayAnimHoverSize",
+                        "sliderMobilePlayAnimClickSize",
+                        "sliderMobilePlayAnimHoverOpacity",
+                        "sliderMobilePlayAnimClickOpacity",
+                        "sliderMobilePlayAnimReleaseSize"
+                      ],
                       "subgroups": []
                     }
                   }
@@ -12726,8 +13526,40 @@
                 "subgroups": [
                   {
                     "key": "mobile:Play Button Animation",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobilePlayAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobilePlayAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobilePlayAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobilePlayAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobilePlayAnimClickOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobilePlayAnimReleaseSize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobilePlayAnimTime",
+                      "sliderMobilePlayAnimHoverSize",
+                      "sliderMobilePlayAnimClickSize",
+                      "sliderMobilePlayAnimHoverOpacity",
+                      "sliderMobilePlayAnimClickOpacity",
+                      "sliderMobilePlayAnimReleaseSize"
+                    ],
                     "subgroups": []
                   }
                 ]
@@ -12793,8 +13625,40 @@
                     "type": "group",
                     "section": {
                       "key": "mobile:Shuffle Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileShuffleAnimTime",
+                        "sliderMobileShuffleAnimHoverSize",
+                        "sliderMobileShuffleAnimClickSize",
+                        "sliderMobileShuffleAnimReleaseSize",
+                        "sliderMobileShuffleAnimHoverOpacity",
+                        "sliderMobileShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   }
@@ -12803,8 +13667,40 @@
                 "subgroups": [
                   {
                     "key": "mobile:Shuffle Button Animation",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimReleaseSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimClickOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileShuffleAnimTime",
+                      "sliderMobileShuffleAnimHoverSize",
+                      "sliderMobileShuffleAnimClickSize",
+                      "sliderMobileShuffleAnimReleaseSize",
+                      "sliderMobileShuffleAnimHoverOpacity",
+                      "sliderMobileShuffleAnimClickOpacity"
+                    ],
                     "subgroups": []
                   }
                 ]
@@ -13405,6 +14301,47 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Click and Drag",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderMobileScrubLineAnimTime"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileScrubLineHoverWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileScrubLineClickWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileScrubLineReleaseWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileScrubLineHoverOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileScrubLineClickOpacity"
+                }
+              ],
+              "rowKeys": [
+                "sliderMobileScrubLineAnimTime",
+                "sliderMobileScrubLineHoverWidth",
+                "sliderMobileScrubLineClickWidth",
+                "sliderMobileScrubLineReleaseWidth",
+                "sliderMobileScrubLineHoverOpacity",
+                "sliderMobileScrubLineClickOpacity"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [],
@@ -13475,6 +14412,44 @@
             "key": "mobile:Song Add Date",
             "items": [],
             "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Click and Drag",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderMobileScrubLineAnimTime"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileScrubLineHoverWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileScrubLineClickWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileScrubLineReleaseWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileScrubLineHoverOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileScrubLineClickOpacity"
+              }
+            ],
+            "rowKeys": [
+              "sliderMobileScrubLineAnimTime",
+              "sliderMobileScrubLineHoverWidth",
+              "sliderMobileScrubLineClickWidth",
+              "sliderMobileScrubLineReleaseWidth",
+              "sliderMobileScrubLineHoverOpacity",
+              "sliderMobileScrubLineClickOpacity"
+            ],
             "subgroups": []
           }
         ]
@@ -14844,8 +15819,40 @@
                         "type": "group",
                         "section": {
                           "key": "landscape:Volume Button Animation",
-                          "items": [],
-                          "rowKeys": [],
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeVolBtnAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeVolBtnAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeVolBtnAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeVolBtnAnimReleaseSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeVolBtnAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeVolBtnAnimClickOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeVolBtnAnimTime",
+                            "sliderLandscapeVolBtnAnimHoverSize",
+                            "sliderLandscapeVolBtnAnimClickSize",
+                            "sliderLandscapeVolBtnAnimReleaseSize",
+                            "sliderLandscapeVolBtnAnimHoverOpacity",
+                            "sliderLandscapeVolBtnAnimClickOpacity"
+                          ],
                           "subgroups": []
                         }
                       }
@@ -14865,8 +15872,40 @@
                     "subgroups": [
                       {
                         "key": "landscape:Volume Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeVolBtnAnimTime",
+                          "sliderLandscapeVolBtnAnimHoverSize",
+                          "sliderLandscapeVolBtnAnimClickSize",
+                          "sliderLandscapeVolBtnAnimReleaseSize",
+                          "sliderLandscapeVolBtnAnimHoverOpacity",
+                          "sliderLandscapeVolBtnAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     ]
@@ -14893,8 +15932,40 @@
                         "type": "group",
                         "section": {
                           "key": "landscape:Play Button Animation",
-                          "items": [],
-                          "rowKeys": [],
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapePlayAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapePlayAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapePlayAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapePlayAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapePlayAnimClickOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapePlayAnimReleaseSize"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapePlayAnimTime",
+                            "sliderLandscapePlayAnimHoverSize",
+                            "sliderLandscapePlayAnimClickSize",
+                            "sliderLandscapePlayAnimHoverOpacity",
+                            "sliderLandscapePlayAnimClickOpacity",
+                            "sliderLandscapePlayAnimReleaseSize"
+                          ],
                           "subgroups": []
                         }
                       }
@@ -14907,8 +15978,40 @@
                     "subgroups": [
                       {
                         "key": "landscape:Play Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimReleaseSize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapePlayAnimTime",
+                          "sliderLandscapePlayAnimHoverSize",
+                          "sliderLandscapePlayAnimClickSize",
+                          "sliderLandscapePlayAnimHoverOpacity",
+                          "sliderLandscapePlayAnimClickOpacity",
+                          "sliderLandscapePlayAnimReleaseSize"
+                        ],
                         "subgroups": []
                       }
                     ]
@@ -14980,8 +16083,40 @@
                         "type": "group",
                         "section": {
                           "key": "landscape:Shuffle Button Animation",
-                          "items": [],
-                          "rowKeys": [],
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimReleaseSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimClickOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeShuffleAnimTime",
+                            "sliderLandscapeShuffleAnimHoverSize",
+                            "sliderLandscapeShuffleAnimClickSize",
+                            "sliderLandscapeShuffleAnimReleaseSize",
+                            "sliderLandscapeShuffleAnimHoverOpacity",
+                            "sliderLandscapeShuffleAnimClickOpacity"
+                          ],
                           "subgroups": []
                         }
                       }
@@ -14990,8 +16125,40 @@
                     "subgroups": [
                       {
                         "key": "landscape:Shuffle Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeShuffleAnimTime",
+                          "sliderLandscapeShuffleAnimHoverSize",
+                          "sliderLandscapeShuffleAnimClickSize",
+                          "sliderLandscapeShuffleAnimReleaseSize",
+                          "sliderLandscapeShuffleAnimHoverOpacity",
+                          "sliderLandscapeShuffleAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     ]
@@ -15047,8 +16214,40 @@
                       "type": "group",
                       "section": {
                         "key": "landscape:Volume Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeVolBtnAnimTime",
+                          "sliderLandscapeVolBtnAnimHoverSize",
+                          "sliderLandscapeVolBtnAnimClickSize",
+                          "sliderLandscapeVolBtnAnimReleaseSize",
+                          "sliderLandscapeVolBtnAnimHoverOpacity",
+                          "sliderLandscapeVolBtnAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -15068,8 +16267,40 @@
                   "subgroups": [
                     {
                       "key": "landscape:Volume Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeVolBtnAnimTime",
+                        "sliderLandscapeVolBtnAnimHoverSize",
+                        "sliderLandscapeVolBtnAnimClickSize",
+                        "sliderLandscapeVolBtnAnimReleaseSize",
+                        "sliderLandscapeVolBtnAnimHoverOpacity",
+                        "sliderLandscapeVolBtnAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -15093,8 +16324,40 @@
                       "type": "group",
                       "section": {
                         "key": "landscape:Play Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimReleaseSize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapePlayAnimTime",
+                          "sliderLandscapePlayAnimHoverSize",
+                          "sliderLandscapePlayAnimClickSize",
+                          "sliderLandscapePlayAnimHoverOpacity",
+                          "sliderLandscapePlayAnimClickOpacity",
+                          "sliderLandscapePlayAnimReleaseSize"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -15107,8 +16370,40 @@
                   "subgroups": [
                     {
                       "key": "landscape:Play Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimReleaseSize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapePlayAnimTime",
+                        "sliderLandscapePlayAnimHoverSize",
+                        "sliderLandscapePlayAnimClickSize",
+                        "sliderLandscapePlayAnimHoverOpacity",
+                        "sliderLandscapePlayAnimClickOpacity",
+                        "sliderLandscapePlayAnimReleaseSize"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -15174,8 +16469,40 @@
                       "type": "group",
                       "section": {
                         "key": "landscape:Shuffle Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeShuffleAnimTime",
+                          "sliderLandscapeShuffleAnimHoverSize",
+                          "sliderLandscapeShuffleAnimClickSize",
+                          "sliderLandscapeShuffleAnimReleaseSize",
+                          "sliderLandscapeShuffleAnimHoverOpacity",
+                          "sliderLandscapeShuffleAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -15184,8 +16511,40 @@
                   "subgroups": [
                     {
                       "key": "landscape:Shuffle Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeShuffleAnimTime",
+                        "sliderLandscapeShuffleAnimHoverSize",
+                        "sliderLandscapeShuffleAnimClickSize",
+                        "sliderLandscapeShuffleAnimReleaseSize",
+                        "sliderLandscapeShuffleAnimHoverOpacity",
+                        "sliderLandscapeShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -16213,8 +17572,40 @@
                       "type": "group",
                       "section": {
                         "key": "landscape:Volume Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeVolBtnAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeVolBtnAnimTime",
+                          "sliderLandscapeVolBtnAnimHoverSize",
+                          "sliderLandscapeVolBtnAnimClickSize",
+                          "sliderLandscapeVolBtnAnimReleaseSize",
+                          "sliderLandscapeVolBtnAnimHoverOpacity",
+                          "sliderLandscapeVolBtnAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -16234,8 +17625,40 @@
                   "subgroups": [
                     {
                       "key": "landscape:Volume Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeVolBtnAnimTime",
+                        "sliderLandscapeVolBtnAnimHoverSize",
+                        "sliderLandscapeVolBtnAnimClickSize",
+                        "sliderLandscapeVolBtnAnimReleaseSize",
+                        "sliderLandscapeVolBtnAnimHoverOpacity",
+                        "sliderLandscapeVolBtnAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -16262,8 +17685,40 @@
                       "type": "group",
                       "section": {
                         "key": "landscape:Play Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapePlayAnimReleaseSize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapePlayAnimTime",
+                          "sliderLandscapePlayAnimHoverSize",
+                          "sliderLandscapePlayAnimClickSize",
+                          "sliderLandscapePlayAnimHoverOpacity",
+                          "sliderLandscapePlayAnimClickOpacity",
+                          "sliderLandscapePlayAnimReleaseSize"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -16276,8 +17731,40 @@
                   "subgroups": [
                     {
                       "key": "landscape:Play Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimReleaseSize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapePlayAnimTime",
+                        "sliderLandscapePlayAnimHoverSize",
+                        "sliderLandscapePlayAnimClickSize",
+                        "sliderLandscapePlayAnimHoverOpacity",
+                        "sliderLandscapePlayAnimClickOpacity",
+                        "sliderLandscapePlayAnimReleaseSize"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -16349,8 +17836,40 @@
                       "type": "group",
                       "section": {
                         "key": "landscape:Shuffle Button Animation",
-                        "items": [],
-                        "rowKeys": [],
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeShuffleAnimTime",
+                          "sliderLandscapeShuffleAnimHoverSize",
+                          "sliderLandscapeShuffleAnimClickSize",
+                          "sliderLandscapeShuffleAnimReleaseSize",
+                          "sliderLandscapeShuffleAnimHoverOpacity",
+                          "sliderLandscapeShuffleAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     }
@@ -16359,8 +17878,40 @@
                   "subgroups": [
                     {
                       "key": "landscape:Shuffle Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeShuffleAnimTime",
+                        "sliderLandscapeShuffleAnimHoverSize",
+                        "sliderLandscapeShuffleAnimClickSize",
+                        "sliderLandscapeShuffleAnimReleaseSize",
+                        "sliderLandscapeShuffleAnimHoverOpacity",
+                        "sliderLandscapeShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -16416,8 +17967,40 @@
                     "type": "group",
                     "section": {
                       "key": "landscape:Volume Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeVolBtnAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeVolBtnAnimTime",
+                        "sliderLandscapeVolBtnAnimHoverSize",
+                        "sliderLandscapeVolBtnAnimClickSize",
+                        "sliderLandscapeVolBtnAnimReleaseSize",
+                        "sliderLandscapeVolBtnAnimHoverOpacity",
+                        "sliderLandscapeVolBtnAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   }
@@ -16437,8 +18020,40 @@
                 "subgroups": [
                   {
                     "key": "landscape:Volume Button Animation",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolBtnAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolBtnAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolBtnAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolBtnAnimReleaseSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolBtnAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeVolBtnAnimClickOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeVolBtnAnimTime",
+                      "sliderLandscapeVolBtnAnimHoverSize",
+                      "sliderLandscapeVolBtnAnimClickSize",
+                      "sliderLandscapeVolBtnAnimReleaseSize",
+                      "sliderLandscapeVolBtnAnimHoverOpacity",
+                      "sliderLandscapeVolBtnAnimClickOpacity"
+                    ],
                     "subgroups": []
                   }
                 ]
@@ -16462,8 +18077,40 @@
                     "type": "group",
                     "section": {
                       "key": "landscape:Play Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapePlayAnimReleaseSize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapePlayAnimTime",
+                        "sliderLandscapePlayAnimHoverSize",
+                        "sliderLandscapePlayAnimClickSize",
+                        "sliderLandscapePlayAnimHoverOpacity",
+                        "sliderLandscapePlayAnimClickOpacity",
+                        "sliderLandscapePlayAnimReleaseSize"
+                      ],
                       "subgroups": []
                     }
                   }
@@ -16476,8 +18123,40 @@
                 "subgroups": [
                   {
                     "key": "landscape:Play Button Animation",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapePlayAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapePlayAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapePlayAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapePlayAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapePlayAnimClickOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapePlayAnimReleaseSize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapePlayAnimTime",
+                      "sliderLandscapePlayAnimHoverSize",
+                      "sliderLandscapePlayAnimClickSize",
+                      "sliderLandscapePlayAnimHoverOpacity",
+                      "sliderLandscapePlayAnimClickOpacity",
+                      "sliderLandscapePlayAnimReleaseSize"
+                    ],
                     "subgroups": []
                   }
                 ]
@@ -16543,8 +18222,40 @@
                     "type": "group",
                     "section": {
                       "key": "landscape:Shuffle Button Animation",
-                      "items": [],
-                      "rowKeys": [],
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeShuffleAnimTime",
+                        "sliderLandscapeShuffleAnimHoverSize",
+                        "sliderLandscapeShuffleAnimClickSize",
+                        "sliderLandscapeShuffleAnimReleaseSize",
+                        "sliderLandscapeShuffleAnimHoverOpacity",
+                        "sliderLandscapeShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   }
@@ -16553,8 +18264,40 @@
                 "subgroups": [
                   {
                     "key": "landscape:Shuffle Button Animation",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimReleaseSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimClickOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeShuffleAnimTime",
+                      "sliderLandscapeShuffleAnimHoverSize",
+                      "sliderLandscapeShuffleAnimClickSize",
+                      "sliderLandscapeShuffleAnimReleaseSize",
+                      "sliderLandscapeShuffleAnimHoverOpacity",
+                      "sliderLandscapeShuffleAnimClickOpacity"
+                    ],
                     "subgroups": []
                   }
                 ]
@@ -17155,6 +18898,47 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Click and Drag",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeScrubLineAnimTime"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeScrubLineHoverWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeScrubLineClickWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeScrubLineReleaseWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeScrubLineHoverOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeScrubLineClickOpacity"
+                }
+              ],
+              "rowKeys": [
+                "sliderLandscapeScrubLineAnimTime",
+                "sliderLandscapeScrubLineHoverWidth",
+                "sliderLandscapeScrubLineClickWidth",
+                "sliderLandscapeScrubLineReleaseWidth",
+                "sliderLandscapeScrubLineHoverOpacity",
+                "sliderLandscapeScrubLineClickOpacity"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [],
@@ -17225,6 +19009,44 @@
             "key": "landscape:Song Add Date",
             "items": [],
             "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:Click and Drag",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderLandscapeScrubLineAnimTime"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeScrubLineHoverWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeScrubLineClickWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeScrubLineReleaseWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeScrubLineHoverOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeScrubLineClickOpacity"
+              }
+            ],
+            "rowKeys": [
+              "sliderLandscapeScrubLineAnimTime",
+              "sliderLandscapeScrubLineHoverWidth",
+              "sliderLandscapeScrubLineClickWidth",
+              "sliderLandscapeScrubLineReleaseWidth",
+              "sliderLandscapeScrubLineHoverOpacity",
+              "sliderLandscapeScrubLineClickOpacity"
+            ],
             "subgroups": []
           }
         ]
@@ -17318,9 +19140,9 @@
     "desktop:Artist": true,
     "desktop:Album & Date": false,
     "desktop:New Group (7)": false,
-    "desktop:Volume Button": true,
+    "desktop:Volume Button": false,
     "desktop:Volume Button Animation": true,
-    "desktop:Play Button": false,
+    "desktop:Play Button": true,
     "desktop:Play Button Animation": false,
     "desktop:Next And Last Song Buttons": true,
     "desktop:Next And Last Button Animation": false,
@@ -17353,6 +19175,7 @@
     "desktop:Scale Numbers": false,
     "desktop:Ticks": false,
     "desktop:Song Add Date": true,
+    "desktop:Click and Drag": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
@@ -17412,6 +19235,7 @@
     "mobile:Scale Numbers": false,
     "mobile:Ticks": false,
     "mobile:Song Add Date": false,
+    "mobile:Click and Drag": false,
     "mobile:Startup": true,
     "mobile:Start Button": false,
     "mobile:Start Button Animation": false,
@@ -17471,6 +19295,7 @@
     "landscape:Scale Numbers": false,
     "landscape:Ticks": false,
     "landscape:Song Add Date": false,
+    "landscape:Click and Drag": false,
     "landscape:Startup": false,
     "landscape:Start Button": false,
     "landscape:Start Button Animation": false
@@ -17918,7 +19743,57 @@
     "sliderMobileNavClickTolerance": null,
     "sliderLandscapeNavClickTolerance": null,
     "mobile:Volume Button Animation": null,
-    "landscape:Volume Button Animation": null
+    "landscape:Volume Button Animation": null,
+    "sliderMobileVolBtnAnimTime": null,
+    "sliderMobileVolBtnAnimHoverSize": null,
+    "sliderMobileVolBtnAnimClickSize": null,
+    "sliderMobileVolBtnAnimReleaseSize": null,
+    "sliderMobileVolBtnAnimHoverOpacity": null,
+    "sliderMobileVolBtnAnimClickOpacity": null,
+    "sliderMobilePlayAnimTime": null,
+    "sliderMobilePlayAnimHoverSize": null,
+    "sliderMobilePlayAnimClickSize": null,
+    "sliderMobilePlayAnimHoverOpacity": null,
+    "sliderMobilePlayAnimClickOpacity": null,
+    "sliderMobilePlayAnimReleaseSize": null,
+    "sliderMobileShuffleAnimTime": null,
+    "sliderMobileShuffleAnimHoverSize": null,
+    "sliderMobileShuffleAnimClickSize": null,
+    "sliderMobileShuffleAnimReleaseSize": null,
+    "sliderMobileShuffleAnimHoverOpacity": null,
+    "sliderMobileShuffleAnimClickOpacity": null,
+    "sliderMobileScrubLineAnimTime": null,
+    "sliderMobileScrubLineHoverWidth": null,
+    "sliderMobileScrubLineClickWidth": null,
+    "sliderMobileScrubLineReleaseWidth": null,
+    "sliderMobileScrubLineHoverOpacity": null,
+    "sliderMobileScrubLineClickOpacity": null,
+    "mobile:Click and Drag": null,
+    "sliderLandscapeVolBtnAnimTime": null,
+    "sliderLandscapeVolBtnAnimHoverSize": null,
+    "sliderLandscapeVolBtnAnimClickSize": null,
+    "sliderLandscapeVolBtnAnimReleaseSize": null,
+    "sliderLandscapeVolBtnAnimHoverOpacity": null,
+    "sliderLandscapeVolBtnAnimClickOpacity": null,
+    "sliderLandscapePlayAnimTime": null,
+    "sliderLandscapePlayAnimHoverSize": null,
+    "sliderLandscapePlayAnimClickSize": null,
+    "sliderLandscapePlayAnimHoverOpacity": null,
+    "sliderLandscapePlayAnimClickOpacity": null,
+    "sliderLandscapePlayAnimReleaseSize": null,
+    "sliderLandscapeShuffleAnimTime": null,
+    "sliderLandscapeShuffleAnimHoverSize": null,
+    "sliderLandscapeShuffleAnimClickSize": null,
+    "sliderLandscapeShuffleAnimReleaseSize": null,
+    "sliderLandscapeShuffleAnimHoverOpacity": null,
+    "sliderLandscapeShuffleAnimClickOpacity": null,
+    "sliderLandscapeScrubLineAnimTime": null,
+    "sliderLandscapeScrubLineHoverWidth": null,
+    "sliderLandscapeScrubLineClickWidth": null,
+    "sliderLandscapeScrubLineReleaseWidth": null,
+    "sliderLandscapeScrubLineHoverOpacity": null,
+    "sliderLandscapeScrubLineClickOpacity": null,
+    "landscape:Click and Drag": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
