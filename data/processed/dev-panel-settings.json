@@ -29,7 +29,7 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
-    "sliderTimelineHeight": 210,
+    "sliderTimelineHeight": 175,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
     "sliderTimelineScaleGap": 0,
@@ -111,6 +111,7 @@
     "sliderTxtArtistMaxWidth": 900,
     "selectTxtArtistOverflow": "wrap",
     "textArtistSeparator": ";",
+    "sliderArtistSeparatorPct": 100,
     "checkboxScaleArtistMultiline": true,
     "sliderArtistMaxLines": 2,
     "checkboxTxtArtistOutlineEnabled": false,
@@ -167,6 +168,7 @@
     "sliderPlayAnimHoverOpacity": 100,
     "sliderPlayAnimClickOpacity": 70,
     "sliderPlayAnimReleaseSize": 70,
+    "sliderNavEdgeOffset": 14,
     "checkboxNavButtonEnabled": true,
     "colorNavButton": "#f2f2f2",
     "sliderNavButtonSize": 39,
@@ -2087,6 +2089,10 @@
                         "key": "sliderArtistMaxLines"
                       },
                       {
+                        "type": "row",
+                        "key": "sliderArtistSeparatorPct"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "desktop:Outline",
@@ -2110,7 +2116,8 @@
                       "selectTxtArtistOverflow",
                       "textArtistSeparator",
                       "checkboxScaleArtistMultiline",
-                      "sliderArtistMaxLines"
+                      "sliderArtistMaxLines",
+                      "sliderArtistSeparatorPct"
                     ],
                     "subgroups": [
                       {
@@ -2662,6 +2669,10 @@
                       "key": "sliderArtistMaxLines"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderArtistSeparatorPct"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -2685,7 +2696,8 @@
                     "selectTxtArtistOverflow",
                     "textArtistSeparator",
                     "checkboxScaleArtistMultiline",
-                    "sliderArtistMaxLines"
+                    "sliderArtistMaxLines",
+                    "sliderArtistSeparatorPct"
                   ],
                   "subgroups": [
                     {
@@ -3103,6 +3115,10 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNavEdgeOffset"
                       }
                     ],
                     "rowKeys": [
@@ -3111,7 +3127,8 @@
                       "sliderNavButtonOpacity",
                       "sliderNavButtonHoverOpacity",
                       "buttonNextSong",
-                      "buttonPrevSong"
+                      "buttonPrevSong",
+                      "sliderNavEdgeOffset"
                     ],
                     "subgroups": [
                       {
@@ -3442,6 +3459,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavEdgeOffset"
                     }
                   ],
                   "rowKeys": [
@@ -3450,7 +3471,8 @@
                     "sliderNavButtonOpacity",
                     "sliderNavButtonHoverOpacity",
                     "buttonNextSong",
-                    "buttonPrevSong"
+                    "buttonPrevSong",
+                    "sliderNavEdgeOffset"
                   ],
                   "subgroups": [
                     {
@@ -4472,6 +4494,10 @@
                       "key": "sliderArtistMaxLines"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderArtistSeparatorPct"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -4495,7 +4521,8 @@
                     "selectTxtArtistOverflow",
                     "textArtistSeparator",
                     "checkboxScaleArtistMultiline",
-                    "sliderArtistMaxLines"
+                    "sliderArtistMaxLines",
+                    "sliderArtistSeparatorPct"
                   ],
                   "subgroups": [
                     {
@@ -5047,6 +5074,10 @@
                     "key": "sliderArtistMaxLines"
                   },
                   {
+                    "type": "row",
+                    "key": "sliderArtistSeparatorPct"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "desktop:Outline",
@@ -5070,7 +5101,8 @@
                   "selectTxtArtistOverflow",
                   "textArtistSeparator",
                   "checkboxScaleArtistMultiline",
-                  "sliderArtistMaxLines"
+                  "sliderArtistMaxLines",
+                  "sliderArtistSeparatorPct"
                 ],
                 "subgroups": [
                   {
@@ -5485,6 +5517,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavEdgeOffset"
                     }
                   ],
                   "rowKeys": [
@@ -5493,7 +5529,8 @@
                     "sliderNavButtonOpacity",
                     "sliderNavButtonHoverOpacity",
                     "buttonNextSong",
-                    "buttonPrevSong"
+                    "buttonPrevSong",
+                    "sliderNavEdgeOffset"
                   ],
                   "subgroups": [
                     {
@@ -5824,6 +5861,10 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNavEdgeOffset"
                   }
                 ],
                 "rowKeys": [
@@ -5832,7 +5873,8 @@
                   "sliderNavButtonOpacity",
                   "sliderNavButtonHoverOpacity",
                   "buttonNextSong",
-                  "buttonPrevSong"
+                  "buttonPrevSong",
+                  "sliderNavEdgeOffset"
                 ],
                 "subgroups": [
                   {
@@ -15930,7 +15972,7 @@
             },
             "height": {
               "mode": "fixed",
-              "value": "210px"
+              "value": "175px"
             }
           }
         },
