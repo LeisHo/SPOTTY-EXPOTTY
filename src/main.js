@@ -668,6 +668,11 @@ async function boot() {
     }, true);
     window.addEventListener('pointerdown', e => {
         if (redirectBtn) return;
+        // Right-button drag on the timeline pans the view: no scrub, no zoom, no jump
+        if (e.pointerType === 'mouse' && e.button === 2) {
+            if (e.target.id === 'spxTimeline') ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: 'mouse', onTimeline: true, moved: false, pan: true, t: performance.now() });
+            return;
+        }
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         if ((inUi(e.target) || inText(e.target)) && e.target.id !== 'spxTimeline') return;
         ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: e.pointerType, onTimeline: e.target.id === 'spxTimeline', moved: false, t: performance.now() });
@@ -689,6 +694,9 @@ async function boot() {
             timeline.zoomBy(Math.pow(pinchDist / d, setting('sliderPinchZoomSpeed') * (setting('checkboxInvertPinch') ? -1 : 1)));
             pinchDist = d;
             timeline.draw();
+        } else if (p.pan) { // right-button drag: pan the view
+            timeline.panPx(dx);
+            timeline.draw();
         } else if (p.moved) {
             if (p.type === 'mouse') { // click-drag zooms, drag right = zoom in
                 timeline.zoomBy(Math.exp(-dx * 0.008 * setting('sliderTimelineZoomSpeed') * (setting('checkboxInvertZoomDrag') ? -1 : 1)));
@@ -704,13 +712,14 @@ async function boot() {
     });
     const endPointer = e => {
         const p = ptrs.get(e.pointerId);
-        if (p && !p.moved && p.onTimeline && e.type === 'pointerup') { // a click/tap on the timeline jumps there
+        if (p && !p.moved && !p.pan && p.onTimeline && e.type === 'pointerup') { // a click/tap on the timeline jumps there
             moveTo(timeline.posAtX(e.clientX - el('spxTimeline').getBoundingClientRect().left));
         }
         ptrs.delete(e.pointerId);
         if (ptrs.size === 2) pinchDist = pinchSpan();
     };
     window.addEventListener('pointerup', endPointer);
+    el('spxTimeline').addEventListener('contextmenu', e => e.preventDefault()); // right-drag pans; no browser menu over the graph
     window.addEventListener('pointercancel', endPointer);
 
     // Shuffle (the icon under the volume icon): Next / Last song and the end of a song follow a shuffled order of every song instead of

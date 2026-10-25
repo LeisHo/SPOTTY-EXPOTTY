@@ -102,6 +102,8 @@ export function createTimeline(canvas, data) {
         viewStart = vAnchor - (ax / w) * span;
         clampView();
     }
+    // Pan the view by dx px (a right-button drag): the scale and the playhead stay as they are
+    function panPx(dx) { viewStart -= (dx / W()) * span; clampView(); }
     // Move the playhead dx px along the current scale (positive = later); returns the new position.
     function scrubByPixels(dx) { return vtToPos(posToVt(pos) + (dx / W()) * span); }
     // The position under a canvas x (clicking the timeline jumps here).
@@ -531,5 +533,5 @@ export function createTimeline(canvas, data) {
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setDateLine, get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
+    return { draw, setDateLine, panPx, get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }
