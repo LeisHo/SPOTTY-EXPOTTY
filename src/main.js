@@ -11,12 +11,12 @@ import {
 } from '../lib/ui-engine/registry.mjs';
 import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
-import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn } from './app/clipPlayer.js';
+import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn, seekClip, clipLength } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
 import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, getProgress, seekTo } from './app/handoff.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
@@ -60,7 +60,7 @@ async function boot() {
             <canvas class="ui-element spx-timeline" id="spxTimeline"></canvas>
             <button class="ui-element spx-cover bs-host" id="spxCover" type="button" aria-label="Play">
                 <img id="spxCoverImg" alt="" draggable="false" crossorigin="anonymous">
-                <span class="spx-play-glyph"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M7 4l13 8-13 8z"/><path class="ico-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></span>
+                <span class="spx-play-glyph"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M7 4l13 8-13 8z"/><path class="ico-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></span><div class="spx-songbar" id="spxSongBar"><div class="spx-songbar-empty"></div><div class="spx-songbar-fill"></div><div class="spx-songbar-hit" id="spxSongBarHit"></div><div class="spx-songbar-marker"></div></div>
             </button>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
             <div class="spx-sdk-status" id="spxSdkStatus" hidden></div>
@@ -408,6 +408,8 @@ async function boot() {
     // applied as a plain CSS max-width (never shrinks the engine's own box, only caps it), with no
     // margin/position changes, so it can't fight the Layout Engine for ownership of these boxes.
     const TEXT_ELEMENTS = [['SongTitle', () => el('spxTitle')], ['Artist', () => el('spxArtist')], ['AlbumDate', () => el('spxMeta')]];
+    // Rendered line count of a text element (one per line box), so a one-line text is never shrunk by a height guess
+    const renderedLines = node => { const r = document.createRange(); r.selectNodeContents(node); return Math.max(1, new Set(Array.from(r.getClientRects()).map(q => Math.round(q.top / 2))).size); };
     function applyTextElementStyles() {
         const effective = {}; // the final font size of each element, for the Scale Down to Match options
         TEXT_ELEMENTS.forEach(([p, getNode]) => {
@@ -445,7 +447,7 @@ async function boot() {
                 const lineMul = parseFloat(st.lineHeight) || 1.2;
                 let fs = size;
                 for (let i = 0; i < 12; i++) {
-                    const lines = Math.round(node.offsetHeight / (fs * lineMul));
+                    const lines = renderedLines(node);
                     if (lines <= maxLines || fs <= 6) break;
                     fs = Math.max(6, Math.floor(fs * Math.min(0.98, maxLines / lines)));
                     st.fontSize = fs + 'px';
@@ -526,6 +528,21 @@ async function boot() {
         applyShuffleIcon(el('spxShuffle').querySelector('svg'), iconIndex(setting('selectShuffleIconStyle')));
         applyShuffleStyle();
         applyVolumeButtonStyle();
+        // Song Timeline (dev panel > Song Timeline): the bar's size, colours, opacities and marker
+        const sbOn = setting('checkboxSongBarEnabled'), sbAnim = setting('checkboxSongBarAnimEnabled'), sbBase = setting('sliderSongBarOpacity') / 100;
+        const sbStyle = el('spxApp').style;
+        sbStyle.setProperty('--sb-h', setting('sliderSongBarHeight') + 'px');
+        sbStyle.setProperty('--sb-tol', setting('sliderSongBarClickTol') + 'px');
+        sbStyle.setProperty('--sb-fill', setting('colorSongBarFill'));
+        sbStyle.setProperty('--sb-empty', setting('colorSongBarEmpty'));
+        sbStyle.setProperty('--sb-op', String(sbBase));
+        sbStyle.setProperty('--sb-hover-op', String(sbAnim ? setting('sliderSongBarHoverOpacity') / 100 : sbBase));
+        sbStyle.setProperty('--sb-click-op', String(sbAnim ? setting('sliderSongBarClickOpacity') / 100 : sbBase));
+        sbStyle.setProperty('--sb-time', setting('sliderSongBarAnimTime') + 'ms');
+        sbStyle.setProperty('--sb-mr', setting('sliderSongBarMarkerRadius') + 'px');
+        sbStyle.setProperty('--sb-mop', String(setting('sliderSongBarMarkerOpacity') / 100));
+        el('spxSongBar').classList.toggle('off', !sbOn);
+        el('spxSongBar').classList.toggle('marker', !!setting('checkboxSongBarMarker'));
         el('spxApp').style.setProperty('--spx-shuffle-edge', setting('sliderShuffleEdgeOffset') + 'px');
         el('spxVolume').style.translate = (setting('sliderVolEdgeOffset') - 14) + 'px 0px'; // the whole volume UI; 14 px is the layout's own left offset
         applyNavIcon(el('spxPrev').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), true);
@@ -599,8 +616,8 @@ async function boot() {
         const s = songs[idx];
         const link = el('spxTitleLink');
         // Bracketed text (round or square, with its brackets) is wrapped in .spx-bracket so Brackets Smaller Text can size it
-        link.replaceChildren(...cleanTitle(s.n).split(/([(\[][^()\[\]]*[)\]])/).filter(Boolean).map(p => {
-            if (!/^[(\[]/.test(p)) return document.createTextNode(p);
+        link.replaceChildren(...cleanTitle(s.n).split(/([(\[{][^()\[\]{}]*[)\]}])/).filter(Boolean).map(p => {
+            if (!/^[(\[{]/.test(p)) return document.createTextNode(p);
             const sp = document.createElement('span');
             sp.className = 'spx-bracket';
             sp.textContent = p;
@@ -609,7 +626,7 @@ async function boot() {
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         artistRaw = s.a;
         setArtistLine();
-        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
+        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) || !previewClipsOn() ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
         applyTextElementStyles(); // re-run Shrink to Fit against the new text (a no-op for every other Overflow mode)
         timeline.setDateLine(fmtAdded(s.t));
         scheduleCover();
@@ -686,7 +703,7 @@ async function boot() {
         // Auto Next Song: a song with no preview clip is held for the set time, then the next song plays.
         // Any song change cancels the hold.
         clearTimeout(noPreviewTimer);
-        if (!clipKey(songs[idx]) && setting('checkboxAutoNextSong')) {
+        if (previewClipsOn() && !clipKey(songs[idx]) && setting('checkboxAutoNextSong')) {
             const held = idx, holdS = setting('sliderNoPreviewHoldSeconds');
             logEvent('playback', `NO PREVIEW: holding ${holdS} s, then the next song`);
             noPreviewTimer = setTimeout(() => { if (idx === held) stepSong(1); }, holdS * 1000);
@@ -971,6 +988,46 @@ async function boot() {
         stopClip();
         toggleTrack(songs[idx].id);
     }
+    // ---- Song Timeline: the playback bar along the album cover's bottom edge. Its hover opacity shows while the cover is hovered; a click or
+    // a drag on it seeks; the marker circle (when on) is dragged the same way. Its own clicks never reach the cover (no play / pause).
+    const progressNow = () => {
+        const g = getProgress();
+        if (g) return g;
+        return clipIsPlaying() || clipPosition() > 0 ? { pos: clipPosition() * 1000, dur: clipLength() * 1000 } : null;
+    };
+    const seekNow = ms => { if (!seekTo(ms)) seekClip(ms / 1000); };
+    const sbBar = el('spxSongBar'), sbHit = el('spxSongBarHit'), sbMarker = sbBar.querySelector('.spx-songbar-marker');
+    let sbFrac = null, sbSeekAt = 0;
+    const sbPos = e => { const r = el('spxCover').getBoundingClientRect(); return clamp((e.clientX - r.left) / (r.width || 1), 0, 1); };
+    function sbRender() {
+        const g = progressNow();
+        const f = sbFrac !== null ? sbFrac : g && g.dur > 0 ? clamp(g.pos / g.dur, 0, 1) : 0;
+        sbBar.querySelector('.spx-songbar-fill').style.width = (f * 100) + '%';
+        sbMarker.style.left = (f * 100) + '%';
+    }
+    setInterval(() => { if (sbFrac === null) sbRender(); }, 200);
+    function sbSeek(e, force) {
+        const now = performance.now();
+        if (!force && now - sbSeekAt < 120) return; // a drag seeks at most every 120 ms
+        sbSeekAt = now;
+        const g = progressNow(), dur = g && g.dur > 0 ? g.dur : 30000;
+        seekNow(sbPos(e) * dur);
+    }
+    const sbDown = e => {
+        e.stopPropagation(); e.preventDefault();
+        sbFrac = sbPos(e); el('spxCover').classList.add('sb-press');
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) { /* synthetic event: carry on */ }
+        sbSeek(e, true); sbRender();
+    };
+    const sbMove = e => { if (sbFrac === null) return; sbFrac = sbPos(e); sbSeek(e, false); sbRender(); };
+    const sbUp = e => { if (sbFrac === null) return; sbSeek(e, true); sbFrac = null; el('spxCover').classList.remove('sb-press'); sbRender(); };
+    [sbHit, sbMarker].forEach(h => {
+        h.addEventListener('pointerdown', sbDown);
+        h.addEventListener('pointermove', sbMove);
+        h.addEventListener('pointerup', sbUp);
+        h.addEventListener('pointercancel', sbUp);
+        h.addEventListener('click', e => e.stopPropagation()); // never the cover's play / pause
+    });
     let coverDown = null;
     el('spxCover').addEventListener('pointerdown', e => { coverDown = [e.clientX, e.clientY]; });
     el('spxCover').addEventListener('click', e => {

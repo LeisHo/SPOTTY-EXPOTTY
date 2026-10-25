@@ -2008,6 +2008,7 @@
     }
     function isDevRowVisible(desktopId) {
         if (devVisibility[desktopId] !== undefined) return devVisibility[desktopId];
+        if (/^(checkbox|slider|color)SongBar/.test(desktopId)) return true; // Song Timeline rows show on every tab by default
         // Button and Scrub Line animation rows show on every tab by default (they are not per-device tuned, so they mirror Desktop until set)
         if (/(Anim(Enabled|Time|HoverSize|ClickSize|ReleaseSize|HoverOpacity|ClickOpacity)|ScrubLine(Drag|AnimTime|HoverWidth|ClickWidth|ReleaseWidth|HoverOpacity|ClickOpacity))$/.test(desktopId)) return true;
         return hasStaticDeviceCounterpart(desktopId, 'mobile') || hasStaticDeviceCounterpart(desktopId, 'landscape');
@@ -8067,6 +8068,41 @@
         const VB = 'Volume Button', AC2 = 'Album Cover';
         uiLayoutContent.appendChild(createDevGroupElement(VB, tab));
         uiLayoutContent.appendChild(createDevGroupElement(AC2, tab));
+        // Song Timeline: the playback bar along the album cover's bottom edge (a toggle group; its animation settings are a sub-group)
+        const SONG = 'Song Timeline', SONGA = 'Song Timeline Animation';
+        uiLayoutContent.appendChild(createDevGroupElement(SONG, tab));
+        const SONG_CONTROLS = [
+            { tab, group: SONG, id: 'checkboxSongBarEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: SONG, id: 'sliderSongBarHeight', type: 'slider', label: 'Timeline Width (Px):', min: 1, max: 60, step: 1, value: 4 },
+            { tab, group: SONG, id: 'colorSongBarFill', type: 'color', label: 'Bar Fill Color:', value: '#1db954' },
+            { tab, group: SONG, id: 'colorSongBarEmpty', type: 'color', label: 'Bar Empty Color:', value: '#3a3f47' },
+            { tab, group: SONG, id: 'sliderSongBarClickTol', type: 'slider', label: 'Click Tolerance Above Bar (Px):', min: 0, max: 100, step: 1, value: 6 },
+            { tab, group: SONG, id: 'sliderSongBarOpacity', type: 'slider', label: 'Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: SONG, id: 'checkboxSongBarMarker', type: 'checkbox', label: 'Progress Marker Circle:', value: false },
+            { tab, group: SONG, id: 'sliderSongBarMarkerRadius', type: 'slider', label: 'Marker Radius (Px):', min: 1, max: 40, step: 0.5, value: 6 },
+            { tab, group: SONG, id: 'sliderSongBarMarkerOpacity', type: 'slider', label: 'Marker Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
+        ];
+        renderControlArray(SONG_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SONGBAR', SONG_CONTROLS);
+        makeDevGroupToggleable(tab, SONG, 'checkboxSongBarEnabled');
+        const SONGA_CONTROLS = [
+            { tab, group: SONGA, id: 'checkboxSongBarAnimEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: SONGA, id: 'sliderSongBarHoverOpacity', type: 'slider', label: 'Opacity On Album Cover Hover (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: SONGA, id: 'sliderSongBarClickOpacity', type: 'slider', label: 'Opacity On Click (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: SONGA, id: 'sliderSongBarAnimTime', type: 'slider', label: 'Animation Duration (Ms):', min: 0, max: 1500, step: 10, value: 160 },
+        ];
+        findGroupContent(tab, SONG, 'renderSpottyDevControls', 'checkboxSongBarEnabled').appendChild(createDevGroupElement(SONGA, tab));
+        renderControlArray(SONGA_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SONGBAR_ANIM', SONGA_CONTROLS);
+        makeDevGroupToggleable(tab, SONGA, 'checkboxSongBarAnimEnabled');
+        // The marker's radius and opacity show only while the marker circle is on
+        const sbMarkerBox = document.getElementById('checkboxSongBarMarker');
+        const sbSync = () => {
+            const on = !!(sbMarkerBox && sbMarkerBox.checked);
+            ['sliderSongBarMarkerRadius', 'sliderSongBarMarkerOpacity'].forEach(id => { const r = document.getElementById(id); if (r && r.closest('.dev-row')) r.closest('.dev-row').style.display = on ? '' : 'none'; });
+        };
+        setInterval(sbSync, 700);
+        sbSync();
         const VB_CONTROLS = [
             { tab, group: VB, id: 'checkboxVolumeButtonEnabled', type: 'checkbox', label: 'Enabled (Off = Click The Icon, Default Look)', value: true },
             { tab, group: VB, id: 'sliderVolMutedOpacity', type: 'slider', label: 'Muted Icon Opacity (%):', min: 0, max: 100, step: 1, value: 40 },
@@ -8157,8 +8193,8 @@
             Nav: { on: true, color: '#f2f2f2', size: 26, op: 100, hoverOp: 100, time: 150, hoverSize: 30, clickSize: 22, animHoverOp: 100, animClickOp: 70, releaseSize: 32 },
         };
         [
-            ['Play', 'Play Button', 'Play Button Animation', [['buttonPlayPause', 'Play / Pause (Right-Click To Set A Hotkey)']]],
-            ['Nav', 'Next And Last Song Buttons', 'Next And Last Button Animation', [['buttonNextSong', 'Next Song (Right-Click To Set A Hotkey)'], ['buttonPrevSong', 'Last Song (Right-Click To Set A Hotkey)']]],
+            ['Play', 'Play Button', 'Play Button Animation', [['buttonPlayPause', 'Play / Pause (Left-Click To Set A Hotkey)']]],
+            ['Nav', 'Next And Last Song Buttons', 'Next And Last Button Animation', [['buttonNextSong', 'Next Song (Left-Click To Set A Hotkey)'], ['buttonPrevSong', 'Last Song (Left-Click To Set A Hotkey)']]],
         ].forEach(([P, G, A, keys]) => {
             const d = BTN_DEF[P];
             uiLayoutContent.appendChild(createDevGroupElement(G, tab));

@@ -7,6 +7,8 @@ import * as sdk from './sdkPlayer.js';
 let controller = null;
 let lastPausedSeen = null, lastBufSeen = null;
 let queued = null;
+let lastEmbed = null; // the embed's last update (position / length, ms)
+let actualId = null; // the track the SDK really has loaded (from its state): Play resumes only that one
 let status = 'loading';
 let loadedId = null;
 let playing = false;
@@ -56,6 +58,7 @@ export function initSdkPlayer(onStatus) {
     sdk.initSdk({
         onState: (isPlayingNow, info) => {
             playing = isPlayingNow;
+            if (info && info.id) actualId = info.id;
             if (info && info.duration > 0) lastDur = info.duration;
             if (!audibleLogged && isPlayingNow && info && (info.id === loadedId || info.linkedId === loadedId)) {
                 audibleLogged = true;
@@ -97,6 +100,7 @@ const emit = () => listeners.forEach(fn => fn(playing));
 
 let lastDur = 0; // last non-zero duration (ms) the embed reported
 function handleUpdate(d) {
+    lastEmbed = { position: d.position, duration: d.duration, paused: d.isPaused };
     const wasPlaying = playing;
     playing = !d.isPaused;
     if (d.duration > 0 && d.duration !== lastDur) {
@@ -194,8 +198,8 @@ export function pauseEmbed() {
 // The album cover is the play button: pause if playing, resume if this song is already
 // loaded, otherwise load and play it.
 export function toggleTrack(trackId) {
-    if (playing) { pauseEmbed(); return; }
-    if (sdk.sdkReady() && loadedId === trackId) { wantPlaying = true; sdk.sdkResume(); return; }
+    if (playing && (!actualId || actualId === trackId)) { pauseEmbed(); return; }
+    if (sdk.sdkReady() && loadedId === trackId && actualId === trackId) { wantPlaying = true; sdk.sdkResume(); return; }
     if (controller && loadedId === trackId) {
         wantPlaying = true;
         // play(), not resume(): resume() is a no-op on an embed that was loaded but never started
@@ -206,6 +210,19 @@ export function toggleTrack(trackId) {
     playTrack(trackId);
 }
 
+// The song's position and length (ms) from the active player: the SDK, then the embed. null when neither has one.
+export function getProgress() {
+    const i = sdk.sdkReady() ? sdk.sdkInfo() : null;
+    if (i && i.duration > 0) return { pos: i.position, dur: i.duration };
+    if (lastEmbed && lastEmbed.duration > 0) return { pos: lastEmbed.position, dur: lastEmbed.duration };
+    return null;
+}
+// Seeks the SDK or the embed (ms). false when neither is available, so the caller can seek the preview clip instead.
+export function seekTo(ms) {
+    if (sdk.sdkReady()) { sdk.sdkSeek(ms); return true; }
+    if (controller) { try { controller.seek(ms / 1000); return true; } catch (e) { /* embed not ready */ } }
+    return false;
+}
 export const isPlaying = () => playing;
 export const embedStatus = () => status;
 // 'preview' when the embed reports a ~30 s duration (not logged in, or the iframe can't see the login),
