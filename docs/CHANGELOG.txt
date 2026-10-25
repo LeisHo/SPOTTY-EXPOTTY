@@ -819,6 +819,17 @@ Commit 103b201 pushed to origin/main.
 Direct request: the browser tab name should read "SpottyPotty". index.html line 6: <title> changed from "SPOTTY EXPOTTY" to "SpottyPotty". The visible page heading and the dev panel title were not changed.
 Not committed at the time of this entry. Not verified in a browser.
 
+--------------------------------------------------------------------------------
+2026-10-25  -  02:36:38 - 02:37:41 EDT  (No Preview subgroup; times from `date`, code push ee244be)
+
+Direct request: in the Scrub Audio group, add a "No Preview" subgroup with an Auto Next Song checkbox and a slider for how long the app holds on a song that has no preview. Changes:
+- src/devpanel/devPanel.js: nested "No Preview" subgroup under Scrub Audio (findGroupContent / createDevGroupElement, same pattern as Album Cover Colors). Controls: checkboxAutoNextSong ("Auto Next Song:", default off) and sliderNoPreviewHoldSeconds ("Hold Time On A Song With No Preview (S):", 1-60 s, step 0.5, default 5).
+- src/app/settings.js: defaults for both controls.
+- src/main.js onIndexChange(): when Auto Next Song is on and the song has no clip (clipKey() is 0), a timer waits the set seconds and then calls stepSong(1), but only if the song is still the same one. Any song change clears the timer.
+Reading taken: Auto Next Song only applies to songs with no preview; songs with a preview are unchanged.
+Known gap: turning Auto Next Song on while already sitting on a no-preview song does not start the timer until the next song change.
+Not verified in a browser: only node --check was run.
+
 ================================================================================
 APPEND-ONLY. Never rewrite, reorder, or delete a prior entry, even to fix
 formatting (CLAUDE.md §4a / Never-Skip rule #3). If an entry needs a
