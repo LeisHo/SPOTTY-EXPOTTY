@@ -7037,85 +7037,11 @@
               "items": [
                 {
                   "type": "row",
-                  "key": "sliderWheelScrubPixels"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxInvertScroll"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderTimelineZoomSpeed"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxInvertZoomDrag"
-                },
-                {
-                  "type": "row",
                   "key": "sliderDefaultTimelineSpanDays"
                 },
                 {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Wheel Scrub Per Notch Curve",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "curveEditorWheelScrubCurve"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectWheelCurveXRange"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderWheelCurveMinPx"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderWheelCurveMaxPx"
-                      }
-                    ],
-                    "rowKeys": [
-                      "curveEditorWheelScrubCurve",
-                      "selectWheelCurveXRange",
-                      "sliderWheelCurveMinPx",
-                      "sliderWheelCurveMaxPx"
-                    ],
-                    "subgroups": []
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Starting Timeline Span Curve",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "curveEditorStartSpanCurve"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderStartSpanCurveMinDays"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderStartSpanCurveMaxDays"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxStartSpanApplyOnJump"
-                      }
-                    ],
-                    "rowKeys": [
-                      "curveEditorStartSpanCurve",
-                      "sliderStartSpanCurveMinDays",
-                      "sliderStartSpanCurveMaxDays",
-                      "checkboxStartSpanApplyOnJump"
-                    ],
-                    "subgroups": []
-                  }
+                  "type": "row",
+                  "key": "checkboxFullScaleOnStartup"
                 },
                 {
                   "type": "group",
@@ -7159,75 +7085,93 @@
                   }
                 },
                 {
-                  "type": "row",
-                  "key": "checkboxFullScaleOnStartup"
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Wheel Scrub Per Notch Curve",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderWheelScrubPixels"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxInvertScroll"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTimelineZoomSpeed"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxInvertZoomDrag"
+                      },
+                      {
+                        "type": "row",
+                        "key": "curveEditorWheelScrubCurve"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectWheelCurveXRange"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderWheelCurveMinPx"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderWheelCurveMaxPx"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderWheelScrubPixels",
+                      "checkboxInvertScroll",
+                      "sliderTimelineZoomSpeed",
+                      "checkboxInvertZoomDrag",
+                      "curveEditorWheelScrubCurve",
+                      "selectWheelCurveXRange",
+                      "sliderWheelCurveMinPx",
+                      "sliderWheelCurveMaxPx"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Starting Timeline Span Curve",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "curveEditorStartSpanCurve"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderStartSpanCurveMinDays"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderStartSpanCurveMaxDays"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxStartSpanApplyOnJump"
+                      }
+                    ],
+                    "rowKeys": [
+                      "curveEditorStartSpanCurve",
+                      "sliderStartSpanCurveMinDays",
+                      "sliderStartSpanCurveMaxDays",
+                      "checkboxStartSpanApplyOnJump"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [
-                "sliderWheelScrubPixels",
-                "checkboxInvertScroll",
-                "sliderTimelineZoomSpeed",
-                "checkboxInvertZoomDrag",
                 "sliderDefaultTimelineSpanDays",
                 "checkboxFullScaleOnStartup"
               ],
               "subgroups": [
-                {
-                  "key": "desktop:Wheel Scrub Per Notch Curve",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "curveEditorWheelScrubCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectWheelCurveXRange"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelCurveMinPx"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelCurveMaxPx"
-                    }
-                  ],
-                  "rowKeys": [
-                    "curveEditorWheelScrubCurve",
-                    "selectWheelCurveXRange",
-                    "sliderWheelCurveMinPx",
-                    "sliderWheelCurveMaxPx"
-                  ],
-                  "subgroups": []
-                },
-                {
-                  "key": "desktop:Starting Timeline Span Curve",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "curveEditorStartSpanCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderStartSpanCurveMinDays"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderStartSpanCurveMaxDays"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxStartSpanApplyOnJump"
-                    }
-                  ],
-                  "rowKeys": [
-                    "curveEditorStartSpanCurve",
-                    "sliderStartSpanCurveMinDays",
-                    "sliderStartSpanCurveMaxDays",
-                    "checkboxStartSpanApplyOnJump"
-                  ],
-                  "subgroups": []
-                },
                 {
                   "key": "desktop:Touch Scrub And Pinch",
                   "items": [
@@ -7263,6 +7207,82 @@
                     "checkboxInvertTouchScrub",
                     "sliderPinchZoomSpeed",
                     "checkboxInvertPinch"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "desktop:Wheel Scrub Per Notch Curve",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderWheelScrubPixels"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxInvertScroll"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTimelineZoomSpeed"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxInvertZoomDrag"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorWheelScrubCurve"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectWheelCurveXRange"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderWheelCurveMinPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderWheelCurveMaxPx"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderWheelScrubPixels",
+                    "checkboxInvertScroll",
+                    "sliderTimelineZoomSpeed",
+                    "checkboxInvertZoomDrag",
+                    "curveEditorWheelScrubCurve",
+                    "selectWheelCurveXRange",
+                    "sliderWheelCurveMinPx",
+                    "sliderWheelCurveMaxPx"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "desktop:Starting Timeline Span Curve",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "curveEditorStartSpanCurve"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartSpanCurveMinDays"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartSpanCurveMaxDays"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxStartSpanApplyOnJump"
+                    }
+                  ],
+                  "rowKeys": [
+                    "curveEditorStartSpanCurve",
+                    "sliderStartSpanCurveMinDays",
+                    "sliderStartSpanCurveMaxDays",
+                    "checkboxStartSpanApplyOnJump"
                   ],
                   "subgroups": []
                 }
@@ -7300,85 +7320,11 @@
             "items": [
               {
                 "type": "row",
-                "key": "sliderWheelScrubPixels"
-              },
-              {
-                "type": "row",
-                "key": "checkboxInvertScroll"
-              },
-              {
-                "type": "row",
-                "key": "sliderTimelineZoomSpeed"
-              },
-              {
-                "type": "row",
-                "key": "checkboxInvertZoomDrag"
-              },
-              {
-                "type": "row",
                 "key": "sliderDefaultTimelineSpanDays"
               },
               {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Wheel Scrub Per Notch Curve",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "curveEditorWheelScrubCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectWheelCurveXRange"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelCurveMinPx"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelCurveMaxPx"
-                    }
-                  ],
-                  "rowKeys": [
-                    "curveEditorWheelScrubCurve",
-                    "selectWheelCurveXRange",
-                    "sliderWheelCurveMinPx",
-                    "sliderWheelCurveMaxPx"
-                  ],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Starting Timeline Span Curve",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "curveEditorStartSpanCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderStartSpanCurveMinDays"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderStartSpanCurveMaxDays"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxStartSpanApplyOnJump"
-                    }
-                  ],
-                  "rowKeys": [
-                    "curveEditorStartSpanCurve",
-                    "sliderStartSpanCurveMinDays",
-                    "sliderStartSpanCurveMaxDays",
-                    "checkboxStartSpanApplyOnJump"
-                  ],
-                  "subgroups": []
-                }
+                "type": "row",
+                "key": "checkboxFullScaleOnStartup"
               },
               {
                 "type": "group",
@@ -7422,75 +7368,93 @@
                 }
               },
               {
-                "type": "row",
-                "key": "checkboxFullScaleOnStartup"
+                "type": "group",
+                "section": {
+                  "key": "desktop:Wheel Scrub Per Notch Curve",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderWheelScrubPixels"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxInvertScroll"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTimelineZoomSpeed"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxInvertZoomDrag"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorWheelScrubCurve"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectWheelCurveXRange"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderWheelCurveMinPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderWheelCurveMaxPx"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderWheelScrubPixels",
+                    "checkboxInvertScroll",
+                    "sliderTimelineZoomSpeed",
+                    "checkboxInvertZoomDrag",
+                    "curveEditorWheelScrubCurve",
+                    "selectWheelCurveXRange",
+                    "sliderWheelCurveMinPx",
+                    "sliderWheelCurveMaxPx"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Starting Timeline Span Curve",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "curveEditorStartSpanCurve"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartSpanCurveMinDays"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartSpanCurveMaxDays"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxStartSpanApplyOnJump"
+                    }
+                  ],
+                  "rowKeys": [
+                    "curveEditorStartSpanCurve",
+                    "sliderStartSpanCurveMinDays",
+                    "sliderStartSpanCurveMaxDays",
+                    "checkboxStartSpanApplyOnJump"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [
-              "sliderWheelScrubPixels",
-              "checkboxInvertScroll",
-              "sliderTimelineZoomSpeed",
-              "checkboxInvertZoomDrag",
               "sliderDefaultTimelineSpanDays",
               "checkboxFullScaleOnStartup"
             ],
             "subgroups": [
-              {
-                "key": "desktop:Wheel Scrub Per Notch Curve",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "curveEditorWheelScrubCurve"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectWheelCurveXRange"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderWheelCurveMinPx"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderWheelCurveMaxPx"
-                  }
-                ],
-                "rowKeys": [
-                  "curveEditorWheelScrubCurve",
-                  "selectWheelCurveXRange",
-                  "sliderWheelCurveMinPx",
-                  "sliderWheelCurveMaxPx"
-                ],
-                "subgroups": []
-              },
-              {
-                "key": "desktop:Starting Timeline Span Curve",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "curveEditorStartSpanCurve"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderStartSpanCurveMinDays"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderStartSpanCurveMaxDays"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxStartSpanApplyOnJump"
-                  }
-                ],
-                "rowKeys": [
-                  "curveEditorStartSpanCurve",
-                  "sliderStartSpanCurveMinDays",
-                  "sliderStartSpanCurveMaxDays",
-                  "checkboxStartSpanApplyOnJump"
-                ],
-                "subgroups": []
-              },
               {
                 "key": "desktop:Touch Scrub And Pinch",
                 "items": [
@@ -7526,6 +7490,82 @@
                   "checkboxInvertTouchScrub",
                   "sliderPinchZoomSpeed",
                   "checkboxInvertPinch"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "desktop:Wheel Scrub Per Notch Curve",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderWheelScrubPixels"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxInvertScroll"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTimelineZoomSpeed"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxInvertZoomDrag"
+                  },
+                  {
+                    "type": "row",
+                    "key": "curveEditorWheelScrubCurve"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectWheelCurveXRange"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderWheelCurveMinPx"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderWheelCurveMaxPx"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderWheelScrubPixels",
+                  "checkboxInvertScroll",
+                  "sliderTimelineZoomSpeed",
+                  "checkboxInvertZoomDrag",
+                  "curveEditorWheelScrubCurve",
+                  "selectWheelCurveXRange",
+                  "sliderWheelCurveMinPx",
+                  "sliderWheelCurveMaxPx"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "desktop:Starting Timeline Span Curve",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "curveEditorStartSpanCurve"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartSpanCurveMinDays"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartSpanCurveMaxDays"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxStartSpanApplyOnJump"
+                  }
+                ],
+                "rowKeys": [
+                  "curveEditorStartSpanCurve",
+                  "sliderStartSpanCurveMinDays",
+                  "sliderStartSpanCurveMaxDays",
+                  "checkboxStartSpanApplyOnJump"
                 ],
                 "subgroups": []
               }
@@ -7718,10 +7758,6 @@
           },
           {
             "type": "row",
-            "key": "rangeBarTimelineZoomLimits"
-          },
-          {
-            "type": "row",
             "key": "selectTimelineStyle"
           },
           {
@@ -7739,6 +7775,10 @@
           {
             "type": "row",
             "key": "sliderGlowIntensity"
+          },
+          {
+            "type": "row",
+            "key": "rangeBarTimelineZoomLimits"
           },
           {
             "type": "row",
@@ -7859,12 +7899,12 @@
           "sliderTimelineBarOpacity",
           "sliderBarWidth",
           "sliderTimelineHeight",
-          "rangeBarTimelineZoomLimits",
           "selectTimelineStyle",
           "sliderGlowStemWidth",
           "sliderGlowRadius",
           "sliderGlowDotSize",
           "sliderGlowIntensity",
+          "rangeBarTimelineZoomLimits",
           "sliderDensitySmoothing",
           "sliderDensityFillOpacity",
           "sliderDensityOutlineWidth",
@@ -11079,6 +11119,15 @@
                 {
                   "type": "group",
                   "section": {
+                    "key": "mobile:Touch Scrub And Pinch",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
                     "key": "mobile:Wheel Scrub Per Notch Curve",
                     "items": [],
                     "rowKeys": [],
@@ -11093,19 +11142,16 @@
                     "rowKeys": [],
                     "subgroups": []
                   }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "mobile:Touch Scrub And Pinch",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
                 }
               ],
               "rowKeys": [],
               "subgroups": [
+                {
+                  "key": "mobile:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
                 {
                   "key": "mobile:Wheel Scrub Per Notch Curve",
                   "items": [],
@@ -11114,12 +11160,6 @@
                 },
                 {
                   "key": "mobile:Starting Timeline Span Curve",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                },
-                {
-                  "key": "mobile:Touch Scrub And Pinch",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
@@ -11142,6 +11182,15 @@
               {
                 "type": "group",
                 "section": {
+                  "key": "mobile:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "mobile:Wheel Scrub Per Notch Curve",
                   "items": [],
                   "rowKeys": [],
@@ -11156,19 +11205,16 @@
                   "rowKeys": [],
                   "subgroups": []
                 }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "mobile:Touch Scrub And Pinch",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
               }
             ],
             "rowKeys": [],
             "subgroups": [
+              {
+                "key": "mobile:Touch Scrub And Pinch",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
               {
                 "key": "mobile:Wheel Scrub Per Notch Curve",
                 "items": [],
@@ -11177,12 +11223,6 @@
               },
               {
                 "key": "mobile:Starting Timeline Span Curve",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              },
-              {
-                "key": "mobile:Touch Scrub And Pinch",
                 "items": [],
                 "rowKeys": [],
                 "subgroups": []
@@ -11246,226 +11286,21 @@
         "key": "mobile:Timeline Look",
         "items": [
           {
-            "type": "row",
-            "key": "colorMobileTimelineAccent"
-          },
-          {
-            "type": "row",
-            "key": "colorMobileTimelinePlayhead"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileTimelineBarOpacity"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileBarWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileTimelineHeight"
-          },
-          {
-            "type": "row",
-            "key": "rangeBarMobileTimelineZoomLimits"
-          },
-          {
-            "type": "row",
-            "key": "selectMobileTimelineStyle"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileGlowStemWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileGlowRadius"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileGlowDotSize"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileGlowIntensity"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileDensitySmoothing"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileDensityFillOpacity"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileDensityOutlineWidth"
-          },
-          {
-            "type": "row",
-            "key": "checkboxMobileDensityGradientFill"
-          },
-          {
-            "type": "row",
-            "key": "selectMobileLineFeature"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileLineWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileLineDotSize"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileLineFillOpacity"
-          },
-          {
-            "type": "row",
-            "key": "checkboxMobileLineSmooth"
-          },
-          {
-            "type": "row",
-            "key": "selectMobileRibbonFeature"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileRibbonThickness"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileRibbonSmoothing"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileRibbonBarsOpacity"
-          },
-          {
             "type": "group",
             "section": {
               "key": "mobile:Album Cover Colors",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "selectMobileAlbumColorMode"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileAlbumColorSaturation"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileAlbumColorBrightness"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxMobileAlbumColorTransition"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileAlbumColorTransitionMs"
-                }
-              ],
-              "rowKeys": [
-                "selectMobileAlbumColorMode",
-                "sliderMobileAlbumColorSaturation",
-                "sliderMobileAlbumColorBrightness",
-                "checkboxMobileAlbumColorTransition",
-                "sliderMobileAlbumColorTransitionMs"
-              ],
+              "items": [],
+              "rowKeys": [],
               "subgroups": []
             }
-          },
-          {
-            "type": "row",
-            "key": "sliderMobilePlayheadWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobilePlayheadHeight"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileTimelineScaleGap"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileDensityColorBlend"
-          },
-          {
-            "type": "row",
-            "key": "checkboxMobileTimelineHeightTransition"
-          },
-          {
-            "type": "row",
-            "key": "sliderMobileTimelineHeightTransitionMs"
           }
         ],
-        "rowKeys": [
-          "colorMobileTimelineAccent",
-          "colorMobileTimelinePlayhead",
-          "sliderMobileTimelineBarOpacity",
-          "sliderMobileBarWidth",
-          "sliderMobileTimelineHeight",
-          "rangeBarMobileTimelineZoomLimits",
-          "selectMobileTimelineStyle",
-          "sliderMobileGlowStemWidth",
-          "sliderMobileGlowRadius",
-          "sliderMobileGlowDotSize",
-          "sliderMobileGlowIntensity",
-          "sliderMobileDensitySmoothing",
-          "sliderMobileDensityFillOpacity",
-          "sliderMobileDensityOutlineWidth",
-          "checkboxMobileDensityGradientFill",
-          "selectMobileLineFeature",
-          "sliderMobileLineWidth",
-          "sliderMobileLineDotSize",
-          "sliderMobileLineFillOpacity",
-          "checkboxMobileLineSmooth",
-          "selectMobileRibbonFeature",
-          "sliderMobileRibbonThickness",
-          "sliderMobileRibbonSmoothing",
-          "sliderMobileRibbonBarsOpacity",
-          "sliderMobilePlayheadWidth",
-          "sliderMobilePlayheadHeight",
-          "sliderMobileTimelineScaleGap",
-          "sliderMobileDensityColorBlend",
-          "checkboxMobileTimelineHeightTransition",
-          "sliderMobileTimelineHeightTransitionMs"
-        ],
+        "rowKeys": [],
         "subgroups": [
           {
             "key": "mobile:Album Cover Colors",
-            "items": [
-              {
-                "type": "row",
-                "key": "selectMobileAlbumColorMode"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileAlbumColorSaturation"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileAlbumColorBrightness"
-              },
-              {
-                "type": "row",
-                "key": "checkboxMobileAlbumColorTransition"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileAlbumColorTransitionMs"
-              }
-            ],
-            "rowKeys": [
-              "selectMobileAlbumColorMode",
-              "sliderMobileAlbumColorSaturation",
-              "sliderMobileAlbumColorBrightness",
-              "checkboxMobileAlbumColorTransition",
-              "sliderMobileAlbumColorTransitionMs"
-            ],
+            "items": [],
+            "rowKeys": [],
             "subgroups": []
           }
         ]
@@ -14628,6 +14463,15 @@
                 {
                   "type": "group",
                   "section": {
+                    "key": "landscape:Touch Scrub And Pinch",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
                     "key": "landscape:Wheel Scrub Per Notch Curve",
                     "items": [],
                     "rowKeys": [],
@@ -14642,19 +14486,16 @@
                     "rowKeys": [],
                     "subgroups": []
                   }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "landscape:Touch Scrub And Pinch",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
                 }
               ],
               "rowKeys": [],
               "subgroups": [
+                {
+                  "key": "landscape:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
                 {
                   "key": "landscape:Wheel Scrub Per Notch Curve",
                   "items": [],
@@ -14663,12 +14504,6 @@
                 },
                 {
                   "key": "landscape:Starting Timeline Span Curve",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                },
-                {
-                  "key": "landscape:Touch Scrub And Pinch",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
@@ -14691,6 +14526,15 @@
               {
                 "type": "group",
                 "section": {
+                  "key": "landscape:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "landscape:Wheel Scrub Per Notch Curve",
                   "items": [],
                   "rowKeys": [],
@@ -14705,19 +14549,16 @@
                   "rowKeys": [],
                   "subgroups": []
                 }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "landscape:Touch Scrub And Pinch",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
               }
             ],
             "rowKeys": [],
             "subgroups": [
+              {
+                "key": "landscape:Touch Scrub And Pinch",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
               {
                 "key": "landscape:Wheel Scrub Per Notch Curve",
                 "items": [],
@@ -14726,12 +14567,6 @@
               },
               {
                 "key": "landscape:Starting Timeline Span Curve",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              },
-              {
-                "key": "landscape:Touch Scrub And Pinch",
                 "items": [],
                 "rowKeys": [],
                 "subgroups": []
@@ -14795,226 +14630,21 @@
         "key": "landscape:Timeline Look",
         "items": [
           {
-            "type": "row",
-            "key": "colorLandscapeTimelineAccent"
-          },
-          {
-            "type": "row",
-            "key": "colorLandscapeTimelinePlayhead"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeTimelineBarOpacity"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeBarWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeTimelineHeight"
-          },
-          {
-            "type": "row",
-            "key": "rangeBarLandscapeTimelineZoomLimits"
-          },
-          {
-            "type": "row",
-            "key": "selectLandscapeTimelineStyle"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeGlowStemWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeGlowRadius"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeGlowDotSize"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeGlowIntensity"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeDensitySmoothing"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeDensityFillOpacity"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeDensityOutlineWidth"
-          },
-          {
-            "type": "row",
-            "key": "checkboxLandscapeDensityGradientFill"
-          },
-          {
-            "type": "row",
-            "key": "selectLandscapeLineFeature"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeLineWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeLineDotSize"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeLineFillOpacity"
-          },
-          {
-            "type": "row",
-            "key": "checkboxLandscapeLineSmooth"
-          },
-          {
-            "type": "row",
-            "key": "selectLandscapeRibbonFeature"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeRibbonThickness"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeRibbonSmoothing"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeRibbonBarsOpacity"
-          },
-          {
             "type": "group",
             "section": {
               "key": "landscape:Album Cover Colors",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "selectLandscapeAlbumColorMode"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeAlbumColorSaturation"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeAlbumColorBrightness"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxLandscapeAlbumColorTransition"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeAlbumColorTransitionMs"
-                }
-              ],
-              "rowKeys": [
-                "selectLandscapeAlbumColorMode",
-                "sliderLandscapeAlbumColorSaturation",
-                "sliderLandscapeAlbumColorBrightness",
-                "checkboxLandscapeAlbumColorTransition",
-                "sliderLandscapeAlbumColorTransitionMs"
-              ],
+              "items": [],
+              "rowKeys": [],
               "subgroups": []
             }
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapePlayheadWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapePlayheadHeight"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeTimelineScaleGap"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeDensityColorBlend"
-          },
-          {
-            "type": "row",
-            "key": "checkboxLandscapeTimelineHeightTransition"
-          },
-          {
-            "type": "row",
-            "key": "sliderLandscapeTimelineHeightTransitionMs"
           }
         ],
-        "rowKeys": [
-          "colorLandscapeTimelineAccent",
-          "colorLandscapeTimelinePlayhead",
-          "sliderLandscapeTimelineBarOpacity",
-          "sliderLandscapeBarWidth",
-          "sliderLandscapeTimelineHeight",
-          "rangeBarLandscapeTimelineZoomLimits",
-          "selectLandscapeTimelineStyle",
-          "sliderLandscapeGlowStemWidth",
-          "sliderLandscapeGlowRadius",
-          "sliderLandscapeGlowDotSize",
-          "sliderLandscapeGlowIntensity",
-          "sliderLandscapeDensitySmoothing",
-          "sliderLandscapeDensityFillOpacity",
-          "sliderLandscapeDensityOutlineWidth",
-          "checkboxLandscapeDensityGradientFill",
-          "selectLandscapeLineFeature",
-          "sliderLandscapeLineWidth",
-          "sliderLandscapeLineDotSize",
-          "sliderLandscapeLineFillOpacity",
-          "checkboxLandscapeLineSmooth",
-          "selectLandscapeRibbonFeature",
-          "sliderLandscapeRibbonThickness",
-          "sliderLandscapeRibbonSmoothing",
-          "sliderLandscapeRibbonBarsOpacity",
-          "sliderLandscapePlayheadWidth",
-          "sliderLandscapePlayheadHeight",
-          "sliderLandscapeTimelineScaleGap",
-          "sliderLandscapeDensityColorBlend",
-          "checkboxLandscapeTimelineHeightTransition",
-          "sliderLandscapeTimelineHeightTransitionMs"
-        ],
+        "rowKeys": [],
         "subgroups": [
           {
             "key": "landscape:Album Cover Colors",
-            "items": [
-              {
-                "type": "row",
-                "key": "selectLandscapeAlbumColorMode"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeAlbumColorSaturation"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeAlbumColorBrightness"
-              },
-              {
-                "type": "row",
-                "key": "checkboxLandscapeAlbumColorTransition"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeAlbumColorTransitionMs"
-              }
-            ],
-            "rowKeys": [
-              "selectLandscapeAlbumColorMode",
-              "sliderLandscapeAlbumColorSaturation",
-              "sliderLandscapeAlbumColorBrightness",
-              "checkboxLandscapeAlbumColorTransition",
-              "sliderLandscapeAlbumColorTransitionMs"
-            ],
+            "items": [],
+            "rowKeys": [],
             "subgroups": []
           }
         ]
@@ -15064,10 +14694,10 @@
     "desktop:Start Button Animation": true,
     "desktop:New Group": true,
     "desktop:Scrub Preload": true,
-    "desktop:Scrub Input": true,
+    "desktop:Scrub Input": false,
+    "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Touch Scrub And Pinch": true,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": false,
     "desktop:No Preview": true,
@@ -15119,9 +14749,9 @@
     "mobile:New Group": false,
     "mobile:Scrub Preload": false,
     "mobile:Scrub Input": false,
+    "mobile:Touch Scrub And Pinch": false,
     "mobile:Wheel Scrub Per Notch Curve": false,
     "mobile:Starting Timeline Span Curve": false,
-    "mobile:Touch Scrub And Pinch": false,
     "mobile:Scrub Audio": false,
     "mobile:New Group (2)": false,
     "mobile:No Preview": false,
@@ -15173,9 +14803,9 @@
     "landscape:New Group": false,
     "landscape:Scrub Preload": false,
     "landscape:Scrub Input": false,
+    "landscape:Touch Scrub And Pinch": false,
     "landscape:Wheel Scrub Per Notch Curve": false,
     "landscape:Starting Timeline Span Curve": false,
-    "landscape:Touch Scrub And Pinch": false,
     "landscape:Scrub Audio": false,
     "landscape:New Group (2)": false,
     "landscape:No Preview": false,
@@ -15698,41 +15328,41 @@
     "sliderCoverScale": true,
     "sliderCoverOffsetX": true,
     "sliderCoverOffsetY": true,
-    "colorTimelineAccent": true,
-    "colorTimelinePlayhead": true,
-    "sliderTimelineBarOpacity": true,
-    "sliderBarWidth": true,
-    "sliderTimelineHeight": true,
-    "rangeBarTimelineZoomLimits": true,
-    "selectTimelineStyle": true,
-    "sliderGlowStemWidth": true,
-    "sliderGlowRadius": true,
-    "sliderGlowDotSize": true,
-    "sliderGlowIntensity": true,
-    "sliderDensitySmoothing": true,
-    "sliderDensityFillOpacity": true,
-    "sliderDensityOutlineWidth": true,
-    "checkboxDensityGradientFill": true,
-    "selectLineFeature": true,
-    "sliderLineWidth": true,
-    "sliderLineDotSize": true,
-    "sliderLineFillOpacity": true,
-    "checkboxLineSmooth": true,
-    "selectRibbonFeature": true,
-    "sliderRibbonThickness": true,
-    "sliderRibbonSmoothing": true,
-    "sliderRibbonBarsOpacity": true,
-    "sliderPlayheadWidth": true,
-    "sliderPlayheadHeight": true,
-    "sliderTimelineScaleGap": true,
-    "sliderDensityColorBlend": true,
-    "checkboxTimelineHeightTransition": true,
-    "sliderTimelineHeightTransitionMs": true,
-    "selectAlbumColorMode": true,
-    "sliderAlbumColorSaturation": true,
-    "sliderAlbumColorBrightness": true,
-    "checkboxAlbumColorTransition": true,
-    "sliderAlbumColorTransitionMs": true
+    "colorTimelineAccent": false,
+    "colorTimelinePlayhead": false,
+    "sliderTimelineBarOpacity": false,
+    "sliderBarWidth": false,
+    "sliderTimelineHeight": false,
+    "rangeBarTimelineZoomLimits": false,
+    "selectTimelineStyle": false,
+    "sliderGlowStemWidth": false,
+    "sliderGlowRadius": false,
+    "sliderGlowDotSize": false,
+    "sliderGlowIntensity": false,
+    "sliderDensitySmoothing": false,
+    "sliderDensityFillOpacity": false,
+    "sliderDensityOutlineWidth": false,
+    "checkboxDensityGradientFill": false,
+    "selectLineFeature": false,
+    "sliderLineWidth": false,
+    "sliderLineDotSize": false,
+    "sliderLineFillOpacity": false,
+    "checkboxLineSmooth": false,
+    "selectRibbonFeature": false,
+    "sliderRibbonThickness": false,
+    "sliderRibbonSmoothing": false,
+    "sliderRibbonBarsOpacity": false,
+    "sliderPlayheadWidth": false,
+    "sliderPlayheadHeight": false,
+    "sliderTimelineScaleGap": false,
+    "sliderDensityColorBlend": false,
+    "checkboxTimelineHeightTransition": false,
+    "sliderTimelineHeightTransitionMs": false,
+    "selectAlbumColorMode": false,
+    "sliderAlbumColorSaturation": false,
+    "sliderAlbumColorBrightness": false,
+    "checkboxAlbumColorTransition": false,
+    "sliderAlbumColorTransitionMs": false
   },
   "devIndependence": {
     "mobile": {
