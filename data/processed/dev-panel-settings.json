@@ -47,7 +47,7 @@
     "sliderRibbonThickness": 28,
     "sliderRibbonSmoothing": 24,
     "sliderRibbonBarsOpacity": 0.25,
-    "sliderTitleScale": 1.15,
+    "sliderTitleScale": 1.1,
     "sliderArtistScale": 1.1,
     "sliderMetaScale": 1.4,
     "buttonOpenLayoutInspector": "",
@@ -174,9 +174,9 @@
   },
   "layout": {
     "left": 26,
-    "top": 56,
-    "width": 600,
-    "height": 402
+    "top": 284,
+    "width": 506,
+    "height": 411
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -7173,7 +7173,7 @@
           "size": {
             "width": {
               "mode": "fixed",
-              "value": "auto"
+              "value": "80vw"
             },
             "height": {
               "mode": "content"
