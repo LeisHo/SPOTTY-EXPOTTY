@@ -146,6 +146,7 @@ export const DEFAULTS = {
     checkboxScaleTitleMultiline: false, sliderTitleMaxLines: 2,
     checkboxScaleArtistMultiline: false, sliderArtistMaxLines: 2,
     textArtistSeparator: ';', // what joins the names when a track has several artists (the data stores them with ';')
+    sliderArtistSeparatorPct: 100,
 
     // Background
     selectBackgroundMode: 'none',

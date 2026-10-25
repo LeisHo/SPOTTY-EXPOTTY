@@ -7778,6 +7778,7 @@
         }, elemContent);
         // Artist only: the separator used when a track has several artists (the data stores them joined with ';')
         if (elementName === 'Artist') add({ tab, id: 'textArtistSeparator', type: 'text', label: 'Artist Name Separator:', value: ';' }, elemContent);
+        if (elementName === 'Artist') add({ tab, id: 'sliderArtistSeparatorPct', type: 'slider', label: 'Separator Font Size (% Of Artist):', min: 10, max: 300, step: 1, value: 100 }, elemContent);
         // Scale Down If Multiline (Song Title and Artist): the line limit is only shown while the checkbox is on
         const MULTI_KEYS = { 'Song Title': 'Title', 'Artist': 'Artist' };
         if (MULTI_KEYS[elementName]) {

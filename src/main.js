@@ -439,7 +439,8 @@ async function boot() {
         el('spxStart').style.setProperty('--spx-start-bg', rgbaOf(setting('colorStartOverlay'), setting('sliderStartOverlayOpacity')));
         el('spxStartBtn').hidden = !setting('checkboxStartButtonEnabled');
         el('spxStartBtn').style.setProperty('--spx-start-play-size', setting('sliderStartPlaySize') + 'px');
-        el('spxArtist').textContent = artistText(); // live: changing the separator re-joins the current song's artists
+        setArtistLine(); // live: changing the separator re-joins the current song's artists
+        el('spxApp').style.setProperty('--spx-sep-pct', setting('sliderArtistSeparatorPct') + '%');
         el('spxApp').style.setProperty('--spx-vol-icon-x', setting('sliderVolIconOffsetX') + 'px');
         // The graph reaches the top of the browser: its box is the full height (bottom edge unchanged). Buttons above it take their clicks (buttonUnder).
         el('spxTimeline').style.setProperty('height', 'calc(100dvh - 14px)', 'important');
@@ -503,7 +504,16 @@ async function boot() {
 
     // The artist line: the raw names (the data joins them with ';') re-joined with the Artist Name Separator setting
     let artistRaw = '';
-    const artistText = () => artistRaw.split(';').join(setting('textArtistSeparator'));
+    // The artist line: each name is a text node; the separator between them is a span with its own font size, and
+    // white-space: pre so several spaces stay several spaces (normal white-space collapses them into one).
+    const setArtistLine = () => {
+        const node = el('spxArtist');
+        node.replaceChildren();
+        artistRaw.split(';').forEach((name, i) => {
+            if (i) { const sep = document.createElement('span'); sep.className = 'spx-sep'; sep.textContent = setting('textArtistSeparator'); node.appendChild(sep); }
+            node.appendChild(document.createTextNode(name));
+        });
+    };
     function render() {
         const s = songs[idx];
         const link = el('spxTitleLink');
@@ -517,7 +527,7 @@ async function boot() {
         }));
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         artistRaw = s.a;
-        el('spxArtist').textContent = artistText();
+        setArtistLine();
         el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
         applyTextElementStyles(); // re-run Shrink to Fit against the new text (a no-op for every other Overflow mode)
         timeline.setDateLine(fmtAdded(s.t));
