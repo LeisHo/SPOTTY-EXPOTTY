@@ -765,15 +765,15 @@ async function boot() {
         if ((inUi(e.target) || inText(e.target)) && e.target.id !== 'spxTimeline') return;
         ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: e.pointerType, onTimeline: e.target.id === 'spxTimeline', moved: false, t: performance.now() });
         if (setting('checkboxScrubLineDrag') && e.target.id === 'spxTimeline' && Math.abs(e.clientX - playheadScreenX()) <= 10) {
-            ptrs.get(e.pointerId).playhead = true; timeline.setPlayheadState('press');
-            moveTo(timeline.posAtX(e.clientX - el('spxTimeline').getBoundingClientRect().left));
+            // Grabbing the line does not move it: the drag keeps the grab point's offset from the line, so the song changes only when the line is dragged.
+            const grab = ptrs.get(e.pointerId); grab.playhead = true; grab.grab = e.clientX - playheadScreenX(); timeline.setPlayheadState('press');
         }
         if (ptrs.size === 2) { pinchDist = pinchSpan(); pinching = true; }
     });
     window.addEventListener('pointermove', e => {
         const p = ptrs.get(e.pointerId);
         if (!p) return;
-        if (p.playhead) { moveTo(timeline.posAtX(e.clientX - el('spxTimeline').getBoundingClientRect().left)); p.x = e.clientX; p.y = e.clientY; return; }
+        if (p.playhead) { moveTo(timeline.posAtX(e.clientX - p.grab - el('spxTimeline').getBoundingClientRect().left)); p.x = e.clientX; p.y = e.clientY; return; }
         const dx = e.clientX - p.x;
         // a finger must travel its own 'start threshold' before it counts as a drag (a tap is not a drag); a mouse 4 px
         const startPx = p.type === 'mouse' ? 4 : setting('sliderTouchStartThreshold');
