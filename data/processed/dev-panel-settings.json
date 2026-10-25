@@ -178,7 +178,7 @@
     "checkboxPlayButtonEnabled": true,
     "colorPlayButton": "#ffffff",
     "sliderPlayButtonSize": 33,
-    "sliderPlayButtonOpacity": 79,
+    "sliderPlayButtonOpacity": 74,
     "sliderPlayButtonHoverOpacity": 100,
     "buttonPlayPause": "",
     "checkboxPlayAnimEnabled": true,
@@ -336,7 +336,7 @@
     "left": 30,
     "top": 6,
     "width": 343,
-    "height": 310
+    "height": 388
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -15654,7 +15654,7 @@
     "mobile:Volume Button": true,
     "mobile:Play Button": true,
     "mobile:Play Button Animation": false,
-    "mobile:Next And Last Song Buttons": false,
+    "mobile:Next And Last Song Buttons": true,
     "mobile:Next And Last Button Animation": false,
     "mobile:Shuffle Button": false,
     "mobile:Background": true,
@@ -16427,7 +16427,7 @@
       "checkboxAlbumColorTransition": false,
       "sliderAlbumColorTransitionMs": 300,
       "sliderCoverOffsetY": -99,
-      "sliderNavButtonOpacity": 100
+      "sliderNavButtonOpacity": 80
     },
     "landscape": {}
   },
