@@ -16,7 +16,7 @@
     "checkboxShowPoolOverlay": false,
     "sliderWheelScrubPixels": 5,
     "checkboxInvertScroll": false,
-    "sliderTimelineZoomSpeed": 1,
+    "sliderTimelineZoomSpeed": 0.3,
     "checkboxInvertZoomDrag": false,
     "sliderDefaultTimelineSpanDays": 4900,
     "checkboxFullScaleOnStartup": true,
