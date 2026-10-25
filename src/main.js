@@ -15,7 +15,7 @@ import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVol
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying } from './app/handoff.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
@@ -70,7 +70,7 @@ async function boot() {
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="w3" d="M21 4.5a11 11 0 0 1 0 15"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>
                 </button>
                 <div class="spx-vol-clip"><div class="spx-vol-panel">
-                    <div class="spx-vol-track" role="slider" tabindex="0" aria-label="Volume" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="spx-vol-fill"></div><div class="spx-vol-thumb"></div></div>
+                    <div class="spx-vol-track" role="slider" tabindex="0" aria-label="Volume" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="spx-vol-fill"></div><div class="spx-vol-thumb"></div></div>
                     <div class="spx-vol-label">100%</div>
                 </div></div>
                 <button type="button" class="spx-shuffle" id="spxShuffle" aria-label="Shuffle" aria-pressed="false" title="Shuffle off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
@@ -657,6 +657,7 @@ async function boot() {
 
     const ptrs = new Map(); // pointerId -> { x, y, startX, startY, type, onTimeline, moved }
     let pinchDist = 0;
+    let pinching = false; // a two-finger gesture happened: no finger lifting after it may count as a tap that jumps the playhead
     const pinchSpan = () => { const [a, b] = [...ptrs.values()]; return Math.hypot(a.x - b.x, a.y - b.y) || 1; };
     // A button can sit UNDER the timeline canvas or a text line (a tall timeline, a scaled-up cover). A press that lands
     // on such a cover-up but inside a button's rectangle is the button's click, not a scrub: remember it here and
@@ -688,7 +689,7 @@ async function boot() {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         if ((inUi(e.target) || inText(e.target)) && e.target.id !== 'spxTimeline') return;
         ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: e.pointerType, onTimeline: e.target.id === 'spxTimeline', moved: false, t: performance.now() });
-        if (ptrs.size === 2) pinchDist = pinchSpan();
+        if (ptrs.size === 2) { pinchDist = pinchSpan(); pinching = true; }
     });
     window.addEventListener('pointermove', e => {
         const p = ptrs.get(e.pointerId);
@@ -724,11 +725,12 @@ async function boot() {
     });
     const endPointer = e => {
         const p = ptrs.get(e.pointerId);
-        if (p && !p.moved && !p.pan && p.onTimeline && e.type === 'pointerup') { // a click/tap on the timeline jumps there
+        if (p && !p.moved && !p.pan && !pinching && p.onTimeline && e.type === 'pointerup') { // a click/tap on the timeline jumps there
             moveTo(timeline.posAtX(e.clientX - el('spxTimeline').getBoundingClientRect().left));
         }
         ptrs.delete(e.pointerId);
         if (ptrs.size === 2) pinchDist = pinchSpan();
+        if (ptrs.size === 0) pinching = false;
     };
     window.addEventListener('pointerup', endPointer);
     el('spxTimeline').addEventListener('contextmenu', e => e.preventDefault()); // right-drag pans; no browser menu over the graph
@@ -830,7 +832,17 @@ async function boot() {
     // Sound starts by itself once the data is ready. A browser may refuse audio until the page has had a user gesture; then the
     // first click or key press starts it (playClip is tried again there). That first gesture also opens the Spotify login popup,
     // which browsers only allow after a gesture.
-    const playFromStart = () => { unlock(); playClip(clipKey(songs[idx])); schedulePreload(); };
+    // Starts the full song at once when the handoff is on, the same as the in-app play button does. Otherwise it waited for the
+    // handoff timer, which only runs after a song change, so nothing played until a second input. Returns false when the preview
+    // clip should play instead (handoff off, muted, or sound still locked).
+    const startSpotifyNow = () => {
+        if (isPlaying()) return true; // already playing (e.g. Run Startup over a song that plays): leave it alone
+        if (!isUnlocked() || !setting('checkboxHandoffEnabled') || volume.get() <= 0) return false;
+        clearTimeout(handoffTimer); handoffPending = false; previewHold = null;
+        stopClip(); handedOff = true; toggleTrack(songs[idx].id);
+        return true;
+    };
+    const playFromStart = () => { unlock(); schedulePreload(); if (!startSpotifyNow()) playClip(clipKey(songs[idx])); };
     // The start screen. A press on the play icon starts playback: on press, or on release when Transition After Release is on.
     // A press or key press anywhere else starts it as well (sound unlocks on that first input).
     let startedOnce = false;

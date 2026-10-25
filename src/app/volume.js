@@ -1,4 +1,4 @@
-// Volume control, top right: a speaker icon with a vertical slider that drops down from it. Custom slider (not
+// Volume control, top right: a speaker icon, with a horizontal slider that slides out to its right. Custom slider (not
 // <input type=range orient=vertical>, which is inconsistent across browsers): drag or tap the track, or use the
 // keyboard when it is focused (arrows, Home, End). The value (0..1) is remembered in localStorage.
 //
@@ -31,12 +31,12 @@ export function initVolume({ root, onChange }) {
     const cfg = { enabled: true, tol: 30, duration: 350, speedAt: () => 1 };
     let target = false;   // should it be open
     let prog = 0;         // how far open it is, 0 = closed .. 1 = fully open
-    let raf = 0, panelH = 0, lastPointer = 'mouse';
+    let raf = 0, panelW = 0, lastPointer = 'mouse';
 
     function render() {
         const pct = Math.round(vol * 100);
-        fill.style.height = pct + '%';
-        thumb.style.bottom = `calc(${pct}% - var(--spx-vol-r))`;
+        fill.style.width = pct + '%';
+        thumb.style.left = `calc(${pct}% - var(--spx-vol-r))`;
         label.textContent = pct + '%';
         track.setAttribute('aria-valuenow', String(pct));
         btn.dataset.level = vol === 0 ? 'mute' : vol < 0.34 ? 'low' : vol < 0.67 ? 'mid' : 'high';
@@ -48,7 +48,7 @@ export function initVolume({ root, onChange }) {
         if (persist) { try { localStorage.setItem(KEY, String(vol)); } catch (e) { /* storage blocked */ } }
         onChange(vol);
     }
-    const fromEvent = e => { const r = track.getBoundingClientRect(); set(1 - (e.clientY - r.top) / (r.height || 1)); };
+    const fromEvent = e => { const r = track.getBoundingClientRect(); set((e.clientX - r.left) / (r.width || 1)); };
 
     let dragging = false;
     track.addEventListener('pointerdown', e => {
@@ -71,9 +71,9 @@ export function initVolume({ root, onChange }) {
 
     // ---- open / close, with the drop-down animation --------------------------------------------------------------
     function paint() {
-        clip.style.height = (prog * panelH) + 'px';
+        clip.style.width = (prog * panelW) + 'px';
         clip.style.visibility = prog > 0 ? 'visible' : 'hidden';
-        panel.style.transform = `translateY(${-(1 - prog) * panelH}px)`; // slides out from under the icon
+        panel.style.transform = `translateX(${-(1 - prog) * panelW}px)`; // slides out from under the icon
         btn.setAttribute('aria-expanded', String(target));
     }
     function setOpen(o) {
@@ -119,11 +119,11 @@ export function initVolume({ root, onChange }) {
         if (!cfg.enabled || e.pointerType === 'touch') return;
         const sh = root.querySelector('.spx-shuffle');
         if (sh && e.target && sh.contains(e.target)) { setOpen(false); return; } // over the shuffle icon: it sits where the slider would drop
-        const b = btn.getBoundingClientRect(), rr = root.getBoundingClientRect();
+        const b = btn.getBoundingClientRect();
         // Closed: only the icon itself counts (no tolerance), so the space under it, where Shuffle sits, never opens the slider.
         // Open: the icon + the slider, with the tolerance, so the pointer can move onto the slider without it closing.
         let l = b.left, r = b.right, t = b.top, bt = b.bottom, tol = 0;
-        if (target) { l = Math.min(l, rr.left); r = Math.max(r, rr.right); bt = b.bottom + panelH; tol = cfg.tol; }
+        if (target) { r = b.right + panelW; tol = cfg.tol; }
         const inside = e.clientX >= l - tol && e.clientX <= r + tol && e.clientY >= t - tol && e.clientY <= bt + tol;
         setOpen(inside);
     });
@@ -144,7 +144,7 @@ export function initVolume({ root, onChange }) {
         set1('--spx-vol-track', L.track);
         set1('--spx-vol-thumb', L.thumb);
         set1('--spx-vol-muted-opacity', String(clamp((L.muted === undefined ? 40 : L.muted) / 100, 0, 1)));
-        panelH = panel.offsetHeight + 8;
+        panelW = panel.offsetWidth + 8;
         if (!cfg.enabled) { target = target; prog = target ? 1 : 0; }
         paint();
     }
