@@ -126,6 +126,18 @@ export const DEFAULTS = {
     colorShadowVolume: '#000000', sliderShadowVolumeOpacity: 0.67, sliderShadowVolumeBlur: 3, sliderShadowVolumeAngle: 90, sliderShadowVolumeDepth: 1,
     colorShadowNav: '#000000', sliderShadowNavOpacity: 0.67, sliderShadowNavBlur: 3, sliderShadowNavAngle: 90, sliderShadowNavDepth: 1,
     colorShadowTitleLift: '#000000',
+    // Startup: the darkening over the app until the first input, and the play icon (no text, no background)
+    colorStartOverlay: '#0d0f12', sliderStartOverlayOpacity: 0.8,
+    checkboxStartButtonEnabled: true, sliderStartPlaySize: 64,
+    // Start Button Animation: the Track Title Button Animation settings, with 'Title' replaced by 'StartPlay' (see titleAnim.js)
+    checkboxStartPlayAnimEnabled: false, selectStartPlayAnimMode: 'bold', sliderStartPlayAnimDuration: 160, selectStartPlayAnimEasing: 'ease-out',
+    sliderStartPlayBoldRestWeight: 500, sliderStartPlayBoldHoverWeight: 800, sliderStartPlayBoldPressWeight: 500,
+    sliderStartPlayPulseScale: 1.08, sliderStartPlayPulseInDuration: 90, sliderStartPlayPulseOutDuration: 180,
+    sliderStartPlayGrowScale: 1.1, sliderStartPlayGrowPressScale: 1,
+    sliderStartPlayGlowRadius: 18, sliderStartPlayGlowOpacity: 0.8, colorStartPlayGlowColor: '#1db954', sliderStartPlayGlowPressRadius: 4,
+    sliderStartPlayTrackingHover: 0.05, sliderStartPlayTrackingPress: 0,
+    sliderStartPlayLiftPx: 6, sliderStartPlayLiftPressPx: 2, sliderStartPlayLiftShadowBlur: 14, sliderStartPlayLiftShadowOpacity: 0.5,
+    checkboxShadowStartPlayLift: true, colorShadowStartPlayLift: '#000000',
     checkboxBracketsSmaller: false,
     sliderBracketsFontPct: 60,
 

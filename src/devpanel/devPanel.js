@@ -8154,6 +8154,30 @@
         registerDevControlArray('SPOTTY_TITLE_BG_CONTROLS', TITLE_BG_CONTROLS);
         makeDevGroupToggleable(tab, TA, 'checkboxTitleAnimEnabled');
 
+        // ---- Startup: the darkening over the app until the first input, and the play icon (no text, no background) ----
+        const SU = 'Startup', SB = 'Start Button', SBA = 'Start Button Animation';
+        uiLayoutContent.appendChild(createDevGroupElement(SU, tab));
+        const SU_CONTROLS = [
+            { tab, group: SU, id: 'sliderStartOverlayOpacity', type: 'slider', label: 'Darkening Opacity (x):', min: 0, max: 1, step: 0.01, value: 0.8 },
+            { tab, group: SU, id: 'colorStartOverlay', type: 'color', label: 'Darkening Color:', value: '#0d0f12' },
+        ];
+        renderControlArray(SU_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_STARTUP_CONTROLS', SU_CONTROLS);
+        findGroupContent(tab, SU, 'renderSpottyDevControls', SB).appendChild(createDevGroupElement(SB, tab));
+        const SB_CONTROLS = [
+            { tab, group: SB, id: 'checkboxStartButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: SB, id: 'sliderStartPlaySize', type: 'slider', label: 'Play Icon Size (Px):', min: 16, max: 200, step: 1, value: 64 },
+        ];
+        renderControlArray(SB_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_START_BUTTON_CONTROLS', SB_CONTROLS);
+        findGroupContent(tab, SB, 'renderSpottyDevControls', SBA).appendChild(createDevGroupElement(SBA, tab));
+        // The same controls as Track Title Button Animation (TITLE_BG_CONTROLS above), with 'Title' replaced by 'StartPlay'
+        const START_ANIM_CONTROLS = TITLE_BG_CONTROLS.filter(c => c.group === TA).map(c => ({ ...c, group: SBA, id: c.id.replace('Title', 'StartPlay') }));
+        renderControlArray(START_ANIM_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_START_ANIM_CONTROLS', START_ANIM_CONTROLS);
+        makeDevGroupToggleable(tab, SBA, 'checkboxStartPlayAnimEnabled');
+        makeDevGroupToggleable(tab, SB, 'checkboxStartButtonEnabled');
+
         // Show only the settings that belong to the selected mode of the title animation / background.
         // A control used by several modes (e.g. Border Sample Depth) is shown when ANY of them is selected.
         const MODE_MAPS = [

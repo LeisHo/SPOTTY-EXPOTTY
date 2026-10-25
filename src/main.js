@@ -76,6 +76,7 @@ async function boot() {
                 <button type="button" class="spx-shuffle" id="spxShuffle" aria-label="Shuffle" aria-pressed="false" title="Shuffle off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
             </div>
             <div class="spx-pool" id="spxPool" hidden></div>
+            <div class="spx-start" id="spxStart"><button type="button" class="spx-start-play" id="spxStartBtn" aria-label="Start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button></div>
             <div class="spx-inspector" id="spxInspectorPanel" hidden>
                 <div class="spx-inspector-head"><span>UI LAYOUT INSPECTOR</span><button type="button" id="spxInspectorClose">✕</button></div>
                 <div id="spxInspectorMount"></div>
@@ -221,6 +222,7 @@ async function boot() {
         getPalette: () => { const c = songs[idx] && songs[idx].c; return c !== undefined ? covers[c] : null; },
     });
     initTitleAnim(el('spxTitleLink'));
+    initTitleAnim(el('spxStartBtn'), 'StartPlay');
     // Volume (top right): scales the scrub clips. Spotify's embedded player has no volume method, so at exactly
     // 0 % the song player is simply stopped and not started (a full mute); above 0 it plays at its own level.
     const volume = initVolume({
@@ -419,6 +421,10 @@ async function boot() {
         // Brackets Smaller Text (app.css: .spx-bracket inside the title)
         el('spxApp').classList.toggle('brackets-small', !!setting('checkboxBracketsSmaller'));
         shStyle.setProperty('--spx-bracket-pct', setting('sliderBracketsFontPct') + '%');
+        // Startup: the darkening over the app until the first input, and the play icon (its size, and whether it shows)
+        el('spxStart').style.setProperty('--spx-start-bg', rgbaOf(setting('colorStartOverlay'), setting('sliderStartOverlayOpacity')));
+        el('spxStartBtn').hidden = !setting('checkboxStartButtonEnabled');
+        el('spxStartBtn').style.setProperty('--spx-start-play-size', setting('sliderStartPlaySize') + 'px');
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
         // Album Cover > Bounding Box: the cover's own box and its centre (see app.css)
@@ -741,7 +747,7 @@ async function boot() {
     // first click or key press starts it (playClip is tried again there). That first gesture also opens the Spotify login popup,
     // which browsers only allow after a gesture.
     const playFromStart = () => { unlock(); playClip(clipKey(songs[idx])); schedulePreload(); };
-    const onFirstGesture = () => { playFromStart(); openSpotifyLogin(); };
+    const onFirstGesture = () => { el('spxStart').hidden = true; playFromStart(); openSpotifyLogin(); };
     document.addEventListener('pointerdown', onFirstGesture, { capture: true, once: true });
     document.addEventListener('keydown', onFirstGesture, { capture: true, once: true });
     playFromStart();

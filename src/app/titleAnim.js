@@ -14,7 +14,10 @@ const EASINGS = {
 };
 const hexToRgb = h => { const m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(h || ''); return m ? [1, 2, 3].map(i => parseInt(m[i], 16)) : [29, 185, 84]; };
 
-export function initTitleAnim(link) {
+// prefix: 'Title' for the track title; 'StartPlay' for the start screen's play icon. Each setting id is the
+// 'Title' one with 'Title' replaced by the prefix (e.g. sliderTitlePulseScale -> sliderStartPlayPulseScale).
+export function initTitleAnim(link, prefix = 'Title') {
+    const S = n => setting(n.replace('Title', prefix));
     let hover = false, down = false, lastState = 'rest';
     const state = () => (down ? 'press' : hover ? 'hover' : 'rest');
 
@@ -27,30 +30,30 @@ export function initTitleAnim(link) {
         const s = {};
         switch (mode) {
             case 'bold':
-                s.fontWeight = String(st === 'hover' ? setting('sliderTitleBoldHoverWeight') : st === 'press' ? setting('sliderTitleBoldPressWeight') : setting('sliderTitleBoldRestWeight'));
+                s.fontWeight = String(st === 'hover' ? S('sliderTitleBoldHoverWeight') : st === 'press' ? S('sliderTitleBoldPressWeight') : S('sliderTitleBoldRestWeight'));
                 break;
             case 'pulse':
-                s.transform = st === 'press' ? `scale(${setting('sliderTitlePulseScale')})` : 'scale(1)';
-                s.dur = st === 'press' ? setting('sliderTitlePulseInDuration') : setting('sliderTitlePulseOutDuration');
+                s.transform = st === 'press' ? `scale(${S('sliderTitlePulseScale')})` : 'scale(1)';
+                s.dur = st === 'press' ? S('sliderTitlePulseInDuration') : S('sliderTitlePulseOutDuration');
                 break;
             case 'grow':
-                s.transform = `scale(${st === 'hover' ? setting('sliderTitleGrowScale') : st === 'press' ? setting('sliderTitleGrowPressScale') : 1})`;
+                s.transform = `scale(${st === 'hover' ? S('sliderTitleGrowScale') : st === 'press' ? S('sliderTitleGrowPressScale') : 1})`;
                 break;
             case 'glow': {
-                const r = st === 'hover' ? setting('sliderTitleGlowRadius') : st === 'press' ? setting('sliderTitleGlowPressRadius') : 0;
-                const [R, G, B] = hexToRgb(setting('colorTitleGlowColor'));
-                s.textShadow = r > 0 ? `0 0 ${r}px rgba(${R},${G},${B},${setting('sliderTitleGlowOpacity')}), 0 0 ${r / 2}px rgba(${R},${G},${B},${setting('sliderTitleGlowOpacity')})` : '0 0 0 rgba(0,0,0,0)';
+                const r = st === 'hover' ? S('sliderTitleGlowRadius') : st === 'press' ? S('sliderTitleGlowPressRadius') : 0;
+                const [R, G, B] = hexToRgb(S('colorTitleGlowColor'));
+                s.textShadow = r > 0 ? `0 0 ${r}px rgba(${R},${G},${B},${S('sliderTitleGlowOpacity')}), 0 0 ${r / 2}px rgba(${R},${G},${B},${S('sliderTitleGlowOpacity')})` : '0 0 0 rgba(0,0,0,0)';
                 break;
             }
             case 'tracking':
-                s.letterSpacing = `${st === 'hover' ? setting('sliderTitleTrackingHover') : st === 'press' ? setting('sliderTitleTrackingPress') : 0}em`;
+                s.letterSpacing = `${st === 'hover' ? S('sliderTitleTrackingHover') : st === 'press' ? S('sliderTitleTrackingPress') : 0}em`;
                 break;
             case 'lift': {
-                const y = st === 'hover' ? -setting('sliderTitleLiftPx') : st === 'press' ? setting('sliderTitleLiftPressPx') : 0;
+                const y = st === 'hover' ? -S('sliderTitleLiftPx') : st === 'press' ? S('sliderTitleLiftPressPx') : 0;
                 s.transform = `translateY(${y}px)`;
-                const blur = setting('sliderTitleLiftShadowBlur'), op = setting('sliderTitleLiftShadowOpacity');
-                const lc = setting('colorShadowTitleLift');
-                s.filter = !setting('checkboxShadowTitleLift') ? 'none' : st === 'hover' ? `drop-shadow(0 ${Math.abs(y) * 0.8}px ${blur}px ${rgbaOf(lc, op)})`
+                const blur = S('sliderTitleLiftShadowBlur'), op = S('sliderTitleLiftShadowOpacity');
+                const lc = S('colorShadowTitleLift');
+                s.filter = !S('checkboxShadowTitleLift') ? 'none' : st === 'hover' ? `drop-shadow(0 ${Math.abs(y) * 0.8}px ${blur}px ${rgbaOf(lc, op)})`
                     : st === 'press' ? `drop-shadow(0 1px ${blur / 3}px ${rgbaOf(lc, op * 0.6)})` : 'drop-shadow(0 0 0 rgba(0,0,0,0))';
                 break;
             }
@@ -60,12 +63,12 @@ export function initTitleAnim(link) {
     }
 
     function apply() {
-        if (!setting('checkboxTitleAnimEnabled')) { clear(); return; }
-        const mode = setting('selectTitleAnimMode');
+        if (!S('checkboxTitleAnimEnabled')) { clear(); return; }
+        const mode = S('selectTitleAnimMode');
         const st = state();
         const s = styleFor(mode, st);
-        const dur = s.dur !== undefined ? s.dur : setting('sliderTitleAnimDuration');
-        const ease = EASINGS[setting('selectTitleAnimEasing')] || 'ease-out';
+        const dur = s.dur !== undefined ? s.dur : S('sliderTitleAnimDuration');
+        const ease = EASINGS[S('selectTitleAnimEasing')] || 'ease-out';
         const props = ['transform', 'font-weight', 'letter-spacing', 'text-shadow', 'filter'];
         link.style.transition = props.map(p => `${p} ${dur}ms ${ease}`).join(', ');
         link.style.transform = s.transform || '';
