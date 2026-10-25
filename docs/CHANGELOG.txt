@@ -646,6 +646,27 @@ Not verified: that the login popup actually opens in a real browser (blocked in 
 CORRECTION to the entry above: its header ended "00:3x"; the measured times are 00:35:42 to 00:37:17 (1m 35s) for the three items' code push.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  00:37:49 - 00:43:44 EDT  (Debug tools port + two timing logs; measured from `date`, code push)
+
+Source read: HANDY DANDIES src/main.js (DEV_GROUPS 'Debug', copyAllDebugLogs, exportDebugLogs, toggleLogsPaused, setPaused/setPausedByUser, applyFrameRateDisplay,
+setupExportLogsUiButton, buildSnapshotText). Ported (the GLOBAL ones): PAUSE (freezes every running animation/transition via document.getAnimations() and gates the
+JS animation loops with window.__spxPaused; it does NOT stop audio), Pause Logs / Resume Logs, Copy All Logs, Clear All Logs, Export Logs (JSON of every active log + page /
+song state), ADD UI BUTTON (a corner export button, top left), Show Frame Rate (+ colour, refresh ms; counts browser animation frames), Take Snapshot with 6 checkboxes
+(Viewport And Cursor, Mouse Tracking, Playback, Audio Clips, Timeline, Settings Changed From Default) and a collapsible snapshot box. Left out on purpose (specific to the
+hands app): Hand Behaviour / Pose Jump / Render Reordering / Frame Rate Drop / Renderer / Frame Sections / System logs, hand numbers, grid helper, wireframe, render-order points.
+New files: src/app/debugTools.js (logic), src/app/debugLog.js (logEvent + the two logs). Logs register in window.spxDebugLogRegistry (the Mouse Log registers itself), so any
+future log that registers is covered by Copy All / Clear All / Export / Snapshot.
+Two new logs, off by default (Debug > Log Playback Timing / Log Preloading), each with a Copy / Save / Clear box:
+- Playback Timing Log: every song change with the state of its clip, CLIP START (offset, buffered seconds, ms after it was asked for) / STOP / STALL ('waiting' event) /
+  pending, HANDOFF timer cancelled / fired (and whether it started the song or why not), EMBED loadUri / play() sent / playing / paused (position) / loop restart / pause.
+- Preload Log: every preload batch (how many clips wanted, how many already ready, how many dropped), URL arrival per clip (ms), READY per clip (ms after its URL request,
+  buffered seconds, how many of the pool are ready), BATCH COMPLETE (ms after request) or BATCH superseded (n/N ready after ms), plus the PLAN line (ahead / behind / scrub speed).
+First finding from a test run (not a conclusion): every clip start is followed within 6-13 ms by a CLIP STALL 'waiting' event even when 30 s are buffered (that is the
+seek to the random start offset); worth watching in a real scrub log for how long the gap is. Verified in the built-in browser: all 9 tool buttons present; PAUSE froze a
+test animation and resumed; Pause Logs stopped new lines; Snapshot 29 lines; frame rate + export button shown; both logs filled while scrubbing 5 songs. Not verified: real
+clipboard copy / file download from the buttons, the frame rate number against a real display, the logs on a phone.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
