@@ -139,7 +139,7 @@
     "sliderTxtArtistMaxWidth": 2000,
     "selectTxtArtistOverflow": "wrap",
     "textArtistSeparator": "  &  ",
-    "sliderArtistSeparatorPct": 74,
+    "sliderArtistSeparatorPct": 79,
     "checkboxScaleArtistMultiline": true,
     "sliderArtistMaxLines": 1,
     "checkboxScaleArtistToMatch": true,
@@ -2361,6 +2361,22 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Brackets Smaller Text",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderBracketsFontPct"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderBracketsFontPct"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [],
@@ -2957,6 +2973,19 @@
                       "subgroups": []
                     }
                   ]
+                },
+                {
+                  "key": "desktop:Brackets Smaller Text",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderBracketsFontPct"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderBracketsFontPct"
+                  ],
+                  "subgroups": []
                 }
               ]
             }
@@ -4697,22 +4726,6 @@
                 }
               ]
             }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "desktop:Brackets Smaller Text",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "sliderBracketsFontPct"
-                }
-              ],
-              "rowKeys": [
-                "sliderBracketsFontPct"
-              ],
-              "subgroups": []
-            }
           }
         ],
         "rowKeys": [
@@ -5326,6 +5339,22 @@
                     }
                   ]
                 }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Brackets Smaller Text",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderBracketsFontPct"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderBracketsFontPct"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [],
@@ -5922,6 +5951,19 @@
                     "subgroups": []
                   }
                 ]
+              },
+              {
+                "key": "desktop:Brackets Smaller Text",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderBracketsFontPct"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderBracketsFontPct"
+                ],
+                "subgroups": []
               }
             ]
           },
@@ -7649,19 +7691,6 @@
                 "subgroups": []
               }
             ]
-          },
-          {
-            "key": "desktop:Brackets Smaller Text",
-            "items": [
-              {
-                "type": "row",
-                "key": "sliderBracketsFontPct"
-              }
-            ],
-            "rowKeys": [
-              "sliderBracketsFontPct"
-            ],
-            "subgroups": []
           }
         ]
       },
@@ -19091,14 +19120,15 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": true,
-    "desktop:Text": true,
+    "desktop:UI Layout": false,
+    "desktop:Text": false,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
-    "desktop:Artist": true,
+    "desktop:Artist": false,
     "desktop:Album & Date": true,
+    "desktop:Brackets Smaller Text": true,
     "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:Volume Button Animation": true,
@@ -19115,7 +19145,6 @@
     "desktop:Volume Shadow": true,
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
-    "desktop:Brackets Smaller Text": true,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
@@ -19126,9 +19155,9 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": false,
-    "desktop:New Group (4)": false,
-    "desktop:Click and Drag": false,
+    "desktop:Timeline Look": true,
+    "desktop:New Group (4)": true,
+    "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
     "desktop:Album Cover Colors": true,
     "desktop:New Group (3)": true,
