@@ -130,7 +130,7 @@
     "checkboxTxtArtistWordWrap": true,
     "sliderTxtArtistMaxWidth": 900,
     "selectTxtArtistOverflow": "wrap",
-    "textArtistSeparator": "  &.  ",
+    "textArtistSeparator": "  &. ",
     "sliderArtistSeparatorPct": 77,
     "checkboxScaleArtistMultiline": true,
     "sliderArtistMaxLines": 2,
@@ -336,7 +336,7 @@
     "left": 26,
     "top": 95,
     "width": 344,
-    "height": 80
+    "height": 312
   },
   "devPanelStyle": {
     "titleFontSize": 17,
