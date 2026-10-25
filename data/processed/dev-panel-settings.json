@@ -19123,7 +19123,7 @@
     "desktop:UI Layout": false,
     "desktop:Text": false,
     "desktop:Font": true,
-    "desktop:Song Title": false,
+    "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
     "desktop:Artist": false,
