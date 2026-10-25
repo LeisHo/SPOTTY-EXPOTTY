@@ -272,11 +272,11 @@
     "sliderSpotlightCenterX": 50,
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
-    "sliderStartOverlayOpacity": 0.8,
+    "sliderStartOverlayOpacity": 0.54,
     "colorStartOverlay": "#0d0f12",
     "checkboxStartButtonEnabled": true,
     "sliderStartPlaySize": 64,
-    "checkboxStartPlayAnimEnabled": false,
+    "checkboxStartPlayAnimEnabled": true,
     "selectStartPlayAnimMode": "bold",
     "sliderStartPlayAnimDuration": 160,
     "selectStartPlayAnimEasing": "ease-out",
@@ -3766,517 +3766,6 @@
                 }
               ]
             }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "desktop:Startup",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "sliderStartOverlayOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "colorStartOverlay"
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Start Button",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderStartPlaySize"
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "desktop:Start Button Animation",
-                          "items": [
-                            {
-                              "type": "row",
-                              "key": "selectStartPlayAnimMode"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayAnimDuration"
-                            },
-                            {
-                              "type": "row",
-                              "key": "selectStartPlayAnimEasing"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayBoldRestWeight"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayBoldHoverWeight"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayBoldPressWeight"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayPulseScale"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayPulseInDuration"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayPulseOutDuration"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayGrowScale"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayGrowPressScale"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayGlowRadius"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayGlowOpacity"
-                            },
-                            {
-                              "type": "row",
-                              "key": "colorStartPlayGlowColor"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayGlowPressRadius"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayTrackingHover"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayTrackingPress"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayLiftPx"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayLiftPressPx"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayLiftShadowBlur"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderStartPlayLiftShadowOpacity"
-                            }
-                          ],
-                          "rowKeys": [
-                            "selectStartPlayAnimMode",
-                            "sliderStartPlayAnimDuration",
-                            "selectStartPlayAnimEasing",
-                            "sliderStartPlayBoldRestWeight",
-                            "sliderStartPlayBoldHoverWeight",
-                            "sliderStartPlayBoldPressWeight",
-                            "sliderStartPlayPulseScale",
-                            "sliderStartPlayPulseInDuration",
-                            "sliderStartPlayPulseOutDuration",
-                            "sliderStartPlayGrowScale",
-                            "sliderStartPlayGrowPressScale",
-                            "sliderStartPlayGlowRadius",
-                            "sliderStartPlayGlowOpacity",
-                            "colorStartPlayGlowColor",
-                            "sliderStartPlayGlowPressRadius",
-                            "sliderStartPlayTrackingHover",
-                            "sliderStartPlayTrackingPress",
-                            "sliderStartPlayLiftPx",
-                            "sliderStartPlayLiftPressPx",
-                            "sliderStartPlayLiftShadowBlur",
-                            "sliderStartPlayLiftShadowOpacity"
-                          ],
-                          "subgroups": []
-                        }
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderStartPlaySize"
-                    ],
-                    "subgroups": [
-                      {
-                        "key": "desktop:Start Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "selectStartPlayAnimMode"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayAnimDuration"
-                          },
-                          {
-                            "type": "row",
-                            "key": "selectStartPlayAnimEasing"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayBoldRestWeight"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayBoldHoverWeight"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayBoldPressWeight"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayPulseScale"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayPulseInDuration"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayPulseOutDuration"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGrowScale"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGrowPressScale"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGlowRadius"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGlowOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "colorStartPlayGlowColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGlowPressRadius"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayTrackingHover"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayTrackingPress"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftPx"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftPressPx"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftShadowBlur"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftShadowOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "selectStartPlayAnimMode",
-                          "sliderStartPlayAnimDuration",
-                          "selectStartPlayAnimEasing",
-                          "sliderStartPlayBoldRestWeight",
-                          "sliderStartPlayBoldHoverWeight",
-                          "sliderStartPlayBoldPressWeight",
-                          "sliderStartPlayPulseScale",
-                          "sliderStartPlayPulseInDuration",
-                          "sliderStartPlayPulseOutDuration",
-                          "sliderStartPlayGrowScale",
-                          "sliderStartPlayGrowPressScale",
-                          "sliderStartPlayGlowRadius",
-                          "sliderStartPlayGlowOpacity",
-                          "colorStartPlayGlowColor",
-                          "sliderStartPlayGlowPressRadius",
-                          "sliderStartPlayTrackingHover",
-                          "sliderStartPlayTrackingPress",
-                          "sliderStartPlayLiftPx",
-                          "sliderStartPlayLiftPressPx",
-                          "sliderStartPlayLiftShadowBlur",
-                          "sliderStartPlayLiftShadowOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    ]
-                  }
-                }
-              ],
-              "rowKeys": [
-                "sliderStartOverlayOpacity",
-                "colorStartOverlay"
-              ],
-              "subgroups": [
-                {
-                  "key": "desktop:Start Button",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderStartPlaySize"
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:Start Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "selectStartPlayAnimMode"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayAnimDuration"
-                          },
-                          {
-                            "type": "row",
-                            "key": "selectStartPlayAnimEasing"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayBoldRestWeight"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayBoldHoverWeight"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayBoldPressWeight"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayPulseScale"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayPulseInDuration"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayPulseOutDuration"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGrowScale"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGrowPressScale"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGlowRadius"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGlowOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "colorStartPlayGlowColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGlowPressRadius"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayTrackingHover"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayTrackingPress"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftPx"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftPressPx"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftShadowBlur"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftShadowOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "selectStartPlayAnimMode",
-                          "sliderStartPlayAnimDuration",
-                          "selectStartPlayAnimEasing",
-                          "sliderStartPlayBoldRestWeight",
-                          "sliderStartPlayBoldHoverWeight",
-                          "sliderStartPlayBoldPressWeight",
-                          "sliderStartPlayPulseScale",
-                          "sliderStartPlayPulseInDuration",
-                          "sliderStartPlayPulseOutDuration",
-                          "sliderStartPlayGrowScale",
-                          "sliderStartPlayGrowPressScale",
-                          "sliderStartPlayGlowRadius",
-                          "sliderStartPlayGlowOpacity",
-                          "colorStartPlayGlowColor",
-                          "sliderStartPlayGlowPressRadius",
-                          "sliderStartPlayTrackingHover",
-                          "sliderStartPlayTrackingPress",
-                          "sliderStartPlayLiftPx",
-                          "sliderStartPlayLiftPressPx",
-                          "sliderStartPlayLiftShadowBlur",
-                          "sliderStartPlayLiftShadowOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderStartPlaySize"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "desktop:Start Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "selectStartPlayAnimMode"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayAnimDuration"
-                        },
-                        {
-                          "type": "row",
-                          "key": "selectStartPlayAnimEasing"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayBoldRestWeight"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayBoldHoverWeight"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayBoldPressWeight"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayPulseScale"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayPulseInDuration"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayPulseOutDuration"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGrowScale"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGrowPressScale"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGlowRadius"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGlowOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "colorStartPlayGlowColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGlowPressRadius"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayTrackingHover"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayTrackingPress"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftPx"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftPressPx"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftShadowBlur"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftShadowOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "selectStartPlayAnimMode",
-                        "sliderStartPlayAnimDuration",
-                        "selectStartPlayAnimEasing",
-                        "sliderStartPlayBoldRestWeight",
-                        "sliderStartPlayBoldHoverWeight",
-                        "sliderStartPlayBoldPressWeight",
-                        "sliderStartPlayPulseScale",
-                        "sliderStartPlayPulseInDuration",
-                        "sliderStartPlayPulseOutDuration",
-                        "sliderStartPlayGrowScale",
-                        "sliderStartPlayGrowPressScale",
-                        "sliderStartPlayGlowRadius",
-                        "sliderStartPlayGlowOpacity",
-                        "colorStartPlayGlowColor",
-                        "sliderStartPlayGlowPressRadius",
-                        "sliderStartPlayTrackingHover",
-                        "sliderStartPlayTrackingPress",
-                        "sliderStartPlayLiftPx",
-                        "sliderStartPlayLiftPressPx",
-                        "sliderStartPlayLiftShadowBlur",
-                        "sliderStartPlayLiftShadowOpacity"
-                      ],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              ]
-            }
           }
         ],
         "rowKeys": [
@@ -6341,399 +5830,32 @@
                 ]
               }
             ]
+          }
+        ]
+      },
+      {
+        "key": "desktop:Startup",
+        "items": [
+          {
+            "type": "row",
+            "key": "sliderStartOverlayOpacity"
           },
           {
-            "key": "desktop:Startup",
-            "items": [
-              {
-                "type": "row",
-                "key": "sliderStartOverlayOpacity"
-              },
-              {
-                "type": "row",
-                "key": "colorStartOverlay"
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Start Button",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderStartPlaySize"
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:Start Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "selectStartPlayAnimMode"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayAnimDuration"
-                          },
-                          {
-                            "type": "row",
-                            "key": "selectStartPlayAnimEasing"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayBoldRestWeight"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayBoldHoverWeight"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayBoldPressWeight"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayPulseScale"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayPulseInDuration"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayPulseOutDuration"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGrowScale"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGrowPressScale"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGlowRadius"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGlowOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "colorStartPlayGlowColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayGlowPressRadius"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayTrackingHover"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayTrackingPress"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftPx"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftPressPx"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftShadowBlur"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderStartPlayLiftShadowOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "selectStartPlayAnimMode",
-                          "sliderStartPlayAnimDuration",
-                          "selectStartPlayAnimEasing",
-                          "sliderStartPlayBoldRestWeight",
-                          "sliderStartPlayBoldHoverWeight",
-                          "sliderStartPlayBoldPressWeight",
-                          "sliderStartPlayPulseScale",
-                          "sliderStartPlayPulseInDuration",
-                          "sliderStartPlayPulseOutDuration",
-                          "sliderStartPlayGrowScale",
-                          "sliderStartPlayGrowPressScale",
-                          "sliderStartPlayGlowRadius",
-                          "sliderStartPlayGlowOpacity",
-                          "colorStartPlayGlowColor",
-                          "sliderStartPlayGlowPressRadius",
-                          "sliderStartPlayTrackingHover",
-                          "sliderStartPlayTrackingPress",
-                          "sliderStartPlayLiftPx",
-                          "sliderStartPlayLiftPressPx",
-                          "sliderStartPlayLiftShadowBlur",
-                          "sliderStartPlayLiftShadowOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderStartPlaySize"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "desktop:Start Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "selectStartPlayAnimMode"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayAnimDuration"
-                        },
-                        {
-                          "type": "row",
-                          "key": "selectStartPlayAnimEasing"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayBoldRestWeight"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayBoldHoverWeight"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayBoldPressWeight"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayPulseScale"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayPulseInDuration"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayPulseOutDuration"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGrowScale"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGrowPressScale"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGlowRadius"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGlowOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "colorStartPlayGlowColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGlowPressRadius"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayTrackingHover"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayTrackingPress"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftPx"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftPressPx"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftShadowBlur"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftShadowOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "selectStartPlayAnimMode",
-                        "sliderStartPlayAnimDuration",
-                        "selectStartPlayAnimEasing",
-                        "sliderStartPlayBoldRestWeight",
-                        "sliderStartPlayBoldHoverWeight",
-                        "sliderStartPlayBoldPressWeight",
-                        "sliderStartPlayPulseScale",
-                        "sliderStartPlayPulseInDuration",
-                        "sliderStartPlayPulseOutDuration",
-                        "sliderStartPlayGrowScale",
-                        "sliderStartPlayGrowPressScale",
-                        "sliderStartPlayGlowRadius",
-                        "sliderStartPlayGlowOpacity",
-                        "colorStartPlayGlowColor",
-                        "sliderStartPlayGlowPressRadius",
-                        "sliderStartPlayTrackingHover",
-                        "sliderStartPlayTrackingPress",
-                        "sliderStartPlayLiftPx",
-                        "sliderStartPlayLiftPressPx",
-                        "sliderStartPlayLiftShadowBlur",
-                        "sliderStartPlayLiftShadowOpacity"
-                      ],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              }
-            ],
-            "rowKeys": [
-              "sliderStartOverlayOpacity",
-              "colorStartOverlay"
-            ],
-            "subgroups": [
-              {
-                "key": "desktop:Start Button",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "sliderStartPlaySize"
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "desktop:Start Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "selectStartPlayAnimMode"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayAnimDuration"
-                        },
-                        {
-                          "type": "row",
-                          "key": "selectStartPlayAnimEasing"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayBoldRestWeight"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayBoldHoverWeight"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayBoldPressWeight"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayPulseScale"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayPulseInDuration"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayPulseOutDuration"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGrowScale"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGrowPressScale"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGlowRadius"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGlowOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "colorStartPlayGlowColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayGlowPressRadius"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayTrackingHover"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayTrackingPress"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftPx"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftPressPx"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftShadowBlur"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderStartPlayLiftShadowOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "selectStartPlayAnimMode",
-                        "sliderStartPlayAnimDuration",
-                        "selectStartPlayAnimEasing",
-                        "sliderStartPlayBoldRestWeight",
-                        "sliderStartPlayBoldHoverWeight",
-                        "sliderStartPlayBoldPressWeight",
-                        "sliderStartPlayPulseScale",
-                        "sliderStartPlayPulseInDuration",
-                        "sliderStartPlayPulseOutDuration",
-                        "sliderStartPlayGrowScale",
-                        "sliderStartPlayGrowPressScale",
-                        "sliderStartPlayGlowRadius",
-                        "sliderStartPlayGlowOpacity",
-                        "colorStartPlayGlowColor",
-                        "sliderStartPlayGlowPressRadius",
-                        "sliderStartPlayTrackingHover",
-                        "sliderStartPlayTrackingPress",
-                        "sliderStartPlayLiftPx",
-                        "sliderStartPlayLiftPressPx",
-                        "sliderStartPlayLiftShadowBlur",
-                        "sliderStartPlayLiftShadowOpacity"
-                      ],
-                      "subgroups": []
-                    }
-                  }
-                ],
-                "rowKeys": [
-                  "sliderStartPlaySize"
-                ],
-                "subgroups": [
-                  {
+            "type": "row",
+            "key": "colorStartOverlay"
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Start Button",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderStartPlaySize"
+                },
+                {
+                  "type": "group",
+                  "section": {
                     "key": "desktop:Start Button Animation",
                     "items": [
                       {
@@ -6846,7 +5968,374 @@
                     ],
                     "subgroups": []
                   }
-                ]
+                }
+              ],
+              "rowKeys": [
+                "sliderStartPlaySize"
+              ],
+              "subgroups": [
+                {
+                  "key": "desktop:Start Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectStartPlayAnimMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectStartPlayAnimEasing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayBoldRestWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayBoldHoverWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayBoldPressWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayPulseScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayPulseInDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayPulseOutDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGrowScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGrowPressScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGlowRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGlowOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorStartPlayGlowColor"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGlowPressRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayTrackingHover"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayTrackingPress"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayLiftPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayLiftPressPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayLiftShadowBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayLiftShadowOpacity"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectStartPlayAnimMode",
+                    "sliderStartPlayAnimDuration",
+                    "selectStartPlayAnimEasing",
+                    "sliderStartPlayBoldRestWeight",
+                    "sliderStartPlayBoldHoverWeight",
+                    "sliderStartPlayBoldPressWeight",
+                    "sliderStartPlayPulseScale",
+                    "sliderStartPlayPulseInDuration",
+                    "sliderStartPlayPulseOutDuration",
+                    "sliderStartPlayGrowScale",
+                    "sliderStartPlayGrowPressScale",
+                    "sliderStartPlayGlowRadius",
+                    "sliderStartPlayGlowOpacity",
+                    "colorStartPlayGlowColor",
+                    "sliderStartPlayGlowPressRadius",
+                    "sliderStartPlayTrackingHover",
+                    "sliderStartPlayTrackingPress",
+                    "sliderStartPlayLiftPx",
+                    "sliderStartPlayLiftPressPx",
+                    "sliderStartPlayLiftShadowBlur",
+                    "sliderStartPlayLiftShadowOpacity"
+                  ],
+                  "subgroups": []
+                }
+              ]
+            }
+          }
+        ],
+        "rowKeys": [
+          "sliderStartOverlayOpacity",
+          "colorStartOverlay"
+        ],
+        "subgroups": [
+          {
+            "key": "desktop:Start Button",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderStartPlaySize"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Start Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectStartPlayAnimMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectStartPlayAnimEasing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayBoldRestWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayBoldHoverWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayBoldPressWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayPulseScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayPulseInDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayPulseOutDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGrowScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGrowPressScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGlowRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGlowOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorStartPlayGlowColor"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayGlowPressRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayTrackingHover"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayTrackingPress"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayLiftPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayLiftPressPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayLiftShadowBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderStartPlayLiftShadowOpacity"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectStartPlayAnimMode",
+                    "sliderStartPlayAnimDuration",
+                    "selectStartPlayAnimEasing",
+                    "sliderStartPlayBoldRestWeight",
+                    "sliderStartPlayBoldHoverWeight",
+                    "sliderStartPlayBoldPressWeight",
+                    "sliderStartPlayPulseScale",
+                    "sliderStartPlayPulseInDuration",
+                    "sliderStartPlayPulseOutDuration",
+                    "sliderStartPlayGrowScale",
+                    "sliderStartPlayGrowPressScale",
+                    "sliderStartPlayGlowRadius",
+                    "sliderStartPlayGlowOpacity",
+                    "colorStartPlayGlowColor",
+                    "sliderStartPlayGlowPressRadius",
+                    "sliderStartPlayTrackingHover",
+                    "sliderStartPlayTrackingPress",
+                    "sliderStartPlayLiftPx",
+                    "sliderStartPlayLiftPressPx",
+                    "sliderStartPlayLiftShadowBlur",
+                    "sliderStartPlayLiftShadowOpacity"
+                  ],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "sliderStartPlaySize"
+            ],
+            "subgroups": [
+              {
+                "key": "desktop:Start Button Animation",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "selectStartPlayAnimMode"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayAnimDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectStartPlayAnimEasing"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayBoldRestWeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayBoldHoverWeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayBoldPressWeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayPulseScale"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayPulseInDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayPulseOutDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayGrowScale"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayGrowPressScale"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayGlowRadius"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayGlowOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorStartPlayGlowColor"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayGlowPressRadius"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayTrackingHover"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayTrackingPress"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayLiftPx"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayLiftPressPx"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayLiftShadowBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderStartPlayLiftShadowOpacity"
+                  }
+                ],
+                "rowKeys": [
+                  "selectStartPlayAnimMode",
+                  "sliderStartPlayAnimDuration",
+                  "selectStartPlayAnimEasing",
+                  "sliderStartPlayBoldRestWeight",
+                  "sliderStartPlayBoldHoverWeight",
+                  "sliderStartPlayBoldPressWeight",
+                  "sliderStartPlayPulseScale",
+                  "sliderStartPlayPulseInDuration",
+                  "sliderStartPlayPulseOutDuration",
+                  "sliderStartPlayGrowScale",
+                  "sliderStartPlayGrowPressScale",
+                  "sliderStartPlayGlowRadius",
+                  "sliderStartPlayGlowOpacity",
+                  "colorStartPlayGlowColor",
+                  "sliderStartPlayGlowPressRadius",
+                  "sliderStartPlayTrackingHover",
+                  "sliderStartPlayTrackingPress",
+                  "sliderStartPlayLiftPx",
+                  "sliderStartPlayLiftPressPx",
+                  "sliderStartPlayLiftShadowBlur",
+                  "sliderStartPlayLiftShadowOpacity"
+                ],
+                "subgroups": []
               }
             ]
           }
@@ -13577,7 +13066,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": false,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:New Group (3)": true,
     "desktop:New Group (4)": true,
     "desktop:New Group (5)": true,
@@ -13603,7 +13092,7 @@
     "desktop:Outline": false,
     "desktop:Artist": false,
     "desktop:Album & Date": true,
-    "desktop:Startup": true,
+    "desktop:Startup": false,
     "desktop:Start Button": false,
     "desktop:Start Button Animation": false,
     "desktop:New Group": true,
