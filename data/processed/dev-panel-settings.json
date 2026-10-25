@@ -303,9 +303,10 @@
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
     "buttonRunStartup": "",
-    "sliderStartOverlayOpacity": 0.52,
+    "sliderStartOverlayOpacity": 0.51,
     "sliderStartFadeMs": 300,
     "colorStartOverlay": "#0d0f12",
+    "checkboxStartCenterOnCover": true,
     "checkboxStartButtonEnabled": true,
     "sliderStartPlaySize": 64,
     "checkboxStartTransitionAfterRelease": true,
@@ -8373,6 +8374,10 @@
           {
             "type": "row",
             "key": "sliderStartFadeMs"
+          },
+          {
+            "type": "row",
+            "key": "checkboxStartCenterOnCover"
           }
         ],
         "rowKeys": [
@@ -8380,7 +8385,8 @@
           "sliderStartOverlayOpacity",
           "colorStartOverlay",
           "checkboxStartTransitionAfterRelease",
-          "sliderStartFadeMs"
+          "sliderStartFadeMs",
+          "checkboxStartCenterOnCover"
         ],
         "subgroups": [
           {
@@ -15585,7 +15591,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:Text": false,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -15627,7 +15633,7 @@
     "desktop:Scale Numbers": false,
     "desktop:Ticks": false,
     "desktop:Song Add Date": true,
-    "desktop:Startup": true,
+    "desktop:Startup": false,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
     "mobile:Dev Panel": true,
