@@ -4113,14 +4113,10 @@
     const CURVE_MAX_POINTS_DEFAULT = 5;
     const CURVE_HIT_RADIUS_PX_DEFAULT = 16; // vs. the 5px visual dot
     const CURVE_HANDLE_REMOVE_THRESHOLD_PX = 6;
-    // Add/delete gestures, direct request 2026-09-28: desktop uses
-    // double-click (background) to add and right-click (a point) to
-    // delete; touch has no right-click, so mobile uses double-tap to add
-    // and triple-tap (a point) to delete instead. CURVE_TAP_WINDOW_MS is
-    // the max gap between taps to still count as the same sequence —
-    // matches typical OS double-tap timing, a judgment call, not a
-    // measurement.
-    const CURVE_TAP_WINDOW_MS = 350;
+    // Add/delete/set gestures, matched to Handy Dandies (2026-10-25, direct
+    // request): a single click on empty graph adds a node; double-click a
+    // node (double-tap on touch) deletes it; right-click a node (triple-tap
+    // on touch) sets it to 1. Touch assist: attachCurveTouchAssist().
     const CURVE_BG_OPACITY_DEFAULT = 0.15;
     function curveCatmullRomY(y0, y1, y2, y3, t) {
         const t2 = t * t, t3 = t2 * t;
@@ -4328,6 +4324,111 @@
         { value: 'logarithmic', text: 'Logarithmic' },
         { value: 'elastic', text: 'Elastic (Ease In-Out)' },
     ];
+    // Touch assist for the curve editor (ported from Handy Dandies'
+    // attachCurveTouchAssist(), 2026-10-25, direct request "make sure SPOTTY
+    // has the same"). On touch, a finger that lands a little off a node or
+    // bezier handle is passed to that element as if it had hit it, a tap
+    // never ADDS a node while one is within reach, two quick taps on a node
+    // delete it (one double-tap window later, so a third tap can still
+    // cancel it), and a third quick tap sets it to 1. Mouse input is never
+    // touched. The radii are screen-px judgment calls, not measurements.
+    const CURVE_TOUCH_POINT_RADIUS_PX = 30;
+    const CURVE_TOUCH_POINT_CORE_PX = 14; // inside this a node always wins over a handle
+    const CURVE_TOUCH_HANDLE_RADIUS_PX = 26; // a bezier handle the user has made (real)
+    const CURVE_TOUCH_PREVIEW_HANDLE_RADIUS_PX = 20; // the dim preview handle, kept smaller so a tap meant for the node does not make one
+    const CURVE_DOUBLE_TAP_MS = 400;
+    const CURVE_TAP_MAX_MOVE_PX = 12;
+    const CURVE_TAP_MAX_MS = 350;
+    function attachCurveTouchAssist(svg, api) {
+        // api: { points: () => [{ el, p }], handles: () => [{ el, p, kind, real }], remove: (p) => void, removable: (p) => boolean, setTop: (p) => void }
+        const st = { redispatching: false, suppressClickUntil: 0, lastTouchDownAt: 0, lastTap: null, down: null, pendingDelete: null };
+        const center = (el) => { const r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; };
+        function pick(x, y) {
+            let best = null, bestScore = Infinity;
+            api.points().forEach((h) => {
+                const c = center(h.el), d = Math.hypot(x - c.x, y - c.y);
+                if (d > CURVE_TOUCH_POINT_RADIUS_PX) return;
+                const score = d <= CURVE_TOUCH_POINT_CORE_PX ? d / 1000 - 1 : d / CURVE_TOUCH_POINT_RADIUS_PX;
+                if (score < bestScore) { bestScore = score; best = { el: h.el, p: h.p, kind: 'point' }; }
+            });
+            api.handles().forEach((h) => {
+                const c = center(h.el), d = Math.hypot(x - c.x, y - c.y), r = h.real ? CURVE_TOUCH_HANDLE_RADIUS_PX : CURVE_TOUCH_PREVIEW_HANDLE_RADIUS_PX;
+                if (d > r) return;
+                const score = d / r;
+                if (score < bestScore) { bestScore = score; best = { el: h.el, p: h.p, kind: 'handle' }; }
+            });
+            return best;
+        }
+        function onUp(e) {
+            window.removeEventListener('pointerup', onUp);
+            window.removeEventListener('pointercancel', onUp);
+            const d = st.down;
+            st.down = null;
+            if (!d || e.type === 'pointercancel') return;
+            const now = performance.now();
+            const isTap = Math.hypot(e.clientX - d.x, e.clientY - d.y) <= CURVE_TAP_MAX_MOVE_PX && now - d.t <= CURVE_TAP_MAX_MS;
+            if (!isTap || !d.p) { st.lastTap = null; return; }
+            const prev = st.lastTap;
+            if (prev && prev.p === d.p && now - prev.t <= CURVE_DOUBLE_TAP_MS) {
+                if (prev.count >= 2) {
+                    // third quick tap: Y = 1, and the delete the second tap scheduled is cancelled
+                    if (st.pendingDelete) { clearTimeout(st.pendingDelete.timer); st.pendingDelete = null; }
+                    st.lastTap = null;
+                    st.suppressClickUntil = now + 600;
+                    if (api.setTop) api.setTop(d.p);
+                    return;
+                }
+                // second quick tap: delete the node, but one double-tap window later, in case a third tap follows
+                st.lastTap = { p: d.p, t: now, count: 2 };
+                const p2 = d.p;
+                st.pendingDelete = {
+                    p: p2,
+                    timer: setTimeout(() => {
+                        st.pendingDelete = null;
+                        st.lastTap = null;
+                        if (api.removable(p2)) { st.suppressClickUntil = performance.now() + 600; api.remove(p2); }
+                    }, CURVE_DOUBLE_TAP_MS)
+                };
+                return;
+            }
+            st.lastTap = { p: d.p, t: now, count: 1 };
+        }
+        svg.addEventListener('pointerdown', (e) => {
+            if (st.redispatching || e.pointerType !== 'touch' || !e.isPrimary) return;
+            const now = performance.now();
+            st.lastTouchDownAt = now;
+            const onPoint = api.points().find((h) => h.el === e.target);
+            const onHandle = api.handles().find((h) => h.el === e.target);
+            let tapPoint = null;
+            if (onPoint) tapPoint = onPoint.p;
+            else if (!onHandle) {
+                const hit = pick(e.clientX, e.clientY);
+                if (hit) {
+                    if (hit.kind === 'point') tapPoint = hit.p;
+                    st.redispatching = true;
+                    try {
+                        hit.el.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true, clientX: e.clientX, clientY: e.clientY, pointerId: e.pointerId, pointerType: 'touch', isPrimary: true, button: 0, buttons: 1 }));
+                    } finally { st.redispatching = false; }
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            }
+            st.down = { x: e.clientX, y: e.clientY, t: now, p: tapPoint };
+            window.addEventListener('pointerup', onUp);
+            window.addEventListener('pointercancel', onUp);
+        }, true);
+        return {
+            // true for ~0.8 s after a touch: a dblclick / contextmenu raised by that touch (a double-tap, a long-press) is not a mouse double-click / right-click
+            recentTouch() { return performance.now() - st.lastTouchDownAt < 800; },
+            // true when the click that follows a touch must NOT add a node
+            blocksAdd(clickEv) {
+                const now = performance.now();
+                if (now < st.suppressClickUntil) return true;
+                if (!(clickEv.pointerType === 'touch' || now - st.lastTouchDownAt < 800)) return false;
+                return !!pick(clickEv.clientX, clickEv.clientY);
+            }
+        };
+    }
     function buildCurveEditorRow(ctrl) {
         // Corrected 2026-10-20 (direct request): a curve USED to be
         // treated like list-picker (never per-device) on the reasoning
@@ -4490,6 +4591,31 @@
         }
         let circles = [];
         let handleEls = [];
+        // Rebuilt by redraw(): every node hit circle, every handle marker (real and preview). The grab logic and the touch assist read these.
+        let pointHits = [];
+        let allHandleHits = [];
+
+        function pointRemovable(p) { const idx = points.indexOf(p); return points.length > 2 && idx > 0 && idx < points.length - 1; }
+        function removePointObj(p) {
+            if (!pointRemovable(p)) return;
+            points.splice(points.indexOf(p), 1);
+            redraw();
+            commitPoints();
+        }
+        // Sets one node to 1 (top of the graph). SPOTTY's curves have no Min / Max range, so the value 1 is the top of the Y axis.
+        function setPointToTop(p) {
+            if (points.indexOf(p) < 0 || p.y === 1) return;
+            p.y = 1;
+            redraw();
+            commitPoints();
+        }
+        const touchAssist = attachCurveTouchAssist(svg, {
+            points: () => pointHits,
+            handles: () => allHandleHits,
+            remove: removePointObj,
+            removable: pointRemovable,
+            setTop: setPointToTop
+        });
 
         function commitPoints() {
             points.sort((a, b) => a.x - b.x);
@@ -4534,6 +4660,8 @@
             handleEls = [];
             circles.forEach(c => svg.removeChild(c));
             circles = [];
+            pointHits = [];
+            allHandleHits = [];
             points.forEach((p, i) => {
                 // Handles are always shown/grabbable, per direct request
                 // 2026-09-28 ("i want bezier handles to be visible at all
@@ -4562,6 +4690,7 @@
                 hit.setAttribute('cx', 0); hit.setAttribute('cy', 0); hit.setAttribute('r', hitRadius);
                 hit.setAttribute('fill', 'transparent');
                 hit.style.cursor = 'grab';
+                pointHits.push({ el: hit, p });
                 let dragged = false;
                 // Delete via right-click (desktop) or triple-tap (touch —
                 // no right-click gesture exists), per direct request
@@ -4570,14 +4699,27 @@
                 // dblclick listener below); keeping both would make
                 // double-clicking a point ambiguous between add and
                 // delete.
-                let pointTapCount = 0, pointTapTimer = null;
                 hit.addEventListener('pointerdown', downEv => {
                     if (downEv.altKey) { startHandleDrag(p, i, 'h1', downEv); return; }
                     if (downEv.shiftKey) { startHandleDrag(p, i, 'h2', downEv); return; }
+                    // A bezier handle near this node is grabbed instead of the node (ported from Handy Dandies, same reach: 7 px mouse / 12 px touch). The node's hit circle is painted
+                    // over the handle marker, so without this the circle always wins where they overlap. The handle wins when the click is nearer to it than to the node, or within the reach.
+                    {
+                        const hr = hit.getBoundingClientRect();
+                        const pointD = Math.hypot(downEv.clientX - (hr.left + hr.width / 2), downEv.clientY - (hr.top + hr.height / 2));
+                        const grabPx = downEv.pointerType === 'touch' ? 12 : 7;
+                        let best = null, bestD = Infinity;
+                        allHandleHits.forEach((h) => {
+                            if (!h.real) return;
+                            const r = h.el.getBoundingClientRect();
+                            const d = Math.hypot(downEv.clientX - (r.left + r.width / 2), downEv.clientY - (r.top + r.height / 2));
+                            if (d <= Math.max(grabPx, pointD) && d < bestD) { bestD = d; best = h; }
+                        });
+                        if (best) { startHandleDrag(best.p, best.i, best.kind, downEv); return; }
+                    }
                     downEv.stopPropagation();
                     dragged = false;
                     const isEndpoint = i === 0 || i === points.length - 1;
-                    const pointerType = downEv.pointerType;
                     function onMove(moveEv) {
                         const rect = svg.getBoundingClientRect();
                         if (rect.width <= 0 || rect.height <= 0) return;
@@ -4590,28 +4732,24 @@
                         window.removeEventListener('pointermove', onMove);
                         window.removeEventListener('pointerup', onUp);
                         if (dragged) { commitPoints(); return; }
-                        if (pointerType === 'touch') {
-                            pointTapCount++;
-                            clearTimeout(pointTapTimer);
-                            if (pointTapCount >= 3) {
-                                pointTapCount = 0;
-                                deletePointIfRemovable();
-                            } else {
-                                pointTapTimer = setTimeout(() => { pointTapCount = 0; }, CURVE_TAP_WINDOW_MS);
-                            }
-                        }
                     }
                     window.addEventListener('pointermove', onMove);
                     window.addEventListener('pointerup', onUp);
                 });
-                function deletePointIfRemovable() {
-                    if (points.length > 2 && i !== 0 && i !== points.length - 1) {
-                        points.splice(points.indexOf(p), 1);
-                        redraw();
-                        commitPoints();
-                    }
-                }
-                hit.addEventListener('contextmenu', ctxEv => { ctxEv.preventDefault(); ctxEv.stopPropagation(); deletePointIfRemovable(); });
+                function deletePointIfRemovable() { removePointObj(p); }
+                // Double-click deletes (desktop); on touch the touch assist deletes on a double-tap itself, so the browser's dblclick is ignored there.
+                hit.addEventListener('dblclick', dblEv => {
+                    dblEv.stopPropagation();
+                    if (touchAssist.recentTouch()) return;
+                    deletePointIfRemovable();
+                });
+                // Right-click sets the node to 1 (top of the graph), ported from Handy Dandies. A touch long-press also raises contextmenu, so that is excluded.
+                hit.addEventListener('contextmenu', ctxEv => {
+                    ctxEv.preventDefault();
+                    ctxEv.stopPropagation();
+                    if (touchAssist.recentTouch()) return;
+                    setPointToTop(p);
+                });
                 pointG.appendChild(hit);
                 const dot = document.createElementNS(svgNS, 'circle');
                 dot.setAttribute('cx', 0); dot.setAttribute('cy', 0); dot.setAttribute('r', 5);
@@ -4655,6 +4793,7 @@
                     marker.setAttribute('fill-opacity', isReal ? '1' : '0.35');
                     marker.style.cursor = 'grab';
                     marker.addEventListener('pointerdown', downEv => startHandleDrag(p, i, kind, downEv));
+                    allHandleHits.push({ el: marker, p, i, kind, real: isReal });
                     markerG.appendChild(marker);
                     svg.appendChild(markerG);
                     handleEls.push(markerG);
@@ -4674,21 +4813,11 @@
         // same reasoning as the point-delete gestures above), per direct
         // request 2026-09-28. A single click/tap on empty space no
         // longer adds anything.
-        svg.addEventListener('dblclick', clickEv => {
+        // A single click on empty graph adds a point (ported from Handy Dandies). On touch, a tap within reach of a node or handle never adds one (the touch assist grabs or deletes it instead).
+        svg.addEventListener('click', clickEv => {
             if (clickEv.target.tagName === 'circle') return;
+            if (touchAssist.blocksAdd(clickEv)) return;
             tryAddPointAt(clickEv.clientX, clickEv.clientY);
-        });
-        let bgTapCount = 0, bgTapTimer = null;
-        svg.addEventListener('pointerup', upEv => {
-            if (upEv.pointerType !== 'touch' || upEv.target.tagName === 'circle') return;
-            bgTapCount++;
-            clearTimeout(bgTapTimer);
-            if (bgTapCount >= 2) {
-                bgTapCount = 0;
-                tryAddPointAt(upEv.clientX, upEv.clientY);
-            } else {
-                bgTapTimer = setTimeout(() => { bgTapCount = 0; }, CURVE_TAP_WINDOW_MS);
-            }
         });
         opacitySlider.addEventListener('input', () => {
             bgOpacity = parseFloat(opacitySlider.value);

@@ -708,6 +708,18 @@ app); it was offered on 2026-10-24 and not chosen, and is still available.
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
+2026-10-25  -  (Curve editor matched to Handy Dandies)
+
+Direct request: "take a look at our curve editor functionality in Handy Dandies, and make sure SPOTTY EXPOTTY has the same", including the bezier grabbing tolerances. Changes in buildCurveEditorRow() (src/devpanel/devPanel.js):
+- Handle-over-node grab: a bezier handle near a node is grabbed before the node, within 7 px (mouse) / 12 px (touch), or nearer to the handle than to the node. Previously paint order alone decided it.
+- Touch assist (new attachCurveTouchAssist(), ported from Handy Dandies): a touch near a node or handle is passed to it; a tap never adds a node within reach; two quick taps delete a node; a third quick tap sets it to 1. Reach radii 30 / 14 / 26 / 20 px and timings 400 / 350 ms are copied from Handy Dandies (judgment calls there, not measurements here).
+- Add: a single click on empty graph adds a node (was double-click, with a double-tap on touch).
+- Delete: double-click a node (double-tap on touch). Was right-click; double-click previously did nothing.
+- Set to 1: right-click a node (triple-tap on touch) sets Y to 1. Was not present. SPOTTY curves have no Min / Max range, so 1 is the top of the graph.
+Kept from SPOTTY: the extra interpolation methods (Catmull-Rom, natural spline, easing curves), the red node dot, and no hint text under the graph (no-prose rule, CLAUDE.md §12j). Reverses SPOTTY's 2026-09-28 gesture requests (double-click to add, right-click to delete); that choice was made by the user in this session.
+Not verified in a browser: per the standing rule against running JavaScript in the built-in browser, only node --check was run.
+
+================================================================================
 APPEND-ONLY. Never rewrite, reorder, or delete a prior entry, even to fix
 formatting (CLAUDE.md §4a / Never-Skip rule #3). If an entry needs a
 correction, add a new entry noting the correction rather than editing the
