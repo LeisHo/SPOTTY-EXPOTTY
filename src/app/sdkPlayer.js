@@ -51,7 +51,7 @@ function onState(state) {
     const ended = lastState && !lastState.paused && state.paused && state.position === 0 && lastState.track_window.current_track
         && state.track_window.previous_tracks.some(t => t.id === lastState.track_window.current_track.id) && Date.now() - lastEndedAt > 2000;
     lastState = state; lastStateAt = performance.now();
-    cb.onState(!state.paused, { id: cur && cur.id, position: state.position, duration: state.duration });
+    cb.onState(!state.paused, { id: cur && cur.id, linkedId: cur && cur.linked_from && cur.linked_from.id, position: state.position, duration: state.duration });
     if (ended) { lastEndedAt = Date.now(); note('song ended'); cb.onEnded(); }
 }
 
@@ -81,7 +81,22 @@ export async function sdkPlay(trackId, positionMs = 0) {
 export const sdkPause = () => { if (ready) player.pause().catch(() => {}); };
 export const sdkResume = () => { if (ready) player.resume().catch(() => {}); };
 export const sdkSeek = ms => { if (ready) player.seek(ms).catch(() => {}); };
-export function sdkSetVolume(v) { volume = Math.min(1, Math.max(0, v)); if (player) player.setVolume(volume).catch(() => {}); }
+let fadeTimer = 0, quiet = false;
+export function sdkSetVolume(v) { volume = Math.min(1, Math.max(0, v)); if (player && !quiet) player.setVolume(volume).catch(() => {}); } // while silent for a crossfade only the stored level changes
+// Handoff crossfade: the next song starts with the SDK volume at 0 (the preview is still playing), then sdkFadeIn() brings it up to the volume slider's level.
+export function sdkPrepareFade() { if (!ready || !player) return false; clearInterval(fadeTimer); quiet = true; player.setVolume(0).catch(() => {}); return true; }
+export function sdkFadeIn(ms) {
+    if (!player) return;
+    clearInterval(fadeTimer);
+    if (!quiet || ms <= 0) { quiet = false; player.setVolume(volume).catch(() => {}); return; }
+    const t0 = performance.now();
+    fadeTimer = setInterval(() => {
+        const f = Math.min(1, (performance.now() - t0) / ms);
+        player.setVolume(volume * f).catch(() => {});
+        if (f >= 1) { clearInterval(fadeTimer); quiet = false; }
+    }, 30);
+}
+export function sdkRestoreVolume() { clearInterval(fadeTimer); if (quiet) { quiet = false; if (player) player.setVolume(volume).catch(() => {}); } }
 // Browsers want this inside a click / key press before audio may start.
 export function sdkActivate() { if (player && player.activateElement) { try { player.activateElement(); } catch (e) { /* ignore */ } } }
 // What the SDK says is loaded right now (position extrapolated while playing): used by the on-screen status box.

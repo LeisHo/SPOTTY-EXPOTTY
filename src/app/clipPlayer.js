@@ -142,14 +142,15 @@ export const clipPosition = () => (current && current.audio ? current.audio.curr
 // True once the preview has been started (play() called and not paused since).
 export const clipIsPlaying = () => !!(current && current.audio && !current.audio.paused);
 
-export function stopClip() {
+// fadeOverrideMs: fade the clip out over this long instead of the "Clip Fade Out" setting (the handoff crossfade uses it).
+export function stopClip(fadeOverrideMs) {
     token++;
     if (!current) return;
     const p = current;
     current = null;
     logEvent('playback', `CLIP STOP ${p.did}`);
     clearInterval(p.fade);
-    const ms = setting('sliderClipFadeOut');
+    const ms = fadeOverrideMs === undefined ? setting('sliderClipFadeOut') : fadeOverrideMs;
     if (!ms || p.audio.paused) { p.audio.pause(); return; }
     const v0 = p.audio.volume, steps = Math.max(1, Math.round(ms / 10));
     let n = 0;

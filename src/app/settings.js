@@ -47,6 +47,7 @@ export const DEFAULTS = {
     checkboxSnapshotTimeline: true,
     checkboxSnapshotSettings: true,
     sliderHandoffDelay: 600,
+    sliderHandoffCrossfade: 250,
     colorTimelineAccent: '#1db954',
     colorTimelinePlayhead: '#ffffff',
     sliderTimelineBarOpacity: 0.8,

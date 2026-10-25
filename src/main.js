@@ -15,7 +15,7 @@ import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVol
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo } from './app/handoff.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
@@ -597,7 +597,14 @@ async function boot() {
             if (ok) {
                 // The full song starts where the preview is now (+ the Full Song Start Offset), not at 0:00
                 const startMs = Math.max(0, clipPosition() + setting('sliderHandoffStartOffset')) * 1000;
-                previewHold = songs[idx].id; playTrack(songs[idx].id, startMs); handedOff = true;
+                const fadeMs = setting('sliderHandoffCrossfade');
+                if (fadeMs > 0) {
+                    // Crossfade: the preview keeps playing; the full song starts silent and, once it is audible (SDK / iframe report it playing),
+                    // it fades in while the preview fades out over fadeMs. No silence between the two.
+                    previewHold = null;
+                    playTrackCrossfade(songs[idx].id, fadeMs, ms => stopClip(ms), startMs);
+                } else { previewHold = songs[idx].id; playTrack(songs[idx].id, startMs); } // 0 = hard cut: the preview still holds until the song plays
+                handedOff = true;
             }
             else stopClip();
         };
