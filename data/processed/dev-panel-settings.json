@@ -336,7 +336,7 @@
     "left": 26,
     "top": 6,
     "width": 343,
-    "height": 207
+    "height": 312
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -15433,7 +15433,7 @@
     "desktop:Outline": true,
     "desktop:Artist": true,
     "desktop:Album & Date": true,
-    "desktop:New Group (7)": false,
+    "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:Play Button": false,
     "desktop:Play Button Animation": false,
@@ -15483,21 +15483,21 @@
     "mobile:Debug": true,
     "mobile:Snapshot": false,
     "mobile:UI Layout": false,
-    "mobile:Text": false,
+    "mobile:Text": true,
     "mobile:Font": false,
     "mobile:Song Title": false,
     "mobile:Track Title Button Animation": false,
     "mobile:Artist": false,
     "mobile:Album & Date": false,
     "mobile:Outline": false,
-    "mobile:New Group (7)": false,
+    "mobile:New Group (7)": true,
     "mobile:Volume Button": false,
     "mobile:Play Button": false,
     "mobile:Play Button Animation": false,
     "mobile:Next And Last Song Buttons": false,
     "mobile:Next And Last Button Animation": false,
     "mobile:Shuffle Button": false,
-    "mobile:Background": false,
+    "mobile:Background": true,
     "mobile:Album Cover": false,
     "mobile:Shadows": false,
     "mobile:Album Cover Shadow": false,
@@ -16184,7 +16184,8 @@
       "sliderAlbumColorSaturation": false,
       "sliderAlbumColorBrightness": false,
       "checkboxAlbumColorTransition": false,
-      "sliderAlbumColorTransitionMs": false
+      "sliderAlbumColorTransitionMs": false,
+      "sliderCoverOffsetY": true
     },
     "landscape": {}
   },
@@ -16224,7 +16225,8 @@
       "sliderAlbumColorSaturation": 1.25,
       "sliderAlbumColorBrightness": 1.15,
       "checkboxAlbumColorTransition": false,
-      "sliderAlbumColorTransitionMs": 300
+      "sliderAlbumColorTransitionMs": 300,
+      "sliderCoverOffsetY": -99
     },
     "landscape": {}
   },
