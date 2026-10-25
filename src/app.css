@@ -9,7 +9,7 @@
 /* The page is not selectable (so click-drag scrubbing never paints blue selection over the cover or
    timeline), EXCEPT these three text lines, which can be highlighted and copied. A drag that starts
    on them selects text instead of zooming (see inText() in main.js). */
-.spx-title, .spx-artist, .spx-meta { text-align: center; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; cursor: text; }
+.spx-title, .spx-artist, .spx-meta { white-space: pre-line; text-align: center; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; cursor: text; }
 .spx-title a { -webkit-user-drag: none; user-select: text; -webkit-user-select: text; }
 .spx-title ::selection, .spx-artist::selection, .spx-meta::selection { background: #1db95466; }
 .spx-title { font-size: calc(clamp(26px, 5.5vw, 60px) * var(--spx-title-scale)); font-weight: 700; line-height: 1.1; }

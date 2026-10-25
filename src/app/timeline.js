@@ -252,7 +252,7 @@ export function createTimeline(canvas, data) {
         // Only the bar band stretches with the canvas height. The playlist rows and the axis keep a
         // fixed pixel height pinned to the bottom (a short canvas shrinks the rows a little), so
         // making the timeline taller just makes the bars taller, upward.
-        const axisH = 18, dateH = 18, ganttH = Math.min(76, Math.max(20, h * 0.4)), ganttTop = h - axisH - dateH - ganttH, topH = Math.max(12, ganttTop - 4);
+        const axisH = 18, dateH = 18 + Math.max(0, setting('sliderTimelineScaleGap')), ganttH = Math.min(76, Math.max(20, h * 0.4)), ganttTop = h - axisH - dateH - ganttH, topH = Math.max(12, ganttTop - 4);
         const viewEnd = viewStart + span;
         const i0 = lowerBound(vt, viewStart), i1 = lowerBound(vt, viewEnd);
         const accentCss = rgbCss(hexToRgb(accent), baseAlpha);
@@ -432,7 +432,7 @@ export function createTimeline(canvas, data) {
             ctx.fillStyle = playheadColor;
             ctx.font = `bold 13px ${getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif'}`;
             ctx.textAlign = 'center';
-            ctx.fillText(dateLine, w / 2, h - axisH - 4);
+            ctx.fillText(dateLine, w / 2, h - axisH - dateH / 2 + 4.5); // centred in the strip between the graph and the scale text
             ctx.textAlign = 'start';
         }
 

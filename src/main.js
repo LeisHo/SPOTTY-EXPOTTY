@@ -334,7 +334,7 @@ async function boot() {
         link.textContent = cleanTitle(s.n);
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         el('spxArtist').textContent = s.a;
-        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${s.d ? '' : '  ·  no preview clip'}`;
+        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${s.d ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
         timeline.setDateLine(fmtAdded(s.t));
         scheduleCover();
         background.onSongChanged(); // palette-driven modes change with the song even if the cover image did not; fades like a new cover
@@ -498,9 +498,24 @@ async function boot() {
     // Browsers require a user gesture before audio can start. The first click or key press
     // ANYWHERE counts (not just the button), so the overlay can't get stuck behind the dev
     // panel or on a small screen.
+    // Spotify's embedded player plays whole songs only when the browser is logged in to Spotify (Premium); otherwise it plays a
+    // 30 s preview. A page cannot start a login without a click (popups need one), so the FIRST click / key press opens Spotify's own
+    // login page in a small window (at most once per 24 h per browser; dev panel > Spotify Handoff to turn it off). Whether it helped
+    // cannot be detected from here: the embed's iframe is cross-site, so it may still not receive the login cookie.
+    const LOGIN_KEY = 'spxLoginOpenedAt';
+    function openSpotifyLogin() {
+        if (!setting('checkboxSpotifyLoginOnStart')) return;
+        try {
+            const last = +localStorage.getItem(LOGIN_KEY) || 0;
+            if (Date.now() - last < 24 * 3600 * 1000) return;
+            localStorage.setItem(LOGIN_KEY, String(Date.now()));
+        } catch (e) { /* storage blocked: open it anyway */ }
+        try { window.open('https://accounts.spotify.com/login?continue=' + encodeURIComponent('https://open.spotify.com/'), 'spxSpotifyLogin', 'popup=yes,width=480,height=760,noopener'); } catch (e) { /* popup blocked */ }
+    }
     const unlockSound = () => {
         if (isUnlocked()) return;
         unlock();
+        openSpotifyLogin();
         el('spxStart').hidden = true;
         playClip(songs[idx].d);
         schedulePreload();
