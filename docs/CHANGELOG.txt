@@ -678,6 +678,11 @@ unmute 0.6; opacity follows the slider (15 -> 0.15, 100 -> 1) once transitions a
 Not verified: touch.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  00:46 AM (correction)
+
+CORRECTION to the click-to-mute entry above: its header ended "00:46:xx"; measured times are 00:44:53 to 00:46:03 (1m 10s) for the code push.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
