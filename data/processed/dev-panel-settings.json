@@ -31,12 +31,12 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
-    "sliderTimelineHeight": 200,
+    "sliderTimelineHeight": 190,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
     "sliderTimelineScaleGap": 54,
     "sliderPlayheadWidth": 3,
-    "sliderPlayheadHeight": 58,
+    "sliderPlayheadHeight": 57,
     "sliderPlayheadOpacity": 70,
     "sliderPlayheadStartHeight": 63,
     "rangeBarTimelineZoomLimits": "{\"min\":64,\"max\":100}",
@@ -46,7 +46,7 @@
     "sliderScrubLineHoverWidth": 3,
     "sliderScrubLineClickWidth": 3,
     "sliderScrubLineReleaseWidth": 3,
-    "sliderScrubLineHoverOpacity": 100,
+    "sliderScrubLineHoverOpacity": 90,
     "sliderScrubLineClickOpacity": 100,
     "selectTimelineStyle": "density",
     "sliderGlowStemWidth": 2,
@@ -20189,7 +20189,7 @@
             },
             "height": {
               "mode": "fixed",
-              "value": "200px"
+              "value": "190px"
             }
           }
         },
