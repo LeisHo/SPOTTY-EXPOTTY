@@ -384,12 +384,26 @@ async function boot() {
             else if (overflow === 'scale') { st.whiteSpace = 'nowrap'; st.overflow = 'visible'; st.textOverflow = ''; }
             else { st.whiteSpace = setting('checkboxTxt' + p + 'WordWrap') ? 'pre-line' : 'nowrap'; st.overflow = ''; st.textOverflow = ''; }
             st.fontSize = size + 'px';
+            // Scale Down If Multiline (Song Title, Artist): shrink the font until the text wraps to at most the line limit
+            const multi = { SongTitle: 'Title', Artist: 'Artist' }[p];
+            if (multi && overflow !== 'scale' && setting('checkboxScale' + multi + 'Multiline')) {
+                const maxLines = setting('slider' + multi + 'MaxLines');
+                const lineMul = parseFloat(st.lineHeight) || 1.2;
+                let fs = size;
+                for (let i = 0; i < 12; i++) {
+                    const lines = Math.round(node.offsetHeight / (fs * lineMul));
+                    if (lines <= maxLines || fs <= 6) break;
+                    fs = Math.max(6, Math.floor(fs * Math.min(0.98, maxLines / lines)));
+                    st.fontSize = fs + 'px';
+                }
+            }
             if (overflow === 'scale') { // Shrink to Fit: back off from the configured size until it fits
                 let fs = size;
                 while (fs > 6 && node.scrollWidth > node.clientWidth) { fs -= 1; st.fontSize = fs + 'px'; }
             }
         });
     }
+    window.addEventListener('resize', () => applyTextElementStyles()); // the line count depends on the width
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
         applyTextElementStyles();
@@ -426,6 +440,7 @@ async function boot() {
         el('spxStartBtn').hidden = !setting('checkboxStartButtonEnabled');
         el('spxStartBtn').style.setProperty('--spx-start-play-size', setting('sliderStartPlaySize') + 'px');
         el('spxArtist').textContent = artistText(); // live: changing the separator re-joins the current song's artists
+        el('spxApp').style.setProperty('--spx-vol-icon-x', setting('sliderVolIconOffsetX') + 'px');
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
         // Album Cover > Bounding Box: the cover's own box and its centre (see app.css)

@@ -7778,6 +7778,18 @@
         }, elemContent);
         // Artist only: the separator used when a track has several artists (the data stores them joined with ';')
         if (elementName === 'Artist') add({ tab, id: 'textArtistSeparator', type: 'text', label: 'Artist Name Separator:', value: ';' }, elemContent);
+        // Scale Down If Multiline (Song Title and Artist): the line limit is only shown while the checkbox is on
+        const MULTI_KEYS = { 'Song Title': 'Title', 'Artist': 'Artist' };
+        if (MULTI_KEYS[elementName]) {
+            const k = MULTI_KEYS[elementName];
+            const multiRow = add({ tab, id: 'checkboxScale' + k + 'Multiline', type: 'checkbox', label: 'Scale Down If Multiline:', value: false }, elemContent);
+            const maxRow = add({ tab, id: 'slider' + k + 'MaxLines', type: 'slider', label: 'Max Lines (Scales Down Past This):', min: 1, max: 8, step: 1, value: 2 }, elemContent);
+            const multiBox = multiRow.querySelector('input');
+            const syncMaxLines = () => { maxRow.style.display = multiBox.checked ? '' : 'none'; };
+            multiBox.addEventListener('change', syncMaxLines);
+            setInterval(syncMaxLines, 700); // catches the saved state restored after the panel is built
+            syncMaxLines();
+        }
         const outlineSec = createDevGroupElement('Outline', tab);
         elemContent.appendChild(outlineSec);
         const outlineContent = outlineSec.querySelector(':scope > .dev-section-content');
@@ -7986,6 +7998,7 @@
             { tab, group: VB, id: 'checkboxVolumeButtonEnabled', type: 'checkbox', label: 'Enabled (Off = Click The Icon, Default Look)', value: true },
             { tab, group: VB, id: 'sliderVolMutedOpacity', type: 'slider', label: 'Muted Icon Opacity (%):', min: 0, max: 100, step: 1, value: 40 },
             { tab, group: VB, id: 'sliderVolIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 24 },
+            { tab, group: VB, id: 'sliderVolIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: VB, id: 'sliderVolCircleRadius', type: 'slider', label: 'Slider Circle Radius (Px):', min: 2, max: 30, step: 0.5, value: 7 },
             { tab, group: VB, id: 'sliderVolBarWidth', type: 'slider', label: 'Slider Bar Width (Px):', min: 2, max: 40, step: 0.5, value: 8 },
             { tab, group: VB, id: 'sliderVolBarLength', type: 'slider', label: 'Slider Bar Length (Px):', min: 40, max: 500, step: 1, value: 130 },

@@ -87,7 +87,7 @@
 .spx-volume { z-index: 5; display: flex; flex-direction: column; align-items: center; user-select: none;
     /* set from the dev panel (UI Layout > Volume Button) by volume.js */
     --spx-vol-icon: 24px; --spx-vol-r: 7px; --spx-vol-bw: 8px; --spx-vol-bl: 130px; --spx-vol-fill: #1db954; --spx-vol-track: #ffffff; --spx-vol-thumb: #ffffff; }
-.spx-vol-btn { width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px); border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; }
+.spx-vol-btn { width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px); border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; translate: var(--spx-vol-icon-x, 0px) 0; }
 .spx-vol-btn:hover { color: #fff; }
 .spx-vol-btn { transition: opacity .15s; }
 .spx-vol-btn[data-level="mute"] { opacity: var(--spx-vol-muted-opacity, 0.4); } /* dev panel: UI Layout > Volume Button > Muted Icon Opacity */
