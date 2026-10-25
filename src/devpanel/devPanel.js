@@ -7859,8 +7859,17 @@
             { tab, group: TL, id: 'sliderPlayheadHeight', type: 'slider', label: 'Scrub Line Height (% Of Timeline):', min: 5, max: 100, step: 1, value: 100 },
             // Integer-valued dual-handle control, so it is a 0-100 % log scale: 0 = 2 minutes visible, 100 = the whole timeline.
             { tab, group: TL, id: 'rangeBarTimelineZoomLimits', type: 'range-bar', label: 'Zoom Limits (% zoomed out, log scale):', trackMin: 0, trackMax: 100, unit: '%', defaultValue: { min: 0, max: 100 } },
+            { tab, group: 'UI Layout', id: 'buttonOpenLayoutInspector', type: 'button', label: 'Open UI Layout Inspector', skipDeviceCheckbox: true },
+        ];
+        renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_CONTROLS', SPOTTY_CONTROLS);
+
+        // Visual Style: the timeline's style dropdown and the settings that belong to each style, in their own subgroup of Timeline Look
+        const VS = 'Visual Style';
+        findGroupContent(tab, TL, 'renderSpottyDevControls', VS).appendChild(createDevGroupElement(VS, tab));
+        const VS_CONTROLS = [
             {
-                tab, group: TL, id: 'selectTimelineStyle', type: 'select', label: 'Timeline Visual Style:', value: 'none',
+                tab, group: VS, id: 'selectTimelineStyle', type: 'select', label: 'Timeline Visual Style:', value: 'none',
                 options: [
                     { value: 'none', text: 'None (plain bars)' },
                     { value: 'glow', text: 'Glow Stems' },
@@ -7870,28 +7879,27 @@
                 ],
             },
             // settings shown only while their style is selected (see refreshSpottyModeVisibility)
-            { tab, group: TL, id: 'sliderGlowStemWidth', type: 'slider', label: 'Glow Stem Width (Px):', min: 1, max: 10, step: 0.5, value: 2 },
-            { tab, group: TL, id: 'sliderGlowRadius', type: 'slider', label: 'Glow Radius (Px):', min: 0, max: 50, step: 1, value: 12 },
-            { tab, group: TL, id: 'sliderGlowDotSize', type: 'slider', label: 'Glow Dot Size (Px):', min: 0, max: 14, step: 0.5, value: 4 },
-            { tab, group: TL, id: 'sliderGlowIntensity', type: 'slider', label: 'Glow Intensity (x):', min: 0, max: 1, step: 0.05, value: 0.8 },
-            { tab, group: TL, id: 'sliderDensitySmoothing', type: 'slider', label: 'Density Smoothing (Px):', min: 2, max: 80, step: 1, value: 14 },
-            { tab, group: TL, id: 'sliderDensityFillOpacity', type: 'slider', label: 'Density Fill Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.55 },
-            { tab, group: TL, id: 'sliderDensityOutlineWidth', type: 'slider', label: 'Density Outline Width (Px):', min: 0, max: 8, step: 0.5, value: 2 },
-            { tab, group: TL, id: 'sliderDensityColorBlend', type: 'slider', label: 'Color Blend Before Add Time (% Of Gap To Previous Datapoint):', min: 0, max: 100, step: 1, value: 100 },
-            { tab, group: TL, id: 'checkboxDensityGradientFill', type: 'checkbox', label: 'Fade Fill Toward Baseline:', value: true },
-            { tab, group: TL, id: 'selectLineFeature', type: 'select', label: 'Line Height Shows:', value: 'valence', options: FEATURES },
-            { tab, group: TL, id: 'sliderLineWidth', type: 'slider', label: 'Line Width (Px):', min: 1, max: 8, step: 0.5, value: 2 },
-            { tab, group: TL, id: 'sliderLineDotSize', type: 'slider', label: 'Line Dot Size (Px):', min: 0, max: 10, step: 0.5, value: 3 },
-            { tab, group: TL, id: 'sliderLineFillOpacity', type: 'slider', label: 'Line Area Fill Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.2 },
-            { tab, group: TL, id: 'checkboxLineSmooth', type: 'checkbox', label: 'Smooth Line Curves:', value: true },
-            { tab, group: TL, id: 'selectRibbonFeature', type: 'select', label: 'Ribbon Color Shows:', value: 'valence', options: FEATURES },
-            { tab, group: TL, id: 'sliderRibbonThickness', type: 'slider', label: 'Ribbon Thickness (Px):', min: 6, max: 120, step: 1, value: 28 },
-            { tab, group: TL, id: 'sliderRibbonSmoothing', type: 'slider', label: 'Ribbon Smoothing (Px):', min: 2, max: 120, step: 1, value: 24 },
-            { tab, group: TL, id: 'sliderRibbonBarsOpacity', type: 'slider', label: 'Ribbon Underlay Bars Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.25 },
-            { tab, group: 'UI Layout', id: 'buttonOpenLayoutInspector', type: 'button', label: 'Open UI Layout Inspector', skipDeviceCheckbox: true },
+            { tab, group: VS, id: 'sliderGlowStemWidth', type: 'slider', label: 'Glow Stem Width (Px):', min: 1, max: 10, step: 0.5, value: 2 },
+            { tab, group: VS, id: 'sliderGlowRadius', type: 'slider', label: 'Glow Radius (Px):', min: 0, max: 50, step: 1, value: 12 },
+            { tab, group: VS, id: 'sliderGlowDotSize', type: 'slider', label: 'Glow Dot Size (Px):', min: 0, max: 14, step: 0.5, value: 4 },
+            { tab, group: VS, id: 'sliderGlowIntensity', type: 'slider', label: 'Glow Intensity (x):', min: 0, max: 1, step: 0.05, value: 0.8 },
+            { tab, group: VS, id: 'sliderDensitySmoothing', type: 'slider', label: 'Density Smoothing (Px):', min: 2, max: 80, step: 1, value: 14 },
+            { tab, group: VS, id: 'sliderDensityFillOpacity', type: 'slider', label: 'Density Fill Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.55 },
+            { tab, group: VS, id: 'sliderDensityOutlineWidth', type: 'slider', label: 'Density Outline Width (Px):', min: 0, max: 8, step: 0.5, value: 2 },
+            { tab, group: VS, id: 'sliderDensityColorBlend', type: 'slider', label: 'Color Blend Before Add Time (% Of Gap To Previous Datapoint):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: VS, id: 'checkboxDensityGradientFill', type: 'checkbox', label: 'Fade Fill Toward Baseline:', value: true },
+            { tab, group: VS, id: 'selectLineFeature', type: 'select', label: 'Line Height Shows:', value: 'valence', options: FEATURES },
+            { tab, group: VS, id: 'sliderLineWidth', type: 'slider', label: 'Line Width (Px):', min: 1, max: 8, step: 0.5, value: 2 },
+            { tab, group: VS, id: 'sliderLineDotSize', type: 'slider', label: 'Line Dot Size (Px):', min: 0, max: 10, step: 0.5, value: 3 },
+            { tab, group: VS, id: 'sliderLineFillOpacity', type: 'slider', label: 'Line Area Fill Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.2 },
+            { tab, group: VS, id: 'checkboxLineSmooth', type: 'checkbox', label: 'Smooth Line Curves:', value: true },
+            { tab, group: VS, id: 'selectRibbonFeature', type: 'select', label: 'Ribbon Color Shows:', value: 'valence', options: FEATURES },
+            { tab, group: VS, id: 'sliderRibbonThickness', type: 'slider', label: 'Ribbon Thickness (Px):', min: 6, max: 120, step: 1, value: 28 },
+            { tab, group: VS, id: 'sliderRibbonSmoothing', type: 'slider', label: 'Ribbon Smoothing (Px):', min: 2, max: 120, step: 1, value: 24 },
+            { tab, group: VS, id: 'sliderRibbonBarsOpacity', type: 'slider', label: 'Ribbon Underlay Bars Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.25 },
         ];
-        renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');
-        registerDevControlArray('SPOTTY_CONTROLS', SPOTTY_CONTROLS);
+        renderControlArray(VS_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_VISUAL_STYLE_CONTROLS', VS_CONTROLS);
 
         // "Album Cover Colors": a toggleable group nested inside Timeline Look (created after
         // Timeline Look's own rows so it sits below them).
