@@ -11,7 +11,7 @@ import {
 } from '../lib/ui-engine/registry.mjs';
 import { setting, loadSavedSettings, rgbaOf } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
-import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition } from './app/clipPlayer.js';
+import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
@@ -564,7 +564,10 @@ async function boot() {
         previewHold = null;
         const handoffDelay = setting('sliderHandoffDelay');
         handoffPending = true;
-        handoffTimer = setTimeout(() => {
+        // The handoff reads where the preview is, so it waits (up to 2 s after the song change) for a pending preview to start.
+        const handoffWaitUntil = performance.now() + 2000;
+        const doHandoff = () => {
+            if (clipKey(songs[idx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
             handoffPending = false;
             const ok = isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0;
             logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[idx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
@@ -574,7 +577,8 @@ async function boot() {
                 previewHold = songs[idx].id; playTrack(songs[idx].id, startMs); handedOff = true;
             }
             else stopClip();
-        }, handoffDelay);
+        };
+        handoffTimer = setTimeout(doHandoff, handoffDelay);
         // Auto Next Song: a song with no preview clip is held for the set time, then the next song plays.
         // Any song change cancels the hold.
         clearTimeout(noPreviewTimer);

@@ -139,6 +139,8 @@ export async function preload(dids) {
 
 // Where the preview is right now, in seconds into the clip (0 when no clip is playing). The handoff starts the full song here.
 export const clipPosition = () => (current && current.audio ? current.audio.currentTime : 0);
+// True once the preview has been started (play() called and not paused since).
+export const clipIsPlaying = () => !!(current && current.audio && !current.audio.paused);
 
 export function stopClip() {
     token++;
