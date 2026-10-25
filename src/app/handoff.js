@@ -112,12 +112,12 @@ export function initEmbed(el, firstTrackId) {
     document.body.appendChild(s);
 }
 
-export function playTrack(trackId) {
+export function playTrack(trackId, positionMs = 0) {
     wantPlaying = true;
     if (sdk.sdkReady()) {
         loadedId = trackId;
         clearPending();
-        sdk.sdkPlay(trackId).then(ok => { if (!ok && wantPlaying && loadedId === trackId) playViaEmbed(trackId); }); // SDK refused: the iframe plays it instead
+        sdk.sdkPlay(trackId, positionMs).then(ok => { if (!ok && wantPlaying && loadedId === trackId) playViaEmbed(trackId); }); // SDK refused: the iframe plays it instead
         return true;
     }
     if (sdk.sdkExpected()) { // logged in, SDK still connecting: wait for it

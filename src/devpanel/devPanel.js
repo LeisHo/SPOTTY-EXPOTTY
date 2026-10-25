@@ -7607,6 +7607,7 @@
             { tab, group: 'Spotify Handoff', id: 'buttonSpotifyLogin', type: 'button', label: 'Log In With Spotify', skipDeviceCheckbox: true },
             { tab, group: 'Spotify Handoff', id: 'checkboxShowSpotifyPlayer', type: 'checkbox', label: 'Show Spotify Player (To Log In Inside It):', value: false },
             { tab, group: 'Spotify Handoff', id: 'sliderHandoffDelay', type: 'slider', label: 'Handoff Delay After Scrubbing Stops (Ms):', min: 100, max: 3000, step: 50, value: 600 },
+            { tab, group: 'Spotify Handoff', id: 'sliderHandoffStartOffset', type: 'slider', label: 'Full Song Start Offset From Preview (S):', min: -30, max: 30, step: 0.5, value: 0 },
             { tab, group: TL, id: 'colorTimelineAccent', type: 'color', label: 'Timeline Accent Color:', value: '#1db954' },
             { tab, group: TL, id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
             { tab, group: TL, id: 'sliderTimelineBarOpacity', type: 'slider', label: 'Timeline Bar Opacity (x):', min: 0.1, max: 1, step: 0.05, value: 0.8 },

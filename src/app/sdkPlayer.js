@@ -66,9 +66,11 @@ async function transfer() {
     catch (e) { note('transfer failed: ' + e.message); return false; }
 }
 // Start a track on this device. On "device not found" (404) transfer playback and try once more.
-export async function sdkPlay(trackId) {
+export async function sdkPlay(trackId, positionMs = 0) {
     if (!ready) return false;
-    const go = () => api('/me/player/play?device_id=' + encodeURIComponent(deviceId), 'PUT', { uris: ['spotify:track:' + trackId] });
+    // position_ms starts the track part-way through, in the same request (no separate seek that could race the start)
+    const body = { uris: ['spotify:track:' + trackId], ...(positionMs > 0 ? { position_ms: Math.round(positionMs) } : {}) };
+    const go = () => api('/me/player/play?device_id=' + encodeURIComponent(deviceId), 'PUT', body);
     try {
         try { await go(); }
         catch (e) { if (!/ 404 /.test(e.message)) throw e; note('play got 404 (device not found yet): transferring and retrying'); await transfer(); await new Promise(r => setTimeout(r, 400)); await go(); }

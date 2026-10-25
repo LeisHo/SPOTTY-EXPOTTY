@@ -137,6 +137,9 @@ export async function preload(dids) {
     checkBatch();
 }
 
+// Where the preview is right now, in seconds into the clip (0 when no clip is playing). The handoff starts the full song here.
+export const clipPosition = () => (current && current.audio ? current.audio.currentTime : 0);
+
 export function stopClip() {
     token++;
     if (!current) return;

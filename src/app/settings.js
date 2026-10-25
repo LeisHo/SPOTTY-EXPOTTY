@@ -49,6 +49,7 @@ export const DEFAULTS = {
     checkboxSnapshotViewport: true,
     checkboxSnapshotMouse: true,
     checkboxSnapshotPlayback: true,
+    sliderHandoffStartOffset: 0,
     checkboxSnapshotAudio: true,
     checkboxSnapshotTimeline: true,
     checkboxSnapshotSettings: true,
