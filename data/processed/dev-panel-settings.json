@@ -35,15 +35,15 @@
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
     "sliderTimelineScaleGap": 54,
-    "sliderPlayheadWidth": 2,
+    "sliderPlayheadWidth": 3,
     "sliderPlayheadHeight": 58,
     "sliderPlayheadStartHeight": 63,
     "rangeBarTimelineZoomLimits": "{\"min\":64,\"max\":100}",
     "buttonOpenLayoutInspector": "",
-    "checkboxScrubLineDrag": false,
-    "sliderScrubLineAnimTime": 160,
-    "sliderScrubLineHoverWidth": 4,
-    "sliderScrubLineClickWidth": 6,
+    "checkboxScrubLineDrag": true,
+    "sliderScrubLineAnimTime": 50,
+    "sliderScrubLineHoverWidth": 3,
+    "sliderScrubLineClickWidth": 3,
     "sliderScrubLineReleaseWidth": 3,
     "sliderScrubLineHoverOpacity": 100,
     "sliderScrubLineClickOpacity": 100,
@@ -382,7 +382,7 @@
     "left": 67,
     "top": 170,
     "width": 359,
-    "height": 415
+    "height": 524
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -8483,6 +8483,47 @@
                 {
                   "type": "row",
                   "key": "colorTimelinePlayhead"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Click and Drag",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderScrubLineAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderScrubLineHoverWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderScrubLineClickWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderScrubLineReleaseWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderScrubLineHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderScrubLineClickOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderScrubLineAnimTime",
+                      "sliderScrubLineHoverWidth",
+                      "sliderScrubLineClickWidth",
+                      "sliderScrubLineReleaseWidth",
+                      "sliderScrubLineHoverOpacity",
+                      "sliderScrubLineClickOpacity"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [
@@ -8491,7 +8532,46 @@
                 "sliderPlayheadStartHeight",
                 "colorTimelinePlayhead"
               ],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "desktop:Click and Drag",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineAnimTime"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineHoverWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineClickWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineReleaseWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineClickOpacity"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderScrubLineAnimTime",
+                    "sliderScrubLineHoverWidth",
+                    "sliderScrubLineClickWidth",
+                    "sliderScrubLineReleaseWidth",
+                    "sliderScrubLineHoverOpacity",
+                    "sliderScrubLineClickOpacity"
+                  ],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -8871,47 +8951,6 @@
               ],
               "subgroups": []
             }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "desktop:Click and Drag",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "sliderScrubLineAnimTime"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderScrubLineHoverWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderScrubLineClickWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderScrubLineReleaseWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderScrubLineHoverOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderScrubLineClickOpacity"
-                }
-              ],
-              "rowKeys": [
-                "sliderScrubLineAnimTime",
-                "sliderScrubLineHoverWidth",
-                "sliderScrubLineClickWidth",
-                "sliderScrubLineReleaseWidth",
-                "sliderScrubLineHoverOpacity",
-                "sliderScrubLineClickOpacity"
-              ],
-              "subgroups": []
-            }
           }
         ],
         "rowKeys": [
@@ -8937,6 +8976,47 @@
               {
                 "type": "row",
                 "key": "colorTimelinePlayhead"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Click and Drag",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineAnimTime"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineHoverWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineClickWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineReleaseWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScrubLineClickOpacity"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderScrubLineAnimTime",
+                    "sliderScrubLineHoverWidth",
+                    "sliderScrubLineClickWidth",
+                    "sliderScrubLineReleaseWidth",
+                    "sliderScrubLineHoverOpacity",
+                    "sliderScrubLineClickOpacity"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [
@@ -8945,7 +9025,46 @@
               "sliderPlayheadStartHeight",
               "colorTimelinePlayhead"
             ],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "desktop:Click and Drag",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderScrubLineAnimTime"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderScrubLineHoverWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderScrubLineClickWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderScrubLineReleaseWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderScrubLineHoverOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderScrubLineClickOpacity"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderScrubLineAnimTime",
+                  "sliderScrubLineHoverWidth",
+                  "sliderScrubLineClickWidth",
+                  "sliderScrubLineReleaseWidth",
+                  "sliderScrubLineHoverOpacity",
+                  "sliderScrubLineClickOpacity"
+                ],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "desktop:Visual Style",
@@ -9307,44 +9426,6 @@
               "colorSongAddDate",
               "sliderSongAddDateLetterSpacing",
               "sliderSongAddDateOpacity"
-            ],
-            "subgroups": []
-          },
-          {
-            "key": "desktop:Click and Drag",
-            "items": [
-              {
-                "type": "row",
-                "key": "sliderScrubLineAnimTime"
-              },
-              {
-                "type": "row",
-                "key": "sliderScrubLineHoverWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderScrubLineClickWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderScrubLineReleaseWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderScrubLineHoverOpacity"
-              },
-              {
-                "type": "row",
-                "key": "sliderScrubLineClickOpacity"
-              }
-            ],
-            "rowKeys": [
-              "sliderScrubLineAnimTime",
-              "sliderScrubLineHoverWidth",
-              "sliderScrubLineClickWidth",
-              "sliderScrubLineReleaseWidth",
-              "sliderScrubLineHoverOpacity",
-              "sliderScrubLineClickOpacity"
             ],
             "subgroups": []
           }
@@ -14178,9 +14259,26 @@
             "type": "group",
             "section": {
               "key": "mobile:New Group (4)",
-              "items": [],
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Click and Drag",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
               "rowKeys": [],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "mobile:Click and Drag",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -14259,56 +14357,32 @@
               "rowKeys": [],
               "subgroups": []
             }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:Click and Drag",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "sliderMobileScrubLineAnimTime"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileScrubLineHoverWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileScrubLineClickWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileScrubLineReleaseWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileScrubLineHoverOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileScrubLineClickOpacity"
-                }
-              ],
-              "rowKeys": [
-                "sliderMobileScrubLineAnimTime",
-                "sliderMobileScrubLineHoverWidth",
-                "sliderMobileScrubLineClickWidth",
-                "sliderMobileScrubLineReleaseWidth",
-                "sliderMobileScrubLineHoverOpacity",
-                "sliderMobileScrubLineClickOpacity"
-              ],
-              "subgroups": []
-            }
           }
         ],
         "rowKeys": [],
         "subgroups": [
           {
             "key": "mobile:New Group (4)",
-            "items": [],
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Click and Drag",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
             "rowKeys": [],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "mobile:Click and Drag",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "mobile:Visual Style",
@@ -14370,44 +14444,6 @@
             "key": "mobile:Song Add Date",
             "items": [],
             "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "mobile:Click and Drag",
-            "items": [
-              {
-                "type": "row",
-                "key": "sliderMobileScrubLineAnimTime"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileScrubLineHoverWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileScrubLineClickWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileScrubLineReleaseWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileScrubLineHoverOpacity"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileScrubLineClickOpacity"
-              }
-            ],
-            "rowKeys": [
-              "sliderMobileScrubLineAnimTime",
-              "sliderMobileScrubLineHoverWidth",
-              "sliderMobileScrubLineClickWidth",
-              "sliderMobileScrubLineReleaseWidth",
-              "sliderMobileScrubLineHoverOpacity",
-              "sliderMobileScrubLineClickOpacity"
-            ],
             "subgroups": []
           }
         ]
@@ -18775,9 +18811,26 @@
             "type": "group",
             "section": {
               "key": "landscape:New Group (4)",
-              "items": [],
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Click and Drag",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
               "rowKeys": [],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "landscape:Click and Drag",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -18856,56 +18909,32 @@
               "rowKeys": [],
               "subgroups": []
             }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:Click and Drag",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeScrubLineAnimTime"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeScrubLineHoverWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeScrubLineClickWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeScrubLineReleaseWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeScrubLineHoverOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeScrubLineClickOpacity"
-                }
-              ],
-              "rowKeys": [
-                "sliderLandscapeScrubLineAnimTime",
-                "sliderLandscapeScrubLineHoverWidth",
-                "sliderLandscapeScrubLineClickWidth",
-                "sliderLandscapeScrubLineReleaseWidth",
-                "sliderLandscapeScrubLineHoverOpacity",
-                "sliderLandscapeScrubLineClickOpacity"
-              ],
-              "subgroups": []
-            }
           }
         ],
         "rowKeys": [],
         "subgroups": [
           {
             "key": "landscape:New Group (4)",
-            "items": [],
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Click and Drag",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
             "rowKeys": [],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "landscape:Click and Drag",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "landscape:Visual Style",
@@ -18967,44 +18996,6 @@
             "key": "landscape:Song Add Date",
             "items": [],
             "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "landscape:Click and Drag",
-            "items": [
-              {
-                "type": "row",
-                "key": "sliderLandscapeScrubLineAnimTime"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeScrubLineHoverWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeScrubLineClickWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeScrubLineReleaseWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeScrubLineHoverOpacity"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeScrubLineClickOpacity"
-              }
-            ],
-            "rowKeys": [
-              "sliderLandscapeScrubLineAnimTime",
-              "sliderLandscapeScrubLineHoverWidth",
-              "sliderLandscapeScrubLineClickWidth",
-              "sliderLandscapeScrubLineReleaseWidth",
-              "sliderLandscapeScrubLineHoverOpacity",
-              "sliderLandscapeScrubLineClickOpacity"
-            ],
             "subgroups": []
           }
         ]
@@ -19089,23 +19080,23 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
     "desktop:Artist": true,
-    "desktop:Album & Date": false,
-    "desktop:New Group (7)": false,
-    "desktop:Volume Button": false,
+    "desktop:Album & Date": true,
+    "desktop:New Group (7)": true,
+    "desktop:Volume Button": true,
     "desktop:Volume Button Animation": true,
     "desktop:Play Button": true,
-    "desktop:Play Button Animation": false,
+    "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": true,
-    "desktop:Next And Last Button Animation": false,
+    "desktop:Next And Last Button Animation": true,
     "desktop:Shuffle Button": true,
-    "desktop:Shuffle Button Animation": false,
+    "desktop:Shuffle Button Animation": true,
     "desktop:Background": true,
     "desktop:Album Cover": true,
     "desktop:Shadows": true,
@@ -19125,15 +19116,15 @@
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
     "desktop:Timeline Look": false,
-    "desktop:New Group (4)": true,
+    "desktop:New Group (4)": false,
+    "desktop:Click and Drag": false,
     "desktop:Visual Style": true,
     "desktop:Album Cover Colors": true,
     "desktop:New Group (3)": true,
-    "desktop:Timeline Scale": false,
-    "desktop:Scale Numbers": false,
-    "desktop:Ticks": false,
+    "desktop:Timeline Scale": true,
+    "desktop:Scale Numbers": true,
+    "desktop:Ticks": true,
     "desktop:Song Add Date": true,
-    "desktop:Click and Drag": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
@@ -19186,6 +19177,7 @@
     "mobile:Starting Timeline Span Curve": false,
     "mobile:Timeline Look": false,
     "mobile:New Group (4)": false,
+    "mobile:Click and Drag": false,
     "mobile:Visual Style": false,
     "mobile:Album Cover Colors": false,
     "mobile:New Group (3)": false,
@@ -19193,7 +19185,6 @@
     "mobile:Scale Numbers": false,
     "mobile:Ticks": false,
     "mobile:Song Add Date": false,
-    "mobile:Click and Drag": false,
     "mobile:Startup": true,
     "mobile:Start Button": false,
     "mobile:Start Button Animation": false,
@@ -19246,6 +19237,7 @@
     "landscape:Starting Timeline Span Curve": false,
     "landscape:Timeline Look": false,
     "landscape:New Group (4)": false,
+    "landscape:Click and Drag": false,
     "landscape:Visual Style": false,
     "landscape:Album Cover Colors": false,
     "landscape:New Group (3)": false,
@@ -19253,7 +19245,6 @@
     "landscape:Scale Numbers": false,
     "landscape:Ticks": false,
     "landscape:Song Add Date": false,
-    "landscape:Click and Drag": false,
     "landscape:Startup": false,
     "landscape:Start Button": false,
     "landscape:Start Button Animation": false
@@ -19936,7 +19927,13 @@
     "sliderArtistMaxLines": true,
     "sliderLastButtonEdgeOffset": true,
     "sliderNextButtonEdgeOffset": true,
-    "sliderNavClickTolerance": true
+    "sliderNavClickTolerance": true,
+    "sliderScrubLineAnimTime": false,
+    "sliderScrubLineHoverWidth": false,
+    "sliderScrubLineClickWidth": false,
+    "sliderScrubLineReleaseWidth": false,
+    "sliderScrubLineHoverOpacity": false,
+    "sliderScrubLineClickOpacity": false
   },
   "devIndependence": {
     "mobile": {
