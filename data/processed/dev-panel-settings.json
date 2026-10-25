@@ -26,7 +26,7 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
-    "sliderTimelineHeight": 260,
+    "sliderTimelineHeight": 210,
     "sliderTimelineScaleGap": 0,
     "sliderPlayheadWidth": 2,
     "sliderPlayheadHeight": 18,
@@ -8142,7 +8142,7 @@
             },
             "height": {
               "mode": "fixed",
-              "value": "260px"
+              "value": "210px"
             }
           }
         },
