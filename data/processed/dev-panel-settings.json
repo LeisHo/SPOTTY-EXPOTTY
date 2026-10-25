@@ -37,7 +37,7 @@
     "sliderTimelineScaleGap": 54,
     "sliderPlayheadWidth": 3,
     "sliderPlayheadHeight": 58,
-    "sliderPlayheadOpacity": 100,
+    "sliderPlayheadOpacity": 70,
     "sliderPlayheadStartHeight": 63,
     "rangeBarTimelineZoomLimits": "{\"min\":64,\"max\":100}",
     "buttonOpenLayoutInspector": "",
@@ -46,8 +46,8 @@
     "sliderScrubLineHoverWidth": 3,
     "sliderScrubLineClickWidth": 3,
     "sliderScrubLineReleaseWidth": 3,
-    "sliderScrubLineHoverOpacity": 70,
-    "sliderScrubLineClickOpacity": 70,
+    "sliderScrubLineHoverOpacity": 100,
+    "sliderScrubLineClickOpacity": 100,
     "selectTimelineStyle": "density",
     "sliderGlowStemWidth": 2,
     "sliderGlowRadius": 12,
@@ -8486,6 +8486,10 @@
                   "key": "colorTimelinePlayhead"
                 },
                 {
+                  "type": "row",
+                  "key": "sliderPlayheadOpacity"
+                },
+                {
                   "type": "group",
                   "section": {
                     "key": "desktop:Click and Drag",
@@ -8531,7 +8535,8 @@
                 "sliderPlayheadWidth",
                 "sliderPlayheadHeight",
                 "sliderPlayheadStartHeight",
-                "colorTimelinePlayhead"
+                "colorTimelinePlayhead",
+                "sliderPlayheadOpacity"
               ],
               "subgroups": [
                 {
@@ -8952,16 +8957,11 @@
               ],
               "subgroups": []
             }
-          },
-          {
-            "type": "row",
-            "key": "sliderPlayheadOpacity"
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
-          "rangeBarTimelineZoomLimits",
-          "sliderPlayheadOpacity"
+          "rangeBarTimelineZoomLimits"
         ],
         "subgroups": [
           {
@@ -8982,6 +8982,10 @@
               {
                 "type": "row",
                 "key": "colorTimelinePlayhead"
+              },
+              {
+                "type": "row",
+                "key": "sliderPlayheadOpacity"
               },
               {
                 "type": "group",
@@ -9029,7 +9033,8 @@
               "sliderPlayheadWidth",
               "sliderPlayheadHeight",
               "sliderPlayheadStartHeight",
-              "colorTimelinePlayhead"
+              "colorTimelinePlayhead",
+              "sliderPlayheadOpacity"
             ],
             "subgroups": [
               {
@@ -19122,11 +19127,11 @@
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
     "desktop:Timeline Look": false,
-    "desktop:New Group (4)": true,
+    "desktop:New Group (4)": false,
     "desktop:Click and Drag": false,
     "desktop:Visual Style": true,
     "desktop:Album Cover Colors": true,
-    "desktop:New Group (3)": false,
+    "desktop:New Group (3)": true,
     "desktop:Timeline Scale": true,
     "desktop:Scale Numbers": true,
     "desktop:Ticks": true,
