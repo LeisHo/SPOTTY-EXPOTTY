@@ -303,8 +303,8 @@
   "layout": {
     "left": 26,
     "top": 6,
-    "width": 344,
-    "height": 568
+    "width": 512,
+    "height": 578
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -1691,35 +1691,8 @@
           {
             "type": "group",
             "section": {
-              "key": "desktop:New Group (3)",
+              "key": "desktop:Text",
               "items": [
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:New Group (4)",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:New Group (5)",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:New Group (6)",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                },
                 {
                   "type": "group",
                   "section": {
@@ -1739,140 +1712,545 @@
                 {
                   "type": "group",
                   "section": {
-                    "key": "desktop:Track Title Button Animation",
+                    "key": "desktop:Song Title",
                     "items": [
                       {
                         "type": "row",
-                        "key": "selectTitleAnimMode"
+                        "key": "sliderTxtSongTitleFontSize"
                       },
                       {
                         "type": "row",
-                        "key": "sliderTitleAnimDuration"
+                        "key": "colorTxtSongTitleColor"
                       },
                       {
                         "type": "row",
-                        "key": "selectTitleAnimEasing"
+                        "key": "checkboxTxtSongTitleBold"
                       },
                       {
                         "type": "row",
-                        "key": "sliderTitleBoldRestWeight"
+                        "key": "checkboxTxtSongTitleItalic"
                       },
                       {
                         "type": "row",
-                        "key": "sliderTitleBoldHoverWeight"
+                        "key": "checkboxTxtSongTitleUnderline"
                       },
                       {
                         "type": "row",
-                        "key": "sliderTitleBoldPressWeight"
+                        "key": "sliderTxtSongTitleLetterSpacing"
                       },
                       {
                         "type": "row",
-                        "key": "sliderTitlePulseScale"
+                        "key": "sliderTxtSongTitleLineSpacing"
                       },
                       {
                         "type": "row",
-                        "key": "sliderTitlePulseInDuration"
+                        "key": "sliderTxtSongTitleOpacity"
                       },
                       {
                         "type": "row",
-                        "key": "sliderTitlePulseOutDuration"
+                        "key": "checkboxTxtSongTitleWordWrap"
                       },
                       {
                         "type": "row",
-                        "key": "sliderTitleGrowScale"
+                        "key": "sliderTxtSongTitleMaxWidth"
                       },
                       {
                         "type": "row",
-                        "key": "sliderTitleGrowPressScale"
+                        "key": "selectTxtSongTitleOverflow"
                       },
                       {
-                        "type": "row",
-                        "key": "sliderTitleGlowRadius"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Track Title Button Animation",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "selectTitleAnimMode"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleAnimDuration"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectTitleAnimEasing"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleBoldRestWeight"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleBoldHoverWeight"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleBoldPressWeight"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitlePulseScale"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitlePulseInDuration"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitlePulseOutDuration"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleGrowScale"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleGrowPressScale"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleGlowRadius"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleGlowOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorTitleGlowColor"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleGlowPressRadius"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleTrackingHover"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleTrackingPress"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleLiftPx"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleLiftPressPx"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleLiftShadowBlur"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleLiftShadowOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "selectTitleAnimMode",
+                            "sliderTitleAnimDuration",
+                            "selectTitleAnimEasing",
+                            "sliderTitleBoldRestWeight",
+                            "sliderTitleBoldHoverWeight",
+                            "sliderTitleBoldPressWeight",
+                            "sliderTitlePulseScale",
+                            "sliderTitlePulseInDuration",
+                            "sliderTitlePulseOutDuration",
+                            "sliderTitleGrowScale",
+                            "sliderTitleGrowPressScale",
+                            "sliderTitleGlowRadius",
+                            "sliderTitleGlowOpacity",
+                            "colorTitleGlowColor",
+                            "sliderTitleGlowPressRadius",
+                            "sliderTitleTrackingHover",
+                            "sliderTitleTrackingPress",
+                            "sliderTitleLiftPx",
+                            "sliderTitleLiftPressPx",
+                            "sliderTitleLiftShadowBlur",
+                            "sliderTitleLiftShadowOpacity"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
-                        "type": "row",
-                        "key": "sliderTitleGlowOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorTitleGlowColor"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTitleGlowPressRadius"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTitleTrackingHover"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTitleTrackingPress"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTitleLiftPx"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTitleLiftPressPx"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTitleLiftShadowBlur"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTitleLiftShadowOpacity"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Outline",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
                       }
                     ],
                     "rowKeys": [
-                      "selectTitleAnimMode",
-                      "sliderTitleAnimDuration",
-                      "selectTitleAnimEasing",
-                      "sliderTitleBoldRestWeight",
-                      "sliderTitleBoldHoverWeight",
-                      "sliderTitleBoldPressWeight",
-                      "sliderTitlePulseScale",
-                      "sliderTitlePulseInDuration",
-                      "sliderTitlePulseOutDuration",
-                      "sliderTitleGrowScale",
-                      "sliderTitleGrowPressScale",
-                      "sliderTitleGlowRadius",
-                      "sliderTitleGlowOpacity",
-                      "colorTitleGlowColor",
-                      "sliderTitleGlowPressRadius",
-                      "sliderTitleTrackingHover",
-                      "sliderTitleTrackingPress",
-                      "sliderTitleLiftPx",
-                      "sliderTitleLiftPressPx",
-                      "sliderTitleLiftShadowBlur",
-                      "sliderTitleLiftShadowOpacity"
+                      "sliderTxtSongTitleFontSize",
+                      "colorTxtSongTitleColor",
+                      "checkboxTxtSongTitleBold",
+                      "checkboxTxtSongTitleItalic",
+                      "checkboxTxtSongTitleUnderline",
+                      "sliderTxtSongTitleLetterSpacing",
+                      "sliderTxtSongTitleLineSpacing",
+                      "sliderTxtSongTitleOpacity",
+                      "checkboxTxtSongTitleWordWrap",
+                      "sliderTxtSongTitleMaxWidth",
+                      "selectTxtSongTitleOverflow"
                     ],
-                    "subgroups": []
+                    "subgroups": [
+                      {
+                        "key": "desktop:Track Title Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "selectTitleAnimMode"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleAnimDuration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTitleAnimEasing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleBoldRestWeight"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleBoldHoverWeight"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleBoldPressWeight"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitlePulseScale"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitlePulseInDuration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitlePulseOutDuration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGrowScale"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGrowPressScale"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGlowRadius"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGlowOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTitleGlowColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGlowPressRadius"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleTrackingHover"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleTrackingPress"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftPx"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftPressPx"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftShadowBlur"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftShadowOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "selectTitleAnimMode",
+                          "sliderTitleAnimDuration",
+                          "selectTitleAnimEasing",
+                          "sliderTitleBoldRestWeight",
+                          "sliderTitleBoldHoverWeight",
+                          "sliderTitleBoldPressWeight",
+                          "sliderTitlePulseScale",
+                          "sliderTitlePulseInDuration",
+                          "sliderTitlePulseOutDuration",
+                          "sliderTitleGrowScale",
+                          "sliderTitleGrowPressScale",
+                          "sliderTitleGlowRadius",
+                          "sliderTitleGlowOpacity",
+                          "colorTitleGlowColor",
+                          "sliderTitleGlowPressRadius",
+                          "sliderTitleTrackingHover",
+                          "sliderTitleTrackingPress",
+                          "sliderTitleLiftPx",
+                          "sliderTitleLiftPressPx",
+                          "sliderTitleLiftShadowBlur",
+                          "sliderTitleLiftShadowOpacity"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:Outline",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Artist",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorTxtArtistColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistBold"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistItalic"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistUnderline"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistLetterSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistLineSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistWordWrap"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistMaxWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectTxtArtistOverflow"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Outline",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderTxtArtistFontSize",
+                      "colorTxtArtistColor",
+                      "checkboxTxtArtistBold",
+                      "checkboxTxtArtistItalic",
+                      "checkboxTxtArtistUnderline",
+                      "sliderTxtArtistLetterSpacing",
+                      "sliderTxtArtistLineSpacing",
+                      "sliderTxtArtistOpacity",
+                      "checkboxTxtArtistWordWrap",
+                      "sliderTxtArtistMaxWidth",
+                      "selectTxtArtistOverflow"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "desktop:Outline",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Album & Date",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderTxtAlbumDateFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorTxtAlbumDateColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtAlbumDateBold"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtAlbumDateItalic"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtAlbumDateUnderline"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtAlbumDateLetterSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtAlbumDateLineSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtAlbumDateOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtAlbumDateWordWrap"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtAlbumDateMaxWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectTxtAlbumDateOverflow"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Outline",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "colorTxtAlbumDateOutlineColor"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtAlbumDateOutlineThickness"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorTxtArtistOutlineColor"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtArtistOutlineThickness"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorTxtSongTitleOutlineColor"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtSongTitleOutlineThickness"
+                            }
+                          ],
+                          "rowKeys": [
+                            "colorTxtAlbumDateOutlineColor",
+                            "sliderTxtAlbumDateOutlineThickness",
+                            "colorTxtArtistOutlineColor",
+                            "sliderTxtArtistOutlineThickness",
+                            "colorTxtSongTitleOutlineColor",
+                            "sliderTxtSongTitleOutlineThickness"
+                          ],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderTxtAlbumDateFontSize",
+                      "colorTxtAlbumDateColor",
+                      "checkboxTxtAlbumDateBold",
+                      "checkboxTxtAlbumDateItalic",
+                      "checkboxTxtAlbumDateUnderline",
+                      "sliderTxtAlbumDateLetterSpacing",
+                      "sliderTxtAlbumDateLineSpacing",
+                      "sliderTxtAlbumDateOpacity",
+                      "checkboxTxtAlbumDateWordWrap",
+                      "sliderTxtAlbumDateMaxWidth",
+                      "selectTxtAlbumDateOverflow"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "desktop:Outline",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "colorTxtAlbumDateOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtAlbumDateOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtArtistOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtSongTitleOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleOutlineThickness"
+                          }
+                        ],
+                        "rowKeys": [
+                          "colorTxtAlbumDateOutlineColor",
+                          "sliderTxtAlbumDateOutlineThickness",
+                          "colorTxtArtistOutlineColor",
+                          "sliderTxtArtistOutlineThickness",
+                          "colorTxtSongTitleOutlineColor",
+                          "sliderTxtSongTitleOutlineThickness"
+                        ],
+                        "subgroups": []
+                      }
+                    ]
                   }
                 }
               ],
               "rowKeys": [],
               "subgroups": [
-                {
-                  "key": "desktop:New Group (4)",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                },
-                {
-                  "key": "desktop:New Group (5)",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                },
-                {
-                  "key": "desktop:New Group (6)",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                },
                 {
                   "key": "desktop:Font",
                   "items": [
@@ -1887,117 +2265,534 @@
                   "subgroups": []
                 },
                 {
-                  "key": "desktop:Track Title Button Animation",
+                  "key": "desktop:Song Title",
                   "items": [
                     {
                       "type": "row",
-                      "key": "selectTitleAnimMode"
+                      "key": "sliderTxtSongTitleFontSize"
                     },
                     {
                       "type": "row",
-                      "key": "sliderTitleAnimDuration"
+                      "key": "colorTxtSongTitleColor"
                     },
                     {
                       "type": "row",
-                      "key": "selectTitleAnimEasing"
+                      "key": "checkboxTxtSongTitleBold"
                     },
                     {
                       "type": "row",
-                      "key": "sliderTitleBoldRestWeight"
+                      "key": "checkboxTxtSongTitleItalic"
                     },
                     {
                       "type": "row",
-                      "key": "sliderTitleBoldHoverWeight"
+                      "key": "checkboxTxtSongTitleUnderline"
                     },
                     {
                       "type": "row",
-                      "key": "sliderTitleBoldPressWeight"
+                      "key": "sliderTxtSongTitleLetterSpacing"
                     },
                     {
                       "type": "row",
-                      "key": "sliderTitlePulseScale"
+                      "key": "sliderTxtSongTitleLineSpacing"
                     },
                     {
                       "type": "row",
-                      "key": "sliderTitlePulseInDuration"
+                      "key": "sliderTxtSongTitleOpacity"
                     },
                     {
                       "type": "row",
-                      "key": "sliderTitlePulseOutDuration"
+                      "key": "checkboxTxtSongTitleWordWrap"
                     },
                     {
                       "type": "row",
-                      "key": "sliderTitleGrowScale"
+                      "key": "sliderTxtSongTitleMaxWidth"
                     },
                     {
                       "type": "row",
-                      "key": "sliderTitleGrowPressScale"
+                      "key": "selectTxtSongTitleOverflow"
                     },
                     {
-                      "type": "row",
-                      "key": "sliderTitleGlowRadius"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Track Title Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "selectTitleAnimMode"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleAnimDuration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTitleAnimEasing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleBoldRestWeight"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleBoldHoverWeight"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleBoldPressWeight"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitlePulseScale"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitlePulseInDuration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitlePulseOutDuration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGrowScale"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGrowPressScale"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGlowRadius"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGlowOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTitleGlowColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGlowPressRadius"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleTrackingHover"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleTrackingPress"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftPx"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftPressPx"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftShadowBlur"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftShadowOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "selectTitleAnimMode",
+                          "sliderTitleAnimDuration",
+                          "selectTitleAnimEasing",
+                          "sliderTitleBoldRestWeight",
+                          "sliderTitleBoldHoverWeight",
+                          "sliderTitleBoldPressWeight",
+                          "sliderTitlePulseScale",
+                          "sliderTitlePulseInDuration",
+                          "sliderTitlePulseOutDuration",
+                          "sliderTitleGrowScale",
+                          "sliderTitleGrowPressScale",
+                          "sliderTitleGlowRadius",
+                          "sliderTitleGlowOpacity",
+                          "colorTitleGlowColor",
+                          "sliderTitleGlowPressRadius",
+                          "sliderTitleTrackingHover",
+                          "sliderTitleTrackingPress",
+                          "sliderTitleLiftPx",
+                          "sliderTitleLiftPressPx",
+                          "sliderTitleLiftShadowBlur",
+                          "sliderTitleLiftShadowOpacity"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderTitleGlowOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorTitleGlowColor"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleGlowPressRadius"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleTrackingHover"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleTrackingPress"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleLiftPx"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleLiftPressPx"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleLiftShadowBlur"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleLiftShadowOpacity"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Outline",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
-                    "selectTitleAnimMode",
-                    "sliderTitleAnimDuration",
-                    "selectTitleAnimEasing",
-                    "sliderTitleBoldRestWeight",
-                    "sliderTitleBoldHoverWeight",
-                    "sliderTitleBoldPressWeight",
-                    "sliderTitlePulseScale",
-                    "sliderTitlePulseInDuration",
-                    "sliderTitlePulseOutDuration",
-                    "sliderTitleGrowScale",
-                    "sliderTitleGrowPressScale",
-                    "sliderTitleGlowRadius",
-                    "sliderTitleGlowOpacity",
-                    "colorTitleGlowColor",
-                    "sliderTitleGlowPressRadius",
-                    "sliderTitleTrackingHover",
-                    "sliderTitleTrackingPress",
-                    "sliderTitleLiftPx",
-                    "sliderTitleLiftPressPx",
-                    "sliderTitleLiftShadowBlur",
-                    "sliderTitleLiftShadowOpacity"
+                    "sliderTxtSongTitleFontSize",
+                    "colorTxtSongTitleColor",
+                    "checkboxTxtSongTitleBold",
+                    "checkboxTxtSongTitleItalic",
+                    "checkboxTxtSongTitleUnderline",
+                    "sliderTxtSongTitleLetterSpacing",
+                    "sliderTxtSongTitleLineSpacing",
+                    "sliderTxtSongTitleOpacity",
+                    "checkboxTxtSongTitleWordWrap",
+                    "sliderTxtSongTitleMaxWidth",
+                    "selectTxtSongTitleOverflow"
                   ],
-                  "subgroups": []
+                  "subgroups": [
+                    {
+                      "key": "desktop:Track Title Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "selectTitleAnimMode"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleAnimDuration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTitleAnimEasing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleBoldRestWeight"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleBoldHoverWeight"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleBoldPressWeight"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitlePulseScale"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitlePulseInDuration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitlePulseOutDuration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGrowScale"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGrowPressScale"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGlowRadius"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGlowOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTitleGlowColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGlowPressRadius"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleTrackingHover"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleTrackingPress"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftPx"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftPressPx"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftShadowBlur"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftShadowOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "selectTitleAnimMode",
+                        "sliderTitleAnimDuration",
+                        "selectTitleAnimEasing",
+                        "sliderTitleBoldRestWeight",
+                        "sliderTitleBoldHoverWeight",
+                        "sliderTitleBoldPressWeight",
+                        "sliderTitlePulseScale",
+                        "sliderTitlePulseInDuration",
+                        "sliderTitlePulseOutDuration",
+                        "sliderTitleGrowScale",
+                        "sliderTitleGrowPressScale",
+                        "sliderTitleGlowRadius",
+                        "sliderTitleGlowOpacity",
+                        "colorTitleGlowColor",
+                        "sliderTitleGlowPressRadius",
+                        "sliderTitleTrackingHover",
+                        "sliderTitleTrackingPress",
+                        "sliderTitleLiftPx",
+                        "sliderTitleLiftPressPx",
+                        "sliderTitleLiftShadowBlur",
+                        "sliderTitleLiftShadowOpacity"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:Outline",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                },
+                {
+                  "key": "desktop:Artist",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderTxtArtistFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorTxtArtistColor"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtArtistBold"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtArtistItalic"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtArtistUnderline"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtArtistLetterSpacing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtArtistLineSpacing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtArtistOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtArtistWordWrap"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtArtistMaxWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectTxtArtistOverflow"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Outline",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderTxtArtistFontSize",
+                    "colorTxtArtistColor",
+                    "checkboxTxtArtistBold",
+                    "checkboxTxtArtistItalic",
+                    "checkboxTxtArtistUnderline",
+                    "sliderTxtArtistLetterSpacing",
+                    "sliderTxtArtistLineSpacing",
+                    "sliderTxtArtistOpacity",
+                    "checkboxTxtArtistWordWrap",
+                    "sliderTxtArtistMaxWidth",
+                    "selectTxtArtistOverflow"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "desktop:Outline",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                },
+                {
+                  "key": "desktop:Album & Date",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderTxtAlbumDateFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorTxtAlbumDateColor"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtAlbumDateBold"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtAlbumDateItalic"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtAlbumDateUnderline"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtAlbumDateLetterSpacing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtAlbumDateLineSpacing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtAlbumDateOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtAlbumDateWordWrap"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtAlbumDateMaxWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectTxtAlbumDateOverflow"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Outline",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "colorTxtAlbumDateOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtAlbumDateOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtArtistOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistOutlineThickness"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtSongTitleOutlineColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleOutlineThickness"
+                          }
+                        ],
+                        "rowKeys": [
+                          "colorTxtAlbumDateOutlineColor",
+                          "sliderTxtAlbumDateOutlineThickness",
+                          "colorTxtArtistOutlineColor",
+                          "sliderTxtArtistOutlineThickness",
+                          "colorTxtSongTitleOutlineColor",
+                          "sliderTxtSongTitleOutlineThickness"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderTxtAlbumDateFontSize",
+                    "colorTxtAlbumDateColor",
+                    "checkboxTxtAlbumDateBold",
+                    "checkboxTxtAlbumDateItalic",
+                    "checkboxTxtAlbumDateUnderline",
+                    "sliderTxtAlbumDateLetterSpacing",
+                    "sliderTxtAlbumDateLineSpacing",
+                    "sliderTxtAlbumDateOpacity",
+                    "checkboxTxtAlbumDateWordWrap",
+                    "sliderTxtAlbumDateMaxWidth",
+                    "selectTxtAlbumDateOverflow"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "desktop:Outline",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "colorTxtAlbumDateOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtAlbumDateOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtArtistOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtSongTitleOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleOutlineThickness"
+                        }
+                      ],
+                      "rowKeys": [
+                        "colorTxtAlbumDateOutlineColor",
+                        "sliderTxtAlbumDateOutlineThickness",
+                        "colorTxtArtistOutlineColor",
+                        "sliderTxtArtistOutlineThickness",
+                        "colorTxtSongTitleOutlineColor",
+                        "sliderTxtSongTitleOutlineThickness"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
                 }
               ]
             }
@@ -3145,326 +3940,34 @@
               ],
               "subgroups": []
             }
-          },
+          }
+        ],
+        "rowKeys": [
+          "buttonOpenLayoutInspector"
+        ],
+        "subgroups": [
           {
-            "type": "group",
-            "section": {
-              "key": "desktop:Text",
-              "items": [
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Song Title",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleFontSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorTxtSongTitleColor"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleBold"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleItalic"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleUnderline"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleLetterSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleLineSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleWordWrap"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleMaxWidth"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectTxtSongTitleOverflow"
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "desktop:Outline",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderTxtSongTitleFontSize",
-                      "colorTxtSongTitleColor",
-                      "checkboxTxtSongTitleBold",
-                      "checkboxTxtSongTitleItalic",
-                      "checkboxTxtSongTitleUnderline",
-                      "sliderTxtSongTitleLetterSpacing",
-                      "sliderTxtSongTitleLineSpacing",
-                      "sliderTxtSongTitleOpacity",
-                      "checkboxTxtSongTitleWordWrap",
-                      "sliderTxtSongTitleMaxWidth",
-                      "selectTxtSongTitleOverflow"
-                    ],
-                    "subgroups": [
-                      {
-                        "key": "desktop:Outline",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Artist",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistFontSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorTxtArtistColor"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtArtistBold"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtArtistItalic"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtArtistUnderline"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistLetterSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistLineSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtArtistWordWrap"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistMaxWidth"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectTxtArtistOverflow"
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "desktop:Outline",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderTxtArtistFontSize",
-                      "colorTxtArtistColor",
-                      "checkboxTxtArtistBold",
-                      "checkboxTxtArtistItalic",
-                      "checkboxTxtArtistUnderline",
-                      "sliderTxtArtistLetterSpacing",
-                      "sliderTxtArtistLineSpacing",
-                      "sliderTxtArtistOpacity",
-                      "checkboxTxtArtistWordWrap",
-                      "sliderTxtArtistMaxWidth",
-                      "selectTxtArtistOverflow"
-                    ],
-                    "subgroups": [
-                      {
-                        "key": "desktop:Outline",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Album & Date",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderTxtAlbumDateFontSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorTxtAlbumDateColor"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtAlbumDateBold"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtAlbumDateItalic"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtAlbumDateUnderline"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtAlbumDateLetterSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtAlbumDateLineSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtAlbumDateOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtAlbumDateWordWrap"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtAlbumDateMaxWidth"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectTxtAlbumDateOverflow"
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "desktop:Outline",
-                          "items": [
-                            {
-                              "type": "row",
-                              "key": "colorTxtAlbumDateOutlineColor"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderTxtAlbumDateOutlineThickness"
-                            },
-                            {
-                              "type": "row",
-                              "key": "colorTxtArtistOutlineColor"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderTxtArtistOutlineThickness"
-                            },
-                            {
-                              "type": "row",
-                              "key": "colorTxtSongTitleOutlineColor"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderTxtSongTitleOutlineThickness"
-                            }
-                          ],
-                          "rowKeys": [
-                            "colorTxtAlbumDateOutlineColor",
-                            "sliderTxtAlbumDateOutlineThickness",
-                            "colorTxtArtistOutlineColor",
-                            "sliderTxtArtistOutlineThickness",
-                            "colorTxtSongTitleOutlineColor",
-                            "sliderTxtSongTitleOutlineThickness"
-                          ],
-                          "subgroups": []
-                        }
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderTxtAlbumDateFontSize",
-                      "colorTxtAlbumDateColor",
-                      "checkboxTxtAlbumDateBold",
-                      "checkboxTxtAlbumDateItalic",
-                      "checkboxTxtAlbumDateUnderline",
-                      "sliderTxtAlbumDateLetterSpacing",
-                      "sliderTxtAlbumDateLineSpacing",
-                      "sliderTxtAlbumDateOpacity",
-                      "checkboxTxtAlbumDateWordWrap",
-                      "sliderTxtAlbumDateMaxWidth",
-                      "selectTxtAlbumDateOverflow"
-                    ],
-                    "subgroups": [
-                      {
-                        "key": "desktop:Outline",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "colorTxtAlbumDateOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtAlbumDateOutlineThickness"
-                          },
-                          {
-                            "type": "row",
-                            "key": "colorTxtArtistOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtArtistOutlineThickness"
-                          },
-                          {
-                            "type": "row",
-                            "key": "colorTxtSongTitleOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtSongTitleOutlineThickness"
-                          }
-                        ],
-                        "rowKeys": [
-                          "colorTxtAlbumDateOutlineColor",
-                          "sliderTxtAlbumDateOutlineThickness",
-                          "colorTxtArtistOutlineColor",
-                          "sliderTxtArtistOutlineThickness",
-                          "colorTxtSongTitleOutlineColor",
-                          "sliderTxtSongTitleOutlineThickness"
-                        ],
-                        "subgroups": []
-                      }
-                    ]
-                  }
+            "key": "desktop:Text",
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Font",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectUiFont"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectUiFont"
+                  ],
+                  "subgroups": []
                 }
-              ],
-              "rowKeys": [],
-              "subgroups": [
-                {
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "desktop:Song Title",
                   "items": [
                     {
@@ -3514,6 +4017,122 @@
                     {
                       "type": "group",
                       "section": {
+                        "key": "desktop:Track Title Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "selectTitleAnimMode"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleAnimDuration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTitleAnimEasing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleBoldRestWeight"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleBoldHoverWeight"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleBoldPressWeight"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitlePulseScale"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitlePulseInDuration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitlePulseOutDuration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGrowScale"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGrowPressScale"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGlowRadius"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGlowOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTitleGlowColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleGlowPressRadius"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleTrackingHover"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleTrackingPress"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftPx"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftPressPx"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftShadowBlur"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleLiftShadowOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "selectTitleAnimMode",
+                          "sliderTitleAnimDuration",
+                          "selectTitleAnimEasing",
+                          "sliderTitleBoldRestWeight",
+                          "sliderTitleBoldHoverWeight",
+                          "sliderTitleBoldPressWeight",
+                          "sliderTitlePulseScale",
+                          "sliderTitlePulseInDuration",
+                          "sliderTitlePulseOutDuration",
+                          "sliderTitleGrowScale",
+                          "sliderTitleGrowPressScale",
+                          "sliderTitleGlowRadius",
+                          "sliderTitleGlowOpacity",
+                          "colorTitleGlowColor",
+                          "sliderTitleGlowPressRadius",
+                          "sliderTitleTrackingHover",
+                          "sliderTitleTrackingPress",
+                          "sliderTitleLiftPx",
+                          "sliderTitleLiftPressPx",
+                          "sliderTitleLiftShadowBlur",
+                          "sliderTitleLiftShadowOpacity"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
                         "key": "desktop:Outline",
                         "items": [],
                         "rowKeys": [],
@@ -3536,14 +4155,130 @@
                   ],
                   "subgroups": [
                     {
+                      "key": "desktop:Track Title Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "selectTitleAnimMode"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleAnimDuration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTitleAnimEasing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleBoldRestWeight"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleBoldHoverWeight"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleBoldPressWeight"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitlePulseScale"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitlePulseInDuration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitlePulseOutDuration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGrowScale"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGrowPressScale"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGlowRadius"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGlowOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTitleGlowColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGlowPressRadius"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleTrackingHover"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleTrackingPress"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftPx"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftPressPx"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftShadowBlur"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftShadowOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "selectTitleAnimMode",
+                        "sliderTitleAnimDuration",
+                        "selectTitleAnimEasing",
+                        "sliderTitleBoldRestWeight",
+                        "sliderTitleBoldHoverWeight",
+                        "sliderTitleBoldPressWeight",
+                        "sliderTitlePulseScale",
+                        "sliderTitlePulseInDuration",
+                        "sliderTitlePulseOutDuration",
+                        "sliderTitleGrowScale",
+                        "sliderTitleGrowPressScale",
+                        "sliderTitleGlowRadius",
+                        "sliderTitleGlowOpacity",
+                        "colorTitleGlowColor",
+                        "sliderTitleGlowPressRadius",
+                        "sliderTitleTrackingHover",
+                        "sliderTitleTrackingPress",
+                        "sliderTitleLiftPx",
+                        "sliderTitleLiftPressPx",
+                        "sliderTitleLiftShadowBlur",
+                        "sliderTitleLiftShadowOpacity"
+                      ],
+                      "subgroups": []
+                    },
+                    {
                       "key": "desktop:Outline",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
                     }
                   ]
-                },
-                {
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "desktop:Artist",
                   "items": [
                     {
@@ -3621,8 +4356,11 @@
                       "subgroups": []
                     }
                   ]
-                },
-                {
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "desktop:Album & Date",
                   "items": [
                     {
@@ -3765,197 +4503,10 @@
                     }
                   ]
                 }
-              ]
-            }
-          }
-        ],
-        "rowKeys": [
-          "buttonOpenLayoutInspector"
-        ],
-        "subgroups": [
-          {
-            "key": "desktop:New Group (3)",
-            "items": [
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:New Group (4)",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:New Group (5)",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:New Group (6)",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Font",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "selectUiFont"
-                    }
-                  ],
-                  "rowKeys": [
-                    "selectUiFont"
-                  ],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Track Title Button Animation",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "selectTitleAnimMode"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleAnimDuration"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTitleAnimEasing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleBoldRestWeight"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleBoldHoverWeight"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleBoldPressWeight"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitlePulseScale"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitlePulseInDuration"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitlePulseOutDuration"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleGrowScale"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleGrowPressScale"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleGlowRadius"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleGlowOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorTitleGlowColor"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleGlowPressRadius"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleTrackingHover"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleTrackingPress"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleLiftPx"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleLiftPressPx"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleLiftShadowBlur"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleLiftShadowOpacity"
-                    }
-                  ],
-                  "rowKeys": [
-                    "selectTitleAnimMode",
-                    "sliderTitleAnimDuration",
-                    "selectTitleAnimEasing",
-                    "sliderTitleBoldRestWeight",
-                    "sliderTitleBoldHoverWeight",
-                    "sliderTitleBoldPressWeight",
-                    "sliderTitlePulseScale",
-                    "sliderTitlePulseInDuration",
-                    "sliderTitlePulseOutDuration",
-                    "sliderTitleGrowScale",
-                    "sliderTitleGrowPressScale",
-                    "sliderTitleGlowRadius",
-                    "sliderTitleGlowOpacity",
-                    "colorTitleGlowColor",
-                    "sliderTitleGlowPressRadius",
-                    "sliderTitleTrackingHover",
-                    "sliderTitleTrackingPress",
-                    "sliderTitleLiftPx",
-                    "sliderTitleLiftPressPx",
-                    "sliderTitleLiftShadowBlur",
-                    "sliderTitleLiftShadowOpacity"
-                  ],
-                  "subgroups": []
-                }
               }
             ],
             "rowKeys": [],
             "subgroups": [
-              {
-                "key": "desktop:New Group (4)",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              },
-              {
-                "key": "desktop:New Group (5)",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              },
-              {
-                "key": "desktop:New Group (6)",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              },
               {
                 "key": "desktop:Font",
                 "items": [
@@ -3970,117 +4521,534 @@
                 "subgroups": []
               },
               {
-                "key": "desktop:Track Title Button Animation",
+                "key": "desktop:Song Title",
                 "items": [
                   {
                     "type": "row",
-                    "key": "selectTitleAnimMode"
+                    "key": "sliderTxtSongTitleFontSize"
                   },
                   {
                     "type": "row",
-                    "key": "sliderTitleAnimDuration"
+                    "key": "colorTxtSongTitleColor"
                   },
                   {
                     "type": "row",
-                    "key": "selectTitleAnimEasing"
+                    "key": "checkboxTxtSongTitleBold"
                   },
                   {
                     "type": "row",
-                    "key": "sliderTitleBoldRestWeight"
+                    "key": "checkboxTxtSongTitleItalic"
                   },
                   {
                     "type": "row",
-                    "key": "sliderTitleBoldHoverWeight"
+                    "key": "checkboxTxtSongTitleUnderline"
                   },
                   {
                     "type": "row",
-                    "key": "sliderTitleBoldPressWeight"
+                    "key": "sliderTxtSongTitleLetterSpacing"
                   },
                   {
                     "type": "row",
-                    "key": "sliderTitlePulseScale"
+                    "key": "sliderTxtSongTitleLineSpacing"
                   },
                   {
                     "type": "row",
-                    "key": "sliderTitlePulseInDuration"
+                    "key": "sliderTxtSongTitleOpacity"
                   },
                   {
                     "type": "row",
-                    "key": "sliderTitlePulseOutDuration"
+                    "key": "checkboxTxtSongTitleWordWrap"
                   },
                   {
                     "type": "row",
-                    "key": "sliderTitleGrowScale"
+                    "key": "sliderTxtSongTitleMaxWidth"
                   },
                   {
                     "type": "row",
-                    "key": "sliderTitleGrowPressScale"
+                    "key": "selectTxtSongTitleOverflow"
                   },
                   {
-                    "type": "row",
-                    "key": "sliderTitleGlowRadius"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Track Title Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "selectTitleAnimMode"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleAnimDuration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTitleAnimEasing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleBoldRestWeight"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleBoldHoverWeight"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleBoldPressWeight"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitlePulseScale"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitlePulseInDuration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitlePulseOutDuration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGrowScale"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGrowPressScale"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGlowRadius"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGlowOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTitleGlowColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleGlowPressRadius"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleTrackingHover"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleTrackingPress"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftPx"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftPressPx"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftShadowBlur"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleLiftShadowOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "selectTitleAnimMode",
+                        "sliderTitleAnimDuration",
+                        "selectTitleAnimEasing",
+                        "sliderTitleBoldRestWeight",
+                        "sliderTitleBoldHoverWeight",
+                        "sliderTitleBoldPressWeight",
+                        "sliderTitlePulseScale",
+                        "sliderTitlePulseInDuration",
+                        "sliderTitlePulseOutDuration",
+                        "sliderTitleGrowScale",
+                        "sliderTitleGrowPressScale",
+                        "sliderTitleGlowRadius",
+                        "sliderTitleGlowOpacity",
+                        "colorTitleGlowColor",
+                        "sliderTitleGlowPressRadius",
+                        "sliderTitleTrackingHover",
+                        "sliderTitleTrackingPress",
+                        "sliderTitleLiftPx",
+                        "sliderTitleLiftPressPx",
+                        "sliderTitleLiftShadowBlur",
+                        "sliderTitleLiftShadowOpacity"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderTitleGlowOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorTitleGlowColor"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTitleGlowPressRadius"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTitleTrackingHover"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTitleTrackingPress"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTitleLiftPx"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTitleLiftPressPx"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTitleLiftShadowBlur"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTitleLiftShadowOpacity"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Outline",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
                   }
                 ],
                 "rowKeys": [
-                  "selectTitleAnimMode",
-                  "sliderTitleAnimDuration",
-                  "selectTitleAnimEasing",
-                  "sliderTitleBoldRestWeight",
-                  "sliderTitleBoldHoverWeight",
-                  "sliderTitleBoldPressWeight",
-                  "sliderTitlePulseScale",
-                  "sliderTitlePulseInDuration",
-                  "sliderTitlePulseOutDuration",
-                  "sliderTitleGrowScale",
-                  "sliderTitleGrowPressScale",
-                  "sliderTitleGlowRadius",
-                  "sliderTitleGlowOpacity",
-                  "colorTitleGlowColor",
-                  "sliderTitleGlowPressRadius",
-                  "sliderTitleTrackingHover",
-                  "sliderTitleTrackingPress",
-                  "sliderTitleLiftPx",
-                  "sliderTitleLiftPressPx",
-                  "sliderTitleLiftShadowBlur",
-                  "sliderTitleLiftShadowOpacity"
+                  "sliderTxtSongTitleFontSize",
+                  "colorTxtSongTitleColor",
+                  "checkboxTxtSongTitleBold",
+                  "checkboxTxtSongTitleItalic",
+                  "checkboxTxtSongTitleUnderline",
+                  "sliderTxtSongTitleLetterSpacing",
+                  "sliderTxtSongTitleLineSpacing",
+                  "sliderTxtSongTitleOpacity",
+                  "checkboxTxtSongTitleWordWrap",
+                  "sliderTxtSongTitleMaxWidth",
+                  "selectTxtSongTitleOverflow"
                 ],
-                "subgroups": []
+                "subgroups": [
+                  {
+                    "key": "desktop:Track Title Button Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "selectTitleAnimMode"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleAnimDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectTitleAnimEasing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleBoldRestWeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleBoldHoverWeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleBoldPressWeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitlePulseScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitlePulseInDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitlePulseOutDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleGrowScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleGrowPressScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleGlowRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleGlowOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorTitleGlowColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleGlowPressRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleTrackingHover"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleTrackingPress"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleLiftPx"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleLiftPressPx"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleLiftShadowBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleLiftShadowOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "selectTitleAnimMode",
+                      "sliderTitleAnimDuration",
+                      "selectTitleAnimEasing",
+                      "sliderTitleBoldRestWeight",
+                      "sliderTitleBoldHoverWeight",
+                      "sliderTitleBoldPressWeight",
+                      "sliderTitlePulseScale",
+                      "sliderTitlePulseInDuration",
+                      "sliderTitlePulseOutDuration",
+                      "sliderTitleGrowScale",
+                      "sliderTitleGrowPressScale",
+                      "sliderTitleGlowRadius",
+                      "sliderTitleGlowOpacity",
+                      "colorTitleGlowColor",
+                      "sliderTitleGlowPressRadius",
+                      "sliderTitleTrackingHover",
+                      "sliderTitleTrackingPress",
+                      "sliderTitleLiftPx",
+                      "sliderTitleLiftPressPx",
+                      "sliderTitleLiftShadowBlur",
+                      "sliderTitleLiftShadowOpacity"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:Outline",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                ]
+              },
+              {
+                "key": "desktop:Artist",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderTxtArtistFontSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorTxtArtistColor"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtArtistBold"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtArtistItalic"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtArtistUnderline"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTxtArtistLetterSpacing"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTxtArtistLineSpacing"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTxtArtistOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtArtistWordWrap"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTxtArtistMaxWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectTxtArtistOverflow"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Outline",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [
+                  "sliderTxtArtistFontSize",
+                  "colorTxtArtistColor",
+                  "checkboxTxtArtistBold",
+                  "checkboxTxtArtistItalic",
+                  "checkboxTxtArtistUnderline",
+                  "sliderTxtArtistLetterSpacing",
+                  "sliderTxtArtistLineSpacing",
+                  "sliderTxtArtistOpacity",
+                  "checkboxTxtArtistWordWrap",
+                  "sliderTxtArtistMaxWidth",
+                  "selectTxtArtistOverflow"
+                ],
+                "subgroups": [
+                  {
+                    "key": "desktop:Outline",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                ]
+              },
+              {
+                "key": "desktop:Album & Date",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderTxtAlbumDateFontSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorTxtAlbumDateColor"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtAlbumDateBold"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtAlbumDateItalic"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtAlbumDateUnderline"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTxtAlbumDateLetterSpacing"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTxtAlbumDateLineSpacing"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTxtAlbumDateOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtAlbumDateWordWrap"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTxtAlbumDateMaxWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectTxtAlbumDateOverflow"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Outline",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "colorTxtAlbumDateOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtAlbumDateOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtArtistOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistOutlineThickness"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtSongTitleOutlineColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleOutlineThickness"
+                        }
+                      ],
+                      "rowKeys": [
+                        "colorTxtAlbumDateOutlineColor",
+                        "sliderTxtAlbumDateOutlineThickness",
+                        "colorTxtArtistOutlineColor",
+                        "sliderTxtArtistOutlineThickness",
+                        "colorTxtSongTitleOutlineColor",
+                        "sliderTxtSongTitleOutlineThickness"
+                      ],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [
+                  "sliderTxtAlbumDateFontSize",
+                  "colorTxtAlbumDateColor",
+                  "checkboxTxtAlbumDateBold",
+                  "checkboxTxtAlbumDateItalic",
+                  "checkboxTxtAlbumDateUnderline",
+                  "sliderTxtAlbumDateLetterSpacing",
+                  "sliderTxtAlbumDateLineSpacing",
+                  "sliderTxtAlbumDateOpacity",
+                  "checkboxTxtAlbumDateWordWrap",
+                  "sliderTxtAlbumDateMaxWidth",
+                  "selectTxtAlbumDateOverflow"
+                ],
+                "subgroups": [
+                  {
+                    "key": "desktop:Outline",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "colorTxtAlbumDateOutlineColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtAlbumDateOutlineThickness"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorTxtArtistOutlineColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistOutlineThickness"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorTxtSongTitleOutlineColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtSongTitleOutlineThickness"
+                      }
+                    ],
+                    "rowKeys": [
+                      "colorTxtAlbumDateOutlineColor",
+                      "sliderTxtAlbumDateOutlineThickness",
+                      "colorTxtArtistOutlineColor",
+                      "sliderTxtArtistOutlineThickness",
+                      "colorTxtSongTitleOutlineColor",
+                      "sliderTxtSongTitleOutlineThickness"
+                    ],
+                    "subgroups": []
+                  }
+                ]
               }
             ]
           },
@@ -5212,625 +6180,6 @@
               "sliderBracketsFontPct"
             ],
             "subgroups": []
-          },
-          {
-            "key": "desktop:Text",
-            "items": [
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Song Title",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleFontSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorTxtSongTitleColor"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleBold"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleItalic"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleUnderline"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleLetterSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleLineSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleWordWrap"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleMaxWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTxtSongTitleOverflow"
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:Outline",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderTxtSongTitleFontSize",
-                    "colorTxtSongTitleColor",
-                    "checkboxTxtSongTitleBold",
-                    "checkboxTxtSongTitleItalic",
-                    "checkboxTxtSongTitleUnderline",
-                    "sliderTxtSongTitleLetterSpacing",
-                    "sliderTxtSongTitleLineSpacing",
-                    "sliderTxtSongTitleOpacity",
-                    "checkboxTxtSongTitleWordWrap",
-                    "sliderTxtSongTitleMaxWidth",
-                    "selectTxtSongTitleOverflow"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "desktop:Outline",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Artist",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistFontSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorTxtArtistColor"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistBold"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistItalic"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistUnderline"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistLetterSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistLineSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistWordWrap"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistMaxWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTxtArtistOverflow"
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:Outline",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderTxtArtistFontSize",
-                    "colorTxtArtistColor",
-                    "checkboxTxtArtistBold",
-                    "checkboxTxtArtistItalic",
-                    "checkboxTxtArtistUnderline",
-                    "sliderTxtArtistLetterSpacing",
-                    "sliderTxtArtistLineSpacing",
-                    "sliderTxtArtistOpacity",
-                    "checkboxTxtArtistWordWrap",
-                    "sliderTxtArtistMaxWidth",
-                    "selectTxtArtistOverflow"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "desktop:Outline",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Album & Date",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderTxtAlbumDateFontSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorTxtAlbumDateColor"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtAlbumDateBold"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtAlbumDateItalic"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtAlbumDateUnderline"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtAlbumDateLetterSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtAlbumDateLineSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtAlbumDateOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtAlbumDateWordWrap"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtAlbumDateMaxWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTxtAlbumDateOverflow"
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:Outline",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "colorTxtAlbumDateOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtAlbumDateOutlineThickness"
-                          },
-                          {
-                            "type": "row",
-                            "key": "colorTxtArtistOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtArtistOutlineThickness"
-                          },
-                          {
-                            "type": "row",
-                            "key": "colorTxtSongTitleOutlineColor"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderTxtSongTitleOutlineThickness"
-                          }
-                        ],
-                        "rowKeys": [
-                          "colorTxtAlbumDateOutlineColor",
-                          "sliderTxtAlbumDateOutlineThickness",
-                          "colorTxtArtistOutlineColor",
-                          "sliderTxtArtistOutlineThickness",
-                          "colorTxtSongTitleOutlineColor",
-                          "sliderTxtSongTitleOutlineThickness"
-                        ],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderTxtAlbumDateFontSize",
-                    "colorTxtAlbumDateColor",
-                    "checkboxTxtAlbumDateBold",
-                    "checkboxTxtAlbumDateItalic",
-                    "checkboxTxtAlbumDateUnderline",
-                    "sliderTxtAlbumDateLetterSpacing",
-                    "sliderTxtAlbumDateLineSpacing",
-                    "sliderTxtAlbumDateOpacity",
-                    "checkboxTxtAlbumDateWordWrap",
-                    "sliderTxtAlbumDateMaxWidth",
-                    "selectTxtAlbumDateOverflow"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "desktop:Outline",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "colorTxtAlbumDateOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtAlbumDateOutlineThickness"
-                        },
-                        {
-                          "type": "row",
-                          "key": "colorTxtArtistOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtArtistOutlineThickness"
-                        },
-                        {
-                          "type": "row",
-                          "key": "colorTxtSongTitleOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtSongTitleOutlineThickness"
-                        }
-                      ],
-                      "rowKeys": [
-                        "colorTxtAlbumDateOutlineColor",
-                        "sliderTxtAlbumDateOutlineThickness",
-                        "colorTxtArtistOutlineColor",
-                        "sliderTxtArtistOutlineThickness",
-                        "colorTxtSongTitleOutlineColor",
-                        "sliderTxtSongTitleOutlineThickness"
-                      ],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              }
-            ],
-            "rowKeys": [],
-            "subgroups": [
-              {
-                "key": "desktop:Song Title",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleFontSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorTxtSongTitleColor"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleBold"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleItalic"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleUnderline"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleLetterSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleLineSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleWordWrap"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleMaxWidth"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectTxtSongTitleOverflow"
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "desktop:Outline",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  }
-                ],
-                "rowKeys": [
-                  "sliderTxtSongTitleFontSize",
-                  "colorTxtSongTitleColor",
-                  "checkboxTxtSongTitleBold",
-                  "checkboxTxtSongTitleItalic",
-                  "checkboxTxtSongTitleUnderline",
-                  "sliderTxtSongTitleLetterSpacing",
-                  "sliderTxtSongTitleLineSpacing",
-                  "sliderTxtSongTitleOpacity",
-                  "checkboxTxtSongTitleWordWrap",
-                  "sliderTxtSongTitleMaxWidth",
-                  "selectTxtSongTitleOverflow"
-                ],
-                "subgroups": [
-                  {
-                    "key": "desktop:Outline",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                ]
-              },
-              {
-                "key": "desktop:Artist",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistFontSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorTxtArtistColor"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtArtistBold"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtArtistItalic"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtArtistUnderline"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistLetterSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistLineSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtArtistWordWrap"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistMaxWidth"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectTxtArtistOverflow"
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "desktop:Outline",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  }
-                ],
-                "rowKeys": [
-                  "sliderTxtArtistFontSize",
-                  "colorTxtArtistColor",
-                  "checkboxTxtArtistBold",
-                  "checkboxTxtArtistItalic",
-                  "checkboxTxtArtistUnderline",
-                  "sliderTxtArtistLetterSpacing",
-                  "sliderTxtArtistLineSpacing",
-                  "sliderTxtArtistOpacity",
-                  "checkboxTxtArtistWordWrap",
-                  "sliderTxtArtistMaxWidth",
-                  "selectTxtArtistOverflow"
-                ],
-                "subgroups": [
-                  {
-                    "key": "desktop:Outline",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                ]
-              },
-              {
-                "key": "desktop:Album & Date",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "sliderTxtAlbumDateFontSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorTxtAlbumDateColor"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtAlbumDateBold"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtAlbumDateItalic"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtAlbumDateUnderline"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtAlbumDateLetterSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtAlbumDateLineSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtAlbumDateOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtAlbumDateWordWrap"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtAlbumDateMaxWidth"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectTxtAlbumDateOverflow"
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "desktop:Outline",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "colorTxtAlbumDateOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtAlbumDateOutlineThickness"
-                        },
-                        {
-                          "type": "row",
-                          "key": "colorTxtArtistOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtArtistOutlineThickness"
-                        },
-                        {
-                          "type": "row",
-                          "key": "colorTxtSongTitleOutlineColor"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderTxtSongTitleOutlineThickness"
-                        }
-                      ],
-                      "rowKeys": [
-                        "colorTxtAlbumDateOutlineColor",
-                        "sliderTxtAlbumDateOutlineThickness",
-                        "colorTxtArtistOutlineColor",
-                        "sliderTxtArtistOutlineThickness",
-                        "colorTxtSongTitleOutlineColor",
-                        "sliderTxtSongTitleOutlineThickness"
-                      ],
-                      "subgroups": []
-                    }
-                  }
-                ],
-                "rowKeys": [
-                  "sliderTxtAlbumDateFontSize",
-                  "colorTxtAlbumDateColor",
-                  "checkboxTxtAlbumDateBold",
-                  "checkboxTxtAlbumDateItalic",
-                  "checkboxTxtAlbumDateUnderline",
-                  "sliderTxtAlbumDateLetterSpacing",
-                  "sliderTxtAlbumDateLineSpacing",
-                  "sliderTxtAlbumDateOpacity",
-                  "checkboxTxtAlbumDateWordWrap",
-                  "sliderTxtAlbumDateMaxWidth",
-                  "selectTxtAlbumDateOverflow"
-                ],
-                "subgroups": [
-                  {
-                    "key": "desktop:Outline",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "colorTxtAlbumDateOutlineColor"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtAlbumDateOutlineThickness"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorTxtArtistOutlineColor"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistOutlineThickness"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorTxtSongTitleOutlineColor"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleOutlineThickness"
-                      }
-                    ],
-                    "rowKeys": [
-                      "colorTxtAlbumDateOutlineColor",
-                      "sliderTxtAlbumDateOutlineThickness",
-                      "colorTxtArtistOutlineColor",
-                      "sliderTxtArtistOutlineThickness",
-                      "colorTxtSongTitleOutlineColor",
-                      "sliderTxtSongTitleOutlineThickness"
-                    ],
-                    "subgroups": []
-                  }
-                ]
-              }
-            ]
           }
         ]
       },
@@ -12964,13 +13313,14 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": false,
-    "desktop:UI Layout": true,
-    "desktop:New Group (3)": true,
-    "desktop:New Group (4)": true,
-    "desktop:New Group (5)": true,
-    "desktop:New Group (6)": true,
+    "desktop:UI Layout": false,
+    "desktop:Text": false,
     "desktop:Font": true,
+    "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
+    "desktop:Outline": false,
+    "desktop:Artist": true,
+    "desktop:Album & Date": true,
     "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:Play Button": true,
@@ -12985,13 +13335,8 @@
     "desktop:Previous / Next Shadow": false,
     "desktop:Title Lift Shadow": false,
     "desktop:Brackets Smaller Text": false,
-    "desktop:Text": true,
-    "desktop:Song Title": false,
-    "desktop:Outline": false,
-    "desktop:Artist": false,
-    "desktop:Album & Date": true,
     "desktop:Startup": false,
-    "desktop:Start Button": false,
+    "desktop:Start Button": true,
     "desktop:Start Button Animation": false,
     "desktop:New Group": true,
     "desktop:Scrub Preload": true,
