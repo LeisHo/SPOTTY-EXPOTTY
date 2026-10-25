@@ -8051,6 +8051,7 @@
             const d = BTN_DEF[P];
             uiLayoutContent.appendChild(createDevGroupElement(G, tab));
             const main = [
+                ...(P === 'Nav' ? [{ tab, group: G, id: 'sliderNavEdgeOffset', type: 'slider', label: 'Edge Offset From Browser (Px):', min: 0, max: 300, step: 1, value: 14 }] : []),
                 { tab, group: G, id: 'checkbox' + P + 'ButtonEnabled', type: 'checkbox', label: 'Enabled', value: d.on },
                 { tab, group: G, id: 'color' + P + 'Button', type: 'color', label: 'Color:', value: d.color },
                 { tab, group: G, id: 'slider' + P + 'ButtonSize', type: 'slider', label: 'Size (Px):', min: 8, max: 300, step: 1, value: d.size },

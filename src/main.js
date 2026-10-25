@@ -446,6 +446,7 @@ async function boot() {
         el('spxTimeline').style.setProperty('height', 'calc(100dvh - 14px)', 'important');
         el('spxStart').style.transition = `opacity ${setting('sliderStartFadeMs')}ms linear`;
         el('spxShuffle').hidden = !setting('checkboxShuffleButtonEnabled');
+        placeNav(); // the edge offset is a setting
         el('spxApp').style.setProperty('--spx-shuffle-icon', setting('sliderShuffleIconSize') + 'px');
         el('spxApp').style.setProperty('--spx-shuffle-x', setting('sliderShuffleIconOffsetX') + 'px');
         el('spxApp').style.setProperty('--spx-shuffle-off-op', String(setting('sliderShuffleOffOpacity') / 100));
@@ -838,8 +839,9 @@ async function boot() {
     // the cover's left edge - 48, the next one's at the cover's right edge.)
     function placeNav() {
         const r = el('spxCover').getBoundingClientRect();
-        el('spxPrev').style.translate = `${14 - (r.left - 48)}px 0px`;
-        el('spxNext').style.translate = `${(innerWidth - 14 - 48) - r.right}px 0px`;
+        const edge = setting('sliderNavEdgeOffset');
+        el('spxPrev').style.translate = `${edge - (r.left - 48)}px 0px`;
+        el('spxNext').style.translate = `${(innerWidth - edge - 48) - r.right}px 0px`;
     }
     // The cover's scale grows it around transform-origin. When the engine centres the cover (anchor center), it has already moved
     // the box by -50% of its own width / height, so scaling around the box's middle pushes it off centre (at scale 1.5 the centre
