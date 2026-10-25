@@ -150,10 +150,10 @@
     "checkboxSnapshotTimeline": true,
     "checkboxSnapshotSettings": true,
     "buttonDebugSnapshot": "",
-    "checkboxShadowCover": true,
-    "checkboxShadowVolume": true,
-    "checkboxShadowNav": true,
-    "checkboxShadowTitleLift": true,
+    "checkboxShadowCover": false,
+    "checkboxShadowVolume": false,
+    "checkboxShadowNav": false,
+    "checkboxShadowTitleLift": false,
     "checkboxTitleAnimEnabled": true,
     "selectTitleAnimMode": "grow",
     "sliderTitleAnimDuration": 110,
@@ -1594,6 +1594,89 @@
                 {
                   "type": "group",
                   "section": {
+                    "key": "desktop:New Group (4)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderTitleSizeMin"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleSizePref"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleSizeMax"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleScale"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderTitleSizeMin",
+                      "sliderTitleSizePref",
+                      "sliderTitleSizeMax",
+                      "sliderTitleScale"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:New Group (5)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderArtistSizeMin"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistSizePref"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistSizeMax"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderArtistSizeMin",
+                      "sliderArtistSizePref",
+                      "sliderArtistSizeMax"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:New Group (6)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMetaSizeMin"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMetaSizePref"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMetaSizeMax"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMetaSizeMin",
+                      "sliderMetaSizePref",
+                      "sliderMetaSizeMax"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
                     "key": "desktop:Font",
                     "items": [
                       {
@@ -1722,61 +1805,84 @@
                     ],
                     "subgroups": []
                   }
-                },
-                {
-                  "type": "row",
-                  "key": "sliderTitleSizeMin"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderTitleSizePref"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderTitleSizeMax"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderArtistSizeMin"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderArtistSizePref"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderArtistSizeMax"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMetaSizeMin"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMetaSizePref"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMetaSizeMax"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderTitleScale"
                 }
               ],
-              "rowKeys": [
-                "sliderTitleSizeMin",
-                "sliderTitleSizePref",
-                "sliderTitleSizeMax",
-                "sliderArtistSizeMin",
-                "sliderArtistSizePref",
-                "sliderArtistSizeMax",
-                "sliderMetaSizeMin",
-                "sliderMetaSizePref",
-                "sliderMetaSizeMax",
-                "sliderTitleScale"
-              ],
+              "rowKeys": [],
               "subgroups": [
+                {
+                  "key": "desktop:New Group (4)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderTitleSizeMin"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleSizePref"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleSizeMax"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderTitleSizeMin",
+                    "sliderTitleSizePref",
+                    "sliderTitleSizeMax",
+                    "sliderTitleScale"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "desktop:New Group (5)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderArtistSizeMin"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistSizePref"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistSizeMax"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderArtistSizeMin",
+                    "sliderArtistSizePref",
+                    "sliderArtistSizeMax"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "desktop:New Group (6)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMetaSizeMin"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMetaSizePref"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMetaSizeMax"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMetaSizeMin",
+                    "sliderMetaSizePref",
+                    "sliderMetaSizeMax"
+                  ],
+                  "subgroups": []
+                },
                 {
                   "key": "desktop:Font",
                   "items": [
@@ -2507,6 +2613,89 @@
               {
                 "type": "group",
                 "section": {
+                  "key": "desktop:New Group (4)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderTitleSizeMin"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleSizePref"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleSizeMax"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderTitleSizeMin",
+                    "sliderTitleSizePref",
+                    "sliderTitleSizeMax",
+                    "sliderTitleScale"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:New Group (5)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderArtistSizeMin"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistSizePref"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistSizeMax"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderArtistSizeMin",
+                    "sliderArtistSizePref",
+                    "sliderArtistSizeMax"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:New Group (6)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMetaSizeMin"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMetaSizePref"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMetaSizeMax"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMetaSizeMin",
+                    "sliderMetaSizePref",
+                    "sliderMetaSizeMax"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "desktop:Font",
                   "items": [
                     {
@@ -2635,61 +2824,84 @@
                   ],
                   "subgroups": []
                 }
-              },
-              {
-                "type": "row",
-                "key": "sliderTitleSizeMin"
-              },
-              {
-                "type": "row",
-                "key": "sliderTitleSizePref"
-              },
-              {
-                "type": "row",
-                "key": "sliderTitleSizeMax"
-              },
-              {
-                "type": "row",
-                "key": "sliderArtistSizeMin"
-              },
-              {
-                "type": "row",
-                "key": "sliderArtistSizePref"
-              },
-              {
-                "type": "row",
-                "key": "sliderArtistSizeMax"
-              },
-              {
-                "type": "row",
-                "key": "sliderMetaSizeMin"
-              },
-              {
-                "type": "row",
-                "key": "sliderMetaSizePref"
-              },
-              {
-                "type": "row",
-                "key": "sliderMetaSizeMax"
-              },
-              {
-                "type": "row",
-                "key": "sliderTitleScale"
               }
             ],
-            "rowKeys": [
-              "sliderTitleSizeMin",
-              "sliderTitleSizePref",
-              "sliderTitleSizeMax",
-              "sliderArtistSizeMin",
-              "sliderArtistSizePref",
-              "sliderArtistSizeMax",
-              "sliderMetaSizeMin",
-              "sliderMetaSizePref",
-              "sliderMetaSizeMax",
-              "sliderTitleScale"
-            ],
+            "rowKeys": [],
             "subgroups": [
+              {
+                "key": "desktop:New Group (4)",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderTitleSizeMin"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTitleSizePref"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTitleSizeMax"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTitleScale"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderTitleSizeMin",
+                  "sliderTitleSizePref",
+                  "sliderTitleSizeMax",
+                  "sliderTitleScale"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "desktop:New Group (5)",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderArtistSizeMin"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderArtistSizePref"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderArtistSizeMax"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderArtistSizeMin",
+                  "sliderArtistSizePref",
+                  "sliderArtistSizeMax"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "desktop:New Group (6)",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderMetaSizeMin"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMetaSizePref"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMetaSizeMax"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderMetaSizeMin",
+                  "sliderMetaSizePref",
+                  "sliderMetaSizeMax"
+                ],
+                "subgroups": []
+              },
               {
                 "key": "desktop:Font",
                 "items": [
@@ -7932,12 +8144,15 @@
     "desktop:Mouse Log": true,
     "desktop:UI Layout": false,
     "desktop:New Group (3)": false,
+    "desktop:New Group (4)": false,
+    "desktop:New Group (5)": true,
+    "desktop:New Group (6)": true,
     "desktop:Font": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Background": true,
     "desktop:Volume Button": true,
     "desktop:Album Cover": false,
-    "desktop:Shadows": true,
+    "desktop:Shadows": false,
     "desktop:Play Button": true,
     "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": true,
@@ -8293,22 +8508,29 @@
     "landscape:Next And Last Song Buttons": null,
     "mobile:No Preview": null,
     "landscape:No Preview": null,
-    "desktop:New Group (3)": "Text"
+    "desktop:New Group (3)": "Text",
+    "desktop:New Group (6)": "ALBUM",
+    "desktop:New Group (5)": "ARTIST",
+    "desktop:New Group (4)": "TRACK TITLE"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
     "desktop:Scrub Audio",
     "desktop:New Group",
     "desktop:New Group (2)",
-    "desktop:New Group (3)"
+    "desktop:New Group (3)",
+    "desktop:New Group (6)",
+    "desktop:New Group (5)",
+    "desktop:New Group (4)"
   ],
   "lockedGroups": [
     "desktop:Dev Panel",
-    "desktop:Debug",
     "mobile:Dev Panel",
     "mobile:Debug",
     "landscape:Dev Panel",
-    "landscape:Debug"
+    "landscape:Debug",
+    "desktop:Mouse Log",
+    "desktop:Debug"
   ],
   "lockedSliderBounds": [],
   "textEditModeEnabled": false,
