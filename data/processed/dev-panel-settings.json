@@ -119,7 +119,7 @@
     "colorTxtSongTitleOutlineColor": "#000000",
     "sliderTxtSongTitleOutlineThickness": 2,
     "checkboxTxtArtistEnabled": true,
-    "sliderTxtArtistFontSize": 22,
+    "sliderTxtArtistFontSize": 19,
     "colorTxtArtistColor": "#f7f7f7",
     "checkboxTxtArtistBold": false,
     "checkboxTxtArtistItalic": false,
@@ -128,7 +128,7 @@
     "sliderTxtArtistLineSpacing": 1.2,
     "sliderTxtArtistOpacity": 1,
     "checkboxTxtArtistWordWrap": true,
-    "sliderTxtArtistMaxWidth": 900,
+    "sliderTxtArtistMaxWidth": 2000,
     "selectTxtArtistOverflow": "wrap",
     "textArtistSeparator": "  &  ",
     "sliderArtistSeparatorPct": 77,
@@ -138,7 +138,7 @@
     "colorTxtArtistOutlineColor": "#000000",
     "sliderTxtArtistOutlineThickness": 2,
     "checkboxTxtAlbumDateEnabled": true,
-    "sliderTxtAlbumDateFontSize": 14,
+    "sliderTxtAlbumDateFontSize": 17,
     "colorTxtAlbumDateColor": "#e8e8e8",
     "checkboxTxtAlbumDateBold": false,
     "checkboxTxtAlbumDateItalic": false,
@@ -147,7 +147,7 @@
     "sliderTxtAlbumDateLineSpacing": 1.2,
     "sliderTxtAlbumDateOpacity": 1,
     "checkboxTxtAlbumDateWordWrap": true,
-    "sliderTxtAlbumDateMaxWidth": 900,
+    "sliderTxtAlbumDateMaxWidth": 2000,
     "selectTxtAlbumDateOverflow": "wrap",
     "checkboxTxtAlbumDateOutlineEnabled": false,
     "colorTxtAlbumDateOutlineColor": "#000000",
@@ -335,9 +335,9 @@
   },
   "layout": {
     "left": 26,
-    "top": 95,
+    "top": 21,
     "width": 344,
-    "height": 593
+    "height": 666
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -9501,10 +9501,15 @@
                     "items": [
                       {
                         "type": "row",
+                        "key": "sliderMobileTxtArtistFontSize"
+                      },
+                      {
+                        "type": "row",
                         "key": "textArtistSeparator"
                       }
                     ],
                     "rowKeys": [
+                      "sliderMobileTxtArtistFontSize",
                       "textArtistSeparator"
                     ],
                     "subgroups": []
@@ -9794,10 +9799,15 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "sliderMobileTxtArtistFontSize"
+                    },
+                    {
+                      "type": "row",
                       "key": "textArtistSeparator"
                     }
                   ],
                   "rowKeys": [
+                    "sliderMobileTxtArtistFontSize",
                     "textArtistSeparator"
                   ],
                   "subgroups": []
@@ -10733,10 +10743,15 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "sliderMobileTxtArtistFontSize"
+                    },
+                    {
+                      "type": "row",
                       "key": "textArtistSeparator"
                     }
                   ],
                   "rowKeys": [
+                    "sliderMobileTxtArtistFontSize",
                     "textArtistSeparator"
                   ],
                   "subgroups": []
@@ -11026,10 +11041,15 @@
                 "items": [
                   {
                     "type": "row",
+                    "key": "sliderMobileTxtArtistFontSize"
+                  },
+                  {
+                    "type": "row",
                     "key": "textArtistSeparator"
                   }
                 ],
                 "rowKeys": [
+                  "sliderMobileTxtArtistFontSize",
                   "textArtistSeparator"
                 ],
                 "subgroups": []
@@ -12971,10 +12991,15 @@
                     "items": [
                       {
                         "type": "row",
+                        "key": "sliderLandscapeTxtArtistFontSize"
+                      },
+                      {
+                        "type": "row",
                         "key": "textArtistSeparator"
                       }
                     ],
                     "rowKeys": [
+                      "sliderLandscapeTxtArtistFontSize",
                       "textArtistSeparator"
                     ],
                     "subgroups": []
@@ -13264,10 +13289,15 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "sliderLandscapeTxtArtistFontSize"
+                    },
+                    {
+                      "type": "row",
                       "key": "textArtistSeparator"
                     }
                   ],
                   "rowKeys": [
+                    "sliderLandscapeTxtArtistFontSize",
                     "textArtistSeparator"
                   ],
                   "subgroups": []
@@ -14203,10 +14233,15 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "sliderLandscapeTxtArtistFontSize"
+                    },
+                    {
+                      "type": "row",
                       "key": "textArtistSeparator"
                     }
                   ],
                   "rowKeys": [
+                    "sliderLandscapeTxtArtistFontSize",
                     "textArtistSeparator"
                   ],
                   "subgroups": []
@@ -14496,10 +14531,15 @@
                 "items": [
                   {
                     "type": "row",
+                    "key": "sliderLandscapeTxtArtistFontSize"
+                  },
+                  {
+                    "type": "row",
                     "key": "textArtistSeparator"
                   }
                 ],
                 "rowKeys": [
+                  "sliderLandscapeTxtArtistFontSize",
                   "textArtistSeparator"
                 ],
                 "subgroups": []
@@ -15592,13 +15632,13 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": true,
+    "desktop:Text": false,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
     "desktop:Artist": true,
-    "desktop:Album & Date": true,
+    "desktop:Album & Date": false,
     "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:Play Button": false,
@@ -16174,7 +16214,9 @@
     "sliderMobilePlayButtonSize": null,
     "sliderLandscapePlayButtonSize": null,
     "sliderMobilePlayButtonOpacity": null,
-    "sliderLandscapePlayButtonOpacity": null
+    "sliderLandscapePlayButtonOpacity": null,
+    "sliderMobileTxtArtistFontSize": null,
+    "sliderLandscapeTxtArtistFontSize": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -16351,7 +16393,8 @@
     "sliderNavAnimClickOpacity": false,
     "sliderNavAnimReleaseSize": false,
     "sliderPlayButtonSize": true,
-    "sliderPlayButtonOpacity": true
+    "sliderPlayButtonOpacity": true,
+    "sliderTxtArtistFontSize": true
   },
   "devIndependence": {
     "mobile": {
