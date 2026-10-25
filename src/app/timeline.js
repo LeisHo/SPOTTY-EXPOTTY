@@ -44,19 +44,6 @@ export function createTimeline(canvas, data) {
     const vMin = vt[0], vMax = vt[n - 1];
     const total = Math.max(1, vMax - vMin);
     const FULL_SPAN = total * 1.02;
-    const ranges = data.playlists.map(() => ({ lo: Infinity, hi: -Infinity }));
-    songs.forEach((s, i) => {
-        const r = ranges[s.p];
-        r.lo = Math.min(r.lo, vt[i]);
-        r.hi = Math.max(r.hi, vt[i]);
-    });
-
-    // Playlist rows are stacked in order of when each playlist STARTED (its first add), earliest at the
-    // top, so they form a staircase. (They used to follow the files' alphabetical order, which meant the
-    // vertical position said nothing.)
-    const rowOf = data.playlists.map((_, i) => i).sort((a, b) => ranges[a].lo - ranges[b].lo || a - b)
-        .reduce((m, pl, rank) => { m[pl] = rank; return m; }, []);
-    let bandGeom = { ganttTop: 0, rowH: 1 };
 
     // ---- zoom limits: a 0-100 % log scale from "2 minutes visible" to "whole timeline" ----
     function zoomLimits() {
@@ -279,11 +266,10 @@ export function createTimeline(canvas, data) {
             sat: setting('sliderAlbumColorSaturation'),
             bri: setting('sliderAlbumColorBrightness'),
         };
-        // Only the bar band stretches with the canvas height. The playlist rows and the axis keep a
-        // fixed pixel height pinned to the bottom (a short canvas shrinks the rows a little), so
-        // making the timeline taller just makes the bars taller, upward.
-        // Negative gaps (down to -18) shrink the strip between the playlist rows and the scale text; 0 keeps the original 18 px.
-        const axisH = 18, dateH = Math.max(0, 18 + setting('sliderTimelineScaleGap')), ganttH = Math.min(76, Math.max(20, h * 0.4)), ganttTop = h - axisH - dateH - ganttH, topH = Math.max(12, ganttTop - 4);
+        // Only the bar band stretches with the canvas height. The scale text keeps a fixed pixel height pinned to the bottom,
+        // so making the timeline taller just makes the bars taller, upward.
+        // Negative gaps (down to -18) shrink the strip between the bars and the scale text; 0 keeps the original 18 px.
+        const axisH = 18, dateH = Math.max(0, 18 + setting('sliderTimelineScaleGap')), ganttTop = h - axisH - dateH, topH = Math.max(12, ganttTop - 4);
         const viewEnd = viewStart + span;
         const i0 = lowerBound(vt, viewStart), i1 = lowerBound(vt, viewEnd);
         const accentCss = rgbCss(hexToRgb(accent), baseAlpha);
@@ -455,19 +441,7 @@ export function createTimeline(canvas, data) {
             }
         }
 
-        // playlist rows
-        const rowH = ganttH / ranges.length;
-        bandGeom = { ganttTop, rowH };
-        const curP = songs[currentIndex()].p;
-        ranges.forEach((r, i) => {
-            if (r.hi < viewStart || r.lo > viewEnd) return;
-            const x0 = Math.max(0, xOf(r.lo)), x1 = Math.min(w, xOf(r.hi));
-            ctx.globalAlpha = i === curP ? 1 : 0.35;
-            ctx.fillStyle = i === curP ? playheadColor : accent;
-            ctx.fillRect(x0, ganttTop + rowOf[i] * rowH, Math.max(2, x1 - x0), Math.max(1, rowH - 1));
-        });
-
-        // exact add date/time of the current song: under the playlist rows, above the scale text
+        // exact add date/time of the current song: under the graph, above the scale text
         if (dateLine) {
             ctx.globalAlpha = 1;
             ctx.fillStyle = playheadColor;
@@ -508,25 +482,6 @@ export function createTimeline(canvas, data) {
             else colorFade = null;
         }
     }
-
-    // Hovering a playlist row shows that playlist's name and date range as the canvas tooltip.
-    const rowToPlaylist = [];
-    rowOf.forEach((rank, pl) => { rowToPlaylist[rank] = pl; });
-    canvas.addEventListener('pointermove', e => {
-        if (e.buttons) return; // not while dragging
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left, y = e.clientY - rect.top;
-        const rank = Math.floor((y - bandGeom.ganttTop) / bandGeom.rowH);
-        let tip = '';
-        if (y >= bandGeom.ganttTop && rank >= 0 && rank < rowToPlaylist.length) {
-            const pl = rowToPlaylist[rank], r = ranges[pl];
-            if (x >= xOf(r.lo) - 2 && x <= xOf(r.hi) + 2) {
-                const fmt = t => new Date(real[Math.min(n - 1, Math.max(0, Math.round(vtToPos(t))))]).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-                tip = `${data.playlists[pl].name}  ·  ${fmt(r.lo)} to ${fmt(r.hi)}`;
-            }
-        }
-        if (canvas.title !== tip) canvas.title = tip;
-    });
 
     // Where the current zoom sits between the smallest and largest span, 0 = fully zoomed in, 1 = fully zoomed
     // out, on the same log scale as the Zoom Limits slider. range 'limits' (default) spans the slider's
