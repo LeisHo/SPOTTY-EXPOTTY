@@ -441,6 +441,13 @@ async function boot() {
         el('spxStartBtn').style.setProperty('--spx-start-play-size', setting('sliderStartPlaySize') + 'px');
         el('spxArtist').textContent = artistText(); // live: changing the separator re-joins the current song's artists
         el('spxApp').style.setProperty('--spx-vol-icon-x', setting('sliderVolIconOffsetX') + 'px');
+        el('spxStart').style.transition = `opacity ${setting('sliderStartFadeMs')}ms linear`;
+        el('spxShuffle').hidden = !setting('checkboxShuffleButtonEnabled');
+        el('spxApp').style.setProperty('--spx-shuffle-icon', setting('sliderShuffleIconSize') + 'px');
+        el('spxApp').style.setProperty('--spx-shuffle-x', setting('sliderShuffleIconOffsetX') + 'px');
+        el('spxApp').style.setProperty('--spx-shuffle-off-op', String(setting('sliderShuffleOffOpacity') / 100));
+        el('spxApp').style.setProperty('--spx-shuffle-color', setting('colorShuffleIcon'));
+        el('spxApp').style.setProperty('--spx-shuffle-on-color', setting('colorShuffleOn'));
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
         // Album Cover > Bounding Box: the cover's own box and its centre (see app.css)
@@ -774,20 +781,23 @@ async function boot() {
     // A press or key press anywhere else starts it as well (sound unlocks on that first input).
     let startedOnce = false;
     const onIconPress = e => !!(e.target && e.target.closest && e.target.closest('#spxStartBtn'));
-    const startFromIcon = () => { el('spxStart').hidden = true; if (!startedOnce) { startedOnce = true; openSpotifyLogin(); } playFromStart(); };
+    // The start screen fades out over Fade Time (Ms), then hides. Showing it again fades it back in.
+    const hideStartScreen = () => { const o = el('spxStart'); o.style.opacity = '0'; setTimeout(() => { if (o.style.opacity === '0') o.hidden = true; }, setting('sliderStartFadeMs')); };
+    const startFromIcon = () => { hideStartScreen(); if (!startedOnce) { startedOnce = true; openSpotifyLogin(); } playFromStart(); };
     const onFirstGesture = e => {
         if (onIconPress(e)) { if (!setting('checkboxStartTransitionAfterRelease')) startFromIcon(); return; }
         if (startedOnce) return;
-        startedOnce = true; el('spxStart').hidden = true; playFromStart(); openSpotifyLogin();
+        startedOnce = true; hideStartScreen(); playFromStart(); openSpotifyLogin();
     };
     el('spxStartBtn').addEventListener('pointerup', () => { if (setting('checkboxStartTransitionAfterRelease') && !el('spxStart').hidden) startFromIcon(); });
     // Run Startup (dev panel): show the start screen again. The next press outside the dev panel hides it (the icon starts it).
     const showStartScreen = () => {
-        el('spxStart').hidden = false;
+        const o = el('spxStart'); o.hidden = false; o.style.opacity = '0';
+        requestAnimationFrame(() => requestAnimationFrame(() => { o.style.opacity = '1'; }));
         const hideOnInput = e => {
             if (e.target && e.target.closest && e.target.closest('#devPanel')) return;
             if (onIconPress(e)) { if (!setting('checkboxStartTransitionAfterRelease')) startFromIcon(); return; }
-            el('spxStart').hidden = true;
+            hideStartScreen();
             document.removeEventListener('pointerdown', hideOnInput, true);
             document.removeEventListener('keydown', hideOnInput, true);
         };

@@ -129,6 +129,8 @@ export const DEFAULTS = {
     // Startup: the darkening over the app until the first input, and the play icon (no text, no background)
     colorStartOverlay: '#0d0f12', sliderStartOverlayOpacity: 0.8,
     checkboxStartButtonEnabled: true, sliderStartPlaySize: 64, checkboxStartTransitionAfterRelease: false,
+    sliderStartFadeMs: 300,
+    checkboxShuffleButtonEnabled: true, sliderShuffleIconSize: 20, sliderShuffleIconOffsetX: 0, sliderShuffleOffOpacity: 45, colorShuffleIcon: '#f2f2f2', colorShuffleOn: '#1db954',
     // Start Button Animation: the Track Title Button Animation settings, with 'Title' replaced by 'StartPlay' (see titleAnim.js)
     checkboxStartPlayAnimEnabled: false, selectStartPlayAnimMode: 'bold', sliderStartPlayAnimDuration: 160, selectStartPlayAnimEasing: 'ease-out',
     sliderStartPlayBoldRestWeight: 500, sliderStartPlayBoldHoverWeight: 800, sliderStartPlayBoldPressWeight: 500,

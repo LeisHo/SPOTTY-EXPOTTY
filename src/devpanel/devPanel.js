@@ -8022,6 +8022,21 @@
         registerDevControlArray('SPOTTY_AC2_CONTROLS', AC2_CONTROLS);
         makeDevGroupToggleable(tab, VB, 'checkboxVolumeButtonEnabled');
 
+        // Shuffle Button: the same settings as Volume Button, minus the slider and animation ones
+        const SHB = 'Shuffle Button';
+        uiLayoutContent.appendChild(createDevGroupElement(SHB, tab));
+        const SHB_CONTROLS = [
+            { tab, group: SHB, id: 'checkboxShuffleButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: SHB, id: 'sliderShuffleIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
+            { tab, group: SHB, id: 'sliderShuffleIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: SHB, id: 'sliderShuffleOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
+            { tab, group: SHB, id: 'colorShuffleIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },
+            { tab, group: SHB, id: 'colorShuffleOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
+        ];
+        renderControlArray(SHB_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SHUFFLE_CONTROLS', SHB_CONTROLS);
+        makeDevGroupToggleable(tab, SHB, 'checkboxShuffleButtonEnabled');
+
         // ---- UI Layout: Play Button + Next And Last Song Buttons (same settings; each toggleable, each with a toggleable Button Animation subgroup) ----
         // The button controls (Play / Pause, Next Song, Last Song) exist so a hotkey can be assigned to them in the dev panel.
         const BTN_DEF = {
@@ -8330,6 +8345,7 @@
         const SU_CONTROLS = [
             { tab, group: SU, id: 'buttonRunStartup', type: 'button', label: 'Run Startup', skipDeviceCheckbox: true },
             { tab, group: SU, id: 'sliderStartOverlayOpacity', type: 'slider', label: 'Darkening Opacity (x):', min: 0, max: 1, step: 0.01, value: 0.8 },
+            { tab, group: SU, id: 'sliderStartFadeMs', type: 'slider', label: 'Fade Time (Ms):', min: 0, max: 3000, step: 10, value: 300 },
             { tab, group: SU, id: 'colorStartOverlay', type: 'color', label: 'Darkening Color:', value: '#0d0f12' },
         ];
         renderControlArray(SU_CONTROLS, 'renderSpottyDevControls');
