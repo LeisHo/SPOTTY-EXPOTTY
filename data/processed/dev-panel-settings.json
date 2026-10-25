@@ -286,7 +286,7 @@
     "colorSpotlightEdgeColor": "#0d0f12",
     "buttonRunStartup": "",
     "sliderStartOverlayOpacity": 0.52,
-    "sliderStartFadeMs": 500,
+    "sliderStartFadeMs": 300,
     "colorStartOverlay": "#0d0f12",
     "checkboxStartButtonEnabled": true,
     "sliderStartPlaySize": 64,
