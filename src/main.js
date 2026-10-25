@@ -425,6 +425,7 @@ async function boot() {
         el('spxStart').style.setProperty('--spx-start-bg', rgbaOf(setting('colorStartOverlay'), setting('sliderStartOverlayOpacity')));
         el('spxStartBtn').hidden = !setting('checkboxStartButtonEnabled');
         el('spxStartBtn').style.setProperty('--spx-start-play-size', setting('sliderStartPlaySize') + 'px');
+        el('spxArtist').textContent = artistText(); // live: changing the separator re-joins the current song's artists
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
         // Album Cover > Bounding Box: the cover's own box and its centre (see app.css)
@@ -476,6 +477,9 @@ async function boot() {
         }, 150);
     }
 
+    // The artist line: the raw names (the data joins them with ';') re-joined with the Artist Name Separator setting
+    let artistRaw = '';
+    const artistText = () => artistRaw.split(';').join(setting('textArtistSeparator'));
     function render() {
         const s = songs[idx];
         const link = el('spxTitleLink');
@@ -488,7 +492,8 @@ async function boot() {
             return sp;
         }));
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
-        el('spxArtist').textContent = s.a;
+        artistRaw = s.a;
+        el('spxArtist').textContent = artistText();
         el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
         applyTextElementStyles(); // re-run Shrink to Fit against the new text (a no-op for every other Overflow mode)
         timeline.setDateLine(fmtAdded(s.t));

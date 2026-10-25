@@ -140,6 +140,7 @@ export const DEFAULTS = {
     checkboxShadowStartPlayLift: true, colorShadowStartPlayLift: '#000000',
     checkboxBracketsSmaller: false,
     sliderBracketsFontPct: 60,
+    textArtistSeparator: ';', // what joins the names when a track has several artists (the data stores them with ';')
 
     // Background
     selectBackgroundMode: 'none',

@@ -3280,6 +3280,10 @@
         row.appendChild(wrapLabel);
         return row;
     }
+    // A text control (type 'text' in a control array): a text box whose value the app reads with setting(id).
+    function buildTextControlRow(ctrl) {
+        return buildTextInputRow({ id: ctrl.id, label: ctrl.label, inputType: 'text', value: ctrl.value, wide: true });
+    }
     // {id, label, inputType: 'text'|'number', value, step?, wide?}
     function buildTextInputRow(ctrl) {
         const row = document.createElement('div');
@@ -5185,7 +5189,7 @@
         render();
         return row;
     }
-    const UNIFORM_ROW_BUILDERS = { slider: buildSliderRow, color: buildColorRow, select: buildSelectRow, checkbox: buildCheckboxRow, button: buildButtonRow, 'list-picker': buildListPickerRow, 'curve-editor': buildCurveEditorRow, 'range-bar': buildRangeBarRow, 'gradient-editor': buildGradientEditorRow };
+    const UNIFORM_ROW_BUILDERS = { text: buildTextControlRow, slider: buildSliderRow, color: buildColorRow, select: buildSelectRow, checkbox: buildCheckboxRow, button: buildButtonRow, 'list-picker': buildListPickerRow, 'curve-editor': buildCurveEditorRow, 'range-bar': buildRangeBarRow, 'gradient-editor': buildGradientEditorRow };
 
     // ================================================================
     // TOGGLEABLE SETTINGS GROUP
@@ -7643,6 +7647,8 @@
             tab, id: 'selectTxt' + p + 'Overflow', type: 'select', label: 'Overflow:', value: 'wrap',
             options: [{ value: 'wrap', text: 'Wrap' }, { value: 'truncate', text: 'Truncate (…)' }, { value: 'clip', text: 'Clip' }, { value: 'scale', text: 'Shrink to Fit' }],
         }, elemContent);
+        // Artist only: the separator used when a track has several artists (the data stores them joined with ';')
+        if (elementName === 'Artist') add({ tab, id: 'textArtistSeparator', type: 'text', label: 'Artist Name Separator:', value: ';' }, elemContent);
         const outlineSec = createDevGroupElement('Outline', tab);
         elemContent.appendChild(outlineSec);
         const outlineContent = outlineSec.querySelector(':scope > .dev-section-content');
