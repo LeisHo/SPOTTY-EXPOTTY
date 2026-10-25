@@ -274,11 +274,11 @@
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
     "buttonRunStartup": "",
-    "sliderStartOverlayOpacity": 0.71,
+    "sliderStartOverlayOpacity": 0.52,
     "colorStartOverlay": "#0d0f12",
     "checkboxStartButtonEnabled": true,
     "sliderStartPlaySize": 64,
-    "checkboxStartTransitionAfterRelease": false,
+    "checkboxStartTransitionAfterRelease": true,
     "checkboxStartPlayAnimEnabled": true,
     "selectStartPlayAnimMode": "grow",
     "sliderStartPlayAnimDuration": 160,
@@ -290,7 +290,7 @@
     "sliderStartPlayPulseInDuration": 90,
     "sliderStartPlayPulseOutDuration": 180,
     "sliderStartPlayGrowScale": 1.28,
-    "sliderStartPlayGrowPressScale": 0.88,
+    "sliderStartPlayGrowPressScale": 0.94,
     "sliderStartPlayGlowRadius": 18,
     "sliderStartPlayGlowOpacity": 0.8,
     "colorStartPlayGlowColor": "#1db954",
@@ -6221,6 +6221,10 @@
             "key": "colorStartOverlay"
           },
           {
+            "type": "row",
+            "key": "checkboxStartTransitionAfterRelease"
+          },
+          {
             "type": "group",
             "section": {
               "key": "desktop:Start Button",
@@ -6344,15 +6348,10 @@
                     ],
                     "subgroups": []
                   }
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxStartTransitionAfterRelease"
                 }
               ],
               "rowKeys": [
-                "sliderStartPlaySize",
-                "checkboxStartTransitionAfterRelease"
+                "sliderStartPlaySize"
               ],
               "subgroups": [
                 {
@@ -6475,7 +6474,8 @@
         "rowKeys": [
           "buttonRunStartup",
           "sliderStartOverlayOpacity",
-          "colorStartOverlay"
+          "colorStartOverlay",
+          "checkboxStartTransitionAfterRelease"
         ],
         "subgroups": [
           {
@@ -6600,15 +6600,10 @@
                   ],
                   "subgroups": []
                 }
-              },
-              {
-                "type": "row",
-                "key": "checkboxStartTransitionAfterRelease"
               }
             ],
             "rowKeys": [
-              "sliderStartPlaySize",
-              "checkboxStartTransitionAfterRelease"
+              "sliderStartPlaySize"
             ],
             "subgroups": [
               {
@@ -14356,7 +14351,7 @@
     "desktop:Title Lift Shadow": false,
     "desktop:Brackets Smaller Text": false,
     "desktop:Startup": false,
-    "desktop:Start Button": true,
+    "desktop:Start Button": false,
     "desktop:Start Button Animation": false,
     "desktop:New Group": true,
     "desktop:Scrub Preload": true,
