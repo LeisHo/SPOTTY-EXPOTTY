@@ -7563,6 +7563,95 @@
     //   5. setupDragReorder() (x2 — groups, then settings).
     //   6. Load saved state (localStorage by default) and apply it.
     // ----------------------------------------------------------------
+    // Turns "Album & Date" into "AlbumDate" for use inside a control id -- ids
+    // must be unique per element, camelCase/PascalCase per this file's own
+    // convention, never raw spaces/punctuation. Ported from the shared
+    // .claude/TEMPLATE_DEV_PANEL.html (its own buildTextElementControls()
+    // section), 2026-10-25.
+    function sanitizeIdPart(name) {
+        return name.replace(/[^a-zA-Z0-9]+/g, ' ').trim().split(' ')
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+    }
+    // Same "a checkbox in the title bar gates this whole group's content"
+    // mechanic as makeDevGroupToggleable() elsewhere in this file, but taking
+    // the section/checkbox elements directly instead of looking them up by
+    // data-sid -- makeDevGroupToggleable()'s own lookup is top-level-only
+    // (a direct-child selector), which the per-element Text groups and their
+    // nested Outline subgroup below can't use (UI Layout > Text > <element> >
+    // Outline is 3 levels deep). Ported from the template, same section.
+    function wireNestedGroupToggle(sectionEl, cb) {
+        cb.classList.add('dev-group-toggle-checkbox');
+        cb.title = 'Enable/disable this whole group';
+        cb.addEventListener('click', e => e.stopPropagation());
+        const titleEl = sectionEl.querySelector(':scope > .dev-section-title');
+        const originalRow = cb.closest('.dev-row');
+        titleEl.appendChild(cb);
+        if (originalRow) originalRow.remove();
+        function applyState() { sectionEl.classList.toggle('dev-section-group-disabled', !cb.checked); }
+        cb.addEventListener('change', applyState);
+        cb.addEventListener('input', applyState);
+        applyState();
+    }
+    // Full per-text-element battery, ported from the shared .claude/TEMPLATE_DEV_PANEL.html
+    // (its own buildTextElementControls()) and adapted for this project, 2026-10-25:
+    //  - No font-family dropdown of its own. SPOTTY EXPOTTY keeps ONE global font
+    //    selector (UI Layout > Font > selectUiFont) -- the owner's explicit choice when
+    //    this was ported, so this battery only ever gets Font SIZE, not family.
+    //  - Nested under the EXISTING "UI Layout" group's own new "Text" subgroup, not the
+    //    template's separate mandatory "UI" group -- this project has no such group, and
+    //    "UI Layout" already holds every other visual setting (Background, Buttons, etc.).
+    //  - Drop Shadow / Extrusion (opt-in in the template) are left out entirely -- not
+    //    requested for this port.
+    //  - REPLACES the old sliderTitleScale/ArtistScale/MetaScale + per-element
+    //    SizeMin/Pref/Max clamp system (3 elements x 4 sliders = 12 controls, a
+    //    clamp(min,pref vw,max)*scale formula) with this battery's own Font Size: a
+    //    literal px value, not a vw-responsive clamp. A disclosed tradeoff -- this loses
+    //    continuous in-between-breakpoint growth as the viewport resizes; a phone still
+    //    gets its own size via the existing Mobile/Landscape independence checkbox, the
+    //    same mechanism every other control in this file already uses for a per-device
+    //    value, just no longer a continuous vw curve.
+    function buildSpottyTextElementGroup(tab, uiLayoutContent, elementName, d) {
+        let textSec = uiLayoutContent.querySelector(':scope > .dev-section > .dev-section-title[data-sid="Text"]')?.closest('.dev-section');
+        if (!textSec) { textSec = createDevGroupElement('Text', tab); uiLayoutContent.appendChild(textSec); }
+        const textContent = textSec.querySelector(':scope > .dev-section-content');
+        const elemSec = createDevGroupElement(elementName, tab);
+        textContent.appendChild(elemSec);
+        const elemContent = elemSec.querySelector(':scope > .dev-section-content');
+        const p = sanitizeIdPart(elementName);
+        const allCtrls = [];
+        function add(ctrl, targetContent) {
+            allCtrls.push(ctrl);
+            const row = buildUniformControlRow(ctrl);
+            if (ctrl.type === 'select') row.querySelector('select').value = ctrl.value;
+            else if (ctrl.type === 'checkbox') row.querySelector('input').checked = !!ctrl.value;
+            targetContent.appendChild(row);
+            return row;
+        }
+        const enabledRow = add({ tab, id: 'checkboxTxt' + p + 'Enabled', type: 'checkbox', label: 'Enabled', value: true }, elemContent);
+        wireNestedGroupToggle(elemSec, enabledRow.querySelector('input'));
+        add({ tab, id: 'sliderTxt' + p + 'FontSize', type: 'slider', label: 'Font Size (Px):', min: 6, max: 140, step: 1, value: d.size }, elemContent);
+        add({ tab, id: 'colorTxt' + p + 'Color', type: 'color', label: 'Font Color:', value: d.color }, elemContent);
+        add({ tab, id: 'checkboxTxt' + p + 'Bold', type: 'checkbox', label: 'Bold', value: d.bold }, elemContent);
+        add({ tab, id: 'checkboxTxt' + p + 'Italic', type: 'checkbox', label: 'Italic', value: false }, elemContent);
+        add({ tab, id: 'checkboxTxt' + p + 'Underline', type: 'checkbox', label: 'Underline', value: false }, elemContent);
+        add({ tab, id: 'sliderTxt' + p + 'LetterSpacing', type: 'slider', label: 'Letter Spacing (Px):', min: -5, max: 30, step: 0.1, value: 0 }, elemContent);
+        add({ tab, id: 'sliderTxt' + p + 'LineSpacing', type: 'slider', label: 'Line Spacing (x):', min: 0.5, max: 3, step: 0.05, value: d.lineSpacing }, elemContent);
+        add({ tab, id: 'sliderTxt' + p + 'Opacity', type: 'slider', label: 'Opacity:', min: 0, max: 1, step: 0.01, value: 1 }, elemContent);
+        add({ tab, id: 'checkboxTxt' + p + 'WordWrap', type: 'checkbox', label: 'Word Wrap', value: true }, elemContent);
+        add({ tab, id: 'sliderTxt' + p + 'MaxWidth', type: 'slider', label: 'Max Width (Px):', min: 20, max: 2400, step: 1, value: 900 }, elemContent);
+        add({
+            tab, id: 'selectTxt' + p + 'Overflow', type: 'select', label: 'Overflow:', value: 'wrap',
+            options: [{ value: 'wrap', text: 'Wrap' }, { value: 'truncate', text: 'Truncate (…)' }, { value: 'clip', text: 'Clip' }, { value: 'scale', text: 'Shrink to Fit' }],
+        }, elemContent);
+        const outlineSec = createDevGroupElement('Outline', tab);
+        elemContent.appendChild(outlineSec);
+        const outlineContent = outlineSec.querySelector(':scope > .dev-section-content');
+        const outlineEnabledRow = add({ tab, id: 'checkboxTxt' + p + 'OutlineEnabled', type: 'checkbox', label: 'Enabled', value: false }, elemContent);
+        add({ tab, id: 'colorTxt' + p + 'OutlineColor', type: 'color', label: 'Outline Color:', value: '#000000' }, outlineContent);
+        add({ tab, id: 'sliderTxt' + p + 'OutlineThickness', type: 'slider', label: 'Outline Thickness (Px):', min: 0, max: 20, step: 0.5, value: 2 }, outlineContent);
+        wireNestedGroupToggle(outlineSec, outlineEnabledRow.querySelector('input'));
+        registerDevControlArray('textElem_' + p, allCtrls);
+    }
     // SPOTTY EXPOTTY's own settings. The app (src/app/settings.js) reads these
     // controls' live DOM values by id -- no separate state copy. Mobile/Landscape
     // twins are created by the template's dynamic per-device mechanism, so every
@@ -7617,7 +7706,7 @@
             // Off: bars snap to the new height when the zoom changes. On: they ease to it over the duration below (shown only while on).
             { tab, group: TL, id: 'checkboxTimelineHeightTransition', type: 'checkbox', label: 'Height Transition:', value: false },
             { tab, group: TL, id: 'sliderTimelineHeightTransitionMs', type: 'slider', label: 'Height Transition Duration (Ms):', min: 0, max: 2000, step: 10, value: 300 },
-            { tab, group: TL, id: 'sliderTimelineScaleGap', type: 'slider', label: 'Space Between Graph And Scale Text (Px):', min: 0, max: 120, step: 1, value: 0 },
+            { tab, group: TL, id: 'sliderTimelineScaleGap', type: 'slider', label: 'Space Between Graph And Scale Text (Px):', min: -18, max: 120, step: 1, value: 0 },
             { tab, group: TL, id: 'sliderPlayheadWidth', type: 'slider', label: 'Scrub Line Width (Px):', min: 1, max: 24, step: 0.5, value: 2 },
             { tab, group: TL, id: 'sliderPlayheadHeight', type: 'slider', label: 'Scrub Line Height (% Of Timeline):', min: 5, max: 100, step: 1, value: 100 },
             // Integer-valued dual-handle control, so it is a 0-100 % log scale: 0 = 2 minutes visible, 100 = the whole timeline.
@@ -7651,18 +7740,6 @@
             { tab, group: TL, id: 'sliderRibbonThickness', type: 'slider', label: 'Ribbon Thickness (Px):', min: 6, max: 120, step: 1, value: 28 },
             { tab, group: TL, id: 'sliderRibbonSmoothing', type: 'slider', label: 'Ribbon Smoothing (Px):', min: 2, max: 120, step: 1, value: 24 },
             { tab, group: TL, id: 'sliderRibbonBarsOpacity', type: 'slider', label: 'Ribbon Underlay Bars Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.25 },
-            { tab, group: 'UI Layout', id: 'sliderTitleScale', type: 'slider', label: 'Song Title Text Scale (x):', min: 0.3, max: 3, step: 0.05, value: 1 },
-            { tab, group: 'UI Layout', id: 'sliderTitleSizeMin', type: 'slider', label: 'Song Title Min Size (Px):', min: 4, max: 120, step: 1, value: 26 },
-            { tab, group: 'UI Layout', id: 'sliderTitleSizePref', type: 'slider', label: 'Song Title Size Growth (Vw):', min: 0, max: 20, step: 0.1, value: 5.5 },
-            { tab, group: 'UI Layout', id: 'sliderTitleSizeMax', type: 'slider', label: 'Song Title Max Size (Px):', min: 4, max: 200, step: 1, value: 60 },
-            { tab, group: 'UI Layout', id: 'sliderArtistScale', type: 'slider', label: 'Artist Text Scale (x):', min: 0.3, max: 3, step: 0.05, value: 1 },
-            { tab, group: 'UI Layout', id: 'sliderArtistSizeMin', type: 'slider', label: 'Artist Min Size (Px):', min: 4, max: 120, step: 1, value: 17 },
-            { tab, group: 'UI Layout', id: 'sliderArtistSizePref', type: 'slider', label: 'Artist Size Growth (Vw):', min: 0, max: 20, step: 0.1, value: 3 },
-            { tab, group: 'UI Layout', id: 'sliderArtistSizeMax', type: 'slider', label: 'Artist Max Size (Px):', min: 4, max: 200, step: 1, value: 28 },
-            { tab, group: 'UI Layout', id: 'sliderMetaScale', type: 'slider', label: 'Album & Date Text Scale (x):', min: 0.3, max: 3, step: 0.05, value: 1 },
-            { tab, group: 'UI Layout', id: 'sliderMetaSizeMin', type: 'slider', label: 'Album & Date Min Size (Px):', min: 4, max: 120, step: 1, value: 14 },
-            { tab, group: 'UI Layout', id: 'sliderMetaSizePref', type: 'slider', label: 'Album & Date Size Growth (Vw):', min: 0, max: 20, step: 0.1, value: 0 },
-            { tab, group: 'UI Layout', id: 'sliderMetaSizeMax', type: 'slider', label: 'Album & Date Max Size (Px):', min: 4, max: 200, step: 1, value: 14 },
             { tab, group: 'UI Layout', id: 'buttonOpenLayoutInspector', type: 'button', label: 'Open UI Layout Inspector', skipDeviceCheckbox: true },
         ];
         renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');
@@ -7687,6 +7764,8 @@
             },
             { tab, group: AC, id: 'sliderAlbumColorSaturation', type: 'slider', label: 'Saturation Boost (x):', min: 0, max: 2.5, step: 0.05, value: 1 },
             { tab, group: AC, id: 'sliderAlbumColorBrightness', type: 'slider', label: 'Brightness (x):', min: 0.4, max: 1.8, step: 0.05, value: 1 },
+            { tab, group: AC, id: 'checkboxAlbumColorTransition', type: 'checkbox', label: 'Color Transition:', value: false },
+            { tab, group: AC, id: 'sliderAlbumColorTransitionMs', type: 'slider', label: 'Color Transition Duration (Ms):', min: 0, max: 3000, step: 50, value: 300 },
         ];
         renderControlArray(ALBUM_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_ALBUM_CONTROLS', ALBUM_CONTROLS);
@@ -7755,6 +7834,14 @@
         }];
         renderControlArray(FONT_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_FONT_CONTROLS', FONT_CONTROLS);
+
+        // UI Layout > Text: per-element Font Size/Color/Bold/Italic/Underline/Letter
+        // Spacing/Line Spacing/Opacity/Wrap/Outline/Enabled, ported 2026-10-25 -- see
+        // buildSpottyTextElementGroup()'s own top comment for the full account. Replaces
+        // the old Title/Artist/Meta Text Scale + Min/Pref/Max clamp sliders (now removed).
+        buildSpottyTextElementGroup(tab, uiLayoutContent, 'Song Title', { size: 44, color: '#f2f2f2', bold: true, lineSpacing: 1.1 });
+        buildSpottyTextElementGroup(tab, uiLayoutContent, 'Artist', { size: 22, color: '#c9d1d9', bold: false, lineSpacing: 1.2 });
+        buildSpottyTextElementGroup(tab, uiLayoutContent, 'Album & Date', { size: 14, color: '#8b94a1', bold: false, lineSpacing: 1.2 });
 
         // ---- UI Layout: Volume Button (toggleable) + Album Cover ------------------------------------------------
         const VB = 'Volume Button', AC2 = 'Album Cover';

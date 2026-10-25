@@ -11,7 +11,7 @@ import {
 } from '../lib/ui-engine/registry.mjs';
 import { setting, loadSavedSettings, rgbaOf } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
-import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState } from './app/clipPlayer.js';
+import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
@@ -204,6 +204,9 @@ async function boot() {
     const clipKey = s => s.d || s.u || 0;
     let pos = 0, idx = 0, dir = 1, handedOff = false, handoffPending = false, handoffTimer = 0, preloadQueued = false, moveLog = [];
     let lastTimelineHeight = null, heightTouched = false;
+    // The song whose full version the hand-off has asked for. The preview keeps playing until that full song reports it is
+    // playing; if it never does, the preview carries on instead of going silent.
+    let previewHold = null;
     // (capture phase: runs before the generic settings listener below, so applyLook sees the flag)
     ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; }, true));
 
@@ -343,21 +346,51 @@ async function boot() {
         };
         h.addEventListener('pointerup', up); h.addEventListener('pointercancel', up);
     }));
+    // UI Layout > Text: per-element Font Size/Color/Bold/Italic/Underline/Letter Spacing/Line
+    // Spacing/Opacity/Wrap/Max Width/Overflow/Outline/Enabled, ported 2026-10-25 (see devPanel.js's
+    // buildSpottyTextElementGroup() for the full account). Replaces the old scale/clamp vars above.
+    // Font SIZE is a literal px value now, not the old clamp(min, growth-vw, max)*scale formula --
+    // a disclosed tradeoff (continuous vw growth is gone; a phone still gets its own size through
+    // the existing Mobile/Landscape independence checkbox, same as every other control here).
+    // Box WIDTH/POSITION stay engine-owned (CLAUDE.md's own architecture note) -- Max Width is
+    // applied as a plain CSS max-width (never shrinks the engine's own box, only caps it), with no
+    // margin/position changes, so it can't fight the Layout Engine for ownership of these boxes.
+    const TEXT_ELEMENTS = [['SongTitle', () => el('spxTitle')], ['Artist', () => el('spxArtist')], ['AlbumDate', () => el('spxMeta')]];
+    function applyTextElementStyles() {
+        TEXT_ELEMENTS.forEach(([p, getNode]) => {
+            const node = getNode();
+            if (!node) return;
+            const enabled = setting('checkboxTxt' + p + 'Enabled');
+            node.style.display = enabled ? '' : 'none';
+            if (!enabled) return;
+            const size = setting('sliderTxt' + p + 'FontSize');
+            const overflow = setting('selectTxt' + p + 'Overflow');
+            const st = node.style;
+            st.color = setting('colorTxt' + p + 'Color');
+            st.fontWeight = setting('checkboxTxt' + p + 'Bold') ? '700' : '400';
+            st.fontStyle = setting('checkboxTxt' + p + 'Italic') ? 'italic' : 'normal';
+            st.textDecoration = setting('checkboxTxt' + p + 'Underline') ? 'underline' : 'none';
+            st.letterSpacing = setting('sliderTxt' + p + 'LetterSpacing') + 'px';
+            st.lineHeight = String(setting('sliderTxt' + p + 'LineSpacing'));
+            st.opacity = String(setting('sliderTxt' + p + 'Opacity'));
+            st.maxWidth = setting('sliderTxt' + p + 'MaxWidth') + 'px';
+            const outlineOn = setting('checkboxTxt' + p + 'OutlineEnabled');
+            st.webkitTextStrokeWidth = outlineOn ? setting('sliderTxt' + p + 'OutlineThickness') + 'px' : '0px';
+            st.webkitTextStrokeColor = outlineOn ? setting('colorTxt' + p + 'OutlineColor') : 'transparent';
+            if (overflow === 'truncate') { st.whiteSpace = 'nowrap'; st.overflow = 'hidden'; st.textOverflow = 'ellipsis'; }
+            else if (overflow === 'clip') { st.whiteSpace = 'nowrap'; st.overflow = 'hidden'; st.textOverflow = 'clip'; }
+            else if (overflow === 'scale') { st.whiteSpace = 'nowrap'; st.overflow = 'visible'; st.textOverflow = ''; }
+            else { st.whiteSpace = setting('checkboxTxt' + p + 'WordWrap') ? 'pre-line' : 'nowrap'; st.overflow = ''; st.textOverflow = ''; }
+            st.fontSize = size + 'px';
+            if (overflow === 'scale') { // Shrink to Fit: back off from the configured size until it fits
+                let fs = size;
+                while (fs > 6 && node.scrollWidth > node.clientWidth) { fs -= 1; st.fontSize = fs + 'px'; }
+            }
+        });
+    }
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
-        scale('--spx-title-scale', setting('sliderTitleScale'));
-        scale('--spx-artist-scale', setting('sliderArtistScale'));
-        scale('--spx-meta-scale', setting('sliderMetaScale'));
-        // Font-size clamps (app.css): min/max in px, growth in vw
-        const clampVars = (name, prefix) => {
-            const st = el('spxApp').style;
-            st.setProperty(`--spx-${name}-min`, `${setting(prefix + 'Min')}px`);
-            st.setProperty(`--spx-${name}-pref`, `${setting(prefix + 'Pref')}vw`);
-            st.setProperty(`--spx-${name}-max`, `${setting(prefix + 'Max')}px`);
-        };
-        clampVars('title', 'sliderTitleSize');
-        clampVars('artist', 'sliderArtistSize');
-        clampVars('meta', 'sliderMetaSize');
+        applyTextElementStyles();
         // Shows Spotify's own player so you can see whether it says "Log in" / "Preview" and log in INSIDE it.
         document.querySelector('.spx-embed').classList.toggle('spx-embed-visible', !!setting('checkboxShowSpotifyPlayer') && !sdkIsReady()); // the iframe is idle (and shows a stale preview UI) while the SDK plays
         volume.configure({
@@ -451,6 +484,7 @@ async function boot() {
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         el('spxArtist').textContent = s.a;
         el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
+        applyTextElementStyles(); // re-run Shrink to Fit against the new text (a no-op for every other Overflow mode)
         timeline.setDateLine(fmtAdded(s.t));
         scheduleCover();
         background.onSongChanged(); // palette-driven modes change with the song even if the cover image did not; fades like a new cover
@@ -494,14 +528,19 @@ async function boot() {
         playClip(clipKey(songs[idx]));
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
+        previewHold = null;
         const handoffDelay = setting('sliderHandoffDelay');
         handoffPending = true;
         handoffTimer = setTimeout(() => {
             handoffPending = false;
-            stopClip();
             const ok = isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0;
             logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[idx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
-            if (ok) { playTrack(songs[idx].id); handedOff = true; }
+            if (ok) {
+                // The full song starts where the preview is now (+ the Full Song Start Offset), not at 0:00
+                const startMs = Math.max(0, clipPosition() + setting('sliderHandoffStartOffset')) * 1000;
+                previewHold = songs[idx].id; playTrack(songs[idx].id, startMs); handedOff = true;
+            }
+            else stopClip();
         }, handoffDelay);
         // Auto Next Song: a song with no preview clip is held for the set time, then the next song plays.
         // Any song change cancels the hold.
@@ -742,6 +781,12 @@ async function boot() {
     onPlayState(playing => {
         el('spxCover').classList.toggle('playing', playing);
         el('spxCover').setAttribute('aria-label', playing ? 'Pause' : 'Play');
+        // The preview stops only once the full song is actually playing (see previewHold above).
+        if (playing && previewHold && songs[idx] && songs[idx].id === previewHold) {
+            previewHold = null;
+            stopClip();
+            logEvent('playback', 'HANDOFF: the full song is playing, the preview stops');
+        }
     });
 
     // ---- UI Layout Inspector (dev only): the engine's own Inspector in a floating panel ------

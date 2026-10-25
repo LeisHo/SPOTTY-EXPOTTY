@@ -232,6 +232,9 @@ export function createTimeline(canvas, data) {
     // duration (smoothstep), redrawing each frame until it arrives. Off: the scale is used as it is, as before.
     const eased = {};
     let easeRaf = 0;
+    // Album Colour Transition: the frame from before a colour-affecting change, faded out over the duration (see draw())
+    let lastColorKey = null, colorFade = null, colorRaf = 0;
+    const fadeCanvas = document.createElement('canvas');
     function easedScale(key, target) {
         const dur = setting('checkboxTimelineHeightTransition') ? Math.max(0, setting('sliderTimelineHeightTransitionMs')) : 0;
         const st = eased[key];
@@ -254,6 +257,17 @@ export function createTimeline(canvas, data) {
         span = clampSpan(span);
         const ctx = canvas.getContext('2d');
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        // Album Colour Transition: when a colour-affecting input changes (zoom, pan, colour settings), keep what is on screen
+        // now so it can fade out over the duration. The colours then change gradually instead of snapping.
+        const colorKey = [viewStart, span, setting('checkboxAlbumColorsEnabled'), setting('selectAlbumColorMode'), setting('sliderAlbumColorSaturation'), setting('sliderAlbumColorBrightness')].join('|');
+        if (colorKey !== lastColorKey) {
+            if (lastColorKey !== null && setting('checkboxAlbumColorTransition') && canvas.width) {
+                if (fadeCanvas.width !== canvas.width || fadeCanvas.height !== canvas.height) { fadeCanvas.width = canvas.width; fadeCanvas.height = canvas.height; }
+                fadeCanvas.getContext('2d').drawImage(canvas, 0, 0);
+                colorFade = { t0: performance.now(), dur: Math.max(1, setting('sliderAlbumColorTransitionMs')) };
+            }
+            lastColorKey = colorKey;
+        }
         ctx.clearRect(0, 0, w, h);
         const accent = setting('colorTimelineAccent');
         const playheadColor = setting('colorTimelinePlayhead');
@@ -268,7 +282,8 @@ export function createTimeline(canvas, data) {
         // Only the bar band stretches with the canvas height. The playlist rows and the axis keep a
         // fixed pixel height pinned to the bottom (a short canvas shrinks the rows a little), so
         // making the timeline taller just makes the bars taller, upward.
-        const axisH = 18, dateH = 18 + Math.max(0, setting('sliderTimelineScaleGap')), ganttH = Math.min(76, Math.max(20, h * 0.4)), ganttTop = h - axisH - dateH - ganttH, topH = Math.max(12, ganttTop - 4);
+        // Negative gaps (down to -18) shrink the strip between the playlist rows and the scale text; 0 keeps the original 18 px.
+        const axisH = 18, dateH = Math.max(0, 18 + setting('sliderTimelineScaleGap')), ganttH = Math.min(76, Math.max(20, h * 0.4)), ganttTop = h - axisH - dateH - ganttH, topH = Math.max(12, ganttTop - 4);
         const viewEnd = viewStart + span;
         const i0 = lowerBound(vt, viewStart), i1 = lowerBound(vt, viewEnd);
         const accentCss = rgbCss(hexToRgb(accent), baseAlpha);
@@ -480,6 +495,18 @@ export function createTimeline(canvas, data) {
         ctx.fillStyle = playheadColor;
         const phW = Math.max(1, setting('sliderPlayheadWidth')), phH = Math.max(1, ((h - axisH) * setting('sliderPlayheadHeight')) / 100);
         ctx.fillRect(Math.round(xOf(posToVt(pos)) - phW / 2), (h - axisH) - phH, phW, phH);
+
+        // Album Colour Transition: the frame from before the change, fading out over the duration on top of the new frame
+        if (colorFade) {
+            const k = Math.min(1, (performance.now() - colorFade.t0) / colorFade.dur);
+            ctx.save();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.globalAlpha = 1 - k;
+            ctx.drawImage(fadeCanvas, 0, 0);
+            ctx.restore();
+            if (k < 1) { if (!colorRaf) colorRaf = requestAnimationFrame(() => { colorRaf = 0; draw(); }); }
+            else colorFade = null;
+        }
     }
 
     // Hovering a playlist row shows that playlist's name and date range as the canvas tooltip.

@@ -20,13 +20,6 @@ export const DEFAULTS = {
     sliderTimelineZoomSpeed: 1,
     sliderDefaultTimelineSpanDays: 120,
     checkboxFullScaleOnStartup: false,
-    sliderTitleScale: 1,
-    sliderArtistScale: 1,
-    sliderMetaScale: 1,
-    // Clamp for each text line's font size: clamp(min px, growth vw, max px). Defaults match the original CSS.
-    sliderTitleSizeMin: 26, sliderTitleSizePref: 5.5, sliderTitleSizeMax: 60,
-    sliderArtistSizeMin: 17, sliderArtistSizePref: 3, sliderArtistSizeMax: 28,
-    sliderMetaSizeMin: 14, sliderMetaSizePref: 0, sliderMetaSizeMax: 14,
     selectUiFont: 'system',
     checkboxInvertScroll: false,
     checkboxInvertZoomDrag: false,
@@ -199,7 +192,36 @@ export const DEFAULTS = {
     selectAlbumColorMode: 'stacked',
     sliderAlbumColorSaturation: 1,
     sliderAlbumColorBrightness: 1,
+    checkboxAlbumColorTransition: false,
+    sliderAlbumColorTransitionMs: 300,
 };
+
+// UI Layout > Text: per-text-element battery (Font Size/Color/Bold/Italic/Underline/Letter
+// Spacing/Line Spacing/Opacity/Wrap/Max Width/Overflow/Outline/Enabled), ported 2026-10-25 --
+// see devPanel.js's buildSpottyTextElementGroup() for the full account. p = the sanitized
+// element-name fragment the dev panel ids use ('Song Title' -> 'SongTitle', etc.).
+const TEXT_ELEMENT_DEFAULTS = {
+    SongTitle: { size: 44, color: '#f2f2f2', bold: true, lineSpacing: 1.1 },
+    Artist: { size: 22, color: '#c9d1d9', bold: false, lineSpacing: 1.2 },
+    AlbumDate: { size: 14, color: '#8b94a1', bold: false, lineSpacing: 1.2 },
+};
+Object.entries(TEXT_ELEMENT_DEFAULTS).forEach(([p, d]) => Object.assign(DEFAULTS, {
+    ['checkboxTxt' + p + 'Enabled']: true,
+    ['sliderTxt' + p + 'FontSize']: d.size,
+    ['colorTxt' + p + 'Color']: d.color,
+    ['checkboxTxt' + p + 'Bold']: d.bold,
+    ['checkboxTxt' + p + 'Italic']: false,
+    ['checkboxTxt' + p + 'Underline']: false,
+    ['sliderTxt' + p + 'LetterSpacing']: 0,
+    ['sliderTxt' + p + 'LineSpacing']: d.lineSpacing,
+    ['sliderTxt' + p + 'Opacity']: 1,
+    ['checkboxTxt' + p + 'WordWrap']: true,
+    ['sliderTxt' + p + 'MaxWidth']: 900,
+    ['selectTxt' + p + 'Overflow']: 'wrap',
+    ['checkboxTxt' + p + 'OutlineEnabled']: false,
+    ['colorTxt' + p + 'OutlineColor']: '#000000',
+    ['sliderTxt' + p + 'OutlineThickness']: 2,
+}));
 
 // UI Layout > Play Button / Next And Last Song Buttons: P = 'Play' or 'Nav'. The same ten settings each (ids built from P in main.js
 // applyButtonStyles() and in devPanel.js), plus the Button Animation subgroup's.

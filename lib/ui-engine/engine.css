@@ -126,3 +126,44 @@
   max-width: 100vw;
   max-height: 100vh;
 }
+
+/* ============================================================
+   TYPOGRAPHY (v0.2.7) — opt-in: `.ui-typography` is only ever added by
+   resolveElementLayout() when an element's layout config actually has at
+   least one typography field set (see engine.mjs's own comment) — an
+   element that never touches typography gets zero rules here, zero
+   custom properties, completely untouched. Every var() fallback below is
+   exactly schema.mjs's own FIELDS default for that field, so an element
+   that opts in but leaves a field unset still renders a sensible value.
+   ============================================================ */
+.ui-typography {
+  font-family: var(--ui-font-family, Arial);
+  font-size: var(--ui-font-size, 16px);
+  color: var(--ui-font-color, #ffffff);
+  font-weight: var(--ui-font-weight, normal);
+  font-style: var(--ui-font-style, normal);
+  text-decoration: var(--ui-text-decoration, none);
+  letter-spacing: var(--ui-letter-spacing, 0px);
+  line-height: var(--ui-line-height, 1.2);
+  opacity: var(--ui-opacity, 1);
+  overflow-wrap: var(--ui-overflow-wrap, normal);
+  max-width: var(--ui-max-width, 400px);
+}
+/* `enabled: false` only — a visible element's `display` is never touched
+   (see engine.mjs's css-class-toggle-false comment). */
+.ui-typography-hidden {
+  display: none;
+}
+/* `outlineEnabled: true` only — -webkit-text-stroke is unprefixed-equivalent
+   in every current major browser despite the vendor prefix; no non-
+   -webkit- text-stroke property exists yet, so this is the only real
+   option for a native (non text-shadow-stack) text outline. */
+.ui-typography-outline {
+  -webkit-text-stroke-width: var(--ui-outline-thickness, 2px);
+  -webkit-text-stroke-color: var(--ui-outline-color, #000000);
+}
+/* overflow (wrap/truncate/clip — 'scale'/shrink-to-fit deliberately not
+   mirrored, see schema.mjs's own comment on the `overflow` field). */
+.ui-typography[data-ui-overflow="wrap"] { white-space: normal; overflow: visible; text-overflow: clip; }
+.ui-typography[data-ui-overflow="truncate"] { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ui-typography[data-ui-overflow="clip"] { white-space: nowrap; overflow: hidden; text-overflow: clip; }

@@ -4,7 +4,7 @@
    (lib/ui-engine/engine.css + the createUIElement() calls in main.js); this file holds only
    non-layout styling (colours, type, borders), as the engine's host/engine split requires. */
 #appStage { background: #0d0f12; color: #f2f2f2; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; overflow: hidden; }
-.spx-app { position: absolute; inset: 0; touch-action: none; user-select: none; -webkit-tap-highlight-color: transparent; font-family: var(--spx-font, inherit); --spx-title-scale: 1; --spx-artist-scale: 1; --spx-meta-scale: 1; }
+.spx-app { position: absolute; inset: 0; touch-action: none; user-select: none; -webkit-tap-highlight-color: transparent; font-family: var(--spx-font, inherit); }
 
 /* The page is not selectable (so click-drag scrubbing never paints blue selection over the cover or
    timeline), EXCEPT these three text lines, which can be highlighted and copied. A drag that starts
@@ -12,7 +12,7 @@
 .spx-title, .spx-artist, .spx-meta { white-space: pre-line; text-align: center; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; cursor: text; }
 .spx-title a { -webkit-user-drag: none; user-select: text; -webkit-user-select: text; }
 .spx-title ::selection, .spx-artist::selection, .spx-meta::selection { background: #1db95466; }
-.spx-title { font-size: calc(clamp(var(--spx-title-min, 26px), var(--spx-title-pref, 5.5vw), var(--spx-title-max, 60px)) * var(--spx-title-scale)); font-weight: 700; line-height: 1.1; }
+.spx-title { font-size: 44px; font-weight: 700; line-height: 1.1; color: #f2f2f2; } /* JS (applyTextElementStyles(), main.js) sets every one of these live from the dev panel's UI Layout > Text > Song Title group -- these are first-paint fallbacks only */
 /* The track title is a link to the song on Spotify. Never underlined (hover included); inline-block so
    transform animations (pulse / grow / lift) work on it. Animation styles are set from titleAnim.js. */
 .spx-title a, .spx-title a:hover, .spx-title a:active, .spx-title a:focus { color: inherit; text-decoration: none; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
@@ -24,8 +24,8 @@
    new one for the crossfade between songs. They sit behind everything (z-index -1 inside the stage). */
 .spx-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; display: block; }
 .spx-bg-prev { opacity: 0; z-index: 0; }
-.spx-artist { font-size: calc(clamp(var(--spx-artist-min, 17px), var(--spx-artist-pref, 3vw), var(--spx-artist-max, 28px)) * var(--spx-artist-scale)); color: #c9d1d9; }
-.spx-meta { font-size: calc(clamp(var(--spx-meta-min, 14px), var(--spx-meta-pref, 0vw), var(--spx-meta-max, 14px)) * var(--spx-meta-scale)); color: #8b94a1; }
+.spx-artist { font-size: 22px; color: #c9d1d9; } /* JS fallbacks -- see .spx-title's own comment above */
+.spx-meta { font-size: 14px; color: #8b94a1; } /* JS fallbacks -- see .spx-title's own comment above */
 
 /* the album cover is the play/pause button */
 /* Stacking: the cover sits BEHIND everything. Scaled up it can overlap the text and the timeline, which
