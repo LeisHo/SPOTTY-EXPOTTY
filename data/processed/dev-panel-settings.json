@@ -313,7 +313,7 @@
   "layout": {
     "left": 26,
     "top": 6,
-    "width": 512,
+    "width": 350,
     "height": 578
   },
   "devPanelStyle": {
@@ -9207,6 +9207,15 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Shuffle Button",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [],
@@ -9331,6 +9340,12 @@
                       "subgroups": []
                     }
                   ]
+                },
+                {
+                  "key": "mobile:Shuffle Button",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
                 }
               ]
             }
@@ -9647,15 +9662,6 @@
             "type": "group",
             "section": {
               "key": "mobile:Brackets Smaller Text",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:Shuffle Button",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -10446,6 +10452,15 @@
                     }
                   ]
                 }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Shuffle Button",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [],
@@ -10570,6 +10585,12 @@
                     "subgroups": []
                   }
                 ]
+              },
+              {
+                "key": "mobile:Shuffle Button",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
               }
             ]
           },
@@ -10879,12 +10900,6 @@
             "subgroups": []
           },
           {
-            "key": "mobile:Shuffle Button",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
             "key": "mobile:New Group (3)",
             "items": [
               {
@@ -11189,21 +11204,226 @@
         "key": "mobile:Timeline Look",
         "items": [
           {
+            "type": "row",
+            "key": "colorMobileTimelineAccent"
+          },
+          {
+            "type": "row",
+            "key": "colorMobileTimelinePlayhead"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileTimelineBarOpacity"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileBarWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileTimelineHeight"
+          },
+          {
+            "type": "row",
+            "key": "rangeBarMobileTimelineZoomLimits"
+          },
+          {
+            "type": "row",
+            "key": "selectMobileTimelineStyle"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileGlowStemWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileGlowRadius"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileGlowDotSize"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileGlowIntensity"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileDensitySmoothing"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileDensityFillOpacity"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileDensityOutlineWidth"
+          },
+          {
+            "type": "row",
+            "key": "checkboxMobileDensityGradientFill"
+          },
+          {
+            "type": "row",
+            "key": "selectMobileLineFeature"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileLineWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileLineDotSize"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileLineFillOpacity"
+          },
+          {
+            "type": "row",
+            "key": "checkboxMobileLineSmooth"
+          },
+          {
+            "type": "row",
+            "key": "selectMobileRibbonFeature"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileRibbonThickness"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileRibbonSmoothing"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileRibbonBarsOpacity"
+          },
+          {
             "type": "group",
             "section": {
               "key": "mobile:Album Cover Colors",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "selectMobileAlbumColorMode"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileAlbumColorSaturation"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileAlbumColorBrightness"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxMobileAlbumColorTransition"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileAlbumColorTransitionMs"
+                }
+              ],
+              "rowKeys": [
+                "selectMobileAlbumColorMode",
+                "sliderMobileAlbumColorSaturation",
+                "sliderMobileAlbumColorBrightness",
+                "checkboxMobileAlbumColorTransition",
+                "sliderMobileAlbumColorTransitionMs"
+              ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "sliderMobilePlayheadWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobilePlayheadHeight"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileTimelineScaleGap"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileDensityColorBlend"
+          },
+          {
+            "type": "row",
+            "key": "checkboxMobileTimelineHeightTransition"
+          },
+          {
+            "type": "row",
+            "key": "sliderMobileTimelineHeightTransitionMs"
           }
         ],
-        "rowKeys": [],
+        "rowKeys": [
+          "colorMobileTimelineAccent",
+          "colorMobileTimelinePlayhead",
+          "sliderMobileTimelineBarOpacity",
+          "sliderMobileBarWidth",
+          "sliderMobileTimelineHeight",
+          "rangeBarMobileTimelineZoomLimits",
+          "selectMobileTimelineStyle",
+          "sliderMobileGlowStemWidth",
+          "sliderMobileGlowRadius",
+          "sliderMobileGlowDotSize",
+          "sliderMobileGlowIntensity",
+          "sliderMobileDensitySmoothing",
+          "sliderMobileDensityFillOpacity",
+          "sliderMobileDensityOutlineWidth",
+          "checkboxMobileDensityGradientFill",
+          "selectMobileLineFeature",
+          "sliderMobileLineWidth",
+          "sliderMobileLineDotSize",
+          "sliderMobileLineFillOpacity",
+          "checkboxMobileLineSmooth",
+          "selectMobileRibbonFeature",
+          "sliderMobileRibbonThickness",
+          "sliderMobileRibbonSmoothing",
+          "sliderMobileRibbonBarsOpacity",
+          "sliderMobilePlayheadWidth",
+          "sliderMobilePlayheadHeight",
+          "sliderMobileTimelineScaleGap",
+          "sliderMobileDensityColorBlend",
+          "checkboxMobileTimelineHeightTransition",
+          "sliderMobileTimelineHeightTransitionMs"
+        ],
         "subgroups": [
           {
             "key": "mobile:Album Cover Colors",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "selectMobileAlbumColorMode"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileAlbumColorSaturation"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileAlbumColorBrightness"
+              },
+              {
+                "type": "row",
+                "key": "checkboxMobileAlbumColorTransition"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileAlbumColorTransitionMs"
+              }
+            ],
+            "rowKeys": [
+              "selectMobileAlbumColorMode",
+              "sliderMobileAlbumColorSaturation",
+              "sliderMobileAlbumColorBrightness",
+              "checkboxMobileAlbumColorTransition",
+              "sliderMobileAlbumColorTransitionMs"
+            ],
             "subgroups": []
           }
         ]
@@ -12536,6 +12756,15 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Shuffle Button",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [],
@@ -12660,6 +12889,12 @@
                       "subgroups": []
                     }
                   ]
+                },
+                {
+                  "key": "landscape:Shuffle Button",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
                 }
               ]
             }
@@ -12976,15 +13211,6 @@
             "type": "group",
             "section": {
               "key": "landscape:Brackets Smaller Text",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:Shuffle Button",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -13775,6 +14001,15 @@
                     }
                   ]
                 }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Shuffle Button",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [],
@@ -13899,6 +14134,12 @@
                     "subgroups": []
                   }
                 ]
+              },
+              {
+                "key": "landscape:Shuffle Button",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
               }
             ]
           },
@@ -14208,12 +14449,6 @@
             "subgroups": []
           },
           {
-            "key": "landscape:Shuffle Button",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
             "key": "landscape:New Group (3)",
             "items": [
               {
@@ -14518,21 +14753,226 @@
         "key": "landscape:Timeline Look",
         "items": [
           {
+            "type": "row",
+            "key": "colorLandscapeTimelineAccent"
+          },
+          {
+            "type": "row",
+            "key": "colorLandscapeTimelinePlayhead"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeTimelineBarOpacity"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeBarWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeTimelineHeight"
+          },
+          {
+            "type": "row",
+            "key": "rangeBarLandscapeTimelineZoomLimits"
+          },
+          {
+            "type": "row",
+            "key": "selectLandscapeTimelineStyle"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeGlowStemWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeGlowRadius"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeGlowDotSize"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeGlowIntensity"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeDensitySmoothing"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeDensityFillOpacity"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeDensityOutlineWidth"
+          },
+          {
+            "type": "row",
+            "key": "checkboxLandscapeDensityGradientFill"
+          },
+          {
+            "type": "row",
+            "key": "selectLandscapeLineFeature"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeLineWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeLineDotSize"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeLineFillOpacity"
+          },
+          {
+            "type": "row",
+            "key": "checkboxLandscapeLineSmooth"
+          },
+          {
+            "type": "row",
+            "key": "selectLandscapeRibbonFeature"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeRibbonThickness"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeRibbonSmoothing"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeRibbonBarsOpacity"
+          },
+          {
             "type": "group",
             "section": {
               "key": "landscape:Album Cover Colors",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "selectLandscapeAlbumColorMode"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeAlbumColorSaturation"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeAlbumColorBrightness"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxLandscapeAlbumColorTransition"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeAlbumColorTransitionMs"
+                }
+              ],
+              "rowKeys": [
+                "selectLandscapeAlbumColorMode",
+                "sliderLandscapeAlbumColorSaturation",
+                "sliderLandscapeAlbumColorBrightness",
+                "checkboxLandscapeAlbumColorTransition",
+                "sliderLandscapeAlbumColorTransitionMs"
+              ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapePlayheadWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapePlayheadHeight"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeTimelineScaleGap"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeDensityColorBlend"
+          },
+          {
+            "type": "row",
+            "key": "checkboxLandscapeTimelineHeightTransition"
+          },
+          {
+            "type": "row",
+            "key": "sliderLandscapeTimelineHeightTransitionMs"
           }
         ],
-        "rowKeys": [],
+        "rowKeys": [
+          "colorLandscapeTimelineAccent",
+          "colorLandscapeTimelinePlayhead",
+          "sliderLandscapeTimelineBarOpacity",
+          "sliderLandscapeBarWidth",
+          "sliderLandscapeTimelineHeight",
+          "rangeBarLandscapeTimelineZoomLimits",
+          "selectLandscapeTimelineStyle",
+          "sliderLandscapeGlowStemWidth",
+          "sliderLandscapeGlowRadius",
+          "sliderLandscapeGlowDotSize",
+          "sliderLandscapeGlowIntensity",
+          "sliderLandscapeDensitySmoothing",
+          "sliderLandscapeDensityFillOpacity",
+          "sliderLandscapeDensityOutlineWidth",
+          "checkboxLandscapeDensityGradientFill",
+          "selectLandscapeLineFeature",
+          "sliderLandscapeLineWidth",
+          "sliderLandscapeLineDotSize",
+          "sliderLandscapeLineFillOpacity",
+          "checkboxLandscapeLineSmooth",
+          "selectLandscapeRibbonFeature",
+          "sliderLandscapeRibbonThickness",
+          "sliderLandscapeRibbonSmoothing",
+          "sliderLandscapeRibbonBarsOpacity",
+          "sliderLandscapePlayheadWidth",
+          "sliderLandscapePlayheadHeight",
+          "sliderLandscapeTimelineScaleGap",
+          "sliderLandscapeDensityColorBlend",
+          "checkboxLandscapeTimelineHeightTransition",
+          "sliderLandscapeTimelineHeightTransitionMs"
+        ],
         "subgroups": [
           {
             "key": "landscape:Album Cover Colors",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "selectLandscapeAlbumColorMode"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeAlbumColorSaturation"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeAlbumColorBrightness"
+              },
+              {
+                "type": "row",
+                "key": "checkboxLandscapeAlbumColorTransition"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeAlbumColorTransitionMs"
+              }
+            ],
+            "rowKeys": [
+              "selectLandscapeAlbumColorMode",
+              "sliderLandscapeAlbumColorSaturation",
+              "sliderLandscapeAlbumColorBrightness",
+              "checkboxLandscapeAlbumColorTransition",
+              "sliderLandscapeAlbumColorTransitionMs"
+            ],
             "subgroups": []
           }
         ]
@@ -14554,7 +14994,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:Text": false,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -14586,11 +15026,11 @@
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
     "desktop:Touch Scrub And Pinch": true,
-    "desktop:Scrub Audio": false,
+    "desktop:Scrub Audio": true,
     "desktop:New Group (2)": false,
     "desktop:No Preview": true,
-    "desktop:Spotify Handoff": false,
-    "desktop:Timeline Look": true,
+    "desktop:Spotify Handoff": true,
+    "desktop:Timeline Look": false,
     "desktop:Album Cover Colors": true,
     "mobile:Dev Panel": true,
     "mobile:MECHANICS": false,
@@ -14604,7 +15044,7 @@
     "mobile:Hot Keys": false,
     "mobile:Debug": true,
     "mobile:Snapshot": false,
-    "mobile:UI Layout": false,
+    "mobile:UI Layout": true,
     "mobile:Text": false,
     "mobile:Font": false,
     "mobile:Song Title": false,
@@ -14618,6 +15058,7 @@
     "mobile:Play Button Animation": false,
     "mobile:Next And Last Song Buttons": false,
     "mobile:Next And Last Button Animation": false,
+    "mobile:Shuffle Button": false,
     "mobile:Background": false,
     "mobile:Album Cover": false,
     "mobile:Shadows": false,
@@ -14626,12 +15067,11 @@
     "mobile:Previous / Next Shadow": false,
     "mobile:Title Lift Shadow": false,
     "mobile:Brackets Smaller Text": false,
-    "mobile:Shuffle Button": false,
     "mobile:New Group (3)": false,
     "mobile:New Group (4)": false,
     "mobile:New Group (5)": false,
     "mobile:New Group (6)": false,
-    "mobile:Startup": false,
+    "mobile:Startup": true,
     "mobile:Start Button": false,
     "mobile:Start Button Animation": false,
     "mobile:New Group": false,
@@ -14643,7 +15083,7 @@
     "mobile:Scrub Audio": false,
     "mobile:New Group (2)": false,
     "mobile:No Preview": false,
-    "mobile:Spotify Handoff": false,
+    "mobile:Spotify Handoff": true,
     "mobile:Timeline Look": false,
     "mobile:Album Cover Colors": false,
     "landscape:Dev Panel": true,
@@ -14672,6 +15112,7 @@
     "landscape:Play Button Animation": false,
     "landscape:Next And Last Song Buttons": false,
     "landscape:Next And Last Button Animation": false,
+    "landscape:Shuffle Button": false,
     "landscape:Background": false,
     "landscape:Album Cover": false,
     "landscape:Shadows": false,
@@ -14680,7 +15121,6 @@
     "landscape:Previous / Next Shadow": false,
     "landscape:Title Lift Shadow": false,
     "landscape:Brackets Smaller Text": false,
-    "landscape:Shuffle Button": false,
     "landscape:New Group (3)": false,
     "landscape:New Group (4)": false,
     "landscape:New Group (5)": false,
@@ -15017,7 +15457,77 @@
     "buttonRunStartup": null,
     "textArtistSeparator": null,
     "mobile:Shuffle Button": null,
-    "landscape:Shuffle Button": null
+    "landscape:Shuffle Button": null,
+    "colorMobileTimelineAccent": null,
+    "colorLandscapeTimelineAccent": null,
+    "colorMobileTimelinePlayhead": null,
+    "colorLandscapeTimelinePlayhead": null,
+    "sliderMobileTimelineBarOpacity": null,
+    "sliderLandscapeTimelineBarOpacity": null,
+    "sliderMobileBarWidth": null,
+    "sliderLandscapeBarWidth": null,
+    "sliderMobileTimelineHeight": null,
+    "sliderLandscapeTimelineHeight": null,
+    "rangeBarMobileTimelineZoomLimits": null,
+    "rangeBarLandscapeTimelineZoomLimits": null,
+    "selectMobileTimelineStyle": null,
+    "selectLandscapeTimelineStyle": null,
+    "sliderMobileGlowStemWidth": null,
+    "sliderLandscapeGlowStemWidth": null,
+    "sliderMobileGlowRadius": null,
+    "sliderLandscapeGlowRadius": null,
+    "sliderMobileGlowDotSize": null,
+    "sliderLandscapeGlowDotSize": null,
+    "sliderMobileGlowIntensity": null,
+    "sliderLandscapeGlowIntensity": null,
+    "sliderMobileDensitySmoothing": null,
+    "sliderLandscapeDensitySmoothing": null,
+    "sliderMobileDensityFillOpacity": null,
+    "sliderLandscapeDensityFillOpacity": null,
+    "sliderMobileDensityOutlineWidth": null,
+    "sliderLandscapeDensityOutlineWidth": null,
+    "checkboxMobileDensityGradientFill": null,
+    "checkboxLandscapeDensityGradientFill": null,
+    "selectMobileLineFeature": null,
+    "selectLandscapeLineFeature": null,
+    "sliderMobileLineWidth": null,
+    "sliderLandscapeLineWidth": null,
+    "sliderMobileLineDotSize": null,
+    "sliderLandscapeLineDotSize": null,
+    "sliderMobileLineFillOpacity": null,
+    "sliderLandscapeLineFillOpacity": null,
+    "checkboxMobileLineSmooth": null,
+    "checkboxLandscapeLineSmooth": null,
+    "selectMobileRibbonFeature": null,
+    "selectLandscapeRibbonFeature": null,
+    "sliderMobileRibbonThickness": null,
+    "sliderLandscapeRibbonThickness": null,
+    "sliderMobileRibbonSmoothing": null,
+    "sliderLandscapeRibbonSmoothing": null,
+    "sliderMobileRibbonBarsOpacity": null,
+    "sliderLandscapeRibbonBarsOpacity": null,
+    "sliderMobilePlayheadWidth": null,
+    "sliderLandscapePlayheadWidth": null,
+    "sliderMobilePlayheadHeight": null,
+    "sliderLandscapePlayheadHeight": null,
+    "sliderMobileTimelineScaleGap": null,
+    "sliderLandscapeTimelineScaleGap": null,
+    "sliderMobileDensityColorBlend": null,
+    "sliderLandscapeDensityColorBlend": null,
+    "checkboxMobileTimelineHeightTransition": null,
+    "checkboxLandscapeTimelineHeightTransition": null,
+    "sliderMobileTimelineHeightTransitionMs": null,
+    "sliderLandscapeTimelineHeightTransitionMs": null,
+    "selectMobileAlbumColorMode": null,
+    "selectLandscapeAlbumColorMode": null,
+    "sliderMobileAlbumColorSaturation": null,
+    "sliderLandscapeAlbumColorSaturation": null,
+    "sliderMobileAlbumColorBrightness": null,
+    "sliderLandscapeAlbumColorBrightness": null,
+    "checkboxMobileAlbumColorTransition": null,
+    "checkboxLandscapeAlbumColorTransition": null,
+    "sliderMobileAlbumColorTransitionMs": null,
+    "sliderLandscapeAlbumColorTransitionMs": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -15145,14 +15655,121 @@
     "curveEditorVolAnimSpeedCurve": true,
     "sliderCoverScale": true,
     "sliderCoverOffsetX": true,
-    "sliderCoverOffsetY": true
+    "sliderCoverOffsetY": true,
+    "colorTimelineAccent": true,
+    "colorTimelinePlayhead": true,
+    "sliderTimelineBarOpacity": true,
+    "sliderBarWidth": true,
+    "sliderTimelineHeight": true,
+    "rangeBarTimelineZoomLimits": true,
+    "selectTimelineStyle": true,
+    "sliderGlowStemWidth": true,
+    "sliderGlowRadius": true,
+    "sliderGlowDotSize": true,
+    "sliderGlowIntensity": true,
+    "sliderDensitySmoothing": true,
+    "sliderDensityFillOpacity": true,
+    "sliderDensityOutlineWidth": true,
+    "checkboxDensityGradientFill": true,
+    "selectLineFeature": true,
+    "sliderLineWidth": true,
+    "sliderLineDotSize": true,
+    "sliderLineFillOpacity": true,
+    "checkboxLineSmooth": true,
+    "selectRibbonFeature": true,
+    "sliderRibbonThickness": true,
+    "sliderRibbonSmoothing": true,
+    "sliderRibbonBarsOpacity": true,
+    "sliderPlayheadWidth": true,
+    "sliderPlayheadHeight": true,
+    "sliderTimelineScaleGap": true,
+    "sliderDensityColorBlend": true,
+    "checkboxTimelineHeightTransition": true,
+    "sliderTimelineHeightTransitionMs": true,
+    "selectAlbumColorMode": true,
+    "sliderAlbumColorSaturation": true,
+    "sliderAlbumColorBrightness": true,
+    "checkboxAlbumColorTransition": true,
+    "sliderAlbumColorTransitionMs": true
   },
   "devIndependence": {
-    "mobile": {},
+    "mobile": {
+      "colorTimelineAccent": false,
+      "colorTimelinePlayhead": false,
+      "sliderTimelineBarOpacity": false,
+      "sliderBarWidth": false,
+      "sliderTimelineHeight": true,
+      "rangeBarTimelineZoomLimits": false,
+      "selectTimelineStyle": false,
+      "sliderGlowStemWidth": false,
+      "sliderGlowRadius": false,
+      "sliderGlowDotSize": false,
+      "sliderGlowIntensity": false,
+      "sliderDensitySmoothing": false,
+      "sliderDensityFillOpacity": false,
+      "sliderDensityOutlineWidth": false,
+      "checkboxDensityGradientFill": false,
+      "selectLineFeature": false,
+      "sliderLineWidth": false,
+      "sliderLineDotSize": false,
+      "sliderLineFillOpacity": false,
+      "checkboxLineSmooth": false,
+      "selectRibbonFeature": false,
+      "sliderRibbonThickness": false,
+      "sliderRibbonSmoothing": false,
+      "sliderRibbonBarsOpacity": false,
+      "sliderPlayheadWidth": false,
+      "sliderPlayheadHeight": false,
+      "sliderTimelineScaleGap": false,
+      "sliderDensityColorBlend": false,
+      "checkboxTimelineHeightTransition": false,
+      "sliderTimelineHeightTransitionMs": false,
+      "selectAlbumColorMode": false,
+      "sliderAlbumColorSaturation": false,
+      "sliderAlbumColorBrightness": false,
+      "checkboxAlbumColorTransition": false,
+      "sliderAlbumColorTransitionMs": false
+    },
     "landscape": {}
   },
   "devDeviceValues": {
-    "mobile": {},
+    "mobile": {
+      "colorTimelineAccent": "#ffffff",
+      "colorTimelinePlayhead": "#ffffff",
+      "sliderTimelineBarOpacity": 1,
+      "sliderBarWidth": 3,
+      "sliderTimelineHeight": 165,
+      "rangeBarTimelineZoomLimits": "{\"min\":76,\"max\":100}",
+      "selectTimelineStyle": "density",
+      "sliderGlowStemWidth": 2,
+      "sliderGlowRadius": 12,
+      "sliderGlowDotSize": 4,
+      "sliderGlowIntensity": 0.8,
+      "sliderDensitySmoothing": 15,
+      "sliderDensityFillOpacity": 0.95,
+      "sliderDensityOutlineWidth": 8,
+      "checkboxDensityGradientFill": false,
+      "selectLineFeature": "valence",
+      "sliderLineWidth": 2,
+      "sliderLineDotSize": 3,
+      "sliderLineFillOpacity": 0.2,
+      "checkboxLineSmooth": true,
+      "selectRibbonFeature": "energy",
+      "sliderRibbonThickness": 28,
+      "sliderRibbonSmoothing": 24,
+      "sliderRibbonBarsOpacity": 0.25,
+      "sliderPlayheadWidth": 2,
+      "sliderPlayheadHeight": 18,
+      "sliderTimelineScaleGap": 0,
+      "sliderDensityColorBlend": 100,
+      "checkboxTimelineHeightTransition": true,
+      "sliderTimelineHeightTransitionMs": 990,
+      "selectAlbumColorMode": "vividGradient",
+      "sliderAlbumColorSaturation": 1.25,
+      "sliderAlbumColorBrightness": 1.15,
+      "checkboxAlbumColorTransition": false,
+      "sliderAlbumColorTransitionMs": 300
+    },
     "landscape": {}
   },
   "perMode": {
@@ -15321,7 +15938,7 @@
           "mobilePortrait": {
             "enabled": true,
             "overrides": {
-              "heightValue": "150px",
+              "heightValue": "165px",
               "offsetY": "28px"
             }
           },
