@@ -5,12 +5,13 @@
     "sliderScrubVolume": 0.7,
     "sliderClipStartMin": 21,
     "sliderClipStartMax": 28,
-    "sliderClipFadeOut": 500,
+    "checkboxStartAtBuffer": false,
+    "sliderClipFadeOut": 2500,
     "checkboxColdStartClips": true,
     "checkboxRandomStartSong": true,
     "checkboxLoopPreview": false,
-    "sliderPreloadAhead": 30,
-    "sliderPreloadBehind": 30,
+    "sliderPreloadAhead": 100,
+    "sliderPreloadBehind": 100,
     "checkboxShowPoolOverlay": false,
     "sliderWheelScrubPixels": 40,
     "checkboxInvertScroll": false,
@@ -70,8 +71,8 @@
     "selectAlbumColorMode": "vividGradient",
     "sliderAlbumColorSaturation": 1.25,
     "sliderAlbumColorBrightness": 1.15,
-    "checkboxAutoNextSong": false,
-    "sliderNoPreviewHoldSeconds": 5,
+    "checkboxAutoNextSong": true,
+    "sliderNoPreviewHoldSeconds": 2,
     "checkboxWheelCurveEnabled": true,
     "curveEditorWheelScrubCurve": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.5882778794478349,\"y\":0.052916717529296886}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.08755427386877113,\"y\":-0.6270833333333333}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "selectWheelCurveXRange": "full",
@@ -219,9 +220,9 @@
   },
   "layout": {
     "left": 26,
-    "top": 6,
+    "top": 7,
     "width": 506,
-    "height": 568
+    "height": 567
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -4126,6 +4127,34 @@
         "key": "desktop:Scrub Audio",
         "items": [
           {
+            "type": "row",
+            "key": "checkboxScrubAudioEnabled"
+          },
+          {
+            "type": "row",
+            "key": "checkboxColdStartClips"
+          },
+          {
+            "type": "row",
+            "key": "checkboxStartAtBuffer"
+          },
+          {
+            "type": "row",
+            "key": "checkboxRandomStartSong"
+          },
+          {
+            "type": "row",
+            "key": "checkboxLoopPreview"
+          },
+          {
+            "type": "row",
+            "key": "sliderScrubVolume"
+          },
+          {
+            "type": "row",
+            "key": "sliderClipFadeOut"
+          },
+          {
             "type": "group",
             "section": {
               "key": "desktop:New Group (2)",
@@ -4145,30 +4174,6 @@
               ],
               "subgroups": []
             }
-          },
-          {
-            "type": "row",
-            "key": "checkboxScrubAudioEnabled"
-          },
-          {
-            "type": "row",
-            "key": "sliderScrubVolume"
-          },
-          {
-            "type": "row",
-            "key": "sliderClipFadeOut"
-          },
-          {
-            "type": "row",
-            "key": "checkboxColdStartClips"
-          },
-          {
-            "type": "row",
-            "key": "checkboxRandomStartSong"
-          },
-          {
-            "type": "row",
-            "key": "checkboxLoopPreview"
           },
           {
             "type": "group",
@@ -4194,11 +4199,12 @@
         ],
         "rowKeys": [
           "checkboxScrubAudioEnabled",
-          "sliderScrubVolume",
-          "sliderClipFadeOut",
           "checkboxColdStartClips",
+          "checkboxStartAtBuffer",
           "checkboxRandomStartSong",
-          "checkboxLoopPreview"
+          "checkboxLoopPreview",
+          "sliderScrubVolume",
+          "sliderClipFadeOut"
         ],
         "subgroups": [
           {
@@ -5077,26 +5083,33 @@
         "subgroups": []
       },
       {
-        "key": "mobile:New Group",
+        "key": "mobile:UI Layout",
         "items": [
           {
             "type": "group",
             "section": {
-              "key": "mobile:Scrub Preload",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:Scrub Input",
+              "key": "mobile:New Group (3)",
               "items": [
                 {
                   "type": "group",
                   "section": {
-                    "key": "mobile:Wheel Scrub Per Notch Curve",
+                    "key": "mobile:New Group (4)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleScale"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileTitleScale"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:New Group (5)",
                     "items": [],
                     "rowKeys": [],
                     "subgroups": []
@@ -5105,7 +5118,7 @@
                 {
                   "type": "group",
                   "section": {
-                    "key": "mobile:Starting Timeline Span Curve",
+                    "key": "mobile:New Group (6)",
                     "items": [],
                     "rowKeys": [],
                     "subgroups": []
@@ -5114,9 +5127,132 @@
                 {
                   "type": "group",
                   "section": {
-                    "key": "mobile:Touch Scrub And Pinch",
-                    "items": [],
-                    "rowKeys": [],
+                    "key": "mobile:Font",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "selectMobileUiFont"
+                      }
+                    ],
+                    "rowKeys": [
+                      "selectMobileUiFont"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Track Title Button Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "selectMobileTitleAnimMode"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleAnimDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectMobileTitleAnimEasing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleBoldRestWeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleBoldHoverWeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleBoldPressWeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitlePulseScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitlePulseInDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitlePulseOutDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleGrowScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleGrowPressScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleGlowRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleGlowOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorMobileTitleGlowColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleGlowPressRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleTrackingHover"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleTrackingPress"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleLiftPx"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleLiftPressPx"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleLiftShadowBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleLiftShadowOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "selectMobileTitleAnimMode",
+                      "sliderMobileTitleAnimDuration",
+                      "selectMobileTitleAnimEasing",
+                      "sliderMobileTitleBoldRestWeight",
+                      "sliderMobileTitleBoldHoverWeight",
+                      "sliderMobileTitleBoldPressWeight",
+                      "sliderMobileTitlePulseScale",
+                      "sliderMobileTitlePulseInDuration",
+                      "sliderMobileTitlePulseOutDuration",
+                      "sliderMobileTitleGrowScale",
+                      "sliderMobileTitleGrowPressScale",
+                      "sliderMobileTitleGlowRadius",
+                      "sliderMobileTitleGlowOpacity",
+                      "colorMobileTitleGlowColor",
+                      "sliderMobileTitleGlowPressRadius",
+                      "sliderMobileTitleTrackingHover",
+                      "sliderMobileTitleTrackingPress",
+                      "sliderMobileTitleLiftPx",
+                      "sliderMobileTitleLiftPressPx",
+                      "sliderMobileTitleLiftShadowBlur",
+                      "sliderMobileTitleLiftShadowOpacity"
+                    ],
                     "subgroups": []
                   }
                 }
@@ -5124,170 +5260,158 @@
               "rowKeys": [],
               "subgroups": [
                 {
-                  "key": "mobile:Wheel Scrub Per Notch Curve",
+                  "key": "mobile:New Group (4)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileTitleScale"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:New Group (5)",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
                 },
                 {
-                  "key": "mobile:Starting Timeline Span Curve",
+                  "key": "mobile:New Group (6)",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
                 },
                 {
-                  "key": "mobile:Touch Scrub And Pinch",
-                  "items": [],
-                  "rowKeys": [],
+                  "key": "mobile:Font",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectMobileUiFont"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectMobileUiFont"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Track Title Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectMobileTitleAnimMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectMobileTitleAnimEasing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleBoldRestWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleBoldHoverWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleBoldPressWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitlePulseScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitlePulseInDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitlePulseOutDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGrowScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGrowPressScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGlowRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGlowOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorMobileTitleGlowColor"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGlowPressRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleTrackingHover"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleTrackingPress"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleLiftPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleLiftPressPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleLiftShadowBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleLiftShadowOpacity"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectMobileTitleAnimMode",
+                    "sliderMobileTitleAnimDuration",
+                    "selectMobileTitleAnimEasing",
+                    "sliderMobileTitleBoldRestWeight",
+                    "sliderMobileTitleBoldHoverWeight",
+                    "sliderMobileTitleBoldPressWeight",
+                    "sliderMobileTitlePulseScale",
+                    "sliderMobileTitlePulseInDuration",
+                    "sliderMobileTitlePulseOutDuration",
+                    "sliderMobileTitleGrowScale",
+                    "sliderMobileTitleGrowPressScale",
+                    "sliderMobileTitleGlowRadius",
+                    "sliderMobileTitleGlowOpacity",
+                    "colorMobileTitleGlowColor",
+                    "sliderMobileTitleGlowPressRadius",
+                    "sliderMobileTitleTrackingHover",
+                    "sliderMobileTitleTrackingPress",
+                    "sliderMobileTitleLiftPx",
+                    "sliderMobileTitleLiftPressPx",
+                    "sliderMobileTitleLiftShadowBlur",
+                    "sliderMobileTitleLiftShadowOpacity"
+                  ],
                   "subgroups": []
                 }
               ]
             }
-          }
-        ],
-        "rowKeys": [],
-        "subgroups": [
-          {
-            "key": "mobile:Scrub Preload",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "mobile:Scrub Input",
-            "items": [
-              {
-                "type": "group",
-                "section": {
-                  "key": "mobile:Wheel Scrub Per Notch Curve",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "mobile:Starting Timeline Span Curve",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "mobile:Touch Scrub And Pinch",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              }
-            ],
-            "rowKeys": [],
-            "subgroups": [
-              {
-                "key": "mobile:Wheel Scrub Per Notch Curve",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              },
-              {
-                "key": "mobile:Starting Timeline Span Curve",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              },
-              {
-                "key": "mobile:Touch Scrub And Pinch",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "key": "mobile:Scrub Audio",
-        "items": [
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:New Group (2)",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:No Preview",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          }
-        ],
-        "rowKeys": [],
-        "subgroups": [
-          {
-            "key": "mobile:New Group (2)",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "mobile:No Preview",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          }
-        ]
-      },
-      {
-        "key": "mobile:Spotify Handoff",
-        "items": [
-          {
-            "type": "row",
-            "key": "buttonSpotifyLogin"
-          }
-        ],
-        "rowKeys": [
-          "buttonSpotifyLogin"
-        ],
-        "subgroups": []
-      },
-      {
-        "key": "mobile:Timeline Look",
-        "items": [
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:Album Cover Colors",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          }
-        ],
-        "rowKeys": [],
-        "subgroups": [
-          {
-            "key": "mobile:Album Cover Colors",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          }
-        ]
-      },
-      {
-        "key": "mobile:UI Layout",
-        "items": [
-          {
-            "type": "row",
-            "key": "sliderMobileTitleScale"
           },
           {
             "type": "row",
@@ -5300,122 +5424,6 @@
           {
             "type": "row",
             "key": "buttonOpenLayoutInspector"
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:Track Title Button Animation",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "selectMobileTitleAnimMode"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleAnimDuration"
-                },
-                {
-                  "type": "row",
-                  "key": "selectMobileTitleAnimEasing"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleBoldRestWeight"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleBoldHoverWeight"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleBoldPressWeight"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitlePulseScale"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitlePulseInDuration"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitlePulseOutDuration"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleGrowScale"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleGrowPressScale"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleGlowRadius"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleGlowOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "colorMobileTitleGlowColor"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleGlowPressRadius"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleTrackingHover"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleTrackingPress"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleLiftPx"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleLiftPressPx"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleLiftShadowBlur"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderMobileTitleLiftShadowOpacity"
-                }
-              ],
-              "rowKeys": [
-                "selectMobileTitleAnimMode",
-                "sliderMobileTitleAnimDuration",
-                "selectMobileTitleAnimEasing",
-                "sliderMobileTitleBoldRestWeight",
-                "sliderMobileTitleBoldHoverWeight",
-                "sliderMobileTitleBoldPressWeight",
-                "sliderMobileTitlePulseScale",
-                "sliderMobileTitlePulseInDuration",
-                "sliderMobileTitlePulseOutDuration",
-                "sliderMobileTitleGrowScale",
-                "sliderMobileTitleGrowPressScale",
-                "sliderMobileTitleGlowRadius",
-                "sliderMobileTitleGlowOpacity",
-                "colorMobileTitleGlowColor",
-                "sliderMobileTitleGlowPressRadius",
-                "sliderMobileTitleTrackingHover",
-                "sliderMobileTitleTrackingPress",
-                "sliderMobileTitleLiftPx",
-                "sliderMobileTitleLiftPressPx",
-                "sliderMobileTitleLiftShadowBlur",
-                "sliderMobileTitleLiftShadowOpacity"
-              ],
-              "subgroups": []
-            }
           },
           {
             "type": "group",
@@ -5631,22 +5639,6 @@
           {
             "type": "group",
             "section": {
-              "key": "mobile:Font",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "selectMobileUiFont"
-                }
-              ],
-              "rowKeys": [
-                "selectMobileUiFont"
-              ],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
               "key": "mobile:Volume Button",
               "items": [
                 {
@@ -5811,124 +5803,335 @@
           }
         ],
         "rowKeys": [
-          "sliderMobileTitleScale",
           "sliderMobileArtistScale",
           "sliderMobileMetaScale",
           "buttonOpenLayoutInspector"
         ],
         "subgroups": [
           {
-            "key": "mobile:Track Title Button Animation",
+            "key": "mobile:New Group (3)",
             "items": [
               {
-                "type": "row",
-                "key": "selectMobileTitleAnimMode"
+                "type": "group",
+                "section": {
+                  "key": "mobile:New Group (4)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileTitleScale"
+                  ],
+                  "subgroups": []
+                }
               },
               {
-                "type": "row",
-                "key": "sliderMobileTitleAnimDuration"
+                "type": "group",
+                "section": {
+                  "key": "mobile:New Group (5)",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               },
               {
-                "type": "row",
-                "key": "selectMobileTitleAnimEasing"
+                "type": "group",
+                "section": {
+                  "key": "mobile:New Group (6)",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               },
               {
-                "type": "row",
-                "key": "sliderMobileTitleBoldRestWeight"
+                "type": "group",
+                "section": {
+                  "key": "mobile:Font",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectMobileUiFont"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectMobileUiFont"
+                  ],
+                  "subgroups": []
+                }
               },
               {
-                "type": "row",
-                "key": "sliderMobileTitleBoldHoverWeight"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleBoldPressWeight"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitlePulseScale"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitlePulseInDuration"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitlePulseOutDuration"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleGrowScale"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleGrowPressScale"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleGlowRadius"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleGlowOpacity"
-              },
-              {
-                "type": "row",
-                "key": "colorMobileTitleGlowColor"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleGlowPressRadius"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleTrackingHover"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleTrackingPress"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleLiftPx"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleLiftPressPx"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleLiftShadowBlur"
-              },
-              {
-                "type": "row",
-                "key": "sliderMobileTitleLiftShadowOpacity"
+                "type": "group",
+                "section": {
+                  "key": "mobile:Track Title Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectMobileTitleAnimMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectMobileTitleAnimEasing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleBoldRestWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleBoldHoverWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleBoldPressWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitlePulseScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitlePulseInDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitlePulseOutDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGrowScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGrowPressScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGlowRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGlowOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorMobileTitleGlowColor"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleGlowPressRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleTrackingHover"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleTrackingPress"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleLiftPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleLiftPressPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleLiftShadowBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTitleLiftShadowOpacity"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectMobileTitleAnimMode",
+                    "sliderMobileTitleAnimDuration",
+                    "selectMobileTitleAnimEasing",
+                    "sliderMobileTitleBoldRestWeight",
+                    "sliderMobileTitleBoldHoverWeight",
+                    "sliderMobileTitleBoldPressWeight",
+                    "sliderMobileTitlePulseScale",
+                    "sliderMobileTitlePulseInDuration",
+                    "sliderMobileTitlePulseOutDuration",
+                    "sliderMobileTitleGrowScale",
+                    "sliderMobileTitleGrowPressScale",
+                    "sliderMobileTitleGlowRadius",
+                    "sliderMobileTitleGlowOpacity",
+                    "colorMobileTitleGlowColor",
+                    "sliderMobileTitleGlowPressRadius",
+                    "sliderMobileTitleTrackingHover",
+                    "sliderMobileTitleTrackingPress",
+                    "sliderMobileTitleLiftPx",
+                    "sliderMobileTitleLiftPressPx",
+                    "sliderMobileTitleLiftShadowBlur",
+                    "sliderMobileTitleLiftShadowOpacity"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
-            "rowKeys": [
-              "selectMobileTitleAnimMode",
-              "sliderMobileTitleAnimDuration",
-              "selectMobileTitleAnimEasing",
-              "sliderMobileTitleBoldRestWeight",
-              "sliderMobileTitleBoldHoverWeight",
-              "sliderMobileTitleBoldPressWeight",
-              "sliderMobileTitlePulseScale",
-              "sliderMobileTitlePulseInDuration",
-              "sliderMobileTitlePulseOutDuration",
-              "sliderMobileTitleGrowScale",
-              "sliderMobileTitleGrowPressScale",
-              "sliderMobileTitleGlowRadius",
-              "sliderMobileTitleGlowOpacity",
-              "colorMobileTitleGlowColor",
-              "sliderMobileTitleGlowPressRadius",
-              "sliderMobileTitleTrackingHover",
-              "sliderMobileTitleTrackingPress",
-              "sliderMobileTitleLiftPx",
-              "sliderMobileTitleLiftPressPx",
-              "sliderMobileTitleLiftShadowBlur",
-              "sliderMobileTitleLiftShadowOpacity"
-            ],
-            "subgroups": []
+            "rowKeys": [],
+            "subgroups": [
+              {
+                "key": "mobile:New Group (4)",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleScale"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderMobileTitleScale"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:New Group (5)",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:New Group (6)",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Font",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "selectMobileUiFont"
+                  }
+                ],
+                "rowKeys": [
+                  "selectMobileUiFont"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Track Title Button Animation",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "selectMobileTitleAnimMode"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleAnimDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectMobileTitleAnimEasing"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleBoldRestWeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleBoldHoverWeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleBoldPressWeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitlePulseScale"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitlePulseInDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitlePulseOutDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleGrowScale"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleGrowPressScale"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleGlowRadius"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleGlowOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorMobileTitleGlowColor"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleGlowPressRadius"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleTrackingHover"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleTrackingPress"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleLiftPx"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleLiftPressPx"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleLiftShadowBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTitleLiftShadowOpacity"
+                  }
+                ],
+                "rowKeys": [
+                  "selectMobileTitleAnimMode",
+                  "sliderMobileTitleAnimDuration",
+                  "selectMobileTitleAnimEasing",
+                  "sliderMobileTitleBoldRestWeight",
+                  "sliderMobileTitleBoldHoverWeight",
+                  "sliderMobileTitleBoldPressWeight",
+                  "sliderMobileTitlePulseScale",
+                  "sliderMobileTitlePulseInDuration",
+                  "sliderMobileTitlePulseOutDuration",
+                  "sliderMobileTitleGrowScale",
+                  "sliderMobileTitleGrowPressScale",
+                  "sliderMobileTitleGlowRadius",
+                  "sliderMobileTitleGlowOpacity",
+                  "colorMobileTitleGlowColor",
+                  "sliderMobileTitleGlowPressRadius",
+                  "sliderMobileTitleTrackingHover",
+                  "sliderMobileTitleTrackingPress",
+                  "sliderMobileTitleLiftPx",
+                  "sliderMobileTitleLiftPressPx",
+                  "sliderMobileTitleLiftShadowBlur",
+                  "sliderMobileTitleLiftShadowOpacity"
+                ],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "mobile:Background",
@@ -6139,19 +6342,6 @@
             "subgroups": []
           },
           {
-            "key": "mobile:Font",
-            "items": [
-              {
-                "type": "row",
-                "key": "selectMobileUiFont"
-              }
-            ],
-            "rowKeys": [
-              "selectMobileUiFont"
-            ],
-            "subgroups": []
-          },
-          {
             "key": "mobile:Volume Button",
             "items": [
               {
@@ -6300,6 +6490,212 @@
                 "subgroups": []
               }
             ]
+          }
+        ]
+      },
+      {
+        "key": "mobile:New Group",
+        "items": [
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Scrub Preload",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Scrub Input",
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Wheel Scrub Per Notch Curve",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Starting Timeline Span Curve",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Touch Scrub And Pinch",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [],
+              "subgroups": [
+                {
+                  "key": "mobile:Wheel Scrub Per Notch Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Starting Timeline Span Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
+            }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "mobile:Scrub Preload",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Scrub Input",
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Wheel Scrub Per Notch Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Starting Timeline Span Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [],
+            "subgroups": [
+              {
+                "key": "mobile:Wheel Scrub Per Notch Curve",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Starting Timeline Span Curve",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Touch Scrub And Pinch",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mobile:Scrub Audio",
+        "items": [
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:New Group (2)",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:No Preview",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "mobile:New Group (2)",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:No Preview",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          }
+        ]
+      },
+      {
+        "key": "mobile:Spotify Handoff",
+        "items": [
+          {
+            "type": "row",
+            "key": "buttonSpotifyLogin"
+          }
+        ],
+        "rowKeys": [
+          "buttonSpotifyLogin"
+        ],
+        "subgroups": []
+      },
+      {
+        "key": "mobile:Timeline Look",
+        "items": [
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Album Cover Colors",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "mobile:Album Cover Colors",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       }
@@ -6900,26 +7296,33 @@
         "subgroups": []
       },
       {
-        "key": "landscape:New Group",
+        "key": "landscape:UI Layout",
         "items": [
           {
             "type": "group",
             "section": {
-              "key": "landscape:Scrub Preload",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:Scrub Input",
+              "key": "landscape:New Group (3)",
               "items": [
                 {
                   "type": "group",
                   "section": {
-                    "key": "landscape:Wheel Scrub Per Notch Curve",
+                    "key": "landscape:New Group (4)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleScale"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeTitleScale"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:New Group (5)",
                     "items": [],
                     "rowKeys": [],
                     "subgroups": []
@@ -6928,7 +7331,7 @@
                 {
                   "type": "group",
                   "section": {
-                    "key": "landscape:Starting Timeline Span Curve",
+                    "key": "landscape:New Group (6)",
                     "items": [],
                     "rowKeys": [],
                     "subgroups": []
@@ -6937,9 +7340,132 @@
                 {
                   "type": "group",
                   "section": {
-                    "key": "landscape:Touch Scrub And Pinch",
-                    "items": [],
-                    "rowKeys": [],
+                    "key": "landscape:Font",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "selectLandscapeUiFont"
+                      }
+                    ],
+                    "rowKeys": [
+                      "selectLandscapeUiFont"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Track Title Button Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "selectLandscapeTitleAnimMode"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleAnimDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectLandscapeTitleAnimEasing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleBoldRestWeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleBoldHoverWeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleBoldPressWeight"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitlePulseScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitlePulseInDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitlePulseOutDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleGrowScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleGrowPressScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleGlowRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleGlowOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorLandscapeTitleGlowColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleGlowPressRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleTrackingHover"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleTrackingPress"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleLiftPx"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleLiftPressPx"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleLiftShadowBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleLiftShadowOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "selectLandscapeTitleAnimMode",
+                      "sliderLandscapeTitleAnimDuration",
+                      "selectLandscapeTitleAnimEasing",
+                      "sliderLandscapeTitleBoldRestWeight",
+                      "sliderLandscapeTitleBoldHoverWeight",
+                      "sliderLandscapeTitleBoldPressWeight",
+                      "sliderLandscapeTitlePulseScale",
+                      "sliderLandscapeTitlePulseInDuration",
+                      "sliderLandscapeTitlePulseOutDuration",
+                      "sliderLandscapeTitleGrowScale",
+                      "sliderLandscapeTitleGrowPressScale",
+                      "sliderLandscapeTitleGlowRadius",
+                      "sliderLandscapeTitleGlowOpacity",
+                      "colorLandscapeTitleGlowColor",
+                      "sliderLandscapeTitleGlowPressRadius",
+                      "sliderLandscapeTitleTrackingHover",
+                      "sliderLandscapeTitleTrackingPress",
+                      "sliderLandscapeTitleLiftPx",
+                      "sliderLandscapeTitleLiftPressPx",
+                      "sliderLandscapeTitleLiftShadowBlur",
+                      "sliderLandscapeTitleLiftShadowOpacity"
+                    ],
                     "subgroups": []
                   }
                 }
@@ -6947,170 +7473,158 @@
               "rowKeys": [],
               "subgroups": [
                 {
-                  "key": "landscape:Wheel Scrub Per Notch Curve",
+                  "key": "landscape:New Group (4)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeTitleScale"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:New Group (5)",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
                 },
                 {
-                  "key": "landscape:Starting Timeline Span Curve",
+                  "key": "landscape:New Group (6)",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
                 },
                 {
-                  "key": "landscape:Touch Scrub And Pinch",
-                  "items": [],
-                  "rowKeys": [],
+                  "key": "landscape:Font",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectLandscapeUiFont"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectLandscapeUiFont"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Track Title Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectLandscapeTitleAnimMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectLandscapeTitleAnimEasing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleBoldRestWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleBoldHoverWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleBoldPressWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitlePulseScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitlePulseInDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitlePulseOutDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGrowScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGrowPressScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGlowRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGlowOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorLandscapeTitleGlowColor"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGlowPressRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleTrackingHover"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleTrackingPress"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleLiftPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleLiftPressPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleLiftShadowBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleLiftShadowOpacity"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectLandscapeTitleAnimMode",
+                    "sliderLandscapeTitleAnimDuration",
+                    "selectLandscapeTitleAnimEasing",
+                    "sliderLandscapeTitleBoldRestWeight",
+                    "sliderLandscapeTitleBoldHoverWeight",
+                    "sliderLandscapeTitleBoldPressWeight",
+                    "sliderLandscapeTitlePulseScale",
+                    "sliderLandscapeTitlePulseInDuration",
+                    "sliderLandscapeTitlePulseOutDuration",
+                    "sliderLandscapeTitleGrowScale",
+                    "sliderLandscapeTitleGrowPressScale",
+                    "sliderLandscapeTitleGlowRadius",
+                    "sliderLandscapeTitleGlowOpacity",
+                    "colorLandscapeTitleGlowColor",
+                    "sliderLandscapeTitleGlowPressRadius",
+                    "sliderLandscapeTitleTrackingHover",
+                    "sliderLandscapeTitleTrackingPress",
+                    "sliderLandscapeTitleLiftPx",
+                    "sliderLandscapeTitleLiftPressPx",
+                    "sliderLandscapeTitleLiftShadowBlur",
+                    "sliderLandscapeTitleLiftShadowOpacity"
+                  ],
                   "subgroups": []
                 }
               ]
             }
-          }
-        ],
-        "rowKeys": [],
-        "subgroups": [
-          {
-            "key": "landscape:Scrub Preload",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "landscape:Scrub Input",
-            "items": [
-              {
-                "type": "group",
-                "section": {
-                  "key": "landscape:Wheel Scrub Per Notch Curve",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "landscape:Starting Timeline Span Curve",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "landscape:Touch Scrub And Pinch",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
-                }
-              }
-            ],
-            "rowKeys": [],
-            "subgroups": [
-              {
-                "key": "landscape:Wheel Scrub Per Notch Curve",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              },
-              {
-                "key": "landscape:Starting Timeline Span Curve",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              },
-              {
-                "key": "landscape:Touch Scrub And Pinch",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "key": "landscape:Scrub Audio",
-        "items": [
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:New Group (2)",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:No Preview",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          }
-        ],
-        "rowKeys": [],
-        "subgroups": [
-          {
-            "key": "landscape:New Group (2)",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "landscape:No Preview",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          }
-        ]
-      },
-      {
-        "key": "landscape:Spotify Handoff",
-        "items": [
-          {
-            "type": "row",
-            "key": "buttonSpotifyLogin"
-          }
-        ],
-        "rowKeys": [
-          "buttonSpotifyLogin"
-        ],
-        "subgroups": []
-      },
-      {
-        "key": "landscape:Timeline Look",
-        "items": [
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:Album Cover Colors",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
-          }
-        ],
-        "rowKeys": [],
-        "subgroups": [
-          {
-            "key": "landscape:Album Cover Colors",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          }
-        ]
-      },
-      {
-        "key": "landscape:UI Layout",
-        "items": [
-          {
-            "type": "row",
-            "key": "sliderLandscapeTitleScale"
           },
           {
             "type": "row",
@@ -7123,122 +7637,6 @@
           {
             "type": "row",
             "key": "buttonOpenLayoutInspector"
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:Track Title Button Animation",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "selectLandscapeTitleAnimMode"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleAnimDuration"
-                },
-                {
-                  "type": "row",
-                  "key": "selectLandscapeTitleAnimEasing"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleBoldRestWeight"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleBoldHoverWeight"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleBoldPressWeight"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitlePulseScale"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitlePulseInDuration"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitlePulseOutDuration"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleGrowScale"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleGrowPressScale"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleGlowRadius"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleGlowOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "colorLandscapeTitleGlowColor"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleGlowPressRadius"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleTrackingHover"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleTrackingPress"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleLiftPx"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleLiftPressPx"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleLiftShadowBlur"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderLandscapeTitleLiftShadowOpacity"
-                }
-              ],
-              "rowKeys": [
-                "selectLandscapeTitleAnimMode",
-                "sliderLandscapeTitleAnimDuration",
-                "selectLandscapeTitleAnimEasing",
-                "sliderLandscapeTitleBoldRestWeight",
-                "sliderLandscapeTitleBoldHoverWeight",
-                "sliderLandscapeTitleBoldPressWeight",
-                "sliderLandscapeTitlePulseScale",
-                "sliderLandscapeTitlePulseInDuration",
-                "sliderLandscapeTitlePulseOutDuration",
-                "sliderLandscapeTitleGrowScale",
-                "sliderLandscapeTitleGrowPressScale",
-                "sliderLandscapeTitleGlowRadius",
-                "sliderLandscapeTitleGlowOpacity",
-                "colorLandscapeTitleGlowColor",
-                "sliderLandscapeTitleGlowPressRadius",
-                "sliderLandscapeTitleTrackingHover",
-                "sliderLandscapeTitleTrackingPress",
-                "sliderLandscapeTitleLiftPx",
-                "sliderLandscapeTitleLiftPressPx",
-                "sliderLandscapeTitleLiftShadowBlur",
-                "sliderLandscapeTitleLiftShadowOpacity"
-              ],
-              "subgroups": []
-            }
           },
           {
             "type": "group",
@@ -7454,22 +7852,6 @@
           {
             "type": "group",
             "section": {
-              "key": "landscape:Font",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "selectLandscapeUiFont"
-                }
-              ],
-              "rowKeys": [
-                "selectLandscapeUiFont"
-              ],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
               "key": "landscape:Volume Button",
               "items": [
                 {
@@ -7634,124 +8016,335 @@
           }
         ],
         "rowKeys": [
-          "sliderLandscapeTitleScale",
           "sliderLandscapeArtistScale",
           "sliderLandscapeMetaScale",
           "buttonOpenLayoutInspector"
         ],
         "subgroups": [
           {
-            "key": "landscape:Track Title Button Animation",
+            "key": "landscape:New Group (3)",
             "items": [
               {
-                "type": "row",
-                "key": "selectLandscapeTitleAnimMode"
+                "type": "group",
+                "section": {
+                  "key": "landscape:New Group (4)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeTitleScale"
+                  ],
+                  "subgroups": []
+                }
               },
               {
-                "type": "row",
-                "key": "sliderLandscapeTitleAnimDuration"
+                "type": "group",
+                "section": {
+                  "key": "landscape:New Group (5)",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               },
               {
-                "type": "row",
-                "key": "selectLandscapeTitleAnimEasing"
+                "type": "group",
+                "section": {
+                  "key": "landscape:New Group (6)",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               },
               {
-                "type": "row",
-                "key": "sliderLandscapeTitleBoldRestWeight"
+                "type": "group",
+                "section": {
+                  "key": "landscape:Font",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectLandscapeUiFont"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectLandscapeUiFont"
+                  ],
+                  "subgroups": []
+                }
               },
               {
-                "type": "row",
-                "key": "sliderLandscapeTitleBoldHoverWeight"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleBoldPressWeight"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitlePulseScale"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitlePulseInDuration"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitlePulseOutDuration"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleGrowScale"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleGrowPressScale"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleGlowRadius"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleGlowOpacity"
-              },
-              {
-                "type": "row",
-                "key": "colorLandscapeTitleGlowColor"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleGlowPressRadius"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleTrackingHover"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleTrackingPress"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleLiftPx"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleLiftPressPx"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleLiftShadowBlur"
-              },
-              {
-                "type": "row",
-                "key": "sliderLandscapeTitleLiftShadowOpacity"
+                "type": "group",
+                "section": {
+                  "key": "landscape:Track Title Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectLandscapeTitleAnimMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleAnimDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectLandscapeTitleAnimEasing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleBoldRestWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleBoldHoverWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleBoldPressWeight"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitlePulseScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitlePulseInDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitlePulseOutDuration"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGrowScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGrowPressScale"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGlowRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGlowOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorLandscapeTitleGlowColor"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleGlowPressRadius"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleTrackingHover"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleTrackingPress"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleLiftPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleLiftPressPx"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleLiftShadowBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTitleLiftShadowOpacity"
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectLandscapeTitleAnimMode",
+                    "sliderLandscapeTitleAnimDuration",
+                    "selectLandscapeTitleAnimEasing",
+                    "sliderLandscapeTitleBoldRestWeight",
+                    "sliderLandscapeTitleBoldHoverWeight",
+                    "sliderLandscapeTitleBoldPressWeight",
+                    "sliderLandscapeTitlePulseScale",
+                    "sliderLandscapeTitlePulseInDuration",
+                    "sliderLandscapeTitlePulseOutDuration",
+                    "sliderLandscapeTitleGrowScale",
+                    "sliderLandscapeTitleGrowPressScale",
+                    "sliderLandscapeTitleGlowRadius",
+                    "sliderLandscapeTitleGlowOpacity",
+                    "colorLandscapeTitleGlowColor",
+                    "sliderLandscapeTitleGlowPressRadius",
+                    "sliderLandscapeTitleTrackingHover",
+                    "sliderLandscapeTitleTrackingPress",
+                    "sliderLandscapeTitleLiftPx",
+                    "sliderLandscapeTitleLiftPressPx",
+                    "sliderLandscapeTitleLiftShadowBlur",
+                    "sliderLandscapeTitleLiftShadowOpacity"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
-            "rowKeys": [
-              "selectLandscapeTitleAnimMode",
-              "sliderLandscapeTitleAnimDuration",
-              "selectLandscapeTitleAnimEasing",
-              "sliderLandscapeTitleBoldRestWeight",
-              "sliderLandscapeTitleBoldHoverWeight",
-              "sliderLandscapeTitleBoldPressWeight",
-              "sliderLandscapeTitlePulseScale",
-              "sliderLandscapeTitlePulseInDuration",
-              "sliderLandscapeTitlePulseOutDuration",
-              "sliderLandscapeTitleGrowScale",
-              "sliderLandscapeTitleGrowPressScale",
-              "sliderLandscapeTitleGlowRadius",
-              "sliderLandscapeTitleGlowOpacity",
-              "colorLandscapeTitleGlowColor",
-              "sliderLandscapeTitleGlowPressRadius",
-              "sliderLandscapeTitleTrackingHover",
-              "sliderLandscapeTitleTrackingPress",
-              "sliderLandscapeTitleLiftPx",
-              "sliderLandscapeTitleLiftPressPx",
-              "sliderLandscapeTitleLiftShadowBlur",
-              "sliderLandscapeTitleLiftShadowOpacity"
-            ],
-            "subgroups": []
+            "rowKeys": [],
+            "subgroups": [
+              {
+                "key": "landscape:New Group (4)",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleScale"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderLandscapeTitleScale"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:New Group (5)",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:New Group (6)",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Font",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "selectLandscapeUiFont"
+                  }
+                ],
+                "rowKeys": [
+                  "selectLandscapeUiFont"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Track Title Button Animation",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "selectLandscapeTitleAnimMode"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleAnimDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectLandscapeTitleAnimEasing"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleBoldRestWeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleBoldHoverWeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleBoldPressWeight"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitlePulseScale"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitlePulseInDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitlePulseOutDuration"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleGrowScale"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleGrowPressScale"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleGlowRadius"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleGlowOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorLandscapeTitleGlowColor"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleGlowPressRadius"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleTrackingHover"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleTrackingPress"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleLiftPx"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleLiftPressPx"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleLiftShadowBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTitleLiftShadowOpacity"
+                  }
+                ],
+                "rowKeys": [
+                  "selectLandscapeTitleAnimMode",
+                  "sliderLandscapeTitleAnimDuration",
+                  "selectLandscapeTitleAnimEasing",
+                  "sliderLandscapeTitleBoldRestWeight",
+                  "sliderLandscapeTitleBoldHoverWeight",
+                  "sliderLandscapeTitleBoldPressWeight",
+                  "sliderLandscapeTitlePulseScale",
+                  "sliderLandscapeTitlePulseInDuration",
+                  "sliderLandscapeTitlePulseOutDuration",
+                  "sliderLandscapeTitleGrowScale",
+                  "sliderLandscapeTitleGrowPressScale",
+                  "sliderLandscapeTitleGlowRadius",
+                  "sliderLandscapeTitleGlowOpacity",
+                  "colorLandscapeTitleGlowColor",
+                  "sliderLandscapeTitleGlowPressRadius",
+                  "sliderLandscapeTitleTrackingHover",
+                  "sliderLandscapeTitleTrackingPress",
+                  "sliderLandscapeTitleLiftPx",
+                  "sliderLandscapeTitleLiftPressPx",
+                  "sliderLandscapeTitleLiftShadowBlur",
+                  "sliderLandscapeTitleLiftShadowOpacity"
+                ],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "landscape:Background",
@@ -7962,19 +8555,6 @@
             "subgroups": []
           },
           {
-            "key": "landscape:Font",
-            "items": [
-              {
-                "type": "row",
-                "key": "selectLandscapeUiFont"
-              }
-            ],
-            "rowKeys": [
-              "selectLandscapeUiFont"
-            ],
-            "subgroups": []
-          },
-          {
             "key": "landscape:Volume Button",
             "items": [
               {
@@ -8125,6 +8705,212 @@
             ]
           }
         ]
+      },
+      {
+        "key": "landscape:New Group",
+        "items": [
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Scrub Preload",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Scrub Input",
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Wheel Scrub Per Notch Curve",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Starting Timeline Span Curve",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Touch Scrub And Pinch",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [],
+              "subgroups": [
+                {
+                  "key": "landscape:Wheel Scrub Per Notch Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Starting Timeline Span Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
+            }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "landscape:Scrub Preload",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:Scrub Input",
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Wheel Scrub Per Notch Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Starting Timeline Span Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [],
+            "subgroups": [
+              {
+                "key": "landscape:Wheel Scrub Per Notch Curve",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Starting Timeline Span Curve",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Touch Scrub And Pinch",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "landscape:Scrub Audio",
+        "items": [
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:New Group (2)",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:No Preview",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "landscape:New Group (2)",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:No Preview",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          }
+        ]
+      },
+      {
+        "key": "landscape:Spotify Handoff",
+        "items": [
+          {
+            "type": "row",
+            "key": "buttonSpotifyLogin"
+          }
+        ],
+        "rowKeys": [
+          "buttonSpotifyLogin"
+        ],
+        "subgroups": []
+      },
+      {
+        "key": "landscape:Timeline Look",
+        "items": [
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Album Cover Colors",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "landscape:Album Cover Colors",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          }
+        ]
       }
     ]
   },
@@ -8142,7 +8928,7 @@
     "desktop:Hot Keys": true,
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:New Group (3)": false,
     "desktop:New Group (4)": false,
     "desktop:New Group (5)": true,
@@ -8157,7 +8943,7 @@
     "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": true,
     "desktop:Next And Last Button Animation": true,
-    "desktop:New Group": true,
+    "desktop:New Group": false,
     "desktop:Scrub Preload": true,
     "desktop:Scrub Input": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
@@ -8165,7 +8951,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
-    "desktop:No Preview": true,
+    "desktop:No Preview": false,
     "desktop:Spotify Handoff": true,
     "desktop:Timeline Look": true,
     "desktop:Album Cover Colors": true,
@@ -8180,6 +8966,21 @@
     "mobile:BUTTONS": false,
     "mobile:Hot Keys": false,
     "mobile:Debug": true,
+    "mobile:UI Layout": false,
+    "mobile:New Group (3)": false,
+    "mobile:New Group (4)": false,
+    "mobile:New Group (5)": false,
+    "mobile:New Group (6)": false,
+    "mobile:Font": false,
+    "mobile:Track Title Button Animation": false,
+    "mobile:Background": false,
+    "mobile:Volume Button": false,
+    "mobile:Album Cover": false,
+    "mobile:Shadows": false,
+    "mobile:Play Button": false,
+    "mobile:Play Button Animation": false,
+    "mobile:Next And Last Song Buttons": false,
+    "mobile:Next And Last Button Animation": false,
     "mobile:New Group": false,
     "mobile:Scrub Preload": false,
     "mobile:Scrub Input": false,
@@ -8192,17 +8993,6 @@
     "mobile:Spotify Handoff": false,
     "mobile:Timeline Look": false,
     "mobile:Album Cover Colors": false,
-    "mobile:UI Layout": false,
-    "mobile:Track Title Button Animation": false,
-    "mobile:Background": false,
-    "mobile:Font": false,
-    "mobile:Volume Button": false,
-    "mobile:Album Cover": false,
-    "mobile:Shadows": false,
-    "mobile:Play Button": false,
-    "mobile:Play Button Animation": false,
-    "mobile:Next And Last Song Buttons": false,
-    "mobile:Next And Last Button Animation": false,
     "landscape:Dev Panel": true,
     "landscape:MECHANICS": false,
     "landscape:PANEL UI": false,
@@ -8214,6 +9004,21 @@
     "landscape:BUTTONS": false,
     "landscape:Hot Keys": false,
     "landscape:Debug": true,
+    "landscape:UI Layout": false,
+    "landscape:New Group (3)": false,
+    "landscape:New Group (4)": false,
+    "landscape:New Group (5)": false,
+    "landscape:New Group (6)": false,
+    "landscape:Font": false,
+    "landscape:Track Title Button Animation": false,
+    "landscape:Background": false,
+    "landscape:Volume Button": false,
+    "landscape:Album Cover": false,
+    "landscape:Shadows": false,
+    "landscape:Play Button": false,
+    "landscape:Play Button Animation": false,
+    "landscape:Next And Last Song Buttons": false,
+    "landscape:Next And Last Button Animation": false,
     "landscape:New Group": false,
     "landscape:Scrub Preload": false,
     "landscape:Scrub Input": false,
@@ -8225,18 +9030,7 @@
     "landscape:No Preview": false,
     "landscape:Spotify Handoff": false,
     "landscape:Timeline Look": false,
-    "landscape:Album Cover Colors": false,
-    "landscape:UI Layout": false,
-    "landscape:Track Title Button Animation": false,
-    "landscape:Background": false,
-    "landscape:Font": false,
-    "landscape:Volume Button": false,
-    "landscape:Album Cover": false,
-    "landscape:Shadows": false,
-    "landscape:Play Button": false,
-    "landscape:Play Button Animation": false,
-    "landscape:Next And Last Song Buttons": false,
-    "landscape:Next And Last Button Animation": false
+    "landscape:Album Cover Colors": false
   },
   "devTextOverrides": {
     "sliderMobileDevPanelTitleFontSize": null,
@@ -8511,7 +9305,15 @@
     "desktop:New Group (3)": "Text",
     "desktop:New Group (6)": "ALBUM",
     "desktop:New Group (5)": "ARTIST",
-    "desktop:New Group (4)": "TRACK TITLE"
+    "desktop:New Group (4)": "TRACK TITLE",
+    "mobile:New Group (4)": "TRACK TITLE",
+    "mobile:New Group (5)": "ARTIST",
+    "mobile:New Group (6)": "ALBUM",
+    "mobile:New Group (3)": "Text",
+    "landscape:New Group (4)": "TRACK TITLE",
+    "landscape:New Group (5)": "ARTIST",
+    "landscape:New Group (6)": "ALBUM",
+    "landscape:New Group (3)": "Text"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
