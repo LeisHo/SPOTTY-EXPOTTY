@@ -17,6 +17,7 @@
     "sliderTimelineZoomSpeed": 1,
     "checkboxInvertZoomDrag": false,
     "sliderDefaultTimelineSpanDays": 4900,
+    "checkboxFullScaleOnStartup": false,
     "checkboxHandoffEnabled": true,
     "checkboxSpotifyLoginOnStart": true,
     "buttonSpotifyLogin": "",
@@ -27,6 +28,8 @@
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
     "sliderTimelineHeight": 210,
+    "checkboxTimelineHeightTransition": false,
+    "sliderTimelineHeightTransitionMs": 300,
     "sliderTimelineScaleGap": 0,
     "sliderPlayheadWidth": 2,
     "sliderPlayheadHeight": 18,
@@ -1733,6 +1736,10 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxFullScaleOnStartup"
                 }
               ],
               "rowKeys": [
@@ -1740,7 +1747,8 @@
                 "checkboxInvertScroll",
                 "sliderTimelineZoomSpeed",
                 "checkboxInvertZoomDrag",
-                "sliderDefaultTimelineSpanDays"
+                "sliderDefaultTimelineSpanDays",
+                "checkboxFullScaleOnStartup"
               ],
               "subgroups": [
                 {
@@ -1991,6 +1999,10 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "row",
+                "key": "checkboxFullScaleOnStartup"
               }
             ],
             "rowKeys": [
@@ -1998,7 +2010,8 @@
               "checkboxInvertScroll",
               "sliderTimelineZoomSpeed",
               "checkboxInvertZoomDrag",
-              "sliderDefaultTimelineSpanDays"
+              "sliderDefaultTimelineSpanDays",
+              "checkboxFullScaleOnStartup"
             ],
             "subgroups": [
               {
@@ -2350,6 +2363,14 @@
           {
             "type": "row",
             "key": "sliderDensityColorBlend"
+          },
+          {
+            "type": "row",
+            "key": "checkboxTimelineHeightTransition"
+          },
+          {
+            "type": "row",
+            "key": "sliderTimelineHeightTransitionMs"
           }
         ],
         "rowKeys": [
@@ -2380,7 +2401,9 @@
           "sliderPlayheadWidth",
           "sliderPlayheadHeight",
           "sliderTimelineScaleGap",
-          "sliderDensityColorBlend"
+          "sliderDensityColorBlend",
+          "checkboxTimelineHeightTransition",
+          "sliderTimelineHeightTransitionMs"
         ],
         "subgroups": [
           {
@@ -8168,11 +8191,11 @@
             "mode": "anchor",
             "horizontal": {
               "anchor": "center",
-              "offset": "0px"
+              "offset": ""
             },
             "vertical": {
-              "anchor": "bottom",
-              "offset": "228px"
+              "anchor": "center",
+              "offset": ""
             }
           },
           "size": {
