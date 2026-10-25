@@ -770,6 +770,15 @@ events"), the login button text and sdkStatus() now include the last play error 
 the new device, and a play that answers 404 (device not found yet) transfers and retries once. Tested against fakes (404 -> transfer -> retry ok; 403 shows the reason). Waiting on the owner's button text / snapshot.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  01:46:21 - code push (see ETA History for the measured end)  SDK status box
+
+Owner report: the login button says "Logged In: Full Songs" (SDK ready) and the new song plays, but the visible Spotify panel still shows the preview UI and does not change with the song. Cause: that panel is the
+old iframe embed (Show Spotify Player), which nothing drives once the SDK plays the songs; it stays on a stale / logged-out view. Fix: when the SDK is ready the iframe is not shown any more; with "Show Spotify Player" on, a
+status box (bottom left) shows what the SDK is really playing: PLAYING / paused, position / length, "(FULL SONG)" when longer than 31 s, title - artist; updated every 500 ms. sdkPlayer.js sdkInfo() feeds it.
+Verified with the fake SDK player: box hidden / iframe visible before the SDK; after ready the iframe hides and the box shows "nothing played yet"; state events update it to "PLAYING 1:24 / 3:34 (FULL SONG) Heaven - I Monster", then the next song.
+Not verified: against the real SDK / audio.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
