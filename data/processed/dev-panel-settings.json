@@ -7,7 +7,7 @@
     "sliderClipStartMax": 28,
     "sliderClipFadeOut": 500,
     "checkboxColdStartClips": true,
-    "checkboxRandomStartSong": false,
+    "checkboxRandomStartSong": true,
     "sliderPreloadAhead": 21,
     "sliderPreloadBehind": 21,
     "checkboxShowPoolOverlay": false,
@@ -148,9 +148,9 @@
   },
   "layout": {
     "left": 45,
-    "top": 272,
+    "top": 67,
     "width": 340,
-    "height": 449
+    "height": 654
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -4308,7 +4308,7 @@
     "desktop:Hot Keys": true,
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
-    "desktop:Scrub Audio": true,
+    "desktop:Scrub Audio": false,
     "desktop:Scrub Preload": true,
     "desktop:Scrub Input": false,
     "desktop:Wheel Scrub Per Notch Curve": true,
