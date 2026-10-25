@@ -749,6 +749,17 @@ Direct request: "take a look at our curve editor functionality in Handy Dandies,
 Kept from SPOTTY: the extra interpolation methods (Catmull-Rom, natural spline, easing curves), the red node dot, and no hint text under the graph (no-prose rule, CLAUDE.md §12j). Reverses SPOTTY's 2026-09-28 gesture requests (double-click to add, right-click to delete); that choice was made by the user in this session.
 Not verified in a browser: per the standing rule against running JavaScript in the built-in browser, only node --check was run.
 
+--------------------------------------------------------------------------------
+2026-10-25  -  01:25:45 - 01:26:28 EDT  (text size clamps; edit window only, times from `date`, code push 01:28 EDT)
+
+Direct request: the title, artist, and album/date font sizes needed their min px / growth vw / max px values adjustable from the dev panel, not only by editing app.css. Changes:
+- src/devpanel/devPanel.js: nine new sliders in UI Layout (Song Title, Artist, Album & Date: Min Size (Px), Size Growth (Vw), Max Size (Px)).
+- src/app/settings.js: defaults, set to the old hardcoded values (title 26 / 5.5 / 60, artist 17 / 3 / 28, album line 14 / 0 / 14), so the look is unchanged until a slider moves.
+- src/main.js applyLook(): writes each trio to --spx-<name>-min / -pref / -max on the app element.
+- src/app.css: the three font-size clamps read those variables, with fallbacks equal to the old values. The album/date line was a fixed 14px; its growth default is 0 vw, so it still does not scale until its slider is raised.
+Not verified in a browser: only node --check was run. The Mobile and Landscape tabs were not checked either.
+Commit 103b201 pushed to origin/main.
+
 ================================================================================
 APPEND-ONLY. Never rewrite, reorder, or delete a prior entry, even to fix
 formatting (CLAUDE.md §4a / Never-Skip rule #3). If an entry needs a
