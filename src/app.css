@@ -41,7 +41,7 @@
 .spx-cover.playing .spx-cover-glyph { opacity: 0; background: transparent; }
 .spx-cover.playing:hover .spx-cover-glyph { opacity: .9; background: #0003; }
 
-.spx-timeline { display: block; cursor: crosshair; touch-action: none; user-select: none; }
+.spx-timeline { display: block; cursor: default; touch-action: none; user-select: none; }
 
 /* Spotify's embedded player must exist to play audio, but its UI is never shown. It has to stay
    ON-SCREEN to play: parked at left:-10000px it never produced audio (tested). So it sits in the

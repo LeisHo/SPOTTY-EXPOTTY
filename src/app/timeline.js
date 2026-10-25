@@ -143,6 +143,15 @@ export function createTimeline(canvas, data) {
         const thinned = [];
         let lastX = -1e9;
         out.forEach(t => { if (t.x - lastX >= 64 && t.x > -10 && t.x < W()) { thinned.push(t); lastX = t.x; } });
+        // The first song's date always gets a tick (for example 2013 when the data starts in 2013), even when it is not a regular tick:
+        // it replaces any tick within 64 px of it, so the two labels never sit on top of each other.
+        const startX = xOf(vMin);
+        if (startX > -10 && startX < W()) {
+            const kept = thinned.filter(t => Math.abs(t.x - startX) >= 64);
+            kept.push({ x: startX, text: label(new Date(realOf(vMin))) });
+            kept.sort((a, b) => a.x - b.x);
+            return kept;
+        }
         return thinned;
     }
 
