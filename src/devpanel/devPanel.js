@@ -7919,7 +7919,7 @@
             { tab, group: TK, id: 'sliderTickOpacity', type: 'slider', label: 'Opacity:', min: 0, max: 1, step: 0.01, value: 0.6 },
             { tab, group: TK, id: 'sliderTickWidth', type: 'slider', label: 'Width (Px):', min: 1, max: 10, step: 0.5, value: 1 },
             { tab, group: TK, id: 'sliderTickHeight', type: 'slider', label: 'Height (Px, Rises Up From Start Height):', min: 1, max: 60, step: 1, value: 5 },
-            { tab, group: TK, id: 'sliderTickStartHeight', type: 'slider', label: 'Start Height (Px Above The Scale Line, Bottom Of Tick):', min: 0, max: 100, step: 1, value: 0 },
+            { tab, group: TK, id: 'sliderTickStartHeight', type: 'slider', label: 'Start Height (Px Above The Scale Line, Bottom Of Tick; Negative Goes Below):', min: -100, max: 100, step: 1, value: 0 },
         ];
         renderControlArray(TS_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_TIMELINE_SCALE_CONTROLS', TS_CONTROLS);

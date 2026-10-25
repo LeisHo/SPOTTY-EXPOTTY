@@ -462,7 +462,7 @@ export function createTimeline(canvas, data) {
         // Timeline Scale: the scale numbers and the tick marks each have their own settings
         const numFont = `${setting('checkboxScaleNumbersBold') ? 'bold ' : ''}${setting('sliderScaleNumbersFontSize')}px system-ui, sans-serif`;
         // a tick stands on its bottom edge, which sits Start Height above the scale line, and rises Height upward from there
-        const tickBottom = h - axisH - Math.max(0, setting('sliderTickStartHeight'));
+        const tickBottom = h - axisH - setting('sliderTickStartHeight'); // negative values put the tick below the scale line
         ctx.letterSpacing = `${setting('sliderScaleNumbersLetterSpacing')}px`;
         ticks().forEach(t => {
             ctx.globalAlpha = setting('sliderTickOpacity');
