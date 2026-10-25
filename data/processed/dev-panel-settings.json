@@ -191,8 +191,8 @@
     "sliderNavEdgeOffset": 14,
     "checkboxNavButtonEnabled": true,
     "colorNavButton": "#f2f2f2",
-    "sliderNavButtonSize": 22,
-    "sliderNavButtonOpacity": 85,
+    "sliderNavButtonSize": 30,
+    "sliderNavButtonOpacity": 100,
     "sliderNavButtonHoverOpacity": 54,
     "buttonNextSong": "",
     "buttonPrevSong": "",
@@ -336,7 +336,7 @@
     "left": 30,
     "top": 6,
     "width": 343,
-    "height": 568
+    "height": 310
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -15650,15 +15650,15 @@
     "mobile:Artist": false,
     "mobile:Album & Date": false,
     "mobile:Outline": false,
-    "mobile:New Group (7)": true,
-    "mobile:Volume Button": false,
-    "mobile:Play Button": false,
+    "mobile:New Group (7)": false,
+    "mobile:Volume Button": true,
+    "mobile:Play Button": true,
     "mobile:Play Button Animation": false,
     "mobile:Next And Last Song Buttons": false,
     "mobile:Next And Last Button Animation": false,
     "mobile:Shuffle Button": false,
     "mobile:Background": true,
-    "mobile:Album Cover": false,
+    "mobile:Album Cover": true,
     "mobile:Shadows": false,
     "mobile:Album Cover Shadow": false,
     "mobile:Volume Shadow": false,
@@ -16384,7 +16384,8 @@
       "sliderAlbumColorBrightness": false,
       "checkboxAlbumColorTransition": false,
       "sliderAlbumColorTransitionMs": false,
-      "sliderCoverOffsetY": true
+      "sliderCoverOffsetY": true,
+      "sliderNavButtonOpacity": true
     },
     "landscape": {}
   },
@@ -16425,7 +16426,8 @@
       "sliderAlbumColorBrightness": 1.15,
       "checkboxAlbumColorTransition": false,
       "sliderAlbumColorTransitionMs": 300,
-      "sliderCoverOffsetY": -99
+      "sliderCoverOffsetY": -99,
+      "sliderNavButtonOpacity": 100
     },
     "landscape": {}
   },
