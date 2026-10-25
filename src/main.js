@@ -354,10 +354,13 @@ async function boot() {
         const v = {
             '--bs-size': size, '--bs-size-hover': (anim ? g('sliderShuffleAnimHoverSize') : g('sliderShuffleIconSize')) + 'px',
             '--bs-size-press': (anim ? g('sliderShuffleAnimClickSize') : g('sliderShuffleIconSize')) + 'px', '--bs-size-release': (anim ? g('sliderShuffleAnimReleaseSize') : g('sliderShuffleIconSize')) + 'px',
-            '--bs-op-hover': String(anim ? g('sliderShuffleAnimHoverOpacity') / 100 : 1), '--bs-op-press': String(anim ? g('sliderShuffleAnimClickOpacity') / 100 : 1),
+            '--bs-op-hover': anim ? String(g('sliderShuffleAnimHoverOpacity') / 100) : undefined, '--bs-op-press': anim ? String(g('sliderShuffleAnimClickOpacity') / 100) : undefined,
             '--bs-time': (anim ? g('sliderShuffleAnimTime') : 0) + 'ms',
         };
-        BS_PROPS.forEach(k => { if (v[k] !== undefined) el('spxShuffle').style.setProperty(k, v[k]); });
+        BS_PROPS.forEach(k => {
+            if (v[k] !== undefined) el('spxShuffle').style.setProperty(k, v[k]);
+            else if (k === '--bs-op-hover' || k === '--bs-op-press') el('spxShuffle').style.removeProperty(k); // off: the state opacity applies
+        });
     }
     // Volume Button Animation: the volume button's sizes and opacities, the same custom properties as the other buttons. The slider's own
     // open/close animation (Animation Time in the slider group) is separate and is not changed by this.
