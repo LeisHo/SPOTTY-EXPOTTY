@@ -28,7 +28,7 @@ export function initVolume({ root, onChange }) {
     let vol = 1;
     try { const s = localStorage.getItem(KEY); if (s !== null && Number.isFinite(+s)) vol = clamp(+s, 0, 1); } catch (e) { /* storage blocked */ }
 
-    const cfg = { enabled: true, tol: 30, duration: 350, speedAt: () => 1 };
+    const cfg = { enabled: true, tol: 30, clickTol: 12, duration: 350, speedAt: () => 1 };
     let target = false;   // should it be open
     let prog = 0;         // how far open it is, 0 = closed .. 1 = fully open
     let raf = 0, panelW = 0, lastPointer = 'mouse';
@@ -111,7 +111,19 @@ export function initVolume({ root, onChange }) {
         if (target) toggleMute(); else setOpen(true);                // touch / keyboard: first tap opens the slider, a tap on the open icon mutes
     });
     // outside tap / Escape closes it
-    document.addEventListener('pointerdown', e => { if (target && !root.contains(e.target)) setOpen(false); });
+    // Click Tolerance: a press within clickTol px of the slider's bar starts a drag there, so a slightly-off click still sets the volume.
+    // (A press outside the tolerance and outside the control closes it, as before.)
+    const distToTrack = e => { const r = track.getBoundingClientRect(); return Math.hypot(Math.max(r.left - e.clientX, 0, e.clientX - r.right), Math.max(r.top - e.clientY, 0, e.clientY - r.bottom)); };
+    document.addEventListener('pointerdown', e => {
+        if (!target) return;
+        if (distToTrack(e) <= cfg.clickTol) {
+            dragging = true;
+            try { track.setPointerCapture(e.pointerId); } catch (err) { /* synthetic event: carry on */ }
+            fromEvent(e);
+            return;
+        }
+        if (!root.contains(e.target)) setOpen(false);
+    });
     window.addEventListener('keydown', e => { if (e.key === 'Escape' && target) setOpen(false); });
 
     // Hover: inside the icon (when closed) or the icon + the fully-open slider (when open), grown by the tolerance.
@@ -132,6 +144,7 @@ export function initVolume({ root, onChange }) {
     function configure(o) {
         cfg.enabled = !!o.enabled;
         cfg.tol = Math.max(0, o.tol || 0);
+        cfg.clickTol = Math.max(0, o.clickTol || 0);
         cfg.duration = Math.max(0, o.duration || 0);
         cfg.speedAt = o.speedAt || (() => 1);
         const L = cfg.enabled ? o : DEFAULT_LOOK;

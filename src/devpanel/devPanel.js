@@ -8045,12 +8045,14 @@
         buildSpottyTextElementGroup(tab, uiLayoutContent, 'Album & Date', { size: 14, color: '#8b94a1', bold: false, lineSpacing: 1.2 });
 
         // ---- UI Layout: Volume Button (toggleable) + Album Cover ------------------------------------------------
+        const ICON_STYLE_OPTIONS = Array.from({ length: 15 }, (_, i) => ({ value: String(i), text: 'Style ' + (i + 1) }));
         const VB = 'Volume Button', AC2 = 'Album Cover';
         uiLayoutContent.appendChild(createDevGroupElement(VB, tab));
         uiLayoutContent.appendChild(createDevGroupElement(AC2, tab));
         const VB_CONTROLS = [
             { tab, group: VB, id: 'checkboxVolumeButtonEnabled', type: 'checkbox', label: 'Enabled (Off = Click The Icon, Default Look)', value: true },
             { tab, group: VB, id: 'sliderVolMutedOpacity', type: 'slider', label: 'Muted Icon Opacity (%):', min: 0, max: 100, step: 1, value: 40 },
+            { tab, group: VB, id: 'sliderVolIconOpacity', type: 'slider', label: 'Icon Opacity When Not Muted (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: VB, id: 'sliderVolIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 24 },
             { tab, group: VB, id: 'sliderVolIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: VB, id: 'sliderVolCircleRadius', type: 'slider', label: 'Slider Circle Radius (Px):', min: 2, max: 30, step: 0.5, value: 7 },
@@ -8060,6 +8062,8 @@
             { tab, group: VB, id: 'colorVolBarTrack', type: 'color', label: 'Slider Bar Empty Color (Shown At 20%):', value: '#ffffff' },
             { tab, group: VB, id: 'colorVolCircle', type: 'color', label: 'Slider Circle Color:', value: '#ffffff' },
             { tab, group: VB, id: 'sliderVolHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Icon And Slider (Px):', min: 0, max: 200, step: 1, value: 30 },
+            { tab, group: VB, id: 'sliderVolClickTolerance', type: 'slider', label: 'Click Tolerance Outside Slider (Px):', min: 0, max: 200, step: 1, value: 12 },
+            { tab, group: VB, id: 'selectVolIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: ICON_STYLE_OPTIONS },
             { tab, group: VB, id: 'sliderVolAnimDuration', type: 'slider', label: 'Drop Down / Rise Up Animation Time At Speed 1 (Ms):', min: 0, max: 3000, step: 10, value: 350 },
             { tab, group: VB, id: 'curveEditorVolAnimSpeedCurve', type: 'curve-editor', label: 'Animation Speed Curve (X: Progress Of The Drop / Rise, Y: Speed, 1 = The Time Slider):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 0.35 }], defaultMethod: 'monotone' },
         ];
@@ -8084,8 +8088,10 @@
             { tab, group: SHB, id: 'sliderShuffleIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
             { tab, group: SHB, id: 'sliderShuffleIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: SHB, id: 'sliderShuffleOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
+            { tab, group: SHB, id: 'sliderShuffleOnOpacity', type: 'slider', label: 'On Icon Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: SHB, id: 'colorShuffleIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },
             { tab, group: SHB, id: 'colorShuffleOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
+            { tab, group: SHB, id: 'selectShuffleIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: ICON_STYLE_OPTIONS },
         ];
         renderControlArray(SHB_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_SHUFFLE_CONTROLS', SHB_CONTROLS);
@@ -8105,6 +8111,13 @@
             uiLayoutContent.appendChild(createDevGroupElement(G, tab));
             const main = [
                 ...(P === 'Nav' ? [{ tab, group: G, id: 'sliderNavEdgeOffset', type: 'slider', label: 'Edge Offset From Browser (Px):', min: 0, max: 300, step: 1, value: 14 }] : []),
+                ...(P === 'Play' ? [
+                    { tab, group: G, id: 'sliderPlayGlyphOpacityPlaying', type: 'slider', label: 'Icon Opacity When Playing (%):', min: 0, max: 100, step: 1, value: 100 },
+                    { tab, group: G, id: 'sliderPlayGlyphOpacityPaused', type: 'slider', label: 'Icon Opacity When Paused (%):', min: 0, max: 100, step: 1, value: 100 },
+                    { tab, group: G, id: 'selectPlayIconStyle', type: 'select', label: 'Play Icon Style:', value: '0', options: ICON_STYLE_OPTIONS },
+                    { tab, group: G, id: 'selectPauseIconStyle', type: 'select', label: 'Pause Icon Style:', value: '0', options: ICON_STYLE_OPTIONS },
+                ] : []),
+                ...(P === 'Nav' ? [{ tab, group: G, id: 'selectNavIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: ICON_STYLE_OPTIONS }] : []),
                 { tab, group: G, id: 'checkbox' + P + 'ButtonEnabled', type: 'checkbox', label: 'Enabled', value: d.on },
                 { tab, group: G, id: 'color' + P + 'Button', type: 'color', label: 'Color:', value: d.color },
                 { tab, group: G, id: 'slider' + P + 'ButtonSize', type: 'slider', label: 'Size (Px):', min: 8, max: 300, step: 1, value: d.size },

@@ -90,6 +90,7 @@
 .spx-vol-btn { width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px); border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; translate: var(--spx-vol-icon-x, 0px) 0; }
 .spx-vol-btn:hover { color: #fff; }
 .spx-vol-btn { transition: opacity .15s; }
+.spx-vol-btn:not([data-level="mute"]) { opacity: var(--spx-vol-op, 1); }
 .spx-vol-btn[data-level="mute"] { opacity: var(--spx-vol-muted-opacity, 0.4); } /* dev panel: UI Layout > Volume Button > Muted Icon Opacity */
 .spx-vol-btn svg { width: var(--spx-vol-icon); height: var(--spx-vol-icon); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-vol-btn svg .spk { fill: currentColor; stroke: none; }
@@ -98,7 +99,7 @@
 .spx-vol-btn[data-level="high"] .w1, .spx-vol-btn[data-level="high"] .w2, .spx-vol-btn[data-level="high"] .w3 { display: inline; }
 .spx-vol-btn[data-level="mute"] .x { display: inline; }
 .spx-vol-clip { position: absolute; left: calc(var(--spx-vol-icon) + 28px); top: 50%; transform: translateY(-50%); overflow: hidden; width: 0; visibility: hidden; }
-.spx-vol-panel { margin: 0; width: max-content; padding: 0 12px 0 8px; border-radius: 22px; background: none; backdrop-filter: none; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); display: flex; flex-direction: row; align-items: center; gap: 8px; }
+.spx-vol-panel { margin: 0; width: max-content; padding: 10px 12px 10px 8px; border-radius: 22px; background: none; backdrop-filter: none; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); display: flex; flex-direction: row; align-items: center; gap: 8px; }
 .spx-vol-panel[hidden] { display: none; }
 .spx-vol-track { position: relative; flex: none; width: var(--spx-vol-bl); height: var(--spx-vol-bw); border-radius: calc(var(--spx-vol-bw) / 2); background: color-mix(in srgb, var(--spx-vol-track) 20%, transparent); cursor: pointer; touch-action: none; outline: none; }
 .spx-vol-track:focus-visible { box-shadow: 0 0 0 2px #1db954; }
@@ -145,6 +146,8 @@
 .bs-host.bs-release .bs-icon { width: var(--bs-size-release, var(--bs-size, 26px)); height: var(--bs-size-release, var(--bs-size, 26px)); opacity: var(--bs-op-hover, var(--bs-op, 1)); }
 .spx-play-glyph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
 .spx-cover.playing .ico-play, .spx-cover:not(.playing) .ico-pause { display: none; }
+.spx-cover.playing .spx-play-glyph { opacity: var(--spx-glyph-op-playing, 1); }
+.spx-cover:not(.playing) .spx-play-glyph { opacity: var(--spx-glyph-op-paused, 1); }
 .spx-app.no-play-glyph .spx-play-glyph { display: none; }
 /* Shuffle (under the volume icon) */
 .spx-shuffle { position: absolute; right: 14px; top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2); /* the stage's top-right corner; the volume is at the left edge */ width: calc(var(--spx-shuffle-icon, 20px) + 20px); height: calc(var(--spx-shuffle-icon, 20px) + 20px);
@@ -152,7 +155,7 @@
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-shuffle-x, 0px) 0; }
 .spx-shuffle svg { width: var(--spx-shuffle-icon, 20px); height: var(--spx-shuffle-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-shuffle:hover { opacity: 0.8; }
-.spx-shuffle[aria-pressed="true"] { opacity: 1; color: var(--spx-shuffle-on-color, #1db954); }
+.spx-shuffle[aria-pressed="true"] { opacity: var(--spx-shuffle-on-op, 1); color: var(--spx-shuffle-on-color, #1db954); }
 .spx-shuffle[hidden] { display: none; }
 .spx-vol-btn[aria-expanded="true"] ~ .spx-shuffle { opacity: 0; pointer-events: none; } /* the slider drops over this spot */
 .spx-app.no-shadow-vol .spx-shuffle { filter: none; }

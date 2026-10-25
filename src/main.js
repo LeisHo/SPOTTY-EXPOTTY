@@ -13,6 +13,7 @@ import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
+import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying } from './app/handoff.js';
@@ -435,7 +436,7 @@ async function boot() {
             enabled: setting('checkboxVolumeButtonEnabled'),
             muted: setting('sliderVolMutedOpacity'), icon: setting('sliderVolIconSize'), radius: setting('sliderVolCircleRadius'), barW: setting('sliderVolBarWidth'), barL: setting('sliderVolBarLength'),
             fill: setting('colorVolBarFill'), track: setting('colorVolBarTrack'), thumb: setting('colorVolCircle'),
-            tol: setting('sliderVolHoverTolerance'), duration: setting('sliderVolAnimDuration'),
+            tol: setting('sliderVolHoverTolerance'), clickTol: setting('sliderVolClickTolerance'), duration: setting('sliderVolAnimDuration'),
             speedAt: s => curveY(setting('curveEditorVolAnimSpeedCurve'), s),
         });
         // Album cover scale + offset are visual only (they never move other elements); the prev/next buttons follow its Y offset.
@@ -475,6 +476,17 @@ async function boot() {
         el('spxApp').style.setProperty('--spx-shuffle-off-op', String(setting('sliderShuffleOffOpacity') / 100));
         el('spxApp').style.setProperty('--spx-shuffle-color', setting('colorShuffleIcon'));
         el('spxApp').style.setProperty('--spx-shuffle-on-color', setting('colorShuffleOn'));
+        el('spxApp').style.setProperty('--spx-vol-op', String(setting('sliderVolIconOpacity') / 100));
+        el('spxApp').style.setProperty('--spx-shuffle-on-op', String(setting('sliderShuffleOnOpacity') / 100));
+        el('spxApp').style.setProperty('--spx-glyph-op-playing', String(setting('sliderPlayGlyphOpacityPlaying') / 100));
+        el('spxApp').style.setProperty('--spx-glyph-op-paused', String(setting('sliderPlayGlyphOpacityPaused') / 100));
+        // Icon styles (the dev panel's Icon Style dropdowns; see iconStyles.js)
+        applyVolumeIcon(el('spxVolume').querySelector('.spx-vol-btn svg'), iconIndex(setting('selectVolIconStyle')));
+        applyShuffleIcon(el('spxShuffle').querySelector('svg'), iconIndex(setting('selectShuffleIconStyle')));
+        applyNavIcon(el('spxPrev').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), true);
+        applyNavIcon(el('spxNext').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), false);
+        applyCoverGlyph(el('spxCover').querySelector('.spx-play-glyph svg'), iconIndex(setting('selectPlayIconStyle')), iconIndex(setting('selectPauseIconStyle')));
+        applyPlayIcon(el('spxStartBtn').querySelector('svg'), iconIndex(setting('selectPlayIconStyle')));
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
         // Album Cover > Bounding Box: the cover's own box and its centre (see app.css)

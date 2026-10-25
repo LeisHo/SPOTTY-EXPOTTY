@@ -153,6 +153,8 @@ export const DEFAULTS = {
     checkboxScaleArtistMultiline: false, sliderArtistMaxLines: 2,
     checkboxScaleAlbumDateMultiline: false, sliderAlbumDateMaxLines: 2,
     checkboxScaleArtistToMatch: false, checkboxScaleAlbumDateToMatch: false,
+    sliderVolIconOpacity: 100, sliderVolClickTolerance: 12, selectVolIconStyle: '0', sliderShuffleOnOpacity: 100, selectShuffleIconStyle: '0',
+    sliderPlayGlyphOpacityPlaying: 100, sliderPlayGlyphOpacityPaused: 100, selectPlayIconStyle: '0', selectPauseIconStyle: '0', selectNavIconStyle: '0',
     textArtistSeparator: ';', // what joins the names when a track has several artists (the data stores them with ';')
     sliderArtistSeparatorPct: 100,
     sliderNavEdgeOffset: 14,
