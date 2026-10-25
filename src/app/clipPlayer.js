@@ -94,12 +94,22 @@ function entry(did) {
         pool.set(did, p);
         ['progress', 'canplay', 'loadeddata'].forEach(ev => audio.addEventListener(ev, () => noteReady(p)));
         audio.addEventListener('waiting', () => { if (current === p) logEvent('playback', `CLIP STALL ${did}: waiting for data (${bufferedEnd(audio).toFixed(1)}s buffered)`); });
-        audio.addEventListener('error', () => logEvent('preload', `ERROR ${did}: the audio element reported an error`));
+        audio.addEventListener('error', () => {
+            logEvent('preload', `ERROR ${did}: the audio element reported an error`);
+            // an iTunes link (no URL lookup to fail earlier) that won't load counts as "no clip", like a failed Deezer lookup
+            if (typeof did === 'string' && !p.dead) { p.dead = true; p.deadAt = Date.now(); checkBatch(); }
+        });
     }
     return p;
 }
 
 async function attach(p) {
+    // An iTunes preview (a song with no Deezer clip; the key is the link itself, see main.js clipKey()): a static CDN link,
+    // so nothing to fetch. urlAt = Infinity keeps entry() from dropping it as an expired Deezer URL.
+    if (typeof p.did === 'string') {
+        if (!p.audio.getAttribute('src')) { p.audio.src = p.did; p.urlAt = Infinity; }
+        return;
+    }
     if (p.audio.getAttribute('src') || p.dead || p.fetching) return;
     p.fetching = true;
     p.reqAt = performance.now();

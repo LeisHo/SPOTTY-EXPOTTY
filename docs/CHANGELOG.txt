@@ -824,3 +824,20 @@ Direct requests (three, one session):
 - New Loop Preview checkbox in the Scrub Audio group (default on, = the old behaviour: the embed restarts the same song). Off: when a preview ends the app moves to the next song; shuffle still always picks the next one. src/app/settings.js, src/devpanel/devPanel.js, src/main.js (setOnEnded).
 - Volume button: the closed slider now opens only over the icon itself (no 30 px tolerance below it). The tolerance still applies once the slider is open. The tolerance had been covering the Shuffle button, so it could not be clicked. src/app/volume.js.
 Not verified in a browser: only node --check was run on the four edited files. Not committed.
+
+--------------------------------------------------------------------------------
+2026-10-25  -  (time not measured)
+
+Direct request: play a preview clip for songs that have no Deezer clip, using iTunes previews, with no change to how the app works or looks.
+- Lookup run (scratch wrapper around resolve_previews.py logic, filtered to the clip-less tracks): Deezer by ISRC found 0 of 837 unique tracks; iTunes title+artist search found previews for 638 unique tracks (639 song-list entries). 198 entries still have no clip.
+- data/processed/itunes-previews.json: { Spotify track id: iTunes preview URL }, 638 links.
+- scripts/active/merge_itunes_previews.py (new): adds u to timeline songs with d = 0 that have a link. 683 song rows get u; 212 rows still have no clip. Run it after every build_timeline.py.
+- src/app/clipPlayer.js: a string key is a direct link. attach() sets it as the audio src (no /api/preview call). An error on it marks the clip dead, like a failed Deezer lookup.
+- src/main.js: clipKey(s) = d || u || 0 replaces .d in the clip plumbing. The 'no preview clip' line under the album shows only when neither exists.
+Exception to the Deezer rule in CLAUDE.md: iTunes URLs are stored (no exp= token). Not verified in a browser: only node --check, and a HEAD request to one stored URL. Not committed.
+
+--------------------------------------------------------------------------------
+2026-10-25  -  (time not measured)
+
+Randomize Starting Song worked in visitor mode but not in dev mode. Cause: the startup check counted ANY pointer, wheel or key input as the visitor having moved, including input on the dev panel, which is open while the page loads in dev mode. src/main.js now ignores input that starts inside #devPanel. The saved (synced) copy the check reads was already correct (randomize on).
+Not verified in a browser: only node --check was run.

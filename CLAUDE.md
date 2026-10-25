@@ -38,6 +38,7 @@ project-authored.
 - `scripts/active/merge_cover_colors.py` — adds `covers` + per-song `c` to `timeline.json` from `cover-colors.json`. Idempotent. **Re-run it after every `build_timeline.py`** (a rebuild drops the colours).
 - `data/processed/timeline.json` — what the app loads: every playlist-add event sorted by `Added At`, with Deezer id (`d`, 0 = no clip) and cover-palette index (`c`). Regenerate with `build_timeline.py` then `merge_cover_colors.py`; don't hand-edit.
 - `data/processed/cover-colors.json` — album cover colours keyed by track id (see above).
+- `data/processed/itunes-previews.json` — iTunes 30 s preview links keyed by Spotify track id, for songs with no Deezer clip (638 links). `scripts/active/merge_itunes_previews.py` puts them on `timeline.json` as `u` (683 song rows). **Re-run it after every `build_timeline.py`**, like the cover merge.
 - `data/Exportify Export/` — the source CSVs; read-only inputs.
 
 ## Untouchable systems
@@ -70,7 +71,7 @@ Source: owner's own account of how the playlists are made (2026-10-23).
 
 ## Known gotchas
 
-- **Deezer preview links expire in ~15 minutes** (measured 14.98 min) and Deezer's API sends no CORS header. Never save preview URLs to a file; save Deezer track ids and resolve fresh URLs through `/api/preview`.
+- **Deezer preview links expire in ~15 minutes** (measured 14.98 min) and Deezer's API sends no CORS header. Never save preview URLs to a file; save Deezer track ids and resolve fresh URLs through `/api/preview`. **Exception (2026-10-25):** iTunes preview links have no expiry token (checked: a 200 on a URL 1 h after it was found, no `exp=`), so they ARE stored, as `u` on timeline songs with no Deezer id. The clip player plays them directly; the proxy is not involved. Confirm the no-`exp=` finding before relying on it.
 - **Don't cache failed lookups.** A Deezer quota error once got cached as "no clip" for 10 minutes, so most songs went silent while scrubbing fast. Only real URLs are cached; a null is retried after 20 s.
 - **Deezer allows ~50 lookups / 5 s per IP; bursts return error code 4.** The proxy (serve.py and api/preview.js) rate-limits to 8/s and retries code 4; the client requests one song at a time, nearest the playhead first, and caps preload-ahead at 16. Running `resolve_previews.py` at the same time shares the limit and makes live lookups fail.
 - **Never seek into an unbuffered part of a clip.** `canplay` fires after only a few seconds are buffered; seeking to a random 2-22 s offset then stalls while the browser re-fetches, which sounds like "loading". `clipPlayer.js` starts only after >=2 s are buffered and picks the offset inside the buffered range.

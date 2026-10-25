@@ -201,6 +201,8 @@ async function boot() {
         return;
     }
     const songs = data.songs;
+    // The clip a song plays: its Deezer id (proxied, expiring links), else its iTunes preview link (static), else 0 (no clip).
+    const clipKey = s => s.d || s.u || 0;
     let pos = 0, idx = 0, dir = 1, handedOff = false, handoffPending = false, handoffTimer = 0, preloadQueued = false, moveLog = [];
     let lastTimelineHeight = null, heightTouched = false;
     // (capture phase: runs before the generic settings listener below, so applyLook sees the flag)
@@ -272,8 +274,11 @@ async function boot() {
     // the saved dev-panel state arrives a moment after load, so apply the curve once it has had time to restore
     setTimeout(() => applyStartSpan(true), 1500); // true: with the curve off, the plain Starting Timeline Span slider applies at load too
     // "Randomize Starting Song": once the saved settings have arrived, jump to a random song unless the visitor already moved.
+    // Only the visitor's moves on the app count. Input on the dev panel (in dev mode, the panel is open while the page loads)
+    // must not cancel the jump; before this, any click or scroll there silently skipped it.
     let interacted = false;
-    ['pointerdown', 'wheel', 'keydown'].forEach(t => window.addEventListener(t, () => { interacted = true; }, { once: true, capture: true }));
+    const onVisitorInput = e => { if (!(e.target && e.target.closest && e.target.closest('#devPanel'))) interacted = true; };
+    ['pointerdown', 'wheel', 'keydown'].forEach(t => window.addEventListener(t, onVisitorInput, { capture: true }));
     // In dev mode the panel's own live checkbox is still the default until the GitHub copy arrives (it can take longer than
     // a fixed delay), so read the saved state itself. A visitor's saved state is already loaded at boot, so this costs nothing there.
     (async () => {
@@ -398,7 +403,7 @@ async function boot() {
         link.textContent = cleanTitle(s.n);
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         el('spxArtist').textContent = s.a;
-        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${s.d ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
+        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
         timeline.setDateLine(fmtAdded(s.t));
         scheduleCover();
         background.onSongChanged(); // palette-driven modes change with the song even if the cover image did not; fades like a new cover
@@ -419,7 +424,7 @@ async function boot() {
             const ahead = Math.min(16, Math.max(setting('sliderPreloadAhead'), Math.ceil(speed))), behind = setting('sliderPreloadBehind');
             // Nearest the playhead first, in the direction of travel first.
             const dids = [];
-            const add = i => { if (i >= 0 && i < songs.length && songs[i].d && !dids.includes(songs[i].d)) dids.push(songs[i].d); };
+            const add = i => { if (i >= 0 && i < songs.length && clipKey(songs[i]) && !dids.includes(clipKey(songs[i]))) dids.push(clipKey(songs[i])); };
             add(idx);
             for (let k = 1; k <= Math.max(ahead, behind); k++) {
                 if (k <= ahead) add(idx + dir * k);
@@ -434,11 +439,11 @@ async function boot() {
         dir = newIdx >= idx ? 1 : -1;
         idx = newIdx;
         moveLog.push({ t: performance.now(), i: idx });
-        logEvent('playback', `SONG ${idx + 1}/${songs.length} "${songs[idx].n}" - ${songs[idx].a}  [clip: ${clipState(songs[idx].d)}]`);
+        logEvent('playback', `SONG ${idx + 1}/${songs.length} "${songs[idx].n}" - ${songs[idx].a}  [clip: ${clipState(clipKey(songs[idx]))}]`);
         render();
         schedulePreload();
         if (handedOff) { logEvent('playback', 'EMBED song stopped: moved to another song'); pauseEmbed(); handedOff = false; }
-        playClip(songs[idx].d);
+        playClip(clipKey(songs[idx]));
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
         const handoffDelay = setting('sliderHandoffDelay');
@@ -642,7 +647,7 @@ async function boot() {
         unlock();
         openSpotifyLogin();
         el('spxStart').hidden = true;
-        playClip(songs[idx].d);
+        playClip(clipKey(songs[idx]));
         schedulePreload();
     };
     document.addEventListener('pointerdown', unlockSound, { capture: true, once: true });
