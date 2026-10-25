@@ -602,6 +602,14 @@ restored 0.5 / 0.9 / 33 / 5 as set; same check for the bar colour mode (stacked 
 a captured state round-trips. Not verified: a real Sync/Reset round trip through GitHub, Mobile/Landscape twins.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  12:30 AM EDT  (Starting Timeline Span at load)
+
+Question: where is the timeline scale on startup set? Scrub Input > "Starting Timeline Span (Days)" (plain) or the "Starting Timeline Span Curve" group
+(playhead position -> span). Bug found: with the curve off, the plain slider was skipped at load (applyStartSpan(false) returns early) and only took effect on
+double-click. main.js now calls applyStartSpan(true) at load and after a random start, so the page opens at the slider value. Verified: slider 120 -> span 120.0 days
+after load. Home/End still use the curve only (unchanged).
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
