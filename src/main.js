@@ -322,6 +322,8 @@ async function boot() {
     })();
     document.addEventListener('input', e => { if (/StartSpanCurve/.test((e.target && e.target.id) || '')) applyStartSpan(false); });
     window.addEventListener('dblclick', e => { if (e.target.id === 'spxTimeline') applyStartSpan(true); });
+    // Only the keys Home and End (and the double-click) apply the Starting Span, and only when that option is on.
+    // Next / Last and shuffle never change the zoom: the zoom changes only when you change it.
     const afterJump = () => { if (setting('checkboxStartSpanApplyOnJump')) applyStartSpan(false); };
 
     const BS_PROPS = ['--bs-color', '--bs-size', '--bs-op', '--bs-size-hover', '--bs-op-hover', '--bs-size-press', '--bs-op-press', '--bs-size-release', '--bs-time'];
@@ -724,7 +726,6 @@ async function boot() {
         shufflePtr = p;
         moveTo(shuffleQueue[p]);
         timeline.centerOnPlayhead();
-        afterJump();
         timeline.draw();
     }
     const syncShuffleUi = () => { shuffleBtn.setAttribute('aria-pressed', String(shuffleOn)); shuffleBtn.title = shuffleOn ? 'Shuffle on' : 'Shuffle off'; };
@@ -745,7 +746,7 @@ async function boot() {
         stepSong(1);
         return true;
     });
-    const stepSong = d => { if (shuffleOn && Math.abs(d) === 1) shuffleStep(d); else { moveTo(timeline.currentIndex() + d); afterJump(); } };
+    const stepSong = d => { if (shuffleOn && Math.abs(d) === 1) shuffleStep(d); else { moveTo(timeline.currentIndex() + d); } };
     // dev-panel buttons (so a hotkey can be assigned to them there)
     document.addEventListener('click', e => {
         const b = e.target && e.target.closest && e.target.closest('button');
