@@ -120,6 +120,12 @@
             content.querySelectorAll('.dev-curve-editor-svg').forEach(svgEl => {
                 if (svgEl.__curveEditorRedraw) svgEl.__curveEditorRedraw();
             });
+            // Direct request 2026-10-25: expanding a group counts as
+            // "interacting with" it, for addDevGroup()'s own no-selection
+            // placement rule below (recordDevGroupInteraction()'s own
+            // comment has the full reasoning). Only the EXPAND transition
+            // counts, never collapse.
+            recordDevGroupInteraction(titleEl.closest('.dev-section'));
         }
     }
 
@@ -239,6 +245,45 @@
     // gesture with no persistence of its own (never saved/copied), and
     // addDevGroup() below just needs to move these exact nodes.
     const devPanelSelectedItems = new Set();
+    // Direct request 2026-10-25: a no-selection "+ Add Group" places the
+    // new group at the top of whichever group/subgroup the user most
+    // recently "interacted within or with" — tracked here, per tab
+    // (each Desktop/Mobile/Landscape tab has its own independent group
+    // tree, so a group tracked on one tab is meaningless on another).
+    // Two triggers update it, per the request's own explicit examples:
+    // (1) expanding a group (toggleSection()'s own expand branch, above
+    // — collapsing does NOT count), (2) changing any setting that lives
+    // inside a group (the delegated 'input'/'change' listener right
+    // below). Deliberately does NOT cover every possible way to
+    // "interact" with a group (dragging it, toggling its own cascade
+    // checkbox, renaming it, etc.) — scoped to exactly the 2 triggers
+    // the request named, not generalized further.
+    let lastInteractedDevGroup = { desktop: null, mobile: null, landscape: null };
+    function recordDevGroupInteraction(sectionEl) {
+        if (!sectionEl || !sectionEl.classList.contains('dev-section')) return;
+        const tabEl = sectionEl.closest('[id$="TabContent"]');
+        if (!tabEl) return;
+        const tab = tabEl.id.slice(0, -'TabContent'.length);
+        lastInteractedDevGroup[tab] = sectionEl;
+    }
+    // Trigger (2) above — any slider drag, checkbox/select change, text
+    // edit, or custom-widget hidden-input update (curve editor, range
+    // bar, gradient picker, list picker) that happens inside a group's
+    // own content counts as "interacting with" that group. One
+    // delegated listener covers every control type uniformly, including
+    // ones a project's own render*Controls() adds later — no per-
+    // control-type wiring needed. Walks to the NEAREST enclosing
+    // .dev-section (the deepest group actually containing the changed
+    // control), matching "within" in the request's own wording.
+    function setupDevGroupInteractionTracking() {
+        ['input', 'change'].forEach(evtName => {
+            devPanel.addEventListener(evtName, (e) => {
+                const content = e.target.closest('.dev-section-content');
+                if (!content) return;
+                recordDevGroupInteraction(content.parentElement);
+            }, true);
+        });
+    }
     // Set by #devAddGroupBtn's own contextmenu handler
     // (setupDevHeaderIconButtons()) - while true, a PLAIN left click also
     // selects (no Shift needed), per direct request ("If i right click
@@ -312,47 +357,12 @@
             if (devGroupSelectionArmed) disarmDevGroupSelection();
         }, true);
     }
-    // Walks UP from one selected element (a .dev-row or a whole selected
-    // .dev-section) to every GROUP that contains it, deepest first - never
-    // includes the element itself, only real ancestor groups. Relies on
-    // the fixed DOM shape every group already has: .dev-section >
-    // .dev-section-content > (rows and/or subsections) - so "el's parent
-    // is a .dev-section-content" is exactly "el sits directly inside some
-    // group", and that content's own parent is the .dev-section that owns
-    // it. A top-level item (direct child of tabEl, no containing custom
-    // group) naturally produces an empty chain, since tabEl itself is
-    // never a .dev-section-content.
-    function devSelectionAncestorGroupChain(el) {
-        const chain = [];
-        let node = el;
-        while (node.parentElement && node.parentElement.classList.contains('dev-section-content')) {
-            const sec = node.parentElement.parentElement;
-            if (!sec || !sec.classList.contains('dev-section')) break;
-            chain.push(sec);
-            node = sec;
-        }
-        return chain;
-    }
-    // The DEEPEST group that contains every one of the given selected
-    // elements, or null if they share no common containing group (all
-    // top-level, or spanning two subtrees with nothing in common below the
-    // tab root). Per direct request (2026-09-20): "the added group should
-    // be within the same settings group that the selected settings were
-    // in. If selected settings...are within different setting groups,
-    // place the new group in the first layer of nest groups that both
-    // settings are within" - e.g. selecting something in "# Flashing" and
-    // something in "High Score", both nested inside "UI Text", should nest
-    // the new group in "UI Text"; selecting two things both already inside
-    // "# Flashing" should nest it directly in "# Flashing" instead.
-    function findDevSelectionCommonAncestorGroup(elements) {
-        if (!elements.length) return null;
-        const chains = elements.map(devSelectionAncestorGroupChain);
-        const [first, ...rest] = chains;
-        for (const candidate of first) {
-            if (rest.every(chain => chain.includes(candidate))) return candidate;
-        }
-        return null;
-    }
+    // devSelectionAncestorGroupChain()/findDevSelectionCommonAncestorGroup()
+    // (2026-09-20's "nest in the deepest group common to every selected
+    // item" logic) were REMOVED 2026-10-25 — superseded by addDevGroup()'s
+    // own simpler "insert directly before the first selected item, in its
+    // own current parent" rule (see that function's own comment for the
+    // full reasoning). Neither function has any other caller.
     function addDevGroup(tab) {
         const tabEl = document.getElementById(tab + 'TabContent');
         const existingNames = new Set(
@@ -363,41 +373,77 @@
         while (existingNames.has(name)) { name = 'New Group (' + n + ')'; n++; }
         const section = createDevGroupElement(name, tab);
         const selectedInTab = Array.from(devPanelSelectedItems).filter(el => tabEl.contains(el));
-        // Placement (2026-09-20 rework): when there's a selection, the new
-        // group now nests inside the selection's own deepest common
-        // containing group (see findDevSelectionCommonAncestorGroup()'s
-        // own comment) instead of always landing at the top of the tab's
-        // project-specific list. Only the no-selection (or no-common-
-        // ancestor, e.g. an all-top-level selection) case falls back to
-        // that original top-of-list placement.
-        const commonAncestor = selectedInTab.length ? findDevSelectionCommonAncestorGroup(selectedInTab) : null;
-        if (commonAncestor) {
-            const targetContent = commonAncestor.querySelector(':scope > .dev-section-content');
-            targetContent.insertBefore(section, targetContent.firstChild);
+        // Placement, corrected 2026-10-25 (direct request, superseding
+        // the 2026-09-20 "deepest common ancestor" rework below — kept
+        // here for history, not followed any more):
+        // "When I right click to group multiple items... place the group
+        // in the same nesting and order location as the first item. If
+        // I click new group with a left click [no selection], place the
+        // group at the top of the group/subgroup I most recently
+        // interacted within."
+        //
+        // WITH a selection: insert the new (still-empty) group directly
+        // in front of the FIRST selected item (devPanelSelectedItems is
+        // a Set, so insertion order = selection order — "first" means
+        // first-clicked, not necessarily topmost on screen), in that
+        // item's OWN current parent. This is simpler than, and replaces,
+        // the old findDevSelectionCommonAncestorGroup() approach — the
+        // first item's own parent already IS the correct nesting level
+        // by construction, no separate "common ancestor of every
+        // selected item" computation needed. A later selected item from
+        // a DIFFERENT subgroup still gets moved into the new group same
+        // as before (selectedInTab.forEach(...) below) — only WHERE the
+        // group itself lands changed, not whether cross-subgroup items
+        // get folded in.
+        //
+        // WITHOUT a selection: use lastInteractedDevGroup[tab] (see its
+        // own declaration/recordDevGroupInteraction() comment) if it's
+        // still a real, attached group — top of ITS content. Falls back
+        // to the original Debug -> Dev Panel -> position-0 top-of-list
+        // placement (2026-09-20's own fix, still correct as the
+        // fallback) when nothing has been interacted with yet this
+        // session, or the tracked group was since deleted.
+        if (selectedInTab.length) {
+            const firstSelected = selectedInTab[0];
+            firstSelected.parentElement.insertBefore(section, firstSelected);
         } else {
-            // Per direct request ("When I add a new group, place it at the
-            // top of the list instead of the bottom") - inserted right after
-            // the built-in Dev Panel/Debug groups, which stay first per
-            // CLAUDE.md §12i/§12i-1's own mandatory ordering (buttons, then
-            // Dev Panel, then Debug, THEN any project-specific groups) - so
-            // this is the top of the project-specific group list, not a
-            // literal position-0 insert that would push a new custom group
-            // above those 2 mandatory ones.
-            // Falls back through Debug -> Dev Panel -> position 0, not
-            // straight to position 0 the moment Debug isn't found at the top
-            // level - a user (or an earlier fold-into-new-group action) can
-            // legally nest Debug somewhere else, and jumping straight to
-            // position 0 in that case would incorrectly place a new custom
-            // group above Dev Panel too (caught live: folding Debug into a
-            // new group left a SUBSEQUENT new group landing before Dev
-            // Panel, since the old version only ever checked for Debug).
-            const debugSection = tabEl.querySelector(':scope > .dev-section > .dev-section-title[data-sid="Debug"]')?.closest('.dev-section');
-            const devPanelSection = tabEl.querySelector(':scope > .dev-section > .dev-section-title[data-sid="Dev Panel"]')?.closest('.dev-section');
-            const anchorSection = debugSection || devPanelSection;
-            if (anchorSection) {
-                tabEl.insertBefore(section, anchorSection.nextSibling);
+            const tracked = lastInteractedDevGroup[tab];
+            const trackedContent = (tracked && document.body.contains(tracked)) ? tracked.querySelector(':scope > .dev-section-content') : null;
+            if (trackedContent) {
+                trackedContent.insertBefore(section, trackedContent.firstChild);
             } else {
-                tabEl.insertBefore(section, tabEl.firstChild);
+                // Per direct request ("When I add a new group, place it at
+                // the top of the list instead of the bottom") - inserted
+                // right after the built-in Dev Panel/Debug groups, which
+                // stay first per CLAUDE.md §12i/§12i-1's own mandatory
+                // ordering (buttons, then Dev Panel, then Debug, THEN any
+                // project-specific groups) - so this is the top of the
+                // project-specific group list, not a literal position-0
+                // insert that would push a new custom group above those 2
+                // mandatory ones.
+                // Falls back through UI -> Debug -> Dev Panel -> position 0
+                // (UI added 2026-10-25, 3rd mandatory group upstream in the
+                // template, kept here for drop-in parity even though this
+                // project has no top-level group literally named "UI" —
+                // the optional-chained lookup below simply finds nothing
+                // and falls through), not straight to position 0 the
+                // moment none is found at the top level - a user (or an
+                // earlier fold-into-new-group action) can legally nest any
+                // of them somewhere else, and jumping straight to position
+                // 0 in that case would incorrectly place a new custom
+                // group above the others too (caught live, pre-UI, on the
+                // template: folding Debug into a new group left a
+                // SUBSEQUENT new group landing before Dev Panel, since the
+                // old version only ever checked for Debug).
+                const uiSection = tabEl.querySelector(':scope > .dev-section > .dev-section-title[data-sid="UI"]')?.closest('.dev-section');
+                const debugSection = tabEl.querySelector(':scope > .dev-section > .dev-section-title[data-sid="Debug"]')?.closest('.dev-section');
+                const devPanelSection = tabEl.querySelector(':scope > .dev-section > .dev-section-title[data-sid="Dev Panel"]')?.closest('.dev-section');
+                const anchorSection = uiSection || debugSection || devPanelSection;
+                if (anchorSection) {
+                    tabEl.insertBefore(section, anchorSection.nextSibling);
+                } else {
+                    tabEl.insertBefore(section, tabEl.firstChild);
+                }
             }
         }
         // Per direct request ("New Feature - when i hold the Shift key...
@@ -3514,6 +3560,13 @@
             entry.listEl.querySelectorAll('.dev-lp-row').forEach(r => {
                 r.classList.toggle('dev-lp-row-selected', entry.multiSelected.has(r.__item));
             });
+            // Direct request 2026-10-25: "this applies to item selectors
+            // as well" — clicking/selecting an item inside a group counts
+            // as interacting with that group, for +Group's own no-
+            // selection placement rule below (addGroupBtn's own comment
+            // has the full reasoning). Top-level/ungrouped items leave
+            // this untouched (nothing meaningful to record).
+            if (item.group) entry.lastInteractedGroupPath = item.group;
         });
         return row;
     }
@@ -3650,7 +3703,13 @@
             const g = header.closest('.dev-lp-group');
             g.classList.toggle('collapsed');
             if (g.classList.contains('collapsed')) entry.expandedGroups.delete(path);
-            else entry.expandedGroups.add(path);
+            else {
+                entry.expandedGroups.add(path);
+                // Direct request 2026-10-25 — same "expanding counts as
+                // interacting with it" rule as the top-level dev-panel
+                // groups (recordDevGroupInteraction()'s own comment).
+                entry.lastInteractedGroupPath = path;
+            }
         });
         return header;
     }
@@ -4013,20 +4072,90 @@
             renderLpRows(entry);
             lpRefreshDefaultIndicator(entry);
         });
-        // Shift-click one or more rows first (renderLpItemRow above), then
-        // +Group drops them straight into the new group already populated.
-        // With no selection, falls back to an empty group shell to drag
-        // items into by hand.
+        // Shift-click (or Ctrl-click) one or more rows first (renderLpItemRow
+        // above), then +Group drops them straight into the new group
+        // already populated. With no selection, falls back to an empty
+        // group shell to drag items into by hand.
+        // Placement, corrected 2026-10-25 (direct request, "this applies
+        // to item selectors as well" — same 2 rules as the top-level
+        // dev-panel groups' own addDevGroup(), adapted to this engine's
+        // array/Map-based group ordering instead of raw DOM position; see
+        // addDevGroup()'s own comment for the full rule statement):
         addGroupBtn.addEventListener('click', () => {
             const existingNames = new Set([].concat(entry.items.map(it => it.group).filter(Boolean), entry.pendingGroups));
             let name = 'New Group', n = 2;
             while (existingNames.has(name)) { name = 'New Group (' + n + ')'; n++; }
-            entry.groupOrder = [name].concat((entry.groupOrder || []).filter(n2 => n2 !== name));
             if (entry.multiSelected.size > 0) {
-                entry.items.forEach(it => { if (entry.multiSelected.has(it)) it.group = name; });
+                // WITH a selection: nest the new group as a SIBLING of the
+                // FIRST selected item's own immediate containing group
+                // (same parent path) — top-level if that item is
+                // ungrouped — instead of always flat top-level like
+                // before. multiSelected is built in on-screen/DOM order
+                // (see its own range-select construction above), so
+                // Array.from(...)[0] is reliably the topmost/first
+                // selected item.
+                const firstSelected = Array.from(entry.multiSelected)[0];
+                const firstPath = firstSelected.group || null;
+                const sepIdx = firstPath ? firstPath.lastIndexOf(LP_GROUP_PATH_SEP) : -1;
+                const parentPath = sepIdx >= 0 ? firstPath.slice(0, sepIdx) : null;
+                const fullName = parentPath ? parentPath + LP_GROUP_PATH_SEP + name : name;
+                if (firstPath && parentPath === null) {
+                    // First item already sits in a TOP-LEVEL group (no
+                    // further nesting) — insert the new group's name into
+                    // groupOrder immediately before that group's own name,
+                    // landing at that exact order slot among top-level
+                    // siblings ("same... order location as the first item").
+                    const order = (entry.groupOrder || []).filter(n2 => n2 !== fullName);
+                    const atIdx = order.indexOf(firstPath);
+                    if (atIdx >= 0) order.splice(atIdx, 0, fullName); else order.unshift(fullName);
+                    entry.groupOrder = order;
+                } else if (!firstPath) {
+                    // First item is ungrouped — ungrouped items render as
+                    // one flat block before every group (renderLpRows()'s
+                    // own layout), with no groupOrder slot an "order
+                    // position" could target; falls back to the original
+                    // top-of-groupOrder placement for this one case, a
+                    // disclosed simplification rather than a precise match.
+                    entry.groupOrder = [fullName].concat((entry.groupOrder || []).filter(n2 => n2 !== fullName));
+                }
+                // else (nested under parentPath): no separate persisted
+                // order for sibling NESTED groups exists in this engine at
+                // all (syncLpFromDom() only ever captures TOP-level
+                // groupOrder — see its own code) — reassigning .group
+                // below WITHOUT touching entry.items' own array order is
+                // what gives correct position for free: renderLpRows()
+                // discovers a nested group at the first entry.items index
+                // that references its path, and the first selected item
+                // keeps its own original index, so the new group is
+                // discovered exactly where that item already was.
+                entry.items.forEach(it => { if (entry.multiSelected.has(it)) it.group = fullName; });
                 lpCommit(entry);
             } else {
-                entry.pendingGroups = entry.pendingGroups.concat([name]);
+                // WITHOUT a selection: nest under entry.lastInteractedGroupPath
+                // (see renderLpItemRow's/buildLpGroupHeader's own comments
+                // for what updates it) if it still names a real group,
+                // prepended so it's discovered before any other PURELY-
+                // EMPTY pending sibling under that same parent — not a
+                // guaranteed "top" against an already-populated sibling
+                // group (entry.items are discovered before pendingGroups;
+                // a real persisted nested-group order doesn't exist in
+                // this engine to target more precisely, same limitation
+                // as the selection branch above). Falls back to the
+                // original top-of-groupOrder placement when nothing
+                // nested has been interacted with yet, or the tracked
+                // group no longer exists.
+                const tracked = entry.lastInteractedGroupPath;
+                const trackedPrefix = tracked ? tracked + LP_GROUP_PATH_SEP : null;
+                const trackedStillExists = !!tracked && (
+                    entry.items.some(it => it.group === tracked || (it.group && it.group.startsWith(trackedPrefix))) ||
+                    (entry.pendingGroups || []).some(p => p === tracked || p.startsWith(trackedPrefix))
+                );
+                if (trackedStillExists) {
+                    entry.pendingGroups = [tracked + LP_GROUP_PATH_SEP + name].concat(entry.pendingGroups);
+                } else {
+                    entry.groupOrder = [name].concat((entry.groupOrder || []).filter(n2 => n2 !== name));
+                    entry.pendingGroups = entry.pendingGroups.concat([name]);
+                }
             }
             renderLpRows(entry);
         });
@@ -8556,6 +8685,7 @@
         // D-key listener above (works even before the panel's own
         // controls are built, and doesn't need to be re-armed per tab).
         setupDevGroupSelection();
+        setupDevGroupInteractionTracking();
         // Text Edit Mode / Add Group / Collapse All header icon buttons -
         // always on, same reasoning (they live in the header, which is
         // static markup present from first paint, unlike the lazily-built
