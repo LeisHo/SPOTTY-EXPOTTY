@@ -192,7 +192,7 @@
     "checkboxNavButtonEnabled": true,
     "colorNavButton": "#f2f2f2",
     "sliderNavButtonSize": 22,
-    "sliderNavButtonOpacity": 69,
+    "sliderNavButtonOpacity": 85,
     "sliderNavButtonHoverOpacity": 54,
     "buttonNextSong": "",
     "buttonPrevSong": "",
@@ -336,7 +336,7 @@
     "left": 30,
     "top": 6,
     "width": 343,
-    "height": 325
+    "height": 568
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -9941,6 +9941,10 @@
                       },
                       {
                         "type": "row",
+                        "key": "sliderMobileNavButtonOpacity"
+                      },
+                      {
+                        "type": "row",
                         "key": "buttonNextSong"
                       },
                       {
@@ -9959,6 +9963,7 @@
                     ],
                     "rowKeys": [
                       "sliderMobileNavButtonSize",
+                      "sliderMobileNavButtonOpacity",
                       "buttonNextSong",
                       "buttonPrevSong"
                     ],
@@ -10090,6 +10095,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "sliderMobileNavButtonOpacity"
+                    },
+                    {
+                      "type": "row",
                       "key": "buttonNextSong"
                     },
                     {
@@ -10108,6 +10117,7 @@
                   ],
                   "rowKeys": [
                     "sliderMobileNavButtonSize",
+                    "sliderMobileNavButtonOpacity",
                     "buttonNextSong",
                     "buttonPrevSong"
                   ],
@@ -11160,6 +11170,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "sliderMobileNavButtonOpacity"
+                    },
+                    {
+                      "type": "row",
                       "key": "buttonNextSong"
                     },
                     {
@@ -11178,6 +11192,7 @@
                   ],
                   "rowKeys": [
                     "sliderMobileNavButtonSize",
+                    "sliderMobileNavButtonOpacity",
                     "buttonNextSong",
                     "buttonPrevSong"
                   ],
@@ -11309,6 +11324,10 @@
                   },
                   {
                     "type": "row",
+                    "key": "sliderMobileNavButtonOpacity"
+                  },
+                  {
+                    "type": "row",
                     "key": "buttonNextSong"
                   },
                   {
@@ -11327,6 +11346,7 @@
                 ],
                 "rowKeys": [
                   "sliderMobileNavButtonSize",
+                  "sliderMobileNavButtonOpacity",
                   "buttonNextSong",
                   "buttonPrevSong"
                 ],
@@ -13391,6 +13411,10 @@
                       },
                       {
                         "type": "row",
+                        "key": "sliderLandscapeNavButtonOpacity"
+                      },
+                      {
+                        "type": "row",
                         "key": "buttonNextSong"
                       },
                       {
@@ -13409,6 +13433,7 @@
                     ],
                     "rowKeys": [
                       "sliderLandscapeNavButtonSize",
+                      "sliderLandscapeNavButtonOpacity",
                       "buttonNextSong",
                       "buttonPrevSong"
                     ],
@@ -13540,6 +13565,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "sliderLandscapeNavButtonOpacity"
+                    },
+                    {
+                      "type": "row",
                       "key": "buttonNextSong"
                     },
                     {
@@ -13558,6 +13587,7 @@
                   ],
                   "rowKeys": [
                     "sliderLandscapeNavButtonSize",
+                    "sliderLandscapeNavButtonOpacity",
                     "buttonNextSong",
                     "buttonPrevSong"
                   ],
@@ -14610,6 +14640,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "sliderLandscapeNavButtonOpacity"
+                    },
+                    {
+                      "type": "row",
                       "key": "buttonNextSong"
                     },
                     {
@@ -14628,6 +14662,7 @@
                   ],
                   "rowKeys": [
                     "sliderLandscapeNavButtonSize",
+                    "sliderLandscapeNavButtonOpacity",
                     "buttonNextSong",
                     "buttonPrevSong"
                   ],
@@ -14759,6 +14794,10 @@
                   },
                   {
                     "type": "row",
+                    "key": "sliderLandscapeNavButtonOpacity"
+                  },
+                  {
+                    "type": "row",
                     "key": "buttonNextSong"
                   },
                   {
@@ -14777,6 +14816,7 @@
                 ],
                 "rowKeys": [
                   "sliderLandscapeNavButtonSize",
+                  "sliderLandscapeNavButtonOpacity",
                   "buttonNextSong",
                   "buttonPrevSong"
                 ],
@@ -15557,7 +15597,7 @@
     "desktop:Volume Button": true,
     "desktop:Play Button": false,
     "desktop:Play Button Animation": true,
-    "desktop:Next And Last Song Buttons": true,
+    "desktop:Next And Last Song Buttons": false,
     "desktop:Next And Last Button Animation": true,
     "desktop:Shuffle Button": true,
     "desktop:Background": true,
@@ -16295,7 +16335,7 @@
     "sliderAlbumColorTransitionMs": false,
     "colorNavButton": false,
     "sliderNavButtonSize": true,
-    "sliderNavButtonOpacity": false,
+    "sliderNavButtonOpacity": true,
     "sliderNavButtonHoverOpacity": false,
     "sliderNavEdgeOffset": false,
     "sliderNavAnimTime": false,
