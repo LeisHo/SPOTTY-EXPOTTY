@@ -11,8 +11,10 @@ import {
 } from '../lib/ui-engine/registry.mjs';
 import { setting } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
-import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume } from './app/clipPlayer.js';
+import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
+import { initDebugTools } from './app/debugTools.js';
+import { logEvent } from './app/debugLog.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, embedStatus } from './app/handoff.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
@@ -183,7 +185,7 @@ async function boot() {
         return;
     }
     const songs = data.songs;
-    let pos = 0, idx = 0, dir = 1, handedOff = false, handoffTimer = 0, preloadQueued = false, moveLog = [];
+    let pos = 0, idx = 0, dir = 1, handedOff = false, handoffPending = false, handoffTimer = 0, preloadQueued = false, moveLog = [];
     let lastTimelineHeight = null, heightTouched = false;
     // (capture phase: runs before the generic settings listener below, so applyLook sees the flag)
     ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; }, true));
@@ -361,6 +363,7 @@ async function boot() {
                 if (k <= ahead) add(idx + dir * k);
                 if (k <= behind) add(idx - dir * k);
             }
+            logEvent('preload', `PLAN at song ${idx + 1}: ahead ${ahead}, behind ${behind}, scrub speed ${speed.toFixed(1)} songs/s -> ${dids.length} clips wanted`);
             preload(dids);
         });
     }
@@ -369,15 +372,22 @@ async function boot() {
         dir = newIdx >= idx ? 1 : -1;
         idx = newIdx;
         moveLog.push({ t: performance.now(), i: idx });
+        logEvent('playback', `SONG ${idx + 1}/${songs.length} "${songs[idx].n}" - ${songs[idx].a}  [clip: ${clipState(songs[idx].d)}]`);
         render();
         schedulePreload();
-        if (handedOff) { pauseEmbed(); handedOff = false; }
+        if (handedOff) { logEvent('playback', 'EMBED song stopped: moved to another song'); pauseEmbed(); handedOff = false; }
         playClip(songs[idx].d);
+        if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
+        const handoffDelay = setting('sliderHandoffDelay');
+        handoffPending = true;
         handoffTimer = setTimeout(() => {
+            handoffPending = false;
             stopClip();
-            if (isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0) { playTrack(songs[idx].id); handedOff = true; }
-        }, setting('sliderHandoffDelay'));
+            const ok = isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0;
+            logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[idx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
+            if (ok) { playTrack(songs[idx].id); handedOff = true; }
+        }, handoffDelay);
     }
 
     // The current song is the LAST one added at or before the playhead's time (timeline.currentIndex()
@@ -525,6 +535,7 @@ async function boot() {
     el('spxStartBtn').addEventListener('click', unlockSound);
 
     function togglePlayback() {
+        logEvent('playback', 'USER play/pause (cover or Space)');
         unlockSound();
         clearTimeout(handoffTimer);
         stopClip();
@@ -578,7 +589,8 @@ async function boot() {
     timeline.setPos(0);
     timeline.draw();
     schedulePreload();
-    window.spotty = { songs, seek, moveTo, timeline, get idx() { return idx; }, get pos() { return pos; }, poolInfo, playClip, unlock };
+    initDebugTools(); // Debug group: PAUSE, Pause/Copy/Clear/Export Logs, frame rate, snapshot (debugTools.js)
+    window.spotty = { songs, volume, seek, moveTo, timeline, get idx() { return idx; }, get pos() { return pos; }, poolInfo, playClip, unlock };
 }
 
 boot();

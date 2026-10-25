@@ -2,7 +2,9 @@
 // here when scrubbing stops or the album cover is clicked. Full songs need the
 // viewer to be logged in to Spotify in this browser; otherwise the embed plays a
 // 30-second preview. Whatever is playing (preview or full song) loops when it ends.
+import { logEvent } from './debugLog.js';
 let controller = null;
+let lastPausedSeen = null, lastBufSeen = null;
 let queued = null;
 let status = 'loading';
 let loadedId = null;
@@ -19,6 +21,10 @@ const emit = () => listeners.forEach(fn => fn(playing));
 function handleUpdate(d) {
     const wasPlaying = playing;
     playing = !d.isPaused;
+    if (d.isPaused !== lastPausedSeen || d.isBuffering !== lastBufSeen) {
+        lastPausedSeen = d.isPaused; lastBufSeen = d.isBuffering;
+        logEvent('playback', `EMBED ${d.isPaused ? 'paused' : 'PLAYING'}${d.isBuffering ? ' (buffering)' : ''} at ${Math.round(d.position)}ms of ${Math.round(d.duration)}ms`);
+    }
     events.push({ t: Math.round(performance.now()), paused: d.isPaused, buffering: d.isBuffering, pos: d.position, dur: d.duration });
     if (events.length > 200) events.shift();
     // Looping. MEASURED (the __spxEvents log): at the end of a 29.7 s preview the embed sends one
@@ -29,6 +35,7 @@ function handleUpdate(d) {
     const unrequestedStop = !playing && wasPlaying;
     if (wantPlaying && (atEnd || unrequestedStop) && performance.now() - lastRestart > 3000) {
         lastRestart = performance.now();
+        logEvent('playback', 'EMBED reached the end: loop restart scheduled');
         // MEASURED: a seek(0)+resume() sent in the same instant as the end-of-track update is ignored
         // (the player is still finishing); the same calls work once it has settled. So wait, restart,
         // and if no update shows the position back near the start, load the track again and play.
@@ -64,16 +71,18 @@ export function initEmbed(el, firstTrackId) {
 
 export function playTrack(trackId) {
     wantPlaying = true;
-    if (!controller) { queued = trackId; return false; }
+    if (!controller) { queued = trackId; logEvent('playback', `EMBED playTrack ${trackId}: embed not ready yet, queued`); return false; }
     loadedId = trackId;
+    logEvent('playback', `EMBED loadUri ${trackId} sent`);
     controller.loadUri('spotify:track:' + trackId);
-    setTimeout(() => { try { controller.play(); } catch (e) { /* embed not ready yet */ } }, 350);
+    setTimeout(() => { try { logEvent('playback', 'EMBED play() sent (350ms after loadUri)'); controller.play(); } catch (e) { /* embed not ready yet */ } }, 350);
     return true;
 }
 
 export function pauseEmbed() {
     queued = null;
     wantPlaying = false;
+    logEvent('playback', 'EMBED pause requested');
     if (controller) { try { controller.pause(); } catch (e) { /* ignore */ } }
 }
 

@@ -7047,6 +7047,7 @@
         mouseLogEl.scrollTop = mouseLogEl.scrollHeight;
     }
     function pushMouseLogEntry(entry) {
+        if (window.spxLogsPaused) return; // Debug > Pause Logs
         entry.time = formatMouseLogTime(new Date());
         mouseLog.push(entry);
         if (mouseLog.length > MOUSE_LOG_MAX_ENTRIES) mouseLog.shift();
@@ -7240,6 +7241,9 @@
         logMouseLogContext('start');
     }
     function setupMouseLog() {
+        // Registered so the Debug group's global tools (Copy All / Clear All / Export Logs / Snapshot) include this log.
+        window.spxDebugLogRegistry = window.spxDebugLogRegistry || [];
+        if (!window.spxDebugLogRegistry.some(l => l.key === 'mouseLog')) window.spxDebugLogRegistry.push({ key: 'mouseLog', title: 'Mouse Log', active: () => true, lines: () => mouseLog.map(mouseLogEntryToLine), clear: clearMouseLog });
         window.addEventListener('pointermove', (e) => {
             mouseLogLastPointerPos = { x: Math.round(e.clientX), y: Math.round(e.clientY), pointerType: e.pointerType };
             const info = mouseLogActivePointers.get(e.pointerId);
@@ -7621,6 +7625,82 @@
         registerDevControlArray('SPOTTY_VB_CONTROLS', VB_CONTROLS);
         registerDevControlArray('SPOTTY_AC2_CONTROLS', AC2_CONTROLS);
         makeDevGroupToggleable(tab, VB, 'checkboxVolumeButtonEnabled');
+
+        // ---- Debug group: global tools ported from HANDY DANDIES (logic in src/app/debugTools.js, log lines in debugLog.js) ----
+        const DBG = 'Debug';
+        const dbgBtn = (id, label) => ({ tab, group: DBG, id, type: 'button', label, skipDeviceCheckbox: true });
+        const DEBUG_CONTROLS = [
+            dbgBtn('buttonDebugPause', 'PAUSE'),
+            dbgBtn('buttonDebugPauseLogs', 'Pause Logs'),
+            dbgBtn('buttonDebugCopyAll', 'Copy All Logs'),
+            dbgBtn('buttonDebugClearAll', 'Clear All Logs'),
+            dbgBtn('buttonDebugExport', 'Export Logs'),
+            { tab, group: DBG, id: 'checkboxExportLogsUiButton', type: 'checkbox', label: 'ADD UI BUTTON (On-Screen Export Logs, Top Left)', value: false },
+            { tab, group: DBG, id: 'checkboxShowFrameRate', type: 'checkbox', label: 'Show Frame Rate', value: false },
+            { tab, group: DBG, id: 'colorFrameRateText', type: 'color', label: 'Frame Rate Text Color:', value: '#ffffff' },
+            { tab, group: DBG, id: 'sliderFrameRateRefreshMs', type: 'slider', label: 'Frame Rate Refresh Rate (Ms Between Updates):', min: 100, max: 5000, step: 50, value: 500 },
+            { tab, group: DBG, id: 'checkboxLogPlayback', type: 'checkbox', label: 'Log Playback Timing (Songs, Clips, Handoff, Spotify Embed)', value: false },
+            { tab, group: DBG, id: 'checkboxLogPreload', type: 'checkbox', label: 'Log Preloading (Batches, URL And Audio Arrival Times)', value: false },
+            { tab, group: DBG, id: 'checkboxSnapshotViewport', type: 'checkbox', label: 'Snapshot: Viewport And Cursor', value: true },
+            { tab, group: DBG, id: 'checkboxSnapshotMouse', type: 'checkbox', label: 'Snapshot: Mouse Tracking', value: true },
+            { tab, group: DBG, id: 'checkboxSnapshotPlayback', type: 'checkbox', label: 'Snapshot: Playback', value: true },
+            { tab, group: DBG, id: 'checkboxSnapshotAudio', type: 'checkbox', label: 'Snapshot: Audio Clips', value: true },
+            { tab, group: DBG, id: 'checkboxSnapshotTimeline', type: 'checkbox', label: 'Snapshot: Timeline', value: true },
+            { tab, group: DBG, id: 'checkboxSnapshotSettings', type: 'checkbox', label: 'Snapshot: Settings Changed From Default', value: true },
+            dbgBtn('buttonDebugSnapshot', 'Take Snapshot'),
+        ];
+        renderControlArray(DEBUG_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_DEBUG_CONTROLS', DEBUG_CONTROLS);
+        // A log box (Copy / Save / Clear + a collapsible scrolling display) placed right after a control's row. The log module
+        // feeds it through window.spxDebugLogViews[key].append(line); Copy / Save / Clear use the registry entry for that key.
+        window.spxDebugLogViews = window.spxDebugLogViews || {};
+        function buildDebugLogBox(afterId, key, title) {
+            const anchor = document.getElementById(afterId);
+            const row = anchor && anchor.closest('.dev-row');
+            if (!row || window.spxDebugLogViews[key]) return;
+            const wrap = document.createElement('div');
+            const btns = document.createElement('div');
+            btns.className = 'dev-buttons';
+            const mk = t => { const b = document.createElement('button'); b.type = 'button'; b.textContent = t; return b; };
+            const copyB = mk('COPY'), saveB = mk('SAVE'), clearB = mk('CLEAR');
+            btns.append(copyB, saveB, clearB);
+            const pre = document.createElement('div');
+            pre.className = 'dev-mouse-log';
+            wrap.append(btns, pre);
+            row.after(wrap);
+            makeLogBoxCollapsible(pre, title);
+            const entry = () => (window.spxDebugLogRegistry || []).find(l => l.key === key);
+            const text = () => (key === 'snapshot' ? (window.spxDebug ? window.spxDebug.getSnapshot() : '') : ((entry() && entry().lines()) || []).join('\n'));
+            copyB.addEventListener('click', () => {
+                const flash = m => { const o = copyB.textContent; copyB.textContent = m; setTimeout(() => { copyB.textContent = o; }, 900); };
+                if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text()).then(() => flash('Copied!')).catch(() => flash('Copy failed')); else flash('Copy failed');
+            });
+            saveB.addEventListener('click', () => {
+                const url = URL.createObjectURL(new Blob([text()], { type: 'text/plain' }));
+                const a = document.createElement('a');
+                a.href = url; a.download = key + '-log-' + new Date().toISOString().replace(/[:.]/g, '-') + '.txt';
+                document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+            });
+            clearB.addEventListener('click', () => { if (key === 'snapshot') { if (window.spxDebug) window.spxDebug.clearSnapshot(); pre.textContent = ''; } else if (entry()) entry().clear(); });
+            window.spxDebugLogViews[key] = {
+                append: line => { pre.appendChild(Object.assign(document.createElement('div'), { textContent: line })); while (pre.children.length > 600) pre.removeChild(pre.firstChild); pre.scrollTop = pre.scrollHeight; },
+                clear: () => { pre.textContent = ''; },
+                set: t => { pre.textContent = t; pre.scrollTop = 0; },
+            };
+        }
+        buildDebugLogBox('checkboxLogPlayback', 'playback', 'Playback Timing Log');
+        buildDebugLogBox('checkboxLogPreload', 'preload', 'Preload Log');
+        buildDebugLogBox('buttonDebugSnapshot', 'snapshot', 'Snapshot');
+        window.spxDebugShowSnapshot = t => { const v = window.spxDebugLogViews.snapshot; if (v) v.set(t); };
+        // the new tools sit ABOVE the Mouse Log subgroup, not below it
+        try {
+            const dbgContent = findGroupContent(tab, DBG, 'renderSpottyDevControls', 'buttonDebugPause');
+            const mouseSection = dbgContent && [...dbgContent.children].find(c => c.querySelector && c.querySelector(':scope > .dev-section-title[data-sid="Mouse Log"]'));
+            if (mouseSection) {
+                const mine = [...dbgContent.children].filter(c => c !== mouseSection && !c.classList.contains('dev-section'));
+                mine.forEach(c => dbgContent.insertBefore(c, mouseSection));
+            }
+        } catch (e) { /* ordering only */ }
 
         // ---- UI Layout: Shadows (one on/off checkbox for everything that has a drop shadow) -----------------------
         const SH = 'Shadows';

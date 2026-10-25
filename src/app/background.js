@@ -262,7 +262,7 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
 
     // Follow the cover if it moves / resizes (only the modes that depend on its position pay for this).
     (function watch() {
-        if (RECT_MODES.has(setting('selectBackgroundMode'))) {
+        if (!window.__spxPaused && RECT_MODES.has(setting('selectBackgroundMode'))) {
             const r = coverEl.getBoundingClientRect();
             const key = [r.left, r.top, r.width, r.height].map(v => Math.round(v * 10)).join(',') + '|' + innerWidth + 'x' + innerHeight;
             if (key !== lastRect) { lastRect = key; render(); }

@@ -84,6 +84,7 @@ export function initVolume({ root, onChange }) {
         // the speed at that point, and the Animation Speed slider is the time one full run takes at speed 1.
         let s = o ? prog : 1 - prog, last = performance.now();
         const tick = now => {
+            if (window.__spxPaused) { last = now; raf = requestAnimationFrame(tick); return; } // Debug > PAUSE freezes this animation
             const dt = now - last; last = now;
             s = Math.min(1, s + (dt / Math.max(1, cfg.duration)) * Math.max(0.03, cfg.speedAt(s)));
             prog = o ? s : 1 - s;
