@@ -29,6 +29,8 @@ export function initVolume({ root, onChange }) {
     let muted = false; // mute is its own state: the slider keeps its value while muted
     try { muted = localStorage.getItem(MUTE_KEY) === '1'; } catch (e) { /* storage blocked */ }
     try { const s = localStorage.getItem(KEY); if (s !== null && Number.isFinite(+s)) vol = clamp(+s, 0, 1); } catch (e) { /* storage blocked */ }
+    // The old mute saved volume 0. Now mute is its own flag, so a saved 0 that is not a mute is restored to the level it was muted from.
+    if (vol === 0 && !muted) { try { const pm = +localStorage.getItem('spxVolumeBeforeMute'); vol = pm > 0 ? clamp(pm, 0.05, 1) : 0.5; localStorage.setItem(KEY, String(vol)); } catch (e) { /* storage blocked */ } }
 
     const cfg = { enabled: true, tol: 30, clickTol: 12, duration: 350, speedAt: () => 1 };
     let target = false;   // should it be open
