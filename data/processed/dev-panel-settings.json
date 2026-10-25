@@ -24,7 +24,7 @@
     "sliderBarWidth": 10,
     "sliderTimelineHeight": 375,
     "sliderPlayheadWidth": 2,
-    "sliderPlayheadHeight": 100,
+    "sliderPlayheadHeight": 68,
     "rangeBarTimelineZoomLimits": "{\"min\":72,\"max\":100}",
     "selectTimelineStyle": "density",
     "sliderGlowStemWidth": 2,
@@ -49,9 +49,9 @@
     "sliderMetaScale": 1,
     "buttonOpenLayoutInspector": "",
     "checkboxAlbumColorsEnabled": true,
-    "selectAlbumColorMode": "palette",
-    "sliderAlbumColorSaturation": 0.65,
-    "sliderAlbumColorBrightness": 1,
+    "selectAlbumColorMode": "vividGradient",
+    "sliderAlbumColorSaturation": 1.25,
+    "sliderAlbumColorBrightness": 1.15,
     "checkboxWheelCurveEnabled": true,
     "curveEditorWheelScrubCurve": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.5882778794478349,\"y\":0.052916717529296886}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.08755427386877113,\"y\":-0.6270833333333333}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "selectWheelCurveXRange": "full",
@@ -70,16 +70,16 @@
     "checkboxInvertPinch": false,
     "selectUiFont": "Poppins",
     "checkboxVolumeButtonEnabled": true,
-    "sliderVolIconSize": 24,
-    "sliderVolCircleRadius": 7,
-    "sliderVolBarWidth": 8,
-    "sliderVolBarLength": 130,
-    "colorVolBarFill": "#1db954",
+    "sliderVolIconSize": 38,
+    "sliderVolCircleRadius": 5,
+    "sliderVolBarWidth": 5,
+    "sliderVolBarLength": 77,
+    "colorVolBarFill": "#757575",
     "colorVolBarTrack": "#ffffff",
     "colorVolCircle": "#ffffff",
-    "sliderVolHoverTolerance": 30,
-    "sliderVolAnimDuration": 350,
-    "curveEditorVolAnimSpeedCurve": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0.35}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "sliderVolHoverTolerance": 70,
+    "sliderVolAnimDuration": 200,
+    "curveEditorVolAnimSpeedCurve": "{\"points\":[{\"x\":0,\"y\":0.5952784220377605,\"h1\":{\"x\":0.504492481784282,\"y\":0.05047709147135415}},{\"x\":1,\"y\":1,\"h2\":{\"x\":0,\"y\":-0.44892730712890627}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderCoverScale": 1,
     "sliderCoverOffsetX": 0,
     "sliderCoverOffsetY": 0,
@@ -148,9 +148,9 @@
   },
   "layout": {
     "left": 45,
-    "top": 215,
+    "top": 272,
     "width": 340,
-    "height": 494
+    "height": 449
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -4313,15 +4313,15 @@
     "desktop:Scrub Input": false,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Touch Scrub And Pinch": false,
+    "desktop:Touch Scrub And Pinch": true,
     "desktop:Spotify Handoff": true,
-    "desktop:Timeline Look": true,
+    "desktop:Timeline Look": false,
     "desktop:Album Cover Colors": true,
-    "desktop:UI Layout": true,
+    "desktop:UI Layout": false,
     "desktop:Track Title Button Animation": true,
     "desktop:Background": true,
     "desktop:Font": true,
-    "desktop:Volume Button": true,
+    "desktop:Volume Button": false,
     "desktop:Album Cover": true,
     "mobile:Dev Panel": true,
     "mobile:MECHANICS": false,
@@ -4503,7 +4503,14 @@
     "mobile": {},
     "landscape": {}
   },
-  "perMode": {},
+  "perMode": {
+    "selectAlbumColorMode": {
+      "vividGradient": {
+        "sliderAlbumColorSaturation": "1.25",
+        "sliderAlbumColorBrightness": "1.15"
+      }
+    }
+  },
   "extra": {
     "uiLayout": {
       "appStage": {
