@@ -123,8 +123,11 @@ async function attach(p) {
 
 // Preload the clips for these deezer ids and evict everything else (except the
 // clip currently playing).
+// Preview clips play only when scrub audio is on AND (Play Preview Clips is on OR nobody is logged in to Spotify, where the preview is all there is).
+export const previewClipsOn = () => !!setting('checkboxScrubAudioEnabled') && (!!setting('checkboxPlayPreviewClips') || !isLoggedIn());
 export async function preload(dids) {
-    const want = [...new Set(dids.filter(Boolean))];
+    // Preview clips off: nothing to preload (it used to download dozens of 30 s clips that were never played, competing with the Spotify song for bandwidth)
+    const want = previewClipsOn() ? [...new Set(dids.filter(Boolean))] : [];
     const keep = new Set(want);
     if (current) keep.add(current.did);
     let evicted = 0;
@@ -168,7 +171,7 @@ export function playClip(did) {
     stopClip();
     const reqAt = performance.now();
     // Play Preview Clips off: only the Spotify song plays, once logged in. Not logged in, the preview always plays.
-    const previewOn = setting('checkboxPlayPreviewClips') || !isLoggedIn();
+    const previewOn = previewClipsOn();
     if (!unlocked || !did || !setting('checkboxScrubAudioEnabled') || !previewOn) { logEvent('playback', `CLIP skipped (${!unlocked ? 'sound not unlocked yet' : !did ? 'this song has no clip' : 'scrub audio is off'})`); return 'skipped'; }
     const known = pool.get(did);
     if (!known && !setting('checkboxColdStartClips')) { logEvent('playback', `CLIP skipped (${did} was not preloaded and cold starts are off)`); return 'skipped'; }

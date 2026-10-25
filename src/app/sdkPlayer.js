@@ -42,6 +42,8 @@ function create() {
     player.addListener('player_state_changed', onState);
     player.connect();
 }
+// Called when a song has waited for the SDK for too long: treat it as unavailable so later songs use the iframe at once instead of waiting again.
+export function sdkGiveUp(reason) { if (ready) return; failed = reason; loading = false; note('GAVE UP: ' + reason); setStatus(); }
 function fail(msg) { failed = msg; ready = false; loading = false; note('FAILED: ' + msg); setStatus(); }
 
 function onState(state) {

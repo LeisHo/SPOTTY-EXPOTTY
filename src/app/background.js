@@ -235,6 +235,7 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
         const ms = setting('sliderBackgroundTransition');
         if (drawn && ms > 0 && setting('selectBackgroundMode') !== 'none') {
             const w = prevCanvas.width, h = prevCanvas.height;
+            if (!w || !h || !canvas.width || !canvas.height) { render(); return; } // nothing to fade from yet (a 0-size canvas makes drawImage throw)
             const op = parseFloat(canvas.style.opacity) || 1;
             const a = Math.min(1, (parseFloat(getComputedStyle(prevCanvas).opacity) || 0) / op); // fade left, relative to the layer opacity
             snapTmp = snapTmp || document.createElement('canvas');

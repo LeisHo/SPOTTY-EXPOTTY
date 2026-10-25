@@ -158,7 +158,7 @@ export function playTrack(trackId, positionMs = 0) {
         loadedId = trackId; pendingSdkTrack = trackId;
         logEvent('playback', 'SDK not ready yet: song ' + trackId + ' waits for it (up to 8 s) instead of the iframe preview');
         clearTimeout(pendingTimer);
-        pendingTimer = setTimeout(() => { if (pendingSdkTrack === trackId) { pendingSdkTrack = null; logEvent('playback', 'SDK still not ready after 8 s: using the iframe preview'); playViaEmbed(trackId); } }, 8000);
+        pendingTimer = setTimeout(() => { if (pendingSdkTrack === trackId) { pendingSdkTrack = null; sdk.sdkGiveUp('did not connect within 8 s (many phone browsers cannot run the Spotify player)'); logEvent('playback', 'SDK still not ready after 8 s: using the iframe preview from now on'); playViaEmbed(trackId); } }, 8000);
         return true;
     }
     return playViaEmbed(trackId);

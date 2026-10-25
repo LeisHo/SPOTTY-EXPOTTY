@@ -11,7 +11,7 @@ import {
 } from '../lib/ui-engine/registry.mjs';
 import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
-import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying } from './app/clipPlayer.js';
+import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
@@ -315,6 +315,7 @@ async function boot() {
     // In dev mode the panel's own live checkbox is still the default until the GitHub copy arrives (it can take longer than
     // a fixed delay), so read the saved state itself. A visitor's saved state is already loaded at boot, so this costs nothing there.
     (async () => {
+        await Promise.resolve(); // let boot() finish first: in normal mode (saved settings already loaded) the code below used to run at once, and moveTo() -> render() touched variables declared further down (a TDZ crash: the random start never happened)
         const saved = document.documentElement.classList.contains('dev-mode')
             ? await loadSavedSettings()
             : null;
@@ -563,7 +564,7 @@ async function boot() {
             const speed = moveLog.length ? Math.abs(moveLog[moveLog.length - 1].i - moveLog[0].i) / 0.4 : 0;
             // Capped at 16: the proxy serves Deezer lookups at ~8/s, so asking for more
             // than a couple of seconds of travel only queues requests that go stale.
-            const ahead = Math.min(16, Math.max(setting('sliderPreloadAhead'), Math.ceil(speed))), behind = setting('sliderPreloadBehind');
+            const ahead = Math.min(16, Math.max(setting('sliderPreloadAhead'), Math.ceil(speed))), behind = Math.min(16, setting('sliderPreloadBehind')); // both capped at 16: a saved 30 + 30 meant ~47 clip downloads per song change
             // Nearest the playhead first, in the direction of travel first.
             const dids = [];
             const add = i => { if (i >= 0 && i < songs.length && clipKey(songs[i]) && !dids.includes(clipKey(songs[i]))) dids.push(clipKey(songs[i])); };
@@ -595,7 +596,7 @@ async function boot() {
         // The handoff reads where the preview is, so it waits (up to 2 s after the song change) for a pending preview to start.
         const handoffWaitUntil = performance.now() + 2000;
         const doHandoff = () => {
-            if (clipKey(songs[idx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
+            if (previewClipsOn() && clipKey(songs[idx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
             handoffPending = false;
             const ok = isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0;
             logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[idx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
