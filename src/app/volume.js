@@ -124,7 +124,7 @@ export function initVolume({ root, onChange }) {
     // (A press outside the tolerance and outside the control closes it, as before.)
     const distToTrack = e => { const r = track.getBoundingClientRect(); return Math.hypot(Math.max(r.left - e.clientX, 0, e.clientX - r.right), Math.max(r.top - e.clientY, 0, e.clientY - r.bottom)); };
     document.addEventListener('pointerdown', e => {
-        if (!target) return;
+        if (!target || btn.contains(e.target)) return; // the icon is its own click (mute), never the slider tolerance
         if (distToTrack(e) <= cfg.clickTol) {
             dragging = true;
             try { track.setPointerCapture(e.pointerId); } catch (err) { /* synthetic event: carry on */ }
@@ -174,5 +174,5 @@ export function initVolume({ root, onChange }) {
     render();
     onChange(vol); // apply the remembered volume
     configure({ enabled: true, ...DEFAULT_LOOK, tol: 30, duration: 350 });
-    return { get: () => effective(), set, open, configure, toggleMute, nudge: d => set(vol + d), isOpen: () => target, owns: e => !!target && distToTrack(e) <= cfg.clickTol };
+    return { get: () => effective(), set, open, configure, toggleMute, nudge: d => set(vol + d), isOpen: () => target, owns: e => !!target && !btn.contains(e.target) && distToTrack(e) <= cfg.clickTol };
 }
