@@ -15,7 +15,7 @@ import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVol
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, embedStatus, embedMode } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, embedStatus, embedMode } from './app/handoff.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
 import { createBackground } from './app/background.js';
@@ -44,12 +44,13 @@ async function boot() {
             <!-- the timeline precedes the cover in the DOM: CSS anchor positioning (the cover is placed relative to it)
                 requires the anchor target to come earlier in tree order than the element anchored to it -->
             <canvas class="ui-element spx-timeline" id="spxTimeline"></canvas>
-            <button class="ui-element spx-cover" id="spxCover" type="button" aria-label="Play">
+            <button class="ui-element spx-cover bs-host" id="spxCover" type="button" aria-label="Play">
                 <img id="spxCoverImg" alt="" draggable="false" crossorigin="anonymous">
+                <span class="spx-play-glyph"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M7 4l13 8-13 8z"/><path class="ico-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></span>
             </button>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
-            <button class="ui-element spx-nav" id="spxPrev" type="button" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14L6 12z"/></svg></button>
-            <button class="ui-element spx-nav" id="spxNext" type="button" aria-label="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14l12-7z"/></svg></button>
+            <button class="ui-element spx-nav bs-host" id="spxPrev" type="button" aria-label="Previous song"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14L6 12z"/></svg></button>
+            <button class="ui-element spx-nav bs-host" id="spxNext" type="button" aria-label="Next song"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14l12-7z"/></svg></button>
             <div class="ui-element spx-volume" id="spxVolume">
                 <button type="button" class="spx-vol-btn" aria-label="Volume" aria-expanded="false" data-level="high">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="w3" d="M21 4.5a11 11 0 0 1 0 15"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>
@@ -58,6 +59,7 @@ async function boot() {
                     <div class="spx-vol-track" role="slider" tabindex="0" aria-label="Volume" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="spx-vol-fill"></div><div class="spx-vol-thumb"></div></div>
                     <div class="spx-vol-label">100%</div>
                 </div></div>
+                <button type="button" class="spx-shuffle" id="spxShuffle" aria-label="Shuffle" aria-pressed="false" title="Shuffle off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
             </div>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart"><button type="button" id="spxStartBtn">Click to enable sound</button></div>
@@ -269,6 +271,30 @@ async function boot() {
     window.addEventListener('dblclick', e => { if (e.target.id === 'spxTimeline') applyStartSpan(true); });
     const afterJump = () => { if (setting('checkboxStartSpanApplyOnJump')) applyStartSpan(false); };
 
+    const BS_PROPS = ['--bs-color', '--bs-size', '--bs-op', '--bs-size-hover', '--bs-op-hover', '--bs-size-press', '--bs-op-press', '--bs-size-release', '--bs-time'];
+    function applyButtonStyle(P, hosts) {
+        const g = id => setting(id), on = g('checkbox' + P + 'ButtonEnabled'), anim = on && g('checkbox' + P + 'AnimEnabled');
+        const size = g('slider' + P + 'ButtonSize'), op = g('slider' + P + 'ButtonOpacity') / 100, hop = g('slider' + P + 'ButtonHoverOpacity') / 100;
+        const v = !on ? null : {
+            '--bs-color': g('color' + P + 'Button'), '--bs-size': size + 'px', '--bs-op': String(op),
+            '--bs-size-hover': (anim ? g('slider' + P + 'AnimHoverSize') : size) + 'px', '--bs-op-hover': String(anim ? g('slider' + P + 'AnimHoverOpacity') / 100 : hop),
+            '--bs-size-press': (anim ? g('slider' + P + 'AnimClickSize') : size) + 'px', '--bs-op-press': String(anim ? g('slider' + P + 'AnimClickOpacity') / 100 : hop),
+            '--bs-size-release': (anim ? g('slider' + P + 'AnimReleaseSize') : size) + 'px', '--bs-time': (anim ? g('slider' + P + 'AnimTime') : 0) + 'ms',
+        };
+        hosts.forEach(h => { if (h) BS_PROPS.forEach(k => (v ? h.style.setProperty(k, v[k]) : h.style.removeProperty(k))); });
+    }
+    // hover / press / release state classes for the styled buttons (the CSS does the animating)
+    [['Play', [el('spxCover')]], ['Nav', [el('spxPrev'), el('spxNext')]]].forEach(([P, hosts]) => hosts.forEach(h => {
+        h.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') h.classList.add('bs-hover'); });
+        h.addEventListener('pointerleave', () => h.classList.remove('bs-hover', 'bs-press'));
+        h.addEventListener('pointerdown', () => h.classList.add('bs-press'));
+        const up = () => {
+            if (!h.classList.contains('bs-press')) return;
+            h.classList.remove('bs-press'); h.classList.add('bs-release');
+            setTimeout(() => h.classList.remove('bs-release'), Math.max(60, setting('slider' + P + 'AnimTime')));
+        };
+        h.addEventListener('pointerup', up); h.addEventListener('pointercancel', up);
+    }));
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
         scale('--spx-title-scale', setting('sliderTitleScale'));
@@ -284,6 +310,10 @@ async function boot() {
             speedAt: s => curveY(setting('curveEditorVolAnimSpeedCurve'), s),
         });
         // Album cover scale + offset are visual only (they never move other elements); the prev/next buttons follow its Y offset.
+        // Play Button + Next And Last Song Buttons (UI Layout): CSS variables on each host; off = the defaults in app.css (Nav) / no glyph (Play)
+        applyButtonStyle('Play', [el('spxCover')]);
+        applyButtonStyle('Nav', [el('spxPrev'), el('spxNext')]);
+        el('spxApp').classList.toggle('no-play-glyph', !setting('checkboxPlayButtonEnabled'));
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
         const cvEl = el('spxCover');
@@ -486,7 +516,49 @@ async function boot() {
     window.addEventListener('pointerup', endPointer);
     window.addEventListener('pointercancel', endPointer);
 
-    const stepSong = d => { moveTo(timeline.currentIndex() + d); afterJump(); };
+    // Shuffle (the icon under the volume icon): Next / Last song and the end of a song follow a shuffled order of every song instead of
+    // the timeline order. The order is a permutation starting at the current song (so Last goes back through what was played); it is
+    // rebuilt when you scrub elsewhere or run out. With shuffle off, Next / Last move one song along the timeline as before.
+    let shuffleOn = false, shuffleQueue = [], shufflePtr = 0;
+    try { shuffleOn = localStorage.getItem('spxShuffle') === '1'; } catch (e) { /* storage blocked */ }
+    const shuffleBtn = el('spxShuffle');
+    function rebuildShuffle() {
+        const a = [];
+        for (let i = 0; i < songs.length; i++) if (i !== idx) a.push(i);
+        for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+        shuffleQueue = [idx, ...a]; shufflePtr = 0;
+    }
+    function shuffleStep(d) {
+        if (shuffleQueue[shufflePtr] !== idx) rebuildShuffle(); // scrubbed somewhere else: shuffle on from here
+        let p = shufflePtr + d;
+        if (p >= shuffleQueue.length) { rebuildShuffle(); p = 1; }
+        p = Math.max(0, p);
+        shufflePtr = p;
+        moveTo(shuffleQueue[p]);
+        timeline.centerOnPlayhead();
+        afterJump();
+        timeline.draw();
+    }
+    const syncShuffleUi = () => { shuffleBtn.setAttribute('aria-pressed', String(shuffleOn)); shuffleBtn.title = shuffleOn ? 'Shuffle on' : 'Shuffle off'; };
+    shuffleBtn.addEventListener('click', () => {
+        shuffleOn = !shuffleOn;
+        try { localStorage.setItem('spxShuffle', shuffleOn ? '1' : '0'); } catch (e) { /* storage blocked */ }
+        if (shuffleOn) rebuildShuffle();
+        syncShuffleUi();
+        logEvent('playback', 'SHUFFLE ' + (shuffleOn ? 'on' : 'off'));
+    });
+    if (shuffleOn) rebuildShuffle();
+    syncShuffleUi();
+    setOnEnded(() => { if (!shuffleOn) return false; logEvent('playback', 'SONG ended: shuffle picks the next song'); stepSong(1); return true; });
+    const stepSong = d => { if (shuffleOn && Math.abs(d) === 1) shuffleStep(d); else { moveTo(timeline.currentIndex() + d); afterJump(); } };
+    // dev-panel buttons (so a hotkey can be assigned to them there)
+    document.addEventListener('click', e => {
+        const b = e.target && e.target.closest && e.target.closest('button');
+        if (!b) return;
+        if (b.id === 'buttonPlayPause') togglePlayback();
+        else if (b.id === 'buttonNextSong') stepSong(1);
+        else if (b.id === 'buttonPrevSong') stepSong(-1);
+    });
     el('spxPrev').addEventListener('click', () => stepSong(-1));
     el('spxNext').addEventListener('click', () => stepSong(1));
 
@@ -496,8 +568,8 @@ async function boot() {
         const step = e.shiftKey ? 10 : 1;
         if (e.key === ' ' || e.code === 'Space') {
             if (!e.repeat) { if (document.activeElement && document.activeElement.tagName === 'BUTTON') document.activeElement.blur(); togglePlayback(); }
-        } else if (e.key === 'ArrowRight') moveTo(timeline.currentIndex() + step);
-        else if (e.key === 'ArrowLeft') moveTo(timeline.currentIndex() - step);
+        } else if (e.key === 'ArrowRight') { if (step === 1) stepSong(1); else moveTo(timeline.currentIndex() + step); }
+        else if (e.key === 'ArrowLeft') { if (step === 1) stepSong(-1); else moveTo(timeline.currentIndex() - step); }
         else if (e.key === 'ArrowUp') volume.nudge(e.shiftKey ? 0.1 : 0.05);
         else if (e.key === 'ArrowDown') volume.nudge(e.shiftKey ? -0.1 : -0.05);
         else if (e.key === 'Home') { moveTo(0); afterJump(); }

@@ -7632,6 +7632,7 @@
             { tab, group: TL, id: 'sliderDensitySmoothing', type: 'slider', label: 'Density Smoothing (Px):', min: 2, max: 80, step: 1, value: 14 },
             { tab, group: TL, id: 'sliderDensityFillOpacity', type: 'slider', label: 'Density Fill Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.55 },
             { tab, group: TL, id: 'sliderDensityOutlineWidth', type: 'slider', label: 'Density Outline Width (Px):', min: 0, max: 8, step: 0.5, value: 2 },
+            { tab, group: TL, id: 'sliderDensityColorBlend', type: 'slider', label: 'Color Blend Before Add Time (% Of Gap To Previous Datapoint):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: TL, id: 'checkboxDensityGradientFill', type: 'checkbox', label: 'Fade Fill Toward Baseline:', value: true },
             { tab, group: TL, id: 'selectLineFeature', type: 'select', label: 'Line Height Shows:', value: 'valence', options: FEATURES },
             { tab, group: TL, id: 'sliderLineWidth', type: 'slider', label: 'Line Width (Px):', min: 1, max: 8, step: 0.5, value: 2 },
@@ -7756,6 +7757,44 @@
         registerDevControlArray('SPOTTY_VB_CONTROLS', VB_CONTROLS);
         registerDevControlArray('SPOTTY_AC2_CONTROLS', AC2_CONTROLS);
         makeDevGroupToggleable(tab, VB, 'checkboxVolumeButtonEnabled');
+
+        // ---- UI Layout: Play Button + Next And Last Song Buttons (same settings; each toggleable, each with a toggleable Button Animation subgroup) ----
+        // The button controls (Play / Pause, Next Song, Last Song) exist so a hotkey can be assigned to them in the dev panel.
+        const BTN_DEF = {
+            Play: { on: false, color: '#ffffff', size: 56, op: 90, hoverOp: 100, time: 150, hoverSize: 64, clickSize: 48, animHoverOp: 100, animClickOp: 70, releaseSize: 70 },
+            Nav: { on: true, color: '#f2f2f2', size: 26, op: 100, hoverOp: 100, time: 150, hoverSize: 30, clickSize: 22, animHoverOp: 100, animClickOp: 70, releaseSize: 32 },
+        };
+        [
+            ['Play', 'Play Button', 'Play Button Animation', [['buttonPlayPause', 'Play / Pause (Right-Click To Set A Hotkey)']]],
+            ['Nav', 'Next And Last Song Buttons', 'Next And Last Button Animation', [['buttonNextSong', 'Next Song (Right-Click To Set A Hotkey)'], ['buttonPrevSong', 'Last Song (Right-Click To Set A Hotkey)']]],
+        ].forEach(([P, G, A, keys]) => {
+            const d = BTN_DEF[P];
+            uiLayoutContent.appendChild(createDevGroupElement(G, tab));
+            const main = [
+                { tab, group: G, id: 'checkbox' + P + 'ButtonEnabled', type: 'checkbox', label: 'Enabled', value: d.on },
+                { tab, group: G, id: 'color' + P + 'Button', type: 'color', label: 'Color:', value: d.color },
+                { tab, group: G, id: 'slider' + P + 'ButtonSize', type: 'slider', label: 'Size (Px):', min: 8, max: 300, step: 1, value: d.size },
+                { tab, group: G, id: 'slider' + P + 'ButtonOpacity', type: 'slider', label: 'Opacity (%):', min: 0, max: 100, step: 1, value: d.op },
+                { tab, group: G, id: 'slider' + P + 'ButtonHoverOpacity', type: 'slider', label: 'Opacity On Hover (%):', min: 0, max: 100, step: 1, value: d.hoverOp },
+                ...keys.map(([id, label]) => ({ tab, group: G, id, type: 'button', label, skipDeviceCheckbox: true })),
+            ];
+            renderControlArray(main, 'renderSpottyDevControls');
+            registerDevControlArray('SPOTTY_BTN_' + P, main);
+            findGroupContent(tab, G, 'renderSpottyDevControls', 'checkbox' + P + 'ButtonEnabled').appendChild(createDevGroupElement(A, tab));
+            const anim = [
+                { tab, group: A, id: 'checkbox' + P + 'AnimEnabled', type: 'checkbox', label: 'Enabled', value: false },
+                { tab, group: A, id: 'slider' + P + 'AnimTime', type: 'slider', label: 'Animation Time (Ms):', min: 0, max: 1500, step: 10, value: d.time },
+                { tab, group: A, id: 'slider' + P + 'AnimHoverSize', type: 'slider', label: 'Size On Hover (Px):', min: 8, max: 300, step: 1, value: d.hoverSize },
+                { tab, group: A, id: 'slider' + P + 'AnimClickSize', type: 'slider', label: 'Size On Click (Px):', min: 8, max: 300, step: 1, value: d.clickSize },
+                { tab, group: A, id: 'slider' + P + 'AnimHoverOpacity', type: 'slider', label: 'Opacity On Hover (%):', min: 0, max: 100, step: 1, value: d.animHoverOp },
+                { tab, group: A, id: 'slider' + P + 'AnimClickOpacity', type: 'slider', label: 'Opacity On Click (%):', min: 0, max: 100, step: 1, value: d.animClickOp },
+                { tab, group: A, id: 'slider' + P + 'AnimReleaseSize', type: 'slider', label: 'Size On Release (Px):', min: 8, max: 300, step: 1, value: d.releaseSize },
+            ];
+            renderControlArray(anim, 'renderSpottyDevControls');
+            registerDevControlArray('SPOTTY_BTNANIM_' + P, anim);
+            makeDevGroupToggleable(tab, G, 'checkbox' + P + 'ButtonEnabled');
+            makeDevGroupToggleable(tab, A, 'checkbox' + P + 'AnimEnabled');
+        });
 
         // ---- Debug group: global tools ported from HANDY DANDIES (logic in src/app/debugTools.js, log lines in debugLog.js) ----
         const DBG = 'Debug';
@@ -8075,7 +8114,7 @@
         // Show only the settings that belong to the selected Timeline Visual Style.
         const STYLE_CONTROLS = {
             glow: ['sliderGlowStemWidth', 'sliderGlowRadius', 'sliderGlowDotSize', 'sliderGlowIntensity'],
-            density: ['sliderDensitySmoothing', 'sliderDensityFillOpacity', 'sliderDensityOutlineWidth', 'checkboxDensityGradientFill'],
+            density: ['sliderDensitySmoothing', 'sliderDensityFillOpacity', 'sliderDensityOutlineWidth', 'sliderDensityColorBlend', 'checkboxDensityGradientFill'],
             line: ['selectLineFeature', 'sliderLineWidth', 'sliderLineDotSize', 'sliderLineFillOpacity', 'checkboxLineSmooth'],
             ribbon: ['selectRibbonFeature', 'sliderRibbonThickness', 'sliderRibbonSmoothing', 'sliderRibbonBarsOpacity'],
         };

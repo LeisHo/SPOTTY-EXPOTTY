@@ -300,19 +300,28 @@ export function createTimeline(canvas, data) {
             const mx = Math.max(1e-6, ...dens);
             const fillA = setting('sliderDensityFillOpacity'), lineW = setting('sliderDensityOutlineWidth');
             const ys = Array.from(dens, d => topH - (d / mx) * (topH - 6));
-            // horizontal colour: accent, or the album colours of the songs under each stretch
+            // horizontal colour: accent, or the album colours of the songs under each stretch. A datapoint's colour BEGINS at its add
+            // time; before that the line shows the previous datapoint's colour, blended into the new one over "Color Blend Before Add Time"
+            // (a % of the distance back to the previous datapoint): 0 = a hard step exactly at the add time, 100 = blended all the way
+            // from the previous datapoint (the smoothest, and how it always looked before this slider).
             const grad = ctx.createLinearGradient(0, 0, w, 0);
-            const stops = Math.min(nb, 120);
-            for (let s = 0; s <= stops; s++) {
-                const f = s / stops, bi = clamp(Math.floor(f * (nb - 1)), 0, nb - 1);
-                let rgb = hexToRgb(accent);
-                if (colorOpts.on) {
-                    for (let d = 0; d < nb; d++) { // nearest non-empty bin
-                        const bn = bins[clamp(bi + (d % 2 ? -(d >> 1) - 1 : d >> 1), 0, nb - 1)];
-                        if (bn) { const p = binColorOf(bn); if (p) rgb = p.solid || (p.gradient && p.gradient[p.gradient.length >> 1]) || p.stack[p.stack.length >> 1]; break; }
-                    }
-                }
-                grad.addColorStop(f, rgbCss(rgb, 1));
+            const accRgb = hexToRgb(accent), blendPct = clamp(setting('sliderDensityColorBlend'), 0, 100) / 100;
+            const colPts = [];
+            if (colorOpts.on) bins.forEach((bn, b) => {
+                if (!bn) return;
+                const p = binColorOf(bn);
+                if (p) colPts.push({ x: (b + 0.5) * bw, rgb: p.solid || (p.gradient && p.gradient[p.gradient.length >> 1]) || p.stack[p.stack.length >> 1] });
+            });
+            let lastF = 0;
+            const stop = (x, rgb) => { const f = Math.max(lastF, clamp(x / w, 0, 1)); lastF = f; grad.addColorStop(f, rgbCss(rgb, 1)); };
+            if (!colPts.length) { grad.addColorStop(0, rgbCss(accRgb, 1)); grad.addColorStop(1, rgbCss(accRgb, 1)); }
+            else {
+                stop(0, colPts[0].rgb);
+                colPts.forEach((pt, i) => {
+                    if (i) { const prev = colPts[i - 1]; stop(pt.x - blendPct * (pt.x - prev.x), prev.rgb); } // the previous colour holds until the blend starts
+                    stop(pt.x, pt.rgb);
+                });
+                stop(w, colPts[colPts.length - 1].rgb);
             }
             ctx.beginPath();
             ctx.moveTo(0, topH);

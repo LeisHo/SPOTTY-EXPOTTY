@@ -112,10 +112,32 @@
 /* Previous / next song buttons beside the album cover */
 .spx-nav { z-index: 1; width: 48px; height: 48px; border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: drop-shadow(0 1px 3px #000a); -webkit-tap-highlight-color: transparent; }
 .spx-nav:hover { color: #fff; }
-.spx-nav svg { width: 26px; height: 26px; fill: currentColor; }
+.spx-nav svg { fill: currentColor; flex: none; } /* flex: none so a big icon size is not squeezed into the 48 px button box */
+.spx-nav { overflow: visible; }
+.spx-play-glyph svg { flex: none; }
 
 /* Shadows switched off from the dev panel (UI Layout > Shadows): classes set on #spxApp in applyLook() */
 .spx-app.no-shadow-cover .spx-cover { box-shadow: none; }
 .spx-app.no-shadow-vol .spx-vol-btn, .spx-app.no-shadow-vol .spx-vol-panel { filter: none; }
 .spx-app.no-shadow-vol .spx-vol-thumb { box-shadow: none; }
 .spx-app.no-shadow-nav .spx-nav { filter: none; }
+
+/* Styled buttons (UI Layout > Play Button / Next And Last Song Buttons). main.js applyButtonStyles() sets the --bs-* variables on each
+   host (.bs-host) and the hover / press / release classes; the icon (.bs-icon) animates between the sizes and opacities. */
+.bs-icon { width: var(--bs-size, 26px); height: var(--bs-size, 26px); color: var(--bs-color, currentColor); opacity: var(--bs-op, 1); fill: currentColor;
+    transition: width var(--bs-time, 0ms) ease, height var(--bs-time, 0ms) ease, opacity var(--bs-time, 0ms) ease; }
+.bs-host.bs-hover .bs-icon { width: var(--bs-size-hover, var(--bs-size, 26px)); height: var(--bs-size-hover, var(--bs-size, 26px)); opacity: var(--bs-op-hover, var(--bs-op, 1)); }
+.bs-host.bs-press .bs-icon { width: var(--bs-size-press, var(--bs-size, 26px)); height: var(--bs-size-press, var(--bs-size, 26px)); opacity: var(--bs-op-press, var(--bs-op, 1)); }
+.bs-host.bs-release .bs-icon { width: var(--bs-size-release, var(--bs-size, 26px)); height: var(--bs-size-release, var(--bs-size, 26px)); opacity: var(--bs-op-hover, var(--bs-op, 1)); }
+.spx-play-glyph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.spx-cover.playing .ico-play, .spx-cover:not(.playing) .ico-pause { display: none; }
+.spx-app.no-play-glyph .spx-play-glyph { display: none; }
+/* Shuffle (under the volume icon) */
+.spx-shuffle { position: absolute; left: 50%; top: calc(var(--spx-vol-icon) + 22px); transform: translateX(-50%); width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px);
+    border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: #f2f2f2; opacity: 0.45; cursor: pointer;
+    filter: drop-shadow(0 1px 3px #000a); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; }
+.spx-shuffle svg { width: calc(var(--spx-vol-icon) * 0.85); height: calc(var(--spx-vol-icon) * 0.85); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spx-shuffle:hover { opacity: 0.8; }
+.spx-shuffle[aria-pressed="true"] { opacity: 1; color: #1db954; }
+.spx-vol-btn[aria-expanded="true"] ~ .spx-shuffle { opacity: 0; pointer-events: none; } /* the slider drops over this spot */
+.spx-app.no-shadow-vol .spx-shuffle { filter: none; }

@@ -117,6 +117,8 @@ export function initVolume({ root, onChange }) {
     // Hover: inside the icon (when closed) or the icon + the fully-open slider (when open), grown by the tolerance.
     document.addEventListener('pointermove', e => {
         if (!cfg.enabled || e.pointerType === 'touch') return;
+        const sh = root.querySelector('.spx-shuffle');
+        if (sh && e.target && sh.contains(e.target)) { setOpen(false); return; } // over the shuffle icon: it sits where the slider would drop
         const b = btn.getBoundingClientRect(), rr = root.getBoundingClientRect();
         let l = b.left, r = b.right, t = b.top, bt = b.bottom;
         if (target) { l = Math.min(l, rr.left); r = Math.max(r, rr.right); bt = b.bottom + panelH; }

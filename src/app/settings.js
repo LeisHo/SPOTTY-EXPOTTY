@@ -163,6 +163,7 @@ export const DEFAULTS = {
     sliderDensitySmoothing: 14,
     sliderDensityFillOpacity: 0.55,
     sliderDensityOutlineWidth: 2,
+    sliderDensityColorBlend: 100,
     checkboxDensityGradientFill: true,
     selectLineFeature: 'valence',
     sliderLineWidth: 2,
@@ -178,6 +179,20 @@ export const DEFAULTS = {
     sliderAlbumColorSaturation: 1,
     sliderAlbumColorBrightness: 1,
 };
+
+// UI Layout > Play Button / Next And Last Song Buttons: P = 'Play' or 'Nav'. The same ten settings each (ids built from P in main.js
+// applyButtonStyles() and in devPanel.js), plus the Button Animation subgroup's.
+const BTN_DEFAULTS = {
+    Play: { on: false, color: '#ffffff', size: 56, op: 90, hoverOp: 100, time: 150, hoverSize: 64, clickSize: 48, animHoverOp: 100, animClickOp: 70, releaseSize: 70 },
+    Nav: { on: true, color: '#f2f2f2', size: 26, op: 100, hoverOp: 100, time: 150, hoverSize: 30, clickSize: 22, animHoverOp: 100, animClickOp: 70, releaseSize: 32 },
+};
+Object.entries(BTN_DEFAULTS).forEach(([P, d]) => Object.assign(DEFAULTS, {
+    ['checkbox' + P + 'ButtonEnabled']: d.on, ['color' + P + 'Button']: d.color, ['slider' + P + 'ButtonSize']: d.size,
+    ['slider' + P + 'ButtonOpacity']: d.op, ['slider' + P + 'ButtonHoverOpacity']: d.hoverOp,
+    ['checkbox' + P + 'AnimEnabled']: false, ['slider' + P + 'AnimTime']: d.time, ['slider' + P + 'AnimHoverSize']: d.hoverSize,
+    ['slider' + P + 'AnimClickSize']: d.clickSize, ['slider' + P + 'AnimHoverOpacity']: d.animHoverOp,
+    ['slider' + P + 'AnimClickOpacity']: d.animClickOp, ['slider' + P + 'AnimReleaseSize']: d.releaseSize,
+}));
 
 export function activeDevice() {
     const w = window.innerWidth, h = window.innerHeight;

@@ -16,6 +16,9 @@ const listeners = new Set();
 const events = (window.__spxEvents = []);
 
 export const onPlayState = fn => listeners.add(fn);
+// Called when the playing song reaches its end; return true to say it was handled (shuffle moves on) so the loop restart is skipped.
+let endedHandler = null;
+export const setOnEnded = fn => { endedHandler = fn; };
 const emit = () => listeners.forEach(fn => fn(playing));
 
 let lastDur = 0; // last non-zero duration (ms) the embed reported
@@ -40,6 +43,7 @@ function handleUpdate(d) {
     const unrequestedStop = !playing && wasPlaying;
     if (wantPlaying && (atEnd || unrequestedStop) && performance.now() - lastRestart > 3000) {
         lastRestart = performance.now();
+        if (endedHandler && endedHandler()) { logEvent('playback', 'EMBED reached the end: handled (shuffle moved to the next song)'); emit(); return; }
         logEvent('playback', 'EMBED reached the end: loop restart scheduled');
         // MEASURED: a seek(0)+resume() sent in the same instant as the end-of-track update is ignored
         // (the player is still finishing); the same calls work once it has settled. So wait, restart,
