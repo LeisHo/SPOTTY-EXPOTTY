@@ -131,9 +131,9 @@
     "sliderTxtArtistMaxWidth": 2000,
     "selectTxtArtistOverflow": "wrap",
     "textArtistSeparator": "  &  ",
-    "sliderArtistSeparatorPct": 77,
+    "sliderArtistSeparatorPct": 74,
     "checkboxScaleArtistMultiline": true,
-    "sliderArtistMaxLines": 2,
+    "sliderArtistMaxLines": 1,
     "checkboxTxtArtistOutlineEnabled": false,
     "colorTxtArtistOutlineColor": "#000000",
     "sliderTxtArtistOutlineThickness": 2,
@@ -9260,6 +9260,10 @@
                     "key": "mobile:Song Title",
                     "items": [
                       {
+                        "type": "row",
+                        "key": "sliderMobileTxtSongTitleFontSize"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "mobile:Track Title Button Animation",
@@ -9376,7 +9380,9 @@
                         }
                       }
                     ],
-                    "rowKeys": [],
+                    "rowKeys": [
+                      "sliderMobileTxtSongTitleFontSize"
+                    ],
                     "subgroups": [
                       {
                         "key": "mobile:Track Title Button Animation",
@@ -9506,11 +9512,21 @@
                       {
                         "type": "row",
                         "key": "textArtistSeparator"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxMobileScaleArtistMultiline"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileArtistMaxLines"
                       }
                     ],
                     "rowKeys": [
                       "sliderMobileTxtArtistFontSize",
-                      "textArtistSeparator"
+                      "textArtistSeparator",
+                      "checkboxMobileScaleArtistMultiline",
+                      "sliderMobileArtistMaxLines"
                     ],
                     "subgroups": []
                   }
@@ -9521,6 +9537,10 @@
                     "key": "mobile:Album & Date",
                     "items": [
                       {
+                        "type": "row",
+                        "key": "sliderMobileTxtAlbumDateFontSize"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "mobile:Outline",
@@ -9530,7 +9550,9 @@
                         }
                       }
                     ],
-                    "rowKeys": [],
+                    "rowKeys": [
+                      "sliderMobileTxtAlbumDateFontSize"
+                    ],
                     "subgroups": [
                       {
                         "key": "mobile:Outline",
@@ -9560,6 +9582,10 @@
                 {
                   "key": "mobile:Song Title",
                   "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTxtSongTitleFontSize"
+                    },
                     {
                       "type": "group",
                       "section": {
@@ -9677,7 +9703,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderMobileTxtSongTitleFontSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "mobile:Track Title Button Animation",
@@ -9804,17 +9832,31 @@
                     {
                       "type": "row",
                       "key": "textArtistSeparator"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileScaleArtistMultiline"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileArtistMaxLines"
                     }
                   ],
                   "rowKeys": [
                     "sliderMobileTxtArtistFontSize",
-                    "textArtistSeparator"
+                    "textArtistSeparator",
+                    "checkboxMobileScaleArtistMultiline",
+                    "sliderMobileArtistMaxLines"
                   ],
                   "subgroups": []
                 },
                 {
                   "key": "mobile:Album & Date",
                   "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTxtAlbumDateFontSize"
+                    },
                     {
                       "type": "group",
                       "section": {
@@ -9825,7 +9867,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderMobileTxtAlbumDateFontSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "mobile:Outline",
@@ -10502,6 +10546,10 @@
                   "key": "mobile:Song Title",
                   "items": [
                     {
+                      "type": "row",
+                      "key": "sliderMobileTxtSongTitleFontSize"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "mobile:Track Title Button Animation",
@@ -10618,7 +10666,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderMobileTxtSongTitleFontSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "mobile:Track Title Button Animation",
@@ -10748,11 +10798,21 @@
                     {
                       "type": "row",
                       "key": "textArtistSeparator"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileScaleArtistMultiline"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileArtistMaxLines"
                     }
                   ],
                   "rowKeys": [
                     "sliderMobileTxtArtistFontSize",
-                    "textArtistSeparator"
+                    "textArtistSeparator",
+                    "checkboxMobileScaleArtistMultiline",
+                    "sliderMobileArtistMaxLines"
                   ],
                   "subgroups": []
                 }
@@ -10763,6 +10823,10 @@
                   "key": "mobile:Album & Date",
                   "items": [
                     {
+                      "type": "row",
+                      "key": "sliderMobileTxtAlbumDateFontSize"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "mobile:Outline",
@@ -10772,7 +10836,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderMobileTxtAlbumDateFontSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "mobile:Outline",
@@ -10802,6 +10868,10 @@
               {
                 "key": "mobile:Song Title",
                 "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTxtSongTitleFontSize"
+                  },
                   {
                     "type": "group",
                     "section": {
@@ -10919,7 +10989,9 @@
                     }
                   }
                 ],
-                "rowKeys": [],
+                "rowKeys": [
+                  "sliderMobileTxtSongTitleFontSize"
+                ],
                 "subgroups": [
                   {
                     "key": "mobile:Track Title Button Animation",
@@ -11046,17 +11118,31 @@
                   {
                     "type": "row",
                     "key": "textArtistSeparator"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxMobileScaleArtistMultiline"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileArtistMaxLines"
                   }
                 ],
                 "rowKeys": [
                   "sliderMobileTxtArtistFontSize",
-                  "textArtistSeparator"
+                  "textArtistSeparator",
+                  "checkboxMobileScaleArtistMultiline",
+                  "sliderMobileArtistMaxLines"
                 ],
                 "subgroups": []
               },
               {
                 "key": "mobile:Album & Date",
                 "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTxtAlbumDateFontSize"
+                  },
                   {
                     "type": "group",
                     "section": {
@@ -11067,7 +11153,9 @@
                     }
                   }
                 ],
-                "rowKeys": [],
+                "rowKeys": [
+                  "sliderMobileTxtAlbumDateFontSize"
+                ],
                 "subgroups": [
                   {
                     "key": "mobile:Outline",
@@ -12750,6 +12838,10 @@
                     "key": "landscape:Song Title",
                     "items": [
                       {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtSongTitleFontSize"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "landscape:Track Title Button Animation",
@@ -12866,7 +12958,9 @@
                         }
                       }
                     ],
-                    "rowKeys": [],
+                    "rowKeys": [
+                      "sliderLandscapeTxtSongTitleFontSize"
+                    ],
                     "subgroups": [
                       {
                         "key": "landscape:Track Title Button Animation",
@@ -12996,11 +13090,21 @@
                       {
                         "type": "row",
                         "key": "textArtistSeparator"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxLandscapeScaleArtistMultiline"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeArtistMaxLines"
                       }
                     ],
                     "rowKeys": [
                       "sliderLandscapeTxtArtistFontSize",
-                      "textArtistSeparator"
+                      "textArtistSeparator",
+                      "checkboxLandscapeScaleArtistMultiline",
+                      "sliderLandscapeArtistMaxLines"
                     ],
                     "subgroups": []
                   }
@@ -13011,6 +13115,10 @@
                     "key": "landscape:Album & Date",
                     "items": [
                       {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtAlbumDateFontSize"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "landscape:Outline",
@@ -13020,7 +13128,9 @@
                         }
                       }
                     ],
-                    "rowKeys": [],
+                    "rowKeys": [
+                      "sliderLandscapeTxtAlbumDateFontSize"
+                    ],
                     "subgroups": [
                       {
                         "key": "landscape:Outline",
@@ -13050,6 +13160,10 @@
                 {
                   "key": "landscape:Song Title",
                   "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtSongTitleFontSize"
+                    },
                     {
                       "type": "group",
                       "section": {
@@ -13167,7 +13281,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderLandscapeTxtSongTitleFontSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "landscape:Track Title Button Animation",
@@ -13294,17 +13410,31 @@
                     {
                       "type": "row",
                       "key": "textArtistSeparator"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeScaleArtistMultiline"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeArtistMaxLines"
                     }
                   ],
                   "rowKeys": [
                     "sliderLandscapeTxtArtistFontSize",
-                    "textArtistSeparator"
+                    "textArtistSeparator",
+                    "checkboxLandscapeScaleArtistMultiline",
+                    "sliderLandscapeArtistMaxLines"
                   ],
                   "subgroups": []
                 },
                 {
                   "key": "landscape:Album & Date",
                   "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtAlbumDateFontSize"
+                    },
                     {
                       "type": "group",
                       "section": {
@@ -13315,7 +13445,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderLandscapeTxtAlbumDateFontSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "landscape:Outline",
@@ -13992,6 +14124,10 @@
                   "key": "landscape:Song Title",
                   "items": [
                     {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtSongTitleFontSize"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "landscape:Track Title Button Animation",
@@ -14108,7 +14244,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderLandscapeTxtSongTitleFontSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "landscape:Track Title Button Animation",
@@ -14238,11 +14376,21 @@
                     {
                       "type": "row",
                       "key": "textArtistSeparator"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeScaleArtistMultiline"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeArtistMaxLines"
                     }
                   ],
                   "rowKeys": [
                     "sliderLandscapeTxtArtistFontSize",
-                    "textArtistSeparator"
+                    "textArtistSeparator",
+                    "checkboxLandscapeScaleArtistMultiline",
+                    "sliderLandscapeArtistMaxLines"
                   ],
                   "subgroups": []
                 }
@@ -14253,6 +14401,10 @@
                   "key": "landscape:Album & Date",
                   "items": [
                     {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtAlbumDateFontSize"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "landscape:Outline",
@@ -14262,7 +14414,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderLandscapeTxtAlbumDateFontSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "landscape:Outline",
@@ -14292,6 +14446,10 @@
               {
                 "key": "landscape:Song Title",
                 "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTxtSongTitleFontSize"
+                  },
                   {
                     "type": "group",
                     "section": {
@@ -14409,7 +14567,9 @@
                     }
                   }
                 ],
-                "rowKeys": [],
+                "rowKeys": [
+                  "sliderLandscapeTxtSongTitleFontSize"
+                ],
                 "subgroups": [
                   {
                     "key": "landscape:Track Title Button Animation",
@@ -14536,17 +14696,31 @@
                   {
                     "type": "row",
                     "key": "textArtistSeparator"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxLandscapeScaleArtistMultiline"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeArtistMaxLines"
                   }
                 ],
                 "rowKeys": [
                   "sliderLandscapeTxtArtistFontSize",
-                  "textArtistSeparator"
+                  "textArtistSeparator",
+                  "checkboxLandscapeScaleArtistMultiline",
+                  "sliderLandscapeArtistMaxLines"
                 ],
                 "subgroups": []
               },
               {
                 "key": "landscape:Album & Date",
                 "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTxtAlbumDateFontSize"
+                  },
                   {
                     "type": "group",
                     "section": {
@@ -14557,7 +14731,9 @@
                     }
                   }
                 ],
-                "rowKeys": [],
+                "rowKeys": [
+                  "sliderLandscapeTxtAlbumDateFontSize"
+                ],
                 "subgroups": [
                   {
                     "key": "landscape:Outline",
@@ -15637,7 +15813,7 @@
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
-    "desktop:Artist": true,
+    "desktop:Artist": false,
     "desktop:Album & Date": false,
     "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
@@ -16216,7 +16392,15 @@
     "sliderMobilePlayButtonOpacity": null,
     "sliderLandscapePlayButtonOpacity": null,
     "sliderMobileTxtArtistFontSize": null,
-    "sliderLandscapeTxtArtistFontSize": null
+    "sliderLandscapeTxtArtistFontSize": null,
+    "sliderMobileTxtAlbumDateFontSize": null,
+    "sliderLandscapeTxtAlbumDateFontSize": null,
+    "sliderMobileTxtSongTitleFontSize": null,
+    "sliderLandscapeTxtSongTitleFontSize": null,
+    "checkboxMobileScaleArtistMultiline": null,
+    "checkboxLandscapeScaleArtistMultiline": null,
+    "sliderMobileArtistMaxLines": null,
+    "sliderLandscapeArtistMaxLines": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -16394,7 +16578,11 @@
     "sliderNavAnimReleaseSize": false,
     "sliderPlayButtonSize": true,
     "sliderPlayButtonOpacity": true,
-    "sliderTxtArtistFontSize": true
+    "sliderTxtArtistFontSize": true,
+    "sliderTxtAlbumDateFontSize": true,
+    "sliderTxtSongTitleFontSize": true,
+    "checkboxScaleArtistMultiline": true,
+    "sliderArtistMaxLines": true
   },
   "devIndependence": {
     "mobile": {
