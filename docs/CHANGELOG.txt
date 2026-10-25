@@ -729,6 +729,12 @@ is logged in. Firefox ships a shim that calls the Storage Access API for Spotify
 Not verified: the button animations by eye, shuffle with real audio, touch.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  01:24 AM (correction)
+
+CORRECTION to the entry above: its header said "01:23:19; non-dev settings 01:2x" and the ETA History row for it said an end of 01:26:19. Measured: start 01:15:51, last code push
+01:23:19, docs push 01:24:24 (8m 33s from start to the docs push). The 01:26:19 was invented (fourth time: read `date` first, then write the time).
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
