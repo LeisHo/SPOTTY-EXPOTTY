@@ -762,6 +762,14 @@ authorize URL has client_id + S256 + redirect_uri https://spottypotty.vercel.app
 accepted (303 to Spotify's login page, not an INVALID_CLIENT / redirect error). Still NOT verified: the real login, the popup closing, the SDK starting, Premium, real playback.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  01:43:46 - code push (time in the ETA row)  SDK diagnostics
+
+Report: logged in, but still only the 30 s preview. A stored login only means the TOKENS exist; the SDK can still be loading / failed / refused by Spotify, and then handoff.js (correctly) falls back to the iframe,
+which only plays the preview. Without seeing the browser the cause is unknown, so: sdkPlayer.js keeps the last 25 SDK events even with the log checkbox off (shown in Debug > Take Snapshot > Playback > "last Spotify SDK
+events"), the login button text and sdkStatus() now include the last play error (e.g. "ready, but the last play failed: 403 ... Premium required"), and the likeliest start-up problem is handled: on "ready" playback is TRANSFERRED to
+the new device, and a play that answers 404 (device not found yet) transfers and retries once. Tested against fakes (404 -> transfer -> retry ok; 403 shows the reason). Waiting on the owner's button text / snapshot.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
@@ -798,3 +806,12 @@ APPEND-ONLY. Never rewrite, reorder, or delete a prior entry, even to fix
 formatting (CLAUDE.md §4a / Never-Skip rule #3). If an entry needs a
 correction, add a new entry noting the correction rather than editing the
 old one in place.
+
+--------------------------------------------------------------------------------
+2026-10-25  -  (time not measured)
+
+Direct requests (three, one session):
+- Randomize Starting Song did nothing in dev mode. The startup jump checked the dev panel's live checkbox at a fixed 1.6 s, but the GitHub copy of the saved settings can arrive later, so the check saw the default off. src/main.js now reads the saved checkbox directly (loadSavedSettings) in dev mode, and falls back to the live setting otherwise.
+- New Loop Preview checkbox in the Scrub Audio group (default on, = the old behaviour: the embed restarts the same song). Off: when a preview ends the app moves to the next song; shuffle still always picks the next one. src/app/settings.js, src/devpanel/devPanel.js, src/main.js (setOnEnded).
+- Volume button: the closed slider now opens only over the icon itself (no 30 px tolerance below it). The tolerance still applies once the slider is open. The tolerance had been covering the Shuffle button, so it could not be clicked. src/app/volume.js.
+Not verified in a browser: only node --check was run on the four edited files. Not committed.
