@@ -190,20 +190,18 @@
     "sliderShuffleIconOffsetX": 0,
     "sliderShuffleOffOpacity": 49,
     "sliderShuffleOnOpacity": 80,
-    "sliderShuffleOnHoverOpacity": 100,
     "sliderShuffleEdgeOffset": 14,
-    "sliderShuffleHoverOpacity": 80,
     "sliderShuffleClickTolerance": 3,
     "sliderShuffleHoverTolerance": 6,
     "colorShuffleIcon": "#f2f2f2",
     "colorShuffleOn": "#ffffff",
-    "selectShuffleIconStyle": "0",
+    "selectShuffleIconStyle": "8",
     "checkboxShuffleAnimEnabled": true,
     "sliderShuffleAnimTime": 70,
     "sliderShuffleAnimHoverSize": 23,
     "sliderShuffleAnimClickSize": 18,
     "sliderShuffleAnimReleaseSize": 20,
-    "sliderShuffleAnimHoverOpacity": 100,
+    "sliderShuffleAnimHoverOpacity": 150,
     "sliderShuffleAnimClickOpacity": 100,
     "checkboxVolBtnAnimEnabled": true,
     "sliderVolBtnAnimTime": 100,
@@ -383,7 +381,7 @@
   "layout": {
     "left": 67,
     "top": 170,
-    "width": 561,
+    "width": 359,
     "height": 415
   },
   "devPanelStyle": {
@@ -3470,19 +3468,11 @@
                       },
                       {
                         "type": "row",
-                        "key": "sliderShuffleHoverOpacity"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderShuffleClickTolerance"
                       },
                       {
                         "type": "row",
                         "key": "sliderShuffleHoverTolerance"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleOnHoverOpacity"
                       },
                       {
                         "type": "group",
@@ -3538,10 +3528,8 @@
                       "colorShuffleOn",
                       "sliderShuffleOnOpacity",
                       "selectShuffleIconStyle",
-                      "sliderShuffleHoverOpacity",
                       "sliderShuffleClickTolerance",
                       "sliderShuffleHoverTolerance",
-                      "sliderShuffleOnHoverOpacity",
                       "sliderShuffleEdgeOffset"
                     ],
                     "subgroups": [
@@ -4081,19 +4069,11 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderShuffleHoverOpacity"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderShuffleClickTolerance"
                     },
                     {
                       "type": "row",
                       "key": "sliderShuffleHoverTolerance"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleOnHoverOpacity"
                     },
                     {
                       "type": "group",
@@ -4149,10 +4129,8 @@
                     "colorShuffleOn",
                     "sliderShuffleOnOpacity",
                     "selectShuffleIconStyle",
-                    "sliderShuffleHoverOpacity",
                     "sliderShuffleClickTolerance",
                     "sliderShuffleHoverTolerance",
-                    "sliderShuffleOnHoverOpacity",
                     "sliderShuffleEdgeOffset"
                   ],
                   "subgroups": [
@@ -6452,19 +6430,11 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderShuffleHoverOpacity"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderShuffleClickTolerance"
                     },
                     {
                       "type": "row",
                       "key": "sliderShuffleHoverTolerance"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleOnHoverOpacity"
                     },
                     {
                       "type": "group",
@@ -6520,10 +6490,8 @@
                     "colorShuffleOn",
                     "sliderShuffleOnOpacity",
                     "selectShuffleIconStyle",
-                    "sliderShuffleHoverOpacity",
                     "sliderShuffleClickTolerance",
                     "sliderShuffleHoverTolerance",
-                    "sliderShuffleOnHoverOpacity",
                     "sliderShuffleEdgeOffset"
                   ],
                   "subgroups": [
@@ -7063,19 +7031,11 @@
                   },
                   {
                     "type": "row",
-                    "key": "sliderShuffleHoverOpacity"
-                  },
-                  {
-                    "type": "row",
                     "key": "sliderShuffleClickTolerance"
                   },
                   {
                     "type": "row",
                     "key": "sliderShuffleHoverTolerance"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderShuffleOnHoverOpacity"
                   },
                   {
                     "type": "group",
@@ -7131,10 +7091,8 @@
                   "colorShuffleOn",
                   "sliderShuffleOnOpacity",
                   "selectShuffleIconStyle",
-                  "sliderShuffleHoverOpacity",
                   "sliderShuffleClickTolerance",
                   "sliderShuffleHoverTolerance",
-                  "sliderShuffleOnHoverOpacity",
                   "sliderShuffleEdgeOffset"
                 ],
                 "subgroups": [
@@ -19140,13 +19098,13 @@
     "desktop:Artist": true,
     "desktop:Album & Date": false,
     "desktop:New Group (7)": false,
-    "desktop:Volume Button": false,
+    "desktop:Volume Button": true,
     "desktop:Volume Button Animation": true,
     "desktop:Play Button": true,
     "desktop:Play Button Animation": false,
     "desktop:Next And Last Song Buttons": true,
     "desktop:Next And Last Button Animation": false,
-    "desktop:Shuffle Button": true,
+    "desktop:Shuffle Button": false,
     "desktop:Shuffle Button Animation": false,
     "desktop:Background": true,
     "desktop:Album Cover": true,
