@@ -20,6 +20,9 @@ export const onPlayState = fn => listeners.add(fn);
 // ---- Web Playback SDK (full songs + real volume; sdkPlayer.js). Used whenever it is ready; otherwise the iframe embed below plays. ----
 // The SDK needs a few seconds after page load to connect. A song asked for before that (the first one after startup) WAITS for it
 // (up to 8 s) instead of starting in the iframe, which can only play the 30 s preview.
+// Timing for the playback log: how long from the song change (and from our play request) until Spotify's player is really playing it.
+let songChangeAt = 0, requestAt = 0, audibleLogged = true;
+export const noteSongChange = () => { songChangeAt = performance.now(); };
 let pendingSdkTrack = null, pendingTimer = 0;
 // ---- handoff crossfade: the preview keeps playing until the full song is AUDIBLE, then it fades out while the song fades in ----
 let audibleWait = null; // { id, fadeMs, onAudible, timer, before }
@@ -54,6 +57,10 @@ export function initSdkPlayer(onStatus) {
         onState: (isPlayingNow, info) => {
             playing = isPlayingNow;
             if (info && info.duration > 0) lastDur = info.duration;
+            if (!audibleLogged && isPlayingNow && info && (info.id === loadedId || info.linkedId === loadedId)) {
+                audibleLogged = true;
+                logEvent('playback', `FULL SONG PLAYING: ${Math.round(performance.now() - requestAt)}ms after the play request, ${Math.round(performance.now() - songChangeAt)}ms after the song change`);
+            }
             if (audibleWait && isPlayingNow && info && (info.id === audibleWait.id || info.linkedId === audibleWait.id || (info.id !== audibleWait.before && info.position < 2500))) finishAudible('sdk');
             emit();
         },
@@ -151,6 +158,7 @@ export function playTrack(trackId, positionMs = 0) {
     if (sdk.sdkReady()) {
         loadedId = trackId;
         clearPending();
+        requestAt = performance.now(); audibleLogged = false;
         sdk.sdkPlay(trackId, positionMs).then(ok => { if (!ok && wantPlaying && loadedId === trackId) playViaEmbed(trackId); }); // SDK refused: the iframe plays it instead
         return true;
     }
