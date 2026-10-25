@@ -379,6 +379,7 @@ async function boot() {
         const cvEl = el('spxCover');
         cvEl.style.scale = String(setting('sliderCoverScale'));
         cvEl.style.translate = `${setting('sliderCoverOffsetX')}px ${setting('sliderCoverOffsetY')}px`;
+        keepCoverCentred();
         placeNav();
         const uiFont = setting('selectUiFont');
         scale('--spx-font', !uiFont || uiFont === 'system' ? 'inherit' : `'${uiFont}', system-ui, sans-serif`);
@@ -702,6 +703,18 @@ async function boot() {
         el('spxPrev').style.translate = `${14 - (r.left - 48)}px 0px`;
         el('spxNext').style.translate = `${(innerWidth - 14 - 48) - r.right}px 0px`;
     }
+    // The cover's scale grows it around transform-origin. When the engine centres the cover (anchor center), it has already moved
+    // the box by -50% of its own width / height, so scaling around the box's middle pushes it off centre (at scale 1.5 the centre
+    // moved 92 px left on a 1920 px screen). Scaling around the anchor point instead keeps it centred. A bottom / top / left /
+    // right anchor is unchanged: the origin stays at the middle.
+    function keepCoverCentred() {
+        const c = el('spxCover');
+        const ox = c.dataset.anchorH === 'center' ? '0px' : '50%';
+        const oy = c.dataset.anchorV === 'center' ? '0px' : '50%';
+        const want = `${ox} ${oy}`;
+        if (c.style.transformOrigin !== want) c.style.transformOrigin = want;
+    }
+    setInterval(keepCoverCentred, 500); // catches an anchor change made in the UI Layout Inspector
     new ResizeObserver(placeNav).observe(el('spxCover'));
     window.addEventListener('resize', placeNav);
     placeNav();

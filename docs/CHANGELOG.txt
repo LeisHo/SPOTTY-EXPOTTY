@@ -902,3 +902,8 @@ Not committed.
 Album cover off-centre, investigated. The cover box is centred by the engine when anchored centre/centre, so the offset is what moves it. The saved engine layout (dev-panel-settings.json, extra.uiLayout) still carries a vertical offset of 228 px (base) and 192 px (mobile portrait) from the bottom anchor. Switching the anchor to centre does not clear it, so the cover moves down by that amount. The dev-panel X/Y offset sliders are 0; the offset is in the layout, not the sliders. Fix in the Inspector: set the cover's vertical offset to 0 when it is anchored to centre.
 Added Album Cover > Bounding Box (default off): shows the cover's box (dashed outline) and its centre (ring). src/devpanel/devPanel.js, src/app/settings.js, src/main.js, src/app.css.
 Not verified in a browser: only node --check was run. Not committed.
+
+--------------------------------------------------------------------------------
+2026-10-25  -  (time not measured)
+
+Album cover off-centre horizontally, measured in a browser at 1920x1080. Cause: the cover's scale grew it around the middle of its box, but the engine's centring (translate -50%) had already moved the box, so at scale 1.5 the centre moved 92 px left. Fix: src/main.js keepCoverCentred() sets the cover's transform-origin to the anchor point on each centred axis (left edge for an anchor-center horizontal, top edge for an anchor-center vertical, the middle otherwise). Checked: centre at x = 960 at scale 1 and at scale 1.5. Runs on apply and every 500 ms (catches Inspector anchor changes). Not committed.
