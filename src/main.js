@@ -456,7 +456,7 @@ async function boot() {
         el('spxStart').style.setProperty('--spx-start-bg', rgbaOf(setting('colorStartOverlay'), setting('sliderStartOverlayOpacity')));
         el('spxStartBtn').hidden = !setting('checkboxStartButtonEnabled');
         el('spxStartBtn').style.setProperty('--spx-start-play-size', setting('sliderStartPlaySize') + 'px');
-        requestAnimationFrame(centerStartOnCover); // after the cover's scale/offset above have been applied
+        centerStartOnCover(); // reads the cover's rect, which applies the scale/offset set above first
         setArtistLine(); // live: changing the separator re-joins the current song's artists
         el('spxApp').style.setProperty('--spx-sep-pct', setting('sliderArtistSeparatorPct') + '%');
         el('spxApp').style.setProperty('--spx-vol-icon-x', setting('sliderVolIconOffsetX') + 'px');
