@@ -6,7 +6,7 @@
 // Each style maps the three states to CSS values; transitions are set per state change so e.g. the pulse can
 // grow quickly on press and return slowly on release. All numbers come from the dev panel ('Track Title
 // Button Animation'); with the group disabled nothing is applied (the title stays plain bold, no underline).
-import { setting } from './settings.js';
+import { setting, rgbaOf } from './settings.js';
 
 const EASINGS = {
     'ease-out': 'ease-out', ease: 'ease', 'ease-in-out': 'ease-in-out', linear: 'linear',
@@ -49,8 +49,9 @@ export function initTitleAnim(link) {
                 const y = st === 'hover' ? -setting('sliderTitleLiftPx') : st === 'press' ? setting('sliderTitleLiftPressPx') : 0;
                 s.transform = `translateY(${y}px)`;
                 const blur = setting('sliderTitleLiftShadowBlur'), op = setting('sliderTitleLiftShadowOpacity');
-                s.filter = !setting('checkboxShadowTitleLift') ? 'none' : st === 'hover' ? `drop-shadow(0 ${Math.abs(y) * 0.8}px ${blur}px rgba(0,0,0,${op}))`
-                    : st === 'press' ? `drop-shadow(0 1px ${blur / 3}px rgba(0,0,0,${op * 0.6}))` : 'drop-shadow(0 0 0 rgba(0,0,0,0))';
+                const lc = setting('colorShadowTitleLift');
+                s.filter = !setting('checkboxShadowTitleLift') ? 'none' : st === 'hover' ? `drop-shadow(0 ${Math.abs(y) * 0.8}px ${blur}px ${rgbaOf(lc, op)})`
+                    : st === 'press' ? `drop-shadow(0 1px ${blur / 3}px ${rgbaOf(lc, op * 0.6)})` : 'drop-shadow(0 0 0 rgba(0,0,0,0))';
                 break;
             }
             default: break;

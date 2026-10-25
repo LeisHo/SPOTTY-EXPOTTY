@@ -7911,6 +7911,40 @@
         ];
         renderControlArray(SH_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_SHADOW_CONTROLS', SH_CONTROLS);
+
+        // Each shadow gets its own subgroup under Shadows. Cover has Size (spread); the filter shadows do not
+        // (CSS drop-shadow has no spread); the title lift keeps its offset from the animation, so only its colour is here.
+        // Values here are the same defaults as settings.js (the panel's value wins in dev mode).
+        const SHADOW_SUBGROUPS = [
+            { g: 'Album Cover Shadow', k: 'Cover', spread: true, op: 0.53, blur: 28, spreadPx: 0, angle: 90, depth: 8 },
+            { g: 'Volume Shadow', k: 'Volume', op: 0.67, blur: 3, angle: 90, depth: 1 },
+            { g: 'Previous / Next Shadow', k: 'Nav', op: 0.67, blur: 3, angle: 90, depth: 1 },
+            { g: 'Title Lift Shadow', k: 'TitleLift', colorOnly: true },
+        ];
+        SHADOW_SUBGROUPS.forEach(({ g, k, spread, colorOnly, op, blur, spreadPx, angle, depth }) => {
+            findGroupContent(tab, SH, 'renderSpottyDevControls', g).appendChild(createDevGroupElement(g, tab));
+            const controls = [{ tab, group: g, id: 'colorShadow' + k, type: 'color', label: 'Color:', value: '#000000' }];
+            if (!colorOnly) {
+                controls.push({ tab, group: g, id: 'sliderShadow' + k + 'Opacity', type: 'slider', label: 'Opacity (x):', min: 0, max: 1, step: 0.01, value: op });
+                controls.push({ tab, group: g, id: 'sliderShadow' + k + 'Blur', type: 'slider', label: 'Blur (Px):', min: 0, max: 80, step: 1, value: blur });
+                if (spread) controls.push({ tab, group: g, id: 'sliderShadow' + k + 'Spread', type: 'slider', label: 'Size (Px, Negative Shrinks):', min: -40, max: 80, step: 1, value: spreadPx });
+                controls.push({ tab, group: g, id: 'sliderShadow' + k + 'Angle', type: 'slider', label: 'Angle (Deg, 90 Is Straight Down):', min: 0, max: 360, step: 1, value: angle });
+                controls.push({ tab, group: g, id: 'sliderShadow' + k + 'Depth', type: 'slider', label: 'Depth (Px):', min: 0, max: 60, step: 0.5, value: depth });
+            }
+            renderControlArray(controls, 'renderSpottyDevControls');
+            registerDevControlArray('SPOTTY_SHADOW_' + k.toUpperCase(), controls);
+        });
+
+        // Brackets Smaller Text: a toggle group in UI Layout (drag it into Text > TRACK TITLE in the panel).
+        const BR = 'Brackets Smaller Text';
+        uiLayoutContent.appendChild(createDevGroupElement(BR, tab));
+        const BR_CONTROLS = [
+            { tab, group: BR, id: 'checkboxBracketsSmaller', type: 'checkbox', label: 'Brackets Smaller Text:', value: false },
+            { tab, group: BR, id: 'sliderBracketsFontPct', type: 'slider', label: 'Bracket Font Size (% Of Title):', min: 10, max: 150, step: 1, value: 60 },
+        ];
+        renderControlArray(BR_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_BRACKET_CONTROLS', BR_CONTROLS);
+        makeDevGroupToggleable(tab, BR, 'checkboxBracketsSmaller');
         const EASINGS = [
             { value: 'ease-out', text: 'Ease Out' }, { value: 'ease', text: 'Ease' }, { value: 'ease-in-out', text: 'Ease In-Out' },
             { value: 'linear', text: 'Linear' }, { value: 'spring', text: 'Spring (Overshoot)' }, { value: 'snap', text: 'Snap (Fast Start)' },

@@ -9,7 +9,7 @@ import {
     createUIElement, updateElement, setContextValue, getActiveContext, resolveAndApplyAll, captureAllLayoutConfigs, registerStorageBackend, loadLayoutConfig,
     resetLayoutConfig,
 } from '../lib/ui-engine/registry.mjs';
-import { setting, loadSavedSettings } from './app/settings.js';
+import { setting, loadSavedSettings, rgbaOf } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
@@ -372,6 +372,20 @@ async function boot() {
         applyButtonStyle('Play', [el('spxCover')]);
         applyButtonStyle('Nav', [el('spxPrev'), el('spxNext')]);
         el('spxApp').classList.toggle('no-play-glyph', !setting('checkboxPlayButtonEnabled'));
+        // Shadow sets: one CSS variable each, read by app.css. Angle 90 = straight down; x and y come from depth and angle.
+        const shadowOf = k => {
+            const a = setting(`sliderShadow${k}Angle`) * Math.PI / 180, d = setting(`sliderShadow${k}Depth`);
+            return { x: (d * Math.cos(a)).toFixed(2) + 'px', y: (d * Math.sin(a)).toFixed(2) + 'px', blur: setting(`sliderShadow${k}Blur`) + 'px', c: rgbaOf(setting(`colorShadow${k}`), setting(`sliderShadow${k}Opacity`)) };
+        };
+        const shCover = shadowOf('Cover'), shVol = shadowOf('Volume'), shNav = shadowOf('Nav');
+        const shStyle = el('spxApp').style;
+        shStyle.setProperty('--shadow-cover', `${shCover.x} ${shCover.y} ${shCover.blur} ${setting('sliderShadowCoverSpread')}px ${shCover.c}`);
+        shStyle.setProperty('--shadow-vol', `drop-shadow(${shVol.x} ${shVol.y} ${shVol.blur} ${shVol.c})`);
+        shStyle.setProperty('--shadow-vol-box', `${shVol.x} ${shVol.y} ${shVol.blur} ${shVol.c}`);
+        shStyle.setProperty('--shadow-nav', `drop-shadow(${shNav.x} ${shNav.y} ${shNav.blur} ${shNav.c})`);
+        // Brackets Smaller Text (app.css: .spx-bracket inside the title)
+        el('spxApp').classList.toggle('brackets-small', !!setting('checkboxBracketsSmaller'));
+        shStyle.setProperty('--spx-bracket-pct', setting('sliderBracketsFontPct') + '%');
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
         // Album Cover > Bounding Box: the cover's own box and its centre (see app.css)
@@ -426,7 +440,14 @@ async function boot() {
     function render() {
         const s = songs[idx];
         const link = el('spxTitleLink');
-        link.textContent = cleanTitle(s.n);
+        // Bracketed text (round or square, with its brackets) is wrapped in .spx-bracket so Brackets Smaller Text can size it
+        link.replaceChildren(...cleanTitle(s.n).split(/([(\[][^()\[\]]*[)\]])/).filter(Boolean).map(p => {
+            if (!/^[(\[]/.test(p)) return document.createTextNode(p);
+            const sp = document.createElement('span');
+            sp.className = 'spx-bracket';
+            sp.textContent = p;
+            return sp;
+        }));
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         el('spxArtist').textContent = s.a;
         el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)

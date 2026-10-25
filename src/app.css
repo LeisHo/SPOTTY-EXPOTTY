@@ -30,7 +30,7 @@
 /* the album cover is the play/pause button */
 /* Stacking: the cover sits BEHIND everything. Scaled up it can overlap the text and the timeline, which
    stay in front of it (and the timeline canvas is transparent, so the bars draw over the cover). */
-.spx-cover { z-index: 0; padding: 0; border: 0; border-radius: 10px; overflow: hidden; background: #1a1d22; cursor: pointer; box-shadow: 0 8px 28px #0008; }
+.spx-cover { z-index: 0; padding: 0; border: 0; border-radius: 10px; overflow: hidden; background: #1a1d22; cursor: pointer; box-shadow: var(--shadow-cover, 0 8px 28px #0008); }
 .spx-title, .spx-artist, .spx-meta, .spx-timeline { z-index: 2; }
 /* the cover can't be selected, highlighted or dragged: no blue selection overlay when click-dragging across it */
 .spx-cover, .spx-cover * { user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
@@ -87,7 +87,7 @@
 .spx-volume { z-index: 5; display: flex; flex-direction: column; align-items: center; user-select: none;
     /* set from the dev panel (UI Layout > Volume Button) by volume.js */
     --spx-vol-icon: 24px; --spx-vol-r: 7px; --spx-vol-bw: 8px; --spx-vol-bl: 130px; --spx-vol-fill: #1db954; --spx-vol-track: #ffffff; --spx-vol-thumb: #ffffff; }
-.spx-vol-btn { width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px); border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: drop-shadow(0 1px 3px #000a); -webkit-tap-highlight-color: transparent; }
+.spx-vol-btn { width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px); border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; }
 .spx-vol-btn:hover { color: #fff; }
 .spx-vol-btn { transition: opacity .15s; }
 .spx-vol-btn[data-level="mute"] { opacity: var(--spx-vol-muted-opacity, 0.4); } /* dev panel: UI Layout > Volume Button > Muted Icon Opacity */
@@ -98,17 +98,17 @@
 .spx-vol-btn[data-level="high"] .w1, .spx-vol-btn[data-level="high"] .w2, .spx-vol-btn[data-level="high"] .w3 { display: inline; }
 .spx-vol-btn[data-level="mute"] .x { display: inline; }
 .spx-vol-clip { overflow: hidden; height: 0; visibility: hidden; }
-.spx-vol-panel { margin: 8px auto 0; width: calc(max(var(--spx-vol-bw), 2 * var(--spx-vol-r)) + 24px); padding: 12px 0 10px; border-radius: 22px; background: none; backdrop-filter: none; filter: drop-shadow(0 1px 3px #000a); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.spx-vol-panel { margin: 8px auto 0; width: calc(max(var(--spx-vol-bw), 2 * var(--spx-vol-r)) + 24px); padding: 12px 0 10px; border-radius: 22px; background: none; backdrop-filter: none; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .spx-vol-panel[hidden] { display: none; }
 .spx-vol-track { position: relative; width: var(--spx-vol-bw); height: var(--spx-vol-bl); border-radius: calc(var(--spx-vol-bw) / 2); background: color-mix(in srgb, var(--spx-vol-track) 20%, transparent); cursor: pointer; touch-action: none; outline: none; }
 .spx-vol-track:focus-visible { box-shadow: 0 0 0 2px #1db954; }
 .spx-vol-fill { position: absolute; left: 0; right: 0; bottom: 0; border-radius: calc(var(--spx-vol-bw) / 2); background: var(--spx-vol-fill); }
 .spx-vol-track::before { content: ''; position: absolute; inset: -6px -12px; } /* wider grab area than the thin bar */
-.spx-vol-thumb { position: absolute; left: calc(50% - var(--spx-vol-r)); width: calc(2 * var(--spx-vol-r)); height: calc(2 * var(--spx-vol-r)); border-radius: 50%; background: var(--spx-vol-thumb); box-shadow: 0 1px 4px #000a; pointer-events: none; }
+.spx-vol-thumb { position: absolute; left: calc(50% - var(--spx-vol-r)); width: calc(2 * var(--spx-vol-r)); height: calc(2 * var(--spx-vol-r)); border-radius: 50%; background: var(--spx-vol-thumb); box-shadow: var(--shadow-vol-box, 0 1px 4px #000a); pointer-events: none; }
 .spx-vol-label { display: none; font: 600 11px/1 system-ui, sans-serif; color: #c9d1d9; }
 
 /* Previous / next song buttons beside the album cover */
-.spx-nav { z-index: 1; width: 48px; height: 48px; border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: drop-shadow(0 1px 3px #000a); -webkit-tap-highlight-color: transparent; }
+.spx-nav { z-index: 1; width: 48px; height: 48px; border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-nav, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; }
 .spx-nav:hover { color: #fff; }
 .spx-nav svg { fill: currentColor; flex: none; } /* flex: none so a big icon size is not squeezed into the 48 px button box */
 .spx-nav { overflow: visible; }
@@ -119,6 +119,8 @@
 .spx-app.no-shadow-vol .spx-vol-btn, .spx-app.no-shadow-vol .spx-vol-panel { filter: none; }
 .spx-app.no-shadow-vol .spx-vol-thumb { box-shadow: none; }
 .spx-app.no-shadow-nav .spx-nav { filter: none; }
+/* Brackets Smaller Text: the bracketed part of the track title is sized by a % of the title (dev panel) */
+.spx-app.brackets-small .spx-bracket { font-size: var(--spx-bracket-pct, 60%); }
 
 /* Album Cover > Bounding Box (dev check): the outline is the cover's real box, the ring is its centre. */
 .spx-app.show-cover-bbox .spx-cover { outline: 2px dashed #ff3b3b; outline-offset: 0; }
@@ -137,7 +139,7 @@
 /* Shuffle (under the volume icon) */
 .spx-shuffle { position: absolute; left: 50%; top: calc(var(--spx-vol-icon) + 22px); transform: translateX(-50%); width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: #f2f2f2; opacity: 0.45; cursor: pointer;
-    filter: drop-shadow(0 1px 3px #000a); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; }
+    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; }
 .spx-shuffle svg { width: calc(var(--spx-vol-icon) * 0.85); height: calc(var(--spx-vol-icon) * 0.85); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-shuffle:hover { opacity: 0.8; }
 .spx-shuffle[aria-pressed="true"] { opacity: 1; color: #1db954; }

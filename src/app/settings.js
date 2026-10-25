@@ -126,6 +126,14 @@ export const DEFAULTS = {
     sliderTitleLiftPressPx: 2,
     sliderTitleLiftShadowBlur: 14,
     sliderTitleLiftShadowOpacity: 0.5,
+    // Shadows (UI Layout > Shadows): colour, opacity, blur, size (cover only), angle (90 = straight down) and depth.
+    // Defaults match the shadows the CSS had before these controls existed.
+    colorShadowCover: '#000000', sliderShadowCoverOpacity: 0.53, sliderShadowCoverBlur: 28, sliderShadowCoverSpread: 0, sliderShadowCoverAngle: 90, sliderShadowCoverDepth: 8,
+    colorShadowVolume: '#000000', sliderShadowVolumeOpacity: 0.67, sliderShadowVolumeBlur: 3, sliderShadowVolumeAngle: 90, sliderShadowVolumeDepth: 1,
+    colorShadowNav: '#000000', sliderShadowNavOpacity: 0.67, sliderShadowNavBlur: 3, sliderShadowNavAngle: 90, sliderShadowNavDepth: 1,
+    colorShadowTitleLift: '#000000',
+    checkboxBracketsSmaller: false,
+    sliderBracketsFontPct: 60,
 
     // Background
     selectBackgroundMode: 'none',
@@ -205,6 +213,13 @@ Object.entries(BTN_DEFAULTS).forEach(([P, d]) => Object.assign(DEFAULTS, {
     ['slider' + P + 'AnimClickSize']: d.clickSize, ['slider' + P + 'AnimHoverOpacity']: d.animHoverOp,
     ['slider' + P + 'AnimClickOpacity']: d.animClickOp, ['slider' + P + 'AnimReleaseSize']: d.releaseSize,
 }));
+
+// '#rrggbb' + alpha -> 'rgba(r,g,b,a)' for the shadow CSS (black if the hex does not parse)
+export function rgbaOf(hex, a) {
+    const m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex || '');
+    const [r, g, b] = m ? [1, 2, 3].map(i => parseInt(m[i], 16)) : [0, 0, 0];
+    return `rgba(${r},${g},${b},${a})`;
+}
 
 export function activeDevice() {
     const w = window.innerWidth, h = window.innerHeight;
