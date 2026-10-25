@@ -830,6 +830,16 @@ Reading taken: Auto Next Song only applies to songs with no preview; songs with 
 Known gap: turning Auto Next Song on while already sitting on a no-preview song does not start the timer until the next song change.
 Not verified in a browser: only node --check was run.
 
+--------------------------------------------------------------------------------
+2026-10-25  -  02:44:16 - 02:44:52 EDT  (Start At Buffer; edit window only, times from `date`, code push 7683586)
+
+Direct request: a Start At Buffer checkbox in Scrub Audio, On by default. Cause it addresses: clips were starting near 0 s because playClip() capped the random start by the buffered amount (buffered end - 1.5 s), and a clip that had only 2 s buffered could start no later than 0.5 s. Changes:
+- src/devpanel/devPanel.js: checkboxStartAtBuffer ("Start At Buffer:"), in Scrub Audio after Clip Start Max.
+- src/app/settings.js: default true.
+- src/app/clipPlayer.js go(): with the checkbox on, the start is the latest buffered point (buffered end - 1.5 s) when that is below Clip Start Min, and Clip Start Min when the buffer has reached it. With the checkbox off, the previous random start inside Min-Max, capped by the buffer, is unchanged.
+Reading taken: "start there" in the request was taken to mean Clip Start Min.
+Not verified in a browser: only node --check was run.
+
 ================================================================================
 APPEND-ONLY. Never rewrite, reorder, or delete a prior entry, even to fix
 formatting (CLAUDE.md §4a / Never-Skip rule #3). If an entry needs a
