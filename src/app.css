@@ -98,9 +98,9 @@
 .spx-vol-btn[data-level="high"] .w1, .spx-vol-btn[data-level="high"] .w2, .spx-vol-btn[data-level="high"] .w3 { display: inline; }
 .spx-vol-btn[data-level="mute"] .x { display: inline; }
 .spx-vol-clip { position: absolute; left: calc(var(--spx-vol-icon) + 28px); top: 50%; transform: translateY(-50%); overflow: hidden; width: 0; visibility: hidden; }
-.spx-vol-panel { margin: 0; padding: 0 12px 0 8px; border-radius: 22px; background: none; backdrop-filter: none; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); display: flex; flex-direction: row; align-items: center; gap: 8px; }
+.spx-vol-panel { margin: 0; width: max-content; padding: 0 12px 0 8px; border-radius: 22px; background: none; backdrop-filter: none; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); display: flex; flex-direction: row; align-items: center; gap: 8px; }
 .spx-vol-panel[hidden] { display: none; }
-.spx-vol-track { position: relative; width: var(--spx-vol-bl); height: var(--spx-vol-bw); border-radius: calc(var(--spx-vol-bw) / 2); background: color-mix(in srgb, var(--spx-vol-track) 20%, transparent); cursor: pointer; touch-action: none; outline: none; }
+.spx-vol-track { position: relative; flex: none; width: var(--spx-vol-bl); height: var(--spx-vol-bw); border-radius: calc(var(--spx-vol-bw) / 2); background: color-mix(in srgb, var(--spx-vol-track) 20%, transparent); cursor: pointer; touch-action: none; outline: none; }
 .spx-vol-track:focus-visible { box-shadow: 0 0 0 2px #1db954; }
 .spx-vol-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: calc(var(--spx-vol-bw) / 2); background: var(--spx-vol-fill); }
 .spx-vol-track::before { content: ''; position: absolute; inset: -12px -6px; } /* wider grab area than the thin bar */
