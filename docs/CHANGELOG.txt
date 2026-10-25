@@ -705,6 +705,30 @@ not depend on cookies is Spotify's Web Playback SDK (OAuth login, Spotify Premiu
 app); it was offered on 2026-10-24 and not chosen, and is still available.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  01:15:51 - 01:23:19 EDT  (density blend, button groups, shuffle; non-dev settings 01:2x; times from `date`, code pushes)
+
+1) Smooth Density > "Color Blend Before Add Time (% Of Gap To Previous Datapoint)" (default 100 = how it always looked): a datapoint's colour BEGINS at its add time; before it the line
+   holds the previous datapoint's colour and blends into the new one over that % of the distance back to the previous datapoint (0 = a hard step at the add time). Only the
+   horizontal colour gradient is affected; the vertical per-bar colour strips (Stacked / Palette / Vivid Gradient modes) never blended and still step at bar boundaries.
+   Measured: distinct colours along the area 515 at 100, 381 at 30, 176 at 0.
+2) UI Layout > "Play Button" (toggleable, default OFF = no icon, as before) and "Next And Last Song Buttons" (toggleable, default on, defaults reproduce the old look): Color, Size (Px),
+   Opacity, Opacity On Hover, plus a dev-panel button (Play / Pause; Next Song and Last Song) to set a hotkey on, and a toggleable subgroup ("Play Button Animation" /
+   "Next And Last Button Animation"; named per group because the dev panel needs unique group names) with Animation Time, Size / Opacity On Hover, Size / Opacity On Click, Size On
+   Release. The Play Button is a play / pause glyph centred on the album cover. States are CSS classes (bs-hover / bs-press / bs-release) set from pointer events.
+3) Shuffle icon under the volume icon (on = green, remembered in localStorage): Next / Last (buttons, hotkey buttons, plain Left / Right arrows) follow a shuffled order starting at the
+   current song (Last walks back through what was played; rebuilt when you scrub elsewhere or run out), and when a song ends the next shuffled song starts instead of the loop
+   restart (handoff.js setOnEnded). Hovering the shuffle icon does not open the volume slider. Shift + arrows still move 10 songs along the timeline.
+4) Saved settings now apply OUTSIDE dev mode. Cause: setting() only read the dev panel's live controls, which exist only in dev mode, so a normal visitor always got the code DEFAULTS
+   (and the saved UI layout was never applied). Fix: settings.js loadSavedSettings() fetches the Sync file at boot (live from /api/save-settings, else the static copy; not in dev mode, where the
+   panel restores itself), setting() uses it after the DOM controls and before DEFAULTS (Mobile/Landscape independent values too), and the saved extra.uiLayout is applied. Verified live on
+   https://spottypotty.vercel.app/ (no ?dev=1): timeline height 375, white accent, blur-cover background, album colours on, as saved. Note: a visitor sees what was last SYNCED, not unsynced edits.
+Spotify embed login (investigation, see the answer in chat): the embed's iframe is cross-site; it identifies a login only if it can read Spotify's first-party cookies / has storage access.
+Browsers that block third-party cookies by default (Safari, Firefox, Brave; Chrome only if the user set it, Incognito or a blocker) leave it in preview mode / "Get Spotify" UI even when the user
+is logged in. Firefox ships a shim that calls the Storage Access API for Spotify embeds. Nothing in this page can reach into the iframe. The reliable fix is the Web Playback SDK with OAuth
+(Premium + a Spotify app Client ID); not built, offered.
+Not verified: the button animations by eye, shuffle with real audio, touch.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
