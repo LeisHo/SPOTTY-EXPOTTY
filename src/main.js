@@ -943,8 +943,7 @@ async function boot() {
     const startFromIcon = () => { hideStartScreen(); if (!startedOnce) { startedOnce = true; openSpotifyLogin(); } playFromStart(); };
     const onFirstGesture = e => {
         if (onIconPress(e)) { if (!setting('checkboxStartTransitionAfterRelease')) startFromIcon(); return; }
-        if (startedOnce) return;
-        startedOnce = true; hideStartScreen(); playFromStart(); openSpotifyLogin();
+        // Only the start icon starts playback. A press or key anywhere else leaves the start screen alone.
     };
     el('spxStartBtn').addEventListener('pointerup', () => { if (setting('checkboxStartTransitionAfterRelease') && !el('spxStart').hidden) startFromIcon(); });
     // Run Startup (dev panel): show the start screen again. The next press outside the dev panel hides it (the icon starts it).

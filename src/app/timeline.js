@@ -111,6 +111,8 @@ export function createTimeline(canvas, data) {
     const currentIndex = () => clamp(Math.floor(pos + 1e-9), 0, n - 1);
 
     function clampView() {
+        // Whole timeline on screen: nothing to pan, so the view stays at its start.
+        if (span >= (vMax - vMinView) * 0.999) { viewStart = vMinView; return; }
         const pad = span * 0.05;
         viewStart = Math.min(vMax + pad - span, Math.max(vMinView - pad, viewStart));
     }
@@ -178,22 +180,6 @@ export function createTimeline(canvas, data) {
         const thinned = [];
         let lastX = -1e9;
         out.forEach(t => { if (t.x - lastX >= 64 && t.x > -10 && t.x < W()) { thinned.push(t); lastX = t.x; } });
-        // The first song's date gets a tick. Ticks from before the data are dropped (so the first year is not shown twice), and the
-        // start tick's text is left off when a regular tick sits within 40 px of it, so no two labels overlap; the tick mark stays.
-        const startX = xOf(vMin);
-        if (startX > -10 && startX < W()) {
-            // The first year's tick goes at 1 January of that year, where the year really is on the timeline. If that is off the left
-            // edge (the data starts after 1 January), it stays at the first date so the year is still shown.
-            const firstYear = new Date(realOf(vMin)).getFullYear();
-            const jan1X = xOf(vtOfReal(new Date(firstYear, 0, 1).getTime()));
-            const tickX = jan1X > -10 && jan1X < W() ? jan1X : startX;
-            const kept = thinned.filter(t => t.x >= tickX - 1 && Math.abs(t.x - tickX) >= 1); // the same 1 January tick is not drawn twice
-            // a year label printed right beside the start would sit on top of the first year: that label loses its text (its tick stays)
-            kept.forEach(t => { if (Math.abs(t.x - tickX) < 30) t.text = ''; });
-            kept.push({ x: tickX, text: label(new Date(realOf(vMin))) });
-            kept.sort((a, b) => a.x - b.x);
-            return kept;
-        }
         return thinned;
     }
 
