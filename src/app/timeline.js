@@ -227,6 +227,22 @@ export function createTimeline(canvas, data) {
     }
     const smooth = (arr, px) => { const r = Math.max(1, Math.round(px / 2)); box(arr, r); box(arr, r); box(arr, r); };
 
+    // Height Transition: bars and curves are scaled to the largest value in the visible window, so zooming changes that
+    // largest value and everything jumps at once. With the transition on, the scale eases to its new value over the
+    // duration (smoothstep), redrawing each frame until it arrives. Off: the scale is used as it is, as before.
+    const eased = {};
+    let easeRaf = 0;
+    function easedScale(key, target) {
+        const dur = setting('checkboxTimelineHeightTransition') ? Math.max(0, setting('sliderTimelineHeightTransitionMs')) : 0;
+        const st = eased[key];
+        if (!st || !dur) { eased[key] = { from: target, to: target, cur: target, t0: 0 }; return target; }
+        if (st.to !== target) { st.from = st.cur; st.to = target; st.t0 = performance.now(); }
+        const k = Math.min(1, (performance.now() - st.t0) / dur), e = k * k * (3 - 2 * k);
+        st.cur = st.from + (st.to - st.from) * e;
+        if (k < 1 && !easeRaf) easeRaf = requestAnimationFrame(() => { easeRaf = 0; draw(); });
+        return st.cur;
+    }
+
     function draw() {
         const dpr = window.devicePixelRatio || 1;
         const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -268,7 +284,8 @@ export function createTimeline(canvas, data) {
         }
         let maxBin = 1;
         bins.forEach(bn => { if (bn) maxBin = Math.max(maxBin, bn.b - bn.a); });
-        const binH = bn => ((bn.b - bn.a) / maxBin) * (topH - 6);
+        const shownBin = easedScale('bins', maxBin);
+        const binH = bn => ((bn.b - bn.a) / shownBin) * (topH - 6);
         const binColorOf = bn => binPaint(bn.a, bn.b, colorOpts);
 
         if (style === 'none') {
@@ -297,7 +314,7 @@ export function createTimeline(canvas, data) {
             const dens = new Float32Array(Math.max(2, Math.ceil(w)));
             for (let i = i0; i < i1; i++) dens[clamp(Math.floor(xOf(vt[i])), 0, dens.length - 1)] += 1;
             smooth(dens, setting('sliderDensitySmoothing'));
-            const mx = Math.max(1e-6, ...dens);
+            const mx = easedScale('dens', Math.max(1e-6, ...dens));
             const fillA = setting('sliderDensityFillOpacity'), lineW = setting('sliderDensityOutlineWidth');
             const ys = Array.from(dens, d => topH - (d / mx) * (topH - 6));
             // horizontal colour: accent, or the album colours of the songs under each stretch. A datapoint's colour BEGINS at its add
@@ -401,7 +418,7 @@ export function createTimeline(canvas, data) {
                 if (v != null) { fsum[x] += v; fcnt[x] += 1; }
             }
             smooth(cnt, sm); smooth(fsum, sm); smooth(fcnt, sm);
-            const mx = Math.max(1e-6, ...cnt);
+            const mx = easedScale('ribbon', Math.max(1e-6, ...cnt));
             // faint bars underneath keep the individual add dates readable
             ctx.globalAlpha = barsA;
             bins.forEach((bn, b) => { if (bn) { ctx.fillStyle = accentCss; ctx.fillRect(b * bw, topH - binH(bn), Math.max(1, bw - 0.5), binH(bn)); } });

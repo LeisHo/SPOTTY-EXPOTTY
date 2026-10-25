@@ -7612,6 +7612,9 @@
             { tab, group: TL, id: 'sliderBarWidth', type: 'slider', label: 'Bar Width / Granularity (Px):', min: 1, max: 40, step: 1, value: 3 },
             // Only the bars stretch (upward); nothing else moves, the cover is positioned independently of the timeline.
             { tab, group: TL, id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 60, max: 900, step: 5, value: 200 },
+            // Off: bars snap to the new height when the zoom changes. On: they ease to it over the duration below (shown only while on).
+            { tab, group: TL, id: 'checkboxTimelineHeightTransition', type: 'checkbox', label: 'Height Transition:', value: false },
+            { tab, group: TL, id: 'sliderTimelineHeightTransitionMs', type: 'slider', label: 'Height Transition Duration (Ms):', min: 0, max: 2000, step: 10, value: 300 },
             { tab, group: TL, id: 'sliderTimelineScaleGap', type: 'slider', label: 'Space Between Graph And Scale Text (Px):', min: 0, max: 120, step: 1, value: 0 },
             { tab, group: TL, id: 'sliderPlayheadWidth', type: 'slider', label: 'Scrub Line Width (Px):', min: 1, max: 24, step: 0.5, value: 2 },
             { tab, group: TL, id: 'sliderPlayheadHeight', type: 'slider', label: 'Scrub Line Height (% Of Timeline):', min: 5, max: 100, step: 1, value: 100 },
@@ -8140,6 +8143,10 @@
                     const row = el && el.closest('.dev-row');
                     if (row) row.style.display = style === sel.value ? '' : 'none';
                 }));
+                // The Height Transition duration shows only while Height Transition is on.
+                const tr = document.getElementById(withDevice('checkboxTimelineHeightTransition', dev)) || document.getElementById('checkboxTimelineHeightTransition');
+                const trRow = (document.getElementById(withDevice('sliderTimelineHeightTransitionMs', dev)) || document.getElementById('sliderTimelineHeightTransitionMs'));
+                if (tr && trRow && trRow.closest('.dev-row')) trRow.closest('.dev-row').style.display = tr.checked ? '' : 'none';
             });
         }
         document.addEventListener('change', refreshSpottyModeVisibility);

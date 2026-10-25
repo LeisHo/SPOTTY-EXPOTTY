@@ -57,6 +57,8 @@ export const DEFAULTS = {
     sliderTimelineBarOpacity: 0.8,
     sliderBarWidth: 3,
     sliderTimelineHeight: 200,
+    checkboxTimelineHeightTransition: false,
+    sliderTimelineHeightTransitionMs: 300,
     sliderTimelineScaleGap: 0,
     sliderPlayheadWidth: 2,
     sliderPlayheadHeight: 100,
