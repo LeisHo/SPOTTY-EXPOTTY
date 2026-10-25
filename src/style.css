@@ -968,15 +968,22 @@
        styling at all — plain unstyled browser buttons. Matches the
        template's own established button visual language (same as
        .dev-buttons/.dev-list-picker-actions buttons and the header icon
-       buttons) per direct report 2026-09-28 ("Action buttons are ugly"),
-       but sized to its own content rather than stretched/fixed-width
-       like those. */
+       buttons) per direct report 2026-09-28 ("Action buttons are ugly").
+       CORRECTED 2026-10-25, direct request ("make them all full width
+       like in Handy Dandies"): that project's own .dp-action-button is
+       `flex: 1 1 auto` inside a .dp-row with no label sibling for a
+       button-type control (same shape .dev-row/buildButtonRow() already
+       has here — no label is appended for type:'button'), so it fills
+       the whole row. Switched from content-sized (padding: 2px 12px) to
+       the same flex-fill behavior project-wide. */
     .dev-action-button {
         background: var(--dev-button-color, #3a3a4a);
         color: var(--dev-panel-button-text-color, #fff);
         border: none;
         border-radius: 3px;
         min-height: calc(var(--dev-button-height-px, 22) * 1px);
+        flex: 1 1 auto;
+        width: 100%;
         padding: 2px 12px;
         font-family: var(--dev-panel-font-family, monospace);
         font-size: calc(var(--dev-button-text-font-size-px, 10) * 1px);

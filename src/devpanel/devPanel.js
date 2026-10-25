@@ -7927,16 +7927,34 @@
             { tab, group: DBG, id: 'sliderFrameRateRefreshMs', type: 'slider', label: 'Frame Rate Refresh Rate (Ms Between Updates):', min: 100, max: 5000, step: 50, value: 500 },
             { tab, group: DBG, id: 'checkboxLogPlayback', type: 'checkbox', label: 'Log Playback Timing (Songs, Clips, Handoff, Spotify Embed)', value: false },
             { tab, group: DBG, id: 'checkboxLogPreload', type: 'checkbox', label: 'Log Preloading (Batches, URL And Audio Arrival Times)', value: false },
-            { tab, group: DBG, id: 'checkboxSnapshotViewport', type: 'checkbox', label: 'Snapshot: Viewport And Cursor', value: true },
-            { tab, group: DBG, id: 'checkboxSnapshotMouse', type: 'checkbox', label: 'Snapshot: Mouse Tracking', value: true },
-            { tab, group: DBG, id: 'checkboxSnapshotPlayback', type: 'checkbox', label: 'Snapshot: Playback', value: true },
-            { tab, group: DBG, id: 'checkboxSnapshotAudio', type: 'checkbox', label: 'Snapshot: Audio Clips', value: true },
-            { tab, group: DBG, id: 'checkboxSnapshotTimeline', type: 'checkbox', label: 'Snapshot: Timeline', value: true },
-            { tab, group: DBG, id: 'checkboxSnapshotSettings', type: 'checkbox', label: 'Snapshot: Settings Changed From Default', value: true },
-            dbgBtn('buttonDebugSnapshot', 'Take Snapshot'),
         ];
         renderControlArray(DEBUG_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_DEBUG_CONTROLS', DEBUG_CONTROLS);
+
+        // Snapshot: its own subgroup within Debug (direct request, 2026-10-25, matching Handy Dandies'
+        // own Debug > Snapshot group) -- was flat alongside the other Debug buttons above. Built directly
+        // (not via renderControlArray(), which only resolves TOP-LEVEL groups) so it can nest.
+        {
+            const debugContentForSnapshot = findGroupContent(tab, DBG, 'renderSpottyDevControls', 'buttonDebugPause');
+            const snapSec = createDevGroupElement('Snapshot', tab);
+            debugContentForSnapshot.appendChild(snapSec);
+            const snapContent = snapSec.querySelector(':scope > .dev-section-content');
+            const SNAPSHOT_CONTROLS = [
+                { tab, group: 'Snapshot', id: 'checkboxSnapshotViewport', type: 'checkbox', label: 'Snapshot: Viewport And Cursor', value: true },
+                { tab, group: 'Snapshot', id: 'checkboxSnapshotMouse', type: 'checkbox', label: 'Snapshot: Mouse Tracking', value: true },
+                { tab, group: 'Snapshot', id: 'checkboxSnapshotPlayback', type: 'checkbox', label: 'Snapshot: Playback', value: true },
+                { tab, group: 'Snapshot', id: 'checkboxSnapshotAudio', type: 'checkbox', label: 'Snapshot: Audio Clips', value: true },
+                { tab, group: 'Snapshot', id: 'checkboxSnapshotTimeline', type: 'checkbox', label: 'Snapshot: Timeline', value: true },
+                { tab, group: 'Snapshot', id: 'checkboxSnapshotSettings', type: 'checkbox', label: 'Snapshot: Settings Changed From Default', value: true },
+                dbgBtn('buttonDebugSnapshot', 'Take Snapshot'),
+            ];
+            SNAPSHOT_CONTROLS.forEach(ctrl => {
+                const row = buildUniformControlRow(ctrl);
+                if (ctrl.type === 'checkbox') row.querySelector('input').checked = !!ctrl.value;
+                snapContent.appendChild(row);
+            });
+            registerDevControlArray('SPOTTY_DEBUG_SNAPSHOT_CONTROLS', SNAPSHOT_CONTROLS);
+        }
         // A log box (Copy / Save / Clear + a collapsible scrolling display) placed right after a control's row. The log module
         // feeds it through window.spxDebugLogViews[key].append(line); Copy / Save / Clear use the registry entry for that key.
         window.spxDebugLogViews = window.spxDebugLogViews || {};
@@ -7978,13 +7996,17 @@
         buildDebugLogBox('checkboxLogPreload', 'preload', 'Preload Log');
         buildDebugLogBox('buttonDebugSnapshot', 'snapshot', 'Snapshot');
         window.spxDebugShowSnapshot = t => { const v = window.spxDebugLogViews.snapshot; if (v) v.set(t); };
-        // the new tools sit ABOVE the Mouse Log subgroup, not below it
+        // the new tools (and the Snapshot subgroup) sit ABOVE the Mouse Log subgroup, not below it
         try {
             const dbgContent = findGroupContent(tab, DBG, 'renderSpottyDevControls', 'buttonDebugPause');
             const mouseSection = dbgContent && [...dbgContent.children].find(c => c.querySelector && c.querySelector(':scope > .dev-section-title[data-sid="Mouse Log"]'));
             if (mouseSection) {
                 const mine = [...dbgContent.children].filter(c => c !== mouseSection && !c.classList.contains('dev-section'));
                 mine.forEach(c => dbgContent.insertBefore(c, mouseSection));
+                // The Snapshot subgroup is its own .dev-section, excluded from "mine" above (that filter exists so this
+                // loop never accidentally relocates an unrelated pre-existing subgroup) -- moved explicitly instead.
+                const snapshotSection = [...dbgContent.children].find(c => c.querySelector && c.querySelector(':scope > .dev-section-title[data-sid="Snapshot"]'));
+                if (snapshotSection) dbgContent.insertBefore(snapshotSection, mouseSection);
             }
         } catch (e) { /* ordering only */ }
 
