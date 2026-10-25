@@ -18,6 +18,7 @@
     "sliderDefaultTimelineSpanDays": 4900,
     "checkboxHandoffEnabled": true,
     "checkboxSpotifyLoginOnStart": true,
+    "checkboxShowSpotifyPlayer": true,
     "sliderHandoffDelay": 100,
     "colorTimelineAccent": "#ffffff",
     "colorTimelinePlayhead": "#ffffff",
@@ -95,8 +96,8 @@
     "checkboxShowFrameRate": false,
     "colorFrameRateText": "#ffffff",
     "sliderFrameRateRefreshMs": 500,
-    "checkboxLogPlayback": false,
-    "checkboxLogPreload": false,
+    "checkboxLogPlayback": true,
+    "checkboxLogPreload": true,
     "checkboxSnapshotViewport": true,
     "checkboxSnapshotMouse": true,
     "checkboxSnapshotPlayback": true,
@@ -174,7 +175,7 @@
   "layout": {
     "left": 26,
     "top": 56,
-    "width": 340,
+    "width": 600,
     "height": 671
   },
   "devPanelStyle": {
@@ -2146,12 +2147,17 @@
           {
             "type": "row",
             "key": "checkboxSpotifyLoginOnStart"
+          },
+          {
+            "type": "row",
+            "key": "checkboxShowSpotifyPlayer"
           }
         ],
         "rowKeys": [
           "checkboxHandoffEnabled",
           "sliderHandoffDelay",
-          "checkboxSpotifyLoginOnStart"
+          "checkboxSpotifyLoginOnStart",
+          "checkboxShowSpotifyPlayer"
         ],
         "subgroups": []
       },
@@ -3888,24 +3894,12 @@
         "subgroups": []
       },
       {
-        "key": "mobile:Scrub Audio",
-        "items": [],
-        "rowKeys": [],
-        "subgroups": []
-      },
-      {
-        "key": "mobile:Scrub Preload",
-        "items": [],
-        "rowKeys": [],
-        "subgroups": []
-      },
-      {
-        "key": "mobile:Scrub Input",
+        "key": "mobile:New Group",
         "items": [
           {
             "type": "group",
             "section": {
-              "key": "mobile:Wheel Scrub Per Notch Curve",
+              "key": "mobile:Scrub Preload",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -3914,16 +3908,130 @@
           {
             "type": "group",
             "section": {
-              "key": "mobile:Starting Timeline Span Curve",
-              "items": [],
+              "key": "mobile:Scrub Input",
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Wheel Scrub Per Notch Curve",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Starting Timeline Span Curve",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Touch Scrub And Pinch",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
               "rowKeys": [],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "mobile:Wheel Scrub Per Notch Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Starting Timeline Span Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
             }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "mobile:Scrub Preload",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           },
+          {
+            "key": "mobile:Scrub Input",
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Wheel Scrub Per Notch Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Starting Timeline Span Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [],
+            "subgroups": [
+              {
+                "key": "mobile:Wheel Scrub Per Notch Curve",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Starting Timeline Span Curve",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Touch Scrub And Pinch",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mobile:Scrub Audio",
+        "items": [
           {
             "type": "group",
             "section": {
-              "key": "mobile:Touch Scrub And Pinch",
+              "key": "mobile:New Group (2)",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -3933,19 +4041,7 @@
         "rowKeys": [],
         "subgroups": [
           {
-            "key": "mobile:Wheel Scrub Per Notch Curve",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "mobile:Starting Timeline Span Curve",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "mobile:Touch Scrub And Pinch",
+            "key": "mobile:New Group (2)",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -5467,24 +5563,12 @@
         "subgroups": []
       },
       {
-        "key": "landscape:Scrub Audio",
-        "items": [],
-        "rowKeys": [],
-        "subgroups": []
-      },
-      {
-        "key": "landscape:Scrub Preload",
-        "items": [],
-        "rowKeys": [],
-        "subgroups": []
-      },
-      {
-        "key": "landscape:Scrub Input",
+        "key": "landscape:New Group",
         "items": [
           {
             "type": "group",
             "section": {
-              "key": "landscape:Wheel Scrub Per Notch Curve",
+              "key": "landscape:Scrub Preload",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -5493,16 +5577,130 @@
           {
             "type": "group",
             "section": {
-              "key": "landscape:Starting Timeline Span Curve",
-              "items": [],
+              "key": "landscape:Scrub Input",
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Wheel Scrub Per Notch Curve",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Starting Timeline Span Curve",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Touch Scrub And Pinch",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
               "rowKeys": [],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "landscape:Wheel Scrub Per Notch Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Starting Timeline Span Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
             }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "landscape:Scrub Preload",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           },
+          {
+            "key": "landscape:Scrub Input",
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Wheel Scrub Per Notch Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Starting Timeline Span Curve",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Touch Scrub And Pinch",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [],
+            "subgroups": [
+              {
+                "key": "landscape:Wheel Scrub Per Notch Curve",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Starting Timeline Span Curve",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Touch Scrub And Pinch",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "landscape:Scrub Audio",
+        "items": [
           {
             "type": "group",
             "section": {
-              "key": "landscape:Touch Scrub And Pinch",
+              "key": "landscape:New Group (2)",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -5512,19 +5710,7 @@
         "rowKeys": [],
         "subgroups": [
           {
-            "key": "landscape:Wheel Scrub Per Notch Curve",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "landscape:Starting Timeline Span Curve",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
-          },
-          {
-            "key": "landscape:Touch Scrub And Pinch",
+            "key": "landscape:New Group (2)",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -6473,16 +6659,16 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
-    "desktop:Spotify Handoff": true,
+    "desktop:Spotify Handoff": false,
     "desktop:Timeline Look": true,
     "desktop:Album Cover Colors": true,
     "desktop:UI Layout": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Background": true,
     "desktop:Font": true,
-    "desktop:Volume Button": false,
+    "desktop:Volume Button": true,
     "desktop:Album Cover": true,
-    "desktop:Shadows": false,
+    "desktop:Shadows": true,
     "mobile:Dev Panel": true,
     "mobile:MECHANICS": false,
     "mobile:PANEL UI": false,
@@ -6494,12 +6680,14 @@
     "mobile:BUTTONS": false,
     "mobile:Hot Keys": false,
     "mobile:Debug": true,
-    "mobile:Scrub Audio": false,
+    "mobile:New Group": false,
     "mobile:Scrub Preload": false,
     "mobile:Scrub Input": false,
     "mobile:Wheel Scrub Per Notch Curve": false,
     "mobile:Starting Timeline Span Curve": false,
     "mobile:Touch Scrub And Pinch": false,
+    "mobile:Scrub Audio": false,
+    "mobile:New Group (2)": false,
     "mobile:Spotify Handoff": false,
     "mobile:Timeline Look": false,
     "mobile:Album Cover Colors": false,
@@ -6521,12 +6709,14 @@
     "landscape:BUTTONS": false,
     "landscape:Hot Keys": false,
     "landscape:Debug": true,
-    "landscape:Scrub Audio": false,
+    "landscape:New Group": false,
     "landscape:Scrub Preload": false,
     "landscape:Scrub Input": false,
     "landscape:Wheel Scrub Per Notch Curve": false,
     "landscape:Starting Timeline Span Curve": false,
     "landscape:Touch Scrub And Pinch": false,
+    "landscape:Scrub Audio": false,
+    "landscape:New Group (2)": false,
     "landscape:Spotify Handoff": false,
     "landscape:Timeline Look": false,
     "landscape:Album Cover Colors": false,
@@ -6556,7 +6746,7 @@
     "sliderMobileDevPanelButtonFontSize": null,
     "mobile:Dev Panel": null,
     "mobile:Debug": null,
-    "mobile:Scrub Audio": null,
+    "mobile:Scrub Audio": "AUDIO",
     "mobile:Scrub Preload": null,
     "mobile:Wheel Scrub Per Notch Curve": null,
     "mobile:Starting Timeline Span Curve": null,
@@ -6569,7 +6759,7 @@
     "mobile:Track Title Button Animation": null,
     "mobile:Background": null,
     "mobile:Font": null,
-    "mobile:UI Layout": null,
+    "mobile:UI Layout": "UI",
     "sliderLandscapeDevPanelTitleFontSize": null,
     "sliderLandscapeDevPanelTabFontSize": null,
     "sliderLandscapeDevPanelGroupTitleFontSize": null,
@@ -6587,7 +6777,7 @@
     "sliderLandscapeDevPanelButtonFontSize": null,
     "landscape:Dev Panel": null,
     "landscape:Debug": null,
-    "landscape:Scrub Audio": null,
+    "landscape:Scrub Audio": "AUDIO",
     "landscape:Scrub Preload": null,
     "landscape:Wheel Scrub Per Notch Curve": null,
     "landscape:Starting Timeline Span Curve": null,
@@ -6599,7 +6789,7 @@
     "landscape:Track Title Button Animation": null,
     "landscape:Background": null,
     "landscape:Font": null,
-    "landscape:UI Layout": null,
+    "landscape:UI Layout": "UI",
     "mobile:MECHANICS": null,
     "mobile:PANEL UI": null,
     "mobile:Dev Panel Title": null,
@@ -6789,7 +6979,11 @@
     "desktop:UI Layout": "UI",
     "desktop:Scrub Audio": "AUDIO",
     "desktop:New Group": "SCRUBBING",
-    "desktop:New Group (2)": "START TIME"
+    "desktop:New Group (2)": "START TIME",
+    "mobile:New Group": "SCRUBBING",
+    "mobile:New Group (2)": "START TIME",
+    "landscape:New Group": "SCRUBBING",
+    "landscape:New Group (2)": "START TIME"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -6826,6 +7020,10 @@
     },
     "y": {
       "id": "devRedoBtn",
+      "action": "click"
+    },
+    "e": {
+      "id": "buttonDebugExport",
       "action": "click"
     }
   },
