@@ -180,17 +180,17 @@
     "checkboxShuffleButtonEnabled": true,
     "sliderShuffleIconSize": 20,
     "sliderShuffleIconOffsetX": 0,
-    "sliderShuffleOffOpacity": 37,
-    "sliderShuffleOnOpacity": 100,
+    "sliderShuffleOffOpacity": 49,
+    "sliderShuffleOnOpacity": 80,
     "sliderShuffleOnHoverOpacity": 100,
     "sliderShuffleHoverOpacity": 80,
     "sliderShuffleClickTolerance": 3,
-    "sliderShuffleHoverTolerance": 0,
+    "sliderShuffleHoverTolerance": 6,
     "colorShuffleIcon": "#f2f2f2",
     "colorShuffleOn": "#ffffff",
     "selectShuffleIconStyle": "0",
     "checkboxShuffleAnimEnabled": true,
-    "sliderShuffleAnimTime": 160,
+    "sliderShuffleAnimTime": 70,
     "sliderShuffleAnimHoverSize": 23,
     "sliderShuffleAnimClickSize": 18,
     "sliderShuffleAnimReleaseSize": 20,
@@ -199,7 +199,7 @@
     "checkboxVolBtnAnimEnabled": true,
     "sliderVolBtnAnimTime": 100,
     "sliderVolBtnAnimHoverSize": 35,
-    "sliderVolBtnAnimClickSize": 18,
+    "sliderVolBtnAnimClickSize": 23,
     "sliderVolBtnAnimReleaseSize": 20,
     "sliderVolBtnAnimHoverOpacity": 100,
     "sliderVolBtnAnimClickOpacity": 100,
@@ -223,8 +223,8 @@
     "sliderPlayAnimClickOpacity": 70,
     "sliderPlayAnimReleaseSize": 54,
     "selectNavIconStyle": "0",
-    "sliderLastButtonEdgeOffset": 29,
-    "sliderNextButtonEdgeOffset": 14,
+    "sliderLastButtonEdgeOffset": 23,
+    "sliderNextButtonEdgeOffset": 23,
     "sliderNavClickTolerance": 0,
     "sliderNavHoverTolerance": 0,
     "checkboxNavButtonEnabled": true,
@@ -3467,6 +3467,10 @@
                         "key": "sliderShuffleHoverTolerance"
                       },
                       {
+                        "type": "row",
+                        "key": "sliderShuffleOnHoverOpacity"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "desktop:Shuffle Button Animation",
@@ -3506,10 +3510,6 @@
                           ],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleOnHoverOpacity"
                       }
                     ],
                     "rowKeys": [
@@ -4068,6 +4068,10 @@
                       "key": "sliderShuffleHoverTolerance"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderShuffleOnHoverOpacity"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Shuffle Button Animation",
@@ -4107,10 +4111,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleOnHoverOpacity"
                     }
                   ],
                   "rowKeys": [
@@ -6429,6 +6429,10 @@
                       "key": "sliderShuffleHoverTolerance"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderShuffleOnHoverOpacity"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Shuffle Button Animation",
@@ -6468,10 +6472,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleOnHoverOpacity"
                     }
                   ],
                   "rowKeys": [
@@ -7030,6 +7030,10 @@
                     "key": "sliderShuffleHoverTolerance"
                   },
                   {
+                    "type": "row",
+                    "key": "sliderShuffleOnHoverOpacity"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "desktop:Shuffle Button Animation",
@@ -7069,10 +7073,6 @@
                       ],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderShuffleOnHoverOpacity"
                   }
                 ],
                 "rowKeys": [
@@ -17310,18 +17310,18 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": false,
+    "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
-    "desktop:Artist": false,
+    "desktop:Artist": true,
     "desktop:Album & Date": false,
-    "desktop:New Group (7)": true,
+    "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:Volume Button Animation": true,
-    "desktop:Play Button": true,
-    "desktop:Play Button Animation": true,
+    "desktop:Play Button": false,
+    "desktop:Play Button Animation": false,
     "desktop:Next And Last Song Buttons": true,
     "desktop:Next And Last Button Animation": false,
     "desktop:Shuffle Button": true,
@@ -17344,7 +17344,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": true,
+    "desktop:Timeline Look": false,
     "desktop:New Group (4)": true,
     "desktop:Visual Style": true,
     "desktop:Album Cover Colors": true,
