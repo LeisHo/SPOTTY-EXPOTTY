@@ -216,9 +216,9 @@
   },
   "layout": {
     "left": 26,
-    "top": 24,
+    "top": 325,
     "width": 506,
-    "height": 550
+    "height": 249
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -8188,15 +8188,11 @@
       "spxCover": {
         "layout": {
           "position": {
-            "mode": "anchor",
-            "horizontal": {
-              "anchor": "center",
-              "offset": ""
-            },
-            "vertical": {
-              "anchor": "center",
-              "offset": ""
-            }
+            "mode": "relative",
+            "relativeTo": "spxMeta",
+            "myAnchor": "top-center",
+            "targetAnchor": "bottom-center",
+            "gap": "8vh"
           },
           "size": {
             "width": {
