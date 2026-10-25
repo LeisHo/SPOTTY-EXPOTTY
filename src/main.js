@@ -409,6 +409,7 @@ async function boot() {
         const tl = el('spxTimeline').style;
         if (activeDevice() === '') tl.setProperty('height', 'calc(100dvh - 14px)', 'important');
         else tl.removeProperty('height');
+        timeline.draw(); // the band height is a setting: redraw when it changes
     }
     window.addEventListener('resize', () => { applyTextElementStyles(); applyTimelineBox(); }); // the line count and the device depend on the width
     const applyLook = () => {

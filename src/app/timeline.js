@@ -8,7 +8,7 @@
 //
 // The current song is always floor(pos): the last song added AT OR BEFORE the playhead's
 // time, so landing in an empty stretch plays the most recent earlier song.
-import { setting } from './settings.js';
+import { setting, activeDevice } from './settings.js';
 
 const SPACING_MS = 1000;
 const MIN_SPAN_MS = 120000;
@@ -235,15 +235,20 @@ export function createTimeline(canvas, data) {
 
     function draw() {
         const dpr = window.devicePixelRatio || 1;
-        const w = canvas.clientWidth, h = canvas.clientHeight;
+        const w = canvas.clientWidth, cssH = canvas.clientHeight;
+        // The bars use the visible band: the Timeline Height setting on desktop, and the whole canvas on a phone (whose height is
+        // already the device's own setting). The canvas itself is taller on desktop, so bars that run above the band are drawn,
+        // not cut off. oy moves the band down to the bottom of the canvas.
+        const h = activeDevice() === '' ? Math.min(cssH, setting('sliderTimelineHeight')) : cssH;
+        const oy = cssH - h;
         if (!w || !h) return;
-        if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
+        if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(cssH * dpr)) {
             canvas.width = Math.round(w * dpr);
-            canvas.height = Math.round(h * dpr);
+            canvas.height = Math.round(cssH * dpr);
         }
         span = clampSpan(span);
         const ctx = canvas.getContext('2d');
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, oy * dpr);
         // Album Colour Transition: when a colour-affecting input changes (zoom, pan, colour settings), keep what is on screen
         // now so it can fade out over the duration. The colours then change gradually instead of snapping.
         const colorKey = [viewStart, span, setting('checkboxAlbumColorsEnabled'), setting('selectAlbumColorMode'), setting('sliderAlbumColorSaturation'), setting('sliderAlbumColorBrightness')].join('|');
@@ -255,7 +260,7 @@ export function createTimeline(canvas, data) {
             }
             lastColorKey = colorKey;
         }
-        ctx.clearRect(0, 0, w, h);
+        ctx.clearRect(0, -oy, w, cssH);
         const accent = setting('colorTimelineAccent');
         const playheadColor = setting('colorTimelinePlayhead');
         const baseAlpha = setting('sliderTimelineBarOpacity');
