@@ -755,6 +755,13 @@ the code-for-token exchange body; a wrong state is rejected; refresh keeps the r
 audio, Premium, the popup closing itself, token refresh against Spotify.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  01:35:45 - 01:35:57 EDT (Client ID set; deploy check after)
+
+Owner supplied the Spotify Client ID; set in src/app/spotifyConfig.js (public: PKCE has no secret) and pushed (df14929). Checked on the live site: hasClientId true, the Spotify login button reads "Log In With Spotify",
+authorize URL has client_id + S256 + redirect_uri https://spottypotty.vercel.app/. Checked with curl against accounts.spotify.com/authorize: both https://spottypotty.vercel.app/ and http://127.0.0.1:8000/ were
+accepted (303 to Spotify's login page, not an INVALID_CLIENT / redirect error). Still NOT verified: the real login, the popup closing, the SDK starting, Premium, real playback.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
