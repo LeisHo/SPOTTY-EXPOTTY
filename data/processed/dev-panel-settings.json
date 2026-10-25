@@ -20,7 +20,7 @@
     "checkboxHandoffEnabled": true,
     "checkboxSpotifyLoginOnStart": true,
     "buttonSpotifyLogin": "",
-    "checkboxShowSpotifyPlayer": true,
+    "checkboxShowSpotifyPlayer": false,
     "sliderHandoffDelay": 100,
     "colorTimelineAccent": "#ffffff",
     "colorTimelinePlayhead": "#ffffff",
