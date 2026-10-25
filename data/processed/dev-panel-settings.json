@@ -63,11 +63,12 @@
     "colorScaleNumbers": "#ffffff",
     "sliderScaleNumbersLetterSpacing": 0.3,
     "sliderScaleNumbersOpacity": 0.62,
+    "sliderScaleNumbersOffsetX": 10,
     "colorTickMark": "#ffffff",
     "sliderTickOpacity": 0.67,
     "sliderTickWidth": 1,
     "sliderTickHeight": 24,
-    "sliderTickStartHeight": 9,
+    "sliderTickStartHeight": -12,
     "checkboxSongAddDateEnabled": true,
     "sliderSongAddDateFontSize": 18,
     "checkboxSongAddDateBold": true,
@@ -334,7 +335,7 @@
     "left": 26,
     "top": 6,
     "width": 343,
-    "height": 671
+    "height": 469
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -7533,6 +7534,10 @@
                       {
                         "type": "row",
                         "key": "sliderScaleNumbersOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderScaleNumbersOffsetX"
                       }
                     ],
                     "rowKeys": [
@@ -7540,7 +7545,8 @@
                       "checkboxScaleNumbersBold",
                       "colorScaleNumbers",
                       "sliderScaleNumbersLetterSpacing",
-                      "sliderScaleNumbersOpacity"
+                      "sliderScaleNumbersOpacity",
+                      "sliderScaleNumbersOffsetX"
                     ],
                     "subgroups": []
                   }
@@ -7606,6 +7612,10 @@
                     {
                       "type": "row",
                       "key": "sliderScaleNumbersOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScaleNumbersOffsetX"
                     }
                   ],
                   "rowKeys": [
@@ -7613,7 +7623,8 @@
                     "checkboxScaleNumbersBold",
                     "colorScaleNumbers",
                     "sliderScaleNumbersLetterSpacing",
-                    "sliderScaleNumbersOpacity"
+                    "sliderScaleNumbersOpacity",
+                    "sliderScaleNumbersOffsetX"
                   ],
                   "subgroups": []
                 },
@@ -7924,6 +7935,10 @@
                     {
                       "type": "row",
                       "key": "sliderScaleNumbersOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderScaleNumbersOffsetX"
                     }
                   ],
                   "rowKeys": [
@@ -7931,7 +7946,8 @@
                     "checkboxScaleNumbersBold",
                     "colorScaleNumbers",
                     "sliderScaleNumbersLetterSpacing",
-                    "sliderScaleNumbersOpacity"
+                    "sliderScaleNumbersOpacity",
+                    "sliderScaleNumbersOffsetX"
                   ],
                   "subgroups": []
                 }
@@ -7997,6 +8013,10 @@
                   {
                     "type": "row",
                     "key": "sliderScaleNumbersOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderScaleNumbersOffsetX"
                   }
                 ],
                 "rowKeys": [
@@ -8004,7 +8024,8 @@
                   "checkboxScaleNumbersBold",
                   "colorScaleNumbers",
                   "sliderScaleNumbersLetterSpacing",
-                  "sliderScaleNumbersOpacity"
+                  "sliderScaleNumbersOpacity",
+                  "sliderScaleNumbersOffsetX"
                 ],
                 "subgroups": []
               },
@@ -15432,7 +15453,7 @@
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
     "desktop:Timeline Look": false,
-    "desktop:New Group (4)": false,
+    "desktop:New Group (4)": true,
     "desktop:Visual Style": true,
     "desktop:Album Cover Colors": true,
     "desktop:New Group (3)": true,
