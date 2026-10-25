@@ -335,8 +335,8 @@
   "layout": {
     "left": 30,
     "top": 6,
-    "width": 343,
-    "height": 388
+    "width": 344,
+    "height": 80
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -15667,7 +15667,7 @@
     "mobile:Brackets Smaller Text": false,
     "mobile:Scrub Audio": false,
     "mobile:New Group (2)": false,
-    "mobile:Spotify Handoff": false,
+    "mobile:Spotify Handoff": true,
     "mobile:No Preview": false,
     "mobile:New Group": false,
     "mobile:Scrub Preload": false,
@@ -15684,7 +15684,7 @@
     "mobile:Scale Numbers": false,
     "mobile:Ticks": false,
     "mobile:Song Add Date": false,
-    "mobile:Startup": false,
+    "mobile:Startup": true,
     "mobile:Start Button": false,
     "mobile:Start Button Animation": false,
     "landscape:Dev Panel": true,
@@ -16482,7 +16482,7 @@
           "size": {
             "width": {
               "mode": "fixed",
-              "value": "90vw"
+              "value": "85vw"
             },
             "height": {
               "mode": "content"
