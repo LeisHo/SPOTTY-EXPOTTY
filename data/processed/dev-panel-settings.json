@@ -272,7 +272,8 @@
     "sliderSpotlightCenterX": 50,
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
-    "sliderStartOverlayOpacity": 0.97,
+    "buttonRunStartup": "",
+    "sliderStartOverlayOpacity": 0.71,
     "colorStartOverlay": "#0d0f12",
     "checkboxStartButtonEnabled": true,
     "sliderStartPlaySize": 64,
@@ -5838,6 +5839,10 @@
         "items": [
           {
             "type": "row",
+            "key": "buttonRunStartup"
+          },
+          {
+            "type": "row",
             "key": "sliderStartOverlayOpacity"
           },
           {
@@ -6092,6 +6097,7 @@
           }
         ],
         "rowKeys": [
+          "buttonRunStartup",
           "sliderStartOverlayOpacity",
           "colorStartOverlay"
         ],
@@ -9860,9 +9866,15 @@
                 }
               ]
             }
+          },
+          {
+            "type": "row",
+            "key": "buttonRunStartup"
           }
         ],
-        "rowKeys": [],
+        "rowKeys": [
+          "buttonRunStartup"
+        ],
         "subgroups": [
           {
             "key": "mobile:Start Button",
@@ -12694,9 +12706,15 @@
                 }
               ]
             }
+          },
+          {
+            "type": "row",
+            "key": "buttonRunStartup"
           }
         ],
-        "rowKeys": [],
+        "rowKeys": [
+          "buttonRunStartup"
+        ],
         "subgroups": [
           {
             "key": "landscape:Start Button",
@@ -12973,7 +12991,7 @@
     "desktop:Artist": false,
     "desktop:Album & Date": true,
     "desktop:Startup": false,
-    "desktop:Start Button": false,
+    "desktop:Start Button": true,
     "desktop:Start Button Animation": false,
     "desktop:New Group": true,
     "desktop:Scrub Preload": true,
@@ -13406,7 +13424,8 @@
     "landscape:Startup": null,
     "desktop:New Group (7)": "AUDIO BUTTONS",
     "mobile:New Group (7)": "AUDIO BUTTONS",
-    "landscape:New Group (7)": "AUDIO BUTTONS"
+    "landscape:New Group (7)": "AUDIO BUTTONS",
+    "buttonRunStartup": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
