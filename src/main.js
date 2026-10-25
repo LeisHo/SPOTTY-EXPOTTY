@@ -208,6 +208,7 @@ async function boot() {
     // The song whose full version the hand-off has asked for. The preview keeps playing until that full song reports it is
     // playing; if it never does, the preview carries on instead of going silent.
     let previewHold = null;
+    let stepImmediate = false; // set by stepSong() so that one song change skips the handoff delay
     // (capture phase: runs before the generic settings listener below, so applyLook sees the flag)
     ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; }, true));
 
@@ -592,7 +593,10 @@ async function boot() {
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
         previewHold = null;
-        const handoffDelay = setting('sliderHandoffDelay');
+        // The handoff delay only exists so a fast wheel scrub does not send Spotify a play request per song. A single deliberate step
+        // (Next / Last / shuffle step / a song ending) has nothing to wait for, so it starts at once.
+        const handoffDelay = stepImmediate ? 0 : setting('sliderHandoffDelay');
+        stepImmediate = false;
         handoffPending = true;
         // The handoff reads where the preview is, so it waits (up to 2 s after the song change) for a pending preview to start.
         const handoffWaitUntil = performance.now() + 2000;
@@ -769,7 +773,7 @@ async function boot() {
         stepSong(1);
         return true;
     });
-    const stepSong = d => { if (shuffleOn && Math.abs(d) === 1) shuffleStep(d); else { moveTo(timeline.currentIndex() + d); } };
+    const stepSong = d => { stepImmediate = true; if (shuffleOn && Math.abs(d) === 1) shuffleStep(d); else { moveTo(timeline.currentIndex() + d); } stepImmediate = false; };
     // dev-panel buttons (so a hotkey can be assigned to them there)
     document.addEventListener('click', e => {
         const b = e.target && e.target.closest && e.target.closest('button');
