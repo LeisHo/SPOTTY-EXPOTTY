@@ -177,8 +177,8 @@
     "colorShuffleOn": "#ffffff",
     "checkboxPlayButtonEnabled": true,
     "colorPlayButton": "#ffffff",
-    "sliderPlayButtonSize": 30,
-    "sliderPlayButtonOpacity": 77,
+    "sliderPlayButtonSize": 33,
+    "sliderPlayButtonOpacity": 79,
     "sliderPlayButtonHoverOpacity": 100,
     "buttonPlayPause": "",
     "checkboxPlayAnimEnabled": true,
@@ -333,7 +333,7 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 26,
+    "left": 30,
     "top": 6,
     "width": 343,
     "height": 325
