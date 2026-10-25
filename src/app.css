@@ -127,6 +127,8 @@
 /* Startup screen: the darkening over the app and the play icon (no text, no background). The first input hides it. */
 .spx-start { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: var(--spx-start-bg, #0d0f12cc); z-index: 2147483000; pointer-events: none; }
 .spx-start[hidden] { display: none; }
+.spx-start.center-cover { justify-content: flex-start; align-items: flex-start; } /* Centre Button on Album Cover: main.js places the button */
+.spx-start.center-cover .spx-start-play { position: absolute; }
 .spx-start-play { pointer-events: auto; width: var(--spx-start-play-size, 64px); height: var(--spx-start-play-size, 64px); padding: 0; border: 0; background: none; color: #ffffff; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .spx-start-play svg { width: 100%; height: 100%; fill: currentColor; display: block; }
 

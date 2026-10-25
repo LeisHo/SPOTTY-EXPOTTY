@@ -131,7 +131,7 @@ export const DEFAULTS = {
     // Startup: the darkening over the app until the first input, and the play icon (no text, no background)
     colorStartOverlay: '#0d0f12', sliderStartOverlayOpacity: 0.8,
     checkboxStartButtonEnabled: true, sliderStartPlaySize: 64, checkboxStartTransitionAfterRelease: false,
-    sliderStartFadeMs: 300,
+    sliderStartFadeMs: 300, checkboxStartCenterOnCover: false,
     sliderPlayheadStartHeight: 0,
     colorTickMark: '#ffffff', sliderTickOpacity: 0.6, sliderTickWidth: 1, sliderTickHeight: 5, sliderTickStartHeight: 0,
     sliderScaleNumbersFontSize: 11, checkboxScaleNumbersBold: false, colorScaleNumbers: '#ffffff', sliderScaleNumbersLetterSpacing: 0, sliderScaleNumbersOpacity: 0.6, sliderScaleNumbersOffsetX: 3,

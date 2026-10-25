@@ -8416,6 +8416,7 @@
             { tab, group: SU, id: 'sliderStartOverlayOpacity', type: 'slider', label: 'Darkening Opacity (x):', min: 0, max: 1, step: 0.01, value: 0.8 },
             { tab, group: SU, id: 'sliderStartFadeMs', type: 'slider', label: 'Fade Time (Ms):', min: 0, max: 3000, step: 10, value: 300 },
             { tab, group: SU, id: 'colorStartOverlay', type: 'color', label: 'Darkening Color:', value: '#0d0f12' },
+            { tab, group: SU, id: 'checkboxStartCenterOnCover', type: 'checkbox', label: 'Center Button on Album Cover:', value: false },
         ];
         renderControlArray(SU_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_STARTUP_CONTROLS', SU_CONTROLS);

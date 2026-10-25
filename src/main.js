@@ -456,6 +456,7 @@ async function boot() {
         el('spxStart').style.setProperty('--spx-start-bg', rgbaOf(setting('colorStartOverlay'), setting('sliderStartOverlayOpacity')));
         el('spxStartBtn').hidden = !setting('checkboxStartButtonEnabled');
         el('spxStartBtn').style.setProperty('--spx-start-play-size', setting('sliderStartPlaySize') + 'px');
+        requestAnimationFrame(centerStartOnCover); // after the cover's scale/offset above have been applied
         setArtistLine(); // live: changing the separator re-joins the current song's artists
         el('spxApp').style.setProperty('--spx-sep-pct', setting('sliderArtistSeparatorPct') + '%');
         el('spxApp').style.setProperty('--spx-vol-icon-x', setting('sliderVolIconOffsetX') + 'px');
@@ -835,6 +836,16 @@ async function boot() {
     let startedOnce = false;
     const onIconPress = e => !!(e.target && e.target.closest && e.target.closest('#spxStartBtn'));
     // The start screen fades out over Fade Time (Ms), then hides. Showing it again fades it back in.
+    // Centre Button on Album Cover (Startup group): the start button is placed over the cover's measured centre instead of the
+    // middle of the screen. Off = the default flex centring, with no inline position left behind.
+    const centerStartOnCover = () => {
+        const sp = el('spxStart'), st = el('spxStartBtn');
+        if (!setting('checkboxStartCenterOnCover')) { sp.classList.remove('center-cover'); st.style.left = st.style.top = ''; return; }
+        const r = el('spxCover').getBoundingClientRect(); // includes the cover's own scale and offset
+        sp.classList.add('center-cover');
+        st.style.left = (r.left + r.width / 2 - st.offsetWidth / 2) + 'px';
+        st.style.top = (r.top + r.height / 2 - st.offsetHeight / 2) + 'px';
+    };
     const hideStartScreen = () => { const o = el('spxStart'); o.style.opacity = '0'; setTimeout(() => { if (o.style.opacity === '0') o.hidden = true; }, setting('sliderStartFadeMs')); };
     const startFromIcon = () => { hideStartScreen(); if (!startedOnce) { startedOnce = true; openSpotifyLogin(); } playFromStart(); };
     const onFirstGesture = e => {
@@ -894,6 +905,7 @@ async function boot() {
     }
     setInterval(keepCoverCentred, 500); // catches an anchor change made in the UI Layout Inspector
     new ResizeObserver(placeNav).observe(el('spxCover'));
+    new ResizeObserver(() => centerStartOnCover()).observe(el('spxCover'));
     window.addEventListener('resize', placeNav);
     placeNav();
     onPlayState(playing => {
