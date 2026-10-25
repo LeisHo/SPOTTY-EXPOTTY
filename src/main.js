@@ -228,6 +228,18 @@ async function boot() {
     // whole timeline, mapped on a log scale between its Y Bottom and Y Top days; else the plain slider.
     // Applied at load, on double-click on the timeline, and (optionally) on Home / End.
     const DAY_MS = 864e5;
+    // The three starting-span sliders always max out at the span that shows the WHOLE data set (the timeline's full
+    // span, in days; it follows the data, not a hard-coded number). Includes Mobile/Landscape twins, which appear later.
+    const fitSpanSliders = () => {
+        const days = Math.ceil((timeline.fullSpanMs / DAY_MS) * 10) / 10;
+        ['sliderDefaultTimelineSpanDays', 'sliderStartSpanCurveMinDays', 'sliderStartSpanCurveMaxDays'].forEach(id =>
+            ['', 'Mobile', 'Landscape'].forEach(dev => {
+                const el = document.getElementById(id.replace(/^slider/, 'slider' + dev));
+                if (el && parseFloat(el.max) !== days) el.max = String(days);
+            }));
+    };
+    fitSpanSliders();
+    setInterval(fitSpanSliders, 1500);
     function applyStartSpan(force) {
         let days;
         if (setting('checkboxStartSpanCurveEnabled')) {
@@ -268,6 +280,8 @@ async function boot() {
             speedAt: s => curveY(setting('curveEditorVolAnimSpeedCurve'), s),
         });
         // Album cover scale + offset are visual only (they never move other elements); the prev/next buttons follow its Y offset.
+        // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
+        [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
         const cvEl = el('spxCover');
         cvEl.style.scale = String(setting('sliderCoverScale'));
         cvEl.style.translate = `${setting('sliderCoverOffsetX')}px ${setting('sliderCoverOffsetY')}px`;

@@ -494,5 +494,5 @@ export function createTimeline(canvas, data) {
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setDateLine, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
+    return { draw, setDateLine, get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }

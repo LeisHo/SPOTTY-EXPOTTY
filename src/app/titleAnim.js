@@ -49,7 +49,7 @@ export function initTitleAnim(link) {
                 const y = st === 'hover' ? -setting('sliderTitleLiftPx') : st === 'press' ? setting('sliderTitleLiftPressPx') : 0;
                 s.transform = `translateY(${y}px)`;
                 const blur = setting('sliderTitleLiftShadowBlur'), op = setting('sliderTitleLiftShadowOpacity');
-                s.filter = st === 'hover' ? `drop-shadow(0 ${Math.abs(y) * 0.8}px ${blur}px rgba(0,0,0,${op}))`
+                s.filter = !setting('checkboxShadowTitleLift') ? 'none' : st === 'hover' ? `drop-shadow(0 ${Math.abs(y) * 0.8}px ${blur}px rgba(0,0,0,${op}))`
                     : st === 'press' ? `drop-shadow(0 1px ${blur / 3}px rgba(0,0,0,${op * 0.6}))` : 'drop-shadow(0 0 0 rgba(0,0,0,0))';
                 break;
             }

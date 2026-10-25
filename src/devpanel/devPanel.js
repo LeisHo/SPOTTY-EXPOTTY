@@ -7619,6 +7619,18 @@
         registerDevControlArray('SPOTTY_VB_CONTROLS', VB_CONTROLS);
         registerDevControlArray('SPOTTY_AC2_CONTROLS', AC2_CONTROLS);
         makeDevGroupToggleable(tab, VB, 'checkboxVolumeButtonEnabled');
+
+        // ---- UI Layout: Shadows (one on/off checkbox for everything that has a drop shadow) -----------------------
+        const SH = 'Shadows';
+        uiLayoutContent.appendChild(createDevGroupElement(SH, tab));
+        const SH_CONTROLS = [
+            { tab, group: SH, id: 'checkboxShadowCover', type: 'checkbox', label: 'Album Cover Shadow:', value: true },
+            { tab, group: SH, id: 'checkboxShadowVolume', type: 'checkbox', label: 'Volume Icon, Slider Bar And Circle Shadow:', value: true },
+            { tab, group: SH, id: 'checkboxShadowNav', type: 'checkbox', label: 'Previous / Next Button Shadow:', value: true },
+            { tab, group: SH, id: 'checkboxShadowTitleLift', type: 'checkbox', label: 'Song Title Lift Animation Shadow:', value: true },
+        ];
+        renderControlArray(SH_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SHADOW_CONTROLS', SH_CONTROLS);
         const EASINGS = [
             { value: 'ease-out', text: 'Ease Out' }, { value: 'ease', text: 'Ease' }, { value: 'ease-in-out', text: 'Ease In-Out' },
             { value: 'linear', text: 'Linear' }, { value: 'spring', text: 'Spring (Overshoot)' }, { value: 'snap', text: 'Snap (Fast Start)' },
