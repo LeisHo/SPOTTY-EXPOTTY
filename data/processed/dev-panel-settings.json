@@ -7757,80 +7757,12 @@
             "key": "sliderTimelineHeight"
           },
           {
-            "type": "row",
-            "key": "selectTimelineStyle"
-          },
-          {
-            "type": "row",
-            "key": "sliderGlowStemWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderGlowRadius"
-          },
-          {
-            "type": "row",
-            "key": "sliderGlowDotSize"
-          },
-          {
-            "type": "row",
-            "key": "sliderGlowIntensity"
+            "type": "group",
+            "key": "desktop:Visual Style"
           },
           {
             "type": "row",
             "key": "rangeBarTimelineZoomLimits"
-          },
-          {
-            "type": "row",
-            "key": "sliderDensitySmoothing"
-          },
-          {
-            "type": "row",
-            "key": "sliderDensityFillOpacity"
-          },
-          {
-            "type": "row",
-            "key": "sliderDensityOutlineWidth"
-          },
-          {
-            "type": "row",
-            "key": "checkboxDensityGradientFill"
-          },
-          {
-            "type": "row",
-            "key": "selectLineFeature"
-          },
-          {
-            "type": "row",
-            "key": "sliderLineWidth"
-          },
-          {
-            "type": "row",
-            "key": "sliderLineDotSize"
-          },
-          {
-            "type": "row",
-            "key": "sliderLineFillOpacity"
-          },
-          {
-            "type": "row",
-            "key": "checkboxLineSmooth"
-          },
-          {
-            "type": "row",
-            "key": "selectRibbonFeature"
-          },
-          {
-            "type": "row",
-            "key": "sliderRibbonThickness"
-          },
-          {
-            "type": "row",
-            "key": "sliderRibbonSmoothing"
-          },
-          {
-            "type": "row",
-            "key": "sliderRibbonBarsOpacity"
           },
           {
             "type": "group",
@@ -7882,10 +7814,6 @@
           },
           {
             "type": "row",
-            "key": "sliderDensityColorBlend"
-          },
-          {
-            "type": "row",
             "key": "checkboxTimelineHeightTransition"
           },
           {
@@ -7899,29 +7827,10 @@
           "sliderTimelineBarOpacity",
           "sliderBarWidth",
           "sliderTimelineHeight",
-          "selectTimelineStyle",
-          "sliderGlowStemWidth",
-          "sliderGlowRadius",
-          "sliderGlowDotSize",
-          "sliderGlowIntensity",
           "rangeBarTimelineZoomLimits",
-          "sliderDensitySmoothing",
-          "sliderDensityFillOpacity",
-          "sliderDensityOutlineWidth",
-          "checkboxDensityGradientFill",
-          "selectLineFeature",
-          "sliderLineWidth",
-          "sliderLineDotSize",
-          "sliderLineFillOpacity",
-          "checkboxLineSmooth",
-          "selectRibbonFeature",
-          "sliderRibbonThickness",
-          "sliderRibbonSmoothing",
-          "sliderRibbonBarsOpacity",
           "sliderPlayheadWidth",
           "sliderPlayheadHeight",
           "sliderTimelineScaleGap",
-          "sliderDensityColorBlend",
           "checkboxTimelineHeightTransition",
           "sliderTimelineHeightTransitionMs"
         ],
@@ -7956,6 +7865,109 @@
               "sliderAlbumColorBrightness",
               "checkboxAlbumColorTransition",
               "sliderAlbumColorTransitionMs"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:Visual Style",
+            "items": [
+              {
+                "type": "row",
+                "key": "selectTimelineStyle"
+              },
+              {
+                "type": "row",
+                "key": "sliderGlowStemWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderGlowRadius"
+              },
+              {
+                "type": "row",
+                "key": "sliderGlowDotSize"
+              },
+              {
+                "type": "row",
+                "key": "sliderGlowIntensity"
+              },
+              {
+                "type": "row",
+                "key": "sliderDensitySmoothing"
+              },
+              {
+                "type": "row",
+                "key": "sliderDensityFillOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderDensityOutlineWidth"
+              },
+              {
+                "type": "row",
+                "key": "checkboxDensityGradientFill"
+              },
+              {
+                "type": "row",
+                "key": "selectLineFeature"
+              },
+              {
+                "type": "row",
+                "key": "sliderLineWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderLineDotSize"
+              },
+              {
+                "type": "row",
+                "key": "sliderLineFillOpacity"
+              },
+              {
+                "type": "row",
+                "key": "checkboxLineSmooth"
+              },
+              {
+                "type": "row",
+                "key": "selectRibbonFeature"
+              },
+              {
+                "type": "row",
+                "key": "sliderRibbonThickness"
+              },
+              {
+                "type": "row",
+                "key": "sliderRibbonSmoothing"
+              },
+              {
+                "type": "row",
+                "key": "sliderRibbonBarsOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderDensityColorBlend"
+              }
+            ],
+            "rowKeys": [
+              "selectTimelineStyle",
+              "sliderGlowStemWidth",
+              "sliderGlowRadius",
+              "sliderGlowDotSize",
+              "sliderGlowIntensity",
+              "sliderDensitySmoothing",
+              "sliderDensityFillOpacity",
+              "sliderDensityOutlineWidth",
+              "checkboxDensityGradientFill",
+              "selectLineFeature",
+              "sliderLineWidth",
+              "sliderLineDotSize",
+              "sliderLineFillOpacity",
+              "checkboxLineSmooth",
+              "selectRibbonFeature",
+              "sliderRibbonThickness",
+              "sliderRibbonSmoothing",
+              "sliderRibbonBarsOpacity",
+              "sliderDensityColorBlend"
             ],
             "subgroups": []
           }
@@ -11293,12 +11305,22 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "key": "mobile:Visual Style"
           }
         ],
         "rowKeys": [],
         "subgroups": [
           {
             "key": "mobile:Album Cover Colors",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Visual Style",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -14637,12 +14659,22 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "key": "landscape:Visual Style"
           }
         ],
         "rowKeys": [],
         "subgroups": [
           {
             "key": "landscape:Album Cover Colors",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:Visual Style",
             "items": [],
             "rowKeys": [],
             "subgroups": []
