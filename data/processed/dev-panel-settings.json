@@ -8,6 +8,7 @@
     "sliderClipFadeOut": 500,
     "checkboxColdStartClips": true,
     "checkboxRandomStartSong": true,
+    "checkboxLoopPreview": false,
     "sliderPreloadAhead": 30,
     "sliderPreloadBehind": 30,
     "checkboxShowPoolOverlay": true,
@@ -18,8 +19,9 @@
     "sliderDefaultTimelineSpanDays": 4900,
     "checkboxHandoffEnabled": true,
     "checkboxSpotifyLoginOnStart": true,
+    "buttonSpotifyLogin": "",
     "checkboxShowSpotifyPlayer": true,
-    "sliderHandoffDelay": 0,
+    "sliderHandoffDelay": 100,
     "colorTimelineAccent": "#ffffff",
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
@@ -37,6 +39,7 @@
     "sliderDensitySmoothing": 15,
     "sliderDensityFillOpacity": 0.95,
     "sliderDensityOutlineWidth": 8,
+    "sliderDensityColorBlend": 100,
     "checkboxDensityGradientFill": false,
     "selectLineFeature": "valence",
     "sliderLineWidth": 2,
@@ -48,8 +51,17 @@
     "sliderRibbonSmoothing": 24,
     "sliderRibbonBarsOpacity": 0.25,
     "sliderTitleScale": 1.1,
+    "sliderTitleSizeMin": 26,
+    "sliderTitleSizePref": 5.5,
+    "sliderTitleSizeMax": 60,
     "sliderArtistScale": 1.1,
+    "sliderArtistSizeMin": 17,
+    "sliderArtistSizePref": 3,
+    "sliderArtistSizeMax": 28,
     "sliderMetaScale": 1.4,
+    "sliderMetaSizeMin": 14,
+    "sliderMetaSizePref": 0,
+    "sliderMetaSizeMax": 14,
     "buttonOpenLayoutInspector": "",
     "checkboxAlbumColorsEnabled": true,
     "selectAlbumColorMode": "vividGradient",
@@ -87,6 +99,33 @@
     "sliderCoverScale": 1,
     "sliderCoverOffsetX": 0,
     "sliderCoverOffsetY": 0,
+    "checkboxPlayButtonEnabled": false,
+    "colorPlayButton": "#ffffff",
+    "sliderPlayButtonSize": 56,
+    "sliderPlayButtonOpacity": 90,
+    "sliderPlayButtonHoverOpacity": 100,
+    "buttonPlayPause": "",
+    "checkboxPlayAnimEnabled": false,
+    "sliderPlayAnimTime": 150,
+    "sliderPlayAnimHoverSize": 64,
+    "sliderPlayAnimClickSize": 48,
+    "sliderPlayAnimHoverOpacity": 100,
+    "sliderPlayAnimClickOpacity": 70,
+    "sliderPlayAnimReleaseSize": 70,
+    "checkboxNavButtonEnabled": true,
+    "colorNavButton": "#f2f2f2",
+    "sliderNavButtonSize": 26,
+    "sliderNavButtonOpacity": 100,
+    "sliderNavButtonHoverOpacity": 100,
+    "buttonNextSong": "",
+    "buttonPrevSong": "",
+    "checkboxNavAnimEnabled": false,
+    "sliderNavAnimTime": 150,
+    "sliderNavAnimHoverSize": 30,
+    "sliderNavAnimClickSize": 22,
+    "sliderNavAnimHoverOpacity": 100,
+    "sliderNavAnimClickOpacity": 70,
+    "sliderNavAnimReleaseSize": 32,
     "buttonDebugPause": "",
     "buttonDebugPauseLogs": "",
     "buttonDebugCopyAll": "",
@@ -174,9 +213,9 @@
   },
   "layout": {
     "left": 26,
-    "top": 284,
+    "top": 24,
     "width": 506,
-    "height": 411
+    "height": 550
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -2103,6 +2142,10 @@
           {
             "type": "row",
             "key": "checkboxRandomStartSong"
+          },
+          {
+            "type": "row",
+            "key": "checkboxLoopPreview"
           }
         ],
         "rowKeys": [
@@ -2110,7 +2153,8 @@
           "sliderScrubVolume",
           "sliderClipFadeOut",
           "checkboxColdStartClips",
-          "checkboxRandomStartSong"
+          "checkboxRandomStartSong",
+          "checkboxLoopPreview"
         ],
         "subgroups": [
           {
@@ -2151,13 +2195,18 @@
           {
             "type": "row",
             "key": "checkboxShowSpotifyPlayer"
+          },
+          {
+            "type": "row",
+            "key": "buttonSpotifyLogin"
           }
         ],
         "rowKeys": [
           "checkboxHandoffEnabled",
           "sliderHandoffDelay",
           "checkboxSpotifyLoginOnStart",
-          "checkboxShowSpotifyPlayer"
+          "checkboxShowSpotifyPlayer",
+          "buttonSpotifyLogin"
         ],
         "subgroups": []
       },
@@ -2297,6 +2346,10 @@
           {
             "type": "row",
             "key": "sliderTimelineScaleGap"
+          },
+          {
+            "type": "row",
+            "key": "sliderDensityColorBlend"
           }
         ],
         "rowKeys": [
@@ -2326,7 +2379,8 @@
           "sliderRibbonBarsOpacity",
           "sliderPlayheadWidth",
           "sliderPlayheadHeight",
-          "sliderTimelineScaleGap"
+          "sliderTimelineScaleGap",
+          "sliderDensityColorBlend"
         ],
         "subgroups": [
           {
@@ -2838,13 +2892,295 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "sliderTitleSizeMin"
+          },
+          {
+            "type": "row",
+            "key": "sliderTitleSizePref"
+          },
+          {
+            "type": "row",
+            "key": "sliderTitleSizeMax"
+          },
+          {
+            "type": "row",
+            "key": "sliderArtistSizeMin"
+          },
+          {
+            "type": "row",
+            "key": "sliderArtistSizePref"
+          },
+          {
+            "type": "row",
+            "key": "sliderArtistSizeMax"
+          },
+          {
+            "type": "row",
+            "key": "sliderMetaSizeMin"
+          },
+          {
+            "type": "row",
+            "key": "sliderMetaSizePref"
+          },
+          {
+            "type": "row",
+            "key": "sliderMetaSizeMax"
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Play Button",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "colorPlayButton"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderPlayButtonSize"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderPlayButtonOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderPlayButtonHoverOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "buttonPlayPause"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Play Button Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimClickOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimReleaseSize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderPlayAnimTime",
+                      "sliderPlayAnimHoverSize",
+                      "sliderPlayAnimClickSize",
+                      "sliderPlayAnimHoverOpacity",
+                      "sliderPlayAnimClickOpacity",
+                      "sliderPlayAnimReleaseSize"
+                    ],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [
+                "colorPlayButton",
+                "sliderPlayButtonSize",
+                "sliderPlayButtonOpacity",
+                "sliderPlayButtonHoverOpacity",
+                "buttonPlayPause"
+              ],
+              "subgroups": [
+                {
+                  "key": "desktop:Play Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimTime"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimHoverSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimClickSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimReleaseSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderPlayAnimTime",
+                    "sliderPlayAnimHoverSize",
+                    "sliderPlayAnimClickSize",
+                    "sliderPlayAnimHoverOpacity",
+                    "sliderPlayAnimClickOpacity",
+                    "sliderPlayAnimReleaseSize"
+                  ],
+                  "subgroups": []
+                }
+              ]
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Next And Last Song Buttons",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "colorNavButton"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderNavButtonSize"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderNavButtonOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderNavButtonHoverOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "buttonNextSong"
+                },
+                {
+                  "type": "row",
+                  "key": "buttonPrevSong"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Next And Last Button Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderNavAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNavAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNavAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNavAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNavAnimClickOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNavAnimReleaseSize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderNavAnimTime",
+                      "sliderNavAnimHoverSize",
+                      "sliderNavAnimClickSize",
+                      "sliderNavAnimHoverOpacity",
+                      "sliderNavAnimClickOpacity",
+                      "sliderNavAnimReleaseSize"
+                    ],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [
+                "colorNavButton",
+                "sliderNavButtonSize",
+                "sliderNavButtonOpacity",
+                "sliderNavButtonHoverOpacity",
+                "buttonNextSong",
+                "buttonPrevSong"
+              ],
+              "subgroups": [
+                {
+                  "key": "desktop:Next And Last Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimTime"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimHoverSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimClickSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimReleaseSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderNavAnimTime",
+                    "sliderNavAnimHoverSize",
+                    "sliderNavAnimClickSize",
+                    "sliderNavAnimHoverOpacity",
+                    "sliderNavAnimClickOpacity",
+                    "sliderNavAnimReleaseSize"
+                  ],
+                  "subgroups": []
+                }
+              ]
+            }
           }
         ],
         "rowKeys": [
           "sliderTitleScale",
           "sliderArtistScale",
           "sliderMetaScale",
-          "buttonOpenLayoutInspector"
+          "buttonOpenLayoutInspector",
+          "sliderTitleSizeMin",
+          "sliderTitleSizePref",
+          "sliderTitleSizeMax",
+          "sliderArtistSizeMin",
+          "sliderArtistSizePref",
+          "sliderArtistSizeMax",
+          "sliderMetaSizeMin",
+          "sliderMetaSizePref",
+          "sliderMetaSizeMax"
         ],
         "subgroups": [
           {
@@ -3294,6 +3630,237 @@
               "checkboxShadowTitleLift"
             ],
             "subgroups": []
+          },
+          {
+            "key": "desktop:Play Button",
+            "items": [
+              {
+                "type": "row",
+                "key": "colorPlayButton"
+              },
+              {
+                "type": "row",
+                "key": "sliderPlayButtonSize"
+              },
+              {
+                "type": "row",
+                "key": "sliderPlayButtonOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderPlayButtonHoverOpacity"
+              },
+              {
+                "type": "row",
+                "key": "buttonPlayPause"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Play Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimTime"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimHoverSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimClickSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayAnimReleaseSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderPlayAnimTime",
+                    "sliderPlayAnimHoverSize",
+                    "sliderPlayAnimClickSize",
+                    "sliderPlayAnimHoverOpacity",
+                    "sliderPlayAnimClickOpacity",
+                    "sliderPlayAnimReleaseSize"
+                  ],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "colorPlayButton",
+              "sliderPlayButtonSize",
+              "sliderPlayButtonOpacity",
+              "sliderPlayButtonHoverOpacity",
+              "buttonPlayPause"
+            ],
+            "subgroups": [
+              {
+                "key": "desktop:Play Button Animation",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderPlayAnimTime"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPlayAnimHoverSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPlayAnimClickSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPlayAnimHoverOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPlayAnimClickOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPlayAnimReleaseSize"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderPlayAnimTime",
+                  "sliderPlayAnimHoverSize",
+                  "sliderPlayAnimClickSize",
+                  "sliderPlayAnimHoverOpacity",
+                  "sliderPlayAnimClickOpacity",
+                  "sliderPlayAnimReleaseSize"
+                ],
+                "subgroups": []
+              }
+            ]
+          },
+          {
+            "key": "desktop:Next And Last Song Buttons",
+            "items": [
+              {
+                "type": "row",
+                "key": "colorNavButton"
+              },
+              {
+                "type": "row",
+                "key": "sliderNavButtonSize"
+              },
+              {
+                "type": "row",
+                "key": "sliderNavButtonOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderNavButtonHoverOpacity"
+              },
+              {
+                "type": "row",
+                "key": "buttonNextSong"
+              },
+              {
+                "type": "row",
+                "key": "buttonPrevSong"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Next And Last Button Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimTime"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimHoverSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimClickSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavAnimReleaseSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderNavAnimTime",
+                    "sliderNavAnimHoverSize",
+                    "sliderNavAnimClickSize",
+                    "sliderNavAnimHoverOpacity",
+                    "sliderNavAnimClickOpacity",
+                    "sliderNavAnimReleaseSize"
+                  ],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "colorNavButton",
+              "sliderNavButtonSize",
+              "sliderNavButtonOpacity",
+              "sliderNavButtonHoverOpacity",
+              "buttonNextSong",
+              "buttonPrevSong"
+            ],
+            "subgroups": [
+              {
+                "key": "desktop:Next And Last Button Animation",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderNavAnimTime"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNavAnimHoverSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNavAnimClickSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNavAnimHoverOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNavAnimClickOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNavAnimReleaseSize"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderNavAnimTime",
+                  "sliderNavAnimHoverSize",
+                  "sliderNavAnimClickSize",
+                  "sliderNavAnimHoverOpacity",
+                  "sliderNavAnimClickOpacity",
+                  "sliderNavAnimReleaseSize"
+                ],
+                "subgroups": []
+              }
+            ]
           }
         ]
       }
@@ -4050,8 +4617,15 @@
       },
       {
         "key": "mobile:Spotify Handoff",
-        "items": [],
-        "rowKeys": [],
+        "items": [
+          {
+            "type": "row",
+            "key": "buttonSpotifyLogin"
+          }
+        ],
+        "rowKeys": [
+          "buttonSpotifyLogin"
+        ],
         "subgroups": []
       },
       {
@@ -4534,6 +5108,75 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Play Button",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "buttonPlayPause"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Play Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [
+                "buttonPlayPause"
+              ],
+              "subgroups": [
+                {
+                  "key": "mobile:Play Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Next And Last Song Buttons",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "buttonNextSong"
+                },
+                {
+                  "type": "row",
+                  "key": "buttonPrevSong"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Next And Last Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [
+                "buttonNextSong",
+                "buttonPrevSong"
+              ],
+              "subgroups": [
+                {
+                  "key": "mobile:Next And Last Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
+            }
           }
         ],
         "rowKeys": [
@@ -4963,6 +5606,69 @@
             "items": [],
             "rowKeys": [],
             "subgroups": []
+          },
+          {
+            "key": "mobile:Play Button",
+            "items": [
+              {
+                "type": "row",
+                "key": "buttonPlayPause"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Play Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "buttonPlayPause"
+            ],
+            "subgroups": [
+              {
+                "key": "mobile:Play Button Animation",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
+          },
+          {
+            "key": "mobile:Next And Last Song Buttons",
+            "items": [
+              {
+                "type": "row",
+                "key": "buttonNextSong"
+              },
+              {
+                "type": "row",
+                "key": "buttonPrevSong"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Next And Last Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "buttonNextSong",
+              "buttonPrevSong"
+            ],
+            "subgroups": [
+              {
+                "key": "mobile:Next And Last Button Animation",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
           }
         ]
       }
@@ -5719,8 +6425,15 @@
       },
       {
         "key": "landscape:Spotify Handoff",
-        "items": [],
-        "rowKeys": [],
+        "items": [
+          {
+            "type": "row",
+            "key": "buttonSpotifyLogin"
+          }
+        ],
+        "rowKeys": [
+          "buttonSpotifyLogin"
+        ],
         "subgroups": []
       },
       {
@@ -6203,6 +6916,75 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Play Button",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "buttonPlayPause"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Play Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [
+                "buttonPlayPause"
+              ],
+              "subgroups": [
+                {
+                  "key": "landscape:Play Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Next And Last Song Buttons",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "buttonNextSong"
+                },
+                {
+                  "type": "row",
+                  "key": "buttonPrevSong"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Next And Last Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [
+                "buttonNextSong",
+                "buttonPrevSong"
+              ],
+              "subgroups": [
+                {
+                  "key": "landscape:Next And Last Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
+            }
           }
         ],
         "rowKeys": [
@@ -6632,6 +7414,69 @@
             "items": [],
             "rowKeys": [],
             "subgroups": []
+          },
+          {
+            "key": "landscape:Play Button",
+            "items": [
+              {
+                "type": "row",
+                "key": "buttonPlayPause"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Play Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "buttonPlayPause"
+            ],
+            "subgroups": [
+              {
+                "key": "landscape:Play Button Animation",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
+          },
+          {
+            "key": "landscape:Next And Last Song Buttons",
+            "items": [
+              {
+                "type": "row",
+                "key": "buttonNextSong"
+              },
+              {
+                "type": "row",
+                "key": "buttonPrevSong"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Next And Last Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "buttonNextSong",
+              "buttonPrevSong"
+            ],
+            "subgroups": [
+              {
+                "key": "landscape:Next And Last Button Animation",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
           }
         ]
       }
@@ -6657,7 +7502,7 @@
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": false,
     "desktop:Touch Scrub And Pinch": true,
-    "desktop:Scrub Audio": true,
+    "desktop:Scrub Audio": false,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": false,
     "desktop:Timeline Look": true,
@@ -6669,6 +7514,10 @@
     "desktop:Volume Button": true,
     "desktop:Album Cover": true,
     "desktop:Shadows": true,
+    "desktop:Play Button": false,
+    "desktop:Play Button Animation": false,
+    "desktop:Next And Last Song Buttons": false,
+    "desktop:Next And Last Button Animation": false,
     "mobile:Dev Panel": true,
     "mobile:MECHANICS": false,
     "mobile:PANEL UI": false,
@@ -6698,6 +7547,10 @@
     "mobile:Volume Button": false,
     "mobile:Album Cover": false,
     "mobile:Shadows": false,
+    "mobile:Play Button": false,
+    "mobile:Play Button Animation": false,
+    "mobile:Next And Last Song Buttons": false,
+    "mobile:Next And Last Button Animation": false,
     "landscape:Dev Panel": true,
     "landscape:MECHANICS": false,
     "landscape:PANEL UI": false,
@@ -6726,7 +7579,11 @@
     "landscape:Font": false,
     "landscape:Volume Button": false,
     "landscape:Album Cover": false,
-    "landscape:Shadows": false
+    "landscape:Shadows": false,
+    "landscape:Play Button": false,
+    "landscape:Play Button Animation": false,
+    "landscape:Next And Last Song Buttons": false,
+    "landscape:Next And Last Button Animation": false
   },
   "devTextOverrides": {
     "sliderMobileDevPanelTitleFontSize": null,
@@ -6983,7 +7840,19 @@
     "mobile:New Group": "SCRUBBING",
     "mobile:New Group (2)": "START TIME",
     "landscape:New Group": "SCRUBBING",
-    "landscape:New Group (2)": "START TIME"
+    "landscape:New Group (2)": "START TIME",
+    "buttonSpotifyLogin": null,
+    "buttonPlayPause": null,
+    "mobile:Play Button Animation": null,
+    "mobile:Play Button": null,
+    "buttonNextSong": null,
+    "buttonPrevSong": null,
+    "mobile:Next And Last Button Animation": null,
+    "mobile:Next And Last Song Buttons": null,
+    "landscape:Play Button Animation": null,
+    "landscape:Play Button": null,
+    "landscape:Next And Last Button Animation": null,
+    "landscape:Next And Last Song Buttons": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
