@@ -240,14 +240,14 @@ async function boot() {
         timeline.draw();
     }
     // the saved dev-panel state arrives a moment after load, so apply the curve once it has had time to restore
-    setTimeout(() => applyStartSpan(false), 1500);
+    setTimeout(() => applyStartSpan(true), 1500); // true: with the curve off, the plain Starting Timeline Span slider applies at load too
     // "Randomize Starting Song": once the saved settings have arrived, jump to a random song unless the visitor already moved.
     let interacted = false;
     ['pointerdown', 'wheel', 'keydown'].forEach(t => window.addEventListener(t, () => { interacted = true; }, { once: true, capture: true }));
     setTimeout(() => {
         if (interacted || !setting('checkboxRandomStartSong')) return;
         moveTo(Math.floor(Math.random() * songs.length));
-        applyStartSpan(false);
+        applyStartSpan(true);
         timeline.centerOnPlayhead();
         timeline.draw();
     }, 1600);
