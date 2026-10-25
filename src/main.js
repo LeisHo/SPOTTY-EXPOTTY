@@ -474,12 +474,12 @@ async function boot() {
         // Timeline height goes through the layout engine; the timeline is pinned by its bottom edge and
         // nothing else is positioned from it, so only the bars grow (upward).
         // On a phone the engine's own per-device height (150 px portrait / 110 px landscape) overrides the base
-        // height, so the slider must write to the ACTIVE context or it does nothing there. Until the slider has
-        // actually been touched, a phone keeps those defaults.
+        // height, so the setting must be written to the ACTIVE context or it does nothing there. The setting is the
+        // phone's own value, including one mirrored from Desktop (Independent from Desktop off), so it is always applied.
         const wantH = setting('sliderTimelineHeight') + 'px';
         const ctxKey = getActiveContext();
         const sig = ctxKey + ':' + wantH;
-        if (sig !== lastTimelineHeight && (ctxKey === 'base' || heightTouched)) {
+        if (sig !== lastTimelineHeight) {
             lastTimelineHeight = sig;
             if (ctxKey === 'base') updateElement('spxTimeline', { size: { height: { value: wantH } } });
             else setContextValue('spxTimeline', ctxKey, 'heightValue', wantH);
