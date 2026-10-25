@@ -272,7 +272,7 @@
     "sliderSpotlightCenterX": 50,
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
-    "sliderStartOverlayOpacity": 0.54,
+    "sliderStartOverlayOpacity": 0.97,
     "colorStartOverlay": "#0d0f12",
     "checkboxStartButtonEnabled": true,
     "sliderStartPlaySize": 64,
@@ -7877,6 +7877,10 @@
         "key": "mobile:UI Layout",
         "items": [
           {
+            "type": "row",
+            "key": "buttonOpenLayoutInspector"
+          },
+          {
             "type": "group",
             "section": {
               "key": "mobile:New Group (3)",
@@ -8453,10 +8457,6 @@
             }
           },
           {
-            "type": "row",
-            "key": "buttonOpenLayoutInspector"
-          },
-          {
             "type": "group",
             "section": {
               "key": "mobile:Background",
@@ -8854,66 +8854,6 @@
                   "subgroups": [
                     {
                       "key": "mobile:Outline",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:Startup",
-              "items": [
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "mobile:Start Button",
-                    "items": [
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "mobile:Start Button Animation",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      }
-                    ],
-                    "rowKeys": [],
-                    "subgroups": [
-                      {
-                        "key": "mobile:Start Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    ]
-                  }
-                }
-              ],
-              "rowKeys": [],
-              "subgroups": [
-                {
-                  "key": "mobile:Start Button",
-                  "items": [
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:Start Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [],
-                  "subgroups": [
-                    {
-                      "key": "mobile:Start Button Animation",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -9889,61 +9829,61 @@
                 ]
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "key": "mobile:Startup",
+        "items": [
           {
-            "key": "mobile:Startup",
+            "type": "group",
+            "section": {
+              "key": "mobile:Start Button",
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Start Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [],
+              "subgroups": [
+                {
+                  "key": "mobile:Start Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
+            }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "mobile:Start Button",
             "items": [
               {
                 "type": "group",
                 "section": {
-                  "key": "mobile:Start Button",
-                  "items": [
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:Start Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    }
-                  ],
+                  "key": "mobile:Start Button Animation",
+                  "items": [],
                   "rowKeys": [],
-                  "subgroups": [
-                    {
-                      "key": "mobile:Start Button Animation",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  ]
+                  "subgroups": []
                 }
               }
             ],
             "rowKeys": [],
             "subgroups": [
               {
-                "key": "mobile:Start Button",
-                "items": [
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "mobile:Start Button Animation",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  }
-                ],
+                "key": "mobile:Start Button Animation",
+                "items": [],
                 "rowKeys": [],
-                "subgroups": [
-                  {
-                    "key": "mobile:Start Button Animation",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                ]
+                "subgroups": []
               }
             ]
           }
@@ -10771,6 +10711,10 @@
         "key": "landscape:UI Layout",
         "items": [
           {
+            "type": "row",
+            "key": "buttonOpenLayoutInspector"
+          },
+          {
             "type": "group",
             "section": {
               "key": "landscape:New Group (3)",
@@ -11347,10 +11291,6 @@
             }
           },
           {
-            "type": "row",
-            "key": "buttonOpenLayoutInspector"
-          },
-          {
             "type": "group",
             "section": {
               "key": "landscape:Background",
@@ -11748,66 +11688,6 @@
                   "subgroups": [
                     {
                       "key": "landscape:Outline",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:Startup",
-              "items": [
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "landscape:Start Button",
-                    "items": [
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "landscape:Start Button Animation",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      }
-                    ],
-                    "rowKeys": [],
-                    "subgroups": [
-                      {
-                        "key": "landscape:Start Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    ]
-                  }
-                }
-              ],
-              "rowKeys": [],
-              "subgroups": [
-                {
-                  "key": "landscape:Start Button",
-                  "items": [
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:Start Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [],
-                  "subgroups": [
-                    {
-                      "key": "landscape:Start Button Animation",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -12783,61 +12663,61 @@
                 ]
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "key": "landscape:Startup",
+        "items": [
           {
-            "key": "landscape:Startup",
+            "type": "group",
+            "section": {
+              "key": "landscape:Start Button",
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Start Button Animation",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [],
+              "subgroups": [
+                {
+                  "key": "landscape:Start Button Animation",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
+            }
+          }
+        ],
+        "rowKeys": [],
+        "subgroups": [
+          {
+            "key": "landscape:Start Button",
             "items": [
               {
                 "type": "group",
                 "section": {
-                  "key": "landscape:Start Button",
-                  "items": [
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:Start Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    }
-                  ],
+                  "key": "landscape:Start Button Animation",
+                  "items": [],
                   "rowKeys": [],
-                  "subgroups": [
-                    {
-                      "key": "landscape:Start Button Animation",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  ]
+                  "subgroups": []
                 }
               }
             ],
             "rowKeys": [],
             "subgroups": [
               {
-                "key": "landscape:Start Button",
-                "items": [
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "landscape:Start Button Animation",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  }
-                ],
+                "key": "landscape:Start Button Animation",
+                "items": [],
                 "rowKeys": [],
-                "subgroups": [
-                  {
-                    "key": "landscape:Start Button Animation",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  }
-                ]
+                "subgroups": []
               }
             ]
           }
