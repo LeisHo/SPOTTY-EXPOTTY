@@ -175,7 +175,7 @@ export function initDebugTools() {
         const b = e.target && e.target.closest && e.target.closest('button');
         if (!b || !b.id) return;
         if (b.id === 'buttonDebugPause') { setPaused(!paused); b.textContent = paused ? 'RESUME' : 'PAUSE'; }
-        else if (b.id === 'buttonDebugPauseLogs') { logsPaused = !logsPaused; window.spxLogsPaused = logsPaused; b.textContent = logsPaused ? 'Resume Logs' : 'Pause Logs'; }
+        else if (b.id === 'buttonDebugPauseLogs') { logsPaused = !logsPaused; window.spxLogsPaused = logsPaused; b.textContent = logsPaused ? 'RESUME LOGS' : 'PAUSE LOGS'; }
         else if (b.id === 'buttonDebugCopyAll') copyAll(b);
         else if (b.id === 'buttonDebugClearAll') clearAll();
         else if (b.id === 'buttonDebugExport') exportLogs(b);

@@ -8052,10 +8052,6 @@
         const dbgBtn = (id, label) => ({ tab, group: DBG, id, type: 'button', label, skipDeviceCheckbox: true });
         const DEBUG_CONTROLS = [
             dbgBtn('buttonDebugPause', 'PAUSE'),
-            dbgBtn('buttonDebugPauseLogs', 'Pause Logs'),
-            dbgBtn('buttonDebugCopyAll', 'Copy All Logs'),
-            dbgBtn('buttonDebugClearAll', 'Clear All Logs'),
-            dbgBtn('buttonDebugExport', 'Export Logs'),
             { tab, group: DBG, id: 'checkboxExportLogsUiButton', type: 'checkbox', label: 'ADD UI BUTTON (On-Screen Export Logs, Top Left)', value: false },
             { tab, group: DBG, id: 'checkboxShowFrameRate', type: 'checkbox', label: 'Show Frame Rate', value: false },
             { tab, group: DBG, id: 'colorFrameRateText', type: 'color', label: 'Frame Rate Text Color:', value: '#ffffff' },
@@ -8065,6 +8061,30 @@
         ];
         renderControlArray(DEBUG_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_DEBUG_CONTROLS', DEBUG_CONTROLS);
+
+        // Log Tools: Pause Logs/Copy All Logs/Clear All Logs/Export Logs, merged into ONE .dev-row
+        // (direct report, 2026-10-25: "they each have their own drag icon right now... their title
+        // isnt capitilized") -- matches the convention just built into the canonical template
+        // (.claude/TEMPLATE_DEV_PANEL.html's own Debug Log Tools cluster): ALL CAPS labels, a single
+        // shared drag handle (one .dev-row -> injectRowDragHandles() gives it exactly one, same as
+        // every other row -- no new drag mechanism needed, just not splitting these into 4 rows).
+        // Inserted right after PAUSE's own row, where these 4 buttons used to individually sit.
+        {
+            const logToolsRow = document.createElement('div');
+            logToolsRow.className = 'dev-row dev-log-tools-row';
+            const mkLogToolBtn = (id, label) => {
+                const b = document.createElement('button');
+                b.type = 'button'; b.id = id; b.className = 'dev-action-button'; b.textContent = label;
+                return b;
+            };
+            logToolsRow.append(
+                mkLogToolBtn('buttonDebugPauseLogs', 'PAUSE LOGS'),
+                mkLogToolBtn('buttonDebugCopyAll', 'COPY ALL LOGS'),
+                mkLogToolBtn('buttonDebugClearAll', 'CLEAR ALL LOGS'),
+                mkLogToolBtn('buttonDebugExport', 'EXPORT LOGS'),
+            );
+            document.getElementById('buttonDebugPause').closest('.dev-row').after(logToolsRow);
+        }
 
         // Snapshot: its own subgroup within Debug (direct request, 2026-10-25, matching Handy Dandies'
         // own Debug > Snapshot group) -- was flat alongside the other Debug buttons above. Built directly

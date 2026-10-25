@@ -991,6 +991,13 @@
         cursor: pointer;
     }
     .dev-action-button:hover { filter: brightness(1.3); }
+    /* Log Tools (Pause/Copy All/Clear All/Export Logs) -- 4 buttons sharing one .dev-row (and
+       therefore one drag handle, per injectRowDragHandles()'s own per-.dev-row selector), evenly
+       distributed. Overrides the base .dev-action-button's own width:100% (which would otherwise
+       make each button want the FULL row, forcing them onto 4 separate wrapped lines) -- scoped to
+       this row only, every other standalone action button in the panel stays full-row-width. */
+    .dev-log-tools-row { gap: 4px; }
+    .dev-log-tools-row .dev-action-button { flex: 1 1 0; width: auto; padding-left: 4px; padding-right: 4px; text-align: center; }
     .dev-text-input {
         width: 52px; background: #000; color: var(--dev-accent-color, #0ff);
         border: 1px solid var(--dev-accent-color, #0ff);
