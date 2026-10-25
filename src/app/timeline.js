@@ -65,11 +65,12 @@ export function createTimeline(canvas, data) {
     const ph = { w: null, op: 1, state: 'idle', raf: 0, last: 0 };
     const phTarget = () => {
         const base = Math.max(1, setting('sliderPlayheadWidth'));
-        if (!setting('checkboxScrubLineDrag')) return { w: base, op: 1 };
+        const baseOp = setting('sliderPlayheadOpacity') / 100; // the Scrub Line Opacity slider
+        if (!setting('checkboxScrubLineDrag')) return { w: base, op: baseOp };
         if (ph.state === 'press') return { w: setting('sliderScrubLineClickWidth'), op: setting('sliderScrubLineClickOpacity') / 100 };
         if (ph.state === 'hover') return { w: setting('sliderScrubLineHoverWidth'), op: setting('sliderScrubLineHoverOpacity') / 100 };
         if (ph.state === 'release') return { w: setting('sliderScrubLineReleaseWidth'), op: 1 };
-        return { w: base, op: 1 };
+        return { w: base, op: baseOp };
     };
     function phStep(now) {
         ph.raf = 0;
@@ -88,7 +89,7 @@ export function createTimeline(canvas, data) {
     }
     // While a state is animating or set, the line uses its width / opacity; otherwise the plain Scrub Line Width.
     const playheadW = () => (ph.raf || ph.state !== 'idle' ? ph.w : Math.max(1, setting('sliderPlayheadWidth')));
-    const phOpacity = () => (ph.raf || ph.state !== 'idle' ? ph.op : 1);
+    const phOpacity = () => (ph.raf || ph.state !== 'idle' ? ph.op : setting('sliderPlayheadOpacity') / 100);
     const W = () => canvas.clientWidth || 1;
     const xOf = v => ((v - viewStart) / span) * W();
 

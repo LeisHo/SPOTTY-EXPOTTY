@@ -7870,6 +7870,7 @@
             { tab, group: TL, id: 'sliderTimelineScaleGap', type: 'slider', label: 'Space Between Graph And Scale Text (Px):', min: -18, max: 120, step: 1, value: 0 },
             { tab, group: TL, id: 'sliderPlayheadWidth', type: 'slider', label: 'Scrub Line Width (Px):', min: 1, max: 24, step: 0.5, value: 2 },
             { tab, group: TL, id: 'sliderPlayheadHeight', type: 'slider', label: 'Scrub Line Height (% Of Timeline):', min: 5, max: 100, step: 1, value: 100 },
+            { tab, group: TL, id: 'sliderPlayheadOpacity', type: 'slider', label: 'Scrub Line Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: TL, id: 'sliderPlayheadStartHeight', type: 'slider', label: 'Scrub Line Start Height (Px Above The Scale Line):', min: 0, max: 400, step: 1, value: 0 },
             // Integer-valued dual-handle control, so it is a 0-100 % log scale: 0 = 2 minutes visible, 100 = the whole timeline.
             { tab, group: TL, id: 'rangeBarTimelineZoomLimits', type: 'range-bar', label: 'Zoom Limits (% zoomed out, log scale):', trackMin: 0, trackMax: 100, unit: '%', defaultValue: { min: 0, max: 100 } },
