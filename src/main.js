@@ -522,6 +522,8 @@ async function boot() {
         applyShuffleIcon(el('spxShuffle').querySelector('svg'), iconIndex(setting('selectShuffleIconStyle')));
         applyShuffleStyle();
         applyVolumeButtonStyle();
+        el('spxApp').style.setProperty('--spx-shuffle-edge', setting('sliderShuffleEdgeOffset') + 'px');
+        el('spxVolume').style.translate = (setting('sliderVolEdgeOffset') - 14) + 'px 0px'; // the whole volume UI; 14 px is the layout's own left offset
         el('spxApp').style.setProperty('--spx-shuffle-on-hover-op', String(setting('sliderShuffleOnHoverOpacity') / 100));
         applyNavIcon(el('spxPrev').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), true);
         applyNavIcon(el('spxNext').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), false);
@@ -727,7 +729,15 @@ async function boot() {
         return x >= r.left - p && x <= r.right + p && y >= r.top - p && y <= r.bottom + p;
     });
     // The timeline canvas sits over the buttons, so the pointer shows as a hand over a button here too (the cursor follows the same test as the click).
-    window.addEventListener('pointermove', e => { if (e.pointerType !== 'touch') el('spxTimeline').style.cursor = buttonUnder(e.clientX, e.clientY) ? 'pointer' : ''; });
+    // Over the scrub line (with Click and Drag on) the pointer is a horizontal resize and the line takes its hover state.
+    let phNear = false;
+    const playheadScreenX = () => el('spxTimeline').getBoundingClientRect().left + timeline.playheadX();
+    window.addEventListener('pointermove', e => {
+        if (e.pointerType === 'touch') return;
+        const near = setting('checkboxScrubLineDrag') && e.target.id === 'spxTimeline' && Math.abs(e.clientX - playheadScreenX()) <= 10;
+        if (near !== phNear && !e.buttons) { phNear = near; timeline.setPlayheadState(near ? 'hover' : 'idle'); }
+        el('spxTimeline').style.cursor = buttonUnder(e.clientX, e.clientY) ? 'pointer' : near ? 'ew-resize' : '';
+    });
     window.addEventListener('pointerdown', e => {
         redirectBtn = null;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
@@ -751,11 +761,16 @@ async function boot() {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         if ((inUi(e.target) || inText(e.target)) && e.target.id !== 'spxTimeline') return;
         ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: e.pointerType, onTimeline: e.target.id === 'spxTimeline', moved: false, t: performance.now() });
+        if (setting('checkboxScrubLineDrag') && e.target.id === 'spxTimeline' && Math.abs(e.clientX - playheadScreenX()) <= 10) {
+            ptrs.get(e.pointerId).playhead = true; timeline.setPlayheadState('press');
+            moveTo(timeline.posAtX(e.clientX - el('spxTimeline').getBoundingClientRect().left));
+        }
         if (ptrs.size === 2) { pinchDist = pinchSpan(); pinching = true; }
     });
     window.addEventListener('pointermove', e => {
         const p = ptrs.get(e.pointerId);
         if (!p) return;
+        if (p.playhead) { moveTo(timeline.posAtX(e.clientX - el('spxTimeline').getBoundingClientRect().left)); p.x = e.clientX; p.y = e.clientY; return; }
         const dx = e.clientX - p.x;
         // a finger must travel its own 'start threshold' before it counts as a drag (a tap is not a drag); a mouse 4 px
         const startPx = p.type === 'mouse' ? 4 : setting('sliderTouchStartThreshold');
@@ -787,12 +802,13 @@ async function boot() {
     });
     const endPointer = e => {
         const p = ptrs.get(e.pointerId);
-        if (p && !p.moved && !p.pan && !pinching && p.onTimeline && e.type === 'pointerup') { // a click/tap on the timeline jumps there
+        if (p && !p.moved && !p.pan && !pinching && !p.playhead && p.onTimeline && e.type === 'pointerup') { // a click/tap on the timeline jumps there
             moveTo(timeline.posAtX(e.clientX - el('spxTimeline').getBoundingClientRect().left));
         }
         ptrs.delete(e.pointerId);
         if (ptrs.size === 2) pinchDist = pinchSpan();
         if (ptrs.size === 0) pinching = false;
+        if (p && p.playhead) { timeline.setPlayheadState('release'); setTimeout(() => timeline.setPlayheadState('idle'), setting('sliderScrubLineAnimTime')); }
     };
     window.addEventListener('pointerup', endPointer);
     el('spxTimeline').addEventListener('contextmenu', e => e.preventDefault()); // right-drag pans; no browser menu over the graph

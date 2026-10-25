@@ -110,7 +110,7 @@
 .spx-vol-label { display: none; font: 600 11px/1 system-ui, sans-serif; color: #c9d1d9; }
 
 /* Previous / next song buttons beside the album cover */
-.spx-nav { z-index: 1; width: 48px; height: 48px; border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-nav, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; }
+.spx-nav { z-index: 4; width: 48px; height: 48px; border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-nav, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; }
 .spx-nav:hover { color: #fff; }
 .spx-nav { width: var(--bs-size, 48px); height: var(--bs-size, 48px); } /* the hit area is the icon's own size (Next And Last Song Buttons > Size) */
 .spx-nav svg { fill: currentColor; flex: none; } /* flex: none so a big icon size is not squeezed into the 48 px button box */
@@ -154,7 +154,7 @@
 .spx-cover:not(.playing) .spx-play-glyph { opacity: var(--spx-glyph-op-paused, 1); }
 .spx-app.no-play-glyph .spx-play-glyph { display: none; }
 /* Shuffle (under the volume icon) */
-.spx-shuffle { position: absolute; right: 14px; top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2); /* the stage's top-right corner; the volume is at the left edge */ width: calc(var(--spx-shuffle-icon, 20px) + 20px); height: calc(var(--spx-shuffle-icon, 20px) + 20px);
+.spx-shuffle { z-index: 4; position: absolute; right: var(--spx-shuffle-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2); /* the stage's top-right corner; the volume is at the left edge */ width: calc(var(--spx-shuffle-icon, 20px) + 20px); height: calc(var(--spx-shuffle-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-shuffle-color, #f2f2f2); opacity: var(--spx-shuffle-off-op, 0.45); cursor: pointer;
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-shuffle-x, 0px) 0; }
 .spx-shuffle svg { width: var(--spx-shuffle-icon, 20px); height: var(--spx-shuffle-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

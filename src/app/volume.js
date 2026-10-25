@@ -30,7 +30,7 @@ export function initVolume({ root, onChange }) {
     try { muted = localStorage.getItem(MUTE_KEY) === '1'; } catch (e) { /* storage blocked */ }
     try { const s = localStorage.getItem(KEY); if (s !== null && Number.isFinite(+s)) vol = clamp(+s, 0, 1); } catch (e) { /* storage blocked */ }
     // The old mute saved volume 0. Now mute is its own flag, so a saved 0 that is not a mute is restored to the level it was muted from.
-    if (vol === 0 && !muted) { try { const pm = +localStorage.getItem('spxVolumeBeforeMute'); vol = pm > 0 ? clamp(pm, 0.05, 1) : 0.5; localStorage.setItem(KEY, String(vol)); } catch (e) { /* storage blocked */ } }
+    if (vol === 0) { try { const pm = +localStorage.getItem('spxVolumeBeforeMute'); vol = pm > 0 ? clamp(pm, 0.05, 1) : 1; localStorage.setItem(KEY, String(vol)); } catch (e) { /* storage blocked */ } }
 
     const cfg = { enabled: true, tol: 30, clickTol: 12, duration: 350, speedAt: () => 1 };
     let target = false;   // should it be open
@@ -105,7 +105,11 @@ export function initVolume({ root, onChange }) {
     // Mute is its own state, not volume 0: the slider keeps its value. The app hears 0 while muted (effective()).
     function effective() { return muted ? 0 : vol; }
     function toggleMute() {
+        if (!muted && vol > 0) { try { localStorage.setItem('spxVolumeBeforeMute', String(vol)); } catch (e) { /* storage blocked */ } }
         muted = !muted;
+        if (!muted && vol === 0) { // unmuting a saved 0: come back to the level it was muted from
+            try { const pm = +localStorage.getItem('spxVolumeBeforeMute'); vol = pm > 0 ? clamp(pm, 0.05, 1) : 1; localStorage.setItem(KEY, String(vol)); } catch (e) { vol = 1; }
+        }
         try { localStorage.setItem(MUTE_KEY, muted ? '1' : '0'); } catch (e) { /* storage blocked */ }
         render();
         onChange(effective());

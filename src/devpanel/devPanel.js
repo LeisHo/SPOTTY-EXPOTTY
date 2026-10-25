@@ -2008,6 +2008,8 @@
     }
     function isDevRowVisible(desktopId) {
         if (devVisibility[desktopId] !== undefined) return devVisibility[desktopId];
+        // Button and Scrub Line animation rows show on every tab by default (they are not per-device tuned, so they mirror Desktop until set)
+        if (/(Anim(Enabled|Time|HoverSize|ClickSize|ReleaseSize|HoverOpacity|ClickOpacity)|ScrubLine(Drag|AnimTime|HoverWidth|ClickWidth|ReleaseWidth|HoverOpacity|ClickOpacity))$/.test(desktopId)) return true;
         return hasStaticDeviceCounterpart(desktopId, 'mobile') || hasStaticDeviceCounterpart(desktopId, 'landscape');
     }
     function isDevRowIndependent(tab, desktopId) {
@@ -7875,6 +7877,21 @@
         ];
         renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_CONTROLS', SPOTTY_CONTROLS);
+        // Click and Drag (Scrub Line): a toggle group with the same animation settings as a standard button animation group
+        const CD = 'Click and Drag';
+        const CD_CONTROLS = [
+            { tab, group: CD, id: 'checkboxScrubLineDrag', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: CD, id: 'sliderScrubLineAnimTime', type: 'slider', label: 'Animation Time (Ms):', min: 0, max: 1500, step: 10, value: 160 },
+            { tab, group: CD, id: 'sliderScrubLineHoverWidth', type: 'slider', label: 'Width On Hover (Px):', min: 1, max: 24, step: 0.5, value: 4 },
+            { tab, group: CD, id: 'sliderScrubLineClickWidth', type: 'slider', label: 'Width On Click (Px):', min: 1, max: 24, step: 0.5, value: 6 },
+            { tab, group: CD, id: 'sliderScrubLineReleaseWidth', type: 'slider', label: 'Width On Release (Px):', min: 1, max: 24, step: 0.5, value: 3 },
+            { tab, group: CD, id: 'sliderScrubLineHoverOpacity', type: 'slider', label: 'Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: CD, id: 'sliderScrubLineClickOpacity', type: 'slider', label: 'Opacity On Click (%):', min: 0, max: 100, step: 1, value: 100 },
+        ];
+        findGroupContent(tab, TL, 'renderSpottyDevControls', 'sliderPlayheadStartHeight').appendChild(createDevGroupElement(CD, tab));
+        renderControlArray(CD_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SCRUBLINE_DRAG', CD_CONTROLS);
+        makeDevGroupToggleable(tab, CD, 'checkboxScrubLineDrag');
 
         // Visual Style: the timeline's style dropdown and the settings that belong to each style, in their own subgroup of Timeline Look
         const VS = 'Visual Style';
@@ -8054,6 +8071,7 @@
             { tab, group: VB, id: 'sliderVolMutedOpacity', type: 'slider', label: 'Muted Icon Opacity (%):', min: 0, max: 100, step: 1, value: 40 },
             { tab, group: VB, id: 'sliderVolIconOpacity', type: 'slider', label: 'Icon Opacity When Not Muted (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: VB, id: 'sliderVolHoverOpacity', type: 'slider', label: 'Icon Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: VB, id: 'sliderVolEdgeOffset', type: 'slider', label: 'Offset From Left Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
             { tab, group: VB, id: 'sliderVolIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 24 },
             { tab, group: VB, id: 'sliderVolIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: VB, id: 'sliderVolCircleRadius', type: 'slider', label: 'Slider Circle Radius (Px):', min: 2, max: 30, step: 0.5, value: 7 },
@@ -8091,6 +8109,7 @@
             { tab, group: SHB, id: 'sliderShuffleOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
             { tab, group: SHB, id: 'sliderShuffleOnOpacity', type: 'slider', label: 'On Icon Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: SHB, id: 'sliderShuffleOnHoverOpacity', type: 'slider', label: 'On Icon Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: SHB, id: 'sliderShuffleEdgeOffset', type: 'slider', label: 'Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
             { tab, group: SHB, id: 'sliderShuffleHoverOpacity', type: 'slider', label: 'Off Icon Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 80 },
             { tab, group: SHB, id: 'sliderShuffleClickTolerance', type: 'slider', label: 'Click Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
             { tab, group: SHB, id: 'sliderShuffleHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },

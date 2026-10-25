@@ -43,7 +43,10 @@ export function createTimeline(canvas, data) {
     const vt = real.map((t, i) => t + i * SPACING_MS);
     const vMin = vt[0], vMax = vt[n - 1];
     const total = Math.max(1, vMax - vMin);
-    const FULL_SPAN = total * 1.02;
+    // The first year starts before the first song: its 1 January must be on the timeline, so the view may reach it.
+    const yearStartMs = new Date(new Date(real[0]).getFullYear(), 0, 1).getTime();
+    const vMinView = Math.min(vMin, yearStartMs);
+    const FULL_SPAN = Math.max(1, vMax - vMinView) * 1.02;
 
     // ---- zoom limits: a 0-100 % log scale from "2 minutes visible" to "whole timeline" ----
     function zoomLimits() {
@@ -54,9 +57,38 @@ export function createTimeline(canvas, data) {
     const clampSpan = s => { const { lo, hi } = zoomLimits(); return clamp(s, lo, hi); };
 
     let span = clampSpan(Math.min(FULL_SPAN, Math.max(MIN_SPAN_MS, setting('sliderDefaultTimelineSpanDays') * DAY)));
-    let viewStart = vMin;
+    let viewStart = vMinView;
     let pos = 0;
 
+    // Scrub Line Click and Drag: the line's width and opacity ease between its idle / hover / press / release values over the
+    // Animation Time, like a button's animation. Idle with the drag off = the plain Scrub Line Width.
+    const ph = { w: null, op: 1, state: 'idle', raf: 0, last: 0 };
+    const phTarget = () => {
+        const base = Math.max(1, setting('sliderPlayheadWidth'));
+        if (!setting('checkboxScrubLineDrag')) return { w: base, op: 1 };
+        if (ph.state === 'press') return { w: setting('sliderScrubLineClickWidth'), op: setting('sliderScrubLineClickOpacity') / 100 };
+        if (ph.state === 'hover') return { w: setting('sliderScrubLineHoverWidth'), op: setting('sliderScrubLineHoverOpacity') / 100 };
+        if (ph.state === 'release') return { w: setting('sliderScrubLineReleaseWidth'), op: 1 };
+        return { w: base, op: 1 };
+    };
+    function phStep(now) {
+        ph.raf = 0;
+        const t = phTarget();
+        if (ph.w === null) { ph.w = t.w; ph.op = t.op; }
+        const dt = Math.max(1, now - (ph.last || now)); ph.last = now;
+        const k = Math.min(1, dt / Math.max(1, setting('sliderScrubLineAnimTime')));
+        ph.w += (t.w - ph.w) * k; ph.op += (t.op - ph.op) * k;
+        draw();
+        if (Math.abs(t.w - ph.w) > 0.02 || Math.abs(t.op - ph.op) > 0.005) ph.raf = requestAnimationFrame(phStep);
+        else ph.last = 0;
+    }
+    function setPlayheadState(st) {
+        ph.state = st;
+        if (!ph.raf) { ph.last = 0; ph.raf = requestAnimationFrame(phStep); }
+    }
+    // While a state is animating or set, the line uses its width / opacity; otherwise the plain Scrub Line Width.
+    const playheadW = () => (ph.raf || ph.state !== 'idle' ? ph.w : Math.max(1, setting('sliderPlayheadWidth')));
+    const phOpacity = () => (ph.raf || ph.state !== 'idle' ? ph.op : 1);
     const W = () => canvas.clientWidth || 1;
     const xOf = v => ((v - viewStart) / span) * W();
 
@@ -79,7 +111,7 @@ export function createTimeline(canvas, data) {
 
     function clampView() {
         const pad = span * 0.05;
-        viewStart = Math.min(vMax + pad - span, Math.max(vMin - pad, viewStart));
+        viewStart = Math.min(vMax + pad - span, Math.max(vMinView - pad, viewStart));
     }
     function keepPlayheadVisible(forceCenter) {
         const x = xOf(posToVt(pos)), w = W();
@@ -501,9 +533,9 @@ export function createTimeline(canvas, data) {
         }
 
         // playhead
-        ctx.globalAlpha = 1;
+        ctx.globalAlpha = phOpacity();
         ctx.fillStyle = playheadColor;
-        const phW = Math.max(1, setting('sliderPlayheadWidth')), phH = Math.max(1, ((h - axisH) * setting('sliderPlayheadHeight')) / 100);
+        const phW = playheadW(), phH = Math.max(1, ((h - axisH) * setting('sliderPlayheadHeight')) / 100);
         const phBottom = (h - axisH) - Math.max(0, setting('sliderPlayheadStartHeight'));
         ctx.fillRect(Math.round(xOf(posToVt(pos)) - phW / 2), phBottom - phH, phW, phH);
 
@@ -539,5 +571,5 @@ export function createTimeline(canvas, data) {
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setDateLine, panPx, get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
+    return { draw, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }
