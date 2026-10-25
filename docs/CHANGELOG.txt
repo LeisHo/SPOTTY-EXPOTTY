@@ -667,6 +667,17 @@ test animation and resumed; Pause Logs stopped new lines; Snapshot 29 lines; fra
 clipboard copy / file download from the buttons, the frame rate number against a real display, the logs on a phone.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  00:44:53 - 00:46:xx EDT  (click to mute; the code-push time is in the ETA History row)
+
+Clicking the volume icon now MUTES (volume 0; the app already treats 0 as muted: clip volume 0, Spotify song paused / not started) and clicking again restores the
+volume from before the mute (kept in localStorage spxVolumeBeforeMute; from a slider-set 0 it restores that remembered value, default 50 %). New UI Layout > Volume Button >
+"Muted Icon Opacity (%)" (default 40, also used when the group is off): the icon fades to that while muted. With the Volume Button group on: a mouse click mutes (the slider opens
+by hover); on touch the first tap opens the slider and a tap on the open icon mutes; with the group off the icon keeps its original click-to-open behaviour.
+Unmuting does not restart the Spotify song by itself (the next song change / the cover starts it). Verified in the built-in browser: 0.6 -> mute (0, level mute, opacity 0.4) ->
+unmute 0.6; opacity follows the slider (15 -> 0.15, 100 -> 1) once transitions are off (the pane throttles the 0.15 s fade, so timed reads lag one step); click at volume 0 restores.
+Not verified: touch.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
