@@ -15,7 +15,7 @@ import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVol
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, embedStatus } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, embedStatus, embedMode } from './app/handoff.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
 import { createBackground } from './app/background.js';
@@ -274,6 +274,8 @@ async function boot() {
         scale('--spx-title-scale', setting('sliderTitleScale'));
         scale('--spx-artist-scale', setting('sliderArtistScale'));
         scale('--spx-meta-scale', setting('sliderMetaScale'));
+        // Shows Spotify's own player so you can see whether it says "Log in" / "Preview" and log in INSIDE it.
+        document.querySelector('.spx-embed').classList.toggle('spx-embed-visible', !!setting('checkboxShowSpotifyPlayer'));
         volume.configure({
             enabled: setting('checkboxVolumeButtonEnabled'),
             muted: setting('sliderVolMutedOpacity'), icon: setting('sliderVolIconSize'), radius: setting('sliderVolCircleRadius'), barW: setting('sliderVolBarWidth'), barL: setting('sliderVolBarLength'),
@@ -580,7 +582,7 @@ async function boot() {
     setInterval(() => {
         if (el('spxPool').hidden) return;
         const p = poolInfo();
-        el('spxPool').textContent = `pool ${p.size} · ready ${p.ready} · no-clip ${p.dead} · embed ${embedStatus()} · playing ${p.playing ?? '-'}`;
+        el('spxPool').textContent = `pool ${p.size} · ready ${p.ready} · no-clip ${p.dead} · embed ${embedStatus()}/${embedMode()} · playing ${p.playing ?? '-'}`;
     }, 250);
 
     initEmbed(el('spxEmbed'), songs[0].id);

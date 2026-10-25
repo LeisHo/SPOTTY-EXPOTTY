@@ -683,6 +683,28 @@ Not verified: touch.
 CORRECTION to the click-to-mute entry above: its header ended "00:46:xx"; measured times are 00:44:53 to 00:46:03 (1m 10s) for the code push.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  (time not measured)
+
+Owner report: logged in to Spotify in the browser, but the player still only plays 30 seconds.
+
+Cause (stated, not measured: the test pane has no Spotify login): the player is a cross-site iframe from open.spotify.com, so it
+only plays full songs if the browser hands it the Spotify login cookie. Browsers that block third-party cookies (Safari, Firefox,
+Chrome in incognito or with the setting on) don't, and the login popup added on 2026-10-24 does not change that. The iframe was
+also invisible, so any "Log in" prompt inside it could never be seen or clicked.
+
+Added:
+- Dev panel > Spotify Handoff > "Show Spotify Player (To Log In Inside It)": shows the real player (320x152, bottom-left) so you can
+  read whether it says "Log in" / "Preview" and click Log in inside it.
+- The app now detects preview vs full: the embed's reported track length <= 31 s is a preview. It is written to the Playback Timing
+  log and shown as `embed ready/preview(30s)` or `/FULL` in the pool overlay (dev panel > Scrub Preload > Show Preload Pool Overlay).
+
+Verified: the toggle changes the player to opacity 1, pointer-events auto, 320x152 and back. NOT verified: that logging in inside
+the visible player produces full songs (no Spotify login available here).
+If it still plays 30 s after logging in inside the visible player, the browser is blocking the iframe's cookie. The fix that does
+not depend on cookies is Spotify's Web Playback SDK (OAuth login, Spotify Premium, and a Client ID from a free Spotify developer
+app); it was offered on 2026-10-24 and not chosen, and is still available.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================

@@ -33,6 +33,7 @@ export const DEFAULTS = {
     checkboxInvertPinch: false,
     checkboxHandoffEnabled: true,
     checkboxSpotifyLoginOnStart: true,
+    checkboxShowSpotifyPlayer: false,
     checkboxLogPlayback: false,
     checkboxLogPreload: false,
     checkboxExportLogsUiButton: false,

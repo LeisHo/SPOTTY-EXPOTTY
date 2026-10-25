@@ -18,9 +18,14 @@ const events = (window.__spxEvents = []);
 export const onPlayState = fn => listeners.add(fn);
 const emit = () => listeners.forEach(fn => fn(playing));
 
+let lastDur = 0; // last non-zero duration (ms) the embed reported
 function handleUpdate(d) {
     const wasPlaying = playing;
     playing = !d.isPaused;
+    if (d.duration > 0 && d.duration !== lastDur) {
+        lastDur = d.duration;
+        logEvent('playback', `EMBED track length ${Math.round(d.duration)}ms = ${d.duration <= 31000 ? 'a 30 s PREVIEW (Spotify is not treating this iframe as logged in)' : 'a FULL song (logged in)'}`);
+    }
     if (d.isPaused !== lastPausedSeen || d.isBuffering !== lastBufSeen) {
         lastPausedSeen = d.isPaused; lastBufSeen = d.isBuffering;
         logEvent('playback', `EMBED ${d.isPaused ? 'paused' : 'PLAYING'}${d.isBuffering ? ' (buffering)' : ''} at ${Math.round(d.position)}ms of ${Math.round(d.duration)}ms`);
@@ -102,3 +107,6 @@ export function toggleTrack(trackId) {
 
 export const isPlaying = () => playing;
 export const embedStatus = () => status;
+// 'preview' when the embed reports a ~30 s duration (not logged in, or the iframe can't see the login),
+// 'full' when it reports a longer one, 'unknown' before the first playing update.
+export const embedMode = () => (lastDur <= 0 ? 'unknown' : lastDur <= 31000 ? 'preview(30s)' : 'FULL');

@@ -7472,6 +7472,7 @@
             { tab, group: 'Scrub Input', id: 'sliderDefaultTimelineSpanDays', type: 'slider', label: 'Starting Timeline Span (Days):', min: 1, max: 5000, step: 1, value: 120 },
             { tab, group: 'Spotify Handoff', id: 'checkboxHandoffEnabled', type: 'checkbox', label: 'Play Real Song When Scrubbing Stops:', value: true },
             { tab, group: 'Spotify Handoff', id: 'checkboxSpotifyLoginOnStart', type: 'checkbox', label: 'Open Spotify Login On First Click (Once A Day):', value: true },
+            { tab, group: 'Spotify Handoff', id: 'checkboxShowSpotifyPlayer', type: 'checkbox', label: 'Show Spotify Player (To Log In Inside It):', value: false },
             { tab, group: 'Spotify Handoff', id: 'sliderHandoffDelay', type: 'slider', label: 'Handoff Delay After Scrubbing Stops (Ms):', min: 100, max: 3000, step: 50, value: 600 },
             { tab, group: TL, id: 'colorTimelineAccent', type: 'color', label: 'Timeline Accent Color:', value: '#1db954' },
             { tab, group: TL, id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
