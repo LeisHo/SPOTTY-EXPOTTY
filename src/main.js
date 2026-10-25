@@ -75,7 +75,7 @@ async function boot() {
                     <div class="spx-vol-label">100%</div>
                 </div></div>
             </div>
-            <button type="button" class="spx-shuffle" id="spxShuffle" aria-label="Shuffle" aria-pressed="false" title="Shuffle off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+            <button type="button" class="spx-shuffle bs-host" id="spxShuffle" aria-label="Shuffle" aria-pressed="false" title="Shuffle off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart"><button type="button" class="spx-start-play" id="spxStartBtn" aria-label="Start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button></div>
             <div class="spx-inspector" id="spxInspectorPanel" hidden>
@@ -229,7 +229,7 @@ async function boot() {
     // 0 % the song player is simply stopped and not started (a full mute); above 0 it plays at its own level.
     const volume = initVolume({
         root: el('spxVolume'),
-        onChange: v => { setMasterVolume(v); setRealVolume(v); if (v === 0) { clearTimeout(handoffTimer); pauseEmbed(); handedOff = false; } },
+        onChange: v => { setMasterVolume(v); setRealVolume(v); }, // muting does not pause the real song (the SDK is silenced; the iframe embed cannot be)
     });
 
     // Evaluate a dev-panel curve ({points, method}) at x in 0..1 -> y in 0..1, with the dev panel's own
@@ -346,8 +346,30 @@ async function boot() {
         };
         hosts.forEach(h => { if (h) BS_PROPS.forEach(k => (v ? h.style.setProperty(k, v[k]) : h.style.removeProperty(k))); });
     }
+    // Shuffle Button Animation: the shuffle button's sizes and opacities, in the same custom properties the other buttons use.
+    function applyShuffleStyle() {
+        const g = id => setting(id), anim = g('checkboxShuffleAnimEnabled'), size = g('sliderShuffleIconSize') + 'px';
+        const v = {
+            '--bs-size': size, '--bs-size-hover': (anim ? g('sliderShuffleAnimHoverSize') : g('sliderShuffleIconSize')) + 'px',
+            '--bs-size-press': (anim ? g('sliderShuffleAnimClickSize') : g('sliderShuffleIconSize')) + 'px', '--bs-size-release': (anim ? g('sliderShuffleAnimReleaseSize') : g('sliderShuffleIconSize')) + 'px',
+            '--bs-op-hover': String(anim ? g('sliderShuffleAnimHoverOpacity') / 100 : 1), '--bs-op-press': String(anim ? g('sliderShuffleAnimClickOpacity') / 100 : 1),
+            '--bs-time': (anim ? g('sliderShuffleAnimTime') : 0) + 'ms',
+        };
+        BS_PROPS.forEach(k => { if (v[k] !== undefined) el('spxShuffle').style.setProperty(k, v[k]); });
+    }
+    // Hover Tolerance (Shuffle, Next/Last, Play): the hover state also shows while the pointer is within the tolerance of the button.
+    const HOVER_TOL = [['spxShuffle', 'sliderShuffleHoverTolerance'], ['spxPrev', 'sliderNavHoverTolerance'], ['spxNext', 'sliderNavHoverTolerance'], ['spxCover', 'sliderPlayHoverTolerance']];
+    const distToRect = (r, x, y) => Math.hypot(Math.max(r.left - x, 0, x - r.right), Math.max(r.top - y, 0, y - r.bottom));
+    document.addEventListener('pointermove', e => {
+        if (e.pointerType === 'touch') return;
+        HOVER_TOL.forEach(([id, key]) => {
+            const h = el(id);
+            if (distToRect(h.getBoundingClientRect(), e.clientX, e.clientY) <= setting(key)) h.classList.add('bs-hover');
+            else if (!h.matches(':hover')) h.classList.remove('bs-hover');
+        });
+    });
     // hover / press / release state classes for the styled buttons (the CSS does the animating)
-    [['Play', [el('spxCover')]], ['Nav', [el('spxPrev'), el('spxNext')]]].forEach(([P, hosts]) => hosts.forEach(h => {
+    [['Play', [el('spxCover')]], ['Nav', [el('spxPrev'), el('spxNext')]], ['Shuffle', [el('spxShuffle')]]].forEach(([P, hosts]) => hosts.forEach(h => {
         h.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') h.classList.add('bs-hover'); });
         h.addEventListener('pointerleave', () => h.classList.remove('bs-hover', 'bs-press'));
         h.addEventListener('pointerdown', () => h.classList.add('bs-press'));
@@ -480,9 +502,12 @@ async function boot() {
         el('spxApp').style.setProperty('--spx-shuffle-on-op', String(setting('sliderShuffleOnOpacity') / 100));
         el('spxApp').style.setProperty('--spx-glyph-op-playing', String(setting('sliderPlayGlyphOpacityPlaying') / 100));
         el('spxApp').style.setProperty('--spx-glyph-op-paused', String(setting('sliderPlayGlyphOpacityPaused') / 100));
+        el('spxApp').style.setProperty('--spx-vol-hover-op', String(setting('sliderVolHoverOpacity') / 100));
+        el('spxApp').style.setProperty('--spx-shuffle-hover-op', String(setting('sliderShuffleHoverOpacity') / 100));
         // Icon styles (the dev panel's Icon Style dropdowns; see iconStyles.js)
         applyVolumeIcon(el('spxVolume').querySelector('.spx-vol-btn svg'), iconIndex(setting('selectVolIconStyle')));
         applyShuffleIcon(el('spxShuffle').querySelector('svg'), iconIndex(setting('selectShuffleIconStyle')));
+        applyShuffleStyle();
         applyNavIcon(el('spxPrev').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), true);
         applyNavIcon(el('spxNext').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), false);
         applyCoverGlyph(el('spxCover').querySelector('.spx-play-glyph svg'), iconIndex(setting('selectPlayIconStyle')), iconIndex(setting('selectPauseIconStyle')));
@@ -680,9 +705,11 @@ async function boot() {
     // on such a cover-up but inside a button's rectangle is the button's click, not a scrub: remember it here and
     // re-dispatch it as a click on that button.
     let redirectBtn = null;
+    // Click Tolerance (Shuffle, Next/Last, Play): each button's hit area grows by its own tolerance in px.
+    const clickTolOf = b => (b.id === 'spxShuffle' ? setting('sliderShuffleClickTolerance') : (b.id === 'spxPrev' || b.id === 'spxNext') ? setting('sliderNavClickTolerance') : b.id === 'spxCover' ? setting('sliderPlayClickTolerance') : 0);
     const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxTitleLink'), el('spxStartBtn')].find(b => {
-        const r = b.getBoundingClientRect();
-        return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+        const r = b.getBoundingClientRect(), p = clickTolOf(b);
+        return x >= r.left - p && x <= r.right + p && y >= r.top - p && y <= r.bottom + p;
     });
     window.addEventListener('pointerdown', e => {
         redirectBtn = null;
@@ -698,6 +725,7 @@ async function boot() {
     }, true);
     window.addEventListener('pointerdown', e => {
         if (redirectBtn) return;
+        if (volume.owns(e)) return; // the volume slider's click tolerance: a volume change, never a scrub or a song change
         // Right-button drag on the timeline pans the view: no scrub, no zoom, no jump
         if (e.pointerType === 'mouse' && e.button === 2) {
             if (e.target.id === 'spxTimeline') ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: 'mouse', onTimeline: true, moved: false, pan: true, t: performance.now() });
@@ -908,18 +936,23 @@ async function boot() {
         stopClip();
         toggleTrack(songs[idx].id);
     }
-    el('spxCover').addEventListener('click', togglePlayback);
+    let coverDown = null;
+    el('spxCover').addEventListener('pointerdown', e => { coverDown = [e.clientX, e.clientY]; });
+    el('spxCover').addEventListener('click', e => {
+        if (coverDown && e.detail > 0 && Math.hypot(e.clientX - coverDown[0], e.clientY - coverDown[1]) > 4) return; // dragged to select: not a click
+        togglePlayback();
+    });
     // prev/next are placed by the engine relative to the cover (so they follow it, scale and offset included, and stay level with
     // its centre); this shifts each one sideways until it is 14 px from the browser edge (the button is 48 px wide). Read from
     // the cover's real on-screen box, so a scaled / moved cover is handled too. (The previous button's own left edge sits at
     // the cover's left edge - 48, the next one's at the cover's right edge.)
     function placeNav() {
         const r = el('spxCover').getBoundingClientRect();
-        const edge = setting('sliderNavEdgeOffset');
+        const prevEdge = setting('sliderLastButtonEdgeOffset'), nextEdge = setting('sliderNextButtonEdgeOffset');
         // The buttons are as wide as their own icon (the hit area = the icon), so the real widths place them, not a fixed 48 px
         const pw = el('spxPrev').offsetWidth, nw = el('spxNext').offsetWidth;
-        el('spxPrev').style.translate = `${edge - (r.left - pw)}px 0px`;
-        el('spxNext').style.translate = `${(innerWidth - edge - nw) - r.right}px 0px`;
+        el('spxPrev').style.translate = `${prevEdge - (r.left - pw)}px 0px`;
+        el('spxNext').style.translate = `${(innerWidth - nextEdge - nw) - r.right}px 0px`;
     }
     // The cover's scale grows it around transform-origin. When the engine centres the cover (anchor center), it has already moved
     // the box by -50% of its own width / height, so scaling around the box's middle pushes it off centre (at scale 1.5 the centre

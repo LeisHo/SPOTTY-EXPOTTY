@@ -165,5 +165,5 @@ export function initVolume({ root, onChange }) {
     render();
     onChange(vol); // apply the remembered volume
     configure({ enabled: true, ...DEFAULT_LOOK, tol: 30, duration: 350 });
-    return { get: () => vol, set, open, configure, toggleMute, nudge: d => set(vol + d), isOpen: () => target };
+    return { get: () => vol, set, open, configure, toggleMute, nudge: d => set(vol + d), isOpen: () => target, owns: e => !!target && distToTrack(e) <= cfg.clickTol };
 }

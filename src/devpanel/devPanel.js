@@ -8053,6 +8053,7 @@
             { tab, group: VB, id: 'checkboxVolumeButtonEnabled', type: 'checkbox', label: 'Enabled (Off = Click The Icon, Default Look)', value: true },
             { tab, group: VB, id: 'sliderVolMutedOpacity', type: 'slider', label: 'Muted Icon Opacity (%):', min: 0, max: 100, step: 1, value: 40 },
             { tab, group: VB, id: 'sliderVolIconOpacity', type: 'slider', label: 'Icon Opacity When Not Muted (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: VB, id: 'sliderVolHoverOpacity', type: 'slider', label: 'Icon Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: VB, id: 'sliderVolIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 24 },
             { tab, group: VB, id: 'sliderVolIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: VB, id: 'sliderVolCircleRadius', type: 'slider', label: 'Slider Circle Radius (Px):', min: 2, max: 30, step: 0.5, value: 7 },
@@ -8089,6 +8090,9 @@
             { tab, group: SHB, id: 'sliderShuffleIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: SHB, id: 'sliderShuffleOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
             { tab, group: SHB, id: 'sliderShuffleOnOpacity', type: 'slider', label: 'On Icon Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: SHB, id: 'sliderShuffleHoverOpacity', type: 'slider', label: 'Off Icon Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 80 },
+            { tab, group: SHB, id: 'sliderShuffleClickTolerance', type: 'slider', label: 'Click Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
+            { tab, group: SHB, id: 'sliderShuffleHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
             { tab, group: SHB, id: 'colorShuffleIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },
             { tab, group: SHB, id: 'colorShuffleOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
             { tab, group: SHB, id: 'selectShuffleIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: ICON_STYLE_OPTIONS },
@@ -8096,6 +8100,21 @@
         renderControlArray(SHB_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_SHUFFLE_CONTROLS', SHB_CONTROLS);
         makeDevGroupToggleable(tab, SHB, 'checkboxShuffleButtonEnabled');
+        // Shuffle Button Animation: the same hover / click / release animation as the Play and Next/Last buttons
+        const SHBA = 'Shuffle Button Animation';
+        const SHBA_CONTROLS = [
+            { tab, group: SHBA, id: 'checkboxShuffleAnimEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: SHBA, id: 'sliderShuffleAnimTime', type: 'slider', label: 'Animation Time (Ms):', min: 0, max: 1500, step: 10, value: 160 },
+            { tab, group: SHBA, id: 'sliderShuffleAnimHoverSize', type: 'slider', label: 'Size On Hover (Px):', min: 8, max: 120, step: 1, value: 24 },
+            { tab, group: SHBA, id: 'sliderShuffleAnimClickSize', type: 'slider', label: 'Size On Click (Px):', min: 8, max: 120, step: 1, value: 18 },
+            { tab, group: SHBA, id: 'sliderShuffleAnimReleaseSize', type: 'slider', label: 'Size On Release (Px):', min: 8, max: 120, step: 1, value: 20 },
+            { tab, group: SHBA, id: 'sliderShuffleAnimHoverOpacity', type: 'slider', label: 'Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: SHBA, id: 'sliderShuffleAnimClickOpacity', type: 'slider', label: 'Opacity On Click (%):', min: 0, max: 100, step: 1, value: 100 },
+        ];
+        findGroupContent(tab, SHB, 'renderSpottyDevControls', 'checkboxShuffleButtonEnabled').appendChild(createDevGroupElement(SHBA, tab));
+        renderControlArray(SHBA_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SHUFFLE_ANIM', SHBA_CONTROLS);
+        makeDevGroupToggleable(tab, SHBA, 'checkboxShuffleAnimEnabled');
 
         // ---- UI Layout: Play Button + Next And Last Song Buttons (same settings; each toggleable, each with a toggleable Button Animation subgroup) ----
         // The button controls (Play / Pause, Next Song, Last Song) exist so a hotkey can be assigned to them in the dev panel.
@@ -8110,14 +8129,21 @@
             const d = BTN_DEF[P];
             uiLayoutContent.appendChild(createDevGroupElement(G, tab));
             const main = [
-                ...(P === 'Nav' ? [{ tab, group: G, id: 'sliderNavEdgeOffset', type: 'slider', label: 'Edge Offset From Browser (Px):', min: 0, max: 300, step: 1, value: 14 }] : []),
                 ...(P === 'Play' ? [
                     { tab, group: G, id: 'sliderPlayGlyphOpacityPlaying', type: 'slider', label: 'Icon Opacity When Playing (%):', min: 0, max: 100, step: 1, value: 100 },
                     { tab, group: G, id: 'sliderPlayGlyphOpacityPaused', type: 'slider', label: 'Icon Opacity When Paused (%):', min: 0, max: 100, step: 1, value: 100 },
                     { tab, group: G, id: 'selectPlayIconStyle', type: 'select', label: 'Play Icon Style:', value: '0', options: ICON_STYLE_OPTIONS },
                     { tab, group: G, id: 'selectPauseIconStyle', type: 'select', label: 'Pause Icon Style:', value: '0', options: ICON_STYLE_OPTIONS },
+                    { tab, group: G, id: 'sliderPlayClickTolerance', type: 'slider', label: 'Click Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
+                    { tab, group: G, id: 'sliderPlayHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
                 ] : []),
                 ...(P === 'Nav' ? [{ tab, group: G, id: 'selectNavIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: ICON_STYLE_OPTIONS }] : []),
+                ...(P === 'Nav' ? [
+                    { tab, group: G, id: 'sliderLastButtonEdgeOffset', type: 'slider', label: 'Last Button Offset From Left Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
+                    { tab, group: G, id: 'sliderNextButtonEdgeOffset', type: 'slider', label: 'Next Button Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
+                    { tab, group: G, id: 'sliderNavClickTolerance', type: 'slider', label: 'Click Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
+                    { tab, group: G, id: 'sliderNavHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
+                ] : []),
                 { tab, group: G, id: 'checkbox' + P + 'ButtonEnabled', type: 'checkbox', label: 'Enabled', value: d.on },
                 { tab, group: G, id: 'color' + P + 'Button', type: 'color', label: 'Color:', value: d.color },
                 { tab, group: G, id: 'slider' + P + 'ButtonSize', type: 'slider', label: 'Size (Px):', min: 8, max: 300, step: 1, value: d.size },

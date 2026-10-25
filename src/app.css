@@ -91,6 +91,7 @@
 .spx-vol-btn:hover { color: #fff; }
 .spx-vol-btn { transition: opacity .15s; }
 .spx-vol-btn:not([data-level="mute"]) { opacity: var(--spx-vol-op, 1); }
+.spx-vol-btn:not([data-level="mute"]):hover { opacity: var(--spx-vol-hover-op, 1); }
 .spx-vol-btn[data-level="mute"] { opacity: var(--spx-vol-muted-opacity, 0.4); } /* dev panel: UI Layout > Volume Button > Muted Icon Opacity */
 .spx-vol-btn svg { width: var(--spx-vol-icon); height: var(--spx-vol-icon); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-vol-btn svg .spk { fill: currentColor; stroke: none; }
@@ -118,6 +119,9 @@
 
 /* Shadows switched off from the dev panel (UI Layout > Shadows): classes set on #spxApp in applyLook() */
 .spx-app.no-shadow-cover .spx-cover { box-shadow: none; }
+/* Text and cover can be selected by dragging across them (the stage itself is user-select: none). The title link must not drag as a link. */
+.spx-title, .spx-artist, .spx-meta, .spx-cover, .spx-title a { user-select: text; -webkit-user-select: text; }
+.spx-cover img, .spx-title a { -webkit-user-drag: none; }
 .spx-app.no-shadow-vol .spx-vol-btn, .spx-app.no-shadow-vol .spx-vol-panel { filter: none; }
 .spx-app.no-shadow-vol .spx-vol-thumb { box-shadow: none; }
 .spx-app.no-shadow-nav .spx-nav { filter: none; }
@@ -154,7 +158,7 @@
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-shuffle-color, #f2f2f2); opacity: var(--spx-shuffle-off-op, 0.45); cursor: pointer;
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-shuffle-x, 0px) 0; }
 .spx-shuffle svg { width: var(--spx-shuffle-icon, 20px); height: var(--spx-shuffle-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.spx-shuffle:hover { opacity: 0.8; }
+.spx-shuffle:hover { opacity: var(--spx-shuffle-hover-op, 0.8); }
 .spx-shuffle[aria-pressed="true"] { opacity: var(--spx-shuffle-on-op, 1); color: var(--spx-shuffle-on-color, #1db954); }
 .spx-shuffle[hidden] { display: none; }
 .spx-vol-btn[aria-expanded="true"] ~ .spx-shuffle { opacity: 0; pointer-events: none; } /* the slider drops over this spot */
