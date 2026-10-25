@@ -941,7 +941,7 @@ async function boot() {
     });
     applyLook();
     render();
-    timeline.setPos(0);
+    timeline.setPos(pos); // the app's position (a random start sets it): the scrub line must follow it, not reset to the start
     timeline.draw();
     schedulePreload();
     initDebugTools(); // Debug group: PAUSE, Pause/Copy/Clear/Export Logs, frame rate, snapshot (debugTools.js)
