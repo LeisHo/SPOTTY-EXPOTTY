@@ -164,6 +164,19 @@
     "checkboxTxtAlbumDateOutlineEnabled": false,
     "colorTxtAlbumDateOutlineColor": "#000000",
     "sliderTxtAlbumDateOutlineThickness": 2,
+    "checkboxSongBarEnabled": false,
+    "sliderSongBarHeight": 4,
+    "colorSongBarFill": "#1db954",
+    "colorSongBarEmpty": "#3a3f47",
+    "sliderSongBarClickTol": 6,
+    "sliderSongBarOpacity": 100,
+    "checkboxSongBarMarker": false,
+    "sliderSongBarMarkerRadius": 6,
+    "sliderSongBarMarkerOpacity": 100,
+    "checkboxSongBarAnimEnabled": false,
+    "sliderSongBarHoverOpacity": 100,
+    "sliderSongBarClickOpacity": 100,
+    "sliderSongBarAnimTime": 160,
     "checkboxVolumeButtonEnabled": true,
     "sliderVolMutedOpacity": 45,
     "sliderVolIconOpacity": 80,
@@ -381,9 +394,9 @@
   },
   "layout": {
     "left": 67,
-    "top": 52,
-    "width": 261,
-    "height": 642
+    "top": 258,
+    "width": 468,
+    "height": 436
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -4726,6 +4739,107 @@
                 }
               ]
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Song Timeline",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderSongBarHeight"
+                },
+                {
+                  "type": "row",
+                  "key": "colorSongBarFill"
+                },
+                {
+                  "type": "row",
+                  "key": "colorSongBarEmpty"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSongBarClickTol"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSongBarOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxSongBarMarker"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSongBarMarkerRadius"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSongBarMarkerOpacity"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Song Timeline Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarClickOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongBarAnimTime"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderSongBarHoverOpacity",
+                      "sliderSongBarClickOpacity",
+                      "sliderSongBarAnimTime"
+                    ],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [
+                "sliderSongBarHeight",
+                "colorSongBarFill",
+                "colorSongBarEmpty",
+                "sliderSongBarClickTol",
+                "sliderSongBarOpacity",
+                "checkboxSongBarMarker",
+                "sliderSongBarMarkerRadius",
+                "sliderSongBarMarkerOpacity"
+              ],
+              "subgroups": [
+                {
+                  "key": "desktop:Song Timeline Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarAnimTime"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderSongBarHoverOpacity",
+                    "sliderSongBarClickOpacity",
+                    "sliderSongBarAnimTime"
+                  ],
+                  "subgroups": []
+                }
+              ]
+            }
           }
         ],
         "rowKeys": [
@@ -7687,6 +7801,104 @@
                 ],
                 "rowKeys": [
                   "colorShadowTitleLift"
+                ],
+                "subgroups": []
+              }
+            ]
+          },
+          {
+            "key": "desktop:Song Timeline",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderSongBarHeight"
+              },
+              {
+                "type": "row",
+                "key": "colorSongBarFill"
+              },
+              {
+                "type": "row",
+                "key": "colorSongBarEmpty"
+              },
+              {
+                "type": "row",
+                "key": "sliderSongBarClickTol"
+              },
+              {
+                "type": "row",
+                "key": "sliderSongBarOpacity"
+              },
+              {
+                "type": "row",
+                "key": "checkboxSongBarMarker"
+              },
+              {
+                "type": "row",
+                "key": "sliderSongBarMarkerRadius"
+              },
+              {
+                "type": "row",
+                "key": "sliderSongBarMarkerOpacity"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Song Timeline Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongBarAnimTime"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderSongBarHoverOpacity",
+                    "sliderSongBarClickOpacity",
+                    "sliderSongBarAnimTime"
+                  ],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "sliderSongBarHeight",
+              "colorSongBarFill",
+              "colorSongBarEmpty",
+              "sliderSongBarClickTol",
+              "sliderSongBarOpacity",
+              "checkboxSongBarMarker",
+              "sliderSongBarMarkerRadius",
+              "sliderSongBarMarkerOpacity"
+            ],
+            "subgroups": [
+              {
+                "key": "desktop:Song Timeline Animation",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderSongBarHoverOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSongBarClickOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSongBarAnimTime"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderSongBarHoverOpacity",
+                  "sliderSongBarClickOpacity",
+                  "sliderSongBarAnimTime"
                 ],
                 "subgroups": []
               }
@@ -10927,6 +11139,15 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Brackets Smaller Text",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [],
@@ -11243,6 +11464,12 @@
                       "subgroups": []
                     }
                   ]
+                },
+                {
+                  "key": "mobile:Brackets Smaller Text",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
                 }
               ]
             }
@@ -12345,10 +12572,102 @@
           {
             "type": "group",
             "section": {
-              "key": "mobile:Brackets Smaller Text",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
+              "key": "mobile:Song Timeline",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongBarHeight"
+                },
+                {
+                  "type": "row",
+                  "key": "colorMobileSongBarFill"
+                },
+                {
+                  "type": "row",
+                  "key": "colorMobileSongBarEmpty"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongBarClickTol"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongBarOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxMobileSongBarMarker"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongBarMarkerRadius"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongBarMarkerOpacity"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Song Timeline Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileSongBarHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileSongBarClickOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileSongBarAnimTime"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileSongBarHoverOpacity",
+                      "sliderMobileSongBarClickOpacity",
+                      "sliderMobileSongBarAnimTime"
+                    ],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [
+                "sliderMobileSongBarHeight",
+                "colorMobileSongBarFill",
+                "colorMobileSongBarEmpty",
+                "sliderMobileSongBarClickTol",
+                "sliderMobileSongBarOpacity",
+                "checkboxMobileSongBarMarker",
+                "sliderMobileSongBarMarkerRadius",
+                "sliderMobileSongBarMarkerOpacity"
+              ],
+              "subgroups": [
+                {
+                  "key": "mobile:Song Timeline Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongBarHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongBarClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongBarAnimTime"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileSongBarHoverOpacity",
+                    "sliderMobileSongBarClickOpacity",
+                    "sliderMobileSongBarAnimTime"
+                  ],
+                  "subgroups": []
+                }
+              ]
             }
           }
         ],
@@ -12683,6 +13002,15 @@
                     }
                   ]
                 }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Brackets Smaller Text",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [],
@@ -12999,6 +13327,12 @@
                     "subgroups": []
                   }
                 ]
+              },
+              {
+                "key": "mobile:Brackets Smaller Text",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
               }
             ]
           },
@@ -14086,10 +14420,102 @@
             ]
           },
           {
-            "key": "mobile:Brackets Smaller Text",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
+            "key": "mobile:Song Timeline",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderMobileSongBarHeight"
+              },
+              {
+                "type": "row",
+                "key": "colorMobileSongBarFill"
+              },
+              {
+                "type": "row",
+                "key": "colorMobileSongBarEmpty"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileSongBarClickTol"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileSongBarOpacity"
+              },
+              {
+                "type": "row",
+                "key": "checkboxMobileSongBarMarker"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileSongBarMarkerRadius"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileSongBarMarkerOpacity"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Song Timeline Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongBarHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongBarClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongBarAnimTime"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileSongBarHoverOpacity",
+                    "sliderMobileSongBarClickOpacity",
+                    "sliderMobileSongBarAnimTime"
+                  ],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "sliderMobileSongBarHeight",
+              "colorMobileSongBarFill",
+              "colorMobileSongBarEmpty",
+              "sliderMobileSongBarClickTol",
+              "sliderMobileSongBarOpacity",
+              "checkboxMobileSongBarMarker",
+              "sliderMobileSongBarMarkerRadius",
+              "sliderMobileSongBarMarkerOpacity"
+            ],
+            "subgroups": [
+              {
+                "key": "mobile:Song Timeline Animation",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderMobileSongBarHoverOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileSongBarClickOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileSongBarAnimTime"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderMobileSongBarHoverOpacity",
+                  "sliderMobileSongBarClickOpacity",
+                  "sliderMobileSongBarAnimTime"
+                ],
+                "subgroups": []
+              }
+            ]
           }
         ]
       },
@@ -15479,6 +15905,15 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Brackets Smaller Text",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [],
@@ -15795,6 +16230,12 @@
                       "subgroups": []
                     }
                   ]
+                },
+                {
+                  "key": "landscape:Brackets Smaller Text",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
                 }
               ]
             }
@@ -16897,10 +17338,102 @@
           {
             "type": "group",
             "section": {
-              "key": "landscape:Brackets Smaller Text",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
+              "key": "landscape:Song Timeline",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongBarHeight"
+                },
+                {
+                  "type": "row",
+                  "key": "colorLandscapeSongBarFill"
+                },
+                {
+                  "type": "row",
+                  "key": "colorLandscapeSongBarEmpty"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongBarClickTol"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongBarOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxLandscapeSongBarMarker"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongBarMarkerRadius"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongBarMarkerOpacity"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Song Timeline Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeSongBarHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeSongBarClickOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeSongBarAnimTime"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeSongBarHoverOpacity",
+                      "sliderLandscapeSongBarClickOpacity",
+                      "sliderLandscapeSongBarAnimTime"
+                    ],
+                    "subgroups": []
+                  }
+                }
+              ],
+              "rowKeys": [
+                "sliderLandscapeSongBarHeight",
+                "colorLandscapeSongBarFill",
+                "colorLandscapeSongBarEmpty",
+                "sliderLandscapeSongBarClickTol",
+                "sliderLandscapeSongBarOpacity",
+                "checkboxLandscapeSongBarMarker",
+                "sliderLandscapeSongBarMarkerRadius",
+                "sliderLandscapeSongBarMarkerOpacity"
+              ],
+              "subgroups": [
+                {
+                  "key": "landscape:Song Timeline Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongBarHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongBarClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongBarAnimTime"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeSongBarHoverOpacity",
+                    "sliderLandscapeSongBarClickOpacity",
+                    "sliderLandscapeSongBarAnimTime"
+                  ],
+                  "subgroups": []
+                }
+              ]
             }
           }
         ],
@@ -17235,6 +17768,15 @@
                     }
                   ]
                 }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Brackets Smaller Text",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [],
@@ -17551,6 +18093,12 @@
                     "subgroups": []
                   }
                 ]
+              },
+              {
+                "key": "landscape:Brackets Smaller Text",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
               }
             ]
           },
@@ -18638,10 +19186,102 @@
             ]
           },
           {
-            "key": "landscape:Brackets Smaller Text",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
+            "key": "landscape:Song Timeline",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongBarHeight"
+              },
+              {
+                "type": "row",
+                "key": "colorLandscapeSongBarFill"
+              },
+              {
+                "type": "row",
+                "key": "colorLandscapeSongBarEmpty"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongBarClickTol"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongBarOpacity"
+              },
+              {
+                "type": "row",
+                "key": "checkboxLandscapeSongBarMarker"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongBarMarkerRadius"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongBarMarkerOpacity"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Song Timeline Animation",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongBarHoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongBarClickOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongBarAnimTime"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeSongBarHoverOpacity",
+                    "sliderLandscapeSongBarClickOpacity",
+                    "sliderLandscapeSongBarAnimTime"
+                  ],
+                  "subgroups": []
+                }
+              }
+            ],
+            "rowKeys": [
+              "sliderLandscapeSongBarHeight",
+              "colorLandscapeSongBarFill",
+              "colorLandscapeSongBarEmpty",
+              "sliderLandscapeSongBarClickTol",
+              "sliderLandscapeSongBarOpacity",
+              "checkboxLandscapeSongBarMarker",
+              "sliderLandscapeSongBarMarkerRadius",
+              "sliderLandscapeSongBarMarkerOpacity"
+            ],
+            "subgroups": [
+              {
+                "key": "landscape:Song Timeline Animation",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeSongBarHoverOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeSongBarClickOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeSongBarAnimTime"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderLandscapeSongBarHoverOpacity",
+                  "sliderLandscapeSongBarClickOpacity",
+                  "sliderLandscapeSongBarAnimTime"
+                ],
+                "subgroups": []
+              }
+            ]
           }
         ]
       },
@@ -19120,7 +19760,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": true,
+    "desktop:UI Layout": false,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -19145,7 +19785,9 @@
     "desktop:Volume Shadow": true,
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
-    "desktop:Scrub Audio": false,
+    "desktop:Song Timeline": false,
+    "desktop:Song Timeline Animation": false,
+    "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
     "desktop:No Preview": true,
@@ -19188,6 +19830,7 @@
     "mobile:Artist": false,
     "mobile:Album & Date": false,
     "mobile:Outline": false,
+    "mobile:Brackets Smaller Text": false,
     "mobile:New Group (7)": true,
     "mobile:Volume Button": true,
     "mobile:Volume Button Animation": false,
@@ -19204,7 +19847,8 @@
     "mobile:Volume Shadow": false,
     "mobile:Previous / Next Shadow": false,
     "mobile:Title Lift Shadow": false,
-    "mobile:Brackets Smaller Text": false,
+    "mobile:Song Timeline": false,
+    "mobile:Song Timeline Animation": false,
     "mobile:Scrub Audio": false,
     "mobile:New Group (2)": false,
     "mobile:Spotify Handoff": true,
@@ -19248,6 +19892,7 @@
     "landscape:Artist": false,
     "landscape:Album & Date": false,
     "landscape:Outline": false,
+    "landscape:Brackets Smaller Text": false,
     "landscape:New Group (7)": false,
     "landscape:Volume Button": false,
     "landscape:Volume Button Animation": false,
@@ -19264,7 +19909,8 @@
     "landscape:Volume Shadow": false,
     "landscape:Previous / Next Shadow": false,
     "landscape:Title Lift Shadow": false,
-    "landscape:Brackets Smaller Text": false,
+    "landscape:Song Timeline": false,
+    "landscape:Song Timeline Animation": false,
     "landscape:Scrub Audio": false,
     "landscape:New Group (2)": false,
     "landscape:Spotify Handoff": false,
@@ -19782,7 +20428,33 @@
     "sliderLandscapeScrubLineReleaseWidth": null,
     "sliderLandscapeScrubLineHoverOpacity": null,
     "sliderLandscapeScrubLineClickOpacity": null,
-    "landscape:Click and Drag": null
+    "landscape:Click and Drag": null,
+    "sliderMobileSongBarHeight": null,
+    "colorMobileSongBarFill": null,
+    "colorMobileSongBarEmpty": null,
+    "sliderMobileSongBarClickTol": null,
+    "sliderMobileSongBarOpacity": null,
+    "checkboxMobileSongBarMarker": null,
+    "sliderMobileSongBarMarkerRadius": null,
+    "sliderMobileSongBarMarkerOpacity": null,
+    "sliderMobileSongBarHoverOpacity": null,
+    "sliderMobileSongBarClickOpacity": null,
+    "sliderMobileSongBarAnimTime": null,
+    "mobile:Song Timeline Animation": null,
+    "mobile:Song Timeline": null,
+    "sliderLandscapeSongBarHeight": null,
+    "colorLandscapeSongBarFill": null,
+    "colorLandscapeSongBarEmpty": null,
+    "sliderLandscapeSongBarClickTol": null,
+    "sliderLandscapeSongBarOpacity": null,
+    "checkboxLandscapeSongBarMarker": null,
+    "sliderLandscapeSongBarMarkerRadius": null,
+    "sliderLandscapeSongBarMarkerOpacity": null,
+    "sliderLandscapeSongBarHoverOpacity": null,
+    "sliderLandscapeSongBarClickOpacity": null,
+    "sliderLandscapeSongBarAnimTime": null,
+    "landscape:Song Timeline Animation": null,
+    "landscape:Song Timeline": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
