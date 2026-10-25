@@ -735,6 +735,26 @@ CORRECTION to the entry above: its header said "01:23:19; non-dev settings 01:2x
 01:23:19, docs push 01:24:24 (8m 33s from start to the docs push). The 01:26:19 was invented (fourth time: read `date` first, then write the time).
 
 --------------------------------------------------------------------------------
+2026-10-25  -  01:28:28 -  (see the ETA History row for the measured end)  Spotify login + Web Playback SDK
+
+Why: the iframe embed cannot see the user's Spotify login when the browser blocks third-party cookies, so it stays on 30 s previews. The Web Playback SDK plays under the page's OWN login instead.
+Built (all inert until src/app/spotifyConfig.js has a Client ID; the iframe embed remains the fallback):
+- spotifyAuth.js: Authorization Code + PKCE (no secret) in a popup; redirect_uri = <origin>/ ; tokens in localStorage (spxSpotifyTokens); refresh with the refresh token; main.js finishes the
+  login at boot when the page is the redirect (?code=&state=, state checked) and closes the popup. Scopes: streaming, user-read-email, user-read-private, user-read-playback-state, user-modify-playback-state.
+- sdkPlayer.js: Spotify.Player named "SPOTTY EXPOTTY"; plays a track with PUT /v1/me/player/play?device_id=; pause / resume / seek / setVolume / activateElement; end of song detected from the
+  state (paused at 0 with the track in previous_tracks); account_error (not Premium) etc. set a "failed" status and the embed keeps playing.
+- handoff.js: playTrack / pauseEmbed / toggleTrack use the SDK whenever it is ready (SDK refusal, e.g. 403, falls back to the iframe); song end -> shuffle hook or loop; embedMode() reports
+  'FULL (Web Playback SDK)'. The volume slider now also scales the REAL song through the SDK (setRealVolume); 0 % still pauses.
+- Login: the first click opens the Spotify authorize popup while there is no stored login (Spotify Handoff > "Open Spotify Login On First Click"); dev panel > Spotify Handoff > "Log In With Spotify"
+  button (shows Client ID not set / Log in / Logged in: full songs, click to log out). Debug snapshot > Playback shows the player mode and SDK status; the Playback Timing Log shows SDK lines.
+Setup the owner must do: Spotify dashboard app, tick Web Playback SDK, Redirect URIs EXACTLY https://spottypotty.vercel.app/ and http://127.0.0.1:8000/ (Spotify rejects http://localhost), paste the
+Client ID into spotifyConfig.js. Premium account needed. For local testing open http://127.0.0.1:8000/index.html?dev=1 (not localhost).
+Verified in the built-in browser against FAKES only (no Client ID, no Spotify account): the PKCE challenge matches the RFC 7636 test vector; the authorize URL (client_id, S256, scopes, redirect);
+the code-for-token exchange body; a wrong state is rejected; refresh keeps the refresh token; with a fake Spotify.Player: ready -> status ready, play -> PUT /me/player/play with the device id, state events
+-> isPlaying, end-of-song -> loop play request, pause / volume / activate / resume reach the player, a 403 falls back to the embed, account_error -> failed status. NOT verified: a real login, real
+audio, Premium, the popup closing itself, token refresh against Spotify.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
