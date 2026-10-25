@@ -6,4 +6,4 @@
 //   https://spottypotty.vercel.app/
 //   http://127.0.0.1:8000/
 // then paste the Client ID below. Playing full songs through the SDK needs a Spotify Premium account.
-export const SPOTIFY_CLIENT_ID = '';
+export const SPOTIFY_CLIENT_ID = '402c7d78d7e94af481b86d21f81490d7';
