@@ -787,6 +787,12 @@ Direct request: the title, artist, and album/date font sizes needed their min px
 Not verified in a browser: only node --check was run. The Mobile and Landscape tabs were not checked either.
 Commit 103b201 pushed to origin/main.
 
+--------------------------------------------------------------------------------
+2026-10-25  -  (time not measured)
+
+Direct request: the browser tab name should read "SpottyPotty". index.html line 6: <title> changed from "SPOTTY EXPOTTY" to "SpottyPotty". The visible page heading and the dev panel title were not changed.
+Not committed at the time of this entry. Not verified in a browser.
+
 ================================================================================
 APPEND-ONLY. Never rewrite, reorder, or delete a prior entry, even to fix
 formatting (CLAUDE.md §4a / Never-Skip rule #3). If an entry needs a
