@@ -641,6 +641,11 @@ centred in that strip. Verified: gap 40 set, canvas height unchanged; no-preview
 Not verified: that the login popup actually opens in a real browser (blocked in the test pane), whether it unlocks full songs.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  00:37 AM (correction)
+
+CORRECTION to the entry above: its header ended "00:3x"; the measured times are 00:35:42 to 00:37:17 (1m 35s) for the three items' code push.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
