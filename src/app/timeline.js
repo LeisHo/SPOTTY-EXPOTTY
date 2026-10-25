@@ -150,8 +150,9 @@ export function createTimeline(canvas, data) {
         const startX = xOf(vMin);
         if (startX > -10 && startX < W()) {
             const kept = thinned.filter(t => t.x >= startX - 1);
-            const clash = kept.some(t => Math.abs(t.x - startX) < 40);
-            kept.push({ x: startX, text: label(new Date(realOf(vMin))), right: clash }); // right: the label goes left of the tick, clear of the next year
+            // a year label printed right beside the start would sit on top of the first year: that label loses its text (its tick stays)
+            kept.forEach(t => { if (Math.abs(t.x - startX) < 30) t.text = ''; });
+            kept.push({ x: startX, text: label(new Date(realOf(vMin))) });
             kept.sort((a, b) => a.x - b.x);
             return kept;
         }
@@ -483,8 +484,7 @@ export function createTimeline(canvas, data) {
             ctx.globalAlpha = setting('sliderScaleNumbersOpacity');
             ctx.fillStyle = setting('colorScaleNumbers');
             ctx.font = numFont;
-            if (t.right) { ctx.textAlign = 'right'; ctx.fillText(t.text, t.x - 3, h - 4); ctx.textAlign = 'start'; }
-            else ctx.fillText(t.text, t.x + setting('sliderScaleNumbersOffsetX'), h - 4);
+            ctx.fillText(t.text, t.x + setting('sliderScaleNumbersOffsetX'), h - 4);
         });
         ctx.letterSpacing = '0px';
 
