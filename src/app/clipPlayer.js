@@ -5,6 +5,7 @@
 // header, so URLs come from /api/preview (api/preview.js, or serve.py locally).
 import { setting } from './settings.js';
 import { logEvent } from './debugLog.js';
+import { isLoggedIn } from './spotifyAuth.js';
 
 const URL_TTL_MS = 10 * 60 * 1000;
 const NULL_TTL_MS = 20 * 1000;
@@ -166,7 +167,9 @@ export function stopClip(fadeOverrideMs) {
 export function playClip(did) {
     stopClip();
     const reqAt = performance.now();
-    if (!unlocked || !did || !setting('checkboxScrubAudioEnabled')) { logEvent('playback', `CLIP skipped (${!unlocked ? 'sound not unlocked yet' : !did ? 'this song has no clip' : 'scrub audio is off'})`); return 'skipped'; }
+    // Play Preview Clips off: only the Spotify song plays, once logged in. Not logged in, the preview always plays.
+    const previewOn = setting('checkboxPlayPreviewClips') || !isLoggedIn();
+    if (!unlocked || !did || !setting('checkboxScrubAudioEnabled') || !previewOn) { logEvent('playback', `CLIP skipped (${!unlocked ? 'sound not unlocked yet' : !did ? 'this song has no clip' : 'scrub audio is off'})`); return 'skipped'; }
     const known = pool.get(did);
     if (!known && !setting('checkboxColdStartClips')) { logEvent('playback', `CLIP skipped (${did} was not preloaded and cold starts are off)`); return 'skipped'; }
     const p = entry(did);

@@ -8,6 +8,7 @@
 
 export const DEFAULTS = {
     checkboxScrubAudioEnabled: true,
+    checkboxPlayPreviewClips: true,
     sliderScrubVolume: 0.7,
     sliderClipStartMin: 2,
     sliderClipStartMax: 22,

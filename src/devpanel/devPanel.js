@@ -7822,6 +7822,7 @@
         ];
         const SPOTTY_CONTROLS = [
             { tab, group: 'Scrub Audio', id: 'checkboxScrubAudioEnabled', type: 'checkbox', label: 'Play Clips While Scrubbing:', value: true },
+            { tab, group: 'Scrub Audio', id: 'checkboxPlayPreviewClips', type: 'checkbox', label: 'Play Preview Clips (Off = Spotify Song Only, Once Logged In):', value: true },
             { tab, group: 'Scrub Audio', id: 'sliderScrubVolume', type: 'slider', label: 'Clip Volume (x):', min: 0, max: 1, step: 0.05, value: 0.7 },
             { tab, group: 'Scrub Audio', id: 'sliderClipStartMin', type: 'slider', label: 'Clip Start Min (S):', min: 0, max: 28, step: 0.5, value: 2 },
             { tab, group: 'Scrub Audio', id: 'sliderClipStartMax', type: 'slider', label: 'Clip Start Max (S):', min: 0, max: 28, step: 0.5, value: 22 },
