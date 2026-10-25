@@ -14,6 +14,8 @@ let cb = { onState: () => {}, onEnded: () => {}, onStatus: () => {} };
 let lastState = null, lastEndedAt = 0, lastStateAt = 0;
 
 export const sdkReady = () => ready;
+// A login exists and the SDK has not failed: it is ready or about to be, so a song should wait for it instead of using the iframe preview.
+export const sdkExpected = () => hasClientId() && isLoggedIn() && !failed;
 export const sdkStatus = () => (!hasClientId() ? 'no Client ID' : !isLoggedIn() ? 'not logged in' : ready ? (lastPlayError ? 'ready, but the last play failed: ' + lastPlayError : 'ready') : failed ? 'failed: ' + failed : 'loading');
 const setStatus = () => cb.onStatus(sdkStatus());
 

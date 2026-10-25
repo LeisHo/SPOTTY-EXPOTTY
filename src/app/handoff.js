@@ -18,11 +18,25 @@ const events = (window.__spxEvents = []);
 
 export const onPlayState = fn => listeners.add(fn);
 // ---- Web Playback SDK (full songs + real volume; sdkPlayer.js). Used whenever it is ready; otherwise the iframe embed below plays. ----
+// The SDK needs a few seconds after page load to connect. A song asked for before that (the first one after startup) WAITS for it
+// (up to 8 s) instead of starting in the iframe, which can only play the 30 s preview.
+let pendingSdkTrack = null, pendingTimer = 0;
+const clearPending = () => { pendingSdkTrack = null; clearTimeout(pendingTimer); };
 export function initSdkPlayer(onStatus) {
     sdk.initSdk({
         onState: (isPlayingNow, info) => { playing = isPlayingNow; if (info && info.duration > 0) lastDur = info.duration; emit(); },
         onEnded: () => sdkEnded(),
-        onStatus: s => { if (onStatus) onStatus(s); },
+        onStatus: s => {
+            if (pendingSdkTrack) {
+                const t = pendingSdkTrack;
+                if (sdk.sdkReady()) { // it connected: play the waiting song, in full
+                    clearPending();
+                    logEvent('playback', 'SDK became ready: playing the song that was waiting for it (' + t + ')');
+                    sdk.sdkPlay(t).then(ok => { if (!ok && wantPlaying && loadedId === t) playViaEmbed(t); });
+                } else if (!sdk.sdkExpected()) { clearPending(); playViaEmbed(t); } // it failed: the iframe preview is all there is
+            }
+            if (onStatus) onStatus(s);
+        },
     });
 }
 export const setRealVolume = v => sdk.sdkSetVolume(v);
@@ -102,7 +116,15 @@ export function playTrack(trackId) {
     wantPlaying = true;
     if (sdk.sdkReady()) {
         loadedId = trackId;
+        clearPending();
         sdk.sdkPlay(trackId).then(ok => { if (!ok && wantPlaying && loadedId === trackId) playViaEmbed(trackId); }); // SDK refused: the iframe plays it instead
+        return true;
+    }
+    if (sdk.sdkExpected()) { // logged in, SDK still connecting: wait for it
+        loadedId = trackId; pendingSdkTrack = trackId;
+        logEvent('playback', 'SDK not ready yet: song ' + trackId + ' waits for it (up to 8 s) instead of the iframe preview');
+        clearTimeout(pendingTimer);
+        pendingTimer = setTimeout(() => { if (pendingSdkTrack === trackId) { pendingSdkTrack = null; logEvent('playback', 'SDK still not ready after 8 s: using the iframe preview'); playViaEmbed(trackId); } }, 8000);
         return true;
     }
     return playViaEmbed(trackId);
@@ -120,6 +142,7 @@ function playViaEmbed(trackId) {
 export function pauseEmbed() {
     queued = null;
     wantPlaying = false;
+    clearPending();
     logEvent('playback', 'EMBED pause requested');
     if (sdk.sdkReady()) sdk.sdkPause();
     if (controller) { try { controller.pause(); } catch (e) { /* ignore */ } }
