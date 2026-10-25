@@ -7644,8 +7644,17 @@
             { tab, group: TL, id: 'sliderRibbonSmoothing', type: 'slider', label: 'Ribbon Smoothing (Px):', min: 2, max: 120, step: 1, value: 24 },
             { tab, group: TL, id: 'sliderRibbonBarsOpacity', type: 'slider', label: 'Ribbon Underlay Bars Opacity (x):', min: 0, max: 1, step: 0.05, value: 0.25 },
             { tab, group: 'UI Layout', id: 'sliderTitleScale', type: 'slider', label: 'Song Title Text Scale (x):', min: 0.3, max: 3, step: 0.05, value: 1 },
+            { tab, group: 'UI Layout', id: 'sliderTitleSizeMin', type: 'slider', label: 'Song Title Min Size (Px):', min: 4, max: 120, step: 1, value: 26 },
+            { tab, group: 'UI Layout', id: 'sliderTitleSizePref', type: 'slider', label: 'Song Title Size Growth (Vw):', min: 0, max: 20, step: 0.1, value: 5.5 },
+            { tab, group: 'UI Layout', id: 'sliderTitleSizeMax', type: 'slider', label: 'Song Title Max Size (Px):', min: 4, max: 200, step: 1, value: 60 },
             { tab, group: 'UI Layout', id: 'sliderArtistScale', type: 'slider', label: 'Artist Text Scale (x):', min: 0.3, max: 3, step: 0.05, value: 1 },
+            { tab, group: 'UI Layout', id: 'sliderArtistSizeMin', type: 'slider', label: 'Artist Min Size (Px):', min: 4, max: 120, step: 1, value: 17 },
+            { tab, group: 'UI Layout', id: 'sliderArtistSizePref', type: 'slider', label: 'Artist Size Growth (Vw):', min: 0, max: 20, step: 0.1, value: 3 },
+            { tab, group: 'UI Layout', id: 'sliderArtistSizeMax', type: 'slider', label: 'Artist Max Size (Px):', min: 4, max: 200, step: 1, value: 28 },
             { tab, group: 'UI Layout', id: 'sliderMetaScale', type: 'slider', label: 'Album & Date Text Scale (x):', min: 0.3, max: 3, step: 0.05, value: 1 },
+            { tab, group: 'UI Layout', id: 'sliderMetaSizeMin', type: 'slider', label: 'Album & Date Min Size (Px):', min: 4, max: 120, step: 1, value: 14 },
+            { tab, group: 'UI Layout', id: 'sliderMetaSizePref', type: 'slider', label: 'Album & Date Size Growth (Vw):', min: 0, max: 20, step: 0.1, value: 0 },
+            { tab, group: 'UI Layout', id: 'sliderMetaSizeMax', type: 'slider', label: 'Album & Date Max Size (Px):', min: 4, max: 200, step: 1, value: 14 },
             { tab, group: 'UI Layout', id: 'buttonOpenLayoutInspector', type: 'button', label: 'Open UI Layout Inspector', skipDeviceCheckbox: true },
         ];
         renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');

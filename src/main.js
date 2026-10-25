@@ -306,6 +306,16 @@ async function boot() {
         scale('--spx-title-scale', setting('sliderTitleScale'));
         scale('--spx-artist-scale', setting('sliderArtistScale'));
         scale('--spx-meta-scale', setting('sliderMetaScale'));
+        // Font-size clamps (app.css): min/max in px, growth in vw
+        const clampVars = (name, prefix) => {
+            const st = el('spxApp').style;
+            st.setProperty(`--spx-${name}-min`, `${setting(prefix + 'Min')}px`);
+            st.setProperty(`--spx-${name}-pref`, `${setting(prefix + 'Pref')}vw`);
+            st.setProperty(`--spx-${name}-max`, `${setting(prefix + 'Max')}px`);
+        };
+        clampVars('title', 'sliderTitleSize');
+        clampVars('artist', 'sliderArtistSize');
+        clampVars('meta', 'sliderMetaSize');
         // Shows Spotify's own player so you can see whether it says "Log in" / "Preview" and log in INSIDE it.
         document.querySelector('.spx-embed').classList.toggle('spx-embed-visible', !!setting('checkboxShowSpotifyPlayer'));
         volume.configure({

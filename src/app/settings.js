@@ -21,6 +21,10 @@ export const DEFAULTS = {
     sliderTitleScale: 1,
     sliderArtistScale: 1,
     sliderMetaScale: 1,
+    // Clamp for each text line's font size: clamp(min px, growth vw, max px). Defaults match the original CSS.
+    sliderTitleSizeMin: 26, sliderTitleSizePref: 5.5, sliderTitleSizeMax: 60,
+    sliderArtistSizeMin: 17, sliderArtistSizePref: 3, sliderArtistSizeMax: 28,
+    sliderMetaSizeMin: 14, sliderMetaSizePref: 0, sliderMetaSizeMax: 14,
     selectUiFont: 'system',
     checkboxInvertScroll: false,
     checkboxInvertZoomDrag: false,
