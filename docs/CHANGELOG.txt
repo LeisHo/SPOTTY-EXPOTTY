@@ -788,6 +788,17 @@ song goes to the iframe at once, and after 8 s without the SDK it does too; paus
 PUT /me/player/play for the waiting song; account_error while waiting -> iframe fallback. Not verified with the real SDK.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  05:05:32 - code push (see the ETA History row)  Handoff crossfade
+
+Request: remove the silence between the preview and the full song, and crossfade them. The handoff used to stop the preview and THEN ask Spotify to start the song (0.5-1 s of silence). Another session had by then
+added previewHold (the preview keeps playing until the full song plays) and the start position (preview position + "Full Song Start Offset"); this crossfade plugs into that.
+New: Spotify Handoff > "Handoff Crossfade, Preview To Full Song (Ms, 0 = Hard Cut)" (default 250). With it above 0, main.js calls handoff.js playTrackCrossfade(id, ms, onAudible, startMs): the SDK volume is set to 0 before the song starts
+(sdkPrepareFade), the preview keeps playing, and when the SDK reports that track playing (matching id / linked id, or a new track near its start) or the iframe reports a position > 200 ms, or after a 3 s timeout,
+sdkFadeIn(ms) ramps the song to the volume slider's level while stopClip(ms) fades the preview out over the same time. pauseEmbed() / a new song cancels a pending crossfade and restores the SDK volume. 0 keeps previewHold's hard cut.
+clipPlayer.stopClip(fadeMs) takes an optional fade length. Verified in the real app with a fake Spotify player: preview still playing before audible; SDK volume 0 at the start; play request with position_ms 2142; on audible the SDK volume ramped 0.1 -> 0.8
+(the slider's 0.8) and the preview was stopped with the 250 ms fade (log: HANDOFF full song audible (sdk) after 47ms: crossfading 250ms). Not verified with real audio / the real SDK. The jump in POSITION is a separate matter (the other session's offset logic).
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
