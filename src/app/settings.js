@@ -18,6 +18,7 @@ export const DEFAULTS = {
     checkboxShowPoolOverlay: false,
     sliderTimelineZoomSpeed: 1,
     sliderDefaultTimelineSpanDays: 120,
+    checkboxFullScaleOnStartup: false,
     sliderTitleScale: 1,
     sliderArtistScale: 1,
     sliderMetaScale: 1,

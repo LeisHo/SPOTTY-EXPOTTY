@@ -850,3 +850,9 @@ Exception to the Deezer rule in CLAUDE.md: iTunes URLs are stored (no exp= token
 
 Randomize Starting Song worked in visitor mode but not in dev mode. Cause: the startup check counted ANY pointer, wheel or key input as the visitor having moved, including input on the dev panel, which is open while the page loads in dev mode. src/main.js now ignores input that starts inside #devPanel. The saved (synced) copy the check reads was already correct (randomize on).
 Not verified in a browser: only node --check was run.
+
+--------------------------------------------------------------------------------
+2026-10-25  -  (time not measured)
+
+Direct request: a Full Scale on Startup checkbox under Starting Timeline Span. On (every refresh shows the whole timeline, nothing remembered). Off: the timeline opens at the scale the visitor was on last time, saved in this browser. src/devpanel/devPanel.js (Scrub Input), src/app/settings.js (default off), src/main.js (startupSpan, rememberSpan; randomize uses the same startup rule). With the Starting Span Curve on it still sets the start, as before. Note: while off, the saved scale takes precedence over later changes to the Starting Timeline Span slider; to reset it, clear localStorage key spxTimelineSpan or turn the checkbox on once.
+Not verified in a browser: only node --check was run. Not committed.

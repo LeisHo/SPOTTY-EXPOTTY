@@ -7600,6 +7600,7 @@
             { tab, group: 'Scrub Input', id: 'sliderTimelineZoomSpeed', type: 'slider', label: 'Drag Zoom Speed (x):', min: 0.1, max: 5, step: 0.1, value: 1 },
             { tab, group: 'Scrub Input', id: 'checkboxInvertZoomDrag', type: 'checkbox', label: 'Invert Drag Zoom Direction:', value: false },
             { tab, group: 'Scrub Input', id: 'sliderDefaultTimelineSpanDays', type: 'slider', label: 'Starting Timeline Span (Days):', min: 1, max: 5000, step: 1, value: 120 },
+            { tab, group: 'Scrub Input', id: 'checkboxFullScaleOnStartup', type: 'checkbox', label: 'Full Scale on Startup:', value: false },
             { tab, group: 'Spotify Handoff', id: 'checkboxHandoffEnabled', type: 'checkbox', label: 'Play Real Song When Scrubbing Stops:', value: true },
             { tab, group: 'Spotify Handoff', id: 'checkboxSpotifyLoginOnStart', type: 'checkbox', label: 'Open Spotify Login On First Click (Until Logged In):', value: true },
             { tab, group: 'Spotify Handoff', id: 'buttonSpotifyLogin', type: 'button', label: 'Log In With Spotify', skipDeviceCheckbox: true },

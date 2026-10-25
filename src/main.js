@@ -272,7 +272,31 @@ async function boot() {
         timeline.draw();
     }
     // the saved dev-panel state arrives a moment after load, so apply the curve once it has had time to restore
-    setTimeout(() => applyStartSpan(true), 1500); // true: with the curve off, the plain Starting Timeline Span slider applies at load too
+    // Startup scale. Full Scale on Startup (on): always the whole timeline, nothing remembered. Off: the scale the visitor
+    // was on last time (saved in this browser), unless the Starting Span Curve is on, which still sets the start.
+    // With neither, the Starting Timeline Span slider applies as before.
+    const SPAN_KEY = 'spxTimelineSpan';
+    function startupSpan() {
+        if (setting('checkboxFullScaleOnStartup')) { timeline.setSpanMs(timeline.fullSpanMs); timeline.centerOnPlayhead(); timeline.draw(); return; }
+        if (!setting('checkboxStartSpanCurveEnabled')) {
+            let saved = 0;
+            try { saved = parseFloat(localStorage.getItem(SPAN_KEY)) || 0; } catch (e) { /* storage blocked */ }
+            if (saved > 0) { timeline.setSpanMs(saved); timeline.centerOnPlayhead(); timeline.draw(); return; }
+        }
+        applyStartSpan(true);
+    }
+    // Remember the scale, only while Full Scale on Startup is off (the span is written when it changes, at most once a second).
+    let lastSpan = 0;
+    const rememberSpan = () => {
+        if (setting('checkboxFullScaleOnStartup')) return;
+        const s = timeline.span;
+        if (Math.abs(s - lastSpan) < 1) return;
+        lastSpan = s;
+        try { localStorage.setItem(SPAN_KEY, String(s)); } catch (e) { /* storage blocked */ }
+    };
+    // the saved dev-panel state arrives a moment after load, so the startup scale waits for it; remembering starts only after that,
+    // so the placeholder scale from before startup is never saved
+    setTimeout(() => { startupSpan(); setInterval(rememberSpan, 1000); }, 1500);
     // "Randomize Starting Song": once the saved settings have arrived, jump to a random song unless the visitor already moved.
     // Only the visitor's moves on the app count. Input on the dev panel (in dev mode, the panel is open while the page loads)
     // must not cancel the jump; before this, any click or scroll there silently skipped it.
@@ -288,7 +312,7 @@ async function boot() {
         const randomOn = saved ? !!(saved.controls && saved.controls.checkboxRandomStartSong) : !!setting('checkboxRandomStartSong');
         if (interacted || !randomOn) return;
         moveTo(Math.floor(Math.random() * songs.length));
-        applyStartSpan(true);
+        startupSpan();
         timeline.centerOnPlayhead();
         timeline.draw();
     })();
