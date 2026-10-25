@@ -461,16 +461,17 @@ export function createTimeline(canvas, data) {
         // axis
         // Timeline Scale: the scale numbers and the tick marks each have their own settings
         const numFont = `${setting('checkboxScaleNumbersBold') ? 'bold ' : ''}${setting('sliderScaleNumbersFontSize')}px system-ui, sans-serif`;
-        const tickTop = h - axisH - Math.max(0, setting('sliderTickStartHeight'));
+        // a tick stands on its bottom edge, which sits Start Height above the scale line, and rises Height upward from there
+        const tickBottom = h - axisH - Math.max(0, setting('sliderTickStartHeight'));
         ctx.letterSpacing = `${setting('sliderScaleNumbersLetterSpacing')}px`;
         ticks().forEach(t => {
             ctx.globalAlpha = setting('sliderTickOpacity');
             ctx.fillStyle = setting('colorTickMark');
-            ctx.fillRect(t.x, tickTop, setting('sliderTickWidth'), setting('sliderTickHeight'));
+            ctx.fillRect(t.x, tickBottom - setting('sliderTickHeight'), setting('sliderTickWidth'), setting('sliderTickHeight'));
             ctx.globalAlpha = setting('sliderScaleNumbersOpacity');
             ctx.fillStyle = setting('colorScaleNumbers');
             ctx.font = numFont;
-            ctx.fillText(t.text, t.x + 3, h - 4);
+            ctx.fillText(t.text, t.x + setting('sliderScaleNumbersOffsetX'), h - 4);
         });
         ctx.letterSpacing = '0px';
 
