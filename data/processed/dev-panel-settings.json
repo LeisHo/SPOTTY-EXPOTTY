@@ -8,7 +8,7 @@
     "sliderClipFadeOut": 500,
     "checkboxColdStartClips": true,
     "checkboxRandomStartSong": true,
-    "checkboxLoopPreview": true,
+    "checkboxLoopPreview": false,
     "sliderPreloadAhead": 30,
     "sliderPreloadBehind": 30,
     "checkboxShowPoolOverlay": false,
