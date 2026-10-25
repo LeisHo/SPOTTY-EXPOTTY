@@ -84,6 +84,7 @@ export const DEFAULTS = {
     sliderCoverScale: 1,
     sliderCoverOffsetX: 0,
     sliderCoverOffsetY: 0,
+    checkboxCoverBoundingBox: false,
     rangeBarTimelineZoomLimits: { min: 0, max: 100 }, // % on a log scale: 0 = 2 min visible, 100 = whole timeline
 
     // Wheel scrub per notch curve (X: zoom scale, Y: px per notch between Min and Max)

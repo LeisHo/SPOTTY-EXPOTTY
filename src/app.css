@@ -120,6 +120,10 @@
 .spx-app.no-shadow-vol .spx-vol-thumb { box-shadow: none; }
 .spx-app.no-shadow-nav .spx-nav { filter: none; }
 
+/* Album Cover > Bounding Box (dev check): the outline is the cover's real box, the ring is its centre. */
+.spx-app.show-cover-bbox .spx-cover { outline: 2px dashed #ff3b3b; outline-offset: 0; }
+.spx-app.show-cover-bbox .spx-cover::after { content: ''; position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border: 2px solid #ff3b3b; border-radius: 50%; box-sizing: border-box; pointer-events: none; }
+
 /* Styled buttons (UI Layout > Play Button / Next And Last Song Buttons). main.js applyButtonStyles() sets the --bs-* variables on each
    host (.bs-host) and the hover / press / release classes; the icon (.bs-icon) animates between the sizes and opacities. */
 .bs-icon { width: var(--bs-size, 26px); height: var(--bs-size, 26px); color: var(--bs-color, currentColor); opacity: var(--bs-op, 1); fill: currentColor;

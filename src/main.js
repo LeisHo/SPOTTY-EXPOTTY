@@ -374,6 +374,8 @@ async function boot() {
         el('spxApp').classList.toggle('no-play-glyph', !setting('checkboxPlayButtonEnabled'));
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
+        // Album Cover > Bounding Box: the cover's own box and its centre (see app.css)
+        el('spxApp').classList.toggle('show-cover-bbox', !!setting('checkboxCoverBoundingBox'));
         const cvEl = el('spxCover');
         cvEl.style.scale = String(setting('sliderCoverScale'));
         cvEl.style.translate = `${setting('sliderCoverOffsetX')}px ${setting('sliderCoverOffsetY')}px`;
@@ -665,19 +667,18 @@ async function boot() {
         } catch (e) { /* storage blocked: open it anyway */ }
         try { window.open('https://accounts.spotify.com/login?continue=' + encodeURIComponent('https://open.spotify.com/'), 'spxSpotifyLogin', 'popup=yes,width=480,height=760,noopener'); } catch (e) { /* popup blocked */ }
     }
-    const unlockSound = () => {
-        if (isUnlocked()) return;
-        unlock();
-        openSpotifyLogin();
-        playClip(clipKey(songs[idx]));
-        schedulePreload();
-    };
-    document.addEventListener('pointerdown', unlockSound, { capture: true, once: true });
-    document.addEventListener('keydown', unlockSound, { capture: true, once: true });
+    // Sound starts by itself once the data is ready. A browser may refuse audio until the page has had a user gesture; then the
+    // first click or key press starts it (playClip is tried again there). That first gesture also opens the Spotify login popup,
+    // which browsers only allow after a gesture.
+    const playFromStart = () => { unlock(); playClip(clipKey(songs[idx])); schedulePreload(); };
+    const onFirstGesture = () => { playFromStart(); openSpotifyLogin(); };
+    document.addEventListener('pointerdown', onFirstGesture, { capture: true, once: true });
+    document.addEventListener('keydown', onFirstGesture, { capture: true, once: true });
+    playFromStart();
 
     function togglePlayback() {
         logEvent('playback', 'USER play/pause (cover or Space)');
-        unlockSound();
+        if (!isUnlocked()) playFromStart();
         clearTimeout(handoffTimer);
         stopClip();
         toggleTrack(songs[idx].id);
