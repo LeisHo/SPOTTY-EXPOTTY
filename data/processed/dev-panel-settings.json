@@ -242,7 +242,7 @@
     "sliderBracketsFontPct": 69,
     "checkboxTitleAnimEnabled": true,
     "selectTitleAnimMode": "grow",
-    "sliderTitleAnimDuration": 110,
+    "sliderTitleAnimDuration": 1090,
     "selectTitleAnimEasing": "spring",
     "sliderTitleBoldRestWeight": 500,
     "sliderTitleBoldHoverWeight": 800,
@@ -15644,7 +15644,7 @@
     "mobile:Snapshot": false,
     "mobile:UI Layout": false,
     "mobile:Text": false,
-    "mobile:Font": false,
+    "mobile:Font": true,
     "mobile:Song Title": false,
     "mobile:Track Title Button Animation": false,
     "mobile:Artist": false,
@@ -16432,7 +16432,14 @@
     },
     "landscape": {}
   },
-  "perMode": {},
+  "perMode": {
+    "selectTitleAnimMode": {
+      "grow": {
+        "sliderTitleAnimDuration": "1090",
+        "sliderMobileTitleAnimDuration": "1090"
+      }
+    }
+  },
   "extra": {
     "uiLayout": {
       "appStage": {
