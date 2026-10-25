@@ -37,6 +37,7 @@
     "sliderTimelineScaleGap": 54,
     "sliderPlayheadWidth": 3,
     "sliderPlayheadHeight": 58,
+    "sliderPlayheadOpacity": 100,
     "sliderPlayheadStartHeight": 63,
     "rangeBarTimelineZoomLimits": "{\"min\":64,\"max\":100}",
     "buttonOpenLayoutInspector": "",
@@ -45,8 +46,8 @@
     "sliderScrubLineHoverWidth": 3,
     "sliderScrubLineClickWidth": 3,
     "sliderScrubLineReleaseWidth": 3,
-    "sliderScrubLineHoverOpacity": 100,
-    "sliderScrubLineClickOpacity": 100,
+    "sliderScrubLineHoverOpacity": 70,
+    "sliderScrubLineClickOpacity": 70,
     "selectTimelineStyle": "density",
     "sliderGlowStemWidth": 2,
     "sliderGlowRadius": 12,
@@ -201,7 +202,7 @@
     "sliderShuffleAnimHoverSize": 23,
     "sliderShuffleAnimClickSize": 18,
     "sliderShuffleAnimReleaseSize": 20,
-    "sliderShuffleAnimHoverOpacity": 180,
+    "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
     "checkboxVolBtnAnimEnabled": true,
     "sliderVolBtnAnimTime": 100,
@@ -380,9 +381,9 @@
   },
   "layout": {
     "left": 67,
-    "top": 170,
+    "top": 52,
     "width": 359,
-    "height": 524
+    "height": 642
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -8951,11 +8952,16 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "sliderPlayheadOpacity"
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
-          "rangeBarTimelineZoomLimits"
+          "rangeBarTimelineZoomLimits",
+          "sliderPlayheadOpacity"
         ],
         "subgroups": [
           {
