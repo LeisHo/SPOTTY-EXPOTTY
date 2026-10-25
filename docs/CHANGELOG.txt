@@ -627,6 +627,20 @@ CORRECTION to the entry above: its header said 12:32 AM - 12:36 AM; measured tim
 (code push) = 1m 25s for both items (span slider ~00:33:07-00:33:41, Shadows 00:33:41-00:34:32). The header times were guesses.
 
 --------------------------------------------------------------------------------
+2026-10-25  -  00:35:42 - 00:3x EDT  (3 small items; the code-push time is in the ETA History row)
+
+1) Spotify login on startup (owner chose the quick option): the FIRST click or key press (the one that unlocks sound) opens https://accounts.spotify.com/login in a
+small popup (continue -> open.spotify.com), at most once per 24 h per browser (localStorage spxLoginOpenedAt); dev panel > Spotify Handoff > "Open Spotify Login On
+First Click". A page cannot open a popup without a user gesture, hence the first click rather than literally at load. NOT detectable whether it worked: the
+embedded player is a cross-site iframe and may not get the login cookie, so full songs are not guaranteed. The proper alternative (OAuth + Web Playback SDK, Premium,
+needs a Spotify app Client ID) was offered and not chosen.
+2) The album line's "no preview clip" is now its own line (white-space: pre-line on the three text lines; the text carries a 
+).
+3) Timeline Look > "Space Between Graph And Scale Text (Px)" (default 0): grows the strip between the playlist rows and the scale text; the exact add date/time line is
+centred in that strip. Verified: gap 40 set, canvas height unchanged; no-preview song (index 6) renders two lines (height 38 px), others one.
+Not verified: that the login popup actually opens in a real browser (blocked in the test pane), whether it unlocks full songs.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
