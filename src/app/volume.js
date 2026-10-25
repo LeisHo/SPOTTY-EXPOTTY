@@ -14,7 +14,7 @@
 // player instead (see main.js).
 const KEY = 'spxVolume';
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
-const PRE_KEY = 'spxVolumeBeforeMute';
+const MUTE_KEY = 'spxVolumeMuted';
 const DEFAULT_LOOK = { muted: 40, icon: 24, radius: 7, barW: 8, barL: 130, fill: '#1db954', track: '#ffffff', thumb: '#ffffff' };
 
 export function initVolume({ root, onChange }) {
@@ -26,6 +26,8 @@ export function initVolume({ root, onChange }) {
     const thumb = root.querySelector('.spx-vol-thumb');
     const label = root.querySelector('.spx-vol-label');
     let vol = 1;
+    let muted = false; // mute is its own state: the slider keeps its value while muted
+    try { muted = localStorage.getItem(MUTE_KEY) === '1'; } catch (e) { /* storage blocked */ }
     try { const s = localStorage.getItem(KEY); if (s !== null && Number.isFinite(+s)) vol = clamp(+s, 0, 1); } catch (e) { /* storage blocked */ }
 
     const cfg = { enabled: true, tol: 30, clickTol: 12, duration: 350, speedAt: () => 1 };
@@ -39,14 +41,15 @@ export function initVolume({ root, onChange }) {
         thumb.style.left = `calc(${pct}% - var(--spx-vol-r))`;
         label.textContent = pct + '%';
         track.setAttribute('aria-valuenow', String(pct));
-        btn.dataset.level = vol === 0 ? 'mute' : vol < 0.34 ? 'low' : vol < 0.67 ? 'mid' : 'high';
-        btn.setAttribute('aria-label', vol === 0 ? 'Volume (muted)' : `Volume ${pct}%`);
+        btn.dataset.level = muted || vol === 0 ? 'mute' : vol < 0.34 ? 'low' : vol < 0.67 ? 'mid' : 'high';
+        btn.setAttribute('aria-label', muted || vol === 0 ? 'Volume (muted)' : `Volume ${pct}%`);
     }
     function set(v, persist = true) {
         vol = clamp(v, 0, 1);
+        if (vol > 0 && muted) { muted = false; try { localStorage.setItem(MUTE_KEY, '0'); } catch (e) { /* storage blocked */ } } // moving the slider unmutes
         render();
         if (persist) { try { localStorage.setItem(KEY, String(vol)); } catch (e) { /* storage blocked */ } }
-        onChange(vol);
+        onChange(effective());
     }
     const fromEvent = e => { const r = track.getBoundingClientRect(); set((e.clientX - r.left) / (r.width || 1)); };
 
@@ -97,13 +100,13 @@ export function initVolume({ root, onChange }) {
     const open = o => setOpen(!!o);
 
     btn.addEventListener('pointerdown', e => { lastPointer = e.pointerType || 'mouse'; });
-    // Mute: clicking the icon sets the volume to 0 and clicking again restores what it was before (kept in localStorage so it
-    // also survives a reload while muted). Volume 0 is what the rest of the app treats as muted (see main.js).
-    let beforeMute = 0.5;
-    try { const s = +localStorage.getItem(PRE_KEY); if (s > 0) beforeMute = clamp(s, 0.05, 1); } catch (e) { /* storage blocked */ }
+    // Mute is its own state, not volume 0: the slider keeps its value. The app hears 0 while muted (effective()).
+    function effective() { return muted ? 0 : vol; }
     function toggleMute() {
-        if (vol > 0) { beforeMute = vol; try { localStorage.setItem(PRE_KEY, String(vol)); } catch (e) { /* storage blocked */ } set(0); }
-        else set(beforeMute);
+        muted = !muted;
+        try { localStorage.setItem(MUTE_KEY, muted ? '1' : '0'); } catch (e) { /* storage blocked */ }
+        render();
+        onChange(effective());
     }
     btn.addEventListener('click', e => {
         if (!cfg.enabled) { setOpen(!target); return; }              // group off: the original click-to-open behaviour
@@ -165,5 +168,5 @@ export function initVolume({ root, onChange }) {
     render();
     onChange(vol); // apply the remembered volume
     configure({ enabled: true, ...DEFAULT_LOOK, tol: 30, duration: 350 });
-    return { get: () => vol, set, open, configure, toggleMute, nudge: d => set(vol + d), isOpen: () => target, owns: e => !!target && distToTrack(e) <= cfg.clickTol };
+    return { get: () => effective(), set, open, configure, toggleMute, nudge: d => set(vol + d), isOpen: () => target, owns: e => !!target && distToTrack(e) <= cfg.clickTol };
 }

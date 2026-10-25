@@ -73,6 +73,8 @@ export function applyShuffleIcon(svg, i) {
 
 // Previous song is the next-song shape mirrored (one shape set for both buttons).
 export function applyNavIcon(svg, i, mirrored) {
+    // The triangle's visual centre sits 2 units left of its box centre: shift it onto the centre, where the click and hover are.
+    if (svg) svg.setAttribute('viewBox', Math.floor(i / 3) === 0 ? (mirrored ? '2 0 24 24' : '-2 0 24 24') : '0 0 24 24');
     setIcon(svg, 'nav' + i + (mirrored ? 'm' : ''), `<path d="${NAV_SHAPES[Math.floor(i / 3)]}" style="${TREATMENTS[i % 3]}"${mirrored ? ' transform="matrix(-1 0 0 1 24 0)"' : ''}/>`);
 }
 

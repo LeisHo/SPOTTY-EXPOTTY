@@ -67,8 +67,8 @@ async function boot() {
             <button class="ui-element spx-nav bs-host" id="spxPrev" type="button" aria-label="Previous song"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14L6 12z"/></svg></button>
             <button class="ui-element spx-nav bs-host" id="spxNext" type="button" aria-label="Next song"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14l12-7z"/></svg></button>
             <div class="ui-element spx-volume" id="spxVolume">
-                <button type="button" class="spx-vol-btn" aria-label="Volume" aria-expanded="false" data-level="high">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="w3" d="M21 4.5a11 11 0 0 1 0 15"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>
+                <button type="button" class="spx-vol-btn bs-host" aria-label="Volume" aria-expanded="false" data-level="high">
+                    <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="w3" d="M21 4.5a11 11 0 0 1 0 15"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>
                 </button>
                 <div class="spx-vol-clip"><div class="spx-vol-panel">
                     <div class="spx-vol-track" role="slider" tabindex="0" aria-label="Volume" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="spx-vol-fill"></div><div class="spx-vol-thumb"></div></div>
@@ -357,6 +357,19 @@ async function boot() {
         };
         BS_PROPS.forEach(k => { if (v[k] !== undefined) el('spxShuffle').style.setProperty(k, v[k]); });
     }
+    // Volume Button Animation: the volume button's sizes and opacities, the same custom properties as the other buttons. The slider's own
+    // open/close animation (Animation Time in the slider group) is separate and is not changed by this.
+    function applyVolumeButtonStyle() {
+        const g = id => setting(id), anim = g('checkboxVolBtnAnimEnabled'), icon = g('sliderVolIconSize') + 'px';
+        const v = {
+            '--bs-size': icon, '--bs-size-hover': (anim ? g('sliderVolBtnAnimHoverSize') : g('sliderVolIconSize')) + 'px',
+            '--bs-size-press': (anim ? g('sliderVolBtnAnimClickSize') : g('sliderVolIconSize')) + 'px', '--bs-size-release': (anim ? g('sliderVolBtnAnimReleaseSize') : g('sliderVolIconSize')) + 'px',
+            '--bs-op-hover': String(anim ? g('sliderVolBtnAnimHoverOpacity') / 100 : 1), '--bs-op-press': String(anim ? g('sliderVolBtnAnimClickOpacity') / 100 : 1),
+            '--bs-time': (anim ? g('sliderVolBtnAnimTime') : 0) + 'ms',
+        };
+        const btn = el('spxVolume').querySelector('.spx-vol-btn');
+        BS_PROPS.forEach(k => { if (v[k] !== undefined) btn.style.setProperty(k, v[k]); });
+    }
     // Hover Tolerance (Shuffle, Next/Last, Play): the hover state also shows while the pointer is within the tolerance of the button.
     const HOVER_TOL = [['spxShuffle', 'sliderShuffleHoverTolerance'], ['spxPrev', 'sliderNavHoverTolerance'], ['spxNext', 'sliderNavHoverTolerance'], ['spxCover', 'sliderPlayHoverTolerance']];
     const distToRect = (r, x, y) => Math.hypot(Math.max(r.left - x, 0, x - r.right), Math.max(r.top - y, 0, y - r.bottom));
@@ -369,7 +382,7 @@ async function boot() {
         });
     });
     // hover / press / release state classes for the styled buttons (the CSS does the animating)
-    [['Play', [el('spxCover')]], ['Nav', [el('spxPrev'), el('spxNext')]], ['Shuffle', [el('spxShuffle')]]].forEach(([P, hosts]) => hosts.forEach(h => {
+    [['Play', [el('spxCover')]], ['Nav', [el('spxPrev'), el('spxNext')]], ['Shuffle', [el('spxShuffle')]], ['Volume', [el('spxVolume').querySelector('.spx-vol-btn')]]].forEach(([P, hosts]) => hosts.forEach(h => {
         h.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') h.classList.add('bs-hover'); });
         h.addEventListener('pointerleave', () => h.classList.remove('bs-hover', 'bs-press'));
         h.addEventListener('pointerdown', () => h.classList.add('bs-press'));
@@ -508,6 +521,8 @@ async function boot() {
         applyVolumeIcon(el('spxVolume').querySelector('.spx-vol-btn svg'), iconIndex(setting('selectVolIconStyle')));
         applyShuffleIcon(el('spxShuffle').querySelector('svg'), iconIndex(setting('selectShuffleIconStyle')));
         applyShuffleStyle();
+        applyVolumeButtonStyle();
+        el('spxApp').style.setProperty('--spx-shuffle-on-hover-op', String(setting('sliderShuffleOnHoverOpacity') / 100));
         applyNavIcon(el('spxPrev').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), true);
         applyNavIcon(el('spxNext').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), false);
         applyCoverGlyph(el('spxCover').querySelector('.spx-play-glyph svg'), iconIndex(setting('selectPlayIconStyle')), iconIndex(setting('selectPauseIconStyle')));
@@ -711,6 +726,8 @@ async function boot() {
         const r = b.getBoundingClientRect(), p = clickTolOf(b);
         return x >= r.left - p && x <= r.right + p && y >= r.top - p && y <= r.bottom + p;
     });
+    // The timeline canvas sits over the buttons, so the pointer shows as a hand over a button here too (the cursor follows the same test as the click).
+    window.addEventListener('pointermove', e => { if (e.pointerType !== 'touch') el('spxTimeline').style.cursor = buttonUnder(e.clientX, e.clientY) ? 'pointer' : ''; });
     window.addEventListener('pointerdown', e => {
         redirectBtn = null;
         if (e.pointerType === 'mouse' && e.button !== 0) return;

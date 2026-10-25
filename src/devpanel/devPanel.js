@@ -8090,6 +8090,7 @@
             { tab, group: SHB, id: 'sliderShuffleIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: SHB, id: 'sliderShuffleOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
             { tab, group: SHB, id: 'sliderShuffleOnOpacity', type: 'slider', label: 'On Icon Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: SHB, id: 'sliderShuffleOnHoverOpacity', type: 'slider', label: 'On Icon Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: SHB, id: 'sliderShuffleHoverOpacity', type: 'slider', label: 'Off Icon Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 80 },
             { tab, group: SHB, id: 'sliderShuffleClickTolerance', type: 'slider', label: 'Click Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
             { tab, group: SHB, id: 'sliderShuffleHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
@@ -8115,6 +8116,21 @@
         renderControlArray(SHBA_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_SHUFFLE_ANIM', SHBA_CONTROLS);
         makeDevGroupToggleable(tab, SHBA, 'checkboxShuffleAnimEnabled');
+        // Volume Button Animation: the same hover / click / release animation as the other buttons. Separate from the slider's open/close animation.
+        const VBA = 'Volume Button Animation';
+        const VBA_CONTROLS = [
+            { tab, group: VBA, id: 'checkboxVolBtnAnimEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: VBA, id: 'sliderVolBtnAnimTime', type: 'slider', label: 'Animation Time (Ms):', min: 0, max: 1500, step: 10, value: 160 },
+            { tab, group: VBA, id: 'sliderVolBtnAnimHoverSize', type: 'slider', label: 'Size On Hover (Px):', min: 8, max: 120, step: 1, value: 24 },
+            { tab, group: VBA, id: 'sliderVolBtnAnimClickSize', type: 'slider', label: 'Size On Click (Px):', min: 8, max: 120, step: 1, value: 18 },
+            { tab, group: VBA, id: 'sliderVolBtnAnimReleaseSize', type: 'slider', label: 'Size On Release (Px):', min: 8, max: 120, step: 1, value: 20 },
+            { tab, group: VBA, id: 'sliderVolBtnAnimHoverOpacity', type: 'slider', label: 'Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: VBA, id: 'sliderVolBtnAnimClickOpacity', type: 'slider', label: 'Opacity On Click (%):', min: 0, max: 100, step: 1, value: 100 },
+        ];
+        findGroupContent(tab, VB, 'renderSpottyDevControls', 'checkboxVolumeButtonEnabled').appendChild(createDevGroupElement(VBA, tab));
+        renderControlArray(VBA_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_VOLBTN_ANIM', VBA_CONTROLS);
+        makeDevGroupToggleable(tab, VBA, 'checkboxVolBtnAnimEnabled');
 
         // ---- UI Layout: Play Button + Next And Last Song Buttons (same settings; each toggleable, each with a toggleable Button Animation subgroup) ----
         // The button controls (Play / Pause, Next Song, Last Song) exist so a hotkey can be assigned to them in the dev panel.
