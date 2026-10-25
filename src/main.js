@@ -924,6 +924,7 @@ async function boot() {
     // settings changes (dev panel controls fire input/change)
     document.addEventListener('input', applyLook);
     document.addEventListener('change', applyLook);
+    document.addEventListener('spx-devrows-ready', applyLook); // see devPanel.js: twin rows exist only after the saved state is restored
 
     setInterval(() => {
         if (el('spxPool').hidden) return;

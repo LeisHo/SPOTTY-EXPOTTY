@@ -6942,6 +6942,9 @@
         refreshAllGroupCascadeCheckboxes();
         if (state.perMode && typeof window.spxApplyPerMode === 'function') window.spxApplyPerMode(state.perMode);
         window.__spxPerModeRestoring = false;
+        // The Mobile/Landscape twin rows exist only now, after the restore above. Anything the app reads through a twin (e.g. the cover's
+        // Y offset on a phone) was computed while they were missing, so the app re-applies its look once they exist.
+        document.dispatchEvent(new Event('spx-devrows-ready'));
     }
     function copyDevPanelSettings() {
         const text = JSON.stringify(captureFullDevPanelState(), null, 2);
