@@ -441,6 +441,8 @@ async function boot() {
         el('spxStartBtn').style.setProperty('--spx-start-play-size', setting('sliderStartPlaySize') + 'px');
         el('spxArtist').textContent = artistText(); // live: changing the separator re-joins the current song's artists
         el('spxApp').style.setProperty('--spx-vol-icon-x', setting('sliderVolIconOffsetX') + 'px');
+        // The graph reaches the top of the browser: its box is the full height (bottom edge unchanged). Buttons above it take their clicks (buttonUnder).
+        el('spxTimeline').style.setProperty('height', 'calc(100dvh - 14px)', 'important');
         el('spxStart').style.transition = `opacity ${setting('sliderStartFadeMs')}ms linear`;
         el('spxShuffle').hidden = !setting('checkboxShuffleButtonEnabled');
         el('spxApp').style.setProperty('--spx-shuffle-icon', setting('sliderShuffleIconSize') + 'px');
@@ -620,7 +622,7 @@ async function boot() {
     // on such a cover-up but inside a button's rectangle is the button's click, not a scrub: remember it here and
     // re-dispatch it as a click on that button.
     let redirectBtn = null;
-    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover')].find(b => {
+    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxTitleLink'), el('spxStartBtn')].find(b => {
         const r = b.getBoundingClientRect();
         return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
     });
