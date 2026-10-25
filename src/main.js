@@ -750,12 +750,23 @@ async function boot() {
     // first click or key press starts it (playClip is tried again there). That first gesture also opens the Spotify login popup,
     // which browsers only allow after a gesture.
     const playFromStart = () => { unlock(); playClip(clipKey(songs[idx])); schedulePreload(); };
-    const onFirstGesture = () => { el('spxStart').hidden = true; playFromStart(); openSpotifyLogin(); };
-    // Run Startup (dev panel): show the start screen again. The next click or key press outside the dev panel hides it.
+    // The start screen. A press on the play icon starts playback: on press, or on release when Transition After Release is on.
+    // A press or key press anywhere else starts it as well (sound unlocks on that first input).
+    let startedOnce = false;
+    const onIconPress = e => !!(e.target && e.target.closest && e.target.closest('#spxStartBtn'));
+    const startFromIcon = () => { el('spxStart').hidden = true; if (!startedOnce) { startedOnce = true; openSpotifyLogin(); } playFromStart(); };
+    const onFirstGesture = e => {
+        if (onIconPress(e)) { if (!setting('checkboxStartTransitionAfterRelease')) startFromIcon(); return; }
+        if (startedOnce) return;
+        startedOnce = true; el('spxStart').hidden = true; playFromStart(); openSpotifyLogin();
+    };
+    el('spxStartBtn').addEventListener('pointerup', () => { if (setting('checkboxStartTransitionAfterRelease') && !el('spxStart').hidden) startFromIcon(); });
+    // Run Startup (dev panel): show the start screen again. The next press outside the dev panel hides it (the icon starts it).
     const showStartScreen = () => {
         el('spxStart').hidden = false;
         const hideOnInput = e => {
             if (e.target && e.target.closest && e.target.closest('#devPanel')) return;
+            if (onIconPress(e)) { if (!setting('checkboxStartTransitionAfterRelease')) startFromIcon(); return; }
             el('spxStart').hidden = true;
             document.removeEventListener('pointerdown', hideOnInput, true);
             document.removeEventListener('keydown', hideOnInput, true);
@@ -763,7 +774,7 @@ async function boot() {
         document.addEventListener('pointerdown', hideOnInput, true);
         document.addEventListener('keydown', hideOnInput, true);
     };
-    document.addEventListener('pointerdown', onFirstGesture, { capture: true, once: true });
+    document.addEventListener('pointerdown', onFirstGesture, { capture: true });
     document.addEventListener('keydown', onFirstGesture, { capture: true, once: true });
     playFromStart();
 

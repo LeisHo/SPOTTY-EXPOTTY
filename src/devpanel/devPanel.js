@@ -8190,6 +8190,7 @@
         const SB_CONTROLS = [
             { tab, group: SB, id: 'checkboxStartButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
             { tab, group: SB, id: 'sliderStartPlaySize', type: 'slider', label: 'Play Icon Size (Px):', min: 16, max: 200, step: 1, value: 64 },
+            { tab, group: SB, id: 'checkboxStartTransitionAfterRelease', type: 'checkbox', label: 'Transition After Release:', value: false },
         ];
         renderControlArray(SB_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_START_BUTTON_CONTROLS', SB_CONTROLS);
