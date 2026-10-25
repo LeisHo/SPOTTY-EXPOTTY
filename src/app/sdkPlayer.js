@@ -11,7 +11,7 @@ const recent = [];
 const note = msg => { recent.push(new Date().toISOString().slice(11, 23) + '  ' + msg); if (recent.length > 25) recent.shift(); logEvent('playback', 'SDK ' + msg); };
 export const sdkRecentEvents = () => recent.slice();
 let cb = { onState: () => {}, onEnded: () => {}, onStatus: () => {} };
-let lastState = null, lastEndedAt = 0;
+let lastState = null, lastEndedAt = 0, lastStateAt = 0;
 
 export const sdkReady = () => ready;
 export const sdkStatus = () => (!hasClientId() ? 'no Client ID' : !isLoggedIn() ? 'not logged in' : ready ? (lastPlayError ? 'ready, but the last play failed: ' + lastPlayError : 'ready') : failed ? 'failed: ' + failed : 'loading');
@@ -48,7 +48,7 @@ function onState(state) {
     // The SDK does not say "ended": a finished track shows up as paused at position 0 with the track moved into previous_tracks.
     const ended = lastState && !lastState.paused && state.paused && state.position === 0 && lastState.track_window.current_track
         && state.track_window.previous_tracks.some(t => t.id === lastState.track_window.current_track.id) && Date.now() - lastEndedAt > 2000;
-    lastState = state;
+    lastState = state; lastStateAt = performance.now();
     cb.onState(!state.paused, { id: cur && cur.id, position: state.position, duration: state.duration });
     if (ended) { lastEndedAt = Date.now(); note('song ended'); cb.onEnded(); }
 }
@@ -80,4 +80,11 @@ export const sdkSeek = ms => { if (ready) player.seek(ms).catch(() => {}); };
 export function sdkSetVolume(v) { volume = Math.min(1, Math.max(0, v)); if (player) player.setVolume(volume).catch(() => {}); }
 // Browsers want this inside a click / key press before audio may start.
 export function sdkActivate() { if (player && player.activateElement) { try { player.activateElement(); } catch (e) { /* ignore */ } } }
+// What the SDK says is loaded right now (position extrapolated while playing): used by the on-screen status box.
+export function sdkInfo() {
+    if (!lastState) return null;
+    const cur = lastState.track_window.current_track || {};
+    const pos = lastState.paused ? lastState.position : Math.min(lastState.duration, lastState.position + (performance.now() - lastStateAt));
+    return { paused: lastState.paused, position: pos, duration: lastState.duration, title: cur.name || '?', artist: (cur.artists || []).map(a => a.name).join(', ') };
+}
 export const sdkCurrentTrackId = () => (lastState && lastState.track_window.current_track ? lastState.track_window.current_track.id : null);

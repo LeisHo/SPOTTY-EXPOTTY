@@ -28,6 +28,8 @@ export function initSdkPlayer(onStatus) {
 export const setRealVolume = v => sdk.sdkSetVolume(v);
 export const activateRealPlayer = () => sdk.sdkActivate();
 export const spotifyLoginStatus = () => sdk.sdkStatus();
+export const sdkIsReady = () => sdk.sdkReady();
+export const sdkInfo = () => sdk.sdkInfo();
 function sdkEnded() {
     if (!wantPlaying) return;
     if (endedHandler && endedHandler()) return;              // shuffle moves on

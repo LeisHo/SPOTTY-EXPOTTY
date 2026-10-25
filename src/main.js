@@ -15,7 +15,7 @@ import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVol
 import { initVolume } from './app/volume.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo } from './app/handoff.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
@@ -62,6 +62,7 @@ async function boot() {
                 <span class="spx-play-glyph"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M7 4l13 8-13 8z"/><path class="ico-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></span>
             </button>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
+            <div class="spx-sdk-status" id="spxSdkStatus" hidden></div>
             <button class="ui-element spx-nav bs-host" id="spxPrev" type="button" aria-label="Previous song"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14L6 12z"/></svg></button>
             <button class="ui-element spx-nav bs-host" id="spxNext" type="button" aria-label="Next song"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14l12-7z"/></svg></button>
             <div class="ui-element spx-volume" id="spxVolume">
@@ -330,7 +331,7 @@ async function boot() {
         clampVars('artist', 'sliderArtistSize');
         clampVars('meta', 'sliderMetaSize');
         // Shows Spotify's own player so you can see whether it says "Log in" / "Preview" and log in INSIDE it.
-        document.querySelector('.spx-embed').classList.toggle('spx-embed-visible', !!setting('checkboxShowSpotifyPlayer'));
+        document.querySelector('.spx-embed').classList.toggle('spx-embed-visible', !!setting('checkboxShowSpotifyPlayer') && !sdkIsReady()); // the iframe is idle (and shows a stale preview UI) while the SDK plays
         volume.configure({
             enabled: setting('checkboxVolumeButtonEnabled'),
             muted: setting('sliderVolMutedOpacity'), icon: setting('sliderVolIconSize'), radius: setting('sliderVolCircleRadius'), barW: setting('sliderVolBarWidth'), barL: setting('sliderVolBarLength'),
@@ -706,6 +707,18 @@ async function boot() {
             : !isLoggedIn() ? 'Log In With Spotify'
             : spotifyLoginStatus() === 'ready' ? 'Logged In: Full Songs (Click To Log Out)' : 'Logged In: SDK ' + spotifyLoginStatus() + ' (Click To Log Out)';
     };
+    // "Show Spotify Player" with the SDK ready: instead of the (idle) iframe, a status box that shows what the SDK is really playing,
+    // including the song's length (a full song is minutes long; a preview is 30 s).
+    const fmtMs = ms => { const s = Math.max(0, Math.round(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    const updateSdkStatus = () => {
+        const box = el('spxSdkStatus'), show = !!setting('checkboxShowSpotifyPlayer'), ready = sdkIsReady();
+        document.querySelector('.spx-embed').classList.toggle('spx-embed-visible', show && !ready);
+        box.hidden = !(show && ready);
+        if (box.hidden) return;
+        const i = sdkInfo();
+        box.textContent = i ? `SPOTIFY SDK ${i.paused ? 'paused' : 'PLAYING'}  ${fmtMs(i.position)} / ${fmtMs(i.duration)}  ${i.duration > 31000 ? '(FULL SONG)' : '(only 30 s?)'}\n${i.title} - ${i.artist}` : 'SPOTIFY SDK ready: nothing has been played through it yet';
+    };
+    setInterval(updateSdkStatus, 500);
     initSdkPlayer(refreshLoginButton);
     onLoginChange(() => { initSdkPlayer(refreshLoginButton); refreshLoginButton(); });
     setInterval(refreshLoginButton, 1500);
