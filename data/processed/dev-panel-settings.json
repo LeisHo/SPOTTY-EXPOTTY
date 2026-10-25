@@ -10,8 +10,8 @@
     "checkboxColdStartClips": true,
     "checkboxRandomStartSong": true,
     "checkboxLoopPreview": false,
-    "sliderPreloadAhead": 100,
-    "sliderPreloadBehind": 100,
+    "sliderPreloadAhead": 30,
+    "sliderPreloadBehind": 30,
     "checkboxShowPoolOverlay": false,
     "sliderWheelScrubPixels": 40,
     "checkboxInvertScroll": false,
@@ -23,7 +23,8 @@
     "checkboxSpotifyLoginOnStart": true,
     "buttonSpotifyLogin": "",
     "checkboxShowSpotifyPlayer": false,
-    "sliderHandoffDelay": 0,
+    "sliderHandoffDelay": 100,
+    "sliderHandoffStartOffset": 0,
     "colorTimelineAccent": "#ffffff",
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
@@ -155,6 +156,25 @@
     "checkboxShadowVolume": false,
     "checkboxShadowNav": false,
     "checkboxShadowTitleLift": false,
+    "colorShadowCover": "#000000",
+    "sliderShadowCoverOpacity": 0.53,
+    "sliderShadowCoverBlur": 28,
+    "sliderShadowCoverSpread": 0,
+    "sliderShadowCoverAngle": 90,
+    "sliderShadowCoverDepth": 8,
+    "colorShadowVolume": "#000000",
+    "sliderShadowVolumeOpacity": 0.67,
+    "sliderShadowVolumeBlur": 3,
+    "sliderShadowVolumeAngle": 90,
+    "sliderShadowVolumeDepth": 1,
+    "colorShadowNav": "#000000",
+    "sliderShadowNavOpacity": 0.67,
+    "sliderShadowNavBlur": 3,
+    "sliderShadowNavAngle": 90,
+    "sliderShadowNavDepth": 1,
+    "colorShadowTitleLift": "#000000",
+    "checkboxBracketsSmaller": false,
+    "sliderBracketsFontPct": 60,
     "checkboxTitleAnimEnabled": true,
     "selectTitleAnimMode": "grow",
     "sliderTitleAnimDuration": 110,
@@ -2353,6 +2373,135 @@
                 {
                   "type": "row",
                   "key": "checkboxShadowTitleLift"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Album Cover Shadow",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "colorShadowCover"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowCoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowCoverBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowCoverSpread"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowCoverAngle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowCoverDepth"
+                      }
+                    ],
+                    "rowKeys": [
+                      "colorShadowCover",
+                      "sliderShadowCoverOpacity",
+                      "sliderShadowCoverBlur",
+                      "sliderShadowCoverSpread",
+                      "sliderShadowCoverAngle",
+                      "sliderShadowCoverDepth"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Volume Shadow",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "colorShadowVolume"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowVolumeOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowVolumeBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowVolumeAngle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowVolumeDepth"
+                      }
+                    ],
+                    "rowKeys": [
+                      "colorShadowVolume",
+                      "sliderShadowVolumeOpacity",
+                      "sliderShadowVolumeBlur",
+                      "sliderShadowVolumeAngle",
+                      "sliderShadowVolumeDepth"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Previous / Next Shadow",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "colorShadowNav"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowNavOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowNavBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowNavAngle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowNavDepth"
+                      }
+                    ],
+                    "rowKeys": [
+                      "colorShadowNav",
+                      "sliderShadowNavOpacity",
+                      "sliderShadowNavBlur",
+                      "sliderShadowNavAngle",
+                      "sliderShadowNavDepth"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Title Lift Shadow",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "colorShadowTitleLift"
+                      }
+                    ],
+                    "rowKeys": [
+                      "colorShadowTitleLift"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [
@@ -2361,7 +2510,125 @@
                 "checkboxShadowNav",
                 "checkboxShadowTitleLift"
               ],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "desktop:Album Cover Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowCover"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverSpread"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverAngle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverDepth"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowCover",
+                    "sliderShadowCoverOpacity",
+                    "sliderShadowCoverBlur",
+                    "sliderShadowCoverSpread",
+                    "sliderShadowCoverAngle",
+                    "sliderShadowCoverDepth"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "desktop:Volume Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowVolume"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowVolumeOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowVolumeBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowVolumeAngle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowVolumeDepth"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowVolume",
+                    "sliderShadowVolumeOpacity",
+                    "sliderShadowVolumeBlur",
+                    "sliderShadowVolumeAngle",
+                    "sliderShadowVolumeDepth"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "desktop:Previous / Next Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowNav"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowNavOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowNavBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowNavAngle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowNavDepth"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowNav",
+                    "sliderShadowNavOpacity",
+                    "sliderShadowNavBlur",
+                    "sliderShadowNavAngle",
+                    "sliderShadowNavDepth"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "desktop:Title Lift Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowTitleLift"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowTitleLift"
+                  ],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -2599,6 +2866,22 @@
                   "subgroups": []
                 }
               ]
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Brackets Smaller Text",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderBracketsFontPct"
+                }
+              ],
+              "rowKeys": [
+                "sliderBracketsFontPct"
+              ],
+              "subgroups": []
             }
           }
         ],
@@ -3348,6 +3631,135 @@
               {
                 "type": "row",
                 "key": "checkboxShadowTitleLift"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Album Cover Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowCover"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverSpread"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverAngle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowCoverDepth"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowCover",
+                    "sliderShadowCoverOpacity",
+                    "sliderShadowCoverBlur",
+                    "sliderShadowCoverSpread",
+                    "sliderShadowCoverAngle",
+                    "sliderShadowCoverDepth"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Volume Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowVolume"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowVolumeOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowVolumeBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowVolumeAngle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowVolumeDepth"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowVolume",
+                    "sliderShadowVolumeOpacity",
+                    "sliderShadowVolumeBlur",
+                    "sliderShadowVolumeAngle",
+                    "sliderShadowVolumeDepth"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Previous / Next Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowNav"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowNavOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowNavBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowNavAngle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowNavDepth"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowNav",
+                    "sliderShadowNavOpacity",
+                    "sliderShadowNavBlur",
+                    "sliderShadowNavAngle",
+                    "sliderShadowNavDepth"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Title Lift Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowTitleLift"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowTitleLift"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [
@@ -3356,7 +3768,125 @@
               "checkboxShadowNav",
               "checkboxShadowTitleLift"
             ],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "desktop:Album Cover Shadow",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "colorShadowCover"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowCoverOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowCoverBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowCoverSpread"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowCoverAngle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowCoverDepth"
+                  }
+                ],
+                "rowKeys": [
+                  "colorShadowCover",
+                  "sliderShadowCoverOpacity",
+                  "sliderShadowCoverBlur",
+                  "sliderShadowCoverSpread",
+                  "sliderShadowCoverAngle",
+                  "sliderShadowCoverDepth"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "desktop:Volume Shadow",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "colorShadowVolume"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowVolumeOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowVolumeBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowVolumeAngle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowVolumeDepth"
+                  }
+                ],
+                "rowKeys": [
+                  "colorShadowVolume",
+                  "sliderShadowVolumeOpacity",
+                  "sliderShadowVolumeBlur",
+                  "sliderShadowVolumeAngle",
+                  "sliderShadowVolumeDepth"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "desktop:Previous / Next Shadow",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "colorShadowNav"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowNavOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowNavBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowNavAngle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowNavDepth"
+                  }
+                ],
+                "rowKeys": [
+                  "colorShadowNav",
+                  "sliderShadowNavOpacity",
+                  "sliderShadowNavBlur",
+                  "sliderShadowNavAngle",
+                  "sliderShadowNavDepth"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "desktop:Title Lift Shadow",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "colorShadowTitleLift"
+                  }
+                ],
+                "rowKeys": [
+                  "colorShadowTitleLift"
+                ],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "desktop:Play Button",
@@ -3588,6 +4118,19 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "desktop:Brackets Smaller Text",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderBracketsFontPct"
+              }
+            ],
+            "rowKeys": [
+              "sliderBracketsFontPct"
+            ],
+            "subgroups": []
           }
         ]
       },
@@ -4267,6 +4810,10 @@
           {
             "type": "row",
             "key": "buttonSpotifyLogin"
+          },
+          {
+            "type": "row",
+            "key": "sliderHandoffStartOffset"
           }
         ],
         "rowKeys": [
@@ -4274,7 +4821,8 @@
           "sliderHandoffDelay",
           "checkboxSpotifyLoginOnStart",
           "checkboxShowSpotifyPlayer",
-          "buttonSpotifyLogin"
+          "buttonSpotifyLogin",
+          "sliderHandoffStartOffset"
         ],
         "subgroups": []
       },
@@ -5727,9 +6275,71 @@
             "type": "group",
             "section": {
               "key": "mobile:Shadows",
-              "items": [],
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Album Cover Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Volume Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Previous / Next Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Title Lift Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
               "rowKeys": [],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "mobile:Album Cover Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Volume Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Previous / Next Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Title Lift Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -5799,6 +6409,15 @@
                   "subgroups": []
                 }
               ]
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Brackets Smaller Text",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
             }
           }
         ],
@@ -6424,9 +7043,71 @@
           },
           {
             "key": "mobile:Shadows",
-            "items": [],
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Album Cover Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Volume Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Previous / Next Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Title Lift Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
             "rowKeys": [],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "mobile:Album Cover Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Volume Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Previous / Next Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Title Lift Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "mobile:Play Button",
@@ -6490,6 +7171,12 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "mobile:Brackets Smaller Text",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       },
@@ -7940,9 +8627,71 @@
             "type": "group",
             "section": {
               "key": "landscape:Shadows",
-              "items": [],
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Album Cover Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Volume Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Previous / Next Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Title Lift Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
               "rowKeys": [],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "landscape:Album Cover Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Volume Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Previous / Next Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Title Lift Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -8012,6 +8761,15 @@
                   "subgroups": []
                 }
               ]
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Brackets Smaller Text",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
             }
           }
         ],
@@ -8637,9 +9395,71 @@
           },
           {
             "key": "landscape:Shadows",
-            "items": [],
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Album Cover Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Volume Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Previous / Next Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Title Lift Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
             "rowKeys": [],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "landscape:Album Cover Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Volume Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Previous / Next Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Title Lift Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "landscape:Play Button",
@@ -8703,6 +9523,12 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "landscape:Brackets Smaller Text",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       },
@@ -8928,7 +9754,7 @@
     "desktop:Hot Keys": true,
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
-    "desktop:UI Layout": true,
+    "desktop:UI Layout": false,
     "desktop:New Group (3)": true,
     "desktop:New Group (4)": true,
     "desktop:New Group (5)": true,
@@ -8939,20 +9765,25 @@
     "desktop:Volume Button": true,
     "desktop:Album Cover": true,
     "desktop:Shadows": true,
+    "desktop:Album Cover Shadow": false,
+    "desktop:Volume Shadow": false,
+    "desktop:Previous / Next Shadow": false,
+    "desktop:Title Lift Shadow": false,
     "desktop:Play Button": true,
     "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": true,
     "desktop:Next And Last Button Animation": true,
+    "desktop:Brackets Smaller Text": false,
     "desktop:New Group": true,
     "desktop:Scrub Preload": true,
     "desktop:Scrub Input": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
     "desktop:Touch Scrub And Pinch": true,
-    "desktop:Scrub Audio": false,
+    "desktop:Scrub Audio": true,
     "desktop:New Group (2)": false,
     "desktop:No Preview": true,
-    "desktop:Spotify Handoff": false,
+    "desktop:Spotify Handoff": true,
     "desktop:Timeline Look": true,
     "desktop:Album Cover Colors": true,
     "mobile:Dev Panel": true,
@@ -8977,10 +9808,15 @@
     "mobile:Volume Button": false,
     "mobile:Album Cover": false,
     "mobile:Shadows": false,
+    "mobile:Album Cover Shadow": false,
+    "mobile:Volume Shadow": false,
+    "mobile:Previous / Next Shadow": false,
+    "mobile:Title Lift Shadow": false,
     "mobile:Play Button": false,
     "mobile:Play Button Animation": false,
     "mobile:Next And Last Song Buttons": false,
     "mobile:Next And Last Button Animation": false,
+    "mobile:Brackets Smaller Text": false,
     "mobile:New Group": false,
     "mobile:Scrub Preload": false,
     "mobile:Scrub Input": false,
@@ -9015,10 +9851,15 @@
     "landscape:Volume Button": false,
     "landscape:Album Cover": false,
     "landscape:Shadows": false,
+    "landscape:Album Cover Shadow": false,
+    "landscape:Volume Shadow": false,
+    "landscape:Previous / Next Shadow": false,
+    "landscape:Title Lift Shadow": false,
     "landscape:Play Button": false,
     "landscape:Play Button Animation": false,
     "landscape:Next And Last Song Buttons": false,
     "landscape:Next And Last Button Animation": false,
+    "landscape:Brackets Smaller Text": false,
     "landscape:New Group": false,
     "landscape:Scrub Preload": false,
     "landscape:Scrub Input": false,
@@ -9313,7 +10154,17 @@
     "landscape:New Group (4)": "TRACK TITLE",
     "landscape:New Group (5)": "ARTIST",
     "landscape:New Group (6)": "ALBUM",
-    "landscape:New Group (3)": "Text"
+    "landscape:New Group (3)": "Text",
+    "mobile:Album Cover Shadow": null,
+    "mobile:Volume Shadow": null,
+    "mobile:Previous / Next Shadow": null,
+    "mobile:Title Lift Shadow": null,
+    "mobile:Brackets Smaller Text": null,
+    "landscape:Album Cover Shadow": null,
+    "landscape:Volume Shadow": null,
+    "landscape:Previous / Next Shadow": null,
+    "landscape:Title Lift Shadow": null,
+    "landscape:Brackets Smaller Text": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
