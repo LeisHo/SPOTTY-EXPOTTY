@@ -1973,7 +1973,7 @@
     // of its ~250 existing control definitions.
     function hasStaticDeviceCounterpart(desktopId, tab) {
         const devicePrefix = tab === 'landscape' ? 'Landscape' : 'Mobile';
-        const targetId = desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar)/, '$1' + devicePrefix);
+        const targetId = desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar|gradientPicker)/, '$1' + devicePrefix);
         if (findRegisteredControlById(targetId)) return true;
         // Fallback for a control OUTSIDE the registerDevControlArray()
         // system entirely - a hand-authored row a project added directly
@@ -2034,7 +2034,7 @@
         const visible = isDevRowVisible(desktopId);
         ['mobile', 'landscape'].forEach(tab => {
             const devicePrefix = tab === 'landscape' ? 'Landscape' : 'Mobile';
-            const targetId = desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar)/, '$1' + devicePrefix);
+            const targetId = desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar|gradientPicker)/, '$1' + devicePrefix);
             const el = document.getElementById(targetId);
             const row = el ? el.closest('.dev-row') : null;
             if (!row) return;
@@ -2188,7 +2188,7 @@
         ['mobile', 'landscape'].forEach(tab => {
             if (isDevRowIndependent(tab, desktopId)) return;
             const devicePrefix = tab === 'landscape' ? 'Landscape' : 'Mobile';
-            const targetId = desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar)/, '$1' + devicePrefix);
+            const targetId = desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar|gradientPicker)/, '$1' + devicePrefix);
             writeDevControlValue(targetId, value);
         });
     }
@@ -2625,7 +2625,7 @@
     // only used to find the row to start walking up from.
     function refreshGroupCascadeCheckboxState(tab, desktopId) {
         const kind = tab === 'desktop' ? 'visibility' : 'independence';
-        const id = tab === 'desktop' ? desktopId : desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar)/, '$1' + (tab === 'landscape' ? 'Landscape' : 'Mobile'));
+        const id = tab === 'desktop' ? desktopId : desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar|gradientPicker)/, '$1' + (tab === 'landscape' ? 'Landscape' : 'Mobile'));
         const rowEl = document.getElementById(id)?.closest('.dev-row');
         let sectionEl = rowEl ? rowEl.closest('.dev-section') : null;
         while (sectionEl) {
@@ -2753,7 +2753,7 @@
         }
         if (existingId) return existingId;
         const devicePrefix = targetTab === 'landscape' ? 'Landscape' : 'Mobile';
-        const newId = desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar)/, '$1' + devicePrefix);
+        const newId = desktopId.replace(/^(slider|color|select|checkbox|curveEditor|rangeBar|gradientPicker)/, '$1' + devicePrefix);
         // Prefer a REAL, separately-registered per-device ctrl (an old-
         // style control, authored with its own independently-tuned
         // Mobile/Landscape entry before this feature existed) over
@@ -7435,6 +7435,7 @@
 
         const posRow = document.createElement('div');
         posRow.className = 'dev-row';
+        posRow.dataset.skipDeviceCheckbox = '1'; // Mouse Log is Desktop-tab-only (one real input stream): no "Show in Mobile/Landscape" checkbox
         const posCheckbox = document.createElement('input');
         posCheckbox.type = 'checkbox';
         posCheckbox.id = 'checkboxMouseLogPosition';
@@ -7465,6 +7466,7 @@
 
         const scrollRow = document.createElement('div');
         scrollRow.className = 'dev-row';
+        scrollRow.dataset.skipDeviceCheckbox = '1';
         const scrollCheckbox = document.createElement('input');
         scrollCheckbox.type = 'checkbox';
         scrollCheckbox.id = 'checkboxMouseLogScroll';
@@ -7477,6 +7479,7 @@
 
         const keyRow = document.createElement('div');
         keyRow.className = 'dev-row';
+        keyRow.dataset.skipDeviceCheckbox = '1';
         const keyCheckbox = document.createElement('input');
         keyCheckbox.type = 'checkbox';
         keyCheckbox.id = 'checkboxMouseLogKeystrokes';
@@ -8262,6 +8265,7 @@
         {
             const logToolsRow = document.createElement('div');
             logToolsRow.className = 'dev-row dev-log-tools-row';
+            logToolsRow.dataset.skipDeviceCheckbox = '1'; // Desktop-only buttons: a "Show in Mobile/Landscape" checkbox here would do nothing
             const mkLogToolBtn = (id, label) => {
                 const b = document.createElement('button');
                 b.type = 'button'; b.id = id; b.className = 'dev-action-button'; b.textContent = label;
