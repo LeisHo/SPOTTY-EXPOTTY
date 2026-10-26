@@ -3716,6 +3716,142 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Filter Button",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterButtonEnabled"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterIconOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterGapBelowShuffle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterEdgeOffset"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterOffOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterOnOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorFilterIcon"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorFilterOn"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterClickTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterHoverTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorFilterGray"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterGrayOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectFilterMissing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterSkipOnStep"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterStopOnFiltered"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterShowCount"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterCloseOnOutside"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorFilterPanelBg"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelBgOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorFilterPanelAccent"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxFilterButtonEnabled",
+                      "sliderFilterIconSize",
+                      "sliderFilterIconOffsetX",
+                      "sliderFilterGapBelowShuffle",
+                      "sliderFilterEdgeOffset",
+                      "sliderFilterOffOpacity",
+                      "sliderFilterOnOpacity",
+                      "colorFilterIcon",
+                      "colorFilterOn",
+                      "sliderFilterClickTolerance",
+                      "sliderFilterHoverTolerance",
+                      "colorFilterGray",
+                      "sliderFilterGrayOpacity",
+                      "selectFilterMissing",
+                      "checkboxFilterSkipOnStep",
+                      "checkboxFilterStopOnFiltered",
+                      "checkboxFilterShowCount",
+                      "checkboxFilterCloseOnOutside",
+                      "sliderFilterPanelWidth",
+                      "sliderFilterPanelFontSize",
+                      "sliderFilterPanelOffsetX",
+                      "sliderFilterPanelOffsetY",
+                      "colorFilterPanelBg",
+                      "sliderFilterPanelBgOpacity",
+                      "colorFilterPanelAccent"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [],
@@ -21050,7 +21186,8 @@
     "sliderLandscapeSongBarClickOpacity": null,
     "sliderLandscapeSongBarAnimTime": null,
     "landscape:Song Timeline Animation": null,
-    "landscape:Song Timeline": null
+    "landscape:Song Timeline": null,
+    "desktop:Filter Button": "FILTER"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",

@@ -8201,6 +8201,40 @@
         renderControlArray(SHBA_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_SHUFFLE_ANIM', SHBA_CONTROLS);
         makeDevGroupToggleable(tab, SHBA, 'checkboxShuffleAnimEnabled');
+        // Filter Button (under Shuffle): the button, the grayed-out look of filtered songs, what filtering does to playback, and the filter panel.
+        const FLB = 'Filter Button';
+        uiLayoutContent.appendChild(createDevGroupElement(FLB, tab));
+        const FLB_CONTROLS = [
+            { tab, group: FLB, id: 'checkboxFilterButtonEnabled', type: 'checkbox', label: 'Enabled (Off Also Turns The Filter Off)', value: true },
+            { tab, group: FLB, id: 'sliderFilterIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
+            { tab, group: FLB, id: 'sliderFilterIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: FLB, id: 'sliderFilterGapBelowShuffle', type: 'slider', label: 'Gap Below Shuffle (Px):', min: -40, max: 200, step: 1, value: 0 },
+            { tab, group: FLB, id: 'sliderFilterEdgeOffset', type: 'slider', label: 'Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
+            { tab, group: FLB, id: 'sliderFilterOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
+            { tab, group: FLB, id: 'sliderFilterOnOpacity', type: 'slider', label: 'On Icon Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: FLB, id: 'colorFilterIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },
+            { tab, group: FLB, id: 'colorFilterOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
+            { tab, group: FLB, id: 'sliderFilterClickTolerance', type: 'slider', label: 'Click Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
+            { tab, group: FLB, id: 'sliderFilterHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
+            // what a filtered-out song looks like and how it behaves
+            { tab, group: FLB, id: 'colorFilterGray', type: 'color', label: 'Filtered-Out Bar Color:', value: '#8a8f98' },
+            { tab, group: FLB, id: 'sliderFilterGrayOpacity', type: 'slider', label: 'Filtered-Out Bar Opacity (%):', min: 0, max: 100, step: 1, value: 35 },
+            { tab, group: FLB, id: 'selectFilterMissing', type: 'select', label: 'Songs With No Audio Data:', value: 'hide', options: [{ value: 'hide', text: 'Filter Out' }, { value: 'keep', text: 'Keep' }] },
+            { tab, group: FLB, id: 'checkboxFilterSkipOnStep', type: 'checkbox', label: 'Next / Last Skip Filtered-Out Songs', value: true },
+            { tab, group: FLB, id: 'checkboxFilterStopOnFiltered', type: 'checkbox', label: 'Do Not Play Filtered-Out Songs', value: true },
+            // the panel
+            { tab, group: FLB, id: 'checkboxFilterShowCount', type: 'checkbox', label: 'Panel: Show Matching Song Count', value: true },
+            { tab, group: FLB, id: 'checkboxFilterCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
+            { tab, group: FLB, id: 'sliderFilterPanelWidth', type: 'slider', label: 'Panel Width (Px):', min: 160, max: 600, step: 1, value: 260 },
+            { tab, group: FLB, id: 'sliderFilterPanelFontSize', type: 'slider', label: 'Panel Font Size (Px):', min: 8, max: 32, step: 1, value: 12 },
+            { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
+            { tab, group: FLB, id: 'sliderFilterPanelOffsetY', type: 'slider', label: 'Panel Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },
+            { tab, group: FLB, id: 'colorFilterPanelBg', type: 'color', label: 'Panel Background Color:', value: '#14161a' },
+            { tab, group: FLB, id: 'sliderFilterPanelBgOpacity', type: 'slider', label: 'Panel Background Opacity (%):', min: 0, max: 100, step: 1, value: 92 },
+            { tab, group: FLB, id: 'colorFilterPanelAccent', type: 'color', label: 'Panel Slider Color:', value: '#1db954' },
+        ];
+        renderControlArray(FLB_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_FILTER_CONTROLS', FLB_CONTROLS);
         // Volume Button Animation: the same hover / click / release animation as the other buttons. Separate from the slider's open/close animation.
         const VBA = 'Volume Button Animation';
         const VBA_CONTROLS = [

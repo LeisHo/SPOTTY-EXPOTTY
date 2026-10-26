@@ -174,6 +174,14 @@ export const DEFAULTS = {
     textArtistSeparator: ';', // what joins the names when a track has several artists (the data stores them with ';')
     sliderArtistSeparatorPct: 100,
     sliderNavEdgeOffset: 14,
+    // Filter button + panel (UI Layout > Audio Buttons > FILTER)
+    checkboxFilterButtonEnabled: true, sliderFilterIconSize: 20, sliderFilterIconOffsetX: 0, sliderFilterGapBelowShuffle: 0, sliderFilterEdgeOffset: 14,
+    sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
+    sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
+    colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
+    selectFilterMissing: 'hide', checkboxFilterSkipOnStep: true, checkboxFilterStopOnFiltered: true, checkboxFilterCloseOnOutside: true, checkboxFilterShowCount: true,
+    sliderFilterPanelWidth: 260, sliderFilterPanelFontSize: 12, sliderFilterPanelOffsetX: 0, sliderFilterPanelOffsetY: 6,
+    colorFilterPanelBg: '#14161a', sliderFilterPanelBgOpacity: 92, colorFilterPanelAccent: '#1db954',
 
     // Background
     selectBackgroundMode: 'none',

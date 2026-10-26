@@ -21,6 +21,7 @@ import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLog
 import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
 import { createBackground } from './app/background.js';
+import { createFilter } from './app/filter.js';
 
 const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 // exact add moment, in the viewer's local time; date only when the export has no time of day
@@ -77,6 +78,7 @@ async function boot() {
                 </div></div>
             </div>
             <button type="button" class="spx-shuffle bs-host" id="spxShuffle" aria-label="Shuffle" aria-pressed="false" title="Shuffle off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+            <button type="button" class="spx-filter bs-host" id="spxFilter" aria-label="Filter songs" aria-pressed="false" aria-expanded="false" title="Filter off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg></button>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart"><button type="button" class="spx-start-play" id="spxStartBtn" aria-label="Start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button></div>
             <div class="spx-inspector" id="spxInspectorPanel" hidden>
@@ -212,6 +214,10 @@ async function boot() {
     // playing; if it never does, the preview carries on instead of going silent.
     let previewHold = null;
     let stepImmediate = false; // set by stepSong() so that one song change skips the handoff delay
+    // Audio-feature filter (Filter button, filter.js). Created further down; until then every song passes.
+    let flt = null;
+    const filterOn = () => !!flt && flt.active() && !!setting('checkboxFilterButtonEnabled');
+    const songOk = i => !filterOn() || flt.passes(i);
     // (capture phase: runs before the generic settings listener below, so applyLook sees the flag)
     ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; }, true));
 
@@ -376,7 +382,7 @@ async function boot() {
         BS_PROPS.forEach(k => { if (v[k] !== undefined) btn.style.setProperty(k, v[k]); });
     }
     // Hover Tolerance (Shuffle, Next/Last, Play): the hover state also shows while the pointer is within the tolerance of the button.
-    const HOVER_TOL = [['spxShuffle', 'sliderShuffleHoverTolerance'], ['spxPrev', 'sliderNavHoverTolerance'], ['spxNext', 'sliderNavHoverTolerance'], ['spxCover', 'sliderPlayHoverTolerance']];
+    const HOVER_TOL = [['spxShuffle', 'sliderShuffleHoverTolerance'], ['spxFilter', 'sliderFilterHoverTolerance'], ['spxPrev', 'sliderNavHoverTolerance'], ['spxNext', 'sliderNavHoverTolerance'], ['spxCover', 'sliderPlayHoverTolerance']];
     const distToRect = (r, x, y) => Math.hypot(Math.max(r.left - x, 0, x - r.right), Math.max(r.top - y, 0, y - r.bottom));
     document.addEventListener('pointermove', e => {
         if (e.pointerType === 'touch') return;
@@ -562,6 +568,21 @@ async function boot() {
         applyTimelineBox();
         el('spxStart').style.transition = `opacity ${setting('sliderStartFadeMs')}ms linear`;
         el('spxShuffle').hidden = !setting('checkboxShuffleButtonEnabled');
+        { // Filter button + panel
+            const a = el('spxApp').style, c = (k, v) => a.setProperty(k, v);
+            el('spxFilter').hidden = !setting('checkboxFilterButtonEnabled');
+            c('--spx-filter-icon', setting('sliderFilterIconSize') + 'px'); c('--spx-filter-x', setting('sliderFilterIconOffsetX') + 'px');
+            c('--spx-filter-gap', setting('sliderFilterGapBelowShuffle') + 'px'); c('--spx-filter-edge', setting('sliderFilterEdgeOffset') + 'px');
+            c('--spx-filter-off-op', String(setting('sliderFilterOffOpacity') / 100)); c('--spx-filter-on-op', String(setting('sliderFilterOnOpacity') / 100));
+            c('--spx-filter-color', setting('colorFilterIcon')); c('--spx-filter-on-color', setting('colorFilterOn'));
+            const ps = flt && flt.panel.style;
+            if (ps) {
+                ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-font', setting('sliderFilterPanelFontSize') + 'px');
+                ps.setProperty('--spx-flt-bg', rgbaOf(setting('colorFilterPanelBg'), setting('sliderFilterPanelBgOpacity') / 100)); ps.setProperty('--spx-flt-accent', setting('colorFilterPanelAccent'));
+                flt.refresh(); syncFilterUi(); timeline.setFilter(filterOn() ? flt.passes : null);
+                if (flt.open) placeFilterPanel();
+            }
+        }
         placeNav(); // the edge offset is a setting
         el('spxApp').style.setProperty('--spx-shuffle-icon', setting('sliderShuffleIconSize') + 'px');
         el('spxApp').style.setProperty('--spx-shuffle-x', setting('sliderShuffleIconOffsetX') + 'px');
@@ -677,7 +698,7 @@ async function boot() {
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         artistRaw = s.a;
         setArtistLine();
-        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) || !previewClipsOn() ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
+        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${songOk(idx) ? (clipKey(s) || !previewClipsOn() ? '' : '\nno preview clip') : '\nfiltered out'}`; // its own line (the line breaks via white-space: pre-line)
         applyTextElementStyles(); // re-run Shrink to Fit against the new text (a no-op for every other Overflow mode)
         timeline.setDateLine(fmtAdded(s.t));
         scheduleCover();
@@ -720,6 +741,12 @@ async function boot() {
         render();
         schedulePreload();
         if (handedOff) { logEvent('playback', 'EMBED song stopped: moved to another song'); pauseEmbed(); handedOff = false; }
+        if (!songOk(idx) && setting('checkboxFilterStopOnFiltered')) { // filtered out: nothing plays for this song
+            logEvent('playback', 'FILTERED OUT: not playing');
+            clearTimeout(handoffTimer); handoffPending = false; clearTimeout(noPreviewTimer);
+            stopClip(); previewHold = null; stepImmediate = false;
+            return;
+        }
         playClip(clipKey(songs[idx]));
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
@@ -775,7 +802,7 @@ async function boot() {
     // ---- input ---------------------------------------------------------------------------
     // Desktop: wheel = scrub (a notch moves the playhead N px along the current scale), click on the
     // timeline = jump, click-drag = zoom around the playhead. Touch: drag = scrub, pinch = zoom, tap = jump.
-    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxCover, #spxVolume, #spxSongBar, a, button, input, select, textarea');
+    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxFilterPanel, #spxCover, #spxVolume, #spxSongBar, a, button, input, select, textarea');
     // The title/artist/album lines are selectable text: a drag that starts on them selects it instead of zooming.
     const inText = t => t.closest && t.closest('.spx-title, .spx-artist, .spx-meta');
     window.addEventListener('wheel', e => {
@@ -794,8 +821,8 @@ async function boot() {
     // re-dispatch it as a click on that button.
     let redirectBtn = null;
     // Click Tolerance (Shuffle, Next/Last, Play): each button's hit area grows by its own tolerance in px.
-    const clickTolOf = b => (b.id === 'spxShuffle' ? setting('sliderShuffleClickTolerance') : (b.id === 'spxPrev' || b.id === 'spxNext') ? setting('sliderNavClickTolerance') : b.id === 'spxCover' ? setting('sliderPlayClickTolerance') : 0);
-    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxTitleLink'), el('spxStartBtn')].find(b => {
+    const clickTolOf = b => (b.id === 'spxShuffle' ? setting('sliderShuffleClickTolerance') : b.id === 'spxFilter' ? setting('sliderFilterClickTolerance') : (b.id === 'spxPrev' || b.id === 'spxNext') ? setting('sliderNavClickTolerance') : b.id === 'spxCover' ? setting('sliderPlayClickTolerance') : 0);
+    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxFilter'), el('spxTitleLink'), el('spxStartBtn')].find(b => {
         const r = b.getBoundingClientRect(), p = clickTolOf(b);
         return x >= r.left - p && x <= r.right + p && y >= r.top - p && y <= r.bottom + p;
     });
@@ -893,7 +920,7 @@ async function boot() {
     const shuffleBtn = el('spxShuffle');
     function rebuildShuffle() {
         const a = [];
-        for (let i = 0; i < songs.length; i++) if (i !== idx) a.push(i);
+        for (let i = 0; i < songs.length; i++) if (i !== idx && songOk(i)) a.push(i);
         for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
         shuffleQueue = [idx, ...a]; shufflePtr = 0;
     }
@@ -925,7 +952,59 @@ async function boot() {
         stepSong(1);
         return true;
     });
-    const stepSong = d => { stepImmediate = true; if (shuffleOn && Math.abs(d) === 1) shuffleStep(d); else { moveTo(timeline.currentIndex() + d); } stepImmediate = false; };
+    const stepSong = d => {
+        stepImmediate = true;
+        if (shuffleOn && Math.abs(d) === 1) shuffleStep(d);
+        else {
+            let t = timeline.currentIndex() + d;
+            if (filterOn() && setting('checkboxFilterSkipOnStep')) { // Next / Last jump to the nearest song that passes the filter
+                const sgn = d < 0 ? -1 : 1;
+                while (t >= 0 && t < songs.length && !flt.passes(t)) t += sgn;
+                if (t < 0 || t >= songs.length) { stepImmediate = false; return; } // none left in that direction
+            }
+            moveTo(t);
+        }
+        stepImmediate = false;
+    };
+    // ---- Filter button (under Shuffle) + panel ----
+    const filterBtn = el('spxFilter');
+    flt = createFilter(songs, { host: document.body, onChange: () => onFilterChanged() });
+    function placeFilterPanel() {
+        const r = filterBtn.getBoundingClientRect(), pn = flt.panel;
+        pn.style.top = Math.max(4, r.bottom + setting('sliderFilterPanelOffsetY')) + 'px';
+        const w = pn.offsetWidth || setting('sliderFilterPanelWidth');
+        pn.style.left = Math.max(4, Math.min(window.innerWidth - w - 4, r.right - w + setting('sliderFilterPanelOffsetX'))) + 'px';
+    }
+    function syncFilterUi() {
+        const on = filterOn();
+        filterBtn.setAttribute('aria-pressed', String(on));
+        filterBtn.setAttribute('aria-expanded', String(flt.open));
+        filterBtn.title = on ? 'Filter on: ' + flt.describe() : 'Filter off';
+    }
+    function onFilterChanged() {
+        timeline.setFilter(filterOn() ? flt.passes : null);
+        if (shuffleOn) rebuildShuffle();
+        if (!songOk(idx) && setting('checkboxFilterStopOnFiltered')) { // the current song no longer passes: stop it
+            clearTimeout(handoffTimer); handoffPending = false; clearTimeout(noPreviewTimer);
+            if (handedOff) { pauseEmbed(); handedOff = false; }
+            stopClip(); previewHold = null;
+        }
+        render();
+        syncFilterUi();
+        logEvent('playback', 'FILTER ' + (filterOn() ? flt.describe() + ' -> ' + flt.countPassing() + ' of ' + songs.length + ' songs' : 'cleared'));
+    }
+    filterBtn.addEventListener('click', () => {
+        flt.setOpen(!flt.open);
+        if (flt.open) placeFilterPanel();
+        syncFilterUi();
+    });
+    document.addEventListener('pointerdown', e => {
+        if (flt.open && setting('checkboxFilterCloseOnOutside') && !flt.panel.contains(e.target) && !filterBtn.contains(e.target)) { flt.setOpen(false); syncFilterUi(); }
+    }, true);
+    window.addEventListener('resize', () => { if (flt.open) placeFilterPanel(); });
+    timeline.setFilter(filterOn() ? flt.passes : null);
+    syncFilterUi();
+    window.__spxState = () => ({ idx, pass: songOk(idx), shuffleOn, filterOn: filterOn() }); // read by tests
     // dev-panel buttons (so a hotkey can be assigned to them there)
     document.addEventListener('click', e => {
         const b = e.target && e.target.closest && e.target.closest('button');

@@ -171,6 +171,31 @@
 .spx-shuffle svg { width: var(--spx-shuffle-icon, 20px); height: var(--spx-shuffle-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-shuffle[aria-pressed="true"] { --bs-op: var(--spx-shuffle-on-op, 1); color: var(--spx-shuffle-on-color, #1db954); }
 .spx-shuffle[hidden] { display: none; }
+/* Filter (under the shuffle icon): opens the audio-feature filter panel (filter.js) */
+.spx-filter { z-index: 4; position: absolute; right: var(--spx-filter-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-filter-gap, 0px)); width: calc(var(--spx-filter-icon, 20px) + 20px); height: calc(var(--spx-filter-icon, 20px) + 20px);
+    border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-filter-color, #f2f2f2); --bs-op: var(--spx-filter-off-op, 0.45); cursor: pointer;
+    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-filter-x, 0px) 0; }
+.spx-filter svg { width: var(--spx-filter-icon, 20px); height: var(--spx-filter-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spx-filter[aria-pressed="true"] { --bs-op: var(--spx-filter-on-op, 1); color: var(--spx-filter-on-color, #1db954); }
+.spx-filter[hidden] { display: none; }
+.spx-app.no-shadow-vol .spx-filter { filter: none; }
+.spx-filter-panel { position: fixed; z-index: 2147482000; width: var(--spx-flt-width, 260px); box-sizing: border-box; padding: 10px 12px 12px; border-radius: 10px; color: #f2f2f2; font-size: var(--spx-flt-font, 12px);
+    background: var(--spx-flt-bg, rgba(20,22,26,0.92)); box-shadow: 0 6px 24px #000a; backdrop-filter: blur(6px); --flt-accent: var(--spx-flt-accent, #1db954); }
+.spx-filter-panel[hidden] { display: none; }
+.spx-flt-head { display: flex; justify-content: space-between; align-items: center; font-weight: 700; letter-spacing: .08em; margin-bottom: 6px; }
+.spx-flt-clear { background: none; border: 1px solid #ffffff55; color: inherit; border-radius: 6px; font-size: inherit; padding: 2px 8px; cursor: pointer; }
+.spx-flt-row { margin: 8px 0 12px; }
+.spx-flt-top { display: flex; justify-content: space-between; opacity: .85; }
+.spx-flt-row.on .spx-flt-top { color: var(--flt-accent); opacity: 1; }
+.spx-flt-range { position: relative; height: 22px; }
+.spx-flt-track { position: absolute; left: 0; right: 0; top: 10px; height: 3px; border-radius: 2px; background: #ffffff30; }
+.spx-flt-fill { position: absolute; top: 0; bottom: 0; background: var(--flt-accent); border-radius: 2px; }
+.spx-flt-range input { position: absolute; left: 0; top: 0; width: 100%; height: 22px; margin: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
+.spx-flt-range input::-webkit-slider-runnable-track { background: none; height: 22px; }
+.spx-flt-range input::-moz-range-track { background: none; }
+.spx-flt-range input::-webkit-slider-thumb { -webkit-appearance: none; pointer-events: auto; width: 14px; height: 14px; margin-top: 4px; border-radius: 50%; background: #fff; border: 2px solid var(--flt-accent); cursor: pointer; }
+.spx-flt-range input::-moz-range-thumb { pointer-events: auto; width: 10px; height: 10px; border-radius: 50%; background: #fff; border: 2px solid var(--flt-accent); cursor: pointer; }
+.spx-flt-count { opacity: .75; text-align: center; min-height: 1em; }
 .spx-vol-btn[aria-expanded="true"] ~ .spx-shuffle { opacity: 0; pointer-events: none; } /* the slider drops over this spot */
 .spx-app.no-shadow-vol .spx-shuffle { filter: none; }
 

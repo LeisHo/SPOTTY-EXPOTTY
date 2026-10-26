@@ -61,6 +61,7 @@ for f in sorted(glob.glob(os.path.join(BASE, "*.csv"))):
                 "v": num(r.get("Valence")),
                 "e": num(r.get("Energy")),
                 "dn": num(r.get("Danceability")),
+                "tp": num(r.get("Tempo"), 1),
             })
             n += 1
     playlists.append({"name": pretty(os.path.basename(f)), "file": os.path.basename(f), "count": n})

@@ -330,16 +330,28 @@ export function createTimeline(canvas, data) {
         const shownBin = easedScale('bins', maxBin);
         const binH = bn => ((bn.b - bn.a) / shownBin) * (topH - 6);
         const binColorOf = bn => binPaint(bn.a, bn.b, colorOpts);
+        // Audio-feature filter (the Filter button): songs that do not pass are drawn gray. validOf(bn) = how many of the bar's songs pass.
+        const filt = filterFn;
+        const validOf = bn => { if (!filt) return bn.b - bn.a; let c = 0; for (let i = bn.a; i < bn.b; i++) if (filt(i)) c++; return c; };
+        const grayCss = filt ? rgbCss(hexToRgb(setting('colorFilterGray')), setting('sliderFilterGrayOpacity') / 100) : '';
 
         if (style === 'none') {
-            bins.forEach((bn, b) => { if (bn) paintFill(ctx, binColorOf(bn), b * bw, topH - binH(bn), Math.max(1, bw - 0.5), binH(bn), accentCss, baseAlpha); });
+            bins.forEach((bn, b) => {
+                if (!bn) return;
+                const n = bn.b - bn.a, ok = validOf(bn), full = binH(bn), x = b * bw, ww = Math.max(1, bw - 0.5);
+                if (ok === n) { paintFill(ctx, binColorOf(bn), x, topH - full, ww, full, accentCss, baseAlpha); return; }
+                const okH = full * ok / n; // the passing songs keep their colour at the bottom, the rest of the bar is gray
+                if (okH > 0) paintFill(ctx, binColorOf(bn), x, topH - okH, ww, okH, accentCss, baseAlpha);
+                ctx.fillStyle = grayCss; ctx.fillRect(x, topH - full, ww, full - okH);
+            });
         } else if (style === 'glow') {
             const stemW = setting('sliderGlowStemWidth'), radius = setting('sliderGlowRadius');
             const dot = setting('sliderGlowDotSize'), intensity = setting('sliderGlowIntensity');
             bins.forEach((bn, b) => {
                 if (!bn) return;
                 const paint = binColorOf(bn);
-                const rgb = paint ? (paint.solid || (paint.gradient && paint.gradient[paint.gradient.length >> 1]) || paint.stack[paint.stack.length - 1]) : hexToRgb(accent);
+                let rgb = paint ? (paint.solid || (paint.gradient && paint.gradient[paint.gradient.length >> 1]) || paint.stack[paint.stack.length - 1]) : hexToRgb(accent);
+                if (filt && validOf(bn) === 0) rgb = hexToRgb(setting('colorFilterGray')); // nothing in this bar passes the filter
                 const x = b * bw + bw / 2, top = topH - binH(bn);
                 ctx.save();
                 ctx.shadowColor = rgbCss(rgb, intensity);
@@ -553,10 +565,12 @@ export function createTimeline(canvas, data) {
     // Set the visible span directly (clamped to the zoom limits), keeping the playhead where it is on screen.
     function setSpanMs(ms) { zoomBy(clampSpan(ms) / span); }
 
+    let filterFn = null; // (songIndex) => passes the audio-feature filter; null = no filter
+    function setFilter(fn) { filterFn = fn; draw(); }
     let dateLine = '';
     function setDateLine(t) { if (t !== dateLine) { dateLine = t; draw(); } }
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
+    return { draw, setFilter, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }
