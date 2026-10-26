@@ -408,8 +408,6 @@ async function boot() {
     // applied as a plain CSS max-width (never shrinks the engine's own box, only caps it), with no
     // margin/position changes, so it can't fight the Layout Engine for ownership of these boxes.
     const TEXT_ELEMENTS = [['SongTitle', () => el('spxTitle')], ['Artist', () => el('spxArtist')], ['AlbumDate', () => el('spxMeta')]];
-    // Rendered line count of a text element (one per line box), so a one-line text is never shrunk by a height guess
-    const renderedLines = node => { const r = document.createRange(); r.selectNodeContents(node); return Math.max(1, new Set(Array.from(r.getClientRects()).map(q => Math.round(q.top / 2))).size); };
     function applyTextElementStyles() {
         const effective = {}; // the final font size of each element, for the Scale Down to Match options
         TEXT_ELEMENTS.forEach(([p, getNode]) => {
@@ -445,13 +443,25 @@ async function boot() {
             if (multi && overflow !== 'scale' && setting('checkboxScale' + multi + 'Multiline')) {
                 const maxLines = setting('slider' + multi + 'MaxLines');
                 const lineMul = parseFloat(st.lineHeight) || 1.2;
+                // Line count = content height / line height (not fragment rectangles, which count a smaller bracketed span
+                // or a differently-aligned fragment as an extra line). Keep the set size when it already fits; otherwise
+                // find the largest size (0.5 px steps) that still fits within the line limit.
+                const cs = getComputedStyle(node);
+                const pad = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+                const fits = f => {
+                    st.fontSize = f + 'px';
+                    return (node.getBoundingClientRect().height - pad) <= maxLines * f * lineMul + 1;
+                };
                 let fs = size;
-                for (let i = 0; i < 12; i++) {
-                    const lines = renderedLines(node);
-                    if (lines <= maxLines || fs <= 6) break;
-                    fs = Math.max(6, Math.floor(fs * Math.min(0.98, maxLines / lines)));
-                    st.fontSize = fs + 'px';
+                if (!fits(size)) {
+                    let lo = 6, hi = size; // lo is the fallback if nothing fits
+                    for (let i = 0; i < 12 && hi - lo > 0.5; i++) {
+                        const mid = (lo + hi) / 2;
+                        if (fits(mid)) lo = mid; else hi = mid;
+                    }
+                    fs = lo;
                 }
+                st.fontSize = fs + 'px';
             }
             if (overflow === 'scale') { // Shrink to Fit: back off from the configured size until it fits
                 let fs = size;
