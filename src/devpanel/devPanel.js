@@ -8091,9 +8091,9 @@
         const GOA_CONTROLS = [
             { tab, group: GOA, id: 'checkboxGlobalOverrideAnim', type: 'checkbox', label: 'Enabled', value: false },
             { tab, group: GOA, id: 'sliderGlobalAnimTime', type: 'slider', label: 'Animation Time (Ms):', min: 0, max: 1500, step: 10, value: 150 },
-            { tab, group: GOA, id: 'sliderGlobalAnimHoverSize', type: 'slider', label: 'Size On Hover (Px):', min: 8, max: 300, step: 1, value: 30 },
-            { tab, group: GOA, id: 'sliderGlobalAnimClickSize', type: 'slider', label: 'Size On Click (Px):', min: 8, max: 300, step: 1, value: 22 },
-            { tab, group: GOA, id: 'sliderGlobalAnimReleaseSize', type: 'slider', label: 'Size On Release (Px):', min: 8, max: 300, step: 1, value: 32 },
+            { tab, group: GOA, id: 'sliderGlobalAnimHoverSize', type: 'slider', label: 'Scale On Hover (%):', min: 10, max: 300, step: 1, value: 115 },
+            { tab, group: GOA, id: 'sliderGlobalAnimClickSize', type: 'slider', label: 'Scale On Click (%):', min: 10, max: 300, step: 1, value: 85 },
+            { tab, group: GOA, id: 'sliderGlobalAnimReleaseSize', type: 'slider', label: 'Scale On Release (%):', min: 10, max: 300, step: 1, value: 120 },
             { tab, group: GOA, id: 'sliderGlobalAnimHoverOpacity', type: 'slider', label: 'Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: GOA, id: 'sliderGlobalAnimClickOpacity', type: 'slider', label: 'Opacity On Click (%):', min: 0, max: 100, step: 1, value: 70 },
         ];

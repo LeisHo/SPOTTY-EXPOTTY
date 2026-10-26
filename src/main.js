@@ -485,8 +485,9 @@ async function boot() {
         const g = id => setting(id), on = g('checkboxGlobalOverrideEnabled'), anim = g('checkboxGlobalOverrideAnim');
         const col = g('colorGlobalOverride'), op = String(g('sliderGlobalOverrideOpacity') / 100);
         const animVars = {
-            '--bs-size-hover': g('sliderGlobalAnimHoverSize') + 'px', '--bs-size-press': g('sliderGlobalAnimClickSize') + 'px',
-            '--bs-size-release': g('sliderGlobalAnimReleaseSize') + 'px', '--bs-op-hover': String(g('sliderGlobalAnimHoverOpacity') / 100),
+            // Scales are percentages of each button's own icon size (its --bs-size), so they work for every button
+            '--bs-size-hover': `calc(var(--bs-size, 26px) * ${g('sliderGlobalAnimHoverSize') / 100})`, '--bs-size-press': `calc(var(--bs-size, 26px) * ${g('sliderGlobalAnimClickSize') / 100})`,
+            '--bs-size-release': `calc(var(--bs-size, 26px) * ${g('sliderGlobalAnimReleaseSize') / 100})`, '--bs-op-hover': String(g('sliderGlobalAnimHoverOpacity') / 100),
             '--bs-op-press': String(g('sliderGlobalAnimClickOpacity') / 100), '--bs-time': g('sliderGlobalAnimTime') + 'ms',
         };
         // kind 'bs': a .bs-host whose --bs-color / --bs-op are rewritten by applyButtonStyle on every change (Play, Next, Last).
