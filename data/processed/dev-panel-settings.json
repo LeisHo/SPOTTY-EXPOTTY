@@ -141,7 +141,7 @@
     "textArtistSeparator": "  &  ",
     "sliderArtistSeparatorPct": 79,
     "checkboxScaleArtistMultiline": true,
-    "sliderArtistMaxLines": 1,
+    "sliderArtistMaxLines": 2,
     "checkboxScaleArtistToMatch": true,
     "checkboxTxtArtistOutlineEnabled": false,
     "colorTxtArtistOutlineColor": "#000000",
@@ -392,7 +392,7 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 67,
+    "left": 35.28570556640625,
     "top": 23,
     "width": 350,
     "height": 671
