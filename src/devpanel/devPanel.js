@@ -8223,9 +8223,8 @@
             { tab, group: FLB, id: 'checkboxFilterSkipOnStep', type: 'checkbox', label: 'Next / Last Skip Filtered-Out Songs', value: true },
             { tab, group: FLB, id: 'checkboxFilterStopOnFiltered', type: 'checkbox', label: 'Do Not Play Filtered-Out Songs', value: true },
             // the panel
-            { tab, group: FLB, id: 'checkboxFilterShowCount', type: 'checkbox', label: 'Panel: Show Matching Song Count', value: true },
             { tab, group: FLB, id: 'checkboxFilterCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
-            { tab, group: FLB, id: 'sliderFilterPanelWidth', type: 'slider', label: 'Panel Width (Px):', min: 160, max: 600, step: 1, value: 260 },
+            { tab, group: FLB, id: 'sliderFilterPanelWidth', type: 'slider', label: 'Panel Default Width (Px):', min: 160, max: 600, step: 1, value: 260 },
             { tab, group: FLB, id: 'sliderFilterPanelFontSize', type: 'slider', label: 'Panel Font Size (Px):', min: 8, max: 32, step: 1, value: 12 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetY', type: 'slider', label: 'Panel Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },

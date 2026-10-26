@@ -968,7 +968,7 @@ async function boot() {
     };
     // ---- Filter button (under Shuffle) + panel ----
     const filterBtn = el('spxFilter');
-    flt = createFilter(songs, { host: document.body, onChange: () => onFilterChanged() });
+    flt = createFilter(songs, { host: document.body, onChange: o => { if (o && o.layout) placeFilterPanel(); else onFilterChanged(); } });
     function placeFilterPanel() {
         const r = filterBtn.getBoundingClientRect(), pn = flt.panel;
         pn.style.top = Math.max(4, r.bottom + setting('sliderFilterPanelOffsetY')) + 'px';

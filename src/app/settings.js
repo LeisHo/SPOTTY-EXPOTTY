@@ -179,7 +179,7 @@ export const DEFAULTS = {
     sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
     sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
-    selectFilterMissing: 'hide', checkboxFilterSkipOnStep: true, checkboxFilterStopOnFiltered: true, checkboxFilterCloseOnOutside: true, checkboxFilterShowCount: true,
+    selectFilterMissing: 'hide', checkboxFilterSkipOnStep: true, checkboxFilterStopOnFiltered: true, checkboxFilterCloseOnOutside: true,
     sliderFilterPanelWidth: 260, sliderFilterPanelFontSize: 12, sliderFilterPanelOffsetX: 0, sliderFilterPanelOffsetY: 6,
     colorFilterPanelBg: '#14161a', sliderFilterPanelBgOpacity: 92, colorFilterPanelAccent: '#1db954',
 

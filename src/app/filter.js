@@ -62,9 +62,44 @@ export function createFilter(songs, { host, onChange }) {
     panel.className = 'spx-filter-panel';
     panel.id = 'spxFilterPanel';
     panel.hidden = true;
-    panel.innerHTML = '<div class="spx-flt-head"><span>FILTER</span><button type="button" class="spx-flt-clear">Clear</button></div><div class="spx-flt-rows"></div><div class="spx-flt-count"></div>';
+    panel.innerHTML = '<div class="spx-flt-head"><button type="button" class="spx-flt-clear" title="Clear filters" aria-label="Clear filters"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></button></div><div class="spx-flt-rows"></div>';
+    // Horizontal resize: two thin strips on the panel's left and right edges. They sit inside the panel's own padding, below the
+    // sliders (z-index), and the slider rows start inside that padding, so a press that could be either is always the slider's.
+    const WIDTH_KEY = 'spxFilterWidth', MIN_W = 160;
+    ['l', 'r'].forEach(side => {
+        const h = document.createElement('div');
+        h.className = 'spx-flt-resize spx-flt-resize-' + side;
+        h.title = 'Drag to resize (double-click to reset)';
+        panel.appendChild(h);
+        h.addEventListener('pointerdown', e => {
+            if (e.button !== 0) return;
+            e.preventDefault();
+            h.setPointerCapture(e.pointerId);
+            const r0 = panel.getBoundingClientRect(), x0 = e.clientX;
+            const move = ev => {
+                const dx = ev.clientX - x0;
+                let left = r0.left, w = side === 'r' ? r0.width + dx : r0.width - dx;
+                w = Math.max(MIN_W, Math.min(window.innerWidth - 8, w));
+                if (side === 'l') left = r0.right - w;
+                if (left < 4) { left = 4; if (side === 'l') w = r0.right - 4; }
+                if (left + w > window.innerWidth - 4) w = window.innerWidth - 4 - left;
+                panel.style.width = w + 'px'; panel.style.left = left + 'px';
+            };
+            const up = () => {
+                h.removeEventListener('pointermove', move); h.removeEventListener('pointerup', up); h.removeEventListener('pointercancel', up);
+                try { localStorage.setItem(WIDTH_KEY, String(Math.round(panel.getBoundingClientRect().width))); } catch (e2) { /* storage blocked */ }
+            };
+            h.addEventListener('pointermove', move); h.addEventListener('pointerup', up); h.addEventListener('pointercancel', up);
+        });
+        h.addEventListener('dblclick', () => { // back to the dev panel's Panel Width
+            panel.style.width = '';
+            try { localStorage.removeItem(WIDTH_KEY); } catch (e2) { /* storage blocked */ }
+            onChange({ layout: true });
+        });
+    });
+    try { const w = parseFloat(localStorage.getItem(WIDTH_KEY)); if (w >= MIN_W) panel.style.width = w + 'px'; } catch (e) { /* storage blocked */ }
     host.appendChild(panel);
-    const rowsEl = panel.querySelector('.spx-flt-rows'), countEl = panel.querySelector('.spx-flt-count');
+    const rowsEl = panel.querySelector('.spx-flt-rows');
     const rows = {};
     const fmt = (f, v) => v.toFixed(f.dp) + f.unit;
 
@@ -110,8 +145,6 @@ export function createFilter(songs, { host, onChange }) {
             r.fill.style.width = ((b - a) / span * 100) + '%';
             r.row.classList.toggle('on', narrowed(f));
         });
-        const n = countPassing();
-        countEl.textContent = setting('checkboxFilterShowCount') ? (active() ? `${n} of ${songs.length} songs match` : `${songs.length} songs (no filter)`) : '';
     }
     function commit() {
         try { localStorage.setItem(STORE, JSON.stringify(range)); } catch (e) { /* storage blocked */ }

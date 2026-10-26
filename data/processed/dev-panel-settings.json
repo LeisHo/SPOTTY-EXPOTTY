@@ -3788,10 +3788,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxFilterShowCount"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxFilterCloseOnOutside"
                       },
                       {
@@ -3840,7 +3836,6 @@
                       "selectFilterMissing",
                       "checkboxFilterSkipOnStep",
                       "checkboxFilterStopOnFiltered",
-                      "checkboxFilterShowCount",
                       "checkboxFilterCloseOnOutside",
                       "sliderFilterPanelWidth",
                       "sliderFilterPanelFontSize",
