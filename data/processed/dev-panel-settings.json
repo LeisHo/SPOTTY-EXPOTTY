@@ -20419,12 +20419,12 @@
     "mobile:Debug": true,
     "mobile:Snapshot": false,
     "mobile:UI Layout": false,
-    "mobile:Text": true,
+    "mobile:Text": false,
     "mobile:Font": true,
     "mobile:Song Title": false,
-    "mobile:Track Title Button Animation": false,
+    "mobile:Track Title Button Animation": true,
     "mobile:Artist": false,
-    "mobile:Album & Date": false,
+    "mobile:Album & Date": true,
     "mobile:Outline": false,
     "mobile:Brackets Smaller Text": false,
     "mobile:New Group (7)": true,
@@ -21289,7 +21289,8 @@
       "checkboxAlbumColorTransition": false,
       "sliderAlbumColorTransitionMs": false,
       "sliderCoverOffsetY": true,
-      "sliderNavButtonOpacity": true
+      "sliderNavButtonOpacity": true,
+      "textArtistSeparator": false
     },
     "landscape": {}
   },
@@ -21332,7 +21333,7 @@
       "sliderAlbumColorTransitionMs": 300,
       "sliderCoverOffsetY": -99,
       "sliderNavButtonOpacity": 80,
-      "textArtistSeparator": ";"
+      "textArtistSeparator": "  &  "
     },
     "landscape": {}
   },
