@@ -839,6 +839,11 @@ Also found (template, not changed): TEMPLATE_DEV_PANEL.html's own Mouse Log rows
 Not verified: a real phone; touch interaction with the checkboxes.
 
 --------------------------------------------------------------------------------
+2026-10-26  -  19:21 (correction)
+
+CORRECTION to the entry above: its header said "19:2x"; the measured times are 19:16:56 (start) to 19:21:39 (code push) = 4m 43s; the docs push was at 19:21:45.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
