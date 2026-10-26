@@ -839,7 +839,7 @@ async function boot() {
     window.addEventListener('pointerdown', e => {
         redirectBtn = null;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
-        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxVolume, #spxSongBar')) return;
+        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxFilterPanel, #spxVolume, #spxSongBar')) return;
         redirectBtn = buttonUnder(e.clientX, e.clientY) || null;
     }, true);
     window.addEventListener('click', e => {
