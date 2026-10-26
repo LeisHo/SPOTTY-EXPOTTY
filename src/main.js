@@ -510,6 +510,9 @@ async function boot() {
         // Brackets Smaller Text (app.css: .spx-bracket inside the title)
         el('spxApp').classList.toggle('brackets-small', !!setting('checkboxBracketsSmaller'));
         shStyle.setProperty('--spx-bracket-pct', setting('sliderBracketsFontPct') + '%');
+        // raise the smaller bracketed text so its vertical centre (about 0.35 em above the baseline) matches the main text's
+        const bp = Math.max(1, setting('sliderBracketsFontPct')) / 100;
+        shStyle.setProperty('--spx-bracket-raise', (0.35 * (1 - bp) / bp).toFixed(3) + 'em');
         // Startup: the darkening over the app until the first input, and the play icon (its size, and whether it shows)
         el('spxStart').style.setProperty('--spx-start-bg', rgbaOf(setting('colorStartOverlay'), setting('sliderStartOverlayOpacity')));
         el('spxStartBtn').hidden = !setting('checkboxStartButtonEnabled');

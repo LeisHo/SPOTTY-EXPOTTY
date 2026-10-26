@@ -126,7 +126,7 @@
 .spx-app.no-shadow-vol .spx-vol-thumb { box-shadow: none; }
 .spx-app.no-shadow-nav .spx-nav { filter: none; }
 /* Brackets Smaller Text: the bracketed part of the track title is sized by a % of the title (dev panel) */
-.spx-app.brackets-small .spx-bracket { font-size: var(--spx-bracket-pct, 60%); }
+.spx-app.brackets-small .spx-bracket { font-size: var(--spx-bracket-pct, 60%); vertical-align: var(--spx-bracket-raise, 0); }
 .spx-sep { white-space: pre; font-size: var(--spx-sep-pct, 100%); }
 
 /* Startup screen: the darkening over the app and the play icon (no text, no background). The first input hides it. */
