@@ -824,6 +824,21 @@ Measured with a fake SDK (handoff delay set to 400 ms): Next 3-4 ms, Last 10 ms 
 What stays: Spotify needs roughly 0.3-1 s between the play request and sound; without queueing / prefetching there is no web-API way to remove it (a second player would interrupt the first). Keeping preview clips on gives instant sound while the song loads (crossfade).
 
 --------------------------------------------------------------------------------
+2026-10-26  -  19:16:56 - 19:2x EDT (check of the "Show in Mobile/Landscape" checkboxes; code push time in the ETA row)
+
+Request: double-check the dev panel template and make sure the "Show in Mobile" checkboxes work correctly in our app.
+1) Template comparison: 15 mechanism functions (ensureDynamicTargetRow, hasStaticDeviceCounterpart, syncStaticRowVisibility, buildVisibilityCheckbox, buildIndependenceCheckbox, buildGroupCascadeCheckbox, syncDeviceCheckboxesFromState,
+refreshEmptyGroupVisibility, injectRowDeviceCheckboxes, registerDevControlArray, findRegisteredControlById, switchDevPanelTab, syncTabOrderToDesktop, captureAllRegisteredControlValues, applyControlValues) compared body by body (comments / whitespace ignored).
+12 were identical; the only drift was the template's id-prefix regex now also accepting gradientPicker (5 places); ours was updated to match (we have no gradientPicker controls, so no behaviour change). All 15 are identical now.
+2) Registration audit on the live Desktop tab: 410 rows, 357 with the checkbox, every one of the 361 registered controls has it or is deliberately skipped (53). 4 rows had a checkbox that could do nothing because they are hand-built, Desktop-only
+rows that are not registered controls: the 3 Mouse Log checkboxes and the merged Log Tools row (Pause / Copy All / Clear All / Export). They now carry data-skip-device-checkbox, so the backfill leaves them alone.
+3) Behaviour, tested live at phone size (375x812, activeDevice Mobile) on 7 control types (slider, checkbox, colour, select, curve editor, range bar, gradient editor), 14 checks each, all pass: unchecked = no Mobile row but the setting still follows Desktop;
+checked = row appears, starts at Desktop's value and mirrors it; Independent = own value, ignores Desktop changes, setting() uses it; unchecking Independent reverts to Desktop; re-checking restores the earlier own value; hiding removes the row and setting() still follows Desktop.
+Group-level checkbox (the Shadows group, 21 rows): 0 -> 21 twins -> 0. Landscape (800x380, activeDevice Landscape) same flow passes. The normal-visitor path (settings.js savedValue()): saved Independent Mobile value 3 vs Desktop 7 -> 3 when independent, 7 when not.
+Also found (template, not changed): TEMPLATE_DEV_PANEL.html's own Mouse Log rows (posRow / scrollRow / keyRow) lack the skip marker too, so every project copying it gets the same no-op checkboxes there. Offered as a deliberate fold-back.
+Not verified: a real phone; touch interaction with the checkboxes.
+
+--------------------------------------------------------------------------------
 <next entry follows the same divider + dated-header pattern>
 
 ================================================================================
