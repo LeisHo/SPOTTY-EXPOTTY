@@ -121,7 +121,7 @@
     "checkboxTxtSongTitleWordWrap": true,
     "sliderTxtSongTitleMaxWidth": 2400,
     "selectTxtSongTitleOverflow": "wrap",
-    "checkboxScaleTitleMultiline": false,
+    "checkboxScaleTitleMultiline": true,
     "sliderTitleMaxLines": 2,
     "checkboxTxtSongTitleOutlineEnabled": false,
     "colorTxtSongTitleOutlineColor": "#000000",
