@@ -2009,6 +2009,7 @@
     function isDevRowVisible(desktopId) {
         if (devVisibility[desktopId] !== undefined) return devVisibility[desktopId];
         if (/^(checkbox|slider|color)SongBar/.test(desktopId)) return true; // Song Timeline rows show on every tab by default
+        if (/^(checkbox|slider|color)GlobalOverride|^checkboxOverride|^sliderGlobalAnim/.test(desktopId)) return true; // Global Override rows too
         // Button and Scrub Line animation rows show on every tab by default (they are not per-device tuned, so they mirror Desktop until set)
         if (/(Anim(Enabled|Time|HoverSize|ClickSize|ReleaseSize|HoverOpacity|ClickOpacity)|ScrubLine(Drag|AnimTime|HoverWidth|ClickWidth|ReleaseWidth|HoverOpacity|ClickOpacity))$/.test(desktopId)) return true;
         return hasStaticDeviceCounterpart(desktopId, 'mobile') || hasStaticDeviceCounterpart(desktopId, 'landscape');
@@ -8071,6 +8072,35 @@
         const VB = 'Volume Button', AC2 = 'Album Cover';
         uiLayoutContent.appendChild(createDevGroupElement(VB, tab));
         uiLayoutContent.appendChild(createDevGroupElement(AC2, tab));
+        // Global Override: a toggle group. Tick the buttons it applies to, then set one colour and opacity, and optionally the standard animation.
+        const GO = 'Global Override', GOA = 'Standard Button Animation';
+        const GO_CONTROLS = [
+            { tab, group: GO, id: 'checkboxGlobalOverrideEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: GO, id: 'checkboxOverridePlay', type: 'checkbox', label: 'Play Button', value: false },
+            { tab, group: GO, id: 'checkboxOverrideNext', type: 'checkbox', label: 'Next Button', value: false },
+            { tab, group: GO, id: 'checkboxOverrideLast', type: 'checkbox', label: 'Last Button', value: false },
+            { tab, group: GO, id: 'checkboxOverrideShuffle', type: 'checkbox', label: 'Shuffle Button', value: false },
+            { tab, group: GO, id: 'checkboxOverrideVolume', type: 'checkbox', label: 'Volume Button', value: false },
+            { tab, group: GO, id: 'colorGlobalOverride', type: 'color', label: 'Color:', value: '#ffffff' },
+            { tab, group: GO, id: 'sliderGlobalOverrideOpacity', type: 'slider', label: 'Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
+        ];
+        uiLayoutContent.insertBefore(createDevGroupElement(GO, tab), uiLayoutContent.firstChild);
+        renderControlArray(GO_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_GLOBAL_OVERRIDE', GO_CONTROLS);
+        makeDevGroupToggleable(tab, GO, 'checkboxGlobalOverrideEnabled');
+        const GOA_CONTROLS = [
+            { tab, group: GOA, id: 'checkboxGlobalOverrideAnim', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: GOA, id: 'sliderGlobalAnimTime', type: 'slider', label: 'Animation Time (Ms):', min: 0, max: 1500, step: 10, value: 150 },
+            { tab, group: GOA, id: 'sliderGlobalAnimHoverSize', type: 'slider', label: 'Size On Hover (Px):', min: 8, max: 300, step: 1, value: 30 },
+            { tab, group: GOA, id: 'sliderGlobalAnimClickSize', type: 'slider', label: 'Size On Click (Px):', min: 8, max: 300, step: 1, value: 22 },
+            { tab, group: GOA, id: 'sliderGlobalAnimReleaseSize', type: 'slider', label: 'Size On Release (Px):', min: 8, max: 300, step: 1, value: 32 },
+            { tab, group: GOA, id: 'sliderGlobalAnimHoverOpacity', type: 'slider', label: 'Opacity On Hover (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: GOA, id: 'sliderGlobalAnimClickOpacity', type: 'slider', label: 'Opacity On Click (%):', min: 0, max: 100, step: 1, value: 70 },
+        ];
+        findGroupContent(tab, GO, 'renderSpottyDevControls', 'checkboxGlobalOverrideEnabled').appendChild(createDevGroupElement(GOA, tab));
+        renderControlArray(GOA_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_GLOBAL_OVERRIDE_ANIM', GOA_CONTROLS);
+        makeDevGroupToggleable(tab, GOA, 'checkboxGlobalOverrideAnim');
         // Song Timeline: the playback bar along the album cover's bottom edge (a toggle group; its animation settings are a sub-group)
         const SONG = 'Song Timeline', SONGA = 'Song Timeline Animation';
         uiLayoutContent.appendChild(createDevGroupElement(SONG, tab));

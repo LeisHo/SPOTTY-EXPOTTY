@@ -479,6 +479,42 @@ async function boot() {
         timeline.draw(); // the band height is a setting: redraw when it changes
     }
     window.addEventListener('resize', () => { applyTextElementStyles(); applyTimelineBox(); }); // the line count and the device depend on the width
+    // Global Override (dev panel > Global Override): a colour, an opacity and an optional standard animation laid over the buttons that are
+    // ticked there. It runs after each button's own styling, so while a button is ticked its values win; unticking gives its own look back.
+    function applyGlobalOverride() {
+        const g = id => setting(id), on = g('checkboxGlobalOverrideEnabled'), anim = g('checkboxGlobalOverrideAnim');
+        const col = g('colorGlobalOverride'), op = String(g('sliderGlobalOverrideOpacity') / 100);
+        const animVars = {
+            '--bs-size-hover': g('sliderGlobalAnimHoverSize') + 'px', '--bs-size-press': g('sliderGlobalAnimClickSize') + 'px',
+            '--bs-size-release': g('sliderGlobalAnimReleaseSize') + 'px', '--bs-op-hover': String(g('sliderGlobalAnimHoverOpacity') / 100),
+            '--bs-op-press': String(g('sliderGlobalAnimClickOpacity') / 100), '--bs-time': g('sliderGlobalAnimTime') + 'ms',
+        };
+        // kind 'bs': a .bs-host whose --bs-color / --bs-op are rewritten by applyButtonStyle on every change (Play, Next, Last).
+        // kind 'plain': a button with its own inline-free styling (Shuffle, Volume), undone by removing the inline properties.
+        const targets = [
+            { k: 'Play', host: el('spxCover'), kind: 'bs' },
+            { k: 'Next', host: el('spxNext'), kind: 'bs' },
+            { k: 'Last', host: el('spxPrev'), kind: 'bs' },
+            { k: 'Shuffle', host: el('spxShuffle'), kind: 'plain', opVar: '--bs-op' },
+            { k: 'Volume', host: el('spxVolume').querySelector('.spx-vol-btn'), kind: 'plain', opVar: '--spx-vol-op' },
+        ];
+        targets.forEach(t => {
+            const ticked = on && !!g('checkboxOverride' + t.k), st = t.host.style;
+            if (t.kind === 'bs') {
+                if (ticked) {
+                    st.setProperty('--bs-color', col); st.setProperty('--bs-op', op);
+                    if (anim) Object.entries(animVars).forEach(([k, v]) => st.setProperty(k, v));
+                }
+                return;
+            }
+            if (ticked) {
+                st.setProperty('color', col); st.setProperty(t.opVar, op);
+                if (anim) Object.entries(animVars).forEach(([k, v]) => st.setProperty(k, v));
+            } else {
+                st.removeProperty('color'); st.removeProperty(t.opVar);
+            }
+        });
+    }
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
         applyTextElementStyles();
@@ -556,6 +592,7 @@ async function boot() {
         sbStyle.setProperty('--sb-mop', String(setting('sliderSongBarMarkerOpacity') / 100));
         el('spxSongBar').classList.toggle('off', !sbOn);
         el('spxSongBar').classList.toggle('marker', !!setting('checkboxSongBarMarker'));
+        applyGlobalOverride(); // last, so a ticked button's override wins over its own styling
         el('spxApp').style.setProperty('--spx-shuffle-edge', setting('sliderShuffleEdgeOffset') + 'px');
         el('spxVolume').style.translate = (setting('sliderVolEdgeOffset') - 14) + 'px 0px'; // the whole volume UI; 14 px is the layout's own left offset
         applyNavIcon(el('spxPrev').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), true);

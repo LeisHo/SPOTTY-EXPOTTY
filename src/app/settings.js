@@ -166,6 +166,9 @@ export const DEFAULTS = {
     checkboxSongBarEnabled: false, sliderSongBarHeight: 4, colorSongBarFill: '#1db954', colorSongBarEmpty: '#3a3f47', sliderSongBarClickTol: 6, sliderSongBarOpacity: 100,
     checkboxSongBarMarker: false, sliderSongBarMarkerRadius: 6, sliderSongBarMarkerOpacity: 100,
     checkboxSongBarAnimEnabled: false, sliderSongBarHoverOpacity: 100, sliderSongBarClickOpacity: 100, sliderSongBarAnimTime: 160,
+    checkboxGlobalOverrideEnabled: false, checkboxOverridePlay: false, checkboxOverrideNext: false, checkboxOverrideLast: false, checkboxOverrideShuffle: false, checkboxOverrideVolume: false,
+    colorGlobalOverride: '#ffffff', sliderGlobalOverrideOpacity: 100,
+    checkboxGlobalOverrideAnim: false, sliderGlobalAnimTime: 150, sliderGlobalAnimHoverSize: 30, sliderGlobalAnimClickSize: 22, sliderGlobalAnimReleaseSize: 32, sliderGlobalAnimHoverOpacity: 100, sliderGlobalAnimClickOpacity: 70,
     checkboxVolBtnAnimEnabled: false, sliderVolBtnAnimTime: 160, sliderVolBtnAnimHoverSize: 24, sliderVolBtnAnimClickSize: 18, sliderVolBtnAnimReleaseSize: 20,
     sliderVolBtnAnimHoverOpacity: 100, sliderVolBtnAnimClickOpacity: 100,
     textArtistSeparator: ';', // what joins the names when a track has several artists (the data stores them with ';')
