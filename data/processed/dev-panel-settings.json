@@ -31,14 +31,14 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
-    "rangeBarSongTickWidth": "{\"min\":1,\"max\":1}",
-    "rangeBarSongTickThinWidth": "{\"min\":1,\"max\":1}",
+    "rangeBarSongTickWidth": "{\"min\":1,\"max\":10}",
+    "rangeBarSongTickThinWidth": "{\"min\":1,\"max\":5}",
     "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
-    "sliderSongTickWidthTransitionMs": 250,
+    "sliderSongTickWidthTransitionMs": 500,
     "sliderSongTickHeight": 35,
     "sliderSongTickMinSpacing": 0.1,
     "checkboxSongTickScale": true,
-    "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0.35},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.25983607808097464,\"y\":0}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.0018032761870837577,\"y\":-0.734375}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderTimelineHeight": 190,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
@@ -569,7 +569,7 @@
     "left": 92,
     "top": 145,
     "width": 1284,
-    "height": 307
+    "height": 379
   },
   "devPanelStyle": {
     "titleFontSize": 17,
