@@ -1199,7 +1199,7 @@ async function boot() {
         if (isPlaying() && playingId() === songs[idx].id) return true; // already playing this song: leave it alone
         if (!isUnlocked() || !setting('checkboxHandoffEnabled') || volume.get() <= 0) return false;
         clearTimeout(handoffTimer); handoffPending = false; previewHold = null;
-        stopClip(); handedOff = true; toggleTrack(songs[idx].id);
+        stopClip(); handedOff = true; toggleTrack(songs[idx].id, true);
         return true;
     };
     const playFromStart = () => { unlock(); schedulePreload(); if (!startSpotifyNow()) playClip(clipKey(songs[idx])); };
@@ -1248,7 +1248,7 @@ async function boot() {
         if (!isUnlocked()) playFromStart();
         clearTimeout(handoffTimer);
         stopClip();
-        toggleTrack(songs[idx].id);
+        toggleTrack(songs[playIdx >= 0 ? playIdx : idx].id); // the PLAYING song: while a filtered-out song is only being viewed, idx is not the one that plays
     }
     // ---- Song Timeline: the playback bar along the album cover's bottom edge. Its hover opacity shows while the cover is hovered; a click or
     // a drag on it seeks; the marker circle (when on) is dragged the same way. Its own clicks never reach the cover (no play / pause).

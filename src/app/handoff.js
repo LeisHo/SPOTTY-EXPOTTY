@@ -9,6 +9,7 @@ let lastPausedSeen = null, lastBufSeen = null;
 let queued = null;
 let lastEmbed = null; // the embed's last update (position / length, ms)
 let actualId = null; // the track the SDK really has loaded (from its state): Play resumes only that one
+let actualLinkedId = null; // the id the track was requested under, when Spotify relinked it to another id (same song, different id)
 let status = 'loading';
 let loadedId = null;
 let playing = false;
@@ -58,7 +59,7 @@ export function initSdkPlayer(onStatus) {
     sdk.initSdk({
         onState: (isPlayingNow, info) => {
             playing = isPlayingNow;
-            if (info && info.id) actualId = info.id;
+            if (info && info.id) { actualId = info.id; actualLinkedId = info.linkedId || null; }
             if (info && info.duration > 0) lastDur = info.duration;
             if (!audibleLogged && isPlayingNow && info && (info.id === loadedId || info.linkedId === loadedId)) {
                 audibleLogged = true;
@@ -164,7 +165,16 @@ export function playTrack(trackId, positionMs = 0) {
         if (controller) { try { controller.pause(); } catch (e) { /* embed not ready */ } } // only one player plays
         clearPending();
         requestAt = performance.now(); audibleLogged = false;
-        sdk.sdkPlay(trackId, positionMs).then(ok => { if (!ok && wantPlaying && loadedId === trackId) playViaEmbed(trackId); }); // SDK refused: the iframe plays it instead
+        sdk.sdkPlay(trackId, positionMs).then(ok => { if (!ok && wantPlaying && loadedId === trackId) { sdk.sdkPause(); playViaEmbed(trackId); } }); // SDK refused: the iframe plays it instead (and the SDK's old song must not play on)
+        // A play request can be accepted and still not switch the song. If the SDK still reports another track 3 s later, ask once more; if it still
+        // has not switched 3 s after that, let the iframe play it and stop the SDK.
+        const stillOld = () => wantPlaying && loadedId === trackId && actualId !== trackId && actualLinkedId !== trackId;
+        setTimeout(() => {
+            if (!stillOld()) return;
+            logEvent('playback', 'SDK did not switch to ' + trackId + ' within 3 s (it still reports ' + actualId + '): asking again');
+            sdk.sdkPlay(trackId, positionMs).then(ok => { if (!ok && stillOld()) { sdk.sdkPause(); playViaEmbed(trackId); } });
+            setTimeout(() => { if (stillOld()) { logEvent('playback', 'SDK still on the old song: the iframe plays ' + trackId); sdk.sdkPause(); playViaEmbed(trackId); } }, 3000);
+        }, 3000);
         return true;
     }
     if (sdk.sdkExpected()) { // logged in, SDK still connecting: wait for it
@@ -198,11 +208,15 @@ export function pauseEmbed() {
 
 // The album cover is the play button: pause if playing, resume if this song is already
 // loaded, otherwise load and play it.
-export function toggleTrack(trackId) {
+export function toggleTrack(trackId, startOnly = false) { // startOnly: a start (never a pause): used by the start screen, which must not pause what already plays
     // Pause only the track that is really playing; resume only the track the SDK really has; anything else starts this song.
-    const isThis = (actualId || loadedId) === trackId;
-    if (playing && isThis) { pauseEmbed(); return; }
-    if (sdk.sdkReady() && actualId === trackId) { wantPlaying = true; sdk.sdkResume(); return; }
+    // A press while anything is playing PAUSES it. (It used to pause only when the playing track's id equalled the shown song's id, so a relinked
+    // track - Spotify reports another id for the same song - or a song change that had not switched yet made the press load the shown song instead.)
+    if (playing) {
+        if (!startOnly) { pauseEmbed(); return; }
+        if (loadedId === trackId || actualId === trackId || actualLinkedId === trackId) return; // already playing this song
+    }
+    if (sdk.sdkReady() && (actualId === trackId || actualLinkedId === trackId)) { wantPlaying = true; sdk.sdkResume(); return; }
     if (controller && loadedId === trackId && !sdk.sdkReady()) {
         wantPlaying = true;
         // play(), not resume(): resume() is a no-op on an embed that was loaded but never started
