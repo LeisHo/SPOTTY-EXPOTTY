@@ -7930,6 +7930,7 @@
             { tab, group: TL, id: 'curveEditorSongTickThinZoom', type: 'curve-editor', label: 'Thinnest Song Tick Width Per Zoom (X: Timeline Zoom, 0 = Zoomed In, 1 = Zoomed Out; Y: Between The Thinnest Min And Max):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 0 }], defaultMethod: 'monotone' },
             { tab, group: TL, id: 'sliderSongTickWidthTransitionMs', type: 'slider', label: 'Song Tick Width Transition Time (Ms, 0 = Snap):', min: 0, max: 3000, step: 10, value: 250 },
             { tab, group: TL, id: 'sliderSongTickHeight', type: 'slider', label: 'Song Tick Height (Px, Grows Downward From The Graph):', min: 0, max: 80, step: 1, value: 3 },
+            { tab, group: TL, id: 'sliderSongTickOpacity', type: 'slider', label: 'Song Tick Opacity (%):', min: 0, max: 100, step: 1, value: 90 },
             { tab, group: TL, id: 'sliderSongTickMinSpacing', type: 'slider', label: 'Song Ticks Start Showing At (Px Between Songs, Lower = Visible Further Zoomed Out):', min: 0.1, max: 40, step: 0.1, value: 4 },
             { tab, group: TL, id: 'checkboxSongTickScale', type: 'checkbox', label: 'Scale Song Ticks With The Number Of Songs They Represent', value: false },
             { tab, group: TL, id: 'curveEditorSongTickScale', type: 'curve-editor', label: 'Song Tick Scale Curve (X: Songs In The Tick, 0 = One / Thinnest, 1 = The Most In View / Widest; Y: How Far Along From The Thinnest Width To The Widest, And Share Of The Height):', defaultPoints: [{ x: 0, y: 0.35 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },

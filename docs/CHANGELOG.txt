@@ -1224,3 +1224,6 @@ Direct report: Debug's own Pause Logs/Copy All Logs/Clear All Logs/Export Logs e
 - Minimum Graph Height now also floors the Timeline Height default on desktop. Measured on 1280 x 800 with the bars' baseline hooked: baseline y 746 for every case (slider 200 -> band 200; slider 90 / min 60 -> 90; min 150 -> 150; slider 260 -> 260; drag up 120 -> 360; drag down 700 -> held at 150), so the bottom edge stays put and height grows upward from it.
 - Right Click Pan: not reproduced; simulated horizontal and diagonal right-drags pan alone and together with height.
 - Owner: all song ticks the same height. With Scale With Datapoints on, the curve now sets only the tick width; the height is always the Height slider (it used to be scaled by the curve too).
+
+2026-10-27 - Song Tick Opacity slider
+- Owner: a slider for the song ticks' opacity in the tick group. Added "Song Tick Opacity (%)" (0-100, default 90 = the old fixed value) right under Song Tick Height; it sets the opacity of ticks that pass the filter (filtered-out gray ticks keep the Gray-out opacity setting). Checked in the dev panel: the slider sits in the same group as the height slider and 40 drew the ticks at alpha 0.4.

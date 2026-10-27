@@ -178,7 +178,7 @@ export const DEFAULTS = {
     sliderNavEdgeOffset: 14,
     // Filter button + panel (UI Layout > Audio Buttons > FILTER)
     checkboxFilterButtonEnabled: true, sliderFilterIconSize: 20, sliderFilterIconOffsetX: 0, sliderFilterEdgeOffset: 14,
-    sliderFilterPanelIconSize: 20, sliderFilterPanelNumbersOffsetY: 1, sliderFilterPanelCountFontSize: 12, rangeBarSongTickWidth: { min: 1, max: 1 }, rangeBarSongTickThinWidth: { min: 1, max: 1 }, sliderSongTickWidthTransitionMs: 250, curveEditorSongTickThinZoom: { points: [{ x: 0, y: 1 }, { x: 1, y: 0 }], method: 'monotone' }, sliderSongTickHeight: 3, sliderSongTickMinSpacing: 4, checkboxSongTickScale: false,
+    sliderFilterPanelIconSize: 20, sliderFilterPanelNumbersOffsetY: 1, sliderFilterPanelCountFontSize: 12, rangeBarSongTickWidth: { min: 1, max: 1 }, rangeBarSongTickThinWidth: { min: 1, max: 1 }, sliderSongTickWidthTransitionMs: 250, curveEditorSongTickThinZoom: { points: [{ x: 0, y: 1 }, { x: 1, y: 0 }], method: 'monotone' }, sliderSongTickHeight: 3, sliderSongTickOpacity: 90, sliderSongTickMinSpacing: 4, checkboxSongTickScale: false,
     curveEditorSongTickScale: { points: [{ x: 0, y: 0.35 }, { x: 1, y: 1 }], method: 'monotone' }, sliderFilterPanelIconOffsetY: 0, checkboxFilterPanelKeepVisible: false, sliderFilterPanelRowGap: 12, sliderFilterPanelRowsOffsetY: 0, sliderFilterPanelBlur: 6, sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
     sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
