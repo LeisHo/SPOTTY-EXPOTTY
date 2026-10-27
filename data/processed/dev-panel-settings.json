@@ -268,10 +268,10 @@
     "selectValenceIconStyle": "0",
     "selectDanceIconStyle": "6",
     "selectEnergyIconStyle": "6",
-    "checkboxFilterButtonEnabled": false,
+    "checkboxFilterButtonEnabled": true,
     "sliderFilterIconSize": 25,
     "sliderFilterIconOffsetX": 0,
-    "sliderFilterIconOffsetY": 25,
+    "sliderFilterIconOffsetY": 117,
     "sliderFilterEdgeOffset": 14,
     "sliderFilterOffOpacity": 45,
     "sliderFilterOnOpacity": 75,
@@ -304,12 +304,12 @@
     "checkboxFilterCloseOnOutside": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 13,
-    "sliderFilterPanelRowGap": -5,
+    "sliderFilterPanelRowGap": -16,
     "sliderFilterPanelRowsOffsetY": -24,
     "checkboxFilterPanelKeepVisible": true,
-    "sliderFilterPanelIconOffsetY": 1,
+    "sliderFilterPanelIconOffsetY": -2,
     "sliderFilterPanelCountFontSize": 12,
-    "sliderFilterPanelNumbersOffsetY": 1,
+    "sliderFilterPanelNumbersOffsetY": 5,
     "sliderFilterPanelIconSize": 23,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": 6,
@@ -4699,6 +4699,14 @@
                                   },
                                   {
                                     "type": "row",
+                                    "key": "sliderFilterPanelCountFontSize"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterPanelNumbersOffsetY"
+                                  },
+                                  {
+                                    "type": "row",
                                     "key": "sliderFilterPanelRowGap"
                                   }
                                 ],
@@ -4707,6 +4715,8 @@
                                   "sliderFilterPanelIconSize",
                                   "sliderFilterPanelRowsOffsetY",
                                   "sliderFilterPanelIconOffsetY",
+                                  "sliderFilterPanelCountFontSize",
+                                  "sliderFilterPanelNumbersOffsetY",
                                   "sliderFilterPanelRowGap"
                                 ],
                                 "subgroups": []
@@ -4749,6 +4759,14 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "sliderFilterPanelCountFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterPanelNumbersOffsetY"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelRowGap"
                                 }
                               ],
@@ -4757,20 +4775,14 @@
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
+                                "sliderFilterPanelCountFontSize",
+                                "sliderFilterPanelNumbersOffsetY",
                                 "sliderFilterPanelRowGap"
                               ],
                               "subgroups": []
                             }
                           ]
                         }
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderFilterPanelCountFontSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderFilterPanelNumbersOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -4785,9 +4797,7 @@
                       "checkboxFilterButtonEnabled",
                       "sliderFilterIconOffsetY",
                       "sliderFilterIconOffsetX",
-                      "sliderFilterEdgeOffset",
-                      "sliderFilterPanelCountFontSize",
-                      "sliderFilterPanelNumbersOffsetY"
+                      "sliderFilterEdgeOffset"
                     ],
                     "subgroups": [
                       {
@@ -5165,6 +5175,14 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "sliderFilterPanelCountFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterPanelNumbersOffsetY"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelRowGap"
                                 }
                               ],
@@ -5173,6 +5191,8 @@
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
+                                "sliderFilterPanelCountFontSize",
+                                "sliderFilterPanelNumbersOffsetY",
                                 "sliderFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -5215,6 +5235,14 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterPanelCountFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -5223,6 +5251,8 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
+                              "sliderFilterPanelCountFontSize",
+                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -7156,6 +7186,14 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "sliderFilterPanelCountFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterPanelNumbersOffsetY"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelRowGap"
                                 }
                               ],
@@ -7164,6 +7202,8 @@
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
+                                "sliderFilterPanelCountFontSize",
+                                "sliderFilterPanelNumbersOffsetY",
                                 "sliderFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -7206,6 +7246,14 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterPanelCountFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -7214,20 +7262,14 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
+                              "sliderFilterPanelCountFontSize",
+                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
                           }
                         ]
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderFilterPanelCountFontSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderFilterPanelNumbersOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -7242,9 +7284,7 @@
                     "checkboxFilterButtonEnabled",
                     "sliderFilterIconOffsetY",
                     "sliderFilterIconOffsetX",
-                    "sliderFilterEdgeOffset",
-                    "sliderFilterPanelCountFontSize",
-                    "sliderFilterPanelNumbersOffsetY"
+                    "sliderFilterEdgeOffset"
                   ],
                   "subgroups": [
                     {
@@ -7622,6 +7662,14 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterPanelCountFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -7630,6 +7678,8 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
+                              "sliderFilterPanelCountFontSize",
+                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -7672,6 +7722,14 @@
                             },
                             {
                               "type": "row",
+                              "key": "sliderFilterPanelCountFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterPanelNumbersOffsetY"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelRowGap"
                             }
                           ],
@@ -7680,6 +7738,8 @@
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
+                            "sliderFilterPanelCountFontSize",
+                            "sliderFilterPanelNumbersOffsetY",
                             "sliderFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -11953,6 +12013,14 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "sliderFilterPanelCountFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterPanelNumbersOffsetY"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelRowGap"
                                 }
                               ],
@@ -11961,6 +12029,8 @@
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
+                                "sliderFilterPanelCountFontSize",
+                                "sliderFilterPanelNumbersOffsetY",
                                 "sliderFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -12003,6 +12073,14 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterPanelCountFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -12011,20 +12089,14 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
+                              "sliderFilterPanelCountFontSize",
+                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
                           }
                         ]
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderFilterPanelCountFontSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderFilterPanelNumbersOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -12039,9 +12111,7 @@
                     "checkboxFilterButtonEnabled",
                     "sliderFilterIconOffsetY",
                     "sliderFilterIconOffsetX",
-                    "sliderFilterEdgeOffset",
-                    "sliderFilterPanelCountFontSize",
-                    "sliderFilterPanelNumbersOffsetY"
+                    "sliderFilterEdgeOffset"
                   ],
                   "subgroups": [
                     {
@@ -12419,6 +12489,14 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterPanelCountFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -12427,6 +12505,8 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
+                              "sliderFilterPanelCountFontSize",
+                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -12469,6 +12549,14 @@
                             },
                             {
                               "type": "row",
+                              "key": "sliderFilterPanelCountFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterPanelNumbersOffsetY"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelRowGap"
                             }
                           ],
@@ -12477,6 +12565,8 @@
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
+                            "sliderFilterPanelCountFontSize",
+                            "sliderFilterPanelNumbersOffsetY",
                             "sliderFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -14410,6 +14500,14 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterPanelCountFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -14418,6 +14516,8 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
+                              "sliderFilterPanelCountFontSize",
+                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -14460,6 +14560,14 @@
                             },
                             {
                               "type": "row",
+                              "key": "sliderFilterPanelCountFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterPanelNumbersOffsetY"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelRowGap"
                             }
                           ],
@@ -14468,20 +14576,14 @@
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
+                            "sliderFilterPanelCountFontSize",
+                            "sliderFilterPanelNumbersOffsetY",
                             "sliderFilterPanelRowGap"
                           ],
                           "subgroups": []
                         }
                       ]
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderFilterPanelCountFontSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderFilterPanelNumbersOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -14496,9 +14598,7 @@
                   "checkboxFilterButtonEnabled",
                   "sliderFilterIconOffsetY",
                   "sliderFilterIconOffsetX",
-                  "sliderFilterEdgeOffset",
-                  "sliderFilterPanelCountFontSize",
-                  "sliderFilterPanelNumbersOffsetY"
+                  "sliderFilterEdgeOffset"
                 ],
                 "subgroups": [
                   {
@@ -14876,6 +14976,14 @@
                             },
                             {
                               "type": "row",
+                              "key": "sliderFilterPanelCountFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterPanelNumbersOffsetY"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelRowGap"
                             }
                           ],
@@ -14884,6 +14992,8 @@
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
+                            "sliderFilterPanelCountFontSize",
+                            "sliderFilterPanelNumbersOffsetY",
                             "sliderFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -14926,6 +15036,14 @@
                           },
                           {
                             "type": "row",
+                            "key": "sliderFilterPanelCountFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterPanelNumbersOffsetY"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterPanelRowGap"
                           }
                         ],
@@ -14934,6 +15052,8 @@
                           "sliderFilterPanelIconSize",
                           "sliderFilterPanelRowsOffsetY",
                           "sliderFilterPanelIconOffsetY",
+                          "sliderFilterPanelCountFontSize",
+                          "sliderFilterPanelNumbersOffsetY",
                           "sliderFilterPanelRowGap"
                         ],
                         "subgroups": []
@@ -38145,7 +38265,7 @@
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": true,
+    "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
@@ -38164,7 +38284,7 @@
     "desktop:New Group (14)": true,
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": true,
+    "desktop:Filter Button": false,
     "desktop:New Group (16)": true,
     "desktop:New Group (17)": true,
     "desktop:New Group (18)": true,
@@ -38172,8 +38292,8 @@
     "desktop:New Group (20)": true,
     "desktop:New Group (22)": true,
     "desktop:New Group (21)": true,
-    "desktop:New Group (19)": true,
-    "desktop:New Group (24)": true,
+    "desktop:New Group (19)": false,
+    "desktop:New Group (24)": false,
     "desktop:Song Data": true,
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
