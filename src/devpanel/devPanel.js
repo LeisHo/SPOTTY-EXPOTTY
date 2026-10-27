@@ -8688,7 +8688,7 @@
             { tab, group: BGA, id: 'sliderBgAnimMaxFps', type: 'slider', label: 'Max Frame Rate (Fps):', min: 5, max: 120, step: 1, value: 60 },
             // Patches, Breathing Fade and 2nd Background Overlay lie over the background: how
             { tab, group: BGA, id: 'selectBgAnimBlend', type: 'select', label: 'Blend Mode:', value: 'normal', options: BLEND_OPTIONS },
-            { tab, group: BGA, id: 'sliderBgAnimOpacity', type: 'slider', label: 'Overlay Opacity (%):', min: 0, max: 100, step: 1, value: 70 },
+            { tab, group: BGA, id: 'sliderBgAnimOpacity', type: 'slider', label: 'Animation Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
             // Patches
             { tab, group: BGA, id: 'sliderBgAnimPatchScale', type: 'slider', label: 'Patch Size (Px):', min: 40, max: 3000, step: 5, value: 500 },
             { tab, group: BGA, id: 'sliderBgAnimPatchCoverage', type: 'slider', label: 'Patch Coverage (%):', min: 0, max: 100, step: 1, value: 50 },
@@ -8757,15 +8757,15 @@
             {
                 select: 'selectBgAnimMode', map: {
                     rotation: [],
-                    patches: ['selectBgAnimBlend', 'sliderBgAnimOpacity', 'sliderBgAnimPatchScale', 'sliderBgAnimPatchCoverage', 'sliderBgAnimPatchSoftness', 'sliderBgAnimPatchDrift', 'sliderBgAnimPatchOctaves'],
+                    patches: ['selectBgAnimBlend', 'sliderBgAnimPatchScale', 'sliderBgAnimPatchCoverage', 'sliderBgAnimPatchSoftness', 'sliderBgAnimPatchDrift', 'sliderBgAnimPatchOctaves'],
                     breathing: ['selectBgAnimBlend', 'sliderBgAnimBreathPeriod', 'sliderBgAnimBreathMin', 'sliderBgAnimBreathMax'],
                     rings: ['rangeBarBgAnimRingThickness', 'curveEditorBgAnimRingThickness', 'sliderBgAnimRingSpeedStep', 'sliderBgAnimRingEdgeBlur', 'checkboxBgAnimRingAlternate'],
                     swirl: ['sliderBgAnimSwirlRadius', 'rangeBarBgAnimSwirlStrength', 'curveEditorBgAnimSwirlStrength', 'checkboxBgAnimSwirlInvert', 'sliderBgAnimSwirlTwist'],
                     warp: ['sliderBgAnimWarpStrength', 'sliderBgAnimWarpScale', 'sliderBgAnimWarpOctaves', 'sliderBgAnimWarpLacunarity', 'sliderBgAnimWarpGain', 'sliderBgAnimWarpDrift'],
-                    overlay: ['selectBgAnimBlend', 'sliderBgAnimOpacity'],
+                    overlay: ['selectBgAnimBlend'],
                 },
                 // shown for every mode except "none"
-                always: ['sliderBgAnimSpeed', 'sliderBgAnimCenterX', 'sliderBgAnimCenterY', 'sliderBgAnimStartStopMs', 'curveEditorBgAnimStartStop', 'sliderBgAnimZoom', 'sliderBgAnimResolution', 'sliderBgAnimMaxFps'],
+                always: ['sliderBgAnimOpacity', 'sliderBgAnimSpeed', 'sliderBgAnimCenterX', 'sliderBgAnimCenterY', 'sliderBgAnimStartStopMs', 'curveEditorBgAnimStartStop', 'sliderBgAnimZoom', 'sliderBgAnimResolution', 'sliderBgAnimMaxFps'],
             },
             {
                 select: 'selectTitleAnimMode', map: {

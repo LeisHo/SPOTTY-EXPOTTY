@@ -111,7 +111,7 @@ void main() {
         float n = fbm(p / uPatchScale + vec2(0.6, 0.8) * uTau * uPatchDrift / uPatchScale, uPatchOct, 2.0, 0.5);
         float thr = mix(0.78, 0.22, uPatchCover);
         float soft = max(0.005, uPatchSoft * 0.35);
-        alpha = smoothstep(thr - soft, thr + soft, n) * uOpacity;
+        alpha = smoothstep(thr - soft, thr + soft, n);
     } else if (m == 3) {     // breathing
         q = rot(d, uAngle);
         alpha = mix(uBreathMin, uBreathMax, 0.5 + 0.5 * sin(6.2831853 * uTau / max(uBreathPeriod, 0.05)));
@@ -151,10 +151,10 @@ void main() {
         q = rot(d + disp, uAngle);
     } else {                 // overlay (a rotated duplicate on top)
         q = rot(d, uAngle);
-        alpha = uOpacity;
+        alpha = 1.0;
     }
     if (!direct) c = samp(uCenter + q / max(uZoom, 0.01));
-    float a = c.a * alpha;
+    float a = c.a * alpha * uOpacity; // uOpacity: the Animation Opacity slider, for every mode
     gl_FragColor = vec4(c.rgb * a, a); // premultiplied (the texture is straight alpha, so c.rgb is multiplied by its own alpha too)
 }`;
 

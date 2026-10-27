@@ -194,7 +194,7 @@ export const DEFAULTS = {
     // Background > Animation (bgAnimation.js)
     selectBgAnimMode: 'none', sliderBgAnimSpeed: 6, sliderBgAnimCenterX: 0, sliderBgAnimCenterY: 0, sliderBgAnimStartStopMs: 2000,
     curveEditorBgAnimStartStop: { points: [{ x: 0, y: 0 }, { x: 1, y: 1 }], method: 'monotone' },
-    sliderBgAnimZoom: 100, sliderBgAnimResolution: 60, sliderBgAnimMaxFps: 60, selectBgAnimBlend: 'normal', sliderBgAnimOpacity: 70,
+    sliderBgAnimZoom: 100, sliderBgAnimResolution: 60, sliderBgAnimMaxFps: 60, selectBgAnimBlend: 'normal', sliderBgAnimOpacity: 100,
     sliderBgAnimPatchScale: 500, sliderBgAnimPatchCoverage: 50, sliderBgAnimPatchSoftness: 40, sliderBgAnimPatchDrift: 30, sliderBgAnimPatchOctaves: 3,
     sliderBgAnimBreathPeriod: 8, sliderBgAnimBreathMin: 0, sliderBgAnimBreathMax: 100,
     sliderBgAnimRingWidth: 120, sliderBgAnimRingSpeedStep: 0.5, sliderBgAnimRingEdgeBlur: 0,
