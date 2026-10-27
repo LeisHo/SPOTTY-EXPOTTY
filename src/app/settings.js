@@ -379,7 +379,8 @@ function savedValue(id) {
     if (dev) { // a Mobile / Landscape value that was saved as independent from Desktop
         const key = dev === 'Mobile' ? 'mobile' : 'landscape';
         const ind = savedState.devIndependence && savedState.devIndependence[key], vals = savedState.devDeviceValues && savedState.devDeviceValues[key];
-        if (ind && ind[id] && vals && vals[id] !== undefined) return coerceSaved(id, vals[id]);
+        const shown = !savedState.devVisibility || savedState.devVisibility[id] !== false; // both boxes must be ticked: Show in Mobile / Landscape (Desktop) and Independent (Mobile / Landscape)
+        if (shown && ind && ind[id] && vals && vals[id] !== undefined) return coerceSaved(id, vals[id]);
     }
     const v = savedState.controls[id];
     return v === undefined ? undefined : coerceSaved(id, v);
@@ -388,7 +389,8 @@ function savedValue(id) {
 export function setting(id) {
     const m = id.match(/^(slider|color|select|checkbox|rangeBar|curveEditor)(.+)$/);
     const dev = activeDevice();
-    if (dev && m) {
+    // A Mobile / Landscape value counts only when BOTH checkboxes are ticked (the dev panel says so through spxMobileValueApplies); otherwise Desktop's applies.
+    if (dev && m && (typeof window.spxMobileValueApplies !== 'function' || window.spxMobileValueApplies(id, dev))) {
         const v = readEl(document.getElementById(m[1] + dev + m[2]));
         if (v !== undefined) return v;
     }

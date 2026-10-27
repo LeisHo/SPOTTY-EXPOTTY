@@ -2018,6 +2018,18 @@
         if (devIndependence[tab] && devIndependence[tab][desktopId] !== undefined) return devIndependence[tab][desktopId];
         return hasStaticDeviceCounterpart(desktopId, tab);
     }
+    // The app (settings.js setting()) asks this before it reads a Mobile / Landscape value: that value is used ONLY when BOTH boxes are ticked - the Desktop
+    // row's "Show in Mobile/Landscape" and the Mobile / Landscape row's "Independent from Desktop". Otherwise the Desktop value applies. Cached because setting()
+    // is called many times per frame; any change to a checkbox (or a restored state) clears the cache.
+    const twinAppliesCache = new Map();
+    window.spxMobileValueApplies = (desktopId, device) => {
+        const key = device + '|' + desktopId;
+        let v = twinAppliesCache.get(key);
+        if (v === undefined) { v = isDevRowVisible(desktopId) && isDevRowIndependent(device === 'Landscape' ? 'landscape' : 'mobile', desktopId); twinAppliesCache.set(key, v); }
+        return v;
+    };
+    window.spxClearMobileApplyCache = () => twinAppliesCache.clear();
+    document.addEventListener('change', e => { if (e.target && e.target.type === 'checkbox') twinAppliesCache.clear(); }, true);
 
     // Shows/hides an existing Mobile/Landscape row per its own
     // devVisibility flag, for a control OUTSIDE the registerDevControlArray()
@@ -6969,6 +6981,7 @@
         window.__spxPerModeRestoring = false;
         window.__spxBulkApply = false;
         if (typeof window.spxSyncPerModeLast === 'function') window.spxSyncPerModeLast();
+        window.spxClearMobileApplyCache();
         // The Mobile/Landscape twin rows exist only now, after the restore above. Anything the app reads through a twin (e.g. the cover's
         // Y offset on a phone) was computed while they were missing, so the app re-applies its look once they exist.
         document.dispatchEvent(new Event('spx-devrows-ready'));
