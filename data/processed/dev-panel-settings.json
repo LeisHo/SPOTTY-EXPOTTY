@@ -36,7 +36,8 @@
     "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderSongTickWidthTransitionMs": 500,
     "sliderSongTickHeight": 14,
-    "sliderSongTickMinSpacing": 1.3,
+    "sliderSongTickOpacity": 53,
+    "sliderSongTickMinSpacing": 0.9,
     "checkboxSongTickScale": true,
     "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.31997971323844665,\"y\":0}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.5177484789764912,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderTimelineHeight": 190,
@@ -268,10 +269,10 @@
     "selectValenceIconStyle": "0",
     "selectDanceIconStyle": "6",
     "selectEnergyIconStyle": "6",
-    "checkboxFilterButtonEnabled": true,
+    "checkboxFilterButtonEnabled": false,
     "sliderFilterIconSize": 25,
     "sliderFilterIconOffsetX": 0,
-    "sliderFilterIconOffsetY": 117,
+    "sliderFilterIconOffsetY": 25,
     "sliderFilterEdgeOffset": 14,
     "sliderFilterOffOpacity": 45,
     "sliderFilterOnOpacity": 75,
@@ -304,12 +305,12 @@
     "checkboxFilterCloseOnOutside": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 13,
-    "sliderFilterPanelRowGap": -13,
+    "sliderFilterPanelRowGap": -5,
     "sliderFilterPanelRowsOffsetY": -24,
     "checkboxFilterPanelKeepVisible": true,
-    "sliderFilterPanelIconOffsetY": -2,
+    "sliderFilterPanelIconOffsetY": 1,
     "sliderFilterPanelCountFontSize": 12,
-    "sliderFilterPanelNumbersOffsetY": 5,
+    "sliderFilterPanelNumbersOffsetY": 1,
     "sliderFilterPanelIconSize": 23,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": 6,
@@ -4699,14 +4700,6 @@
                                   },
                                   {
                                     "type": "row",
-                                    "key": "sliderFilterPanelCountFontSize"
-                                  },
-                                  {
-                                    "type": "row",
-                                    "key": "sliderFilterPanelNumbersOffsetY"
-                                  },
-                                  {
-                                    "type": "row",
                                     "key": "sliderFilterPanelRowGap"
                                   }
                                 ],
@@ -4715,8 +4708,6 @@
                                   "sliderFilterPanelIconSize",
                                   "sliderFilterPanelRowsOffsetY",
                                   "sliderFilterPanelIconOffsetY",
-                                  "sliderFilterPanelCountFontSize",
-                                  "sliderFilterPanelNumbersOffsetY",
                                   "sliderFilterPanelRowGap"
                                 ],
                                 "subgroups": []
@@ -4759,14 +4750,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderFilterPanelCountFontSize"
-                                },
-                                {
-                                  "type": "row",
-                                  "key": "sliderFilterPanelNumbersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderFilterPanelRowGap"
                                 }
                               ],
@@ -4775,14 +4758,20 @@
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
-                                "sliderFilterPanelCountFontSize",
-                                "sliderFilterPanelNumbersOffsetY",
                                 "sliderFilterPanelRowGap"
                               ],
                               "subgroups": []
                             }
                           ]
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelCountFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelNumbersOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -4797,7 +4786,9 @@
                       "checkboxFilterButtonEnabled",
                       "sliderFilterIconOffsetY",
                       "sliderFilterIconOffsetX",
-                      "sliderFilterEdgeOffset"
+                      "sliderFilterEdgeOffset",
+                      "sliderFilterPanelCountFontSize",
+                      "sliderFilterPanelNumbersOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -5175,14 +5166,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderFilterPanelCountFontSize"
-                                },
-                                {
-                                  "type": "row",
-                                  "key": "sliderFilterPanelNumbersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderFilterPanelRowGap"
                                 }
                               ],
@@ -5191,8 +5174,6 @@
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
-                                "sliderFilterPanelCountFontSize",
-                                "sliderFilterPanelNumbersOffsetY",
                                 "sliderFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -5235,14 +5216,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderFilterPanelCountFontSize"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -5251,8 +5224,6 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelCountFontSize",
-                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -7186,14 +7157,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderFilterPanelCountFontSize"
-                                },
-                                {
-                                  "type": "row",
-                                  "key": "sliderFilterPanelNumbersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderFilterPanelRowGap"
                                 }
                               ],
@@ -7202,8 +7165,6 @@
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
-                                "sliderFilterPanelCountFontSize",
-                                "sliderFilterPanelNumbersOffsetY",
                                 "sliderFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -7246,14 +7207,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderFilterPanelCountFontSize"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -7262,14 +7215,20 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelCountFontSize",
-                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
                           }
                         ]
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelCountFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelNumbersOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -7284,7 +7243,9 @@
                     "checkboxFilterButtonEnabled",
                     "sliderFilterIconOffsetY",
                     "sliderFilterIconOffsetX",
-                    "sliderFilterEdgeOffset"
+                    "sliderFilterEdgeOffset",
+                    "sliderFilterPanelCountFontSize",
+                    "sliderFilterPanelNumbersOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -7662,14 +7623,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderFilterPanelCountFontSize"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -7678,8 +7631,6 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelCountFontSize",
-                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -7722,14 +7673,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderFilterPanelCountFontSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterPanelNumbersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderFilterPanelRowGap"
                             }
                           ],
@@ -7738,8 +7681,6 @@
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
-                            "sliderFilterPanelCountFontSize",
-                            "sliderFilterPanelNumbersOffsetY",
                             "sliderFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -12013,14 +11954,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderFilterPanelCountFontSize"
-                                },
-                                {
-                                  "type": "row",
-                                  "key": "sliderFilterPanelNumbersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderFilterPanelRowGap"
                                 }
                               ],
@@ -12029,8 +11962,6 @@
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
-                                "sliderFilterPanelCountFontSize",
-                                "sliderFilterPanelNumbersOffsetY",
                                 "sliderFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -12073,14 +12004,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderFilterPanelCountFontSize"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -12089,14 +12012,20 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelCountFontSize",
-                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
                           }
                         ]
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelCountFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelNumbersOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -12111,7 +12040,9 @@
                     "checkboxFilterButtonEnabled",
                     "sliderFilterIconOffsetY",
                     "sliderFilterIconOffsetX",
-                    "sliderFilterEdgeOffset"
+                    "sliderFilterEdgeOffset",
+                    "sliderFilterPanelCountFontSize",
+                    "sliderFilterPanelNumbersOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -12489,14 +12420,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderFilterPanelCountFontSize"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -12505,8 +12428,6 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelCountFontSize",
-                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -12549,14 +12470,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderFilterPanelCountFontSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterPanelNumbersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderFilterPanelRowGap"
                             }
                           ],
@@ -12565,8 +12478,6 @@
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
-                            "sliderFilterPanelCountFontSize",
-                            "sliderFilterPanelNumbersOffsetY",
                             "sliderFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -14500,14 +14411,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderFilterPanelCountFontSize"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderFilterPanelRowGap"
                               }
                             ],
@@ -14516,8 +14419,6 @@
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelCountFontSize",
-                              "sliderFilterPanelNumbersOffsetY",
                               "sliderFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -14560,14 +14461,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderFilterPanelCountFontSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterPanelNumbersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderFilterPanelRowGap"
                             }
                           ],
@@ -14576,14 +14469,20 @@
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
-                            "sliderFilterPanelCountFontSize",
-                            "sliderFilterPanelNumbersOffsetY",
                             "sliderFilterPanelRowGap"
                           ],
                           "subgroups": []
                         }
                       ]
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterPanelCountFontSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterPanelNumbersOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -14598,7 +14497,9 @@
                   "checkboxFilterButtonEnabled",
                   "sliderFilterIconOffsetY",
                   "sliderFilterIconOffsetX",
-                  "sliderFilterEdgeOffset"
+                  "sliderFilterEdgeOffset",
+                  "sliderFilterPanelCountFontSize",
+                  "sliderFilterPanelNumbersOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -14976,14 +14877,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderFilterPanelCountFontSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterPanelNumbersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderFilterPanelRowGap"
                             }
                           ],
@@ -14992,8 +14885,6 @@
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
-                            "sliderFilterPanelCountFontSize",
-                            "sliderFilterPanelNumbersOffsetY",
                             "sliderFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -15036,14 +14927,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "sliderFilterPanelCountFontSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterPanelNumbersOffsetY"
-                          },
-                          {
-                            "type": "row",
                             "key": "sliderFilterPanelRowGap"
                           }
                         ],
@@ -15052,8 +14935,6 @@
                           "sliderFilterPanelIconSize",
                           "sliderFilterPanelRowsOffsetY",
                           "sliderFilterPanelIconOffsetY",
-                          "sliderFilterPanelCountFontSize",
-                          "sliderFilterPanelNumbersOffsetY",
                           "sliderFilterPanelRowGap"
                         ],
                         "subgroups": []
@@ -17968,11 +17849,16 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "sliderSongTickOpacity"
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
-          "rangeBarTimelineZoomLimits"
+          "rangeBarTimelineZoomLimits",
+          "sliderSongTickOpacity"
         ],
         "subgroups": [
           {
@@ -28485,6 +28371,15 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:New Group (28)",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [],
@@ -28600,6 +28495,12 @@
           },
           {
             "key": "mobile:Right Click Height",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:New Group (28)",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -38054,6 +37955,15 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:New Group (28)",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [],
@@ -38169,6 +38079,12 @@
           },
           {
             "key": "landscape:Right Click Height",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:New Group (28)",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -38321,7 +38237,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": true,
+    "desktop:Timeline Look": false,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
@@ -38333,7 +38249,7 @@
     "desktop:Song Add Date": true,
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
-    "desktop:New Group (28)": true,
+    "desktop:New Group (28)": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
@@ -38427,6 +38343,7 @@
     "mobile:Song Add Date": false,
     "mobile:Right Click Pan": false,
     "mobile:Right Click Height": false,
+    "mobile:New Group (28)": false,
     "mobile:Startup": true,
     "mobile:Start Button": false,
     "mobile:Start Button Animation": false,
@@ -38520,6 +38437,7 @@
     "landscape:Song Add Date": false,
     "landscape:Right Click Pan": false,
     "landscape:Right Click Height": false,
+    "landscape:New Group (28)": false,
     "landscape:Startup": false,
     "landscape:Start Button": false,
     "landscape:Start Button Animation": false
@@ -39321,7 +39239,9 @@
     "sliderLandscapeFilterPanelRowGap": null,
     "sliderSongTickHeight": null,
     "rangeBarSongTickWidth": null,
-    "desktop:New Group (28)": "TICKS"
+    "desktop:New Group (28)": "TICKS",
+    "mobile:New Group (28)": "TICKS",
+    "landscape:New Group (28)": "TICKS"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
