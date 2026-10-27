@@ -1320,6 +1320,10 @@ async function boot() {
     setInterval(keepCoverCentred, 500); // catches an anchor change made in the UI Layout Inspector
     new ResizeObserver(placeNav).observe(el('spxCover'));
     new ResizeObserver(() => centerStartOnCover()).observe(el('spxCover'));
+    // The cover can move without changing size (the saved settings or a layout override arriving after load, an anchor change), and a
+    // ResizeObserver does not see that: while the start screen is up the button follows the cover every frame.
+    const trackStartOnCover = () => { if (!el('spxStart').hidden && setting('checkboxStartCenterOnCover')) centerStartOnCover(); requestAnimationFrame(trackStartOnCover); };
+    requestAnimationFrame(trackStartOnCover);
     window.addEventListener('resize', placeNav);
     placeNav();
     onPlayState(playing => {
