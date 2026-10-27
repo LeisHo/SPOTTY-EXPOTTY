@@ -537,9 +537,10 @@ export function createTimeline(canvas, data) {
 
         // Song Data (the button under Shuffle): tempo / valence / danceability / energy of the shown song, each as an icon and a number,
         // right-aligned on the same row as the add date.
-        if (songData && songData.length) {
+        const sdItems = songData && songData.length ? songData : (sdAlpha > 0 ? sdLast : null); // while fading out, the last row is still drawn
+        if (sdItems && sdAlpha > 0) {
             const fsz = setting('sliderSongDataFontSize'), ic = setting('sliderSongDataIconSize'), gIc = setting('sliderSongDataIconGap'), gIt = setting('sliderSongDataItemGap');
-            ctx.globalAlpha = setting('sliderSongDataOpacity');
+            ctx.globalAlpha = setting('sliderSongDataOpacity') * sdAlpha; // sdAlpha: the fade when the Song Data button is switched on / off
             ctx.fillStyle = ctx.strokeStyle = setting('colorSongData');
             const fam = getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif';
             // The row is centred vertically on the add date's text: the middle of the date's digits (measured with the date's own font) is the row's centre
@@ -552,7 +553,7 @@ export function createTimeline(canvas, data) {
             ctx.font = dataFont;
             ctx.letterSpacing = '0px';
             ctx.textAlign = 'start';
-            const items = songData.map(it => ({ ...it, tw: ctx.measureText(it.text).width }));
+            const items = sdItems.map(it => ({ ...it, tw: ctx.measureText(it.text).width }));
             const total = items.reduce((sum, it) => sum + ic + gIc + it.tw, 0) + gIt * (items.length - 1);
             let x = w - setting('sliderSongDataEdgeOffset') - total;
             items.forEach(it => {
@@ -639,10 +640,22 @@ export function createTimeline(canvas, data) {
         draw();
     }
     // Song Data row: [{ key, text }] or null. The icon paths come from the filter panel's icons.
-    let songData = null;
+    let songData = null, sdLast = null, sdAlpha = 0, sdFadeRaf = 0, sdFadeT = 0; // the row, the last row (drawn while it fades out), its fade 0..1
     function setSongData(items) {
         songData = items ? items.map(it => ({ ...it, shapes: featureIcon(it.key, setting(FEATURE_ICON_SETTING[it.key])).p.map(([d, eo]) => [new Path2D(d), eo]) })) : null;
-        draw();
+        if (songData) sdLast = songData;
+        // Switching the row on fades it in, switching it off fades it out (Song Data > Fade Duration); a change of song while it is on does not fade.
+        const target = songData ? 1 : 0, dur = Math.max(0, setting('sliderSongDataFadeMs'));
+        if (sdAlpha === target) { draw(); return; }
+        if (dur === 0) { sdAlpha = target; draw(); return; }
+        cancelAnimationFrame(sdFadeRaf); sdFadeT = performance.now();
+        const step = now => {
+            const d = Math.max(0, Math.min(100, now - sdFadeT)); sdFadeT = now;
+            sdAlpha = target ? Math.min(1, sdAlpha + d / dur) : Math.max(0, sdAlpha - d / dur);
+            draw();
+            if (sdAlpha !== target) sdFadeRaf = requestAnimationFrame(step); else sdFadeRaf = 0;
+        };
+        sdFadeRaf = requestAnimationFrame(step);
     }
     let dateLine = '';
     function setDateLine(t) { if (t !== dateLine) { dateLine = t; draw(); } }
