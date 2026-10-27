@@ -58,7 +58,7 @@
     "checkboxRcHeightInvert": false,
     "sliderRcHeightThreshold": 42,
     "sliderRcHeightMin": 49,
-    "sliderRcHeightMaxPct": 59,
+    "sliderRcHeightMaxPct": 44,
     "checkboxScrubLineDrag": true,
     "sliderScrubLineAnimTime": 50,
     "sliderScrubLineHoverWidth": 3,
