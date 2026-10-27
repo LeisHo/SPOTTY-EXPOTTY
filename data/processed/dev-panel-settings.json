@@ -481,17 +481,17 @@
     "sliderSpotlightCenterX": 50,
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
-    "selectBgAnimMode": "warp",
-    "sliderBgAnimSpeed": 77.5,
+    "selectBgAnimMode": "rings",
+    "sliderBgAnimSpeed": 1,
     "sliderBgAnimCenterX": 0,
     "sliderBgAnimCenterY": 0,
     "sliderBgAnimStartStopMs": 3000,
     "curveEditorBgAnimStartStop": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.2147454358232241,\"y\":0}},{\"x\":0.6851959754298688,\"y\":0.3325002034505208,\"h1\":{\"x\":0.10708017595909614,\"y\":0.16000061035156254},\"h2\":{\"x\":-0.11527206490868874,\"y\":-0.19333292643229172}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.16500879500840304,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
-    "sliderBgAnimZoom": 100,
+    "sliderBgAnimZoom": 50,
     "sliderBgAnimResolution": 100,
     "sliderBgAnimMaxFps": 60,
     "selectBgAnimBlend": "normal",
-    "sliderBgAnimOpacity": 19,
+    "sliderBgAnimOpacity": 27,
     "sliderBgAnimPatchScale": 1155,
     "sliderBgAnimPatchCoverage": 47,
     "sliderBgAnimPatchSoftness": 93,
@@ -501,11 +501,11 @@
     "sliderBgAnimBreathPeriod": 4,
     "sliderBgAnimBreathMin": 0,
     "sliderBgAnimBreathMax": 100,
-    "rangeBarBgAnimRingThickness": "{\"min\":0.1,\"max\":8}",
-    "curveEditorBgAnimRingThickness": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":0.5898218713037233,\"y\":0.20083325703938804,\"h1\":{\"x\":0.16195571501060246,\"y\":0.19999999999999996},\"h2\":{\"x\":-0.10389614325682217,\"y\":-0.1533335367838542}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.18829514598118435,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
-    "sliderBgAnimRingSpeedStep": 0.1,
-    "sliderBgAnimRingEdgeBlur": 100,
-    "checkboxBgAnimRingAlternate": false,
+    "rangeBarBgAnimRingThickness": "{\"min\":0.1,\"max\":5}",
+    "curveEditorBgAnimRingThickness": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.6337038596877189,\"y\":0}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.16968989035190118,\"y\":-0.2075002034505209}}],\"method\":\"monotone\",\"bgOpacity\":0}",
+    "sliderBgAnimRingSpeedStep": 0.3,
+    "sliderBgAnimRingEdgeBlur": 0,
+    "checkboxBgAnimRingAlternate": true,
     "sliderBgAnimSwirlRadius": 3705,
     "rangeBarBgAnimSwirlStrength": "{\"min\":29,\"max\":100}",
     "curveEditorBgAnimSwirlStrength": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":0.25,\"y\":0.35},{\"x\":0.5,\"y\":0.65},{\"x\":0.75,\"y\":0.9},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
@@ -553,7 +553,7 @@
   "layout": {
     "left": 27,
     "top": 107,
-    "width": 422,
+    "width": 632,
     "height": 570
   },
   "devPanelStyle": {
@@ -28004,12 +28004,15 @@
         "selectBgAnimBlend": "normal"
       },
       "rings": {
-        "sliderBgAnimSpeed": "5",
+        "sliderBgAnimSpeed": "1",
         "sliderBgAnimCenterX": "0",
         "sliderBgAnimCenterY": "0",
-        "sliderBgAnimZoom": "100",
-        "sliderBgAnimOpacity": "14",
-        "selectBgAnimBlend": "normal"
+        "sliderBgAnimZoom": "50",
+        "sliderBgAnimOpacity": "27",
+        "selectBgAnimBlend": "normal",
+        "sliderBgAnimRingEdgeBlur": "0",
+        "sliderBgAnimRingSpeedStep": "0.3",
+        "checkboxBgAnimRingAlternate": true
       },
       "swirl": {
         "sliderBgAnimSpeed": "262.5",
@@ -28033,7 +28036,7 @@
         "sliderBgAnimWarpGain": "0.47",
         "sliderBgAnimWarpStrength": "737",
         "sliderBgAnimWarpScale": "3000",
-        "curveEditorBgAnimStartStop": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+        "curveEditorBgAnimStartStop": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.2147454358232241,\"y\":0}},{\"x\":0.6851959754298688,\"y\":0.3325002034505208,\"h1\":{\"x\":0.10708017595909614,\"y\":0.16000061035156254},\"h2\":{\"x\":-0.11527206490868874,\"y\":-0.19333292643229172}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.16500879500840304,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
         "sliderBgAnimResolution": "100",
         "sliderBgAnimMaxFps": "60",
         "sliderBgAnimPatchScale": "1155",
@@ -28054,7 +28057,8 @@
         "curveEditorBgAnimSwirlStrength": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":0.25,\"y\":0.35},{\"x\":0.5,\"y\":0.65},{\"x\":0.75,\"y\":0.9},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
         "checkboxBgAnimSwirlInvert": true,
         "sliderBgAnimSwirlTwist": "121",
-        "selectBgAnimWarpDriftDir": "diagonal"
+        "selectBgAnimWarpDriftDir": "diagonal",
+        "selectBgAnimPatchDriftDir": "diagonal"
       }
     },
     "selectBackgroundMode": {
