@@ -7,10 +7,10 @@
 import { setting } from './settings.js';
 
 const FEATURES = [
-    { key: 'tp', label: 'Tempo', unit: ' BPM', step: 1, dp: 0 },
-    { key: 'v', label: 'Valence', unit: '', step: 0.01, dp: 2 },
-    { key: 'dn', label: 'Danceability', unit: '', step: 0.01, dp: 2 },
-    { key: 'e', label: 'Energy', unit: '', step: 0.01, dp: 2 },
+    { key: 'tp', label: 'Tempo', unit: ' BPM', step: 'any', dp: 1 },
+    { key: 'v', label: 'Valence', unit: '', step: 'any', dp: 3 },
+    { key: 'dn', label: 'Danceability', unit: '', step: 'any', dp: 3 },
+    { key: 'e', label: 'Energy', unit: '', step: 'any', dp: 3 },
 ];
 const STORE = 'spxFilter';
 // the panel shows an icon instead of each feature's name (the name is its tooltip)
@@ -22,7 +22,9 @@ const ICONS = {
 };
 
 // tempo 0 is Spotify's "no data" placeholder, so it counts as missing like a null does
-const valueOf = (s, k) => { const v = s[k]; return typeof v === 'number' && !(k === 'tp' && v <= 0) ? v : null; };
+// A row whose tempo, valence and danceability are all exactly 0 has no audio analysis (3 songs): those 3 values are missing, not real zeros.
+const noAnalysis = s => s.tp === 0 && s.v === 0 && s.dn === 0;
+const valueOf = (s, k) => { const v = s[k]; return typeof v === 'number' && !(k !== 'e' && noAnalysis(s)) && !(k === 'tp' && v <= 0) ? v : null; };
 
 export function createFilter(songs, { host, onChange }) {
     // dataset extents
@@ -31,7 +33,7 @@ export function createFilter(songs, { host, onChange }) {
         let lo = Infinity, hi = -Infinity;
         songs.forEach(s => { const v = valueOf(s, f.key); if (v !== null) { if (v < lo) lo = v; if (v > hi) hi = v; } });
         if (!isFinite(lo)) { lo = 0; hi = 1; }
-        ext[f.key] = f.key === 'tp' ? [Math.floor(lo), Math.ceil(hi)] : [lo, hi];
+        ext[f.key] = [lo, hi]; // exactly the lowest and highest value present in the data
     });
     const range = {};
     FEATURES.forEach(f => { range[f.key] = ext[f.key].slice(); });
@@ -109,8 +111,8 @@ export function createFilter(songs, { host, onChange }) {
         row.className = 'spx-flt-row';
         row.innerHTML = `<div class="spx-flt-top"><span class="spx-flt-ico" title="${f.label}" aria-label="${f.label}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[f.key]}</svg></span><span class="spx-flt-val"></span></div>
             <div class="spx-flt-range"><div class="spx-flt-track"><div class="spx-flt-fill"></div></div>
-            <input type="range" class="spx-flt-min" min="${lo}" max="${hi}" step="${f.key === 'tp' ? 1 : 'any'}" aria-label="${f.label} minimum">
-            <input type="range" class="spx-flt-max" min="${lo}" max="${hi}" step="${f.key === 'tp' ? 1 : 'any'}" aria-label="${f.label} maximum"></div>`;
+            <input type="range" class="spx-flt-min" min="${lo}" max="${hi}" step="any" aria-label="${f.label} minimum">
+            <input type="range" class="spx-flt-max" min="${lo}" max="${hi}" step="any" aria-label="${f.label} maximum"></div>`;
         rowsEl.appendChild(row);
         const r = rows[f.key] = { f, row, val: row.querySelector('.spx-flt-val'), fill: row.querySelector('.spx-flt-fill'), min: row.querySelector('.spx-flt-min'), max: row.querySelector('.spx-flt-max') };
         const fromInputs = which => {
@@ -121,7 +123,7 @@ export function createFilter(songs, { host, onChange }) {
         };
         // A press on the track (not on a handle) moves the nearer handle there and keeps dragging it.
         const rangeEl = row.querySelector('.spx-flt-range');
-        const valAt = x => { const b = rangeEl.getBoundingClientRect(), t = Math.min(1, Math.max(0, (x - b.left) / (b.width || 1))), v = lo + t * (hi - lo); return f.key === 'tp' ? Math.round(v) : v; };
+        const valAt = x => { const b = rangeEl.getBoundingClientRect(), t = Math.min(1, Math.max(0, (x - b.left) / (b.width || 1))), v = lo + t * (hi - lo); return v; };
         rangeEl.addEventListener('pointerdown', e => {
             if (e.target.tagName === 'INPUT') return; // a handle: the browser drags it
             e.preventDefault();
