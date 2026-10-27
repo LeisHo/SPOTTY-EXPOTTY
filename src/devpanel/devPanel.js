@@ -8303,6 +8303,8 @@
             { tab, group: FLB, id: 'sliderFilterPanelFontSize', type: 'slider', label: 'Panel Font Size (Px):', min: 8, max: 32, step: 1, value: 12 },
             { tab, group: FLB, id: 'sliderFilterPanelRowGap', type: 'slider', label: 'Panel Vertical Spacing Between Sliders (Px):', min: 0, max: 80, step: 1, value: 12 },
             { tab, group: FLB, id: 'sliderFilterPanelRowsOffsetY', type: 'slider', label: 'Panel Slider Group Y Offset (Px):', min: -100, max: 100, step: 1, value: 0 },
+            { tab, group: FLB, id: 'checkboxFilterPanelKeepVisible', type: 'checkbox', label: 'Keep The Filter Panel Visible:', value: false },
+            { tab, group: FLB, id: 'sliderFilterPanelIconOffsetY', type: 'slider', label: 'Panel Icon Y Offset From Its Slider (Px):', min: -30, max: 80, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelIconSize', type: 'slider', label: 'Panel Category Icon Size (Px):', min: 8, max: 120, step: 1, value: 20 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetY', type: 'slider', label: 'Panel Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },

@@ -18,7 +18,8 @@ const rgbToHsv = (r, g, b) => {
 };
 const RECT_MODES = new Set(['borderRadial', 'spotlight']);
 
-export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPalette }) {
+export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPalette, hold }) {
+    const held = () => !!(hold && hold()); // true while a filtered-out song is only being viewed: the song-driven changes below are skipped
     const ctx = canvas.getContext('2d');
     let version = 0, fadeEnd = 0; // version: bumped on every redraw; fadeEnd: when the current crossfade ends (the animation layer reads both)
     const pctx = prevCanvas.getContext('2d');
@@ -258,8 +259,8 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
         render();
     }
 
-    coverImg.addEventListener('load', () => { analyseCover(); crossfadeThenRender(); });
-    coverImg.addEventListener('error', () => { pix = null; crossfadeThenRender(); });
+    coverImg.addEventListener('load', () => { if (held()) return; analyseCover(); crossfadeThenRender(); });
+    coverImg.addEventListener('error', () => { if (held()) return; pix = null; crossfadeThenRender(); });
     window.addEventListener('resize', render);
     document.addEventListener('input', render);
     document.addEventListener('change', render);
@@ -283,7 +284,7 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
         version: () => version,
         fading: () => performance.now() < fadeEnd,
         refresh: render,
-        onCoverChanged: () => { analyseCover(); crossfadeThenRender(); },
-        onSongChanged: () => { if (SONG_INDEPENDENT.has(setting('selectBackgroundMode'))) render(); else crossfadeThenRender(); },
+        onCoverChanged: () => { if (held()) return; analyseCover(); crossfadeThenRender(); },
+        onSongChanged: () => { if (held()) return; if (SONG_INDEPENDENT.has(setting('selectBackgroundMode'))) render(); else crossfadeThenRender(); },
     };
 }

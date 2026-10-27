@@ -281,7 +281,9 @@ async function boot() {
     const covers = data.covers || [];
     const background = createBackground({
         canvas: el('spxBg'), prevCanvas: el('spxBgPrev'), coverEl: el('spxCover'), coverImg: el('spxCoverImg'),
-        getPalette: () => { const c = songs[idx] && songs[idx].c; return c !== undefined ? covers[c] : null; },
+        // A filtered-out song that is only being viewed (clicked / scrubbed to) must not change the background: it follows the song that is playing.
+        hold: () => viewOnlyNow(),
+        getPalette: () => { const s = songs[viewOnlyNow() && playIdx >= 0 ? playIdx : idx], c = s && s.c; return c !== undefined ? covers[c] : null; },
     });
     // Background animation (UI Layout > Background > Animation): a WebGL layer above the background canvas. curveY is declared further down; it is only called later.
     const bgAnim = createBgAnimation({ bgCanvas: el('spxBg'), prevCanvas: el('spxBgPrev'), fxCanvas: el('spxBgFx'), coverEl: el('spxCover'), curveY: (c, x) => curveY(c, x), bgVersion: () => background.version(), bgFading: () => background.fading(), isPlaying: () => el('spxCover').classList.contains('playing') });
@@ -661,10 +663,11 @@ async function boot() {
             applyFilterIcon(el('spxFilter').querySelector('svg'), iconIndex(setting('selectFilterIconStyle')));
             const ps = flt && flt.panel.style;
             if (ps) {
-                ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-ico', setting('sliderFilterPanelIconSize') + 'px'); ps.setProperty('--spx-flt-row-gap', setting('sliderFilterPanelRowGap') + 'px'); ps.setProperty('--spx-flt-rows-y', setting('sliderFilterPanelRowsOffsetY') + 'px'); ps.setProperty('--spx-flt-blur', setting('sliderFilterPanelBlur') + 'px');
+                ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-ico', setting('sliderFilterPanelIconSize') + 'px'); ps.setProperty('--spx-flt-row-gap', setting('sliderFilterPanelRowGap') + 'px'); ps.setProperty('--spx-flt-ico-gap', setting('sliderFilterPanelIconOffsetY') + 'px'); ps.setProperty('--spx-flt-rows-y', setting('sliderFilterPanelRowsOffsetY') + 'px'); ps.setProperty('--spx-flt-blur', setting('sliderFilterPanelBlur') + 'px');
                 { const sf = shadowOf('FilterPanel'); ps.setProperty('--shadow-flt-panel', setting('checkboxShadowFilterPanel') ? `${sf.x} ${sf.y} ${sf.blur} ${setting('sliderShadowFilterPanelSpread')}px ${sf.c}` : 'none'); } // Shadows > Filter Panel Shadow ps.setProperty('--spx-flt-font', setting('sliderFilterPanelFontSize') + 'px');
                 ps.setProperty('--spx-flt-bg', rgbaOf(setting('colorFilterPanelBg'), setting('sliderFilterPanelBgOpacity') / 100)); ps.setProperty('--spx-flt-accent', setting('colorFilterPanelAccent'));
                 flt.refresh(); syncFilterUi(); timeline.setFilter(filterOn() ? flt.passes : null);
+                if (setting('checkboxFilterPanelKeepVisible') && !flt.open) { flt.setOpen(true); syncFilterUi(); } // Keep The Filter Panel Visible
                 if (flt.open) placeFilterPanel();
             }
         }
@@ -1105,12 +1108,13 @@ async function boot() {
         logEvent('playback', 'FILTER ' + (filterOn() ? flt.describe() + ' -> ' + flt.countPassing() + ' of ' + songs.length + ' songs' : 'cleared'));
     }
     filterBtn.addEventListener('click', () => {
+        if (setting('checkboxFilterPanelKeepVisible') && flt.open) return; // pinned open
         flt.setOpen(!flt.open);
         if (flt.open) placeFilterPanel();
         syncFilterUi();
     });
     document.addEventListener('pointerdown', e => {
-        if (flt.open && setting('checkboxFilterCloseOnOutside') && !flt.panel.contains(e.target) && !filterBtn.contains(e.target)) { flt.setOpen(false); syncFilterUi(); }
+        if (flt.open && setting('checkboxFilterCloseOnOutside') && !setting('checkboxFilterPanelKeepVisible') && !flt.panel.contains(e.target) && !filterBtn.contains(e.target)) { flt.setOpen(false); syncFilterUi(); }
     }, true);
     window.addEventListener('resize', () => { if (flt.open) placeFilterPanel(); });
     timeline.setFilter(filterOn() ? flt.passes : null);
