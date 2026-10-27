@@ -226,6 +226,7 @@
     "curveEditorVolAnimSpeedCurve": "{\"points\":[{\"x\":0,\"y\":0.5952784220377605,\"h1\":{\"x\":0.504492481784282,\"y\":0.05047709147135415}},{\"x\":1,\"y\":1,\"h2\":{\"x\":0,\"y\":-0.44892730712890627}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderCoverScale": 1.65,
     "sliderCoverOffsetX": 0,
+    "sliderCoverBrightness": 100,
     "sliderCoverOffsetY": -45,
     "checkboxCoverBoundingBox": false,
     "selectShuffleIconStyle": "1",
@@ -441,8 +442,9 @@
     "sliderTitleLiftShadowOpacity": 0.5,
     "selectBackgroundMode": "blurCover",
     "sliderBackgroundOpacity": 1,
-    "sliderBackgroundBrightness": 1,
+    "sliderBackgroundBrightness": 1.3,
     "sliderBackgroundSaturation": 1.28,
+    "sliderBackgroundDither": 4,
     "sliderBackgroundTransition": 1950,
     "colorBackgroundColor": "#0d0f12",
     "curveEditorBackgroundGradient": "{\"stops\":[{\"p\":0,\"c\":\"#1db954\"},{\"p\":1,\"c\":\"#0d0f12\"}]}",
@@ -479,23 +481,23 @@
     "sliderSpotlightCenterX": 50,
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
-    "selectBgAnimMode": "patches",
-    "sliderBgAnimSpeed": 51.5,
+    "selectBgAnimMode": "breathing",
+    "sliderBgAnimSpeed": 41.5,
     "sliderBgAnimCenterX": 0,
     "sliderBgAnimCenterY": 0,
     "sliderBgAnimStartStopMs": 2000,
     "curveEditorBgAnimStartStop": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderBgAnimZoom": 100,
-    "sliderBgAnimResolution": 60,
+    "sliderBgAnimResolution": 100,
     "sliderBgAnimMaxFps": 60,
     "selectBgAnimBlend": "normal",
-    "sliderBgAnimOpacity": 57,
+    "sliderBgAnimOpacity": 100,
     "sliderBgAnimPatchScale": 1155,
     "sliderBgAnimPatchCoverage": 47,
     "sliderBgAnimPatchSoftness": 93,
-    "sliderBgAnimPatchDrift": 179,
-    "sliderBgAnimPatchOctaves": 6,
-    "sliderBgAnimBreathPeriod": 8,
+    "sliderBgAnimPatchDrift": 215,
+    "sliderBgAnimPatchOctaves": 4,
+    "sliderBgAnimBreathPeriod": 4,
     "sliderBgAnimBreathMin": 0,
     "sliderBgAnimBreathMax": 100,
     "rangeBarBgAnimRingThickness": "{\"min\":120,\"max\":120}",
@@ -6060,6 +6062,10 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "row",
+                  "key": "sliderBackgroundDither"
                 }
               ],
               "rowKeys": [
@@ -6102,7 +6108,8 @@
                 "colorSpotlightEdgeColor",
                 "sliderBlurOffsetX",
                 "sliderBlurOffsetY",
-                "sliderSpotlightMaxBrightness"
+                "sliderSpotlightMaxBrightness",
+                "sliderBackgroundDither"
               ],
               "subgroups": [
                 {
@@ -6311,13 +6318,18 @@
                 {
                   "type": "row",
                   "key": "checkboxCoverBoundingBox"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderCoverBrightness"
                 }
               ],
               "rowKeys": [
                 "sliderCoverScale",
                 "sliderCoverOffsetX",
                 "sliderCoverOffsetY",
-                "checkboxCoverBoundingBox"
+                "checkboxCoverBoundingBox",
+                "sliderCoverBrightness"
               ],
               "subgroups": []
             }
@@ -10822,6 +10834,10 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "row",
+                "key": "sliderBackgroundDither"
               }
             ],
             "rowKeys": [
@@ -10864,7 +10880,8 @@
               "colorSpotlightEdgeColor",
               "sliderBlurOffsetX",
               "sliderBlurOffsetY",
-              "sliderSpotlightMaxBrightness"
+              "sliderSpotlightMaxBrightness",
+              "sliderBackgroundDither"
             ],
             "subgroups": [
               {
@@ -11070,13 +11087,18 @@
               {
                 "type": "row",
                 "key": "checkboxCoverBoundingBox"
+              },
+              {
+                "type": "row",
+                "key": "sliderCoverBrightness"
               }
             ],
             "rowKeys": [
               "sliderCoverScale",
               "sliderCoverOffsetX",
               "sliderCoverOffsetY",
-              "checkboxCoverBoundingBox"
+              "checkboxCoverBoundingBox",
+              "sliderCoverBrightness"
             ],
             "subgroups": []
           },
@@ -27868,17 +27890,25 @@
         "selectBgAnimBlend": "normal"
       },
       "patches": {
-        "sliderBgAnimSpeed": "51.5",
+        "sliderBgAnimSpeed": "41.5",
         "sliderBgAnimCenterX": "0",
         "sliderBgAnimCenterY": "0",
         "sliderBgAnimZoom": "100",
-        "sliderBgAnimOpacity": "57",
+        "sliderBgAnimOpacity": "100",
+        "selectBgAnimBlend": "normal"
+      },
+      "breathing": {
+        "sliderBgAnimSpeed": "41.5",
+        "sliderBgAnimCenterX": "0",
+        "sliderBgAnimCenterY": "0",
+        "sliderBgAnimZoom": "100",
+        "sliderBgAnimOpacity": "100",
         "selectBgAnimBlend": "normal"
       }
     },
     "selectBackgroundMode": {
       "blurCover": {
-        "sliderBackgroundBrightness": "1"
+        "sliderBackgroundBrightness": "1.3"
       }
     }
   },
