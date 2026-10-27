@@ -304,7 +304,7 @@
     "checkboxFilterCloseOnOutside": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 13,
-    "sliderFilterPanelRowGap": -16,
+    "sliderFilterPanelRowGap": -13,
     "sliderFilterPanelRowsOffsetY": -24,
     "checkboxFilterPanelKeepVisible": true,
     "sliderFilterPanelIconOffsetY": -2,
