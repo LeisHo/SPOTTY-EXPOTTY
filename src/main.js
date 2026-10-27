@@ -216,6 +216,9 @@ async function boot() {
     // The song whose full version the hand-off has asked for. The preview keeps playing until that full song reports it is
     // playing; if it never does, the preview carries on instead of going silent.
     let previewHold = null;
+    // The songs that settled (were actually played, not scrubbed past), oldest first; the last entry is the one playing. The Last button goes back through it,
+    // with shuffle on or off.
+    const playedHistory = [];
     let stepImmediate = false; // set by stepSong() so that one song change skips the handoff delay
     // Audio-feature filter (Filter button, filter.js). Created further down; until then every song passes.
     let flt = null;
@@ -892,6 +895,7 @@ async function boot() {
         const doHandoff = () => {
             if (previewClipsOn() && clipKey(songs[playIdx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
             handoffPending = false;
+            if (playedHistory[playedHistory.length - 1] !== playIdx) { playedHistory.push(playIdx); if (playedHistory.length > 300) playedHistory.shift(); }
             const ok = interacted && isUnlocked() && setting('checkboxHandoffEnabled') && realPlayAllowed();
             logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[playIdx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
             if (ok) {
@@ -1104,6 +1108,21 @@ async function boot() {
         return true;
     });
     const stepSong = (d, fromPlaying) => {
+        if (d === -1) { // Last: the song that was playing before this one, wherever it was in the list (and whatever shuffle is doing)
+            while (playedHistory.length && playedHistory[playedHistory.length - 1] === playIdx) playedHistory.pop(); // drop the current song
+            let t;
+            while (playedHistory.length && (t = playedHistory[playedHistory.length - 1]) !== undefined && (t === playIdx || !songOk(t))) playedHistory.pop();
+            if (playedHistory.length) {
+                t = playedHistory[playedHistory.length - 1];
+                stepImmediate = true;
+                logEvent('playback', `LAST: back to the previously played song ${t + 1}`);
+                moveTo(t);
+                if (shuffleOn) { timeline.centerOnPlayhead(); timeline.draw(); }
+                stepImmediate = false;
+                return;
+            }
+            if (playIdx >= 0) playedHistory.push(playIdx); // nothing earlier: the current song stays the history's start, and Last steps as before
+        }
         stepImmediate = true;
         if (shuffleOn && Math.abs(d) === 1) shuffleStep(d);
         else {
