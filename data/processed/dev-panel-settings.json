@@ -38156,7 +38156,7 @@
     "desktop:New Group (10)": true,
     "desktop:New Group (11)": true,
     "desktop:Play Button Animation": true,
-    "desktop:Next And Last Song Buttons": false,
+    "desktop:Next And Last Song Buttons": true,
     "desktop:New Group (12)": true,
     "desktop:New Group (13)": true,
     "desktop:Next And Last Button Animation": true,
@@ -38201,7 +38201,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": true,
+    "desktop:Timeline Look": false,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
@@ -38213,7 +38213,7 @@
     "desktop:Song Add Date": true,
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
-    "desktop:New Group (28)": true,
+    "desktop:New Group (28)": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
@@ -39200,7 +39200,8 @@
     "sliderMobileFilterPanelRowGap": null,
     "sliderLandscapeFilterPanelRowGap": null,
     "sliderSongTickHeight": null,
-    "rangeBarSongTickWidth": null
+    "rangeBarSongTickWidth": null,
+    "desktop:New Group (28)": "TICKS"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -39235,7 +39236,8 @@
     "desktop:New Group (24)",
     "desktop:New Group (27)",
     "desktop:New Group (26)",
-    "desktop:New Group (25)"
+    "desktop:New Group (25)",
+    "desktop:New Group (28)"
   ],
   "lockedGroups": [
     "desktop:Dev Panel",
@@ -39272,7 +39274,7 @@
     "desktop:Startup"
   ],
   "lockedSliderBounds": [],
-  "textEditModeEnabled": false,
+  "textEditModeEnabled": true,
   "hotkeys": {
     "s": {
       "id": "devHeaderSyncBtn",
