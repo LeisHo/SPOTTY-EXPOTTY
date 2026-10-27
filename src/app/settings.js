@@ -172,6 +172,7 @@ export const DEFAULTS = {
     checkboxGlobalOverrideAnim: false, sliderGlobalAnimTime: 150, sliderGlobalAnimHoverSize: 115, sliderGlobalAnimClickSize: 85, sliderGlobalAnimReleaseSize: 120, sliderGlobalAnimHoverOpacity: 100, sliderGlobalAnimClickOpacity: 70,
     checkboxVolBtnAnimEnabled: false, sliderVolBtnAnimTime: 160, sliderVolBtnAnimHoverSize: 24, sliderVolBtnAnimClickSize: 18, sliderVolBtnAnimReleaseSize: 20,
     sliderVolBtnAnimHoverOpacity: 100, sliderVolBtnAnimClickOpacity: 100,
+    checkboxTestTextEnabled: false, textTestSong: 'Test Song Name (Live)', textTestArtist: 'Test Artist; Second Artist', textTestAlbum: 'Test Album Name (2026)',
     textArtistSeparator: ';', // what joins the names when a track has several artists (the data stores them with ';')
     sliderArtistSeparatorPct: 100,
     sliderNavEdgeOffset: 14,

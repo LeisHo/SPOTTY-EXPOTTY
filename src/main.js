@@ -608,6 +608,7 @@ async function boot() {
     }
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
+        { const t = !!setting('checkboxTestTextEnabled'), sig = [t, t && setting('textTestSong'), t && setting('textTestArtist'), t && setting('textTestAlbum')].join(''); if (songs[idx] && sig !== textSig) renderText(); }
         applyTextElementStyles();
         // Shows Spotify's own player so you can see whether it says "Log in" / "Preview" and log in INSIDE it.
         document.querySelector('.spx-embed').classList.toggle('spx-embed-visible', !!setting('checkboxShowSpotifyPlayer') && !sdkIsReady()); // the iframe is idle (and shows a stale preview UI) while the SDK plays
@@ -788,11 +789,15 @@ async function boot() {
             node.appendChild(document.createTextNode(name));
         });
     };
-    function render() {
-        const s = songs[idx];
+    // The song name, artist and album line. Test Text Mode (UI Layout > Text) shows the three typed texts instead of the song's own; the artist text may
+    // use ';' between names, as the data does, so the Artist Name Separator can be tried out too.
+    let textSig = '';
+    function renderText() {
+        const s = songs[idx], test = !!setting('checkboxTestTextEnabled');
+        textSig = [test, test && setting('textTestSong'), test && setting('textTestArtist'), test && setting('textTestAlbum')].join('\u0001');
         const link = el('spxTitleLink');
         // Bracketed text (round or square, with its brackets) is wrapped in .spx-bracket so Brackets Smaller Text can size it
-        link.replaceChildren(...cleanTitle(s.n).split(/([(\[{][^()\[\]{}]*[)\]}])/).filter(Boolean).map(p => {
+        link.replaceChildren(...String(test ? setting('textTestSong') : cleanTitle(s.n)).split(/([(\[{][^()\[\]{}]*[)\]}])/).filter(Boolean).map(p => {
             if (!/^[(\[{]/.test(p)) return document.createTextNode(p);
             const sp = document.createElement('span');
             sp.className = 'spx-bracket';
@@ -800,10 +805,14 @@ async function boot() {
             return sp;
         }));
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
-        artistRaw = s.a;
+        artistRaw = test ? String(setting('textTestArtist')) : s.a;
         setArtistLine();
-        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) || !previewClipsOn() ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
+        el('spxMeta').textContent = test ? String(setting('textTestAlbum')) : `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) || !previewClipsOn() ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
         applyTextElementStyles(); // re-run Shrink to Fit against the new text (a no-op for every other Overflow mode)
+    }
+    function render() {
+        const s = songs[idx];
+        renderText();
         timeline.setDateLine(fmtAdded(s.t));
         el('spxApp').classList.toggle('view-filtered', viewOnlyNow());
         updateSongData();
