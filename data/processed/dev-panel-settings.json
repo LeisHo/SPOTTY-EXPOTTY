@@ -253,7 +253,7 @@
     "checkboxFilterButtonEnabled": true,
     "sliderFilterIconSize": 25,
     "sliderFilterIconOffsetX": 0,
-    "sliderFilterIconOffsetY": 23,
+    "sliderFilterIconOffsetY": 21,
     "sliderFilterGapBelowShuffle": 0,
     "sliderFilterEdgeOffset": 14,
     "sliderFilterOffOpacity": 45,
@@ -263,18 +263,18 @@
     "sliderFilterClickTolerance": 0,
     "sliderFilterHoverTolerance": 0,
     "colorFilterGray": "#8a8f98",
-    "sliderFilterGrayOpacity": 35,
+    "sliderFilterGrayOpacity": 31,
     "selectFilterMissing": "hide",
     "checkboxFilterSkipOnStep": true,
     "sliderFilterCoverGrayscale": 100,
-    "sliderFilterCoverBrightness": 100,
-    "sliderFilterCoverContrast": 100,
-    "sliderFilterTextBrightness": 100,
-    "sliderFilterCoverTransitionMs": 250,
+    "sliderFilterCoverBrightness": 102,
+    "sliderFilterCoverContrast": 32,
+    "sliderFilterTextBrightness": 64,
+    "sliderFilterCoverTransitionMs": 460,
     "sliderFilterGraphGrayscale": 100,
     "checkboxFilterReturnEnabled": true,
     "sliderFilterReturnDelay": 3,
-    "sliderFilterReturnDuration": 600,
+    "sliderFilterReturnDuration": 5000,
     "selectFilterReturnEasing": "ease-in-out",
     "selectFilterReturnRestore": "end",
     "checkboxFilterGrayTicks": true,
@@ -287,7 +287,9 @@
     "checkboxFilterCloseOnOutside": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 12,
-    "sliderFilterPanelIconSize": 20,
+    "sliderFilterPanelRowGap": -50,
+    "sliderFilterPanelRowsOffsetY": -25,
+    "sliderFilterPanelIconSize": 23,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": 6,
     "colorFilterPanelBg": "#4f4f4f",
@@ -307,13 +309,13 @@
     "colorSongDataBtnOn": "#ffffff",
     "sliderSongDataClickTolerance": 0,
     "sliderSongDataHoverTolerance": 0,
-    "sliderSongDataIconSize": 19,
+    "sliderSongDataIconSize": 24,
     "sliderSongDataFontSize": 13,
     "checkboxSongDataBold": true,
     "colorSongData": "#ffffff",
     "sliderSongDataOpacity": 0.9,
-    "sliderSongDataIconGap": 5,
-    "sliderSongDataItemGap": 14,
+    "sliderSongDataIconGap": 2,
+    "sliderSongDataItemGap": 40,
     "sliderSongDataEdgeOffset": 14,
     "sliderSongDataOffsetY": 0,
     "sliderSongDataTempoDecimals": 0,
@@ -3343,7 +3345,7 @@
                     "items": [
                       {
                         "type": "row",
-                        "key": "buttonPlayPause"
+                        "key": "selectPlayIconStyle"
                       },
                       {
                         "type": "row",
@@ -3351,7 +3353,7 @@
                       },
                       {
                         "type": "row",
-                        "key": "selectPlayIconStyle"
+                        "key": "buttonPlayPause"
                       },
                       {
                         "type": "row",
@@ -3432,9 +3434,9 @@
                       }
                     ],
                     "rowKeys": [
-                      "buttonPlayPause",
-                      "selectPauseIconStyle",
                       "selectPlayIconStyle",
+                      "selectPauseIconStyle",
+                      "buttonPlayPause",
                       "colorPlayButton",
                       "sliderPlayButtonSize",
                       "sliderPlayButtonOpacity",
@@ -3901,6 +3903,22 @@
                       },
                       {
                         "type": "row",
+                        "key": "selectTempoIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectValenceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectDanceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectEnergyIconStyle"
+                      },
+                      {
+                        "type": "row",
                         "key": "checkboxFilterButtonEnabled"
                       },
                       {
@@ -4045,22 +4063,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "selectTempoIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectValenceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectDanceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectEnergyIconStyle"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderFilterCoverContrast"
                       },
                       {
@@ -4090,10 +4092,22 @@
                       {
                         "type": "row",
                         "key": "sliderFilterPanelBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelRowGap"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelRowsOffsetY"
                       }
                     ],
                     "rowKeys": [
                       "selectFilterIconStyle",
+                      "selectTempoIconStyle",
+                      "selectValenceIconStyle",
+                      "selectDanceIconStyle",
+                      "selectEnergyIconStyle",
                       "checkboxFilterButtonEnabled",
                       "sliderFilterIconSize",
                       "sliderFilterIconOffsetX",
@@ -4130,10 +4144,6 @@
                       "colorFilterPanelBg",
                       "sliderFilterPanelBgOpacity",
                       "colorFilterPanelAccent",
-                      "selectTempoIconStyle",
-                      "selectValenceIconStyle",
-                      "selectDanceIconStyle",
-                      "selectEnergyIconStyle",
                       "sliderFilterCoverContrast",
                       "sliderFilterTextBrightness",
                       "checkboxFilterShowNumbers",
@@ -4141,7 +4151,9 @@
                       "sliderFilterIconOffsetY",
                       "checkboxFilterShowRangeText",
                       "sliderFilterPanelIconSize",
-                      "sliderFilterPanelBlur"
+                      "sliderFilterPanelBlur",
+                      "sliderFilterPanelRowGap",
+                      "sliderFilterPanelRowsOffsetY"
                     ],
                     "subgroups": []
                   }
@@ -4458,7 +4470,7 @@
                   "items": [
                     {
                       "type": "row",
-                      "key": "buttonPlayPause"
+                      "key": "selectPlayIconStyle"
                     },
                     {
                       "type": "row",
@@ -4466,7 +4478,7 @@
                     },
                     {
                       "type": "row",
-                      "key": "selectPlayIconStyle"
+                      "key": "buttonPlayPause"
                     },
                     {
                       "type": "row",
@@ -4547,9 +4559,9 @@
                     }
                   ],
                   "rowKeys": [
-                    "buttonPlayPause",
-                    "selectPauseIconStyle",
                     "selectPlayIconStyle",
+                    "selectPauseIconStyle",
+                    "buttonPlayPause",
                     "colorPlayButton",
                     "sliderPlayButtonSize",
                     "sliderPlayButtonOpacity",
@@ -5004,6 +5016,22 @@
                     },
                     {
                       "type": "row",
+                      "key": "selectTempoIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectValenceIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectDanceIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectEnergyIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "checkboxFilterButtonEnabled"
                     },
                     {
@@ -5148,22 +5176,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "selectTempoIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectValenceIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectDanceIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectEnergyIconStyle"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderFilterCoverContrast"
                     },
                     {
@@ -5193,10 +5205,22 @@
                     {
                       "type": "row",
                       "key": "sliderFilterPanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelRowGap"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelRowsOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "selectFilterIconStyle",
+                    "selectTempoIconStyle",
+                    "selectValenceIconStyle",
+                    "selectDanceIconStyle",
+                    "selectEnergyIconStyle",
                     "checkboxFilterButtonEnabled",
                     "sliderFilterIconSize",
                     "sliderFilterIconOffsetX",
@@ -5233,10 +5257,6 @@
                     "colorFilterPanelBg",
                     "sliderFilterPanelBgOpacity",
                     "colorFilterPanelAccent",
-                    "selectTempoIconStyle",
-                    "selectValenceIconStyle",
-                    "selectDanceIconStyle",
-                    "selectEnergyIconStyle",
                     "sliderFilterCoverContrast",
                     "sliderFilterTextBrightness",
                     "checkboxFilterShowNumbers",
@@ -5244,7 +5264,9 @@
                     "sliderFilterIconOffsetY",
                     "checkboxFilterShowRangeText",
                     "sliderFilterPanelIconSize",
-                    "sliderFilterPanelBlur"
+                    "sliderFilterPanelBlur",
+                    "sliderFilterPanelRowGap",
+                    "sliderFilterPanelRowsOffsetY"
                   ],
                   "subgroups": []
                 },
@@ -7910,7 +7932,7 @@
                   "items": [
                     {
                       "type": "row",
-                      "key": "buttonPlayPause"
+                      "key": "selectPlayIconStyle"
                     },
                     {
                       "type": "row",
@@ -7918,7 +7940,7 @@
                     },
                     {
                       "type": "row",
-                      "key": "selectPlayIconStyle"
+                      "key": "buttonPlayPause"
                     },
                     {
                       "type": "row",
@@ -7999,9 +8021,9 @@
                     }
                   ],
                   "rowKeys": [
-                    "buttonPlayPause",
-                    "selectPauseIconStyle",
                     "selectPlayIconStyle",
+                    "selectPauseIconStyle",
+                    "buttonPlayPause",
                     "colorPlayButton",
                     "sliderPlayButtonSize",
                     "sliderPlayButtonOpacity",
@@ -8468,6 +8490,22 @@
                     },
                     {
                       "type": "row",
+                      "key": "selectTempoIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectValenceIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectDanceIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectEnergyIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "checkboxFilterButtonEnabled"
                     },
                     {
@@ -8612,22 +8650,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "selectTempoIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectValenceIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectDanceIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectEnergyIconStyle"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderFilterCoverContrast"
                     },
                     {
@@ -8657,10 +8679,22 @@
                     {
                       "type": "row",
                       "key": "sliderFilterPanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelRowGap"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelRowsOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "selectFilterIconStyle",
+                    "selectTempoIconStyle",
+                    "selectValenceIconStyle",
+                    "selectDanceIconStyle",
+                    "selectEnergyIconStyle",
                     "checkboxFilterButtonEnabled",
                     "sliderFilterIconSize",
                     "sliderFilterIconOffsetX",
@@ -8697,10 +8731,6 @@
                     "colorFilterPanelBg",
                     "sliderFilterPanelBgOpacity",
                     "colorFilterPanelAccent",
-                    "selectTempoIconStyle",
-                    "selectValenceIconStyle",
-                    "selectDanceIconStyle",
-                    "selectEnergyIconStyle",
                     "sliderFilterCoverContrast",
                     "sliderFilterTextBrightness",
                     "checkboxFilterShowNumbers",
@@ -8708,7 +8738,9 @@
                     "sliderFilterIconOffsetY",
                     "checkboxFilterShowRangeText",
                     "sliderFilterPanelIconSize",
-                    "sliderFilterPanelBlur"
+                    "sliderFilterPanelBlur",
+                    "sliderFilterPanelRowGap",
+                    "sliderFilterPanelRowsOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -9025,7 +9057,7 @@
                 "items": [
                   {
                     "type": "row",
-                    "key": "buttonPlayPause"
+                    "key": "selectPlayIconStyle"
                   },
                   {
                     "type": "row",
@@ -9033,7 +9065,7 @@
                   },
                   {
                     "type": "row",
-                    "key": "selectPlayIconStyle"
+                    "key": "buttonPlayPause"
                   },
                   {
                     "type": "row",
@@ -9114,9 +9146,9 @@
                   }
                 ],
                 "rowKeys": [
-                  "buttonPlayPause",
-                  "selectPauseIconStyle",
                   "selectPlayIconStyle",
+                  "selectPauseIconStyle",
+                  "buttonPlayPause",
                   "colorPlayButton",
                   "sliderPlayButtonSize",
                   "sliderPlayButtonOpacity",
@@ -9571,6 +9603,22 @@
                   },
                   {
                     "type": "row",
+                    "key": "selectTempoIconStyle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectValenceIconStyle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectDanceIconStyle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectEnergyIconStyle"
+                  },
+                  {
+                    "type": "row",
                     "key": "checkboxFilterButtonEnabled"
                   },
                   {
@@ -9715,22 +9763,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "selectTempoIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectValenceIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectDanceIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectEnergyIconStyle"
-                  },
-                  {
-                    "type": "row",
                     "key": "sliderFilterCoverContrast"
                   },
                   {
@@ -9760,10 +9792,22 @@
                   {
                     "type": "row",
                     "key": "sliderFilterPanelBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterPanelRowGap"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterPanelRowsOffsetY"
                   }
                 ],
                 "rowKeys": [
                   "selectFilterIconStyle",
+                  "selectTempoIconStyle",
+                  "selectValenceIconStyle",
+                  "selectDanceIconStyle",
+                  "selectEnergyIconStyle",
                   "checkboxFilterButtonEnabled",
                   "sliderFilterIconSize",
                   "sliderFilterIconOffsetX",
@@ -9800,10 +9844,6 @@
                   "colorFilterPanelBg",
                   "sliderFilterPanelBgOpacity",
                   "colorFilterPanelAccent",
-                  "selectTempoIconStyle",
-                  "selectValenceIconStyle",
-                  "selectDanceIconStyle",
-                  "selectEnergyIconStyle",
                   "sliderFilterCoverContrast",
                   "sliderFilterTextBrightness",
                   "checkboxFilterShowNumbers",
@@ -9811,7 +9851,9 @@
                   "sliderFilterIconOffsetY",
                   "checkboxFilterShowRangeText",
                   "sliderFilterPanelIconSize",
-                  "sliderFilterPanelBlur"
+                  "sliderFilterPanelBlur",
+                  "sliderFilterPanelRowGap",
+                  "sliderFilterPanelRowsOffsetY"
                 ],
                 "subgroups": []
               },
