@@ -506,11 +506,11 @@
     "sliderBgAnimResolution": 100,
     "sliderBgAnimMaxFps": 60,
     "selectBgAnimBlend": "color",
-    "sliderBgAnimOpacity": 61,
-    "sliderBgAnimPatchScale": 370,
-    "sliderBgAnimPatchCoverage": 22,
+    "sliderBgAnimOpacity": 67,
+    "sliderBgAnimPatchScale": 45,
+    "sliderBgAnimPatchCoverage": 29,
     "sliderBgAnimPatchSoftness": 100,
-    "sliderBgAnimPatchDrift": 20,
+    "sliderBgAnimPatchDrift": 38,
     "selectBgAnimPatchDriftDir": "diagonal",
     "sliderBgAnimPatchOctaves": 6,
     "sliderBgAnimBreathPeriod": 4,
@@ -1842,38 +1842,46 @@
           },
           {
             "type": "row",
-            "key": "checkboxSnapshotViewport"
-          },
-          {
-            "type": "row",
-            "key": "checkboxSnapshotMouse"
-          },
-          {
-            "type": "row",
-            "key": "checkboxSnapshotPlayback"
-          },
-          {
-            "type": "row",
-            "key": "checkboxSnapshotAudio"
-          },
-          {
-            "type": "row",
-            "key": "checkboxSnapshotTimeline"
-          },
-          {
-            "type": "row",
-            "key": "checkboxSnapshotSettings"
-          },
-          {
-            "type": "row",
             "key": "buttonDebugSnapshot"
           },
           {
             "type": "group",
             "section": {
               "key": "desktop:Snapshot",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "checkboxSnapshotViewport"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxSnapshotMouse"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxSnapshotPlayback"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxSnapshotAudio"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxSnapshotTimeline"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxSnapshotSettings"
+                }
+              ],
+              "rowKeys": [
+                "checkboxSnapshotViewport",
+                "checkboxSnapshotMouse",
+                "checkboxSnapshotPlayback",
+                "checkboxSnapshotAudio",
+                "checkboxSnapshotTimeline",
+                "checkboxSnapshotSettings"
+              ],
               "subgroups": []
             }
           }
@@ -1887,12 +1895,6 @@
           "sliderFrameRateRefreshMs",
           "checkboxLogPlayback",
           "checkboxLogPreload",
-          "checkboxSnapshotViewport",
-          "checkboxSnapshotMouse",
-          "checkboxSnapshotPlayback",
-          "checkboxSnapshotAudio",
-          "checkboxSnapshotTimeline",
-          "checkboxSnapshotSettings",
           "buttonDebugSnapshot"
         ],
         "subgroups": [
@@ -1926,8 +1928,40 @@
           },
           {
             "key": "desktop:Snapshot",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "checkboxSnapshotViewport"
+              },
+              {
+                "type": "row",
+                "key": "checkboxSnapshotMouse"
+              },
+              {
+                "type": "row",
+                "key": "checkboxSnapshotPlayback"
+              },
+              {
+                "type": "row",
+                "key": "checkboxSnapshotAudio"
+              },
+              {
+                "type": "row",
+                "key": "checkboxSnapshotTimeline"
+              },
+              {
+                "type": "row",
+                "key": "checkboxSnapshotSettings"
+              }
+            ],
+            "rowKeys": [
+              "checkboxSnapshotViewport",
+              "checkboxSnapshotMouse",
+              "checkboxSnapshotPlayback",
+              "checkboxSnapshotAudio",
+              "checkboxSnapshotTimeline",
+              "checkboxSnapshotSettings"
+            ],
             "subgroups": []
           }
         ]
@@ -38201,9 +38235,9 @@
     "desktop:TABS": true,
     "desktop:BUTTONS": true,
     "desktop:Hot Keys": true,
-    "desktop:Debug": true,
+    "desktop:Debug": false,
     "desktop:Mouse Log": true,
-    "desktop:Snapshot": true,
+    "desktop:Snapshot": false,
     "desktop:UI Layout": false,
     "desktop:Text": true,
     "desktop:Font": true,
@@ -38214,7 +38248,7 @@
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": true,
+    "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
@@ -38233,7 +38267,7 @@
     "desktop:New Group (14)": true,
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": true,
+    "desktop:Filter Button": false,
     "desktop:New Group (16)": true,
     "desktop:New Group (17)": true,
     "desktop:New Group (18)": true,
@@ -38251,8 +38285,8 @@
     "desktop:Song Timeline Animation": true,
     "desktop:Global Override": true,
     "desktop:Standard Button Animation": true,
-    "desktop:Background": false,
-    "desktop:Animation": false,
+    "desktop:Background": true,
+    "desktop:Animation": true,
     "desktop:Album Cover": true,
     "desktop:Shadows": true,
     "desktop:Album Cover Shadow": true,
@@ -39318,8 +39352,6 @@
     "mobile:Debug",
     "landscape:Dev Panel",
     "landscape:Debug",
-    "desktop:Mouse Log",
-    "desktop:Debug",
     "desktop:New Group (2)",
     "desktop:Spotify Handoff",
     "desktop:No Preview",
@@ -39332,7 +39364,10 @@
     "desktop:New Group",
     "desktop:Start Button",
     "desktop:Start Button Animation",
-    "desktop:Startup"
+    "desktop:Startup",
+    "desktop:Mouse Log",
+    "desktop:Snapshot",
+    "desktop:Debug"
   ],
   "lockedSliderBounds": [],
   "textEditModeEnabled": false,
@@ -39774,12 +39809,12 @@
         "sliderBgAnimCenterX": "0",
         "sliderBgAnimCenterY": "0",
         "sliderBgAnimZoom": "100",
-        "sliderBgAnimOpacity": "61",
+        "sliderBgAnimOpacity": "67",
         "selectBgAnimBlend": "color",
-        "sliderBgAnimPatchScale": "370",
+        "sliderBgAnimPatchScale": "45",
         "sliderBgAnimPatchSoftness": "100",
-        "sliderBgAnimPatchCoverage": "22",
-        "sliderBgAnimPatchDrift": "20",
+        "sliderBgAnimPatchCoverage": "29",
+        "sliderBgAnimPatchDrift": "38",
         "sliderBgAnimPatchOctaves": "6",
         "sliderBgAnimStartStopMs": "2000",
         "curveEditorBgAnimStartStop": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":0.7039203568038616,\"y\":0.2791666666666667,\"h2\":{\"x\":-0.19192502068954187,\"y\":-0.22666651407877603},\"h1\":{\"x\":0.16617909674580666,\"y\":0.19999999999999996}},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
