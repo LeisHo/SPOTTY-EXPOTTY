@@ -557,9 +557,9 @@
   },
   "layout": {
     "left": 35,
-    "top": 53,
-    "width": 350,
-    "height": 80
+    "top": 54,
+    "width": 852,
+    "height": 653
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -3216,59 +3216,122 @@
                       },
                       {
                         "type": "row",
-                        "key": "sliderVolCircleRadius"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderVolBarWidth"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderVolBarLength"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorVolBarFill"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorVolBarTrack"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorVolCircle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderVolHoverTolerance"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderVolAnimDuration"
-                      },
-                      {
-                        "type": "row",
-                        "key": "curveEditorVolAnimSpeedCurve"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderVolMutedOpacity"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderVolIconOffsetX"
                       },
                       {
                         "type": "row",
-                        "key": "sliderVolIconOpacity"
+                        "key": "sliderVolIconOffsetY"
                       },
                       {
                         "type": "row",
-                        "key": "sliderVolClickTolerance"
+                        "key": "sliderVolEdgeOffset"
                       },
                       {
-                        "type": "row",
-                        "key": "sliderVolHoverOpacity"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (5)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "colorVolBarFill"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorVolBarTrack"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorVolCircle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolBarWidth"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolBarLength"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolCircleRadius"
+                            },
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "desktop:New Group (8)",
+                                "items": [
+                                  {
+                                    "type": "row",
+                                    "key": "curveEditorVolAnimSpeedCurve"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderVolAnimDuration"
+                                  }
+                                ],
+                                "rowKeys": [
+                                  "curveEditorVolAnimSpeedCurve",
+                                  "sliderVolAnimDuration"
+                                ],
+                                "subgroups": []
+                              }
+                            }
+                          ],
+                          "rowKeys": [
+                            "colorVolBarFill",
+                            "colorVolBarTrack",
+                            "colorVolCircle",
+                            "sliderVolBarWidth",
+                            "sliderVolBarLength",
+                            "sliderVolCircleRadius"
+                          ],
+                          "subgroups": [
+                            {
+                              "key": "desktop:New Group (8)",
+                              "items": [
+                                {
+                                  "type": "row",
+                                  "key": "curveEditorVolAnimSpeedCurve"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderVolAnimDuration"
+                                }
+                              ],
+                              "rowKeys": [
+                                "curveEditorVolAnimSpeedCurve",
+                                "sliderVolAnimDuration"
+                              ],
+                              "subgroups": []
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (6)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderVolMutedOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolIconOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolHoverOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderVolMutedOpacity",
+                            "sliderVolIconOpacity",
+                            "sliderVolHoverOpacity"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
                         "type": "group",
@@ -3312,35 +3375,136 @@
                         }
                       },
                       {
-                        "type": "row",
-                        "key": "sliderVolEdgeOffset"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderVolIconOffsetY"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (9)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderVolHoverTolerance"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolClickTolerance"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderVolHoverTolerance",
+                            "sliderVolClickTolerance"
+                          ],
+                          "subgroups": []
+                        }
                       }
                     ],
                     "rowKeys": [
                       "selectVolIconStyle",
                       "sliderVolIconSize",
-                      "sliderVolCircleRadius",
-                      "sliderVolBarWidth",
-                      "sliderVolBarLength",
-                      "colorVolBarFill",
-                      "colorVolBarTrack",
-                      "colorVolCircle",
-                      "sliderVolHoverTolerance",
-                      "sliderVolAnimDuration",
-                      "curveEditorVolAnimSpeedCurve",
-                      "sliderVolMutedOpacity",
                       "sliderVolIconOffsetX",
-                      "sliderVolIconOpacity",
-                      "sliderVolClickTolerance",
-                      "sliderVolHoverOpacity",
-                      "sliderVolEdgeOffset",
-                      "sliderVolIconOffsetY"
+                      "sliderVolIconOffsetY",
+                      "sliderVolEdgeOffset"
                     ],
                     "subgroups": [
+                      {
+                        "key": "desktop:New Group (5)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "colorVolBarFill"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorVolBarTrack"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorVolCircle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolBarWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolBarLength"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolCircleRadius"
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "desktop:New Group (8)",
+                              "items": [
+                                {
+                                  "type": "row",
+                                  "key": "curveEditorVolAnimSpeedCurve"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderVolAnimDuration"
+                                }
+                              ],
+                              "rowKeys": [
+                                "curveEditorVolAnimSpeedCurve",
+                                "sliderVolAnimDuration"
+                              ],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [
+                          "colorVolBarFill",
+                          "colorVolBarTrack",
+                          "colorVolCircle",
+                          "sliderVolBarWidth",
+                          "sliderVolBarLength",
+                          "sliderVolCircleRadius"
+                        ],
+                        "subgroups": [
+                          {
+                            "key": "desktop:New Group (8)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "curveEditorVolAnimSpeedCurve"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderVolAnimDuration"
+                              }
+                            ],
+                            "rowKeys": [
+                              "curveEditorVolAnimSpeedCurve",
+                              "sliderVolAnimDuration"
+                            ],
+                            "subgroups": []
+                          }
+                        ]
+                      },
+                      {
+                        "key": "desktop:New Group (6)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderVolMutedOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolIconOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolHoverOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderVolMutedOpacity",
+                          "sliderVolIconOpacity",
+                          "sliderVolHoverOpacity"
+                        ],
+                        "subgroups": []
+                      },
                       {
                         "key": "desktop:Volume Button Animation",
                         "items": [
@@ -3376,6 +3540,24 @@
                           "sliderVolBtnAnimReleaseSize",
                           "sliderVolBtnAnimHoverOpacity",
                           "sliderVolBtnAnimClickOpacity"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:New Group (9)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderVolHoverTolerance"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolClickTolerance"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderVolHoverTolerance",
+                          "sliderVolClickTolerance"
                         ],
                         "subgroups": []
                       }
@@ -4500,59 +4682,122 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderVolCircleRadius"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolBarWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolBarLength"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorVolBarFill"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorVolBarTrack"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorVolCircle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolHoverTolerance"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolAnimDuration"
-                    },
-                    {
-                      "type": "row",
-                      "key": "curveEditorVolAnimSpeedCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolMutedOpacity"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderVolIconOffsetX"
                     },
                     {
                       "type": "row",
-                      "key": "sliderVolIconOpacity"
+                      "key": "sliderVolIconOffsetY"
                     },
                     {
                       "type": "row",
-                      "key": "sliderVolClickTolerance"
+                      "key": "sliderVolEdgeOffset"
                     },
                     {
-                      "type": "row",
-                      "key": "sliderVolHoverOpacity"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (5)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "colorVolBarFill"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorVolBarTrack"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorVolCircle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolBarWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolBarLength"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolCircleRadius"
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "desktop:New Group (8)",
+                              "items": [
+                                {
+                                  "type": "row",
+                                  "key": "curveEditorVolAnimSpeedCurve"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderVolAnimDuration"
+                                }
+                              ],
+                              "rowKeys": [
+                                "curveEditorVolAnimSpeedCurve",
+                                "sliderVolAnimDuration"
+                              ],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [
+                          "colorVolBarFill",
+                          "colorVolBarTrack",
+                          "colorVolCircle",
+                          "sliderVolBarWidth",
+                          "sliderVolBarLength",
+                          "sliderVolCircleRadius"
+                        ],
+                        "subgroups": [
+                          {
+                            "key": "desktop:New Group (8)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "curveEditorVolAnimSpeedCurve"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderVolAnimDuration"
+                              }
+                            ],
+                            "rowKeys": [
+                              "curveEditorVolAnimSpeedCurve",
+                              "sliderVolAnimDuration"
+                            ],
+                            "subgroups": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (6)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderVolMutedOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolIconOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolHoverOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderVolMutedOpacity",
+                          "sliderVolIconOpacity",
+                          "sliderVolHoverOpacity"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -4596,35 +4841,136 @@
                       }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderVolEdgeOffset"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolIconOffsetY"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (9)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderVolHoverTolerance"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolClickTolerance"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderVolHoverTolerance",
+                          "sliderVolClickTolerance"
+                        ],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
                     "selectVolIconStyle",
                     "sliderVolIconSize",
-                    "sliderVolCircleRadius",
-                    "sliderVolBarWidth",
-                    "sliderVolBarLength",
-                    "colorVolBarFill",
-                    "colorVolBarTrack",
-                    "colorVolCircle",
-                    "sliderVolHoverTolerance",
-                    "sliderVolAnimDuration",
-                    "curveEditorVolAnimSpeedCurve",
-                    "sliderVolMutedOpacity",
                     "sliderVolIconOffsetX",
-                    "sliderVolIconOpacity",
-                    "sliderVolClickTolerance",
-                    "sliderVolHoverOpacity",
-                    "sliderVolEdgeOffset",
-                    "sliderVolIconOffsetY"
+                    "sliderVolIconOffsetY",
+                    "sliderVolEdgeOffset"
                   ],
                   "subgroups": [
+                    {
+                      "key": "desktop:New Group (5)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "colorVolBarFill"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorVolBarTrack"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorVolCircle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolBarWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolBarLength"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolCircleRadius"
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "desktop:New Group (8)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "curveEditorVolAnimSpeedCurve"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderVolAnimDuration"
+                              }
+                            ],
+                            "rowKeys": [
+                              "curveEditorVolAnimSpeedCurve",
+                              "sliderVolAnimDuration"
+                            ],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [
+                        "colorVolBarFill",
+                        "colorVolBarTrack",
+                        "colorVolCircle",
+                        "sliderVolBarWidth",
+                        "sliderVolBarLength",
+                        "sliderVolCircleRadius"
+                      ],
+                      "subgroups": [
+                        {
+                          "key": "desktop:New Group (8)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "curveEditorVolAnimSpeedCurve"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolAnimDuration"
+                            }
+                          ],
+                          "rowKeys": [
+                            "curveEditorVolAnimSpeedCurve",
+                            "sliderVolAnimDuration"
+                          ],
+                          "subgroups": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "desktop:New Group (6)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderVolMutedOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolIconOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolHoverOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderVolMutedOpacity",
+                        "sliderVolIconOpacity",
+                        "sliderVolHoverOpacity"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "desktop:Volume Button Animation",
                       "items": [
@@ -4660,6 +5006,24 @@
                         "sliderVolBtnAnimReleaseSize",
                         "sliderVolBtnAnimHoverOpacity",
                         "sliderVolBtnAnimClickOpacity"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (9)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderVolHoverTolerance"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolClickTolerance"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderVolHoverTolerance",
+                        "sliderVolClickTolerance"
                       ],
                       "subgroups": []
                     }
@@ -8051,59 +8415,122 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderVolCircleRadius"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolBarWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolBarLength"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorVolBarFill"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorVolBarTrack"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorVolCircle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolHoverTolerance"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolAnimDuration"
-                    },
-                    {
-                      "type": "row",
-                      "key": "curveEditorVolAnimSpeedCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolMutedOpacity"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderVolIconOffsetX"
                     },
                     {
                       "type": "row",
-                      "key": "sliderVolIconOpacity"
+                      "key": "sliderVolIconOffsetY"
                     },
                     {
                       "type": "row",
-                      "key": "sliderVolClickTolerance"
+                      "key": "sliderVolEdgeOffset"
                     },
                     {
-                      "type": "row",
-                      "key": "sliderVolHoverOpacity"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (5)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "colorVolBarFill"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorVolBarTrack"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorVolCircle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolBarWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolBarLength"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolCircleRadius"
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "desktop:New Group (8)",
+                              "items": [
+                                {
+                                  "type": "row",
+                                  "key": "curveEditorVolAnimSpeedCurve"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderVolAnimDuration"
+                                }
+                              ],
+                              "rowKeys": [
+                                "curveEditorVolAnimSpeedCurve",
+                                "sliderVolAnimDuration"
+                              ],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [
+                          "colorVolBarFill",
+                          "colorVolBarTrack",
+                          "colorVolCircle",
+                          "sliderVolBarWidth",
+                          "sliderVolBarLength",
+                          "sliderVolCircleRadius"
+                        ],
+                        "subgroups": [
+                          {
+                            "key": "desktop:New Group (8)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "curveEditorVolAnimSpeedCurve"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderVolAnimDuration"
+                              }
+                            ],
+                            "rowKeys": [
+                              "curveEditorVolAnimSpeedCurve",
+                              "sliderVolAnimDuration"
+                            ],
+                            "subgroups": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (6)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderVolMutedOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolIconOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolHoverOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderVolMutedOpacity",
+                          "sliderVolIconOpacity",
+                          "sliderVolHoverOpacity"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -8147,35 +8574,136 @@
                       }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderVolEdgeOffset"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderVolIconOffsetY"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (9)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderVolHoverTolerance"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolClickTolerance"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderVolHoverTolerance",
+                          "sliderVolClickTolerance"
+                        ],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
                     "selectVolIconStyle",
                     "sliderVolIconSize",
-                    "sliderVolCircleRadius",
-                    "sliderVolBarWidth",
-                    "sliderVolBarLength",
-                    "colorVolBarFill",
-                    "colorVolBarTrack",
-                    "colorVolCircle",
-                    "sliderVolHoverTolerance",
-                    "sliderVolAnimDuration",
-                    "curveEditorVolAnimSpeedCurve",
-                    "sliderVolMutedOpacity",
                     "sliderVolIconOffsetX",
-                    "sliderVolIconOpacity",
-                    "sliderVolClickTolerance",
-                    "sliderVolHoverOpacity",
-                    "sliderVolEdgeOffset",
-                    "sliderVolIconOffsetY"
+                    "sliderVolIconOffsetY",
+                    "sliderVolEdgeOffset"
                   ],
                   "subgroups": [
+                    {
+                      "key": "desktop:New Group (5)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "colorVolBarFill"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorVolBarTrack"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorVolCircle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolBarWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolBarLength"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolCircleRadius"
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "desktop:New Group (8)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "curveEditorVolAnimSpeedCurve"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderVolAnimDuration"
+                              }
+                            ],
+                            "rowKeys": [
+                              "curveEditorVolAnimSpeedCurve",
+                              "sliderVolAnimDuration"
+                            ],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [
+                        "colorVolBarFill",
+                        "colorVolBarTrack",
+                        "colorVolCircle",
+                        "sliderVolBarWidth",
+                        "sliderVolBarLength",
+                        "sliderVolCircleRadius"
+                      ],
+                      "subgroups": [
+                        {
+                          "key": "desktop:New Group (8)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "curveEditorVolAnimSpeedCurve"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolAnimDuration"
+                            }
+                          ],
+                          "rowKeys": [
+                            "curveEditorVolAnimSpeedCurve",
+                            "sliderVolAnimDuration"
+                          ],
+                          "subgroups": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "desktop:New Group (6)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderVolMutedOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolIconOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolHoverOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderVolMutedOpacity",
+                        "sliderVolIconOpacity",
+                        "sliderVolHoverOpacity"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "desktop:Volume Button Animation",
                       "items": [
@@ -8211,6 +8739,24 @@
                         "sliderVolBtnAnimReleaseSize",
                         "sliderVolBtnAnimHoverOpacity",
                         "sliderVolBtnAnimClickOpacity"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (9)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderVolHoverTolerance"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolClickTolerance"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderVolHoverTolerance",
+                        "sliderVolClickTolerance"
                       ],
                       "subgroups": []
                     }
@@ -9335,59 +9881,122 @@
                   },
                   {
                     "type": "row",
-                    "key": "sliderVolCircleRadius"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderVolBarWidth"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderVolBarLength"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorVolBarFill"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorVolBarTrack"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorVolCircle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderVolHoverTolerance"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderVolAnimDuration"
-                  },
-                  {
-                    "type": "row",
-                    "key": "curveEditorVolAnimSpeedCurve"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderVolMutedOpacity"
-                  },
-                  {
-                    "type": "row",
                     "key": "sliderVolIconOffsetX"
                   },
                   {
                     "type": "row",
-                    "key": "sliderVolIconOpacity"
+                    "key": "sliderVolIconOffsetY"
                   },
                   {
                     "type": "row",
-                    "key": "sliderVolClickTolerance"
+                    "key": "sliderVolEdgeOffset"
                   },
                   {
-                    "type": "row",
-                    "key": "sliderVolHoverOpacity"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (5)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "colorVolBarFill"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorVolBarTrack"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorVolCircle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolBarWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolBarLength"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolCircleRadius"
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "desktop:New Group (8)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "curveEditorVolAnimSpeedCurve"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderVolAnimDuration"
+                              }
+                            ],
+                            "rowKeys": [
+                              "curveEditorVolAnimSpeedCurve",
+                              "sliderVolAnimDuration"
+                            ],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [
+                        "colorVolBarFill",
+                        "colorVolBarTrack",
+                        "colorVolCircle",
+                        "sliderVolBarWidth",
+                        "sliderVolBarLength",
+                        "sliderVolCircleRadius"
+                      ],
+                      "subgroups": [
+                        {
+                          "key": "desktop:New Group (8)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "curveEditorVolAnimSpeedCurve"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolAnimDuration"
+                            }
+                          ],
+                          "rowKeys": [
+                            "curveEditorVolAnimSpeedCurve",
+                            "sliderVolAnimDuration"
+                          ],
+                          "subgroups": []
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (6)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderVolMutedOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolIconOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolHoverOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderVolMutedOpacity",
+                        "sliderVolIconOpacity",
+                        "sliderVolHoverOpacity"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
                     "type": "group",
@@ -9431,35 +10040,136 @@
                     }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderVolEdgeOffset"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderVolIconOffsetY"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (9)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderVolHoverTolerance"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderVolClickTolerance"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderVolHoverTolerance",
+                        "sliderVolClickTolerance"
+                      ],
+                      "subgroups": []
+                    }
                   }
                 ],
                 "rowKeys": [
                   "selectVolIconStyle",
                   "sliderVolIconSize",
-                  "sliderVolCircleRadius",
-                  "sliderVolBarWidth",
-                  "sliderVolBarLength",
-                  "colorVolBarFill",
-                  "colorVolBarTrack",
-                  "colorVolCircle",
-                  "sliderVolHoverTolerance",
-                  "sliderVolAnimDuration",
-                  "curveEditorVolAnimSpeedCurve",
-                  "sliderVolMutedOpacity",
                   "sliderVolIconOffsetX",
-                  "sliderVolIconOpacity",
-                  "sliderVolClickTolerance",
-                  "sliderVolHoverOpacity",
-                  "sliderVolEdgeOffset",
-                  "sliderVolIconOffsetY"
+                  "sliderVolIconOffsetY",
+                  "sliderVolEdgeOffset"
                 ],
                 "subgroups": [
+                  {
+                    "key": "desktop:New Group (5)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "colorVolBarFill"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorVolBarTrack"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorVolCircle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolBarWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolBarLength"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolCircleRadius"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (8)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "curveEditorVolAnimSpeedCurve"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderVolAnimDuration"
+                            }
+                          ],
+                          "rowKeys": [
+                            "curveEditorVolAnimSpeedCurve",
+                            "sliderVolAnimDuration"
+                          ],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "colorVolBarFill",
+                      "colorVolBarTrack",
+                      "colorVolCircle",
+                      "sliderVolBarWidth",
+                      "sliderVolBarLength",
+                      "sliderVolCircleRadius"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "desktop:New Group (8)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "curveEditorVolAnimSpeedCurve"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderVolAnimDuration"
+                          }
+                        ],
+                        "rowKeys": [
+                          "curveEditorVolAnimSpeedCurve",
+                          "sliderVolAnimDuration"
+                        ],
+                        "subgroups": []
+                      }
+                    ]
+                  },
+                  {
+                    "key": "desktop:New Group (6)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderVolMutedOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolIconOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolHoverOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderVolMutedOpacity",
+                      "sliderVolIconOpacity",
+                      "sliderVolHoverOpacity"
+                    ],
+                    "subgroups": []
+                  },
                   {
                     "key": "desktop:Volume Button Animation",
                     "items": [
@@ -9495,6 +10205,24 @@
                       "sliderVolBtnAnimReleaseSize",
                       "sliderVolBtnAnimHoverOpacity",
                       "sliderVolBtnAnimClickOpacity"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:New Group (9)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderVolHoverTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolClickTolerance"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderVolHoverTolerance",
+                      "sliderVolClickTolerance"
                     ],
                     "subgroups": []
                   }
@@ -27658,7 +28386,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": true,
+    "desktop:UI Layout": false,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -27667,9 +28395,13 @@
     "desktop:Artist": true,
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
-    "desktop:New Group (7)": true,
-    "desktop:Volume Button": true,
+    "desktop:New Group (7)": false,
+    "desktop:Volume Button": false,
+    "desktop:New Group (5)": true,
+    "desktop:New Group (8)": false,
+    "desktop:New Group (6)": true,
     "desktop:Volume Button Animation": true,
+    "desktop:New Group (9)": true,
     "desktop:Play Button": true,
     "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": true,
@@ -27701,7 +28433,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": false,
+    "desktop:Timeline Look": true,
     "desktop:New Group (4)": false,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
@@ -28128,8 +28860,8 @@
     "mobile:No Preview": null,
     "landscape:No Preview": null,
     "desktop:New Group (3)": "GRAPH BARS",
-    "desktop:New Group (6)": "ALBUM",
-    "desktop:New Group (5)": "ARTIST",
+    "desktop:New Group (6)": "OPACITY",
+    "desktop:New Group (5)": "SLIDER",
     "desktop:New Group (4)": "SCRUB LINE",
     "mobile:New Group (4)": "SCRUB LINE",
     "mobile:New Group (5)": "ARTIST",
@@ -28571,7 +29303,14 @@
     "sliderMobileSongAddDateOffsetY": null,
     "sliderLandscapeSongAddDateOffsetY": null,
     "sliderMobilePlayheadStartHeight": null,
-    "sliderLandscapePlayheadStartHeight": null
+    "sliderLandscapePlayheadStartHeight": null,
+    "curveEditorVolAnimSpeedCurve": null,
+    "desktop:New Group (8)": "SLIDER ANIMATION",
+    "sliderVolMutedOpacity": "Muted Opacity (%):",
+    "sliderVolIconOpacity": "Not Muted (%):",
+    "sliderVolHoverOpacity": "hover Opacity (%):",
+    "sliderVolClickTolerance": null,
+    "desktop:New Group (9)": "TOLERANCE"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -28583,7 +29322,12 @@
     "desktop:New Group (5)",
     "desktop:New Group (4)",
     "desktop:New Group (7)",
-    "desktop:Timeline Look"
+    "desktop:Timeline Look",
+    "desktop:New Group (8)",
+    "sliderVolMutedOpacity",
+    "sliderVolIconOpacity",
+    "sliderVolHoverOpacity",
+    "desktop:New Group (9)"
   ],
   "lockedGroups": [
     "desktop:Dev Panel",
