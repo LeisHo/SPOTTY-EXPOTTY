@@ -8255,6 +8255,8 @@
             // a filtered-out song shown on the timeline (clicked): grayscale cover, plays nothing, then the playhead returns to the playing song
             { tab, group: FLB, id: 'sliderFilterCoverGrayscale', type: 'slider', label: 'Filtered-Out Cover Grayscale (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: FLB, id: 'sliderFilterCoverBrightness', type: 'slider', label: 'Filtered-Out Cover Brightness (%):', min: 10, max: 200, step: 1, value: 100 },
+            { tab, group: FLB, id: 'sliderFilterCoverContrast', type: 'slider', label: 'Filtered-Out Cover Contrast (%):', min: 0, max: 300, step: 1, value: 100 },
+            { tab, group: FLB, id: 'sliderFilterTextBrightness', type: 'slider', label: 'Filtered-Out Song Text Brightness (%):', min: 0, max: 200, step: 1, value: 100 },
             { tab, group: FLB, id: 'sliderFilterCoverTransitionMs', type: 'slider', label: 'Cover Grayscale Fade (Ms):', min: 0, max: 2000, step: 10, value: 250 },
             { tab, group: FLB, id: 'sliderFilterGraphGrayscale', type: 'slider', label: 'Graph: Filtered-Out Album Color Grayscale (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: FLB, id: 'checkboxFilterReturnEnabled', type: 'checkbox', label: 'Return To Playing Song After A Filtered-Out Click', value: true },

@@ -181,7 +181,7 @@ export const DEFAULTS = {
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
     selectFilterMissing: 'hide', checkboxFilterShowNumbers: true, checkboxFilterShowCount: false, checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,
     selectFilterIconStyle: '0', selectTempoIconStyle: '0', selectValenceIconStyle: '0', selectDanceIconStyle: '0', selectEnergyIconStyle: '0',
-    sliderFilterCoverGrayscale: 100, sliderFilterCoverBrightness: 100, sliderFilterCoverTransitionMs: 250, sliderFilterGraphGrayscale: 100,
+    sliderFilterCoverGrayscale: 100, sliderFilterCoverBrightness: 100, sliderFilterCoverContrast: 100, sliderFilterTextBrightness: 100, sliderFilterCoverTransitionMs: 250, sliderFilterGraphGrayscale: 100,
     checkboxFilterReturnEnabled: true, sliderFilterReturnDelay: 3, sliderFilterReturnDuration: 600, selectFilterReturnEasing: 'ease-in-out', selectFilterReturnRestore: 'end',
     checkboxFilterGrayTicks: true, colorFilterTickGray: '#6b7280', sliderFilterTickGrayOpacity: 25, sliderFilterNumberGrayOpacity: 25,
     sliderFilterPanelWidth: 260, sliderFilterPanelFontSize: 12, sliderFilterPanelOffsetX: 0, sliderFilterPanelOffsetY: 6,

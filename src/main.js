@@ -651,7 +651,7 @@ async function boot() {
             c('--spx-filter-gap', setting('sliderFilterGapBelowShuffle') + 'px'); c('--spx-filter-edge', setting('sliderFilterEdgeOffset') + 'px');
             c('--spx-filter-off-op', String(setting('sliderFilterOffOpacity') / 100)); c('--spx-filter-on-op', String(setting('sliderFilterOnOpacity') / 100));
             c('--spx-filter-color', setting('colorFilterIcon')); c('--spx-filter-on-color', setting('colorFilterOn'));
-            c('--spx-flt-cover-gray', String(setting('sliderFilterCoverGrayscale') / 100)); c('--spx-flt-cover-bright', String(setting('sliderFilterCoverBrightness') / 100)); c('--spx-flt-cover-ms', setting('sliderFilterCoverTransitionMs') + 'ms');
+            c('--spx-flt-cover-gray', String(setting('sliderFilterCoverGrayscale') / 100)); c('--spx-flt-cover-bright', String(setting('sliderFilterCoverBrightness') / 100)); c('--spx-flt-cover-contrast', String(setting('sliderFilterCoverContrast') / 100)); c('--spx-flt-text-bright', String(setting('sliderFilterTextBrightness') / 100)); c('--spx-flt-cover-ms', setting('sliderFilterCoverTransitionMs') + 'ms');
             applyFilterIcon(el('spxFilter').querySelector('svg'), iconIndex(setting('selectFilterIconStyle')));
             const ps = flt && flt.panel.style;
             if (ps) {
