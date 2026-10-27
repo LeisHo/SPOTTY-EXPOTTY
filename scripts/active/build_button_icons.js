@@ -14,6 +14,7 @@ const MAP = {
     pause: [['PAUSE']],
     nav: [['NEXT LAST'], ['PLAY', 16, 24]],   // Next / Last: the arrows, then play icons 16-24 (owner's request)
     filter: [['FILTER']],
+    data: [['DATA']],                         // the Show Song Data button
     tp: [['TEMPO']],
     v: [['VALENCE']],
     dn: [['DANCE']],

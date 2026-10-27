@@ -35,6 +35,7 @@ export function applyCoverGlyph(svg, playI, pauseI) {
 }
 
 export function applyFilterIcon(svg, i) { setIcon(svg, 'filt' + i, shapes(pick('filter', i))); }
+export function applySongDataIcon(svg, i) { setIcon(svg, 'sdata' + i, shapes(pick('data', i))); }
 
 // The four audio-feature icons (filter panel and Song Data row): key is tp / v / dn / e. Returns the icon's SVG markup and its shapes.
 export const featureIcon = (key, i) => pick(key, iconIndex(i));

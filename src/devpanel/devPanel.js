@@ -8290,6 +8290,7 @@
         uiLayoutContent.appendChild(createDevGroupElement(SDG, tab));
         const SDG_CONTROLS = [
             { tab, group: SDG, id: 'checkboxSongDataEnabled', type: 'checkbox', label: 'Enabled (Shows The Song Data Button)', value: true },
+            { tab, group: SDG, id: 'selectSongDataIconStyle', type: 'select', label: 'Button Icon Style:', value: '0', options: iconOptions('data') },
             { tab, group: SDG, id: 'sliderSongDataBtnSize', type: 'slider', label: 'Button Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
             { tab, group: SDG, id: 'sliderSongDataBtnOffsetX', type: 'slider', label: 'Button Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: SDG, id: 'sliderSongDataBtnGap', type: 'slider', label: 'Gap Below Shuffle (Px):', min: -40, max: 200, step: 1, value: 0 },

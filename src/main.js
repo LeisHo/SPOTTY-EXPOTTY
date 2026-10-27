@@ -13,7 +13,7 @@ import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn, seekClip, clipLength } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
-import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon } from './app/iconStyles.js';
+import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon, applySongDataIcon } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo } from './app/handoff.js';
@@ -640,6 +640,7 @@ async function boot() {
             { // Song Data button: its own look, and the Filter button moves down by its height
                 const sdOn = !!setting('checkboxSongDataEnabled'), ic = setting('sliderSongDataBtnSize');
                 el('spxSongData').hidden = !sdOn;
+                applySongDataIcon(el('spxSongData').querySelector('svg'), iconIndex(setting('selectSongDataIconStyle')));
                 c('--spx-sd-icon', ic + 'px'); c('--spx-sd-x', setting('sliderSongDataBtnOffsetX') + 'px'); c('--spx-sd-edge', setting('sliderSongDataBtnEdge') + 'px'); c('--spx-sd-gap', setting('sliderSongDataBtnGap') + 'px');
                 c('--spx-sd-off-op', String(setting('sliderSongDataBtnOffOpacity') / 100)); c('--spx-sd-on-op', String(setting('sliderSongDataBtnOnOpacity') / 100));
                 c('--spx-sd-color', setting('colorSongDataBtn')); c('--spx-sd-on-color', setting('colorSongDataBtnOn'));
