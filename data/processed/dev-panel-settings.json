@@ -31,6 +31,7 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
+    "sliderSongTickWidth": 0.008,
     "sliderSongTickHeight": 11,
     "sliderTimelineHeight": 190,
     "checkboxTimelineHeightTransition": true,
@@ -49,10 +50,10 @@
     "checkboxRcHeightEnabled": true,
     "sliderRcHeightSpeed": 1,
     "checkboxRcHeightInvert": false,
-    "sliderRcHeightThreshold": 12,
+    "sliderRcHeightThreshold": 0,
     "sliderRcHeightMin": 60,
     "sliderRcHeightMaxPct": 100,
-    "sliderRcGraphHeight": 0,
+    "sliderRcGraphHeight": 638,
     "checkboxScrubLineDrag": true,
     "sliderScrubLineAnimTime": 50,
     "sliderScrubLineHoverWidth": 3,
@@ -561,8 +562,8 @@
   "layout": {
     "left": 134,
     "top": 56,
-    "width": 811,
-    "height": 404
+    "width": 458,
+    "height": 399
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -17778,33 +17779,18 @@
           },
           {
             "type": "row",
-            "key": "rangeBarSongTickWidth"
+            "key": "sliderSongTickWidth"
           },
           {
             "type": "row",
             "key": "sliderSongTickHeight"
-          },
-          {
-            "type": "row",
-            "key": "sliderSongTickMinSpacing"
-          },
-          {
-            "type": "row",
-            "key": "checkboxSongTickScale"
-          },
-          {
-            "type": "row",
-            "key": "curveEditorSongTickScale"
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
           "rangeBarTimelineZoomLimits",
-          "rangeBarSongTickWidth",
-          "sliderSongTickHeight",
-          "sliderSongTickMinSpacing",
-          "checkboxSongTickScale",
-          "curveEditorSongTickScale"
+          "sliderSongTickWidth",
+          "sliderSongTickHeight"
         ],
         "subgroups": [
           {
@@ -38121,7 +38107,7 @@
     "desktop:Ticks": true,
     "desktop:Song Add Date": true,
     "desktop:Right Click Pan": true,
-    "desktop:Right Click Height": true,
+    "desktop:Right Click Height": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
