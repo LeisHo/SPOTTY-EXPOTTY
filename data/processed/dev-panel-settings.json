@@ -231,7 +231,7 @@
     "checkboxCoverBoundingBox": false,
     "selectShuffleIconStyle": "1",
     "checkboxShuffleButtonEnabled": true,
-    "sliderShuffleIconSize": 25,
+    "sliderShuffleIconSize": 18,
     "sliderShuffleIconOffsetX": 0,
     "sliderShuffleIconOffsetY": 0,
     "sliderShuffleOffOpacity": 45,
@@ -254,7 +254,7 @@
     "selectDanceIconStyle": "6",
     "selectEnergyIconStyle": "6",
     "checkboxFilterButtonEnabled": true,
-    "sliderFilterIconSize": 25,
+    "sliderFilterIconSize": 18,
     "sliderFilterIconOffsetX": 0,
     "sliderFilterIconOffsetY": 25,
     "sliderFilterGapBelowShuffle": 0,
@@ -303,7 +303,7 @@
     "colorFilterPanelAccent": "#878787",
     "selectSongDataIconStyle": "1",
     "checkboxSongDataEnabled": true,
-    "sliderSongDataBtnSize": 25,
+    "sliderSongDataBtnSize": 18,
     "sliderSongDataBtnOffsetX": 0,
     "sliderSongDataBtnOffsetY": 10,
     "sliderSongDataBtnGap": 0,
@@ -553,9 +553,9 @@
   },
   "layout": {
     "left": 35,
-    "top": 346,
+    "top": 209,
     "width": 350,
-    "height": 80
+    "height": 476
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -15557,6 +15557,10 @@
                     "key": "mobile:Shuffle Button",
                     "items": [
                       {
+                        "type": "row",
+                        "key": "sliderMobileShuffleIconSize"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "mobile:Shuffle Button Animation",
@@ -15598,7 +15602,9 @@
                         }
                       }
                     ],
-                    "rowKeys": [],
+                    "rowKeys": [
+                      "sliderMobileShuffleIconSize"
+                    ],
                     "subgroups": [
                       {
                         "key": "mobile:Shuffle Button Animation",
@@ -15645,8 +15651,15 @@
                   "type": "group",
                   "section": {
                     "key": "mobile:Filter Button",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileFilterIconSize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileFilterIconSize"
+                    ],
                     "subgroups": []
                   }
                 },
@@ -15654,8 +15667,15 @@
                   "type": "group",
                   "section": {
                     "key": "mobile:Song Data",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileSongDataBtnSize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileSongDataBtnSize"
+                    ],
                     "subgroups": []
                   }
                 },
@@ -16203,6 +16223,10 @@
                   "key": "mobile:Shuffle Button",
                   "items": [
                     {
+                      "type": "row",
+                      "key": "sliderMobileShuffleIconSize"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "mobile:Shuffle Button Animation",
@@ -16244,7 +16268,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderMobileShuffleIconSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "mobile:Shuffle Button Animation",
@@ -16288,14 +16314,28 @@
                 },
                 {
                   "key": "mobile:Filter Button",
-                  "items": [],
-                  "rowKeys": [],
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileFilterIconSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileFilterIconSize"
+                  ],
                   "subgroups": []
                 },
                 {
                   "key": "mobile:Song Data",
-                  "items": [],
-                  "rowKeys": [],
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongDataBtnSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileSongDataBtnSize"
+                  ],
                   "subgroups": []
                 },
                 {
@@ -18219,6 +18259,10 @@
                   "key": "mobile:Shuffle Button",
                   "items": [
                     {
+                      "type": "row",
+                      "key": "sliderMobileShuffleIconSize"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "mobile:Shuffle Button Animation",
@@ -18260,7 +18304,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderMobileShuffleIconSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "mobile:Shuffle Button Animation",
@@ -18307,8 +18353,15 @@
                 "type": "group",
                 "section": {
                   "key": "mobile:Filter Button",
-                  "items": [],
-                  "rowKeys": [],
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileFilterIconSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileFilterIconSize"
+                  ],
                   "subgroups": []
                 }
               },
@@ -18316,8 +18369,15 @@
                 "type": "group",
                 "section": {
                   "key": "mobile:Song Data",
-                  "items": [],
-                  "rowKeys": [],
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongDataBtnSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderMobileSongDataBtnSize"
+                  ],
                   "subgroups": []
                 }
               },
@@ -18865,6 +18925,10 @@
                 "key": "mobile:Shuffle Button",
                 "items": [
                   {
+                    "type": "row",
+                    "key": "sliderMobileShuffleIconSize"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "mobile:Shuffle Button Animation",
@@ -18906,7 +18970,9 @@
                     }
                   }
                 ],
-                "rowKeys": [],
+                "rowKeys": [
+                  "sliderMobileShuffleIconSize"
+                ],
                 "subgroups": [
                   {
                     "key": "mobile:Shuffle Button Animation",
@@ -18950,14 +19016,28 @@
               },
               {
                 "key": "mobile:Filter Button",
-                "items": [],
-                "rowKeys": [],
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderMobileFilterIconSize"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderMobileFilterIconSize"
+                ],
                 "subgroups": []
               },
               {
                 "key": "mobile:Song Data",
-                "items": [],
-                "rowKeys": [],
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderMobileSongDataBtnSize"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderMobileSongDataBtnSize"
+                ],
                 "subgroups": []
               },
               {
@@ -21960,6 +22040,10 @@
                     "key": "landscape:Shuffle Button",
                     "items": [
                       {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleIconSize"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "landscape:Shuffle Button Animation",
@@ -22001,7 +22085,9 @@
                         }
                       }
                     ],
-                    "rowKeys": [],
+                    "rowKeys": [
+                      "sliderLandscapeShuffleIconSize"
+                    ],
                     "subgroups": [
                       {
                         "key": "landscape:Shuffle Button Animation",
@@ -22048,8 +22134,15 @@
                   "type": "group",
                   "section": {
                     "key": "landscape:Filter Button",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeFilterIconSize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeFilterIconSize"
+                    ],
                     "subgroups": []
                   }
                 },
@@ -22057,8 +22150,15 @@
                   "type": "group",
                   "section": {
                     "key": "landscape:Song Data",
-                    "items": [],
-                    "rowKeys": [],
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeSongDataBtnSize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeSongDataBtnSize"
+                    ],
                     "subgroups": []
                   }
                 },
@@ -22606,6 +22706,10 @@
                   "key": "landscape:Shuffle Button",
                   "items": [
                     {
+                      "type": "row",
+                      "key": "sliderLandscapeShuffleIconSize"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "landscape:Shuffle Button Animation",
@@ -22647,7 +22751,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderLandscapeShuffleIconSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "landscape:Shuffle Button Animation",
@@ -22691,14 +22797,28 @@
                 },
                 {
                   "key": "landscape:Filter Button",
-                  "items": [],
-                  "rowKeys": [],
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeFilterIconSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeFilterIconSize"
+                  ],
                   "subgroups": []
                 },
                 {
                   "key": "landscape:Song Data",
-                  "items": [],
-                  "rowKeys": [],
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongDataBtnSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeSongDataBtnSize"
+                  ],
                   "subgroups": []
                 },
                 {
@@ -24622,6 +24742,10 @@
                   "key": "landscape:Shuffle Button",
                   "items": [
                     {
+                      "type": "row",
+                      "key": "sliderLandscapeShuffleIconSize"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "landscape:Shuffle Button Animation",
@@ -24663,7 +24787,9 @@
                       }
                     }
                   ],
-                  "rowKeys": [],
+                  "rowKeys": [
+                    "sliderLandscapeShuffleIconSize"
+                  ],
                   "subgroups": [
                     {
                       "key": "landscape:Shuffle Button Animation",
@@ -24710,8 +24836,15 @@
                 "type": "group",
                 "section": {
                   "key": "landscape:Filter Button",
-                  "items": [],
-                  "rowKeys": [],
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeFilterIconSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeFilterIconSize"
+                  ],
                   "subgroups": []
                 }
               },
@@ -24719,8 +24852,15 @@
                 "type": "group",
                 "section": {
                   "key": "landscape:Song Data",
-                  "items": [],
-                  "rowKeys": [],
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongDataBtnSize"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderLandscapeSongDataBtnSize"
+                  ],
                   "subgroups": []
                 }
               },
@@ -25268,6 +25408,10 @@
                 "key": "landscape:Shuffle Button",
                 "items": [
                   {
+                    "type": "row",
+                    "key": "sliderLandscapeShuffleIconSize"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "landscape:Shuffle Button Animation",
@@ -25309,7 +25453,9 @@
                     }
                   }
                 ],
-                "rowKeys": [],
+                "rowKeys": [
+                  "sliderLandscapeShuffleIconSize"
+                ],
                 "subgroups": [
                   {
                     "key": "landscape:Shuffle Button Animation",
@@ -25353,14 +25499,28 @@
               },
               {
                 "key": "landscape:Filter Button",
-                "items": [],
-                "rowKeys": [],
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeFilterIconSize"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderLandscapeFilterIconSize"
+                ],
                 "subgroups": []
               },
               {
                 "key": "landscape:Song Data",
-                "items": [],
-                "rowKeys": [],
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeSongDataBtnSize"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderLandscapeSongDataBtnSize"
+                ],
                 "subgroups": []
               },
               {
@@ -26793,7 +26953,7 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": false,
+    "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": false,
     "desktop:Track Title Button Animation": true,
@@ -26801,7 +26961,7 @@
     "desktop:Artist": true,
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
-    "desktop:New Group (7)": true,
+    "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:Volume Button Animation": true,
     "desktop:Play Button": true,
@@ -26863,28 +27023,28 @@
     "mobile:Debug": true,
     "mobile:Snapshot": false,
     "mobile:UI Layout": false,
-    "mobile:Text": false,
+    "mobile:Text": true,
     "mobile:Font": true,
-    "mobile:Song Title": false,
+    "mobile:Song Title": true,
     "mobile:Track Title Button Animation": true,
     "mobile:Artist": false,
     "mobile:Album & Date": false,
     "mobile:Outline": false,
     "mobile:Brackets Smaller Text": false,
-    "mobile:New Group (7)": true,
+    "mobile:New Group (7)": false,
     "mobile:Volume Button": true,
     "mobile:Volume Button Animation": false,
     "mobile:Play Button": true,
     "mobile:Play Button Animation": false,
-    "mobile:Next And Last Song Buttons": true,
+    "mobile:Next And Last Song Buttons": false,
     "mobile:Next And Last Button Animation": false,
-    "mobile:Shuffle Button": false,
+    "mobile:Shuffle Button": true,
     "mobile:Shuffle Button Animation": false,
-    "mobile:Filter Button": false,
-    "mobile:Song Data": false,
-    "mobile:Song Timeline": false,
+    "mobile:Filter Button": true,
+    "mobile:Song Data": true,
+    "mobile:Song Timeline": true,
     "mobile:Song Timeline Animation": false,
-    "mobile:Global Override": false,
+    "mobile:Global Override": true,
     "mobile:Standard Button Animation": false,
     "mobile:Background": true,
     "mobile:Animation": false,
@@ -27631,7 +27791,15 @@
     "curveEditorMobileBgAnimSwirlStrength": null,
     "curveEditorLandscapeBgAnimSwirlStrength": null,
     "sliderMobileTxtSongTitleMaxWidth": null,
-    "sliderLandscapeTxtSongTitleMaxWidth": null
+    "sliderLandscapeTxtSongTitleMaxWidth": null,
+    "selectMobileShuffleIconStyle": null,
+    "selectLandscapeShuffleIconStyle": null,
+    "sliderMobileShuffleIconSize": null,
+    "sliderLandscapeShuffleIconSize": null,
+    "sliderMobileFilterIconSize": null,
+    "sliderLandscapeFilterIconSize": null,
+    "sliderMobileSongDataBtnSize": null,
+    "sliderLandscapeSongDataBtnSize": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -27891,7 +28059,11 @@
     "sliderBgAnimRingEdgeBlur": true,
     "rangeBarBgAnimSwirlStrength": true,
     "curveEditorBgAnimSwirlStrength": true,
-    "sliderTxtSongTitleMaxWidth": true
+    "sliderTxtSongTitleMaxWidth": true,
+    "selectShuffleIconStyle": false,
+    "sliderShuffleIconSize": true,
+    "sliderFilterIconSize": true,
+    "sliderSongDataBtnSize": true
   },
   "devIndependence": {
     "mobile": {
@@ -27933,7 +28105,10 @@
       "sliderCoverOffsetY": true,
       "sliderNavButtonOpacity": true,
       "textArtistSeparator": false,
-      "sliderTxtSongTitleMaxWidth": true
+      "sliderTxtSongTitleMaxWidth": true,
+      "sliderVolIconSize": true,
+      "sliderPlayButtonSize": true,
+      "sliderNavButtonSize": true
     },
     "landscape": {}
   },
@@ -27977,7 +28152,10 @@
       "sliderCoverOffsetY": -99,
       "sliderNavButtonOpacity": 80,
       "textArtistSeparator": "  &  ",
-      "sliderTxtSongTitleMaxWidth": 300
+      "sliderTxtSongTitleMaxWidth": 300,
+      "sliderVolIconSize": 25,
+      "sliderNavButtonSize": 18,
+      "sliderPlayButtonSize": 20
     },
     "landscape": {}
   },
