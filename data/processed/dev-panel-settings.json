@@ -463,7 +463,7 @@
     "sliderChromaMinSaturation": 0.2,
     "sliderChromaMinBrightness": 0.12,
     "sliderChromaGrayscaleThreshold": 85,
-    "sliderBlurRadius": 165,
+    "sliderBlurRadius": 175,
     "sliderBlurScale": 0.5,
     "sliderBlurOffsetX": 0,
     "sliderBlurOffsetY": 0,
