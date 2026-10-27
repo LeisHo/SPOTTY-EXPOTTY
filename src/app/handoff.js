@@ -165,7 +165,16 @@ export function playTrack(trackId, positionMs = 0) {
         if (controller) { try { controller.pause(); } catch (e) { /* embed not ready */ } } // only one player plays
         clearPending();
         requestAt = performance.now(); audibleLogged = false;
-        sdk.sdkPlay(trackId, positionMs).then(ok => { if (!ok && wantPlaying && loadedId === trackId) { sdk.sdkPause(); playViaEmbed(trackId); } }); // SDK refused: the iframe plays it instead (and the SDK's old song must not play on)
+        // A play request that fails right after the SDK's own pause command (or before its device is known) is retried once after 700 ms; only if that fails
+        // too does the iframe play the song (and the SDK's old song is paused so it does not play on).
+        sdk.sdkPlay(trackId, positionMs).then(ok => {
+            if (ok || !wantPlaying || loadedId !== trackId) return;
+            logEvent('playback', 'SDK play request failed: retrying once in 700 ms');
+            setTimeout(() => {
+                if (!wantPlaying || loadedId !== trackId) return;
+                sdk.sdkPlay(trackId, positionMs).then(ok2 => { if (!ok2 && wantPlaying && loadedId === trackId) { sdk.sdkPause(); playViaEmbed(trackId); } });
+            }, 700);
+        });
         // A play request can be accepted and still not switch the song. If the SDK still reports another track 3 s later, ask once more; if it still
         // has not switched 3 s after that, let the iframe play it and stop the SDK.
         const stillOld = () => wantPlaying && loadedId === trackId && actualId !== trackId && actualLinkedId !== trackId;
@@ -216,6 +225,7 @@ export function toggleTrack(trackId, startOnly = false) { // startOnly: a start 
         if (!startOnly) { pauseEmbed(); return; }
         if (loadedId === trackId || actualId === trackId || actualLinkedId === trackId) return; // already playing this song
     }
+    if (startOnly) { playTrack(trackId); return; } // the page-load start may have loaded the track but been blocked from playing (no gesture yet): resume() would do nothing
     if (sdk.sdkReady() && (actualId === trackId || actualLinkedId === trackId)) { wantPlaying = true; sdk.sdkResume(); return; }
     if (controller && loadedId === trackId && !sdk.sdkReady()) {
         wantPlaying = true;
