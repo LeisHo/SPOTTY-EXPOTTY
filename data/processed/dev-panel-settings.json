@@ -181,6 +181,8 @@
     "checkboxOverrideLast": true,
     "checkboxOverrideShuffle": true,
     "checkboxOverrideVolume": true,
+    "checkboxOverrideFilter": false,
+    "checkboxOverrideSongData": false,
     "colorGlobalOverride": "#ffffff",
     "sliderGlobalOverrideOnOpacity": 75,
     "sliderGlobalOverrideOpacity": 45,
@@ -287,8 +289,10 @@
     "checkboxFilterCloseOnOutside": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 12,
-    "sliderFilterPanelRowGap": -50,
+    "sliderFilterPanelRowGap": -5,
     "sliderFilterPanelRowsOffsetY": -25,
+    "checkboxFilterPanelKeepVisible": false,
+    "sliderFilterPanelIconOffsetY": 2,
     "sliderFilterPanelIconSize": 23,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": 6,
@@ -309,6 +313,7 @@
     "colorSongDataBtnOn": "#ffffff",
     "sliderSongDataClickTolerance": 0,
     "sliderSongDataHoverTolerance": 0,
+    "sliderSongDataFadeMs": 250,
     "sliderSongDataIconSize": 24,
     "sliderSongDataFontSize": 13,
     "checkboxSongDataBold": true,
@@ -4100,6 +4105,14 @@
                       {
                         "type": "row",
                         "key": "sliderFilterPanelRowsOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterPanelKeepVisible"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelIconOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -4153,7 +4166,9 @@
                       "sliderFilterPanelIconSize",
                       "sliderFilterPanelBlur",
                       "sliderFilterPanelRowGap",
-                      "sliderFilterPanelRowsOffsetY"
+                      "sliderFilterPanelRowsOffsetY",
+                      "checkboxFilterPanelKeepVisible",
+                      "sliderFilterPanelIconOffsetY"
                     ],
                     "subgroups": []
                   }
@@ -4254,6 +4269,10 @@
                       {
                         "type": "row",
                         "key": "sliderSongDataBtnOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataFadeMs"
                       }
                     ],
                     "rowKeys": [
@@ -4279,7 +4298,8 @@
                       "sliderSongDataOffsetY",
                       "sliderSongDataTempoDecimals",
                       "sliderSongDataDecimals",
-                      "sliderSongDataBtnOffsetY"
+                      "sliderSongDataBtnOffsetY",
+                      "sliderSongDataFadeMs"
                     ],
                     "subgroups": []
                   }
@@ -5213,6 +5233,14 @@
                     {
                       "type": "row",
                       "key": "sliderFilterPanelRowsOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterPanelKeepVisible"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelIconOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -5266,7 +5294,9 @@
                     "sliderFilterPanelIconSize",
                     "sliderFilterPanelBlur",
                     "sliderFilterPanelRowGap",
-                    "sliderFilterPanelRowsOffsetY"
+                    "sliderFilterPanelRowsOffsetY",
+                    "checkboxFilterPanelKeepVisible",
+                    "sliderFilterPanelIconOffsetY"
                   ],
                   "subgroups": []
                 },
@@ -5364,6 +5394,10 @@
                     {
                       "type": "row",
                       "key": "sliderSongDataBtnOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongDataFadeMs"
                     }
                   ],
                   "rowKeys": [
@@ -5389,7 +5423,8 @@
                     "sliderSongDataOffsetY",
                     "sliderSongDataTempoDecimals",
                     "sliderSongDataDecimals",
-                    "sliderSongDataBtnOffsetY"
+                    "sliderSongDataBtnOffsetY",
+                    "sliderSongDataFadeMs"
                   ],
                   "subgroups": []
                 }
@@ -6447,6 +6482,14 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxOverrideFilter"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxOverrideSongData"
                 }
               ],
               "rowKeys": [
@@ -6457,7 +6500,9 @@
                 "checkboxOverrideVolume",
                 "colorGlobalOverride",
                 "sliderGlobalOverrideOpacity",
-                "sliderGlobalOverrideOnOpacity"
+                "sliderGlobalOverrideOnOpacity",
+                "checkboxOverrideFilter",
+                "checkboxOverrideSongData"
               ],
               "subgroups": [
                 {
@@ -8687,6 +8732,14 @@
                     {
                       "type": "row",
                       "key": "sliderFilterPanelRowsOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterPanelKeepVisible"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelIconOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -8740,7 +8793,9 @@
                     "sliderFilterPanelIconSize",
                     "sliderFilterPanelBlur",
                     "sliderFilterPanelRowGap",
-                    "sliderFilterPanelRowsOffsetY"
+                    "sliderFilterPanelRowsOffsetY",
+                    "checkboxFilterPanelKeepVisible",
+                    "sliderFilterPanelIconOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -8841,6 +8896,10 @@
                     {
                       "type": "row",
                       "key": "sliderSongDataBtnOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongDataFadeMs"
                     }
                   ],
                   "rowKeys": [
@@ -8866,7 +8925,8 @@
                     "sliderSongDataOffsetY",
                     "sliderSongDataTempoDecimals",
                     "sliderSongDataDecimals",
-                    "sliderSongDataBtnOffsetY"
+                    "sliderSongDataBtnOffsetY",
+                    "sliderSongDataFadeMs"
                   ],
                   "subgroups": []
                 }
@@ -9800,6 +9860,14 @@
                   {
                     "type": "row",
                     "key": "sliderFilterPanelRowsOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterPanelKeepVisible"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterPanelIconOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -9853,7 +9921,9 @@
                   "sliderFilterPanelIconSize",
                   "sliderFilterPanelBlur",
                   "sliderFilterPanelRowGap",
-                  "sliderFilterPanelRowsOffsetY"
+                  "sliderFilterPanelRowsOffsetY",
+                  "checkboxFilterPanelKeepVisible",
+                  "sliderFilterPanelIconOffsetY"
                 ],
                 "subgroups": []
               },
@@ -9951,6 +10021,10 @@
                   {
                     "type": "row",
                     "key": "sliderSongDataBtnOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSongDataFadeMs"
                   }
                 ],
                 "rowKeys": [
@@ -9976,7 +10050,8 @@
                   "sliderSongDataOffsetY",
                   "sliderSongDataTempoDecimals",
                   "sliderSongDataDecimals",
-                  "sliderSongDataBtnOffsetY"
+                  "sliderSongDataBtnOffsetY",
+                  "sliderSongDataFadeMs"
                 ],
                 "subgroups": []
               }
@@ -11022,6 +11097,14 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "row",
+                "key": "checkboxOverrideFilter"
+              },
+              {
+                "type": "row",
+                "key": "checkboxOverrideSongData"
               }
             ],
             "rowKeys": [
@@ -11032,7 +11115,9 @@
               "checkboxOverrideVolume",
               "colorGlobalOverride",
               "sliderGlobalOverrideOpacity",
-              "sliderGlobalOverrideOnOpacity"
+              "sliderGlobalOverrideOnOpacity",
+              "checkboxOverrideFilter",
+              "checkboxOverrideSongData"
             ],
             "subgroups": [
               {
@@ -16172,6 +16257,10 @@
                   "key": "sliderMobileGlobalOverrideOpacity"
                 },
                 {
+                  "type": "row",
+                  "key": "sliderMobileGlobalOverrideOnOpacity"
+                },
+                {
                   "type": "group",
                   "section": {
                     "key": "mobile:Standard Button Animation",
@@ -16214,7 +16303,11 @@
                 },
                 {
                   "type": "row",
-                  "key": "sliderMobileGlobalOverrideOnOpacity"
+                  "key": "checkboxMobileOverrideFilter"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxMobileOverrideSongData"
                 }
               ],
               "rowKeys": [
@@ -16225,7 +16318,9 @@
                 "checkboxMobileOverrideVolume",
                 "colorMobileGlobalOverride",
                 "sliderMobileGlobalOverrideOpacity",
-                "sliderMobileGlobalOverrideOnOpacity"
+                "sliderMobileGlobalOverrideOnOpacity",
+                "checkboxMobileOverrideFilter",
+                "checkboxMobileOverrideSongData"
               ],
               "subgroups": [
                 {
@@ -18310,6 +18405,10 @@
                 "key": "sliderMobileGlobalOverrideOpacity"
               },
               {
+                "type": "row",
+                "key": "sliderMobileGlobalOverrideOnOpacity"
+              },
+              {
                 "type": "group",
                 "section": {
                   "key": "mobile:Standard Button Animation",
@@ -18352,7 +18451,11 @@
               },
               {
                 "type": "row",
-                "key": "sliderMobileGlobalOverrideOnOpacity"
+                "key": "checkboxMobileOverrideFilter"
+              },
+              {
+                "type": "row",
+                "key": "checkboxMobileOverrideSongData"
               }
             ],
             "rowKeys": [
@@ -18363,7 +18466,9 @@
               "checkboxMobileOverrideVolume",
               "colorMobileGlobalOverride",
               "sliderMobileGlobalOverrideOpacity",
-              "sliderMobileGlobalOverrideOnOpacity"
+              "sliderMobileGlobalOverrideOnOpacity",
+              "checkboxMobileOverrideFilter",
+              "checkboxMobileOverrideSongData"
             ],
             "subgroups": [
               {
@@ -21548,6 +21653,10 @@
                   "key": "sliderLandscapeGlobalOverrideOpacity"
                 },
                 {
+                  "type": "row",
+                  "key": "sliderLandscapeGlobalOverrideOnOpacity"
+                },
+                {
                   "type": "group",
                   "section": {
                     "key": "landscape:Standard Button Animation",
@@ -21590,7 +21699,11 @@
                 },
                 {
                   "type": "row",
-                  "key": "sliderLandscapeGlobalOverrideOnOpacity"
+                  "key": "checkboxLandscapeOverrideFilter"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxLandscapeOverrideSongData"
                 }
               ],
               "rowKeys": [
@@ -21601,7 +21714,9 @@
                 "checkboxLandscapeOverrideVolume",
                 "colorLandscapeGlobalOverride",
                 "sliderLandscapeGlobalOverrideOpacity",
-                "sliderLandscapeGlobalOverrideOnOpacity"
+                "sliderLandscapeGlobalOverrideOnOpacity",
+                "checkboxLandscapeOverrideFilter",
+                "checkboxLandscapeOverrideSongData"
               ],
               "subgroups": [
                 {
@@ -23686,6 +23801,10 @@
                 "key": "sliderLandscapeGlobalOverrideOpacity"
               },
               {
+                "type": "row",
+                "key": "sliderLandscapeGlobalOverrideOnOpacity"
+              },
+              {
                 "type": "group",
                 "section": {
                   "key": "landscape:Standard Button Animation",
@@ -23728,7 +23847,11 @@
               },
               {
                 "type": "row",
-                "key": "sliderLandscapeGlobalOverrideOnOpacity"
+                "key": "checkboxLandscapeOverrideFilter"
+              },
+              {
+                "type": "row",
+                "key": "checkboxLandscapeOverrideSongData"
               }
             ],
             "rowKeys": [
@@ -23739,7 +23862,9 @@
               "checkboxLandscapeOverrideVolume",
               "colorLandscapeGlobalOverride",
               "sliderLandscapeGlobalOverrideOpacity",
-              "sliderLandscapeGlobalOverrideOnOpacity"
+              "sliderLandscapeGlobalOverrideOnOpacity",
+              "checkboxLandscapeOverrideFilter",
+              "checkboxLandscapeOverrideSongData"
             ],
             "subgroups": [
               {
@@ -25052,7 +25177,11 @@
     "mobile:Filter Panel Shadow": null,
     "sliderMobileGlobalOverrideOnOpacity": null,
     "landscape:Filter Panel Shadow": null,
-    "sliderLandscapeGlobalOverrideOnOpacity": null
+    "sliderLandscapeGlobalOverrideOnOpacity": null,
+    "checkboxMobileOverrideFilter": null,
+    "checkboxMobileOverrideSongData": null,
+    "checkboxLandscapeOverrideFilter": null,
+    "checkboxLandscapeOverrideSongData": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
