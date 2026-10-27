@@ -473,6 +473,17 @@ async function boot() {
                 let fs = size;
                 while (fs > 6 && node.scrollWidth > node.clientWidth) { fs -= 1; st.fontSize = fs + 'px'; }
             }
+            // A single word wider than the box would overflow it (a wrapped line can only break between words): shrink the font
+            // until the widest word fits on its line. Wrapping modes only; Truncate / Clip / Shrink to Fit / no-wrap choose their own way.
+            if (overflow === 'wrap' && setting('checkboxTxt' + p + 'WordWrap')) {
+                const wordFits = f => { st.fontSize = f + 'px'; return node.scrollWidth <= node.clientWidth + 1; };
+                const cur = parseFloat(st.fontSize);
+                if (!wordFits(cur)) {
+                    let lo = 6, hi = cur;
+                    for (let i = 0; i < 12 && hi - lo > 0.5; i++) { const mid = (lo + hi) / 2; if (wordFits(mid)) lo = mid; else hi = mid; }
+                    st.fontSize = lo + 'px';
+                }
+            }
             effective[p] = parseFloat(st.fontSize);
         });
     }

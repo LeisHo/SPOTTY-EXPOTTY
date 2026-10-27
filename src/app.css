@@ -9,7 +9,7 @@
 /* The page is not selectable (so click-drag scrubbing never paints blue selection over the cover or
    timeline), EXCEPT these three text lines, which can be highlighted and copied. A drag that starts
    on them selects text instead of zooming (see inText() in main.js). */
-.spx-title, .spx-artist, .spx-meta { white-space: pre-line; text-align: center; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; cursor: text; }
+.spx-title, .spx-artist, .spx-meta { white-space: pre-line; text-align: center; overflow-wrap: normal; user-select: text; -webkit-user-select: text; cursor: text; }
 .spx-title a { -webkit-user-drag: none; user-select: text; -webkit-user-select: text; }
 .spx-title ::selection, .spx-artist::selection, .spx-meta::selection { background: #1db95466; }
 .spx-title { font-size: 44px; font-weight: 700; line-height: 1.1; color: #f2f2f2; } /* JS (applyTextElementStyles(), main.js) sets every one of these live from the dev panel's UI Layout > Text > Song Title group -- these are first-paint fallbacks only */
