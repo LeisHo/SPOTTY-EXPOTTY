@@ -28292,8 +28292,15 @@
             "type": "group",
             "section": {
               "key": "mobile:New Group (3)",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderMobileTimelineHeight"
+                }
+              ],
+              "rowKeys": [
+                "sliderMobileTimelineHeight"
+              ],
               "subgroups": []
             }
           },
@@ -28432,8 +28439,15 @@
           },
           {
             "key": "mobile:New Group (3)",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderMobileTimelineHeight"
+              }
+            ],
+            "rowKeys": [
+              "sliderMobileTimelineHeight"
+            ],
             "subgroups": []
           },
           {
@@ -37876,8 +37890,15 @@
             "type": "group",
             "section": {
               "key": "landscape:New Group (3)",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeTimelineHeight"
+                }
+              ],
+              "rowKeys": [
+                "sliderLandscapeTimelineHeight"
+              ],
               "subgroups": []
             }
           },
@@ -38016,8 +38037,15 @@
           },
           {
             "key": "landscape:New Group (3)",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderLandscapeTimelineHeight"
+              }
+            ],
+            "rowKeys": [
+              "sliderLandscapeTimelineHeight"
+            ],
             "subgroups": []
           },
           {
@@ -38171,7 +38199,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": true,
+    "desktop:UI Layout": false,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -38220,7 +38248,7 @@
     "desktop:Standard Button Animation": true,
     "desktop:Background": true,
     "desktop:Animation": true,
-    "desktop:Album Cover": true,
+    "desktop:Album Cover": false,
     "desktop:Shadows": true,
     "desktop:Album Cover Shadow": true,
     "desktop:Volume Shadow": true,
@@ -38237,7 +38265,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": false,
+    "desktop:Timeline Look": true,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
@@ -39436,7 +39464,7 @@
     "colorTimelinePlayhead": false,
     "sliderTimelineBarOpacity": false,
     "sliderBarWidth": false,
-    "sliderTimelineHeight": false,
+    "sliderTimelineHeight": true,
     "rangeBarTimelineZoomLimits": false,
     "selectTimelineStyle": false,
     "sliderGlowStemWidth": false,
