@@ -225,16 +225,16 @@
     "sliderCoverOffsetY": -45,
     "checkboxCoverBoundingBox": false,
     "checkboxShuffleButtonEnabled": true,
-    "sliderShuffleIconSize": 20,
+    "sliderShuffleIconSize": 25,
     "sliderShuffleIconOffsetX": 0,
     "sliderShuffleOffOpacity": 46,
-    "sliderShuffleOnOpacity": 80,
+    "sliderShuffleOnOpacity": 75,
     "sliderShuffleEdgeOffset": 14,
     "sliderShuffleClickTolerance": 3,
     "sliderShuffleHoverTolerance": 6,
     "colorShuffleIcon": "#f2f2f2",
     "colorShuffleOn": "#ffffff",
-    "selectShuffleIconStyle": "8",
+    "selectShuffleIconStyle": "1",
     "checkboxShuffleAnimEnabled": true,
     "sliderShuffleAnimTime": 70,
     "sliderShuffleAnimHoverSize": 23,
@@ -243,21 +243,21 @@
     "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
     "checkboxFilterButtonEnabled": true,
-    "sliderFilterIconSize": 20,
+    "sliderFilterIconSize": 26,
     "sliderFilterIconOffsetX": 0,
     "sliderFilterGapBelowShuffle": 0,
     "sliderFilterEdgeOffset": 14,
     "sliderFilterOffOpacity": 45,
-    "sliderFilterOnOpacity": 100,
+    "sliderFilterOnOpacity": 75,
     "colorFilterIcon": "#f2f2f2",
-    "colorFilterOn": "#1db954",
+    "colorFilterOn": "#ffffff",
     "sliderFilterClickTolerance": 0,
     "sliderFilterHoverTolerance": 0,
     "colorFilterGray": "#8a8f98",
     "sliderFilterGrayOpacity": 35,
     "selectFilterMissing": "hide",
     "checkboxFilterSkipOnStep": true,
-    "selectFilterIconStyle": "0",
+    "selectFilterIconStyle": "3",
     "selectTempoIconStyle": "0",
     "selectValenceIconStyle": "0",
     "selectDanceIconStyle": "0",
@@ -335,7 +335,7 @@
     "sliderPlayAnimHoverOpacity": 100,
     "sliderPlayAnimClickOpacity": 70,
     "sliderPlayAnimReleaseSize": 54,
-    "selectNavIconStyle": "0",
+    "selectNavIconStyle": "3",
     "sliderLastButtonEdgeOffset": 23,
     "sliderNextButtonEdgeOffset": 23,
     "sliderNavClickTolerance": 0,
@@ -3359,6 +3359,47 @@
                       {
                         "type": "row",
                         "key": "sliderPlayHoverTolerance"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Play Button Animation",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderPlayAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderPlayAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderPlayAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderPlayAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderPlayAnimClickOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderPlayAnimReleaseSize"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderPlayAnimTime",
+                            "sliderPlayAnimHoverSize",
+                            "sliderPlayAnimClickSize",
+                            "sliderPlayAnimHoverOpacity",
+                            "sliderPlayAnimClickOpacity",
+                            "sliderPlayAnimReleaseSize"
+                          ],
+                          "subgroups": []
+                        }
                       }
                     ],
                     "rowKeys": [
@@ -3374,48 +3415,46 @@
                       "sliderPlayClickTolerance",
                       "sliderPlayHoverTolerance"
                     ],
-                    "subgroups": []
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Play Button Animation",
-                    "items": [
+                    "subgroups": [
                       {
-                        "type": "row",
-                        "key": "sliderPlayAnimTime"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderPlayAnimHoverSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderPlayAnimClickSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderPlayAnimHoverOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderPlayAnimClickOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderPlayAnimReleaseSize"
+                        "key": "desktop:Play Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimReleaseSize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderPlayAnimTime",
+                          "sliderPlayAnimHoverSize",
+                          "sliderPlayAnimClickSize",
+                          "sliderPlayAnimHoverOpacity",
+                          "sliderPlayAnimClickOpacity",
+                          "sliderPlayAnimReleaseSize"
+                        ],
+                        "subgroups": []
                       }
-                    ],
-                    "rowKeys": [
-                      "sliderPlayAnimTime",
-                      "sliderPlayAnimHoverSize",
-                      "sliderPlayAnimClickSize",
-                      "sliderPlayAnimHoverOpacity",
-                      "sliderPlayAnimClickOpacity",
-                      "sliderPlayAnimReleaseSize"
-                    ],
-                    "subgroups": []
+                    ]
                   }
                 },
                 {
@@ -3423,6 +3462,10 @@
                   "section": {
                     "key": "desktop:Next And Last Song Buttons",
                     "items": [
+                      {
+                        "type": "row",
+                        "key": "selectNavIconStyle"
+                      },
                       {
                         "type": "row",
                         "key": "colorNavButton"
@@ -3446,6 +3489,22 @@
                       {
                         "type": "row",
                         "key": "buttonPrevSong"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLastButtonEdgeOffset"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNextButtonEdgeOffset"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNavClickTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNavHoverTolerance"
                       },
                       {
                         "type": "group",
@@ -3487,36 +3546,16 @@
                           ],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectNavIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLastButtonEdgeOffset"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderNextButtonEdgeOffset"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderNavClickTolerance"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderNavHoverTolerance"
                       }
                     ],
                     "rowKeys": [
+                      "selectNavIconStyle",
                       "colorNavButton",
                       "sliderNavButtonSize",
                       "sliderNavButtonOpacity",
                       "sliderNavButtonHoverOpacity",
                       "buttonNextSong",
                       "buttonPrevSong",
-                      "selectNavIconStyle",
                       "sliderLastButtonEdgeOffset",
                       "sliderNextButtonEdgeOffset",
                       "sliderNavClickTolerance",
@@ -3558,6 +3597,147 @@
                           "sliderNavAnimHoverOpacity",
                           "sliderNavAnimClickOpacity",
                           "sliderNavAnimReleaseSize"
+                        ],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Shuffle Button",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "selectShuffleIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleIconOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleOffOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorShuffleIcon"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorShuffleOn"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleOnOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleClickTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleHoverTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleEdgeOffset"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Shuffle Button Animation",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderShuffleAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderShuffleAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderShuffleAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderShuffleAnimReleaseSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderShuffleAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderShuffleAnimClickOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderShuffleAnimTime",
+                            "sliderShuffleAnimHoverSize",
+                            "sliderShuffleAnimClickSize",
+                            "sliderShuffleAnimReleaseSize",
+                            "sliderShuffleAnimHoverOpacity",
+                            "sliderShuffleAnimClickOpacity"
+                          ],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "selectShuffleIconStyle",
+                      "sliderShuffleIconSize",
+                      "sliderShuffleIconOffsetX",
+                      "sliderShuffleOffOpacity",
+                      "colorShuffleIcon",
+                      "colorShuffleOn",
+                      "sliderShuffleOnOpacity",
+                      "sliderShuffleClickTolerance",
+                      "sliderShuffleHoverTolerance",
+                      "sliderShuffleEdgeOffset"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "desktop:Shuffle Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderShuffleAnimTime",
+                          "sliderShuffleAnimHoverSize",
+                          "sliderShuffleAnimClickSize",
+                          "sliderShuffleAnimReleaseSize",
+                          "sliderShuffleAnimHoverOpacity",
+                          "sliderShuffleAnimClickOpacity"
                         ],
                         "subgroups": []
                       }
@@ -3668,149 +3848,12 @@
                 {
                   "type": "group",
                   "section": {
-                    "key": "desktop:Shuffle Button",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleIconSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleIconOffsetX"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleOffOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorShuffleIcon"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorShuffleOn"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleOnOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectShuffleIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleClickTolerance"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleHoverTolerance"
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "desktop:Shuffle Button Animation",
-                          "items": [
-                            {
-                              "type": "row",
-                              "key": "sliderShuffleAnimTime"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderShuffleAnimHoverSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderShuffleAnimClickSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderShuffleAnimReleaseSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderShuffleAnimHoverOpacity"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderShuffleAnimClickOpacity"
-                            }
-                          ],
-                          "rowKeys": [
-                            "sliderShuffleAnimTime",
-                            "sliderShuffleAnimHoverSize",
-                            "sliderShuffleAnimClickSize",
-                            "sliderShuffleAnimReleaseSize",
-                            "sliderShuffleAnimHoverOpacity",
-                            "sliderShuffleAnimClickOpacity"
-                          ],
-                          "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleEdgeOffset"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderShuffleIconSize",
-                      "sliderShuffleIconOffsetX",
-                      "sliderShuffleOffOpacity",
-                      "colorShuffleIcon",
-                      "colorShuffleOn",
-                      "sliderShuffleOnOpacity",
-                      "selectShuffleIconStyle",
-                      "sliderShuffleClickTolerance",
-                      "sliderShuffleHoverTolerance",
-                      "sliderShuffleEdgeOffset"
-                    ],
-                    "subgroups": [
-                      {
-                        "key": "desktop:Shuffle Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimTime"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimHoverSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimClickSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimReleaseSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimHoverOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimClickOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderShuffleAnimTime",
-                          "sliderShuffleAnimHoverSize",
-                          "sliderShuffleAnimClickSize",
-                          "sliderShuffleAnimReleaseSize",
-                          "sliderShuffleAnimHoverOpacity",
-                          "sliderShuffleAnimClickOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
                     "key": "desktop:Filter Button",
                     "items": [
+                      {
+                        "type": "row",
+                        "key": "selectFilterIconStyle"
+                      },
                       {
                         "type": "row",
                         "key": "checkboxFilterButtonEnabled"
@@ -3870,10 +3913,6 @@
                       {
                         "type": "row",
                         "key": "checkboxFilterSkipOnStep"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectFilterIconStyle"
                       },
                       {
                         "type": "row",
@@ -3993,6 +4032,7 @@
                       }
                     ],
                     "rowKeys": [
+                      "selectFilterIconStyle",
                       "checkboxFilterButtonEnabled",
                       "sliderFilterIconSize",
                       "sliderFilterIconOffsetX",
@@ -4008,7 +4048,6 @@
                       "sliderFilterGrayOpacity",
                       "selectFilterMissing",
                       "checkboxFilterSkipOnStep",
-                      "selectFilterIconStyle",
                       "sliderFilterCoverGrayscale",
                       "sliderFilterCoverBrightness",
                       "sliderFilterCoverTransitionMs",
@@ -4380,6 +4419,47 @@
                     {
                       "type": "row",
                       "key": "sliderPlayHoverTolerance"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Play Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimReleaseSize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderPlayAnimTime",
+                          "sliderPlayAnimHoverSize",
+                          "sliderPlayAnimClickSize",
+                          "sliderPlayAnimHoverOpacity",
+                          "sliderPlayAnimClickOpacity",
+                          "sliderPlayAnimReleaseSize"
+                        ],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
@@ -4395,49 +4475,54 @@
                     "sliderPlayClickTolerance",
                     "sliderPlayHoverTolerance"
                   ],
-                  "subgroups": []
-                },
-                {
-                  "key": "desktop:Play Button Animation",
-                  "items": [
+                  "subgroups": [
                     {
-                      "type": "row",
-                      "key": "sliderPlayAnimTime"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimHoverSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimClickSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimHoverOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimClickOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimReleaseSize"
+                      "key": "desktop:Play Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimReleaseSize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderPlayAnimTime",
+                        "sliderPlayAnimHoverSize",
+                        "sliderPlayAnimClickSize",
+                        "sliderPlayAnimHoverOpacity",
+                        "sliderPlayAnimClickOpacity",
+                        "sliderPlayAnimReleaseSize"
+                      ],
+                      "subgroups": []
                     }
-                  ],
-                  "rowKeys": [
-                    "sliderPlayAnimTime",
-                    "sliderPlayAnimHoverSize",
-                    "sliderPlayAnimClickSize",
-                    "sliderPlayAnimHoverOpacity",
-                    "sliderPlayAnimClickOpacity",
-                    "sliderPlayAnimReleaseSize"
-                  ],
-                  "subgroups": []
+                  ]
                 },
                 {
                   "key": "desktop:Next And Last Song Buttons",
                   "items": [
+                    {
+                      "type": "row",
+                      "key": "selectNavIconStyle"
+                    },
                     {
                       "type": "row",
                       "key": "colorNavButton"
@@ -4461,6 +4546,22 @@
                     {
                       "type": "row",
                       "key": "buttonPrevSong"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLastButtonEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNextButtonEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavClickTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavHoverTolerance"
                     },
                     {
                       "type": "group",
@@ -4502,36 +4603,16 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectNavIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLastButtonEdgeOffset"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderNextButtonEdgeOffset"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderNavClickTolerance"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderNavHoverTolerance"
                     }
                   ],
                   "rowKeys": [
+                    "selectNavIconStyle",
                     "colorNavButton",
                     "sliderNavButtonSize",
                     "sliderNavButtonOpacity",
                     "sliderNavButtonHoverOpacity",
                     "buttonNextSong",
                     "buttonPrevSong",
-                    "selectNavIconStyle",
                     "sliderLastButtonEdgeOffset",
                     "sliderNextButtonEdgeOffset",
                     "sliderNavClickTolerance",
@@ -4573,6 +4654,144 @@
                         "sliderNavAnimHoverOpacity",
                         "sliderNavAnimClickOpacity",
                         "sliderNavAnimReleaseSize"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
+                },
+                {
+                  "key": "desktop:Shuffle Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectShuffleIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleOffOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorShuffleIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorShuffleOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleClickTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleHoverTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleEdgeOffset"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Shuffle Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderShuffleAnimTime",
+                          "sliderShuffleAnimHoverSize",
+                          "sliderShuffleAnimClickSize",
+                          "sliderShuffleAnimReleaseSize",
+                          "sliderShuffleAnimHoverOpacity",
+                          "sliderShuffleAnimClickOpacity"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectShuffleIconStyle",
+                    "sliderShuffleIconSize",
+                    "sliderShuffleIconOffsetX",
+                    "sliderShuffleOffOpacity",
+                    "colorShuffleIcon",
+                    "colorShuffleOn",
+                    "sliderShuffleOnOpacity",
+                    "sliderShuffleClickTolerance",
+                    "sliderShuffleHoverTolerance",
+                    "sliderShuffleEdgeOffset"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "desktop:Shuffle Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderShuffleAnimTime",
+                        "sliderShuffleAnimHoverSize",
+                        "sliderShuffleAnimClickSize",
+                        "sliderShuffleAnimReleaseSize",
+                        "sliderShuffleAnimHoverOpacity",
+                        "sliderShuffleAnimClickOpacity"
                       ],
                       "subgroups": []
                     }
@@ -4677,146 +4896,12 @@
                   ]
                 },
                 {
-                  "key": "desktop:Shuffle Button",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleIconSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleIconOffsetX"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleOffOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorShuffleIcon"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorShuffleOn"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleOnOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectShuffleIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleClickTolerance"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleHoverTolerance"
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:Shuffle Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimTime"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimHoverSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimClickSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimReleaseSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimHoverOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimClickOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderShuffleAnimTime",
-                          "sliderShuffleAnimHoverSize",
-                          "sliderShuffleAnimClickSize",
-                          "sliderShuffleAnimReleaseSize",
-                          "sliderShuffleAnimHoverOpacity",
-                          "sliderShuffleAnimClickOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleEdgeOffset"
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderShuffleIconSize",
-                    "sliderShuffleIconOffsetX",
-                    "sliderShuffleOffOpacity",
-                    "colorShuffleIcon",
-                    "colorShuffleOn",
-                    "sliderShuffleOnOpacity",
-                    "selectShuffleIconStyle",
-                    "sliderShuffleClickTolerance",
-                    "sliderShuffleHoverTolerance",
-                    "sliderShuffleEdgeOffset"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "desktop:Shuffle Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimTime"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimHoverSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimClickSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimReleaseSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimHoverOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimClickOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderShuffleAnimTime",
-                        "sliderShuffleAnimHoverSize",
-                        "sliderShuffleAnimClickSize",
-                        "sliderShuffleAnimReleaseSize",
-                        "sliderShuffleAnimHoverOpacity",
-                        "sliderShuffleAnimClickOpacity"
-                      ],
-                      "subgroups": []
-                    }
-                  ]
-                },
-                {
                   "key": "desktop:Filter Button",
                   "items": [
+                    {
+                      "type": "row",
+                      "key": "selectFilterIconStyle"
+                    },
                     {
                       "type": "row",
                       "key": "checkboxFilterButtonEnabled"
@@ -4876,10 +4961,6 @@
                     {
                       "type": "row",
                       "key": "checkboxFilterSkipOnStep"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectFilterIconStyle"
                     },
                     {
                       "type": "row",
@@ -4999,6 +5080,7 @@
                     }
                   ],
                   "rowKeys": [
+                    "selectFilterIconStyle",
                     "checkboxFilterButtonEnabled",
                     "sliderFilterIconSize",
                     "sliderFilterIconOffsetX",
@@ -5014,7 +5096,6 @@
                     "sliderFilterGrayOpacity",
                     "selectFilterMissing",
                     "checkboxFilterSkipOnStep",
-                    "selectFilterIconStyle",
                     "sliderFilterCoverGrayscale",
                     "sliderFilterCoverBrightness",
                     "sliderFilterCoverTransitionMs",
@@ -7646,6 +7727,47 @@
                     {
                       "type": "row",
                       "key": "sliderPlayHoverTolerance"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Play Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimClickOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPlayAnimReleaseSize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderPlayAnimTime",
+                          "sliderPlayAnimHoverSize",
+                          "sliderPlayAnimClickSize",
+                          "sliderPlayAnimHoverOpacity",
+                          "sliderPlayAnimClickOpacity",
+                          "sliderPlayAnimReleaseSize"
+                        ],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
@@ -7661,48 +7783,46 @@
                     "sliderPlayClickTolerance",
                     "sliderPlayHoverTolerance"
                   ],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Play Button Animation",
-                  "items": [
+                  "subgroups": [
                     {
-                      "type": "row",
-                      "key": "sliderPlayAnimTime"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimHoverSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimClickSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimHoverOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimClickOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPlayAnimReleaseSize"
+                      "key": "desktop:Play Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimReleaseSize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderPlayAnimTime",
+                        "sliderPlayAnimHoverSize",
+                        "sliderPlayAnimClickSize",
+                        "sliderPlayAnimHoverOpacity",
+                        "sliderPlayAnimClickOpacity",
+                        "sliderPlayAnimReleaseSize"
+                      ],
+                      "subgroups": []
                     }
-                  ],
-                  "rowKeys": [
-                    "sliderPlayAnimTime",
-                    "sliderPlayAnimHoverSize",
-                    "sliderPlayAnimClickSize",
-                    "sliderPlayAnimHoverOpacity",
-                    "sliderPlayAnimClickOpacity",
-                    "sliderPlayAnimReleaseSize"
-                  ],
-                  "subgroups": []
+                  ]
                 }
               },
               {
@@ -7710,6 +7830,10 @@
                 "section": {
                   "key": "desktop:Next And Last Song Buttons",
                   "items": [
+                    {
+                      "type": "row",
+                      "key": "selectNavIconStyle"
+                    },
                     {
                       "type": "row",
                       "key": "colorNavButton"
@@ -7733,6 +7857,22 @@
                     {
                       "type": "row",
                       "key": "buttonPrevSong"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLastButtonEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNextButtonEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavClickTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNavHoverTolerance"
                     },
                     {
                       "type": "group",
@@ -7774,36 +7914,16 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectNavIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLastButtonEdgeOffset"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderNextButtonEdgeOffset"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderNavClickTolerance"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderNavHoverTolerance"
                     }
                   ],
                   "rowKeys": [
+                    "selectNavIconStyle",
                     "colorNavButton",
                     "sliderNavButtonSize",
                     "sliderNavButtonOpacity",
                     "sliderNavButtonHoverOpacity",
                     "buttonNextSong",
                     "buttonPrevSong",
-                    "selectNavIconStyle",
                     "sliderLastButtonEdgeOffset",
                     "sliderNextButtonEdgeOffset",
                     "sliderNavClickTolerance",
@@ -7845,6 +7965,147 @@
                         "sliderNavAnimHoverOpacity",
                         "sliderNavAnimClickOpacity",
                         "sliderNavAnimReleaseSize"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Shuffle Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "selectShuffleIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleOffOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorShuffleIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorShuffleOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleClickTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleHoverTolerance"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleEdgeOffset"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Shuffle Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderShuffleAnimTime",
+                          "sliderShuffleAnimHoverSize",
+                          "sliderShuffleAnimClickSize",
+                          "sliderShuffleAnimReleaseSize",
+                          "sliderShuffleAnimHoverOpacity",
+                          "sliderShuffleAnimClickOpacity"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "selectShuffleIconStyle",
+                    "sliderShuffleIconSize",
+                    "sliderShuffleIconOffsetX",
+                    "sliderShuffleOffOpacity",
+                    "colorShuffleIcon",
+                    "colorShuffleOn",
+                    "sliderShuffleOnOpacity",
+                    "sliderShuffleClickTolerance",
+                    "sliderShuffleHoverTolerance",
+                    "sliderShuffleEdgeOffset"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "desktop:Shuffle Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderShuffleAnimTime",
+                        "sliderShuffleAnimHoverSize",
+                        "sliderShuffleAnimClickSize",
+                        "sliderShuffleAnimReleaseSize",
+                        "sliderShuffleAnimHoverOpacity",
+                        "sliderShuffleAnimClickOpacity"
                       ],
                       "subgroups": []
                     }
@@ -7955,149 +8216,12 @@
               {
                 "type": "group",
                 "section": {
-                  "key": "desktop:Shuffle Button",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleIconSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleIconOffsetX"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleOffOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorShuffleIcon"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorShuffleOn"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleOnOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectShuffleIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleClickTolerance"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleHoverTolerance"
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:Shuffle Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimTime"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimHoverSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimClickSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimReleaseSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimHoverOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderShuffleAnimClickOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderShuffleAnimTime",
-                          "sliderShuffleAnimHoverSize",
-                          "sliderShuffleAnimClickSize",
-                          "sliderShuffleAnimReleaseSize",
-                          "sliderShuffleAnimHoverOpacity",
-                          "sliderShuffleAnimClickOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderShuffleEdgeOffset"
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderShuffleIconSize",
-                    "sliderShuffleIconOffsetX",
-                    "sliderShuffleOffOpacity",
-                    "colorShuffleIcon",
-                    "colorShuffleOn",
-                    "sliderShuffleOnOpacity",
-                    "selectShuffleIconStyle",
-                    "sliderShuffleClickTolerance",
-                    "sliderShuffleHoverTolerance",
-                    "sliderShuffleEdgeOffset"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "desktop:Shuffle Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimTime"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimHoverSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimClickSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimReleaseSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimHoverOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimClickOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderShuffleAnimTime",
-                        "sliderShuffleAnimHoverSize",
-                        "sliderShuffleAnimClickSize",
-                        "sliderShuffleAnimReleaseSize",
-                        "sliderShuffleAnimHoverOpacity",
-                        "sliderShuffleAnimClickOpacity"
-                      ],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "group",
-                "section": {
                   "key": "desktop:Filter Button",
                   "items": [
+                    {
+                      "type": "row",
+                      "key": "selectFilterIconStyle"
+                    },
                     {
                       "type": "row",
                       "key": "checkboxFilterButtonEnabled"
@@ -8157,10 +8281,6 @@
                     {
                       "type": "row",
                       "key": "checkboxFilterSkipOnStep"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectFilterIconStyle"
                     },
                     {
                       "type": "row",
@@ -8280,6 +8400,7 @@
                     }
                   ],
                   "rowKeys": [
+                    "selectFilterIconStyle",
                     "checkboxFilterButtonEnabled",
                     "sliderFilterIconSize",
                     "sliderFilterIconOffsetX",
@@ -8295,7 +8416,6 @@
                     "sliderFilterGrayOpacity",
                     "selectFilterMissing",
                     "checkboxFilterSkipOnStep",
-                    "selectFilterIconStyle",
                     "sliderFilterCoverGrayscale",
                     "sliderFilterCoverBrightness",
                     "sliderFilterCoverTransitionMs",
@@ -8667,6 +8787,47 @@
                   {
                     "type": "row",
                     "key": "sliderPlayHoverTolerance"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Play Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimClickOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPlayAnimReleaseSize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderPlayAnimTime",
+                        "sliderPlayAnimHoverSize",
+                        "sliderPlayAnimClickSize",
+                        "sliderPlayAnimHoverOpacity",
+                        "sliderPlayAnimClickOpacity",
+                        "sliderPlayAnimReleaseSize"
+                      ],
+                      "subgroups": []
+                    }
                   }
                 ],
                 "rowKeys": [
@@ -8682,49 +8843,54 @@
                   "sliderPlayClickTolerance",
                   "sliderPlayHoverTolerance"
                 ],
-                "subgroups": []
-              },
-              {
-                "key": "desktop:Play Button Animation",
-                "items": [
+                "subgroups": [
                   {
-                    "type": "row",
-                    "key": "sliderPlayAnimTime"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderPlayAnimHoverSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderPlayAnimClickSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderPlayAnimHoverOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderPlayAnimClickOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderPlayAnimReleaseSize"
+                    "key": "desktop:Play Button Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimClickOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayAnimReleaseSize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderPlayAnimTime",
+                      "sliderPlayAnimHoverSize",
+                      "sliderPlayAnimClickSize",
+                      "sliderPlayAnimHoverOpacity",
+                      "sliderPlayAnimClickOpacity",
+                      "sliderPlayAnimReleaseSize"
+                    ],
+                    "subgroups": []
                   }
-                ],
-                "rowKeys": [
-                  "sliderPlayAnimTime",
-                  "sliderPlayAnimHoverSize",
-                  "sliderPlayAnimClickSize",
-                  "sliderPlayAnimHoverOpacity",
-                  "sliderPlayAnimClickOpacity",
-                  "sliderPlayAnimReleaseSize"
-                ],
-                "subgroups": []
+                ]
               },
               {
                 "key": "desktop:Next And Last Song Buttons",
                 "items": [
+                  {
+                    "type": "row",
+                    "key": "selectNavIconStyle"
+                  },
                   {
                     "type": "row",
                     "key": "colorNavButton"
@@ -8748,6 +8914,22 @@
                   {
                     "type": "row",
                     "key": "buttonPrevSong"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLastButtonEdgeOffset"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNextButtonEdgeOffset"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNavClickTolerance"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNavHoverTolerance"
                   },
                   {
                     "type": "group",
@@ -8789,36 +8971,16 @@
                       ],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectNavIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderLastButtonEdgeOffset"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderNextButtonEdgeOffset"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderNavClickTolerance"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderNavHoverTolerance"
                   }
                 ],
                 "rowKeys": [
+                  "selectNavIconStyle",
                   "colorNavButton",
                   "sliderNavButtonSize",
                   "sliderNavButtonOpacity",
                   "sliderNavButtonHoverOpacity",
                   "buttonNextSong",
                   "buttonPrevSong",
-                  "selectNavIconStyle",
                   "sliderLastButtonEdgeOffset",
                   "sliderNextButtonEdgeOffset",
                   "sliderNavClickTolerance",
@@ -8860,6 +9022,144 @@
                       "sliderNavAnimHoverOpacity",
                       "sliderNavAnimClickOpacity",
                       "sliderNavAnimReleaseSize"
+                    ],
+                    "subgroups": []
+                  }
+                ]
+              },
+              {
+                "key": "desktop:Shuffle Button",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "selectShuffleIconStyle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleIconSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleIconOffsetX"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleOffOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorShuffleIcon"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorShuffleOn"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleOnOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleClickTolerance"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleHoverTolerance"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleEdgeOffset"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Shuffle Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderShuffleAnimTime",
+                        "sliderShuffleAnimHoverSize",
+                        "sliderShuffleAnimClickSize",
+                        "sliderShuffleAnimReleaseSize",
+                        "sliderShuffleAnimHoverOpacity",
+                        "sliderShuffleAnimClickOpacity"
+                      ],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [
+                  "selectShuffleIconStyle",
+                  "sliderShuffleIconSize",
+                  "sliderShuffleIconOffsetX",
+                  "sliderShuffleOffOpacity",
+                  "colorShuffleIcon",
+                  "colorShuffleOn",
+                  "sliderShuffleOnOpacity",
+                  "sliderShuffleClickTolerance",
+                  "sliderShuffleHoverTolerance",
+                  "sliderShuffleEdgeOffset"
+                ],
+                "subgroups": [
+                  {
+                    "key": "desktop:Shuffle Button Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleAnimReleaseSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleAnimClickOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderShuffleAnimTime",
+                      "sliderShuffleAnimHoverSize",
+                      "sliderShuffleAnimClickSize",
+                      "sliderShuffleAnimReleaseSize",
+                      "sliderShuffleAnimHoverOpacity",
+                      "sliderShuffleAnimClickOpacity"
                     ],
                     "subgroups": []
                   }
@@ -8964,146 +9264,12 @@
                 ]
               },
               {
-                "key": "desktop:Shuffle Button",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "sliderShuffleIconSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderShuffleIconOffsetX"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderShuffleOffOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorShuffleIcon"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorShuffleOn"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderShuffleOnOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectShuffleIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderShuffleClickTolerance"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderShuffleHoverTolerance"
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "desktop:Shuffle Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimTime"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimHoverSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimClickSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimReleaseSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimHoverOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderShuffleAnimClickOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderShuffleAnimTime",
-                        "sliderShuffleAnimHoverSize",
-                        "sliderShuffleAnimClickSize",
-                        "sliderShuffleAnimReleaseSize",
-                        "sliderShuffleAnimHoverOpacity",
-                        "sliderShuffleAnimClickOpacity"
-                      ],
-                      "subgroups": []
-                    }
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderShuffleEdgeOffset"
-                  }
-                ],
-                "rowKeys": [
-                  "sliderShuffleIconSize",
-                  "sliderShuffleIconOffsetX",
-                  "sliderShuffleOffOpacity",
-                  "colorShuffleIcon",
-                  "colorShuffleOn",
-                  "sliderShuffleOnOpacity",
-                  "selectShuffleIconStyle",
-                  "sliderShuffleClickTolerance",
-                  "sliderShuffleHoverTolerance",
-                  "sliderShuffleEdgeOffset"
-                ],
-                "subgroups": [
-                  {
-                    "key": "desktop:Shuffle Button Animation",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleAnimTime"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleAnimHoverSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleAnimClickSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleAnimReleaseSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleAnimHoverOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderShuffleAnimClickOpacity"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderShuffleAnimTime",
-                      "sliderShuffleAnimHoverSize",
-                      "sliderShuffleAnimClickSize",
-                      "sliderShuffleAnimReleaseSize",
-                      "sliderShuffleAnimHoverOpacity",
-                      "sliderShuffleAnimClickOpacity"
-                    ],
-                    "subgroups": []
-                  }
-                ]
-              },
-              {
                 "key": "desktop:Filter Button",
                 "items": [
+                  {
+                    "type": "row",
+                    "key": "selectFilterIconStyle"
+                  },
                   {
                     "type": "row",
                     "key": "checkboxFilterButtonEnabled"
@@ -9163,10 +9329,6 @@
                   {
                     "type": "row",
                     "key": "checkboxFilterSkipOnStep"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectFilterIconStyle"
                   },
                   {
                     "type": "row",
@@ -9286,6 +9448,7 @@
                   }
                 ],
                 "rowKeys": [
+                  "selectFilterIconStyle",
                   "checkboxFilterButtonEnabled",
                   "sliderFilterIconSize",
                   "sliderFilterIconOffsetX",
@@ -9301,7 +9464,6 @@
                   "sliderFilterGrayOpacity",
                   "selectFilterMissing",
                   "checkboxFilterSkipOnStep",
-                  "selectFilterIconStyle",
                   "sliderFilterCoverGrayscale",
                   "sliderFilterCoverBrightness",
                   "sliderFilterCoverTransitionMs",
@@ -23587,18 +23749,18 @@
     "desktop:Album & Date": false,
     "desktop:Brackets Smaller Text": true,
     "desktop:New Group (7)": false,
-    "desktop:Volume Button": false,
+    "desktop:Volume Button": true,
     "desktop:Volume Button Animation": true,
     "desktop:Play Button": true,
     "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": true,
     "desktop:Next And Last Button Animation": true,
+    "desktop:Shuffle Button": false,
+    "desktop:Shuffle Button Animation": true,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
-    "desktop:Shuffle Button": true,
-    "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": false,
-    "desktop:Song Data": false,
+    "desktop:Filter Button": true,
+    "desktop:Song Data": true,
     "desktop:Background": true,
     "desktop:Animation": false,
     "desktop:Album Cover": true,
