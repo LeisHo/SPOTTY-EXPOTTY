@@ -9,7 +9,9 @@
 //   overlay   - a rotated duplicate lies over the background with a blend mode
 // All modes share one "eased time" tau: it advances at speed x factor, where factor ramps 0 -> 1 on start and 1 -> 0 on stop along
 // the Start / Stop curve (x = progress through the Start / Stop duration), so the rotation, the noise drift and the breathing all
-// speed up and slow down together. Nothing runs (no frames, canvas hidden) while the mode is off and the ramp has finished.
+// speed up and slow down together. The animation runs only while the song is playing: pausing slows it down over the Start / Stop
+// duration and it then stays at the angle it reached (no frames run); playing again speeds it up from there. Switching the mode off
+// slows it down the same way, then hides the layer.
 import { setting } from './settings.js';
 
 const MODES = { rotation: 1, patches: 2, breathing: 3, rings: 4, swirl: 5, warp: 6, overlay: 7 };
@@ -31,7 +33,7 @@ precision mediump float;
 #endif
 uniform sampler2D uTex;
 uniform vec2 uRes;
-uniform vec2 uCenter;
+uniform vec2 uCenter, uTexel;
 uniform float uMode, uAngle, uTau, uZoom;
 uniform float uOpacity;
 uniform float uPatchScale, uPatchCover, uPatchSoft, uPatchDrift, uPatchOct;
@@ -64,6 +66,9 @@ vec2 rot(vec2 v, float a) { float c = cos(a), s = sin(a); return vec2(c * v.x - 
 vec4 samp(vec2 src) {
     vec2 uv = src / uRes;
     uv = 1.0 - abs(1.0 - mod(uv, 2.0));
+    // never read the picture's outermost 2 texels: the edge row / column can be a partly transparent or differently filtered line, and a
+    // mirrored or turned copy would put that line in the middle of the screen
+    uv = clamp(uv, uTexel * 2.0, 1.0 - uTexel * 2.0);
     return texture2D(uTex, uv);
 }
 
@@ -103,10 +108,10 @@ void main() {
     gl_FragColor = vec4(c.rgb * alpha, c.a * alpha); // premultiplied
 }`;
 
-export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, curveY, bgVersion, bgFading }) {
+export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, curveY, bgVersion, bgFading, isPlaying }) {
     let gl = null, prog = null, tex = null, U = {}, failed = false;
     const comp = document.createElement('canvas'); // the background as it is on screen mid-crossfade (new frame + fading old frame)
-    let on = false, lastMode = 0, running = false, raf = 0, last = 0, lastDraw = 0, rampT = 0, tau = 0, seenVersion = -1;
+    let texel = [0, 0], on = false, shown = false, lastMode = 0, running = false, raf = 0, last = 0, lastDraw = 0, rampT = 0, tau = 0, seenVersion = -1;
 
     function init() {
         if (gl || failed) return !!gl;
@@ -159,6 +164,7 @@ export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, cur
         gl.bindTexture(gl.TEXTURE_2D, tex);
         gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, src);
+        texel = [1 / src.width, 1 / src.height];
     }
 
     function draw() {
@@ -178,6 +184,7 @@ export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, cur
         const f = (name, v) => { if (U[name] !== undefined && U[name] !== null) gl.uniform1f(U[name], v); };
         gl.uniform2f(U.uRes, pw, ph);
         gl.uniform2f(U.uCenter, cx, cy);
+        gl.uniform2f(U.uTexel, texel[0], texel[1]);
         f('uMode', m);
         f('uAngle', (setting('sliderBgAnimSpeed') * tau * Math.PI) / 180);
         f('uTau', tau);
@@ -209,35 +216,43 @@ export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, cur
         tau += dt * factor;
         const capMs = 1000 / Math.max(1, setting('sliderBgAnimMaxFps'));
         if (now - lastDraw >= capMs - 1) { lastDraw = now; draw(); }
-        if (!on && rampT <= 0) { stop(); return; } // fully slowed down
+        if (!on && rampT <= 0) { // fully slowed down: stop the frames; keep the angle while the mode is still on, hide the layer if it was switched off
+            stopLoop();
+            if (modeOf()) draw(); else hide();
+            return;
+        }
         raf = requestAnimationFrame(frame);
     }
     function start() {
         if (running) return;
         if (!init()) return;
         running = true; last = performance.now(); seenVersion = -1;
-        fxCanvas.style.display = 'block';
         raf = requestAnimationFrame(frame);
     }
-    function stop() {
+    function stopLoop() {
         running = false;
         if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    }
+    function hide() {
+        stopLoop();
+        shown = false; rampT = 0; tau = 0;
         fxCanvas.style.display = 'none';
-        tau = 0;
     }
 
     // Called from applyLook() whenever settings change: mode on/off, the CSS blend mode, the layer's opacity / filter.
     function refresh() {
         const m = modeOf();
-        on = m > 0;
-        if (on) {
+        on = m > 0 && !!isPlaying();
+        if (!m && shown && !running) hide(); // switched off while idle: nothing to slow down
+        if (m > 0) {
             lastMode = m;
+            if (!shown) { if (!init()) return; shown = true; fxCanvas.style.display = 'block'; }
             fxCanvas.style.opacity = bgCanvas.style.opacity || '1';
             fxCanvas.style.filter = bgCanvas.style.filter || '';
             fxCanvas.style.mixBlendMode = (m === 2 || m === 3 || m === 7) ? (setting('selectBgAnimBlend') || 'normal') : 'normal';
-            if (!running) start();
             seenVersion = -1; // the background may have been redrawn
+            if (on || rampT > 0) { if (!running) start(); } else draw(); // idle (paused): redraw once at the angle it stopped at
         }
     }
-    return { refresh, get active() { return running; }, get failed() { return failed; } };
+    return { refresh, get active() { return running; }, get shown() { return shown; }, get failed() { return failed; } };
 }

@@ -9,7 +9,8 @@
 // The current song is always floor(pos): the last song added AT OR BEFORE the playhead's
 // time, so landing in an empty stretch plays the most recent earlier song.
 import { setting, activeDevice } from './settings.js';
-import { FEATURE_ICON_PATHS } from './filter.js';
+import { FEATURE_ICON_SETTING } from './filter.js';
+import { featureIcon, ICON_BOX } from './iconStyles.js';
 
 const SPACING_MS = 1000;
 const MIN_SPAN_MS = 120000;
@@ -550,9 +551,8 @@ export function createTimeline(canvas, data) {
             items.forEach(it => {
                 ctx.save();
                 ctx.translate(x, base - fsz * 0.35 - ic / 2); // icon centred on the middle of the digits
-                ctx.scale(ic / 24, ic / 24);
-                ctx.lineWidth = 1.8; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-                (it.paths || []).forEach(d => ctx.stroke(new Path2D(d)));
+                ctx.scale(ic / ICON_BOX, ic / ICON_BOX);
+                (it.shapes || []).forEach(([p2, eo]) => ctx.fill(p2, eo ? 'evenodd' : 'nonzero'));
                 ctx.restore();
                 ctx.fillText(it.text, x + ic + gIc, base);
                 x += ic + gIc + it.tw + gIt;
@@ -634,7 +634,7 @@ export function createTimeline(canvas, data) {
     // Song Data row: [{ key, text }] or null. The icon paths come from the filter panel's icons.
     let songData = null;
     function setSongData(items) {
-        songData = items ? items.map(it => ({ ...it, paths: [...(FEATURE_ICON_PATHS[it.key] || '').matchAll(/ d="([^"]+)"/g)].map(m => m[1]) })) : null;
+        songData = items ? items.map(it => ({ ...it, shapes: featureIcon(it.key, setting(FEATURE_ICON_SETTING[it.key])).p.map(([d, eo]) => [new Path2D(d), eo]) })) : null;
         draw();
     }
     let dateLine = '';

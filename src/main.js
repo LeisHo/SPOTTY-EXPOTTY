@@ -284,7 +284,7 @@ async function boot() {
         getPalette: () => { const c = songs[idx] && songs[idx].c; return c !== undefined ? covers[c] : null; },
     });
     // Background animation (UI Layout > Background > Animation): a WebGL layer above the background canvas. curveY is declared further down; it is only called later.
-    const bgAnim = createBgAnimation({ bgCanvas: el('spxBg'), prevCanvas: el('spxBgPrev'), fxCanvas: el('spxBgFx'), coverEl: el('spxCover'), curveY: (c, x) => curveY(c, x), bgVersion: () => background.version(), bgFading: () => background.fading() });
+    const bgAnim = createBgAnimation({ bgCanvas: el('spxBg'), prevCanvas: el('spxBgPrev'), fxCanvas: el('spxBgFx'), coverEl: el('spxCover'), curveY: (c, x) => curveY(c, x), bgVersion: () => background.version(), bgFading: () => background.fading(), isPlaying: () => el('spxCover').classList.contains('playing') });
     initTitleAnim(el('spxTitleLink'));
     initTitleAnim(el('spxStartBtn'), 'StartPlay');
     // Volume (top right): scales the scrub clips. Spotify's embedded player has no volume method, so at exactly
@@ -1323,6 +1323,7 @@ async function boot() {
     placeNav();
     onPlayState(playing => {
         el('spxCover').classList.toggle('playing', playing);
+        bgAnim.refresh(); // the background animation runs only while playing
         el('spxCover').setAttribute('aria-label', playing ? 'Pause' : 'Play');
         // The preview stops only once the full song is actually playing (see previewHold above).
         if (playing && previewHold && songs[idx] && songs[idx].id === previewHold) {

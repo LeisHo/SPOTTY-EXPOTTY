@@ -5,6 +5,7 @@
 // follow the "Songs With No Audio Data" setting (hide = they fail). Nothing is removed from the timeline: failing
 // songs are drawn gray and are not played (main.js / timeline.js use passes(i)).
 import { setting } from './settings.js';
+import { featureIconHtml, ICON_BOX } from './iconStyles.js';
 
 const FEATURES = [
     { key: 'tp', label: 'Tempo', unit: ' BPM', step: 'any', dp: 0 },
@@ -13,17 +14,10 @@ const FEATURES = [
     { key: 'e', label: 'Energy', unit: '', step: 'any', dp: 1 },
 ];
 const STORE = 'spxFilter';
-// the panel shows an icon instead of each feature's name (the name is its tooltip)
-export const FEATURE_ICON_PATHS = {} ; // filled below (the same icons are drawn on the timeline by the Song Data row)
-const ICONS = {
-    tp: '<path d="M8 21h8l-2.5-17h-3z"/><path d="M12 16l4.5-9"/><path d="M9.5 12h5"/>', // metronome
-    v: '<circle cx="12" cy="12" r="9"/><path d="M8 14.2c1.2 2.2 6.8 2.2 8 0"/><path d="M9 9.8h.01M15 9.8h.01"/>', // smiley
-    dn: '<circle cx="12" cy="4.5" r="2"/><path d="M12 7.5v6.5M6 4l6 5 6-5M12 14l-4 7M12 14l4 7"/>', // dancing figure
-    e: '<path d="M13 2L5 14h6l-1 8 8-12h-6z"/>', // lightning bolt
-};
+// the panel shows an icon instead of each feature's name (the name is its tooltip); the icon is the dev panel's choice for that feature
+export const FEATURE_ICON_SETTING = { tp: 'selectTempoIconStyle', v: 'selectValenceIconStyle', dn: 'selectDanceIconStyle', e: 'selectEnergyIconStyle' };
 
 // tempo 0 is Spotify's "no data" placeholder, so it counts as missing like a null does
-Object.assign(FEATURE_ICON_PATHS, ICONS);
 // A row whose tempo, valence and danceability are all exactly 0 has no audio analysis (3 songs): those 3 values are missing, not real zeros.
 const noAnalysis = s => s.tp === 0 && s.v === 0 && s.dn === 0;
 const valueOf = (s, k) => { const v = s[k]; return typeof v === 'number' && !(k !== 'e' && noAnalysis(s)) && !(k === 'tp' && v <= 0) ? v : null; };
@@ -111,13 +105,13 @@ export function createFilter(songs, { host, onChange }) {
         const [lo, hi] = ext[f.key];
         const row = document.createElement('div');
         row.className = 'spx-flt-row';
-        row.innerHTML = `<div class="spx-flt-top"><span class="spx-flt-ico" title="${f.label}" aria-label="${f.label}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[f.key]}</svg></span></div>
+        row.innerHTML = `<div class="spx-flt-top"><span class="spx-flt-ico" title="${f.label}" aria-label="${f.label}"><svg viewBox="0 0 ${ICON_BOX} ${ICON_BOX}" aria-hidden="true"></svg></span></div>
             <div class="spx-flt-range"><div class="spx-flt-track"><div class="spx-flt-fill"></div></div>
             <input type="range" class="spx-flt-min" min="${lo}" max="${hi}" step="any" aria-label="${f.label} minimum">
             <input type="range" class="spx-flt-max" min="${lo}" max="${hi}" step="any" aria-label="${f.label} maximum"></div>
             <div class="spx-flt-nums"><span class="spx-flt-lo"></span><span class="spx-flt-val"></span><span class="spx-flt-hi"></span></div>`;
         rowsEl.appendChild(row);
-        const r = rows[f.key] = { f, row, lo: row.querySelector('.spx-flt-lo'), hi: row.querySelector('.spx-flt-hi'), val: row.querySelector('.spx-flt-val'), fill: row.querySelector('.spx-flt-fill'), min: row.querySelector('.spx-flt-min'), max: row.querySelector('.spx-flt-max') };
+        const r = rows[f.key] = { f, row, ico: row.querySelector('.spx-flt-ico svg'), lo: row.querySelector('.spx-flt-lo'), hi: row.querySelector('.spx-flt-hi'), val: row.querySelector('.spx-flt-val'), fill: row.querySelector('.spx-flt-fill'), min: row.querySelector('.spx-flt-min'), max: row.querySelector('.spx-flt-max') };
         const fromInputs = which => {
             let a = parseFloat(r.min.value), b = parseFloat(r.max.value);
             if (a > b) { if (which === 'min') a = b; else b = a; }
@@ -141,6 +135,7 @@ export function createFilter(songs, { host, onChange }) {
         r.max.addEventListener('input', () => fromInputs('max'));
     });
     function refresh() {
+        FEATURES.forEach(f => { const r = rows[f.key], v = setting(FEATURE_ICON_SETTING[f.key]); if (r.ico.dataset.icon !== String(v)) { r.ico.dataset.icon = String(v); r.ico.innerHTML = featureIconHtml(f.key, v); } });
         FEATURES.forEach(f => {
             const r = rows[f.key], [lo, hi] = ext[f.key], [a, b] = range[f.key];
             r.min.value = a; r.max.value = b;
