@@ -105,7 +105,8 @@ void main() {
         alpha = uOpacity;
     }
     vec4 c = samp(uCenter + q / max(uZoom, 0.01));
-    gl_FragColor = vec4(c.rgb * alpha, c.a * alpha); // premultiplied
+    float a = c.a * alpha;
+    gl_FragColor = vec4(c.rgb * a, a); // premultiplied (the texture is straight alpha, so c.rgb is multiplied by its own alpha too)
 }`;
 
 export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, curveY, bgVersion, bgFading, isPlaying }) {

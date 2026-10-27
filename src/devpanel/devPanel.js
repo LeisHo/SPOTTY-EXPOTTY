@@ -8834,6 +8834,9 @@
             { select: 'selectBackgroundMode', ids: ['sliderBackgroundOpacity', 'sliderBackgroundBrightness', 'sliderBackgroundSaturation', 'sliderBackgroundTransition', 'sliderBorderDepth'] },
             { select: 'selectAlbumColorMode', ids: ['sliderAlbumColorSaturation', 'sliderAlbumColorBrightness'] },
             { select: 'selectTitleAnimMode', ids: ['sliderTitleAnimDuration', 'selectTitleAnimEasing'] },
+            // Background > Animation: the settings several modes share (the others belong to one mode and already keep their own values).
+            // Start / Stop Duration + its curve, Render Resolution and Max Frame Rate are deliberately NOT here: they are the same for every mode.
+            { select: 'selectBgAnimMode', ids: ['sliderBgAnimSpeed', 'sliderBgAnimCenterX', 'sliderBgAnimCenterY', 'sliderBgAnimZoom', 'sliderBgAnimOpacity', 'selectBgAnimBlend'] },
         ];
         let perModeStore = {}; // { selectId: { mode: { elementId: value } } }
         const PM_DEVS = ['', 'Mobile', 'Landscape'];
