@@ -39,7 +39,7 @@ uniform float uMode, uAngle, uTau, uZoom;
 uniform float uOpacity;
 uniform float uPatchScale, uPatchCover, uPatchSoft, uPatchDrift, uPatchOct, uPatchDir;
 uniform float uBreathPeriod, uBreathMin, uBreathMax;
-uniform float uRingStep, uRingAlt, uRingBlur, uRingLast;
+uniform float uRingStep, uRingAlt, uRingBlur, uRingLast, uRingCount, uRingRev;
 uniform vec4 uEdge[16];      // outer edge (px from the centre) of rings 0..63, 4 per vector; later rings are uRingLast thick
 uniform vec2 uSwirlRange;    // turn amount at the curve's Y = 0 and Y = 1 (fraction of the full turn)
 uniform vec4 uSwirlLut[9];   // the swirl curve sampled at 32 points (the last value repeated)
@@ -103,7 +103,9 @@ float lutAt(float f) {
 // the picture as ring k shows it (every ring turns by its own angle)
 vec4 ringColor(vec2 d, float k) {
     float sgn = uRingAlt > 0.5 ? (mod(abs(k), 2.0) < 1.0 ? 1.0 : -1.0) : 1.0;
-    return samp(uCenter + rot(d, uAngle * (1.0 + uRingStep * k) * sgn) / max(uZoom, 0.01));
+    // Speed Change Per Ring counts rings from the center out; reversed it counts from the outermost ring in, so the INNER rings turn the most
+    float kk = uRingRev > 0.5 ? max(uRingCount - 1.0 - k, 0.0) : k;
+    return samp(uCenter + rot(d, uAngle * (1.0 + uRingStep * kk) * sgn) / max(uZoom, 0.01));
 }
 
 void main() {
@@ -277,6 +279,9 @@ export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, cur
             for (let k = n; k < 64; k++) edges[k] = 1e9;
             if (U['uEdge[0]'] !== undefined) gl.uniform4fv(U['uEdge[0]'], edges);
             f('uRingLast', last);
+            let total = n; // rings out to the farthest corner (past the 64 in the table the rings are `last` thick)
+            if (n > 0 && edges[n - 1] < far) total = n + Math.ceil((far - edges[n - 1]) / Math.max(last, 1));
+            f('uRingCount', total); f('uRingRev', setting('checkboxBgAnimRingReverse') ? 1 : 0);
         } else if (m === 5) { // swirl: turn amount = Min + (Max - Min) x the curve at (distance from the centre / swirl radius)
             const sr = setting('rangeBarBgAnimSwirlStrength') || { min: 0, max: 100 }, cv = setting('curveEditorBgAnimSwirlStrength');
             const lut = new Float32Array(36);

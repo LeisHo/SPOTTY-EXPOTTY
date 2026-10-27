@@ -198,7 +198,7 @@ export const DEFAULTS = {
     sliderBgAnimZoom: 100, sliderBgAnimResolution: 60, sliderBgAnimMaxFps: 60, selectBgAnimBlend: 'normal', sliderBgAnimOpacity: 100,
     sliderBgAnimPatchScale: 500, sliderBgAnimPatchCoverage: 50, sliderBgAnimPatchSoftness: 40, sliderBgAnimPatchDrift: 30, sliderBgAnimPatchOctaves: 3,
     sliderBgAnimBreathPeriod: 8, sliderBgAnimBreathMin: 0, sliderBgAnimBreathMax: 100,
-    sliderBgAnimRingWidth: 120, sliderBgAnimRingSpeedStep: 0.5, sliderBgAnimRingEdgeBlur: 0, selectBgAnimPatchDriftDir: 'diagonal', selectBgAnimWarpDriftDir: 'diagonal',
+    sliderBgAnimRingWidth: 120, sliderBgAnimRingSpeedStep: 0.5, sliderBgAnimRingEdgeBlur: 0, checkboxBgAnimRingReverse: false, selectBgAnimPatchDriftDir: 'diagonal', selectBgAnimWarpDriftDir: 'diagonal',
     rangeBarBgAnimRingThickness: { min: 120, max: 120 }, curveEditorBgAnimRingThickness: { points: [{ x: 0, y: 0.5 }, { x: 1, y: 0.5 }], method: 'monotone' },
     rangeBarBgAnimSwirlStrength: { min: 0, max: 100 }, curveEditorBgAnimSwirlStrength: { points: [{ x: 0, y: 1 }, { x: 0.25, y: 0.65 }, { x: 0.5, y: 0.35 }, { x: 0.75, y: 0.1 }, { x: 1, y: 0 }], method: 'monotone' }, checkboxBgAnimRingAlternate: true,
     sliderBgAnimSwirlRadius: 700, sliderBgAnimSwirlFalloff: 1.5, checkboxBgAnimSwirlInvert: false, sliderBgAnimSwirlTwist: 0,
