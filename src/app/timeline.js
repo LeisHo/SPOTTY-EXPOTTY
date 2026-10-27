@@ -530,7 +530,7 @@ export function createTimeline(canvas, data) {
             ctx.font = `${setting('checkboxSongAddDateBold') ? 'bold ' : ''}${setting('sliderSongAddDateFontSize')}px ${getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif'}`;
             ctx.letterSpacing = `${setting('sliderSongAddDateLetterSpacing')}px`;
             ctx.textAlign = 'center';
-            ctx.fillText(dateLine, w / 2, h - axisH - dateH / 2 + 4.5); // centred in the strip between the graph and the scale text
+            ctx.fillText(dateLine, w / 2, h - axisH - dateH / 2 + 4.5 + setting('sliderSongAddDateOffsetY')); // centred in the strip between the graph and the scale text, moved by the Y Offset
             ctx.textAlign = 'start';
             ctx.letterSpacing = '0px';
         }
@@ -546,7 +546,7 @@ export function createTimeline(canvas, data) {
             // The row is centred vertically on the add date's text: the middle of the date's digits (measured with the date's own font) is the row's centre
             // line; the icons are centred on it and each number's digits are centred on it too, whatever the two font sizes are.
             const digitMid = font => { ctx.font = font; const m = ctx.measureText('0'); return (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2; };
-            const dateBase = h - axisH - dateH / 2 + 4.5; // the add date's text baseline
+            const dateBase = h - axisH - dateH / 2 + 4.5 + setting('sliderSongAddDateOffsetY'); // the add date's text baseline (the Song Data row follows the date's Y Offset)
             const yc = dateBase - digitMid(`${setting('checkboxSongAddDateBold') ? 'bold ' : ''}${setting('sliderSongAddDateFontSize')}px ${fam}`) + setting('sliderSongDataOffsetY');
             const dataFont = `${setting('checkboxSongDataBold') ? 'bold ' : ''}${fsz}px ${fam}`;
             const base = yc + digitMid(dataFont); // baseline that puts the number's digits on the centre line

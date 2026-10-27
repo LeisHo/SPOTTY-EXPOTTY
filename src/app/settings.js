@@ -136,7 +136,7 @@ export const DEFAULTS = {
     sliderPlayheadStartHeight: 0,
     colorTickMark: '#ffffff', sliderTickOpacity: 0.6, sliderTickWidth: 1, sliderTickHeight: 5, sliderTickStartHeight: 0,
     sliderScaleNumbersFontSize: 11, checkboxScaleNumbersBold: false, colorScaleNumbers: '#ffffff', sliderScaleNumbersLetterSpacing: 0, sliderScaleNumbersOpacity: 0.6, sliderScaleNumbersOffsetX: 3,
-    checkboxSongAddDateEnabled: true, sliderSongAddDateFontSize: 13, checkboxSongAddDateBold: true, colorSongAddDate: '#ffffff', sliderSongAddDateLetterSpacing: 0, sliderSongAddDateOpacity: 1,
+    checkboxSongAddDateEnabled: true, sliderSongAddDateFontSize: 13, checkboxSongAddDateBold: true, colorSongAddDate: '#ffffff', sliderSongAddDateLetterSpacing: 0, sliderSongAddDateOpacity: 1, sliderSongAddDateOffsetY: 0,
     checkboxShuffleButtonEnabled: true, sliderShuffleIconSize: 20, sliderShuffleIconOffsetX: 0, sliderShuffleOffOpacity: 45, colorShuffleIcon: '#f2f2f2', colorShuffleOn: '#1db954',
     // Start Button Animation: the Track Title Button Animation settings, with 'Title' replaced by 'StartPlay' (see titleAnim.js)
     checkboxStartPlayAnimEnabled: false, selectStartPlayAnimMode: 'bold', sliderStartPlayAnimDuration: 160, selectStartPlayAnimEasing: 'ease-out',

@@ -8009,6 +8009,7 @@
             { tab, group: SAD, id: 'colorSongAddDate', type: 'color', label: 'Font Color:', value: '#ffffff' },
             { tab, group: SAD, id: 'sliderSongAddDateLetterSpacing', type: 'slider', label: 'Letter Spacing (Px):', min: -5, max: 30, step: 0.1, value: 0 },
             { tab, group: SAD, id: 'sliderSongAddDateOpacity', type: 'slider', label: 'Opacity:', min: 0, max: 1, step: 0.01, value: 1 },
+            { tab, group: SAD, id: 'sliderSongAddDateOffsetY', type: 'slider', label: 'Y Offset (Px):', min: -100, max: 100, step: 1, value: 0 },
         ];
         renderControlArray(SAD_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_SONG_ADD_DATE_CONTROLS', SAD_CONTROLS);
