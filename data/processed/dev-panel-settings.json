@@ -481,8 +481,8 @@
     "sliderSpotlightCenterX": 50,
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
-    "selectBgAnimMode": "breathing",
-    "sliderBgAnimSpeed": 41.5,
+    "selectBgAnimMode": "rings",
+    "sliderBgAnimSpeed": 15,
     "sliderBgAnimCenterX": 0,
     "sliderBgAnimCenterY": 0,
     "sliderBgAnimStartStopMs": 2000,
@@ -500,10 +500,10 @@
     "sliderBgAnimBreathPeriod": 4,
     "sliderBgAnimBreathMin": 0,
     "sliderBgAnimBreathMax": 100,
-    "rangeBarBgAnimRingThickness": "{\"min\":120,\"max\":120}",
-    "curveEditorBgAnimRingThickness": "{\"points\":[{\"x\":0,\"y\":0.5},{\"x\":1,\"y\":0.5}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
-    "sliderBgAnimRingSpeedStep": 0.5,
-    "sliderBgAnimRingEdgeBlur": 0,
+    "rangeBarBgAnimRingThickness": "{\"min\":0.5,\"max\":4}",
+    "curveEditorBgAnimRingThickness": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":0.7188693477060469,\"y\":0.3474998474121094,\"h1\":{\"x\":0.16195571501060246,\"y\":0.19999999999999996},\"h2\":{\"x\":-0.10389614325682217,\"y\":-0.1533335367838542}},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "sliderBgAnimRingSpeedStep": 0.1,
+    "sliderBgAnimRingEdgeBlur": 100,
     "checkboxBgAnimRingAlternate": true,
     "sliderBgAnimSwirlRadius": 700,
     "rangeBarBgAnimSwirlStrength": "{\"min\":0,\"max\":100}",
@@ -549,9 +549,9 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 49,
+    "left": 27,
     "top": 107,
-    "width": 342,
+    "width": 473,
     "height": 570
   },
   "devPanelStyle": {
@@ -27899,6 +27899,14 @@
       },
       "breathing": {
         "sliderBgAnimSpeed": "41.5",
+        "sliderBgAnimCenterX": "0",
+        "sliderBgAnimCenterY": "0",
+        "sliderBgAnimZoom": "100",
+        "sliderBgAnimOpacity": "100",
+        "selectBgAnimBlend": "normal"
+      },
+      "rings": {
+        "sliderBgAnimSpeed": "15",
         "sliderBgAnimCenterX": "0",
         "sliderBgAnimCenterY": "0",
         "sliderBgAnimZoom": "100",
