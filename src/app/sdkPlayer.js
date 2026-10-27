@@ -33,7 +33,7 @@ export function initSdk(callbacks) {
 }
 function create() {
     player = new window.Spotify.Player({ name: 'SPOTTY EXPOTTY', getOAuthToken: async done => { try { done(await getAccessToken()); } catch (e) { failed = 'login expired: ' + e.message; note('token FAILED: ' + e.message); setStatus(); } }, volume });
-    player.addListener('ready', ({ device_id }) => { deviceId = device_id; ready = true; loading = false; failed = null; note('ready as device ' + device_id); setStatus(); transfer(); });
+    player.addListener('ready', ({ device_id }) => { deviceId = device_id; ready = true; loading = false; failed = null; note('ready as device ' + device_id); setStatus(); player.setVolume(volume).catch(() => {}); /* the saved volume / mute applies from the start */ transfer(); });
     player.addListener('not_ready', () => { ready = false; note('device went offline'); setStatus(); });
     player.addListener('initialization_error', e => fail('initialization: ' + e.message));
     player.addListener('authentication_error', e => fail('authentication: ' + e.message));

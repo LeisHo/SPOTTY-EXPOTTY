@@ -370,6 +370,8 @@ async function boot() {
     // "Randomize Starting Song": once the saved settings have arrived, jump to a random song unless the visitor already moved.
     // Only the visitor's moves on the app count. Input on the dev panel (in dev mode, the panel is open while the page loads)
     // must not cancel the jump; before this, any click or scroll there silently skipped it.
+    // Muted (volume 0) must not stop playback: the Web Playback SDK is silenced by its volume, so songs keep changing silently. Only the iframe embed (no volume method) has to be left stopped.
+    const realPlayAllowed = () => volume.get() > 0 || sdkIsReady();
     let interacted = false;
     const onVisitorInput = e => { if (!(e.target && e.target.closest && e.target.closest('#devPanel'))) interacted = true; };
     ['pointerdown', 'wheel', 'keydown'].forEach(t => window.addEventListener(t, onVisitorInput, { capture: true }));
@@ -875,7 +877,7 @@ async function boot() {
         // and preview clips off the playing song is left alone: the next play request replaces it (and doHandoff pauses it if no request is sent).
         // With preview clips off nothing else would sound in the gap, so the playing song is left playing until the next one's play request replaces it (the SDK or the embed
         // switches songs by itself); pausing it here made every Next / Last / scroll a silence of up to a second or two. doHandoff stops it if no request is sent.
-        if (handedOff) { const replaceNext = !previewClipsOn() && interacted && isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0; logEvent('playback', replaceNext ? 'EMBED song left playing: the next song replaces it' : 'EMBED song stopped: moved to another song'); if (!replaceNext) pauseEmbed(); handedOff = false; }
+        if (handedOff) { const replaceNext = !previewClipsOn() && interacted && isUnlocked() && setting('checkboxHandoffEnabled') && realPlayAllowed(); logEvent('playback', replaceNext ? 'EMBED song left playing: the next song replaces it' : 'EMBED song stopped: moved to another song'); if (!replaceNext) pauseEmbed(); handedOff = false; }
         playClip(clipKey(songs[idx]));
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
@@ -890,7 +892,7 @@ async function boot() {
         const doHandoff = () => {
             if (previewClipsOn() && clipKey(songs[playIdx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
             handoffPending = false;
-            const ok = interacted && isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0;
+            const ok = interacted && isUnlocked() && setting('checkboxHandoffEnabled') && realPlayAllowed();
             logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[playIdx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
             if (ok) {
                 // The full song starts where the preview is now (+ the Full Song Start Offset), not at 0:00
@@ -1222,7 +1224,7 @@ async function boot() {
     // clip should play instead (handoff off, muted, or sound still locked).
     const startSpotifyNow = () => {
         if (isPlaying() && playingId() === songs[idx].id) return true; // already playing this song: leave it alone
-        if (!isUnlocked() || !setting('checkboxHandoffEnabled') || volume.get() <= 0) return false;
+        if (!isUnlocked() || !setting('checkboxHandoffEnabled') || !realPlayAllowed()) return false;
         clearTimeout(handoffTimer); handoffPending = false; previewHold = null;
         stopClip(); handedOff = true; toggleTrack(songs[idx].id, true);
         return true;
