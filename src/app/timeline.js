@@ -176,7 +176,13 @@ export function createTimeline(canvas, data) {
             return x.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
         };
         let guard = 0;
-        while (d <= endReal && guard++ < 5000) { out.push({ x: xOf(vtOfReal(d.getTime())), text: label(d) }); step(); }
+        while (d <= endReal && guard++ < 5000) {
+            const v0 = vtOfReal(d.getTime());
+            const tick = { x: xOf(v0), text: label(d), v0, v1: v0 };
+            out.push(tick);
+            step();
+            tick.v1 = vtOfReal(d.getTime()); // the tick's unit (the year / month / day / hour it names) runs from v0 to v1
+        }
         const thinned = [];
         let lastX = -1e9;
         out.forEach(t => { if (t.x - lastX >= 64 && t.x > -10 && t.x < W()) { thinned.push(t); lastX = t.x; } });
@@ -196,7 +202,19 @@ export function createTimeline(canvas, data) {
         }
         return v;
     }
-    const coverOf = i => (songs[i].c !== undefined ? covers[songs[i].c] : null);
+    // Audio-feature filter (Filter button): filterFn(i) = song i passes; null = no filter. A song that does not pass has its album colors
+    // desaturated by grayAmt (0-1) wherever the graph uses them; cumValid[i] = how many of songs [0, i) pass (for the scale ticks).
+    let filterFn = null, grayAmt = 0, cumValid = null;
+    const grayCache = new Map();
+    const grayRgb = (rgb, amt) => { const g = 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]; return rgb.map(c => Math.round(c + (g - c) * amt)); };
+    const coverOf = i => {
+        const c = songs[i].c !== undefined ? covers[songs[i].c] : null;
+        if (!c || !filterFn || grayAmt <= 0 || filterFn(i)) return c;
+        const key = songs[i].c + '|' + grayAmt;
+        let v = grayCache.get(key);
+        if (!v) { v = c.map(r => grayRgb(r, grayAmt)); grayCache.set(key, v); }
+        return v;
+    };
     const meanRgb = list => list.length ? [0, 1, 2].map(k => list.reduce((a, c) => a + c[k], 0) / list.length) : null;
 
     // The colour(s) a bar covering songs [a, b) should take, per the album-colour mode.
@@ -298,6 +316,7 @@ export function createTimeline(canvas, data) {
             lastColorKey = colorKey;
         }
         ctx.clearRect(0, -oy, w, cssH);
+        grayAmt = filterFn ? setting('sliderFilterGraphGrayscale') / 100 : 0;
         const accent = setting('colorTimelineAccent');
         const playheadColor = setting('colorTimelinePlayhead');
         const baseAlpha = setting('sliderTimelineBarOpacity');
@@ -334,12 +353,13 @@ export function createTimeline(canvas, data) {
         const filt = filterFn;
         const validOf = bn => { if (!filt) return bn.b - bn.a; let c = 0; for (let i = bn.a; i < bn.b; i++) if (filt(i)) c++; return c; };
         const grayCss = filt ? rgbCss(hexToRgb(setting('colorFilterGray')), setting('sliderFilterGrayOpacity') / 100) : '';
+        const flatGray = !!filt && !colorOpts.on; // album colors off: filtered-out parts of a bar are a flat gray
 
         if (style === 'none') {
             bins.forEach((bn, b) => {
                 if (!bn) return;
                 const n = bn.b - bn.a, ok = validOf(bn), full = binH(bn), x = b * bw, ww = Math.max(1, bw - 0.5);
-                if (ok === n) { paintFill(ctx, binColorOf(bn), x, topH - full, ww, full, accentCss, baseAlpha); return; }
+                if (ok === n || !flatGray) { paintFill(ctx, binColorOf(bn), x, topH - full, ww, full, accentCss, baseAlpha); return; }
                 const okH = full * ok / n; // the passing songs keep their colour at the bottom, the rest of the bar is gray
                 if (okH > 0) paintFill(ctx, binColorOf(bn), x, topH - okH, ww, okH, accentCss, baseAlpha);
                 ctx.fillStyle = grayCss; ctx.fillRect(x, topH - full, ww, full - okH);
@@ -351,7 +371,7 @@ export function createTimeline(canvas, data) {
                 if (!bn) return;
                 const paint = binColorOf(bn);
                 let rgb = paint ? (paint.solid || (paint.gradient && paint.gradient[paint.gradient.length >> 1]) || paint.stack[paint.stack.length - 1]) : hexToRgb(accent);
-                if (filt && validOf(bn) === 0) rgb = hexToRgb(setting('colorFilterGray')); // nothing in this bar passes the filter
+                if (flatGray && validOf(bn) === 0) rgb = hexToRgb(setting('colorFilterGray')); // nothing in this bar passes the filter
                 const x = b * bw + bw / 2, top = topH - binH(bn);
                 ctx.save();
                 ctx.shadowColor = rgbCss(rgb, intensity);
@@ -513,12 +533,15 @@ export function createTimeline(canvas, data) {
         // a tick stands on its bottom edge, which sits Start Height above the scale line, and rises Height upward from there
         const tickBottom = h - axisH - setting('sliderTickStartHeight'); // negative values put the tick below the scale line
         ctx.letterSpacing = `${setting('sliderScaleNumbersLetterSpacing')}px`;
+        const grayTicks = !!filterFn && !!cumValid && setting('checkboxFilterGrayTicks');
         ticks().forEach(t => {
-            ctx.globalAlpha = setting('sliderTickOpacity');
-            ctx.fillStyle = setting('colorTickMark');
+            // no song in this tick's time span passes the filter: the tick and its number are grayed
+            const dead = grayTicks && cumValid[lowerBound(vt, t.v1)] - cumValid[lowerBound(vt, t.v0)] === 0;
+            ctx.globalAlpha = dead ? setting('sliderFilterTickGrayOpacity') / 100 : setting('sliderTickOpacity');
+            ctx.fillStyle = dead ? setting('colorFilterTickGray') : setting('colorTickMark');
             ctx.fillRect(t.x, tickBottom - setting('sliderTickHeight'), setting('sliderTickWidth'), setting('sliderTickHeight'));
-            ctx.globalAlpha = setting('sliderScaleNumbersOpacity');
-            ctx.fillStyle = setting('colorScaleNumbers');
+            ctx.globalAlpha = dead ? setting('sliderFilterNumberGrayOpacity') / 100 : setting('sliderScaleNumbersOpacity');
+            ctx.fillStyle = dead ? setting('colorFilterTickGray') : setting('colorScaleNumbers');
             ctx.font = numFont;
             ctx.fillText(t.text, t.x + setting('sliderScaleNumbersOffsetX'), h - 4);
         });
@@ -528,7 +551,12 @@ export function createTimeline(canvas, data) {
         if (i1 - i0 > 0 && (i1 - i0) * 4 < w) {
             ctx.globalAlpha = 0.9;
             ctx.fillStyle = playheadColor;
-            for (let i = i0; i < i1; i++) ctx.fillRect(Math.round(xOf(vt[i])), topH + 1, 1, 3);
+            for (let i = i0; i < i1; i++) {
+                const off = !!filterFn && !filterFn(i);
+                ctx.globalAlpha = off ? setting('sliderFilterGrayOpacity') / 100 : 0.9;
+                ctx.fillStyle = off ? setting('colorFilterGray') : playheadColor;
+                ctx.fillRect(Math.round(xOf(vt[i])), topH + 1, 1, 3);
+            }
         }
 
         // playhead
@@ -565,8 +593,12 @@ export function createTimeline(canvas, data) {
     // Set the visible span directly (clamped to the zoom limits), keeping the playhead where it is on screen.
     function setSpanMs(ms) { zoomBy(clampSpan(ms) / span); }
 
-    let filterFn = null; // (songIndex) => passes the audio-feature filter; null = no filter
-    function setFilter(fn) { filterFn = fn; draw(); }
+    function setFilter(fn) {
+        filterFn = fn;
+        cumValid = null;
+        if (fn) { cumValid = new Uint32Array(n + 1); for (let i = 0; i < n; i++) cumValid[i + 1] = cumValid[i] + (fn(i) ? 1 : 0); }
+        draw();
+    }
     let dateLine = '';
     function setDateLine(t) { if (t !== dateLine) { dateLine = t; draw(); } }
     function centerOnPlayhead() { keepPlayheadVisible(true); }

@@ -8202,6 +8202,7 @@
         registerDevControlArray('SPOTTY_SHUFFLE_ANIM', SHBA_CONTROLS);
         makeDevGroupToggleable(tab, SHBA, 'checkboxShuffleAnimEnabled');
         // Filter Button (under Shuffle): the button, the grayed-out look of filtered songs, what filtering does to playback, and the filter panel.
+        const FILTER_ICON_OPTIONS = ['Funnel', 'Sliders', 'Equalizer', 'Magnifier', 'Checklist', 'Tuner Dials', 'Sort Bars', 'Sieve', 'Toggle', 'Eye', 'Tag', 'Star', 'Target', 'Magic Wand', 'Layers'].map((text, i) => ({ value: String(i), text }));
         const FLB = 'Filter Button';
         uiLayoutContent.appendChild(createDevGroupElement(FLB, tab));
         const FLB_CONTROLS = [
@@ -8220,8 +8221,23 @@
             { tab, group: FLB, id: 'colorFilterGray', type: 'color', label: 'Filtered-Out Bar Color:', value: '#8a8f98' },
             { tab, group: FLB, id: 'sliderFilterGrayOpacity', type: 'slider', label: 'Filtered-Out Bar Opacity (%):', min: 0, max: 100, step: 1, value: 35 },
             { tab, group: FLB, id: 'selectFilterMissing', type: 'select', label: 'Songs With No Audio Data:', value: 'hide', options: [{ value: 'hide', text: 'Filter Out' }, { value: 'keep', text: 'Keep' }] },
-            { tab, group: FLB, id: 'checkboxFilterSkipOnStep', type: 'checkbox', label: 'Next / Last Skip Filtered-Out Songs', value: true },
-            { tab, group: FLB, id: 'checkboxFilterStopOnFiltered', type: 'checkbox', label: 'Do Not Play Filtered-Out Songs', value: true },
+            { tab, group: FLB, id: 'checkboxFilterSkipOnStep', type: 'checkbox', label: 'Next / Last / Scrolling Skip Filtered-Out Songs', value: true },
+            { tab, group: FLB, id: 'selectFilterIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: FILTER_ICON_OPTIONS },
+            // a filtered-out song shown on the timeline (clicked): grayscale cover, plays nothing, then the playhead returns to the playing song
+            { tab, group: FLB, id: 'sliderFilterCoverGrayscale', type: 'slider', label: 'Filtered-Out Cover Grayscale (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: FLB, id: 'sliderFilterCoverBrightness', type: 'slider', label: 'Filtered-Out Cover Brightness (%):', min: 10, max: 200, step: 1, value: 100 },
+            { tab, group: FLB, id: 'sliderFilterCoverTransitionMs', type: 'slider', label: 'Cover Grayscale Fade (Ms):', min: 0, max: 2000, step: 10, value: 250 },
+            { tab, group: FLB, id: 'sliderFilterGraphGrayscale', type: 'slider', label: 'Graph: Filtered-Out Album Color Grayscale (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: FLB, id: 'checkboxFilterReturnEnabled', type: 'checkbox', label: 'Return To Playing Song After A Filtered-Out Click', value: true },
+            { tab, group: FLB, id: 'sliderFilterReturnDelay', type: 'slider', label: 'Return Delay (S):', min: 0, max: 60, step: 0.1, value: 3 },
+            { tab, group: FLB, id: 'sliderFilterReturnDuration', type: 'slider', label: 'Return Animation Time (Ms):', min: 0, max: 5000, step: 10, value: 600 },
+            { tab, group: FLB, id: 'selectFilterReturnEasing', type: 'select', label: 'Return Animation Easing:', value: 'ease-in-out', options: [{ value: 'ease-in-out', text: 'Ease In Out' }, { value: 'ease-out', text: 'Ease Out' }, { value: 'ease-in', text: 'Ease In' }, { value: 'linear', text: 'Linear' }] },
+            { tab, group: FLB, id: 'selectFilterReturnRestore', type: 'select', label: 'Text And Cover Change Back:', value: 'end', options: [{ value: 'end', text: 'When The Playhead Arrives' }, { value: 'start', text: 'When It Starts Moving' }] },
+            // timeline scale: a tick or number whose time span has no song passing the filter
+            { tab, group: FLB, id: 'checkboxFilterGrayTicks', type: 'checkbox', label: 'Gray Out Scale Ticks And Numbers With No Matching Song', value: true },
+            { tab, group: FLB, id: 'colorFilterTickGray', type: 'color', label: 'Grayed Tick And Number Color:', value: '#6b7280' },
+            { tab, group: FLB, id: 'sliderFilterTickGrayOpacity', type: 'slider', label: 'Grayed Tick Opacity (%):', min: 0, max: 100, step: 1, value: 25 },
+            { tab, group: FLB, id: 'sliderFilterNumberGrayOpacity', type: 'slider', label: 'Grayed Number Opacity (%):', min: 0, max: 100, step: 1, value: 25 },
             // the panel
             { tab, group: FLB, id: 'checkboxFilterCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
             { tab, group: FLB, id: 'sliderFilterPanelWidth', type: 'slider', label: 'Panel Default Width (Px):', min: 160, max: 600, step: 1, value: 260 },

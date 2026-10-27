@@ -88,3 +88,30 @@ export function applyCoverGlyph(svg, playI, pauseI) {
         `<path class="ico-play" d="${PLAY_SHAPES[Math.floor(playI / 3)]}" style="${TREATMENTS[playI % 3]}"/>` +
         `<path class="ico-pause" d="${PAUSE_SHAPES[Math.floor(pauseI / 3)]}" style="${TREATMENTS[pauseI % 3]}"/>`);
 }
+
+// Filter button: 15 genuinely different drawings (not one shape in several weights). Each is a list of [path, filled?]; the SVG's own
+// stroke / fill settings (app.css .spx-filter svg) draw the outlines.
+const C = (cx, cy, r) => `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0`;
+export const FILTER_ICON_NAMES = ['Funnel', 'Sliders', 'Equalizer', 'Magnifier', 'Checklist', 'Tuner Dials', 'Sort Bars', 'Sieve', 'Toggle', 'Eye', 'Tag', 'Star', 'Target', 'Magic Wand', 'Layers'];
+const FILTER_ICONS = [
+    [['M3 5h18l-7 8v6l-4-2v-4z']],
+    [['M4 6h16M4 12h16M4 18h16'], [C(8, 6, 2), 1], [C(16, 12, 2), 1], [C(9, 18, 2), 1]],
+    [['M5 20v-8M10 20V5M15 20v-11M20 20v-6']],
+    [['M10 3.5a6.5 6.5 0 1 0 0 13a6.5 6.5 0 0 0 0-13z'], ['M15 15l6 6']],
+    [['M3.5 5l1.5 1.5L8 3.5M3.5 12l1.5 1.5L8 10.5M3.5 19l1.5 1.5L8 17.5'], ['M12 5h9M12 12h9M12 19h9']],
+    [['M7 3v18M17 3v18'], ['M4.5 8h5v4h-5z', 1], ['M14.5 13h5v4h-5z', 1]],
+    [['M3 6h18M3 12h12M3 18h6']],
+    [['M3 9h18a9 9 0 0 1-18 0z'], ['M8 13h.01M12 15.5h.01M16 13h.01M12 11.5h.01']],
+    [['M8 6.5h8a5.5 5.5 0 0 1 0 11H8a5.5 5.5 0 0 1 0-11z'], [C(16, 12, 2.2), 1]],
+    [['M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'], [C(12, 12, 3)]],
+    [['M3 12.5V4h8.5l9.5 9.5-8.5 8.5z'], ['M7.5 8h.01']],
+    [['M12 3l2.7 5.8 6.3.8-4.6 4.3 1.2 6.3L12 17l-5.6 3.2 1.2-6.3L3 9.6l6.3-.8z']],
+    [[C(12, 12, 9)], [C(12, 12, 4.5)], ['M12 12h.01']],
+    [['M4 20L15 9'], ['M18 2.5l1.2 2.8L22 6.5l-2.8 1.2L18 10.5l-1.2-2.8L14 6.5l2.8-1.2z', 1], ['M7 4v3M5.5 5.5h3']],
+    [['M12 3l9 5-9 5-9-5z'], ['M3 12.5l9 5 9-5'], ['M3 17l9 5 9-5']],
+];
+export function applyFilterIcon(svg, i) {
+    if (!svg) return;
+    const parts = FILTER_ICONS[i] || FILTER_ICONS[0];
+    setIcon(svg, 'filt' + i, parts.map(([d, filled]) => `<path d="${d}"${filled ? ' style="fill:currentColor"' : ''}/>`).join(''));
+}

@@ -3784,7 +3784,59 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxFilterStopOnFiltered"
+                        "key": "selectFilterIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterCoverGrayscale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterCoverBrightness"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterCoverTransitionMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterGraphGrayscale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterReturnEnabled"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterReturnDelay"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterReturnDuration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectFilterReturnEasing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectFilterReturnRestore"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterGrayTicks"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorFilterTickGray"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterTickGrayOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterNumberGrayOpacity"
                       },
                       {
                         "type": "row",
@@ -3835,7 +3887,20 @@
                       "sliderFilterGrayOpacity",
                       "selectFilterMissing",
                       "checkboxFilterSkipOnStep",
-                      "checkboxFilterStopOnFiltered",
+                      "selectFilterIconStyle",
+                      "sliderFilterCoverGrayscale",
+                      "sliderFilterCoverBrightness",
+                      "sliderFilterCoverTransitionMs",
+                      "sliderFilterGraphGrayscale",
+                      "checkboxFilterReturnEnabled",
+                      "sliderFilterReturnDelay",
+                      "sliderFilterReturnDuration",
+                      "selectFilterReturnEasing",
+                      "selectFilterReturnRestore",
+                      "checkboxFilterGrayTicks",
+                      "colorFilterTickGray",
+                      "sliderFilterTickGrayOpacity",
+                      "sliderFilterNumberGrayOpacity",
                       "checkboxFilterCloseOnOutside",
                       "sliderFilterPanelWidth",
                       "sliderFilterPanelFontSize",

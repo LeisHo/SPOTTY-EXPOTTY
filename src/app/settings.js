@@ -179,7 +179,11 @@ export const DEFAULTS = {
     sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
     sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
-    selectFilterMissing: 'hide', checkboxFilterSkipOnStep: true, checkboxFilterStopOnFiltered: true, checkboxFilterCloseOnOutside: true,
+    selectFilterMissing: 'hide', checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,
+    selectFilterIconStyle: '0',
+    sliderFilterCoverGrayscale: 100, sliderFilterCoverBrightness: 100, sliderFilterCoverTransitionMs: 250, sliderFilterGraphGrayscale: 100,
+    checkboxFilterReturnEnabled: true, sliderFilterReturnDelay: 3, sliderFilterReturnDuration: 600, selectFilterReturnEasing: 'ease-in-out', selectFilterReturnRestore: 'end',
+    checkboxFilterGrayTicks: true, colorFilterTickGray: '#6b7280', sliderFilterTickGrayOpacity: 25, sliderFilterNumberGrayOpacity: 25,
     sliderFilterPanelWidth: 260, sliderFilterPanelFontSize: 12, sliderFilterPanelOffsetX: 0, sliderFilterPanelOffsetY: 6,
     colorFilterPanelBg: '#14161a', sliderFilterPanelBgOpacity: 92, colorFilterPanelAccent: '#1db954',
 

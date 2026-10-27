@@ -13,7 +13,7 @@ import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn, seekClip, clipLength } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
-import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph } from './app/iconStyles.js';
+import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
 import { logEvent } from './app/debugLog.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo } from './app/handoff.js';
@@ -218,6 +218,44 @@ async function boot() {
     let flt = null;
     const filterOn = () => !!flt && flt.active() && !!setting('checkboxFilterButtonEnabled');
     const songOk = i => !filterOn() || flt.passes(i);
+    // The filter only decides which songs get played NEXT. idx = the song shown (text, cover, playhead); playIdx = the song actually
+    // playing (-1 = none yet). They differ while a clicked filtered-out song is only being looked at: it plays nothing and does not
+    // interrupt the playing song, and after a delay the playhead animates back to the playing song.
+    let playIdx = -1, returnTimer = 0, returnRaf = 0, returningToPlaying = false;
+    const viewOnlyNow = () => filterOn() && idx !== playIdx && !flt.passes(idx);
+    function cancelReturn() { clearTimeout(returnTimer); returnTimer = 0; if (returnRaf) { cancelAnimationFrame(returnRaf); returnRaf = 0; } }
+    function startReturnTimer() {
+        cancelReturn();
+        if (playIdx < 0 || idx === playIdx || !setting('checkboxFilterReturnEnabled')) return;
+        returnTimer = setTimeout(startReturnAnim, setting('sliderFilterReturnDelay') * 1000);
+    }
+    const RETURN_EASE = { 'ease-in-out': t => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2), 'ease-out': t => 1 - (1 - t) * (1 - t), 'ease-in': t => t * t, linear: t => t };
+    function startReturnAnim() {
+        returnTimer = 0;
+        if (playIdx < 0 || idx === playIdx) return;
+        const from = pos, to = playIdx, dur = Math.max(0, setting('sliderFilterReturnDuration')), ease = RETURN_EASE[setting('selectFilterReturnEasing')] || RETURN_EASE['ease-in-out'], t0 = performance.now();
+        logEvent('playback', `RETURN to the playing song ${to + 1} (${dur} ms)`);
+        if (setting('selectFilterReturnRestore') === 'start') { idx = playIdx; render(); } // text and cover change back as the playhead starts moving
+        const finish = () => { returnRaf = 0; returningToPlaying = true; moveTo(to); returningToPlaying = false; };
+        if (dur <= 0) { finish(); return; }
+        const tick = now => {
+            const k = Math.min(1, (now - t0) / dur);
+            pos = from + (to - from) * ease(k);
+            timeline.setPos(pos); timeline.draw();
+            if (k < 1) returnRaf = requestAnimationFrame(tick); else finish();
+        };
+        returnRaf = requestAnimationFrame(tick);
+    }
+    // Scrolling / dragging the scrub line / arrow keys: a position that lands on a filtered-out song moves on to the nearest song that passes, in the direction of travel.
+    function snapPos(p) {
+        if (!filterOn() || !setting('checkboxFilterSkipOnStep')) return p;
+        const c = clamp(p, 0, songs.length - 1), i = Math.floor(c);
+        if (flt.passes(i)) return p;
+        const sgn = c >= pos ? 1 : -1;
+        for (let j = i; j >= 0 && j < songs.length; j += sgn) if (flt.passes(j)) return j;
+        return pos; // none left that way: stay
+    }
+    const randomPassingSong = () => { const pool = []; for (let i = 0; i < songs.length; i++) if (songOk(i)) pool.push(i); return pool.length ? pool[Math.floor(Math.random() * pool.length)] : Math.floor(Math.random() * songs.length); };
     // (capture phase: runs before the generic settings listener below, so applyLook sees the flag)
     ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; }, true));
 
@@ -332,7 +370,7 @@ async function boot() {
             : null;
         const randomOn = saved ? !!(saved.controls && saved.controls.checkboxRandomStartSong) : !!setting('checkboxRandomStartSong');
         if (interacted || !randomOn) return;
-        moveTo(Math.floor(Math.random() * songs.length));
+        moveTo(randomPassingSong());
         startupSpan();
         timeline.centerOnPlayhead();
         timeline.draw();
@@ -586,6 +624,8 @@ async function boot() {
             c('--spx-filter-gap', setting('sliderFilterGapBelowShuffle') + 'px'); c('--spx-filter-edge', setting('sliderFilterEdgeOffset') + 'px');
             c('--spx-filter-off-op', String(setting('sliderFilterOffOpacity') / 100)); c('--spx-filter-on-op', String(setting('sliderFilterOnOpacity') / 100));
             c('--spx-filter-color', setting('colorFilterIcon')); c('--spx-filter-on-color', setting('colorFilterOn'));
+            c('--spx-flt-cover-gray', String(setting('sliderFilterCoverGrayscale') / 100)); c('--spx-flt-cover-bright', String(setting('sliderFilterCoverBrightness') / 100)); c('--spx-flt-cover-ms', setting('sliderFilterCoverTransitionMs') + 'ms');
+            applyFilterIcon(el('spxFilter').querySelector('svg'), iconIndex(setting('selectFilterIconStyle')));
             const ps = flt && flt.panel.style;
             if (ps) {
                 ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-font', setting('sliderFilterPanelFontSize') + 'px');
@@ -709,9 +749,10 @@ async function boot() {
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         artistRaw = s.a;
         setArtistLine();
-        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${songOk(idx) ? (clipKey(s) || !previewClipsOn() ? '' : '\nno preview clip') : '\nfiltered out'}`; // its own line (the line breaks via white-space: pre-line)
+        el('spxMeta').textContent = `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) || !previewClipsOn() ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
         applyTextElementStyles(); // re-run Shrink to Fit against the new text (a no-op for every other Overflow mode)
         timeline.setDateLine(fmtAdded(s.t));
+        el('spxApp').classList.toggle('view-filtered', viewOnlyNow());
         scheduleCover();
         background.onSongChanged(); // palette-driven modes change with the song even if the cover image did not; fades like a new cover
     }
@@ -746,18 +787,22 @@ async function boot() {
     function onIndexChange(newIdx) {
         dir = newIdx >= idx ? 1 : -1;
         idx = newIdx;
+        if (returningToPlaying) { render(); return; } // the playhead is back on the song that was playing: only the text / cover come back
+        if (filterOn() && !flt.passes(idx)) { // shown only: nothing is played or interrupted
+            logEvent('playback', `VIEW (filtered out) ${idx + 1}/${songs.length} "${songs[idx].n}" - ${songs[idx].a}; the playing song stays ${playIdx + 1}`);
+            stepImmediate = false;
+            render();
+            startReturnTimer();
+            return;
+        }
+        cancelReturn();
+        playIdx = idx;
         moveLog.push({ t: performance.now(), i: idx });
         noteSongChange();
         logEvent('playback', `SONG ${idx + 1}/${songs.length} "${songs[idx].n}" - ${songs[idx].a}  [clip: ${clipState(clipKey(songs[idx]))}]`);
         render();
         schedulePreload();
         if (handedOff) { logEvent('playback', 'EMBED song stopped: moved to another song'); pauseEmbed(); handedOff = false; }
-        if (!songOk(idx) && setting('checkboxFilterStopOnFiltered')) { // filtered out: nothing plays for this song
-            logEvent('playback', 'FILTERED OUT: not playing');
-            clearTimeout(handoffTimer); handoffPending = false; clearTimeout(noPreviewTimer);
-            stopClip(); previewHold = null; stepImmediate = false;
-            return;
-        }
         playClip(clipKey(songs[idx]));
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
@@ -770,10 +815,10 @@ async function boot() {
         // The handoff reads where the preview is, so it waits (up to 2 s after the song change) for a pending preview to start.
         const handoffWaitUntil = performance.now() + 2000;
         const doHandoff = () => {
-            if (previewClipsOn() && clipKey(songs[idx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
+            if (previewClipsOn() && clipKey(songs[playIdx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
             handoffPending = false;
             const ok = interacted && isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0;
-            logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[idx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
+            logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[playIdx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
             if (ok) {
                 // The full song starts where the preview is now (+ the Full Song Start Offset), not at 0:00
                 const startMs = Math.max(0, clipPosition() + setting('sliderHandoffStartOffset')) * 1000;
@@ -782,8 +827,8 @@ async function boot() {
                     // Crossfade: the preview keeps playing; the full song starts silent and, once it is audible (SDK / iframe report it playing),
                     // it fades in while the preview fades out over fadeMs. No silence between the two.
                     previewHold = null;
-                    playTrackCrossfade(songs[idx].id, fadeMs, ms => stopClip(ms), startMs);
-                } else { previewHold = songs[idx].id; playTrack(songs[idx].id, startMs); } // 0 = hard cut: the preview still holds until the song plays
+                    playTrackCrossfade(songs[playIdx].id, fadeMs, ms => stopClip(ms), startMs);
+                } else { previewHold = songs[playIdx].id; playTrack(songs[playIdx].id, startMs); } // 0 = hard cut: the preview still holds until the song plays
                 handedOff = true;
             }
             else stopClip();
@@ -792,20 +837,22 @@ async function boot() {
         // Auto Next Song: a song with no preview clip is held for the set time, then the next song plays.
         // Any song change cancels the hold.
         clearTimeout(noPreviewTimer);
-        if (previewClipsOn() && !clipKey(songs[idx]) && setting('checkboxAutoNextSong')) {
-            const held = idx, holdS = setting('sliderNoPreviewHoldSeconds');
+        if (previewClipsOn() && !clipKey(songs[playIdx]) && setting('checkboxAutoNextSong')) {
+            const held = playIdx, holdS = setting('sliderNoPreviewHoldSeconds');
             logEvent('playback', `NO PREVIEW: holding ${holdS} s, then the next song`);
-            noPreviewTimer = setTimeout(() => { if (idx === held) stepSong(1); }, holdS * 1000);
+            noPreviewTimer = setTimeout(() => { if (playIdx === held) stepSong(1, true); }, holdS * 1000);
         }
     }
 
     // The current song is the LAST one added at or before the playhead's time (timeline.currentIndex()
     // = floor(pos)): landing in an empty stretch of the timeline plays the most recent earlier song.
     function moveTo(p) {
+        if (!returningToPlaying) cancelReturn();
         pos = clamp(p, 0, songs.length - 1);
         timeline.setPos(pos);
         const n = timeline.currentIndex();
         if (n !== idx) onIndexChange(n);
+        else if (viewOnlyNow()) startReturnTimer(); // clicked the same filtered-out song again: the return delay starts over
         timeline.draw();
     }
     const seek = i => moveTo(i);
@@ -820,7 +867,7 @@ async function boot() {
         if (inUi(e.target)) return;
         e.preventDefault();
         const unit = e.deltaMode === 1 ? e.deltaY / 3 : e.deltaY / 100;
-        moveTo(timeline.scrubByPixels(unit * wheelPixels() * (setting('checkboxInvertScroll') ? -1 : 1)));
+        moveTo(snapPos(timeline.scrubByPixels(unit * wheelPixels() * (setting('checkboxInvertScroll') ? -1 : 1))));
     }, { passive: false });
 
     const ptrs = new Map(); // pointerId -> { x, y, startX, startY, type, onTimeline, moved }
@@ -879,7 +926,7 @@ async function boot() {
     window.addEventListener('pointermove', e => {
         const p = ptrs.get(e.pointerId);
         if (!p) return;
-        if (p.playhead) { moveTo(timeline.posAtX(e.clientX - p.grab - el('spxTimeline').getBoundingClientRect().left)); p.x = e.clientX; p.y = e.clientY; return; }
+        if (p.playhead) { moveTo(snapPos(timeline.posAtX(e.clientX - p.grab - el('spxTimeline').getBoundingClientRect().left))); p.x = e.clientX; p.y = e.clientY; return; }
         const dx = e.clientX - p.x;
         // a finger must travel its own 'start threshold' before it counts as a drag (a tap is not a drag); a mouse 4 px
         const startPx = p.type === 'mouse' ? 4 : setting('sliderTouchStartThreshold');
@@ -905,7 +952,7 @@ async function boot() {
                 // Touch Scrub Speed px per px of finger movement, plus Acceleration x the finger's speed (px/ms, capped
                 // at 4) so a fast swipe travels farther than a slow one.
                 const gain = setting('sliderTouchScrubSpeed') * (1 + setting('sliderTouchScrubAcceleration') * Math.min(4, Math.abs(dx) / dt));
-                moveTo(timeline.scrubByPixels(dx * gain * (setting('checkboxInvertTouchScrub') ? -1 : 1)));
+                moveTo(snapPos(timeline.scrubByPixels(dx * gain * (setting('checkboxInvertTouchScrub') ? -1 : 1))));
             }
         }
     });
@@ -939,7 +986,14 @@ async function boot() {
         if (shuffleQueue[shufflePtr] !== idx) rebuildShuffle(); // scrubbed somewhere else: shuffle on from here
         let p = shufflePtr + d;
         if (p >= shuffleQueue.length) { rebuildShuffle(); p = 1; }
-        p = Math.max(0, p);
+        if (p < 0) { // before the start of what was played: a new random song that passes the filter goes in front
+            const pool = [];
+            for (let i = 0; i < songs.length; i++) if (i !== idx && songOk(i)) pool.push(i);
+            if (!pool.length) return;
+            shuffleQueue.unshift(pool[Math.floor(Math.random() * pool.length)]);
+            p = 0;
+        }
+        if (shuffleQueue[p] === undefined) return; // nothing else passes the filter
         shufflePtr = p;
         moveTo(shuffleQueue[p]);
         timeline.centerOnPlayhead();
@@ -960,18 +1014,18 @@ async function boot() {
     setOnEnded(() => {
         if (!shuffleOn && setting('checkboxLoopPreview')) return false;
         logEvent('playback', shuffleOn ? 'SONG ended: shuffle picks the next song' : 'SONG ended: Loop Preview is off, moves to the next song');
-        stepSong(1);
+        stepSong(1, true);
         return true;
     });
-    const stepSong = d => {
+    const stepSong = (d, fromPlaying) => {
         stepImmediate = true;
         if (shuffleOn && Math.abs(d) === 1) shuffleStep(d);
         else {
-            let t = timeline.currentIndex() + d;
+            let t = (fromPlaying && playIdx >= 0 ? playIdx : timeline.currentIndex()) + d;
             if (filterOn() && setting('checkboxFilterSkipOnStep')) { // Next / Last jump to the nearest song that passes the filter
                 const sgn = d < 0 ? -1 : 1;
                 while (t >= 0 && t < songs.length && !flt.passes(t)) t += sgn;
-                if (t < 0 || t >= songs.length) { stepImmediate = false; return; } // none left in that direction
+                if (t < 0 || t >= songs.length) { stepImmediate = false; logEvent('playback', 'NEXT/LAST: no song that passes the filter in that direction'); return; }
             }
             moveTo(t);
         }
@@ -995,12 +1049,9 @@ async function boot() {
     function onFilterChanged() {
         timeline.setFilter(filterOn() ? flt.passes : null);
         if (shuffleOn) rebuildShuffle();
-        if (!songOk(idx) && setting('checkboxFilterStopOnFiltered')) { // the current song no longer passes: stop it
-            clearTimeout(handoffTimer); handoffPending = false; clearTimeout(noPreviewTimer);
-            if (handedOff) { pauseEmbed(); handedOff = false; }
-            stopClip(); previewHold = null;
-        }
+        // The playing song keeps playing even if it no longer passes: the filter only decides which songs are played next.
         render();
+        if (idx !== playIdx) startReturnTimer();
         syncFilterUi();
         logEvent('playback', 'FILTER ' + (filterOn() ? flt.describe() + ' -> ' + flt.countPassing() + ' of ' + songs.length + ' songs' : 'cleared'));
     }
@@ -1015,7 +1066,7 @@ async function boot() {
     window.addEventListener('resize', () => { if (flt.open) placeFilterPanel(); });
     timeline.setFilter(filterOn() ? flt.passes : null);
     syncFilterUi();
-    window.__spxState = () => ({ idx, pass: songOk(idx), shuffleOn, filterOn: filterOn() }); // read by tests
+    window.__spxState = () => ({ idx, playIdx, pass: songOk(idx), view: viewOnlyNow(), pos, shuffleOn, filterOn: filterOn() }); // read by tests
     // dev-panel buttons (so a hotkey can be assigned to them there)
     document.addEventListener('click', e => {
         const b = e.target && e.target.closest && e.target.closest('button');
@@ -1036,8 +1087,8 @@ async function boot() {
         const step = e.shiftKey ? 10 : 1;
         if (e.key === ' ' || e.code === 'Space') {
             if (!e.repeat) { if (document.activeElement && document.activeElement.tagName === 'BUTTON') document.activeElement.blur(); togglePlayback(); }
-        } else if (e.key === 'ArrowRight') { if (step === 1) stepSong(1); else moveTo(timeline.currentIndex() + step); }
-        else if (e.key === 'ArrowLeft') { if (step === 1) stepSong(-1); else moveTo(timeline.currentIndex() - step); }
+        } else if (e.key === 'ArrowRight') { if (step === 1) stepSong(1); else moveTo(snapPos(timeline.currentIndex() + step)); }
+        else if (e.key === 'ArrowLeft') { if (step === 1) stepSong(-1); else moveTo(snapPos(timeline.currentIndex() - step)); }
         else if (e.key === 'ArrowUp') volume.nudge(e.shiftKey ? 0.1 : 0.05);
         else if (e.key === 'ArrowDown') volume.nudge(e.shiftKey ? -0.1 : -0.05);
         else if (e.key === 'Home') { moveTo(0); afterJump(); }
