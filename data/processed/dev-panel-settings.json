@@ -299,7 +299,7 @@
     "sliderFilterPanelOffsetY": 6,
     "colorFilterPanelBg": "#4f4f4f",
     "sliderFilterPanelBlur": 6,
-    "sliderFilterPanelBgOpacity": 42,
+    "sliderFilterPanelBgOpacity": 91,
     "colorFilterPanelAccent": "#878787",
     "selectSongDataIconStyle": "1",
     "checkboxSongDataEnabled": true,
@@ -309,7 +309,7 @@
     "sliderSongDataBtnGap": 0,
     "sliderSongDataBtnEdge": 14,
     "sliderSongDataBtnOffOpacity": 45,
-    "sliderSongDataBtnOnOpacity": 75,
+    "sliderSongDataBtnOnOpacity": 100,
     "colorSongDataBtn": "#f2f2f2",
     "colorSongDataBtnOn": "#ffffff",
     "sliderSongDataClickTolerance": 0,
@@ -15655,10 +15655,15 @@
                       {
                         "type": "row",
                         "key": "sliderMobileFilterIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileFilterIconOffsetY"
                       }
                     ],
                     "rowKeys": [
-                      "sliderMobileFilterIconSize"
+                      "sliderMobileFilterIconSize",
+                      "sliderMobileFilterIconOffsetY"
                     ],
                     "subgroups": []
                   }
@@ -15671,10 +15676,15 @@
                       {
                         "type": "row",
                         "key": "sliderMobileSongDataBtnSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileSongDataBtnOffsetY"
                       }
                     ],
                     "rowKeys": [
-                      "sliderMobileSongDataBtnSize"
+                      "sliderMobileSongDataBtnSize",
+                      "sliderMobileSongDataBtnOffsetY"
                     ],
                     "subgroups": []
                   }
@@ -16318,10 +16328,15 @@
                     {
                       "type": "row",
                       "key": "sliderMobileFilterIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileFilterIconOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderMobileFilterIconSize"
+                    "sliderMobileFilterIconSize",
+                    "sliderMobileFilterIconOffsetY"
                   ],
                   "subgroups": []
                 },
@@ -16331,10 +16346,15 @@
                     {
                       "type": "row",
                       "key": "sliderMobileSongDataBtnSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongDataBtnOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderMobileSongDataBtnSize"
+                    "sliderMobileSongDataBtnSize",
+                    "sliderMobileSongDataBtnOffsetY"
                   ],
                   "subgroups": []
                 },
@@ -18357,10 +18377,15 @@
                     {
                       "type": "row",
                       "key": "sliderMobileFilterIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileFilterIconOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderMobileFilterIconSize"
+                    "sliderMobileFilterIconSize",
+                    "sliderMobileFilterIconOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -18373,10 +18398,15 @@
                     {
                       "type": "row",
                       "key": "sliderMobileSongDataBtnSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileSongDataBtnOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderMobileSongDataBtnSize"
+                    "sliderMobileSongDataBtnSize",
+                    "sliderMobileSongDataBtnOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -19020,10 +19050,15 @@
                   {
                     "type": "row",
                     "key": "sliderMobileFilterIconSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileFilterIconOffsetY"
                   }
                 ],
                 "rowKeys": [
-                  "sliderMobileFilterIconSize"
+                  "sliderMobileFilterIconSize",
+                  "sliderMobileFilterIconOffsetY"
                 ],
                 "subgroups": []
               },
@@ -19033,10 +19068,15 @@
                   {
                     "type": "row",
                     "key": "sliderMobileSongDataBtnSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileSongDataBtnOffsetY"
                   }
                 ],
                 "rowKeys": [
-                  "sliderMobileSongDataBtnSize"
+                  "sliderMobileSongDataBtnSize",
+                  "sliderMobileSongDataBtnOffsetY"
                 ],
                 "subgroups": []
               },
@@ -22138,10 +22178,15 @@
                       {
                         "type": "row",
                         "key": "sliderLandscapeFilterIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeFilterIconOffsetY"
                       }
                     ],
                     "rowKeys": [
-                      "sliderLandscapeFilterIconSize"
+                      "sliderLandscapeFilterIconSize",
+                      "sliderLandscapeFilterIconOffsetY"
                     ],
                     "subgroups": []
                   }
@@ -22154,10 +22199,15 @@
                       {
                         "type": "row",
                         "key": "sliderLandscapeSongDataBtnSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeSongDataBtnOffsetY"
                       }
                     ],
                     "rowKeys": [
-                      "sliderLandscapeSongDataBtnSize"
+                      "sliderLandscapeSongDataBtnSize",
+                      "sliderLandscapeSongDataBtnOffsetY"
                     ],
                     "subgroups": []
                   }
@@ -22801,10 +22851,15 @@
                     {
                       "type": "row",
                       "key": "sliderLandscapeFilterIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeFilterIconOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderLandscapeFilterIconSize"
+                    "sliderLandscapeFilterIconSize",
+                    "sliderLandscapeFilterIconOffsetY"
                   ],
                   "subgroups": []
                 },
@@ -22814,10 +22869,15 @@
                     {
                       "type": "row",
                       "key": "sliderLandscapeSongDataBtnSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongDataBtnOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderLandscapeSongDataBtnSize"
+                    "sliderLandscapeSongDataBtnSize",
+                    "sliderLandscapeSongDataBtnOffsetY"
                   ],
                   "subgroups": []
                 },
@@ -24840,10 +24900,15 @@
                     {
                       "type": "row",
                       "key": "sliderLandscapeFilterIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeFilterIconOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderLandscapeFilterIconSize"
+                    "sliderLandscapeFilterIconSize",
+                    "sliderLandscapeFilterIconOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -24856,10 +24921,15 @@
                     {
                       "type": "row",
                       "key": "sliderLandscapeSongDataBtnSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeSongDataBtnOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderLandscapeSongDataBtnSize"
+                    "sliderLandscapeSongDataBtnSize",
+                    "sliderLandscapeSongDataBtnOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -25503,10 +25573,15 @@
                   {
                     "type": "row",
                     "key": "sliderLandscapeFilterIconSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeFilterIconOffsetY"
                   }
                 ],
                 "rowKeys": [
-                  "sliderLandscapeFilterIconSize"
+                  "sliderLandscapeFilterIconSize",
+                  "sliderLandscapeFilterIconOffsetY"
                 ],
                 "subgroups": []
               },
@@ -25516,10 +25591,15 @@
                   {
                     "type": "row",
                     "key": "sliderLandscapeSongDataBtnSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeSongDataBtnOffsetY"
                   }
                 ],
                 "rowKeys": [
-                  "sliderLandscapeSongDataBtnSize"
+                  "sliderLandscapeSongDataBtnSize",
+                  "sliderLandscapeSongDataBtnOffsetY"
                 ],
                 "subgroups": []
               },
@@ -26970,8 +27050,8 @@
     "desktop:Next And Last Button Animation": true,
     "desktop:Shuffle Button": true,
     "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": true,
-    "desktop:Song Data": true,
+    "desktop:Filter Button": false,
+    "desktop:Song Data": false,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
     "desktop:Global Override": true,
@@ -27040,8 +27120,8 @@
     "mobile:Next And Last Button Animation": false,
     "mobile:Shuffle Button": true,
     "mobile:Shuffle Button Animation": false,
-    "mobile:Filter Button": true,
-    "mobile:Song Data": true,
+    "mobile:Filter Button": false,
+    "mobile:Song Data": false,
     "mobile:Song Timeline": true,
     "mobile:Song Timeline Animation": false,
     "mobile:Global Override": true,
@@ -27799,7 +27879,11 @@
     "sliderMobileFilterIconSize": null,
     "sliderLandscapeFilterIconSize": null,
     "sliderMobileSongDataBtnSize": null,
-    "sliderLandscapeSongDataBtnSize": null
+    "sliderLandscapeSongDataBtnSize": null,
+    "sliderMobileSongDataBtnOffsetY": null,
+    "sliderLandscapeSongDataBtnOffsetY": null,
+    "sliderMobileFilterIconOffsetY": null,
+    "sliderLandscapeFilterIconOffsetY": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -28063,7 +28147,9 @@
     "selectShuffleIconStyle": false,
     "sliderShuffleIconSize": true,
     "sliderFilterIconSize": true,
-    "sliderSongDataBtnSize": true
+    "sliderSongDataBtnSize": true,
+    "sliderSongDataBtnOffsetY": true,
+    "sliderFilterIconOffsetY": true
   },
   "devIndependence": {
     "mobile": {
@@ -28108,7 +28194,11 @@
       "sliderTxtSongTitleMaxWidth": true,
       "sliderVolIconSize": true,
       "sliderPlayButtonSize": true,
-      "sliderNavButtonSize": true
+      "sliderNavButtonSize": true,
+      "sliderSongDataBtnOffsetY": true,
+      "sliderSongDataBtnSize": true,
+      "sliderFilterIconOffsetY": true,
+      "sliderFilterIconSize": true
     },
     "landscape": {}
   },
@@ -28155,7 +28245,9 @@
       "sliderTxtSongTitleMaxWidth": 300,
       "sliderVolIconSize": 25,
       "sliderNavButtonSize": 18,
-      "sliderPlayButtonSize": 20
+      "sliderPlayButtonSize": 20,
+      "sliderSongDataBtnOffsetY": 1,
+      "sliderFilterIconOffsetY": 2
     },
     "landscape": {}
   },
