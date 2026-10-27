@@ -253,7 +253,7 @@
     "checkboxFilterButtonEnabled": true,
     "sliderFilterIconSize": 25,
     "sliderFilterIconOffsetX": 0,
-    "sliderFilterIconOffsetY": 0,
+    "sliderFilterIconOffsetY": 23,
     "sliderFilterGapBelowShuffle": 0,
     "sliderFilterEdgeOffset": 14,
     "sliderFilterOffOpacity": 45,
@@ -292,13 +292,13 @@
     "sliderFilterPanelOffsetY": 6,
     "colorFilterPanelBg": "#4f4f4f",
     "sliderFilterPanelBlur": 6,
-    "sliderFilterPanelBgOpacity": 4,
+    "sliderFilterPanelBgOpacity": 42,
     "colorFilterPanelAccent": "#878787",
     "selectSongDataIconStyle": "1",
     "checkboxSongDataEnabled": true,
     "sliderSongDataBtnSize": 25,
     "sliderSongDataBtnOffsetX": 0,
-    "sliderSongDataBtnOffsetY": 0,
+    "sliderSongDataBtnOffsetY": 10,
     "sliderSongDataBtnGap": 0,
     "sliderSongDataBtnEdge": 14,
     "sliderSongDataBtnOffOpacity": 45,
@@ -307,7 +307,7 @@
     "colorSongDataBtnOn": "#ffffff",
     "sliderSongDataClickTolerance": 0,
     "sliderSongDataHoverTolerance": 0,
-    "sliderSongDataIconSize": 16,
+    "sliderSongDataIconSize": 19,
     "sliderSongDataFontSize": 13,
     "checkboxSongDataBold": true,
     "colorSongData": "#ffffff",
@@ -3343,7 +3343,7 @@
                     "items": [
                       {
                         "type": "row",
-                        "key": "selectPlayIconStyle"
+                        "key": "buttonPlayPause"
                       },
                       {
                         "type": "row",
@@ -3351,7 +3351,7 @@
                       },
                       {
                         "type": "row",
-                        "key": "buttonPlayPause"
+                        "key": "selectPlayIconStyle"
                       },
                       {
                         "type": "row",
@@ -3432,9 +3432,9 @@
                       }
                     ],
                     "rowKeys": [
-                      "selectPlayIconStyle",
-                      "selectPauseIconStyle",
                       "buttonPlayPause",
+                      "selectPauseIconStyle",
+                      "selectPlayIconStyle",
                       "colorPlayButton",
                       "sliderPlayButtonSize",
                       "sliderPlayButtonOpacity",
@@ -3901,22 +3901,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "selectTempoIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectValenceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectDanceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectEnergyIconStyle"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxFilterButtonEnabled"
                       },
                       {
@@ -4061,6 +4045,22 @@
                       },
                       {
                         "type": "row",
+                        "key": "selectTempoIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectValenceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectDanceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectEnergyIconStyle"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderFilterCoverContrast"
                       },
                       {
@@ -4094,10 +4094,6 @@
                     ],
                     "rowKeys": [
                       "selectFilterIconStyle",
-                      "selectTempoIconStyle",
-                      "selectValenceIconStyle",
-                      "selectDanceIconStyle",
-                      "selectEnergyIconStyle",
                       "checkboxFilterButtonEnabled",
                       "sliderFilterIconSize",
                       "sliderFilterIconOffsetX",
@@ -4134,6 +4130,10 @@
                       "colorFilterPanelBg",
                       "sliderFilterPanelBgOpacity",
                       "colorFilterPanelAccent",
+                      "selectTempoIconStyle",
+                      "selectValenceIconStyle",
+                      "selectDanceIconStyle",
+                      "selectEnergyIconStyle",
                       "sliderFilterCoverContrast",
                       "sliderFilterTextBrightness",
                       "checkboxFilterShowNumbers",
@@ -24234,7 +24234,7 @@
   },
   "sectionCollapseState": {
     "desktop:Saved Dev Settings": true,
-    "desktop:Dev Panel": false,
+    "desktop:Dev Panel": true,
     "desktop:MECHANICS": true,
     "desktop:PANEL UI": true,
     "desktop:TEXT": true,
@@ -24267,12 +24267,12 @@
     "desktop:Shuffle Button Animation": true,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
-    "desktop:Filter Button": true,
+    "desktop:Filter Button": false,
     "desktop:Song Data": true,
     "desktop:Background": true,
     "desktop:Animation": true,
     "desktop:Album Cover": true,
-    "desktop:Shadows": false,
+    "desktop:Shadows": true,
     "desktop:Album Cover Shadow": true,
     "desktop:Volume Shadow": true,
     "desktop:Previous / Next Shadow": true,
