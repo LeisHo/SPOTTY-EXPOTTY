@@ -555,7 +555,7 @@
     "left": 26,
     "top": 209,
     "width": 350,
-    "height": 457
+    "height": 264
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -28472,7 +28472,7 @@
       "sliderSongDataFontSize": 12,
       "sliderSongDataItemGap": 75,
       "sliderSongDataBtnSize": 18,
-      "sliderSongDataOffsetY": 22
+      "sliderSongDataOffsetY": 88
     },
     "landscape": {}
   },
