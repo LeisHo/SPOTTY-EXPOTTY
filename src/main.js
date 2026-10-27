@@ -22,6 +22,7 @@ import { cleanTitle } from './app/title.mjs';
 import { initTitleAnim } from './app/titleAnim.js';
 import { createBackground } from './app/background.js';
 import { createFilter } from './app/filter.js';
+import { createBgAnimation } from './app/bgAnimation.js';
 
 const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 // exact add moment, in the viewer's local time; date only when the export has no time of day
@@ -53,6 +54,7 @@ async function boot() {
         <div class="spx-app" id="spxApp">
             <canvas class="spx-bg spx-bg-prev" id="spxBgPrev"></canvas>
             <canvas class="spx-bg" id="spxBg"></canvas>
+            <canvas class="spx-bg spx-bg-fx" id="spxBgFx"></canvas>
             <div class="ui-element spx-title" id="spxTitle"><a id="spxTitleLink" target="_blank" rel="noopener noreferrer">Loading…</a></div>
             <div class="ui-element spx-artist" id="spxArtist"></div>
             <div class="ui-element spx-meta" id="spxMeta"></div>
@@ -270,6 +272,8 @@ async function boot() {
         canvas: el('spxBg'), prevCanvas: el('spxBgPrev'), coverEl: el('spxCover'), coverImg: el('spxCoverImg'),
         getPalette: () => { const c = songs[idx] && songs[idx].c; return c !== undefined ? covers[c] : null; },
     });
+    // Background animation (UI Layout > Background > Animation): a WebGL layer above the background canvas. curveY is declared further down; it is only called later.
+    const bgAnim = createBgAnimation({ bgCanvas: el('spxBg'), prevCanvas: el('spxBgPrev'), fxCanvas: el('spxBgFx'), coverEl: el('spxCover'), curveY: (c, x) => curveY(c, x), bgVersion: () => background.version(), bgFading: () => background.fading() });
     initTitleAnim(el('spxTitleLink'));
     initTitleAnim(el('spxStartBtn'), 'StartPlay');
     // Volume (top right): scales the scrub clips. Spotify's embedded player has no volume method, so at exactly
@@ -617,6 +621,7 @@ async function boot() {
         applyTimelineBox();
         el('spxStart').style.transition = `opacity ${setting('sliderStartFadeMs')}ms linear`;
         el('spxShuffle').hidden = !setting('checkboxShuffleButtonEnabled');
+        bgAnim.refresh();
         { // Filter button + panel
             const a = el('spxApp').style, c = (k, v) => a.setProperty(k, v);
             el('spxFilter').hidden = !setting('checkboxFilterButtonEnabled');

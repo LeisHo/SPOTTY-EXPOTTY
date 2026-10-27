@@ -187,6 +187,16 @@ export const DEFAULTS = {
     sliderFilterPanelWidth: 260, sliderFilterPanelFontSize: 12, sliderFilterPanelOffsetX: 0, sliderFilterPanelOffsetY: 6,
     colorFilterPanelBg: '#14161a', sliderFilterPanelBgOpacity: 92, colorFilterPanelAccent: '#1db954',
 
+    // Background > Animation (bgAnimation.js)
+    selectBgAnimMode: 'none', sliderBgAnimSpeed: 6, sliderBgAnimCenterX: 0, sliderBgAnimCenterY: 0, sliderBgAnimStartStopMs: 2000,
+    curveEditorBgAnimStartStop: { points: [{ x: 0, y: 0 }, { x: 1, y: 1 }], method: 'monotone' },
+    sliderBgAnimZoom: 100, sliderBgAnimResolution: 60, sliderBgAnimMaxFps: 60, selectBgAnimBlend: 'normal', sliderBgAnimOpacity: 70,
+    sliderBgAnimPatchScale: 500, sliderBgAnimPatchCoverage: 50, sliderBgAnimPatchSoftness: 40, sliderBgAnimPatchDrift: 30, sliderBgAnimPatchOctaves: 3,
+    sliderBgAnimBreathPeriod: 8, sliderBgAnimBreathMin: 0, sliderBgAnimBreathMax: 100,
+    sliderBgAnimRingWidth: 120, sliderBgAnimRingSpeedStep: 0.5, checkboxBgAnimRingAlternate: true,
+    sliderBgAnimSwirlRadius: 700, sliderBgAnimSwirlFalloff: 1.5, checkboxBgAnimSwirlInvert: false, sliderBgAnimSwirlTwist: 0,
+    sliderBgAnimWarpStrength: 120, sliderBgAnimWarpScale: 420, sliderBgAnimWarpOctaves: 4, sliderBgAnimWarpLacunarity: 2, sliderBgAnimWarpGain: 0.5, sliderBgAnimWarpDrift: 40,
+
     // Background
     selectBackgroundMode: 'none',
     sliderBackgroundOpacity: 1,

@@ -8602,6 +8602,59 @@
         ];
         renderControlArray(TITLE_BG_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_TITLE_BG_CONTROLS', TITLE_BG_CONTROLS);
+
+        // Background > Animation (bgAnimation.js): one mode select; only the selected mode's settings show (MODE_MAPS below). The speed,
+        // centre, start / stop and quality settings are shared by every mode.
+        const BGA = 'Animation';
+        findGroupContent(tab, BG, 'renderSpottyDevControls', 'selectBackgroundMode').appendChild(createDevGroupElement(BGA, tab));
+        const BLEND_OPTIONS = ['normal', 'screen', 'overlay', 'soft-light', 'hard-light', 'multiply', 'difference', 'exclusion', 'color-dodge', 'lighten', 'darken', 'hue', 'color', 'luminosity']
+            .map(v => ({ value: v, text: v.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) }));
+        const BGA_CONTROLS = [
+            { tab, group: BGA, id: 'selectBgAnimMode', type: 'select', label: 'Animation Mode:', value: 'none', options: [
+                { value: 'none', text: 'None (Off)' }, { value: 'rotation', text: 'Background Rotation' }, { value: 'patches', text: 'Patches (Rotating In Areas)' },
+                { value: 'breathing', text: 'Breathing Fade' }, { value: 'rings', text: 'Ring Bands' }, { value: 'swirl', text: 'Swirl' },
+                { value: 'warp', text: 'Domain Warp (Octave Noise)' }, { value: 'overlay', text: '2nd Background Overlay' }] },
+            // shared by every mode
+            { tab, group: BGA, id: 'sliderBgAnimSpeed', type: 'slider', label: 'Rotation Speed (Deg/S):', min: -180, max: 180, step: 0.5, value: 6 },
+            { tab, group: BGA, id: 'sliderBgAnimCenterX', type: 'slider', label: 'Rotation Center X Offset From Album Cover (Px):', min: -1500, max: 1500, step: 1, value: 0 },
+            { tab, group: BGA, id: 'sliderBgAnimCenterY', type: 'slider', label: 'Rotation Center Y Offset From Album Cover (Px):', min: -1500, max: 1500, step: 1, value: 0 },
+            { tab, group: BGA, id: 'sliderBgAnimStartStopMs', type: 'slider', label: 'Start / Stop Duration (Ms):', min: 0, max: 30000, step: 50, value: 2000 },
+            { tab, group: BGA, id: 'curveEditorBgAnimStartStop', type: 'curve-editor', label: 'Start / Stop Easing Curve (X: Progress Of The Start / Stop Duration, Y: Speed, 1 = Full Speed):', defaultPoints: [{ x: 0, y: 0 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
+            { tab, group: BGA, id: 'sliderBgAnimZoom', type: 'slider', label: 'Zoom (%):', min: 50, max: 400, step: 1, value: 100 },
+            { tab, group: BGA, id: 'sliderBgAnimResolution', type: 'slider', label: 'Render Resolution (% Of Screen):', min: 10, max: 100, step: 1, value: 60 },
+            { tab, group: BGA, id: 'sliderBgAnimMaxFps', type: 'slider', label: 'Max Frame Rate (Fps):', min: 5, max: 120, step: 1, value: 60 },
+            // Patches, Breathing Fade and 2nd Background Overlay lie over the background: how
+            { tab, group: BGA, id: 'selectBgAnimBlend', type: 'select', label: 'Blend Mode:', value: 'normal', options: BLEND_OPTIONS },
+            { tab, group: BGA, id: 'sliderBgAnimOpacity', type: 'slider', label: 'Overlay Opacity (%):', min: 0, max: 100, step: 1, value: 70 },
+            // Patches
+            { tab, group: BGA, id: 'sliderBgAnimPatchScale', type: 'slider', label: 'Patch Size (Px):', min: 40, max: 3000, step: 5, value: 500 },
+            { tab, group: BGA, id: 'sliderBgAnimPatchCoverage', type: 'slider', label: 'Patch Coverage (%):', min: 0, max: 100, step: 1, value: 50 },
+            { tab, group: BGA, id: 'sliderBgAnimPatchSoftness', type: 'slider', label: 'Patch Edge Softness (%):', min: 1, max: 100, step: 1, value: 40 },
+            { tab, group: BGA, id: 'sliderBgAnimPatchDrift', type: 'slider', label: 'Patch Drift Speed (Px/S):', min: 0, max: 600, step: 1, value: 30 },
+            { tab, group: BGA, id: 'sliderBgAnimPatchOctaves', type: 'slider', label: 'Patch Noise Octaves:', min: 1, max: 6, step: 1, value: 3 },
+            // Breathing Fade
+            { tab, group: BGA, id: 'sliderBgAnimBreathPeriod', type: 'slider', label: 'Breathing Period (S):', min: 0.5, max: 120, step: 0.5, value: 8 },
+            { tab, group: BGA, id: 'sliderBgAnimBreathMin', type: 'slider', label: 'Breathing Minimum Opacity (%):', min: 0, max: 100, step: 1, value: 0 },
+            { tab, group: BGA, id: 'sliderBgAnimBreathMax', type: 'slider', label: 'Breathing Maximum Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
+            // Ring Bands
+            { tab, group: BGA, id: 'sliderBgAnimRingWidth', type: 'slider', label: 'Ring Width (Px):', min: 10, max: 1200, step: 1, value: 120 },
+            { tab, group: BGA, id: 'sliderBgAnimRingSpeedStep', type: 'slider', label: 'Speed Change Per Ring (x):', min: -2, max: 2, step: 0.05, value: 0.5 },
+            { tab, group: BGA, id: 'checkboxBgAnimRingAlternate', type: 'checkbox', label: 'Alternate Direction Per Ring', value: true },
+            // Swirl
+            { tab, group: BGA, id: 'sliderBgAnimSwirlRadius', type: 'slider', label: 'Swirl Radius (Px):', min: 50, max: 4000, step: 5, value: 700 },
+            { tab, group: BGA, id: 'sliderBgAnimSwirlFalloff', type: 'slider', label: 'Swirl Falloff (Power):', min: 0.2, max: 6, step: 0.05, value: 1.5 },
+            { tab, group: BGA, id: 'checkboxBgAnimSwirlInvert', type: 'checkbox', label: 'Edges Turn Instead Of The Center', value: false },
+            { tab, group: BGA, id: 'sliderBgAnimSwirlTwist', type: 'slider', label: 'Static Twist (Deg):', min: -720, max: 720, step: 1, value: 0 },
+            // Domain Warp
+            { tab, group: BGA, id: 'sliderBgAnimWarpStrength', type: 'slider', label: 'Warp Strength (Px):', min: 0, max: 800, step: 1, value: 120 },
+            { tab, group: BGA, id: 'sliderBgAnimWarpScale', type: 'slider', label: 'Warp Noise Scale (Px):', min: 40, max: 3000, step: 5, value: 420 },
+            { tab, group: BGA, id: 'sliderBgAnimWarpOctaves', type: 'slider', label: 'Warp Octaves:', min: 1, max: 6, step: 1, value: 4 },
+            { tab, group: BGA, id: 'sliderBgAnimWarpLacunarity', type: 'slider', label: 'Warp Lacunarity (x):', min: 1.1, max: 4, step: 0.05, value: 2 },
+            { tab, group: BGA, id: 'sliderBgAnimWarpGain', type: 'slider', label: 'Warp Gain (x):', min: 0.1, max: 0.9, step: 0.01, value: 0.5 },
+            { tab, group: BGA, id: 'sliderBgAnimWarpDrift', type: 'slider', label: 'Warp Drift Speed (Px/S):', min: 0, max: 600, step: 1, value: 40 },
+        ];
+        renderControlArray(BGA_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_BG_ANIM_CONTROLS', BGA_CONTROLS);
         makeDevGroupToggleable(tab, TA, 'checkboxTitleAnimEnabled');
 
         // ---- Startup: the darkening over the app until the first input, and the play icon (no text, no background) ----
@@ -8635,6 +8688,19 @@
         // Show only the settings that belong to the selected mode of the title animation / background.
         // A control used by several modes (e.g. Border Sample Depth) is shown when ANY of them is selected.
         const MODE_MAPS = [
+            {
+                select: 'selectBgAnimMode', map: {
+                    rotation: [],
+                    patches: ['selectBgAnimBlend', 'sliderBgAnimOpacity', 'sliderBgAnimPatchScale', 'sliderBgAnimPatchCoverage', 'sliderBgAnimPatchSoftness', 'sliderBgAnimPatchDrift', 'sliderBgAnimPatchOctaves'],
+                    breathing: ['selectBgAnimBlend', 'sliderBgAnimBreathPeriod', 'sliderBgAnimBreathMin', 'sliderBgAnimBreathMax'],
+                    rings: ['sliderBgAnimRingWidth', 'sliderBgAnimRingSpeedStep', 'checkboxBgAnimRingAlternate'],
+                    swirl: ['sliderBgAnimSwirlRadius', 'sliderBgAnimSwirlFalloff', 'checkboxBgAnimSwirlInvert', 'sliderBgAnimSwirlTwist'],
+                    warp: ['sliderBgAnimWarpStrength', 'sliderBgAnimWarpScale', 'sliderBgAnimWarpOctaves', 'sliderBgAnimWarpLacunarity', 'sliderBgAnimWarpGain', 'sliderBgAnimWarpDrift'],
+                    overlay: ['selectBgAnimBlend', 'sliderBgAnimOpacity'],
+                },
+                // shown for every mode except "none"
+                always: ['sliderBgAnimSpeed', 'sliderBgAnimCenterX', 'sliderBgAnimCenterY', 'sliderBgAnimStartStopMs', 'curveEditorBgAnimStartStop', 'sliderBgAnimZoom', 'sliderBgAnimResolution', 'sliderBgAnimMaxFps'],
+            },
             {
                 select: 'selectTitleAnimMode', map: {
                     bold: ['sliderTitleBoldRestWeight', 'sliderTitleBoldHoverWeight', 'sliderTitleBoldPressWeight'],

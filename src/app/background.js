@@ -20,6 +20,7 @@ const RECT_MODES = new Set(['borderRadial', 'spotlight']);
 
 export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPalette }) {
     const ctx = canvas.getContext('2d');
+    let version = 0, fadeEnd = 0; // version: bumped on every redraw; fadeEnd: when the current crossfade ends (the animation layer reads both)
     const pctx = prevCanvas.getContext('2d');
     const sampler = document.createElement('canvas');
     sampler.width = sampler.height = SAMPLE;
@@ -127,6 +128,7 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
     }
 
     function render() {
+        version++;
         const dpr = Math.min(2, window.devicePixelRatio || 1);
         const w = canvas.clientWidth || innerWidth, h = canvas.clientHeight || innerHeight;
         const pw = Math.round(w * dpr), ph = Math.round(h * dpr);
@@ -251,6 +253,7 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
             void prevCanvas.offsetWidth; // commit the starting opacity before animating it away
             prevCanvas.style.transition = `opacity ${ms}ms linear`;
             prevCanvas.style.opacity = '0';
+            fadeEnd = performance.now() + ms + 60;
         }
         render();
     }
@@ -277,6 +280,8 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
     // same for every song (None / Color / Gradient) have nothing to fade.
     const SONG_INDEPENDENT = new Set(['none', 'color', 'gradient']);
     return {
+        version: () => version,
+        fading: () => performance.now() < fadeEnd,
         refresh: render,
         onCoverChanged: () => { analyseCover(); crossfadeThenRender(); },
         onSongChanged: () => { if (SONG_INDEPENDENT.has(setting('selectBackgroundMode'))) render(); else crossfadeThenRender(); },

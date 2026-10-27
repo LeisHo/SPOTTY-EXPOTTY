@@ -4778,6 +4778,177 @@
                 {
                   "type": "row",
                   "key": "sliderSpotlightMaxBrightness"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "selectBgAnimMode"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimSpeed"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimCenterX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimCenterY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimStartStopMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "curveEditorBgAnimStartStop"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimZoom"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimResolution"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimMaxFps"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectBgAnimBlend"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimPatchScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimPatchCoverage"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimPatchSoftness"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimPatchDrift"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimPatchOctaves"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimBreathPeriod"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimBreathMin"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimBreathMax"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimRingWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimRingSpeedStep"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxBgAnimRingAlternate"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimSwirlRadius"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimSwirlFalloff"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxBgAnimSwirlInvert"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimSwirlTwist"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimWarpStrength"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimWarpScale"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimWarpOctaves"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimWarpLacunarity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimWarpGain"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderBgAnimWarpDrift"
+                      }
+                    ],
+                    "rowKeys": [
+                      "selectBgAnimMode",
+                      "sliderBgAnimSpeed",
+                      "sliderBgAnimCenterX",
+                      "sliderBgAnimCenterY",
+                      "sliderBgAnimStartStopMs",
+                      "curveEditorBgAnimStartStop",
+                      "sliderBgAnimZoom",
+                      "sliderBgAnimResolution",
+                      "sliderBgAnimMaxFps",
+                      "selectBgAnimBlend",
+                      "sliderBgAnimOpacity",
+                      "sliderBgAnimPatchScale",
+                      "sliderBgAnimPatchCoverage",
+                      "sliderBgAnimPatchSoftness",
+                      "sliderBgAnimPatchDrift",
+                      "sliderBgAnimPatchOctaves",
+                      "sliderBgAnimBreathPeriod",
+                      "sliderBgAnimBreathMin",
+                      "sliderBgAnimBreathMax",
+                      "sliderBgAnimRingWidth",
+                      "sliderBgAnimRingSpeedStep",
+                      "checkboxBgAnimRingAlternate",
+                      "sliderBgAnimSwirlRadius",
+                      "sliderBgAnimSwirlFalloff",
+                      "checkboxBgAnimSwirlInvert",
+                      "sliderBgAnimSwirlTwist",
+                      "sliderBgAnimWarpStrength",
+                      "sliderBgAnimWarpScale",
+                      "sliderBgAnimWarpOctaves",
+                      "sliderBgAnimWarpLacunarity",
+                      "sliderBgAnimWarpGain",
+                      "sliderBgAnimWarpDrift"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [
