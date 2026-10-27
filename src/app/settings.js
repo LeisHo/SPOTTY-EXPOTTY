@@ -197,7 +197,7 @@ export const DEFAULTS = {
     sliderBgAnimZoom: 100, sliderBgAnimResolution: 60, sliderBgAnimMaxFps: 60, selectBgAnimBlend: 'normal', sliderBgAnimOpacity: 70,
     sliderBgAnimPatchScale: 500, sliderBgAnimPatchCoverage: 50, sliderBgAnimPatchSoftness: 40, sliderBgAnimPatchDrift: 30, sliderBgAnimPatchOctaves: 3,
     sliderBgAnimBreathPeriod: 8, sliderBgAnimBreathMin: 0, sliderBgAnimBreathMax: 100,
-    sliderBgAnimRingWidth: 120, sliderBgAnimRingSpeedStep: 0.5, checkboxBgAnimRingAlternate: true,
+    sliderBgAnimRingWidth: 120, sliderBgAnimRingSpeedStep: 0.5, sliderBgAnimRingEdgeBlur: 0, checkboxBgAnimRingAlternate: true,
     sliderBgAnimSwirlRadius: 700, sliderBgAnimSwirlFalloff: 1.5, checkboxBgAnimSwirlInvert: false, sliderBgAnimSwirlTwist: 0,
     sliderBgAnimWarpStrength: 120, sliderBgAnimWarpScale: 420, sliderBgAnimWarpOctaves: 4, sliderBgAnimWarpLacunarity: 2, sliderBgAnimWarpGain: 0.5, sliderBgAnimWarpDrift: 40,
 

@@ -8702,6 +8702,7 @@
             // Ring Bands
             { tab, group: BGA, id: 'sliderBgAnimRingWidth', type: 'slider', label: 'Ring Width (Px):', min: 10, max: 1200, step: 1, value: 120 },
             { tab, group: BGA, id: 'sliderBgAnimRingSpeedStep', type: 'slider', label: 'Speed Change Per Ring (x):', min: -2, max: 2, step: 0.05, value: 0.5 },
+            { tab, group: BGA, id: 'sliderBgAnimRingEdgeBlur', type: 'slider', label: 'Ring Edge Blur (% Of Ring Width):', min: 0, max: 100, step: 1, value: 0 },
             { tab, group: BGA, id: 'checkboxBgAnimRingAlternate', type: 'checkbox', label: 'Alternate Direction Per Ring', value: true },
             // Swirl
             { tab, group: BGA, id: 'sliderBgAnimSwirlRadius', type: 'slider', label: 'Swirl Radius (Px):', min: 50, max: 4000, step: 5, value: 700 },
@@ -8756,7 +8757,7 @@
                     rotation: [],
                     patches: ['selectBgAnimBlend', 'sliderBgAnimOpacity', 'sliderBgAnimPatchScale', 'sliderBgAnimPatchCoverage', 'sliderBgAnimPatchSoftness', 'sliderBgAnimPatchDrift', 'sliderBgAnimPatchOctaves'],
                     breathing: ['selectBgAnimBlend', 'sliderBgAnimBreathPeriod', 'sliderBgAnimBreathMin', 'sliderBgAnimBreathMax'],
-                    rings: ['sliderBgAnimRingWidth', 'sliderBgAnimRingSpeedStep', 'checkboxBgAnimRingAlternate'],
+                    rings: ['sliderBgAnimRingWidth', 'sliderBgAnimRingSpeedStep', 'sliderBgAnimRingEdgeBlur', 'checkboxBgAnimRingAlternate'],
                     swirl: ['sliderBgAnimSwirlRadius', 'sliderBgAnimSwirlFalloff', 'checkboxBgAnimSwirlInvert', 'sliderBgAnimSwirlTwist'],
                     warp: ['sliderBgAnimWarpStrength', 'sliderBgAnimWarpScale', 'sliderBgAnimWarpOctaves', 'sliderBgAnimWarpLacunarity', 'sliderBgAnimWarpGain', 'sliderBgAnimWarpDrift'],
                     overlay: ['selectBgAnimBlend', 'sliderBgAnimOpacity'],

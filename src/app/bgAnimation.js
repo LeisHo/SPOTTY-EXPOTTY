@@ -38,7 +38,7 @@ uniform float uMode, uAngle, uTau, uZoom;
 uniform float uOpacity;
 uniform float uPatchScale, uPatchCover, uPatchSoft, uPatchDrift, uPatchOct;
 uniform float uBreathPeriod, uBreathMin, uBreathMax;
-uniform float uRingW, uRingStep, uRingAlt;
+uniform float uRingW, uRingStep, uRingAlt, uRingBlur;
 uniform float uSwirlR, uSwirlPow, uSwirlInv, uSwirlTwist;
 uniform float uWarpStr, uWarpScale, uWarpOct, uWarpLac, uWarpGain, uWarpDrift;
 varying vec2 vP;
@@ -72,11 +72,19 @@ vec4 samp(vec2 src) {
     return texture2D(uTex, uv);
 }
 
+// the picture as ring k shows it (every ring turns by its own angle)
+vec4 ringColor(vec2 d, float k) {
+    float sgn = uRingAlt > 0.5 ? (mod(abs(k), 2.0) < 1.0 ? 1.0 : -1.0) : 1.0;
+    return samp(uCenter + rot(d, uAngle * (1.0 + uRingStep * k) * sgn) / max(uZoom, 0.01));
+}
+
 void main() {
     int m = int(uMode + 0.5);
     vec2 p = vP, d = p - uCenter;
     vec2 q;
     float alpha = 1.0;
+    vec4 c = vec4(0.0);
+    bool direct = false; // the mode already worked out the colour
     if (m == 1) {            // rotation
         q = rot(d, uAngle);
     } else if (m == 2) {     // patches
@@ -89,9 +97,16 @@ void main() {
         q = rot(d, uAngle);
         alpha = mix(uBreathMin, uBreathMax, 0.5 + 0.5 * sin(6.2831853 * uTau / max(uBreathPeriod, 0.05)));
     } else if (m == 4) {     // rings
-        float k = floor(length(d) / max(uRingW, 1.0));
-        float sgn = uRingAlt > 0.5 ? (mod(k, 2.0) < 1.0 ? 1.0 : -1.0) : 1.0;
-        q = rot(d, uAngle * (1.0 + uRingStep * k) * sgn);
+        float x = length(d) / max(uRingW, 1.0);
+        float k = floor(x), t = x - k;
+        float b = clamp(uRingBlur, 0.0, 1.0) * 0.5; // half the width of the blended band, as a fraction of a ring
+        c = ringColor(d, k);
+        // blur the edges: near a ring's inner / outer edge it is mixed with its neighbour's picture (half and half exactly on the edge)
+        if (b > 0.001) {
+            if (t < b && k > 0.5) c = mix(c, ringColor(d, k - 1.0), 0.5 * (1.0 - t / b));
+            else if (t > 1.0 - b) c = mix(c, ringColor(d, k + 1.0), 0.5 * (1.0 - (1.0 - t) / b));
+        }
+        direct = true;
     } else if (m == 5) {     // swirl
         float w = pow(clamp(1.0 - length(d) / max(uSwirlR, 1.0), 0.0, 1.0), uSwirlPow);
         if (uSwirlInv > 0.5) w = 1.0 - w;
@@ -104,7 +119,7 @@ void main() {
         q = rot(d, uAngle);
         alpha = uOpacity;
     }
-    vec4 c = samp(uCenter + q / max(uZoom, 0.01));
+    if (!direct) c = samp(uCenter + q / max(uZoom, 0.01));
     float a = c.a * alpha;
     gl_FragColor = vec4(c.rgb * a, a); // premultiplied (the texture is straight alpha, so c.rgb is multiplied by its own alpha too)
 }`;
@@ -194,7 +209,7 @@ export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, cur
         f('uPatchScale', setting('sliderBgAnimPatchScale') * px); f('uPatchCover', setting('sliderBgAnimPatchCoverage') / 100);
         f('uPatchSoft', setting('sliderBgAnimPatchSoftness') / 100); f('uPatchDrift', setting('sliderBgAnimPatchDrift') * px); f('uPatchOct', setting('sliderBgAnimPatchOctaves'));
         f('uBreathPeriod', setting('sliderBgAnimBreathPeriod')); f('uBreathMin', setting('sliderBgAnimBreathMin') / 100); f('uBreathMax', setting('sliderBgAnimBreathMax') / 100);
-        f('uRingW', setting('sliderBgAnimRingWidth') * px); f('uRingStep', setting('sliderBgAnimRingSpeedStep')); f('uRingAlt', setting('checkboxBgAnimRingAlternate') ? 1 : 0);
+        f('uRingW', setting('sliderBgAnimRingWidth') * px); f('uRingStep', setting('sliderBgAnimRingSpeedStep')); f('uRingAlt', setting('checkboxBgAnimRingAlternate') ? 1 : 0); f('uRingBlur', setting('sliderBgAnimRingEdgeBlur') / 100);
         f('uSwirlR', setting('sliderBgAnimSwirlRadius') * px); f('uSwirlPow', setting('sliderBgAnimSwirlFalloff')); f('uSwirlInv', setting('checkboxBgAnimSwirlInvert') ? 1 : 0);
         f('uSwirlTwist', (setting('sliderBgAnimSwirlTwist') * Math.PI) / 180);
         f('uWarpStr', setting('sliderBgAnimWarpStrength') * px); f('uWarpScale', setting('sliderBgAnimWarpScale') * px);
