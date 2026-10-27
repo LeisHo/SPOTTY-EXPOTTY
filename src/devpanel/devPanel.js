@@ -6968,6 +6968,7 @@
         if (state.perMode && typeof window.spxApplyPerMode === 'function') window.spxApplyPerMode(state.perMode);
         window.__spxPerModeRestoring = false;
         window.__spxBulkApply = false;
+        if (typeof window.spxSyncPerModeLast === 'function') window.spxSyncPerModeLast();
         // The Mobile/Landscape twin rows exist only now, after the restore above. Anything the app reads through a twin (e.g. the cover's
         // Y offset on a phone) was computed while they were missing, so the app re-applies its look once they exist.
         document.dispatchEvent(new Event('spx-devrows-ready'));
@@ -8885,11 +8886,12 @@
             { select: 'selectBackgroundMode', ids: ['sliderBackgroundOpacity', 'sliderBackgroundBrightness', 'sliderBackgroundSaturation', 'sliderBackgroundTransition', 'sliderBorderDepth'] },
             { select: 'selectAlbumColorMode', ids: ['sliderAlbumColorSaturation', 'sliderAlbumColorBrightness'] },
             { select: 'selectTitleAnimMode', ids: ['sliderTitleAnimDuration', 'selectTitleAnimEasing'] },
-            // Background > Animation: the settings several modes share (the others belong to one mode and already keep their own values).
-            // Start / Stop Duration + its curve, Render Resolution and Max Frame Rate are deliberately NOT here: they are the same for every mode.
-            { select: 'selectBgAnimMode', ids: ['sliderBgAnimSpeed', 'sliderBgAnimCenterX', 'sliderBgAnimCenterY', 'sliderBgAnimZoom', 'sliderBgAnimOpacity', 'selectBgAnimBlend'] },
+            // Background > Animation: EVERY setting in the group is remembered per mode (rotation speed, center, zoom, opacity, blend, start / stop duration and curve,
+            // resolution, frame rate and each mode's own settings), so switching modes never carries one mode's values into another.
+            { select: 'selectBgAnimMode', ids: BGA_CONTROLS.map(c => c.id).filter(id => id !== 'selectBgAnimMode') },
         ];
         let perModeStore = {}; // { selectId: { mode: { elementId: value } } }
+        const pmLastMode = {}; // select element id -> the mode it showed last, so that mode's values can be saved the moment it is left
         const PM_DEVS = ['', 'Mobile', 'Landscape'];
         const pmRead = el => (el.type === 'checkbox' ? el.checked : el.value);
         const pmWrite = (el, v) => {
@@ -8897,8 +8899,11 @@
             el.dispatchEvent(new Event('input', { bubbles: true }));
             el.dispatchEvent(new Event('change', { bubbles: true }));
         };
-        const pmSplit = id => { const m = id.match(/^(slider|color|select|checkbox)(Mobile|Landscape)?(.+)$/); return m ? { base: m[1] + m[3], dev: m[2] || '' } : null; };
+        const pmSplit = id => { const m = id.match(/^(slider|color|select|checkbox|curveEditor|rangeBar)(Mobile|Landscape)?(.+)$/); return m ? { base: m[1] + m[3], dev: m[2] || '' } : null; };
         const pmModeOf = (pm, dev) => { const s = document.getElementById(wd(pm.select, dev)) || document.getElementById(pm.select); return s ? s.value : null; };
+        const pmSyncLastModes = () => PER_MODE.forEach(pm => PM_DEVS.forEach(d => { const s = document.getElementById(wd(pm.select, d)); if (s) pmLastMode[s.id] = s.value; }));
+        pmSyncLastModes();
+        window.spxSyncPerModeLast = pmSyncLastModes; // called after a saved state is applied (the select was changed while restoring, which the handler below ignores)
         document.addEventListener('input', e => {
             const el = e.target;
             if (window.__spxPerModeRestoring || !el || !el.id) return;
@@ -8919,6 +8924,14 @@
             // devices this select governs: its own, plus (for Desktop) any twin that has no select of its own
             const devs = [dev, ...(dev === '' ? PM_DEVS.slice(1).filter(d => !document.getElementById(wd(pm.select, d))) : [])];
             const mode = selEl.value;
+            // Save the mode being LEFT first: its values may have come from a saved state (not from edits this session), and without this it would be
+            // treated as never visited and inherit the next mode's values when it is selected again.
+            const prevMode = pmLastMode[selEl.id];
+            if (prevMode && prevMode !== mode) {
+                const left = ((perModeStore[pm.select] = perModeStore[pm.select] || {})[prevMode] = perModeStore[pm.select][prevMode] || {});
+                devs.forEach(d => pm.ids.forEach(id => { const el = document.getElementById(wd(id, d)); if (el) left[el.id] = pmRead(el); }));
+            }
+            pmLastMode[selEl.id] = mode;
             const entry = (perModeStore[pm.select] || {})[mode];
             if (entry) {
                 Object.entries(entry).forEach(([elId, val]) => {
