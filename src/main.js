@@ -1348,8 +1348,10 @@ async function boot() {
     el('spxInspectorClose').addEventListener('click', () => { el('spxInspectorPanel').hidden = true; });
 
     // settings changes (dev panel controls fire input/change)
-    document.addEventListener('input', applyLook);
-    document.addEventListener('change', applyLook);
+    // While the dev panel restores a saved state it fires one input / change event per control (hundreds); the app re-applies its look
+    // once at the end instead ('spx-devrows-ready' below). Running applyLook() for each of them took ~30 s on the owner's saved settings.
+    document.addEventListener('input', () => { if (!window.__spxBulkApply) applyLook(); });
+    document.addEventListener('change', () => { if (!window.__spxBulkApply) applyLook(); });
     document.addEventListener('spx-devrows-ready', applyLook); // see devPanel.js: twin rows exist only after the saved state is restored
 
     setInterval(() => {

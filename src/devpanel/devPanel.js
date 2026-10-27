@@ -6895,7 +6895,8 @@
     function applyFullDevPanelState(state) {
         if (!state) return;
         window.__spxPerModeRestoring = true; // restore events must not be recorded as the user changing a mode's values
-        setTimeout(() => { window.__spxPerModeRestoring = false; }, 1000); // safety net if anything below throws
+        window.__spxBulkApply = true; // the app's own input / change listeners (main.js applyLook) wait for 'spx-devrows-ready' below instead of running once per restored control
+        setTimeout(() => { window.__spxPerModeRestoring = false; window.__spxBulkApply = false; }, 1000); // safety net if anything below throws
         applyControlValues(state.controls);
         // Restore BEFORE syncTabOrderToDesktop() runs below (via
         // applySectionOrder() -> nothing yet, this is a separate call) -
@@ -6949,6 +6950,7 @@
         refreshAllGroupCascadeCheckboxes();
         if (state.perMode && typeof window.spxApplyPerMode === 'function') window.spxApplyPerMode(state.perMode);
         window.__spxPerModeRestoring = false;
+        window.__spxBulkApply = false;
         // The Mobile/Landscape twin rows exist only now, after the restore above. Anything the app reads through a twin (e.g. the cover's
         // Y offset on a phone) was computed while they were missing, so the app re-applies its look once they exist.
         document.dispatchEvent(new Event('spx-devrows-ready'));
@@ -8805,6 +8807,7 @@
         ];
         const wd = (id, dev) => id.replace(/^(slider|color|select|checkbox|rangeBar|curveEditor)(.+)$/, '$1' + dev + '$2');
         function refreshSpottyModeVisibility2() {
+            if (window.__spxBulkApply) return; // a bulk restore fires hundreds of events; the 700 ms poll catches up
             ['', 'Mobile', 'Landscape'].forEach(dev => {
                 MODE_MAPS.forEach(({ select, map, always }) => {
                     const sel = document.getElementById(wd(select, dev)) || document.getElementById(select);
@@ -8894,6 +8897,7 @@
         };
         const withDevice = (id, dev) => id.replace(/^(slider|color|select|checkbox|rangeBar)(.+)$/, '$1' + dev + '$2');
         function refreshSpottyModeVisibility() {
+            if (window.__spxBulkApply) return;
             ['', 'Mobile', 'Landscape'].forEach(dev => {
                 const sel = document.getElementById(withDevice('selectTimelineStyle', dev)) || document.getElementById('selectTimelineStyle');
                 if (!sel) return;
