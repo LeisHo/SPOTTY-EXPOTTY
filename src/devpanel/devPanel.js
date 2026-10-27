@@ -6892,6 +6892,22 @@
             perMode: typeof window.spxCapturePerMode === 'function' ? window.spxCapturePerMode() : undefined,
         };
     }
+    // The icon style dropdowns are always the first rows of their group (owner's request): a saved layout (Sync) keeps whatever order the panel had
+    // when it was saved, which put them back down the list once, so this runs after every restore and re-pins them. Order = this list.
+    const ICON_DROPDOWN_ORDER = ['selectVolIconStyle', 'selectShuffleIconStyle', 'selectFilterIconStyle', 'selectTempoIconStyle', 'selectValenceIconStyle', 'selectDanceIconStyle', 'selectEnergyIconStyle', 'selectSongDataIconStyle', 'selectPlayIconStyle', 'selectPauseIconStyle', 'selectNavIconStyle'];
+    function pinIconDropdownsToTop() {
+        const byParent = new Map();
+        ICON_DROPDOWN_ORDER.forEach(id => {
+            const row = (document.getElementById(id) || {}).closest ? document.getElementById(id).closest('.dev-row') : null;
+            if (!row || !row.parentElement) return;
+            if (!byParent.has(row.parentElement)) byParent.set(row.parentElement, []);
+            byParent.get(row.parentElement).push(row);
+        });
+        byParent.forEach((rows, parent) => {
+            const first = Array.from(parent.children).find(c => !rows.includes(c));
+            rows.forEach(r => { if (first) parent.insertBefore(r, first); });
+        });
+    }
     function applyFullDevPanelState(state) {
         if (!state) return;
         window.__spxPerModeRestoring = true; // restore events must not be recorded as the user changing a mode's values
@@ -6931,6 +6947,7 @@
         syncDevPanelStyleControlsFromState();
         applySectionOrder(state.sectionOrder);
         applySectionCollapseState(state.sectionCollapseState);
+        pinIconDropdownsToTop(); // BEFORE the Mobile / Landscape rows are derived from Desktop's order just below
         // Re-derives Mobile/Landscape from Desktop's now-restored order +
         // the devVisibility/devIndependence/devDeviceValues just restored
         // above - creates any dynamic row that doesn't exist in the DOM
@@ -8284,6 +8301,8 @@
             { tab, group: FLB, id: 'checkboxFilterCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
             { tab, group: FLB, id: 'sliderFilterPanelWidth', type: 'slider', label: 'Panel Default Width (Px):', min: 160, max: 600, step: 1, value: 260 },
             { tab, group: FLB, id: 'sliderFilterPanelFontSize', type: 'slider', label: 'Panel Font Size (Px):', min: 8, max: 32, step: 1, value: 12 },
+            { tab, group: FLB, id: 'sliderFilterPanelRowGap', type: 'slider', label: 'Panel Vertical Spacing Between Sliders (Px):', min: 0, max: 80, step: 1, value: 12 },
+            { tab, group: FLB, id: 'sliderFilterPanelRowsOffsetY', type: 'slider', label: 'Panel Slider Group Y Offset (Px):', min: -100, max: 100, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelIconSize', type: 'slider', label: 'Panel Category Icon Size (Px):', min: 8, max: 120, step: 1, value: 20 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetY', type: 'slider', label: 'Panel Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },

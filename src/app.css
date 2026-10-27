@@ -203,7 +203,8 @@
 .spx-flt-clear { background: none; border: 0; color: inherit; opacity: .75; padding: 2px; margin: 0; cursor: pointer; display: inline-flex; }
 .spx-flt-clear:hover { opacity: 1; }
 .spx-flt-clear svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.spx-flt-row { margin: 8px 0 12px; }
+.spx-flt-rows { display: flex; flex-direction: column; gap: var(--spx-flt-row-gap, 12px); margin: calc(8px + var(--spx-flt-rows-y, 0px)) 0 12px; } /* gap = the space between the sliders; the top margin moves the whole slider group, and both change the panel's height */
+.spx-flt-row { margin: 0; }
 .spx-flt-top { display: flex; justify-content: center; align-items: center; opacity: .85; }
 .spx-flt-ico { display: inline-flex; }
 .spx-flt-nums { display: flex; justify-content: space-between; align-items: baseline; font-size: .9em; opacity: .8; margin-top: 1px; }
