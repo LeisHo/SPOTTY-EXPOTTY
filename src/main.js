@@ -555,7 +555,7 @@ async function boot() {
     // ticked there. It runs after each button's own styling, so while a button is ticked its values win; unticking gives its own look back.
     function applyGlobalOverride() {
         const g = id => setting(id), on = g('checkboxGlobalOverrideEnabled'), anim = g('checkboxGlobalOverrideAnim');
-        const col = g('colorGlobalOverride'), op = String(g('sliderGlobalOverrideOpacity') / 100);
+        const col = g('colorGlobalOverride'), op = String(g('sliderGlobalOverrideOpacity') / 100), onOp = String(g('sliderGlobalOverrideOnOpacity') / 100); // op = Off: the rest opacity of every button; onOp = Shuffle when it is on
         const animVars = {
             // Scales are percentages of each button's own icon size (its --bs-size), so they work for every button
             '--bs-size-hover': `calc(var(--bs-size, 26px) * ${g('sliderGlobalAnimHoverSize') / 100})`, '--bs-size-press': `calc(var(--bs-size, 26px) * ${g('sliderGlobalAnimClickSize') / 100})`,
@@ -568,7 +568,7 @@ async function boot() {
             { k: 'Play', host: el('spxCover'), kind: 'bs' },
             { k: 'Next', host: el('spxNext'), kind: 'bs' },
             { k: 'Last', host: el('spxPrev'), kind: 'bs' },
-            { k: 'Shuffle', host: el('spxShuffle'), kind: 'plain', opVar: '--bs-op' },
+            { k: 'Shuffle', host: el('spxShuffle'), kind: 'plain', opVar: '--spx-shuffle-off-op', onVar: '--spx-shuffle-on-op' }, // Shuffle's CSS picks the off / on variable from aria-pressed
             { k: 'Volume', host: el('spxVolume').querySelector('.spx-vol-btn'), kind: 'plain', opVar: '--spx-vol-op' },
         ];
         targets.forEach(t => {
@@ -582,9 +582,11 @@ async function boot() {
             }
             if (ticked) {
                 st.setProperty('color', col); st.setProperty(t.opVar, op);
+                if (t.onVar) st.setProperty(t.onVar, onOp);
                 if (anim) Object.entries(animVars).forEach(([k, v]) => st.setProperty(k, v));
             } else {
                 st.removeProperty('color'); st.removeProperty(t.opVar);
+                if (t.onVar) st.removeProperty(t.onVar);
             }
         });
     }
@@ -630,6 +632,9 @@ async function boot() {
         setArtistLine(); // live: changing the separator re-joins the current song's artists
         el('spxApp').style.setProperty('--spx-sep-pct', setting('sliderArtistSeparatorPct') + '%');
         el('spxApp').style.setProperty('--spx-vol-icon-x', setting('sliderVolIconOffsetX') + 'px');
+        el('spxApp').style.setProperty('--spx-vol-icon-y', setting('sliderVolIconOffsetY') + 'px');
+        el('spxApp').style.setProperty('--spx-play-y', setting('sliderPlayGlyphOffsetY') + 'px');
+        el('spxApp').style.setProperty('--spx-start-y', setting('sliderStartPlayOffsetY') + 'px');
         // The graph reaches the top of the browser: its box is the full height (bottom edge unchanged). Buttons above it take their clicks (buttonUnder).
         applyTimelineBox();
         el('spxStart').style.transition = `opacity ${setting('sliderStartFadeMs')}ms linear`;
@@ -641,14 +646,14 @@ async function boot() {
                 const sdOn = !!setting('checkboxSongDataEnabled'), ic = setting('sliderSongDataBtnSize');
                 el('spxSongData').hidden = !sdOn;
                 applySongDataIcon(el('spxSongData').querySelector('svg'), iconIndex(setting('selectSongDataIconStyle')));
-                c('--spx-sd-icon', ic + 'px'); c('--spx-sd-x', setting('sliderSongDataBtnOffsetX') + 'px'); c('--spx-sd-edge', setting('sliderSongDataBtnEdge') + 'px'); c('--spx-sd-gap', setting('sliderSongDataBtnGap') + 'px');
+                c('--spx-sd-icon', ic + 'px'); c('--spx-sd-x', setting('sliderSongDataBtnOffsetX') + 'px'); c('--spx-sd-y', setting('sliderSongDataBtnOffsetY') + 'px'); c('--spx-sd-edge', setting('sliderSongDataBtnEdge') + 'px'); c('--spx-sd-gap', setting('sliderSongDataBtnGap') + 'px');
                 c('--spx-sd-off-op', String(setting('sliderSongDataBtnOffOpacity') / 100)); c('--spx-sd-on-op', String(setting('sliderSongDataBtnOnOpacity') / 100));
                 c('--spx-sd-color', setting('colorSongDataBtn')); c('--spx-sd-on-color', setting('colorSongDataBtnOn'));
                 c('--spx-sd-offset', sdOn ? (ic + 20 + setting('sliderSongDataBtnGap')) + 'px' : '0px');
                 updateSongData();
             }
             el('spxFilter').hidden = !setting('checkboxFilterButtonEnabled');
-            c('--spx-filter-icon', setting('sliderFilterIconSize') + 'px'); c('--spx-filter-x', setting('sliderFilterIconOffsetX') + 'px');
+            c('--spx-filter-icon', setting('sliderFilterIconSize') + 'px'); c('--spx-filter-x', setting('sliderFilterIconOffsetX') + 'px'); c('--spx-filter-y', setting('sliderFilterIconOffsetY') + 'px');
             c('--spx-filter-gap', setting('sliderFilterGapBelowShuffle') + 'px'); c('--spx-filter-edge', setting('sliderFilterEdgeOffset') + 'px');
             c('--spx-filter-off-op', String(setting('sliderFilterOffOpacity') / 100)); c('--spx-filter-on-op', String(setting('sliderFilterOnOpacity') / 100));
             c('--spx-filter-color', setting('colorFilterIcon')); c('--spx-filter-on-color', setting('colorFilterOn'));
@@ -656,7 +661,7 @@ async function boot() {
             applyFilterIcon(el('spxFilter').querySelector('svg'), iconIndex(setting('selectFilterIconStyle')));
             const ps = flt && flt.panel.style;
             if (ps) {
-                ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-font', setting('sliderFilterPanelFontSize') + 'px');
+                ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-ico', setting('sliderFilterPanelIconSize') + 'px'); ps.setProperty('--spx-flt-font', setting('sliderFilterPanelFontSize') + 'px');
                 ps.setProperty('--spx-flt-bg', rgbaOf(setting('colorFilterPanelBg'), setting('sliderFilterPanelBgOpacity') / 100)); ps.setProperty('--spx-flt-accent', setting('colorFilterPanelAccent'));
                 flt.refresh(); syncFilterUi(); timeline.setFilter(filterOn() ? flt.passes : null);
                 if (flt.open) placeFilterPanel();
@@ -665,6 +670,7 @@ async function boot() {
         placeNav(); // the edge offset is a setting
         el('spxApp').style.setProperty('--spx-shuffle-icon', setting('sliderShuffleIconSize') + 'px');
         el('spxApp').style.setProperty('--spx-shuffle-x', setting('sliderShuffleIconOffsetX') + 'px');
+        el('spxApp').style.setProperty('--spx-shuffle-y', setting('sliderShuffleIconOffsetY') + 'px');
         el('spxApp').style.setProperty('--spx-shuffle-off-op', String(setting('sliderShuffleOffOpacity') / 100));
         el('spxApp').style.setProperty('--spx-shuffle-color', setting('colorShuffleIcon'));
         el('spxApp').style.setProperty('--spx-shuffle-on-color', setting('colorShuffleOn'));
@@ -1303,8 +1309,8 @@ async function boot() {
         const prevEdge = setting('sliderLastButtonEdgeOffset'), nextEdge = setting('sliderNextButtonEdgeOffset');
         // The buttons are as wide as their own icon (the hit area = the icon), so the real widths place them, not a fixed 48 px
         const pw = el('spxPrev').offsetWidth, nw = el('spxNext').offsetWidth;
-        el('spxPrev').style.translate = `${prevEdge - (r.left - pw)}px 0px`;
-        el('spxNext').style.translate = `${(innerWidth - nextEdge - nw) - r.right}px 0px`;
+        el('spxPrev').style.translate = `${prevEdge - (r.left - pw)}px ${setting('sliderLastButtonOffsetY')}px`;
+        el('spxNext').style.translate = `${(innerWidth - nextEdge - nw) - r.right}px ${setting('sliderNextButtonOffsetY')}px`;
     }
     // The cover's scale grows it around transform-origin. When the engine centres the cover (anchor center), it has already moved
     // the box by -50% of its own width / height, so scaling around the box's middle pushes it off centre (at scale 1.5 the centre

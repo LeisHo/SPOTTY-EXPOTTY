@@ -8110,7 +8110,10 @@
             { tab, group: GO, id: 'checkboxOverrideShuffle', type: 'checkbox', label: 'Shuffle Button', value: false },
             { tab, group: GO, id: 'checkboxOverrideVolume', type: 'checkbox', label: 'Volume Button', value: false },
             { tab, group: GO, id: 'colorGlobalOverride', type: 'color', label: 'Color:', value: '#ffffff' },
-            { tab, group: GO, id: 'sliderGlobalOverrideOpacity', type: 'slider', label: 'Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
+            // On = a button that is switched on (Shuffle). Off = the same button switched off, and for buttons with no on / off (Play, Next, Last, Volume) the opacity when not hovered.
+            // The Off slider keeps the id of the old single Opacity slider, so a saved value carries over.
+            { tab, group: GO, id: 'sliderGlobalOverrideOnOpacity', type: 'slider', label: 'Opacity On (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: GO, id: 'sliderGlobalOverrideOpacity', type: 'slider', label: 'Opacity Off (%):', min: 0, max: 100, step: 1, value: 100 },
         ];
         uiLayoutContent.insertBefore(createDevGroupElement(GO, tab), uiLayoutContent.firstChild);
         renderControlArray(GO_CONTROLS, 'renderSpottyDevControls');
@@ -8163,6 +8166,7 @@
         setInterval(sbSync, 700);
         sbSync();
         const VB_CONTROLS = [
+            { tab, group: VB, id: 'selectVolIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: iconOptions('volume') },
             { tab, group: VB, id: 'checkboxVolumeButtonEnabled', type: 'checkbox', label: 'Enabled (Off = Click The Icon, Default Look)', value: true },
             { tab, group: VB, id: 'sliderVolMutedOpacity', type: 'slider', label: 'Muted Icon Opacity (%):', min: 0, max: 100, step: 1, value: 40 },
             { tab, group: VB, id: 'sliderVolIconOpacity', type: 'slider', label: 'Icon Opacity When Not Muted (%):', min: 0, max: 100, step: 1, value: 100 },
@@ -8170,6 +8174,7 @@
             { tab, group: VB, id: 'sliderVolEdgeOffset', type: 'slider', label: 'Offset From Left Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
             { tab, group: VB, id: 'sliderVolIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 24 },
             { tab, group: VB, id: 'sliderVolIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: VB, id: 'sliderVolIconOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: VB, id: 'sliderVolCircleRadius', type: 'slider', label: 'Slider Circle Radius (Px):', min: 2, max: 30, step: 0.5, value: 7 },
             { tab, group: VB, id: 'sliderVolBarWidth', type: 'slider', label: 'Slider Bar Width (Px):', min: 2, max: 40, step: 0.5, value: 8 },
             { tab, group: VB, id: 'sliderVolBarLength', type: 'slider', label: 'Slider Bar Length (Px):', min: 40, max: 500, step: 1, value: 130 },
@@ -8178,7 +8183,6 @@
             { tab, group: VB, id: 'colorVolCircle', type: 'color', label: 'Slider Circle Color:', value: '#ffffff' },
             { tab, group: VB, id: 'sliderVolHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Icon And Slider (Px):', min: 0, max: 200, step: 1, value: 30 },
             { tab, group: VB, id: 'sliderVolClickTolerance', type: 'slider', label: 'Click Tolerance Outside Slider (Px):', min: 0, max: 200, step: 1, value: 12 },
-            { tab, group: VB, id: 'selectVolIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: iconOptions('volume') },
             { tab, group: VB, id: 'sliderVolAnimDuration', type: 'slider', label: 'Drop Down / Rise Up Animation Time At Speed 1 (Ms):', min: 0, max: 3000, step: 10, value: 350 },
             { tab, group: VB, id: 'curveEditorVolAnimSpeedCurve', type: 'curve-editor', label: 'Animation Speed Curve (X: Progress Of The Drop / Rise, Y: Speed, 1 = The Time Slider):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 0.35 }], defaultMethod: 'monotone' },
         ];
@@ -8199,9 +8203,11 @@
         const SHB = 'Shuffle Button';
         uiLayoutContent.appendChild(createDevGroupElement(SHB, tab));
         const SHB_CONTROLS = [
+            { tab, group: SHB, id: 'selectShuffleIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: iconOptions('shuffle') },
             { tab, group: SHB, id: 'checkboxShuffleButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
             { tab, group: SHB, id: 'sliderShuffleIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
             { tab, group: SHB, id: 'sliderShuffleIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: SHB, id: 'sliderShuffleIconOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: SHB, id: 'sliderShuffleOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
             { tab, group: SHB, id: 'sliderShuffleOnOpacity', type: 'slider', label: 'On Icon Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: SHB, id: 'sliderShuffleEdgeOffset', type: 'slider', label: 'Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
@@ -8209,7 +8215,6 @@
             { tab, group: SHB, id: 'sliderShuffleHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
             { tab, group: SHB, id: 'colorShuffleIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },
             { tab, group: SHB, id: 'colorShuffleOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
-            { tab, group: SHB, id: 'selectShuffleIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: iconOptions('shuffle') },
         ];
         renderControlArray(SHB_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_SHUFFLE_CONTROLS', SHB_CONTROLS);
@@ -8233,9 +8238,15 @@
                 const FLB = 'Filter Button';
         uiLayoutContent.appendChild(createDevGroupElement(FLB, tab));
         const FLB_CONTROLS = [
+            { tab, group: FLB, id: 'selectFilterIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: iconOptions('filter') },
+            { tab, group: FLB, id: 'selectTempoIconStyle', type: 'select', label: 'Tempo Icon (Panel And Song Data):', value: '0', options: iconOptions('tp') },
+            { tab, group: FLB, id: 'selectValenceIconStyle', type: 'select', label: 'Valence Icon (Panel And Song Data):', value: '0', options: iconOptions('v') },
+            { tab, group: FLB, id: 'selectDanceIconStyle', type: 'select', label: 'Danceability Icon (Panel And Song Data):', value: '0', options: iconOptions('dn') },
+            { tab, group: FLB, id: 'selectEnergyIconStyle', type: 'select', label: 'Energy Icon (Panel And Song Data):', value: '0', options: iconOptions('e') },
             { tab, group: FLB, id: 'checkboxFilterButtonEnabled', type: 'checkbox', label: 'Enabled (Off Also Turns The Filter Off)', value: true },
             { tab, group: FLB, id: 'sliderFilterIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
             { tab, group: FLB, id: 'sliderFilterIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: FLB, id: 'sliderFilterIconOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterGapBelowShuffle', type: 'slider', label: 'Gap Below Shuffle (Px):', min: -40, max: 200, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterEdgeOffset', type: 'slider', label: 'Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
             { tab, group: FLB, id: 'sliderFilterOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
@@ -8249,11 +8260,6 @@
             { tab, group: FLB, id: 'sliderFilterGrayOpacity', type: 'slider', label: 'Filtered-Out Bar Opacity (%):', min: 0, max: 100, step: 1, value: 35 },
             { tab, group: FLB, id: 'selectFilterMissing', type: 'select', label: 'Songs With No Audio Data:', value: 'hide', options: [{ value: 'hide', text: 'Filter Out' }, { value: 'keep', text: 'Keep' }] },
             { tab, group: FLB, id: 'checkboxFilterSkipOnStep', type: 'checkbox', label: 'Next / Last / Scrolling Skip Filtered-Out Songs', value: true },
-            { tab, group: FLB, id: 'selectFilterIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: iconOptions('filter') },
-            { tab, group: FLB, id: 'selectTempoIconStyle', type: 'select', label: 'Tempo Icon (Panel And Song Data):', value: '0', options: iconOptions('tp') },
-            { tab, group: FLB, id: 'selectValenceIconStyle', type: 'select', label: 'Valence Icon (Panel And Song Data):', value: '0', options: iconOptions('v') },
-            { tab, group: FLB, id: 'selectDanceIconStyle', type: 'select', label: 'Danceability Icon (Panel And Song Data):', value: '0', options: iconOptions('dn') },
-            { tab, group: FLB, id: 'selectEnergyIconStyle', type: 'select', label: 'Energy Icon (Panel And Song Data):', value: '0', options: iconOptions('e') },
             // a filtered-out song shown on the timeline (clicked): grayscale cover, plays nothing, then the playhead returns to the playing song
             { tab, group: FLB, id: 'sliderFilterCoverGrayscale', type: 'slider', label: 'Filtered-Out Cover Grayscale (%):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: FLB, id: 'sliderFilterCoverBrightness', type: 'slider', label: 'Filtered-Out Cover Brightness (%):', min: 10, max: 200, step: 1, value: 100 },
@@ -8277,6 +8283,7 @@
             { tab, group: FLB, id: 'checkboxFilterCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
             { tab, group: FLB, id: 'sliderFilterPanelWidth', type: 'slider', label: 'Panel Default Width (Px):', min: 160, max: 600, step: 1, value: 260 },
             { tab, group: FLB, id: 'sliderFilterPanelFontSize', type: 'slider', label: 'Panel Font Size (Px):', min: 8, max: 32, step: 1, value: 12 },
+            { tab, group: FLB, id: 'sliderFilterPanelIconSize', type: 'slider', label: 'Panel Category Icon Size (Px):', min: 8, max: 120, step: 1, value: 20 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetY', type: 'slider', label: 'Panel Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },
             { tab, group: FLB, id: 'colorFilterPanelBg', type: 'color', label: 'Panel Background Color:', value: '#14161a' },
@@ -8289,10 +8296,11 @@
         const SDG = 'Song Data';
         uiLayoutContent.appendChild(createDevGroupElement(SDG, tab));
         const SDG_CONTROLS = [
-            { tab, group: SDG, id: 'checkboxSongDataEnabled', type: 'checkbox', label: 'Enabled (Shows The Song Data Button)', value: true },
             { tab, group: SDG, id: 'selectSongDataIconStyle', type: 'select', label: 'Button Icon Style:', value: '0', options: iconOptions('data') },
+            { tab, group: SDG, id: 'checkboxSongDataEnabled', type: 'checkbox', label: 'Enabled (Shows The Song Data Button)', value: true },
             { tab, group: SDG, id: 'sliderSongDataBtnSize', type: 'slider', label: 'Button Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
             { tab, group: SDG, id: 'sliderSongDataBtnOffsetX', type: 'slider', label: 'Button Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: SDG, id: 'sliderSongDataBtnOffsetY', type: 'slider', label: 'Button Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: SDG, id: 'sliderSongDataBtnGap', type: 'slider', label: 'Gap Below Shuffle (Px):', min: -40, max: 200, step: 1, value: 0 },
             { tab, group: SDG, id: 'sliderSongDataBtnEdge', type: 'slider', label: 'Button Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
             { tab, group: SDG, id: 'sliderSongDataBtnOffOpacity', type: 'slider', label: 'Button Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
@@ -8346,17 +8354,22 @@
             uiLayoutContent.appendChild(createDevGroupElement(G, tab));
             const main = [
                 ...(P === 'Play' ? [
-                    { tab, group: G, id: 'sliderPlayGlyphOpacityPlaying', type: 'slider', label: 'Icon Opacity When Playing (%):', min: 0, max: 100, step: 1, value: 100 },
-                    { tab, group: G, id: 'sliderPlayGlyphOpacityPaused', type: 'slider', label: 'Icon Opacity When Paused (%):', min: 0, max: 100, step: 1, value: 100 },
                     { tab, group: G, id: 'selectPlayIconStyle', type: 'select', label: 'Play Icon Style:', value: '0', options: iconOptions('play') },
                     { tab, group: G, id: 'selectPauseIconStyle', type: 'select', label: 'Pause Icon Style:', value: '0', options: iconOptions('pause') },
+                ] : []),
+                ...(P === 'Nav' ? [{ tab, group: G, id: 'selectNavIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: iconOptions('nav') }] : []),
+                ...(P === 'Play' ? [
+                    { tab, group: G, id: 'sliderPlayGlyphOpacityPlaying', type: 'slider', label: 'Icon Opacity When Playing (%):', min: 0, max: 100, step: 1, value: 100 },
+                    { tab, group: G, id: 'sliderPlayGlyphOpacityPaused', type: 'slider', label: 'Icon Opacity When Paused (%):', min: 0, max: 100, step: 1, value: 100 },
+                    { tab, group: G, id: 'sliderPlayGlyphOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
                     { tab, group: G, id: 'sliderPlayClickTolerance', type: 'slider', label: 'Click Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
                     { tab, group: G, id: 'sliderPlayHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
                 ] : []),
-                ...(P === 'Nav' ? [{ tab, group: G, id: 'selectNavIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: iconOptions('nav') }] : []),
                 ...(P === 'Nav' ? [
                     { tab, group: G, id: 'sliderLastButtonEdgeOffset', type: 'slider', label: 'Last Button Offset From Left Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
                     { tab, group: G, id: 'sliderNextButtonEdgeOffset', type: 'slider', label: 'Next Button Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
+                    { tab, group: G, id: 'sliderLastButtonOffsetY', type: 'slider', label: 'Last Button Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+                    { tab, group: G, id: 'sliderNextButtonOffsetY', type: 'slider', label: 'Next Button Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
                     { tab, group: G, id: 'sliderNavClickTolerance', type: 'slider', label: 'Click Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
                     { tab, group: G, id: 'sliderNavHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
                 ] : []),
@@ -8742,6 +8755,7 @@
         const SB_CONTROLS = [
             { tab, group: SB, id: 'checkboxStartButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
             { tab, group: SB, id: 'sliderStartPlaySize', type: 'slider', label: 'Play Icon Size (Px):', min: 16, max: 200, step: 1, value: 64 },
+            { tab, group: SB, id: 'sliderStartPlayOffsetY', type: 'slider', label: 'Play Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: SB, id: 'checkboxStartTransitionAfterRelease', type: 'checkbox', label: 'Transition After Release:', value: false },
         ];
         renderControlArray(SB_CONTROLS, 'renderSpottyDevControls');

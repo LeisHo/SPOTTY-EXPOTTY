@@ -541,16 +541,23 @@ export function createTimeline(canvas, data) {
             const fsz = setting('sliderSongDataFontSize'), ic = setting('sliderSongDataIconSize'), gIc = setting('sliderSongDataIconGap'), gIt = setting('sliderSongDataItemGap');
             ctx.globalAlpha = setting('sliderSongDataOpacity');
             ctx.fillStyle = ctx.strokeStyle = setting('colorSongData');
-            ctx.font = `${setting('checkboxSongDataBold') ? 'bold ' : ''}${fsz}px ${getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif'}`;
+            const fam = getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif';
+            // The row is centred vertically on the add date's text: the middle of the date's digits (measured with the date's own font) is the row's centre
+            // line; the icons are centred on it and each number's digits are centred on it too, whatever the two font sizes are.
+            const digitMid = font => { ctx.font = font; const m = ctx.measureText('0'); return (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2; };
+            const dateBase = h - axisH - dateH / 2 + 4.5; // the add date's text baseline
+            const yc = dateBase - digitMid(`${setting('checkboxSongAddDateBold') ? 'bold ' : ''}${setting('sliderSongAddDateFontSize')}px ${fam}`) + setting('sliderSongDataOffsetY');
+            const dataFont = `${setting('checkboxSongDataBold') ? 'bold ' : ''}${fsz}px ${fam}`;
+            const base = yc + digitMid(dataFont); // baseline that puts the number's digits on the centre line
+            ctx.font = dataFont;
             ctx.letterSpacing = '0px';
             ctx.textAlign = 'start';
             const items = songData.map(it => ({ ...it, tw: ctx.measureText(it.text).width }));
             const total = items.reduce((sum, it) => sum + ic + gIc + it.tw, 0) + gIt * (items.length - 1);
             let x = w - setting('sliderSongDataEdgeOffset') - total;
-            const base = h - axisH - dateH / 2 + 4.5 + setting('sliderSongDataOffsetY'); // the date line's text baseline
             items.forEach(it => {
                 ctx.save();
-                ctx.translate(x, base - fsz * 0.35 - ic / 2); // icon centred on the middle of the digits
+                ctx.translate(x, yc - ic / 2); // icon centred on the row's centre line
                 ctx.scale(ic / ICON_BOX, ic / ICON_BOX);
                 (it.shapes || []).forEach(([p2, eo]) => ctx.fill(p2, eo ? 'evenodd' : 'nonzero'));
                 ctx.restore();

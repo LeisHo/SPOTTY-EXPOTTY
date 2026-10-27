@@ -3319,7 +3319,7 @@
                     "items": [
                       {
                         "type": "row",
-                        "key": "buttonPlayPause"
+                        "key": "selectPlayIconStyle"
                       },
                       {
                         "type": "row",
@@ -3327,7 +3327,7 @@
                       },
                       {
                         "type": "row",
-                        "key": "selectPlayIconStyle"
+                        "key": "buttonPlayPause"
                       },
                       {
                         "type": "row",
@@ -3404,9 +3404,9 @@
                       }
                     ],
                     "rowKeys": [
-                      "buttonPlayPause",
-                      "selectPauseIconStyle",
                       "selectPlayIconStyle",
+                      "selectPauseIconStyle",
+                      "buttonPlayPause",
                       "colorPlayButton",
                       "sliderPlayButtonSize",
                       "sliderPlayButtonOpacity",
@@ -3857,6 +3857,22 @@
                       },
                       {
                         "type": "row",
+                        "key": "selectTempoIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectValenceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectDanceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectEnergyIconStyle"
+                      },
+                      {
+                        "type": "row",
                         "key": "checkboxFilterButtonEnabled"
                       },
                       {
@@ -4001,22 +4017,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "selectTempoIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectValenceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectDanceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectEnergyIconStyle"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderFilterCoverContrast"
                       },
                       {
@@ -4034,6 +4034,10 @@
                     ],
                     "rowKeys": [
                       "selectFilterIconStyle",
+                      "selectTempoIconStyle",
+                      "selectValenceIconStyle",
+                      "selectDanceIconStyle",
+                      "selectEnergyIconStyle",
                       "checkboxFilterButtonEnabled",
                       "sliderFilterIconSize",
                       "sliderFilterIconOffsetX",
@@ -4070,10 +4074,6 @@
                       "colorFilterPanelBg",
                       "sliderFilterPanelBgOpacity",
                       "colorFilterPanelAccent",
-                      "selectTempoIconStyle",
-                      "selectValenceIconStyle",
-                      "selectDanceIconStyle",
-                      "selectEnergyIconStyle",
                       "sliderFilterCoverContrast",
                       "sliderFilterTextBrightness",
                       "checkboxFilterShowNumbers",

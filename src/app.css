@@ -92,7 +92,7 @@
 .spx-volume { z-index: 5; display: flex; flex-direction: row; align-items: center; gap: 8px; user-select: none;
     /* set from the dev panel (UI Layout > Volume Button) by volume.js */
     --spx-vol-icon: 24px; --spx-vol-r: 7px; --spx-vol-bw: 8px; --spx-vol-bl: 130px; --spx-vol-fill: #1db954; --spx-vol-track: #ffffff; --spx-vol-thumb: #ffffff; }
-.spx-vol-btn { width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px); border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; translate: var(--spx-vol-icon-x, 0px) 0; }
+.spx-vol-btn { width: calc(var(--spx-vol-icon) + 20px); height: calc(var(--spx-vol-icon) + 20px); border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; translate: var(--spx-vol-icon-x, 0px) var(--spx-vol-icon-y, 0px); }
 .spx-vol-btn:hover { color: #fff; }
 .spx-vol-btn { transition: opacity .15s; }
 .spx-vol-btn:not([data-level="mute"]) { opacity: var(--spx-vol-op, 1); }
@@ -139,7 +139,7 @@
 .spx-start[hidden] { display: none; }
 .spx-start.center-cover { justify-content: flex-start; align-items: flex-start; } /* Centre Button on Album Cover: main.js places the button */
 .spx-start.center-cover .spx-start-play { position: absolute; }
-.spx-start-play { pointer-events: auto; width: var(--spx-start-play-size, 64px); height: var(--spx-start-play-size, 64px); padding: 0; border: 0; background: none; color: #ffffff; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.spx-start-play { translate: 0 var(--spx-start-y, 0px); pointer-events: auto; width: var(--spx-start-play-size, 64px); height: var(--spx-start-play-size, 64px); padding: 0; border: 0; background: none; color: #ffffff; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .spx-start-play svg { width: 100%; height: 100%; fill: currentColor; display: block; }
 
 /* Album Cover > Bounding Box (dev check): the outline is the cover's real box, the ring is its centre. */
@@ -153,7 +153,7 @@
 .bs-host.bs-hover .bs-icon { width: var(--bs-size-hover, var(--bs-size, 26px)); height: var(--bs-size-hover, var(--bs-size, 26px)); opacity: var(--bs-op-hover, var(--bs-op, 1)); }
 .bs-host.bs-press .bs-icon { width: var(--bs-size-press, var(--bs-size, 26px)); height: var(--bs-size-press, var(--bs-size, 26px)); opacity: var(--bs-op-press, var(--bs-op, 1)); }
 .bs-host.bs-release .bs-icon { width: var(--bs-size-release, var(--bs-size, 26px)); height: var(--bs-size-release, var(--bs-size, 26px)); opacity: var(--bs-op-hover, var(--bs-op, 1)); }
-.spx-play-glyph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.spx-play-glyph { translate: 0 var(--spx-play-y, 0px); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
 .spx-cover.playing .ico-play, .spx-cover:not(.playing) .ico-pause { display: none; }
 .spx-cover.playing .spx-play-glyph { opacity: var(--spx-glyph-op-playing, 1); }
 .spx-cover:not(.playing) .spx-play-glyph { opacity: var(--spx-glyph-op-paused, 1); }
@@ -172,7 +172,7 @@
 /* Shuffle (under the volume icon) */
 .spx-shuffle { z-index: 4; position: absolute; right: var(--spx-shuffle-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2); /* the stage's top-right corner; the volume is at the left edge */ width: calc(var(--spx-shuffle-icon, 20px) + 20px); height: calc(var(--spx-shuffle-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-shuffle-color, #f2f2f2); --bs-op: var(--spx-shuffle-off-op, 0.45); /* the on/off opacity is the icon's own base (the animation group's hover / press values replace it); the button stays at full opacity */ cursor: pointer;
-    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-shuffle-x, 0px) 0; }
+    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-shuffle-x, 0px) var(--spx-shuffle-y, 0px); }
 .spx-shuffle svg { width: var(--spx-shuffle-icon, 20px); height: var(--spx-shuffle-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-shuffle[aria-pressed="true"] { --bs-op: var(--spx-shuffle-on-op, 1); color: var(--spx-shuffle-on-color, #1db954); }
 .spx-shuffle[hidden] { display: none; }
@@ -180,14 +180,14 @@
 /* Song Data button (between Shuffle and Filter): the four audio numbers of the shown song appear on the timeline's add-date row */
 .spx-songdata { z-index: 4; position: absolute; right: var(--spx-sd-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-sd-gap, 0px)); width: calc(var(--spx-sd-icon, 20px) + 20px); height: calc(var(--spx-sd-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-sd-color, #f2f2f2); --bs-op: var(--spx-sd-off-op, 0.45); cursor: pointer;
-    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-sd-x, 0px) 0; }
+    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-sd-x, 0px) var(--spx-sd-y, 0px); }
 .spx-songdata svg { width: var(--spx-sd-icon, 20px); height: var(--spx-sd-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-songdata[aria-pressed="true"] { --bs-op: var(--spx-sd-on-op, 1); color: var(--spx-sd-on-color, #1db954); }
 .spx-songdata[hidden] { display: none; }
 .spx-app.no-shadow-vol .spx-songdata { filter: none; }
 .spx-filter { z-index: 4; position: absolute; right: var(--spx-filter-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-sd-offset, 0px) + var(--spx-filter-gap, 0px)); width: calc(var(--spx-filter-icon, 20px) + 20px); height: calc(var(--spx-filter-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-filter-color, #f2f2f2); --bs-op: var(--spx-filter-off-op, 0.45); cursor: pointer;
-    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-filter-x, 0px) 0; }
+    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-filter-x, 0px) var(--spx-filter-y, 0px); }
 .spx-filter svg { width: var(--spx-filter-icon, 20px); height: var(--spx-filter-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-filter[aria-pressed="true"] { --bs-op: var(--spx-filter-on-op, 1); color: var(--spx-filter-on-color, #1db954); }
 .spx-filter[hidden] { display: none; }
@@ -211,7 +211,7 @@
 .spx-flt-row.on .spx-flt-val { color: var(--flt-accent); }
 .spx-filter-panel.no-nums .spx-flt-nums { display: none; }
 .spx-flt-count { text-align: center; opacity: .75; margin-top: 2px; }
-.spx-flt-ico svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.spx-flt-ico svg { width: var(--spx-flt-ico, 20px); height: var(--spx-flt-ico, 20px); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .spx-flt-row.on .spx-flt-top { color: var(--flt-accent); opacity: 1; }
 .spx-flt-range { position: relative; height: 22px; }
 .spx-flt-track { position: absolute; left: 0; right: 0; top: 10px; height: 3px; border-radius: 2px; background: #ffffff30; }
