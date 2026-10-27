@@ -177,8 +177,8 @@ export const DEFAULTS = {
     sliderArtistSeparatorPct: 100,
     sliderNavEdgeOffset: 14,
     // Filter button + panel (UI Layout > Audio Buttons > FILTER)
-    checkboxFilterButtonEnabled: true, sliderFilterIconSize: 20, sliderFilterIconOffsetX: 0, sliderFilterGapBelowShuffle: 0, sliderFilterEdgeOffset: 14,
-    sliderFilterPanelIconSize: 20, sliderFilterPanelIconOffsetY: 0, checkboxFilterPanelKeepVisible: false, sliderFilterPanelRowGap: 12, sliderFilterPanelRowsOffsetY: 0, sliderFilterPanelBlur: 6, sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
+    checkboxFilterButtonEnabled: true, sliderFilterIconSize: 20, sliderFilterIconOffsetX: 0, sliderFilterEdgeOffset: 14,
+    sliderFilterPanelIconSize: 20, sliderFilterPanelCountFontSize: 12, sliderSongTickWidth: 1, sliderSongTickHeight: 3, sliderFilterPanelIconOffsetY: 0, checkboxFilterPanelKeepVisible: false, sliderFilterPanelRowGap: 12, sliderFilterPanelRowsOffsetY: 0, sliderFilterPanelBlur: 6, sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
     sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
     selectFilterMissing: 'hide', checkboxFilterShowNumbers: true, checkboxFilterShowRangeText: false, checkboxFilterShowCount: false, checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,
@@ -190,7 +190,7 @@ export const DEFAULTS = {
     colorFilterPanelBg: '#14161a', sliderFilterPanelBgOpacity: 92, colorFilterPanelAccent: '#1db954',
 
     // Song Data button + row, Right Click Pan / Height
-    checkboxSongDataEnabled: true, sliderSongDataBtnSize: 20, sliderSongDataBtnOffsetX: 0, sliderSongDataBtnGap: 0, sliderSongDataBtnEdge: 14, sliderSongDataBtnOffOpacity: 45, sliderSongDataBtnOnOpacity: 100, colorSongDataBtn: '#f2f2f2', colorSongDataBtnOn: '#1db954', sliderSongDataClickTolerance: 0, sliderSongDataHoverTolerance: 0, sliderSongDataIconSize: 16, sliderSongDataFontSize: 13, checkboxSongDataBold: true, colorSongData: '#ffffff', sliderSongDataOpacity: 0.9, sliderSongDataIconGap: 5, sliderSongDataItemGap: 14, sliderSongDataFadeMs: 250, sliderSongDataEdgeOffset: 14, sliderSongDataOffsetY: 0, sliderSongDataTempoDecimals: 0, sliderSongDataDecimals: 2,
+    checkboxSongDataEnabled: true, sliderSongDataBtnSize: 20, sliderSongDataBtnOffsetX: 0, sliderSongDataBtnEdge: 14, sliderSongDataBtnOffOpacity: 45, sliderSongDataBtnOnOpacity: 100, colorSongDataBtn: '#f2f2f2', colorSongDataBtnOn: '#1db954', sliderSongDataClickTolerance: 0, sliderSongDataHoverTolerance: 0, sliderSongDataIconSize: 16, sliderSongDataFontSize: 13, checkboxSongDataBold: true, colorSongData: '#ffffff', sliderSongDataOpacity: 0.9, sliderSongDataIconGap: 5, sliderSongDataItemGap: 14, sliderSongDataFadeMs: 250, sliderSongDataEdgeOffset: 14, sliderSongDataOffsetY: 0, sliderSongDataDecimals: 2,
     checkboxRcPanEnabled: true, sliderRcPanSpeed: 1, checkboxRcPanInvert: false, sliderRcPanThreshold: 0, checkboxRcHeightEnabled: true, sliderRcHeightSpeed: 1, checkboxRcHeightInvert: false, sliderRcHeightThreshold: 12, sliderRcHeightMin: 60, sliderRcHeightMaxPct: 100, sliderRcGraphHeight: 0,
 
     // Background > Animation (bgAnimation.js)

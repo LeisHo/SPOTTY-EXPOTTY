@@ -149,7 +149,7 @@ export function createFilter(songs, { host, onChange }) {
         panel.classList.toggle('no-nums', !setting('checkboxFilterShowNumbers'));
         panel.classList.toggle('no-range-text', !setting('checkboxFilterShowRangeText')); // the "36 BPM - 209 BPM" text between the two end numbers
         countEl.style.display = setting('checkboxFilterShowCount') ? '' : 'none';
-        if (setting('checkboxFilterShowCount')) countEl.textContent = countPassing() + '/' + songs.length + ' songs';
+        if (setting('checkboxFilterShowCount')) countEl.textContent = countPassing() + ' / ' + songs.length + ' songs';
     }
     function commit() {
         try { localStorage.setItem(STORE, JSON.stringify(range)); } catch (e) { /* storage blocked */ }

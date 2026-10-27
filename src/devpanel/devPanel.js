@@ -7918,6 +7918,8 @@
             { tab, group: TL, id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
             { tab, group: TL, id: 'sliderTimelineBarOpacity', type: 'slider', label: 'Timeline Bar Opacity (x):', min: 0.1, max: 1, step: 0.05, value: 0.8 },
             { tab, group: TL, id: 'sliderBarWidth', type: 'slider', label: 'Bar Width / Granularity (Px):', min: 1, max: 40, step: 1, value: 3 },
+            { tab, group: TL, id: 'sliderSongTickWidth', type: 'slider', label: 'Song Tick Width (Px, The Marks Under The Graph When Zoomed In):', min: 1, max: 20, step: 1, value: 1 },
+            { tab, group: TL, id: 'sliderSongTickHeight', type: 'slider', label: 'Song Tick Height (Px, Grows Downward From The Graph):', min: 0, max: 80, step: 1, value: 3 },
             // Only the bars stretch (upward); nothing else moves, the cover is positioned independently of the timeline.
             { tab, group: TL, id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 60, max: 900, step: 5, value: 200 },
             // Off: bars snap to the new height when the zoom changes. On: they ease to it over the duration below (shown only while on).
@@ -8301,7 +8303,6 @@
             { tab, group: FLB, id: 'sliderFilterIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
             { tab, group: FLB, id: 'sliderFilterIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterIconOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
-            { tab, group: FLB, id: 'sliderFilterGapBelowShuffle', type: 'slider', label: 'Gap Below Shuffle (Px):', min: -40, max: 200, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterEdgeOffset', type: 'slider', label: 'Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
             { tab, group: FLB, id: 'sliderFilterOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
             { tab, group: FLB, id: 'sliderFilterOnOpacity', type: 'slider', label: 'On Icon Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
@@ -8342,6 +8343,7 @@
             { tab, group: FLB, id: 'sliderFilterPanelRowsOffsetY', type: 'slider', label: 'Panel Slider Group Y Offset (Px):', min: -100, max: 100, step: 1, value: 0 },
             { tab, group: FLB, id: 'checkboxFilterPanelKeepVisible', type: 'checkbox', label: 'Keep The Filter Panel Visible:', value: false },
             { tab, group: FLB, id: 'sliderFilterPanelIconOffsetY', type: 'slider', label: 'Panel Icon Y Offset From Its Slider (Px):', min: -30, max: 80, step: 1, value: 0 },
+            { tab, group: FLB, id: 'sliderFilterPanelCountFontSize', type: 'slider', label: 'Panel Song Count Font Size (Px):', min: 6, max: 60, step: 1, value: 12 },
             { tab, group: FLB, id: 'sliderFilterPanelIconSize', type: 'slider', label: 'Panel Category Icon Size (Px):', min: 8, max: 120, step: 1, value: 20 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetY', type: 'slider', label: 'Panel Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },
@@ -8361,7 +8363,6 @@
             { tab, group: SDG, id: 'sliderSongDataBtnSize', type: 'slider', label: 'Button Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
             { tab, group: SDG, id: 'sliderSongDataBtnOffsetX', type: 'slider', label: 'Button Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: SDG, id: 'sliderSongDataBtnOffsetY', type: 'slider', label: 'Button Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
-            { tab, group: SDG, id: 'sliderSongDataBtnGap', type: 'slider', label: 'Gap Below Shuffle (Px):', min: -40, max: 200, step: 1, value: 0 },
             { tab, group: SDG, id: 'sliderSongDataBtnEdge', type: 'slider', label: 'Button Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
             { tab, group: SDG, id: 'sliderSongDataBtnOffOpacity', type: 'slider', label: 'Button Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
             { tab, group: SDG, id: 'sliderSongDataBtnOnOpacity', type: 'slider', label: 'Button On Icon Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
@@ -8379,7 +8380,6 @@
             { tab, group: SDG, id: 'sliderSongDataItemGap', type: 'slider', label: 'X Gap Between The Data Items (Px):', min: 0, max: 200, step: 1, value: 14 },
             { tab, group: SDG, id: 'sliderSongDataEdgeOffset', type: 'slider', label: 'Data Row Offset From Right Edge (Px):', min: 0, max: 600, step: 1, value: 14 },
             { tab, group: SDG, id: 'sliderSongDataOffsetY', type: 'slider', label: 'Data Row Y Offset (Px):', min: -200, max: 200, step: 1, value: 0 },
-            { tab, group: SDG, id: 'sliderSongDataTempoDecimals', type: 'slider', label: 'Tempo Decimals:', min: 0, max: 3, step: 1, value: 0 },
             { tab, group: SDG, id: 'sliderSongDataDecimals', type: 'slider', label: 'Valence / Danceability / Energy Decimals:', min: 0, max: 4, step: 1, value: 2 },
         ];
         renderControlArray(SDG_CONTROLS, 'renderSpottyDevControls');

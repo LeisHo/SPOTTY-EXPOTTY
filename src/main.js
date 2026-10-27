@@ -233,7 +233,7 @@ async function boot() {
         const s = songs[idx], none = typeof s.tp === 'number' && s.tp === 0 && s.v === 0 && s.dn === 0; // an all-zero row has no analysis
         const num = (k, dp) => (typeof s[k] === 'number' && !(none && k !== 'e') ? s[k].toFixed(dp) : '-');
         const dp = setting('sliderSongDataDecimals');
-        timeline.setSongData([{ key: 'tp', text: num('tp', setting('sliderSongDataTempoDecimals')) }, { key: 'v', text: num('v', dp) }, { key: 'dn', text: num('dn', dp) }, { key: 'e', text: num('e', dp) }]);
+        timeline.setSongData([{ key: 'tp', text: num('tp', 0) }, { key: 'v', text: num('v', dp) }, { key: 'dn', text: num('dn', dp) }, { key: 'e', text: num('e', dp) }]);
     }
     const viewOnlyNow = () => filterOn() && idx !== playIdx && !flt.passes(idx);
     function cancelReturn() { clearTimeout(returnTimer); returnTimer = 0; if (returnRaf) { cancelAnimationFrame(returnRaf); returnRaf = 0; } }
@@ -663,26 +663,28 @@ async function boot() {
                 const sdOn = !!setting('checkboxSongDataEnabled'), ic = setting('sliderSongDataBtnSize');
                 el('spxSongData').hidden = !sdOn;
                 applySongDataIcon(el('spxSongData').querySelector('svg'), iconIndex(setting('selectSongDataIconStyle')));
-                c('--spx-sd-icon', ic + 'px'); c('--spx-sd-x', setting('sliderSongDataBtnOffsetX') + 'px'); c('--spx-sd-y', setting('sliderSongDataBtnOffsetY') + 'px'); c('--spx-sd-edge', setting('sliderSongDataBtnEdge') + 'px'); c('--spx-sd-gap', setting('sliderSongDataBtnGap') + 'px');
+                c('--spx-sd-icon', ic + 'px'); c('--spx-sd-x', setting('sliderSongDataBtnOffsetX') + 'px'); c('--spx-sd-y', setting('sliderSongDataBtnOffsetY') + 'px'); c('--spx-sd-edge', setting('sliderSongDataBtnEdge') + 'px');
                 c('--spx-sd-off-op', String(setting('sliderSongDataBtnOffOpacity') / 100)); c('--spx-sd-on-op', String(setting('sliderSongDataBtnOnOpacity') / 100));
                 c('--spx-sd-color', setting('colorSongDataBtn')); c('--spx-sd-on-color', setting('colorSongDataBtnOn'));
-                c('--spx-sd-offset', sdOn ? (ic + 20 + setting('sliderSongDataBtnGap')) + 'px' : '0px');
+                c('--spx-sd-offset', sdOn ? (ic + 20) + 'px' : '0px');
                 updateSongData();
             }
             el('spxFilter').hidden = !setting('checkboxFilterButtonEnabled');
             c('--spx-filter-icon', setting('sliderFilterIconSize') + 'px'); c('--spx-filter-x', setting('sliderFilterIconOffsetX') + 'px'); c('--spx-filter-y', setting('sliderFilterIconOffsetY') + 'px');
-            c('--spx-filter-gap', setting('sliderFilterGapBelowShuffle') + 'px'); c('--spx-filter-edge', setting('sliderFilterEdgeOffset') + 'px');
+            c('--spx-filter-edge', setting('sliderFilterEdgeOffset') + 'px');
             c('--spx-filter-off-op', String(setting('sliderFilterOffOpacity') / 100)); c('--spx-filter-on-op', String(setting('sliderFilterOnOpacity') / 100));
             c('--spx-filter-color', setting('colorFilterIcon')); c('--spx-filter-on-color', setting('colorFilterOn'));
             c('--spx-flt-cover-gray', String(setting('sliderFilterCoverGrayscale') / 100)); c('--spx-flt-cover-bright', String(setting('sliderFilterCoverBrightness') / 100)); c('--spx-flt-cover-contrast', String(setting('sliderFilterCoverContrast') / 100)); c('--spx-flt-text-bright', String(setting('sliderFilterTextBrightness') / 100)); c('--spx-flt-cover-ms', setting('sliderFilterCoverTransitionMs') + 'ms');
             applyFilterIcon(el('spxFilter').querySelector('svg'), iconIndex(setting('selectFilterIconStyle')));
             const ps = flt && flt.panel.style;
             if (ps) {
-                ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-ico', setting('sliderFilterPanelIconSize') + 'px'); ps.setProperty('--spx-flt-row-gap', setting('sliderFilterPanelRowGap') + 'px'); ps.setProperty('--spx-flt-ico-gap', setting('sliderFilterPanelIconOffsetY') + 'px'); ps.setProperty('--spx-flt-rows-y', setting('sliderFilterPanelRowsOffsetY') + 'px'); ps.setProperty('--spx-flt-blur', setting('sliderFilterPanelBlur') + 'px');
+                ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-ico', setting('sliderFilterPanelIconSize') + 'px'); ps.setProperty('--spx-flt-count-font', setting('sliderFilterPanelCountFontSize') + 'px'); ps.setProperty('--spx-flt-row-gap', setting('sliderFilterPanelRowGap') + 'px'); ps.setProperty('--spx-flt-ico-gap', setting('sliderFilterPanelIconOffsetY') + 'px'); ps.setProperty('--spx-flt-rows-y', setting('sliderFilterPanelRowsOffsetY') + 'px'); ps.setProperty('--spx-flt-blur', setting('sliderFilterPanelBlur') + 'px');
                 { const sf = shadowOf('FilterPanel'); ps.setProperty('--shadow-flt-panel', setting('checkboxShadowFilterPanel') ? `${sf.x} ${sf.y} ${sf.blur} ${setting('sliderShadowFilterPanelSpread')}px ${sf.c}` : 'none'); } // Shadows > Filter Panel Shadow ps.setProperty('--spx-flt-font', setting('sliderFilterPanelFontSize') + 'px');
                 ps.setProperty('--spx-flt-bg', rgbaOf(setting('colorFilterPanelBg'), setting('sliderFilterPanelBgOpacity') / 100)); ps.setProperty('--spx-flt-accent', setting('colorFilterPanelAccent'));
                 flt.refresh(); syncFilterUi(); timeline.setFilter(filterOn() ? flt.passes : null);
-                if (setting('checkboxFilterPanelKeepVisible') && !flt.open) { flt.setOpen(true); syncFilterUi(); } // Keep The Filter Panel Visible
+                const btnOn = !!setting('checkboxFilterButtonEnabled');
+                if (!btnOn && flt.open) { flt.setOpen(false); syncFilterUi(); } // the Filter button is off (and so is the filter): no panel either, whatever Keep Visible says
+                if (btnOn && setting('checkboxFilterPanelKeepVisible') && !flt.open) { flt.setOpen(true); syncFilterUi(); } // Keep The Filter Panel Visible
                 if (flt.open) placeFilterPanel();
             }
         }

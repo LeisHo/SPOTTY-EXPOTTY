@@ -591,11 +591,12 @@ export function createTimeline(canvas, data) {
         if (i1 - i0 > 0 && (i1 - i0) * 4 < w) {
             ctx.globalAlpha = 0.9;
             ctx.fillStyle = playheadColor;
+            const tickW = Math.max(1, Math.round(setting('sliderSongTickWidth'))), tickH = Math.max(0, setting('sliderSongTickHeight'));
             for (let i = i0; i < i1; i++) {
                 const off = !!filterFn && !filterFn(i);
                 ctx.globalAlpha = off ? setting('sliderFilterGrayOpacity') / 100 : 0.9;
                 ctx.fillStyle = off ? setting('colorFilterGray') : playheadColor;
-                ctx.fillRect(Math.round(xOf(vt[i])), topH + 1, 1, 3);
+                ctx.fillRect(Math.round(xOf(vt[i])) - Math.floor(tickW / 2), topH + 1, tickW, tickH); // one mark per song; it hangs down from the graph's bottom edge
             }
         }
 
