@@ -492,10 +492,10 @@
     "sliderBgAnimMaxFps": 60,
     "selectBgAnimBlend": "normal",
     "sliderBgAnimOpacity": 76,
-    "sliderBgAnimPatchScale": 1955,
-    "sliderBgAnimPatchCoverage": 47,
-    "sliderBgAnimPatchSoftness": 93,
-    "sliderBgAnimPatchDrift": 215,
+    "sliderBgAnimPatchScale": 210,
+    "sliderBgAnimPatchCoverage": 63,
+    "sliderBgAnimPatchSoftness": 100,
+    "sliderBgAnimPatchDrift": 116,
     "sliderBgAnimPatchOctaves": 4,
     "sliderBgAnimBreathPeriod": 4,
     "sliderBgAnimBreathMin": 0,
@@ -27924,7 +27924,10 @@
         "sliderBgAnimZoom": "131",
         "sliderBgAnimOpacity": "76",
         "selectBgAnimBlend": "normal",
-        "sliderBgAnimPatchScale": "1955"
+        "sliderBgAnimPatchScale": "210",
+        "sliderBgAnimPatchSoftness": "100",
+        "sliderBgAnimPatchCoverage": "63",
+        "sliderBgAnimPatchDrift": "116"
       },
       "breathing": {
         "sliderBgAnimSpeed": "41.5",
