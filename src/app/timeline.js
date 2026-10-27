@@ -290,13 +290,18 @@ export function createTimeline(canvas, data) {
         return st.cur;
     }
 
+    // Right Click Height on desktop: the drawn graph band is the Timeline Height setting, NOT the canvas (which is as tall as the window), so a right-drag has to
+    // change the band. null = use the setting. bandHeight() is what the band is right now (the drag starts from it).
+    let bandOverride = null;
+    function setBandHeight(v) { bandOverride = v > 0 ? v : null; draw(); }
+    function bandHeight() { return activeDevice() === '' ? Math.min(canvas.clientHeight, bandOverride !== null ? bandOverride : setting('sliderTimelineHeight')) : canvas.clientHeight; }
     function draw() {
         const dpr = window.devicePixelRatio || 1;
         const w = canvas.clientWidth, cssH = canvas.clientHeight;
         // The bars use the visible band: the Timeline Height setting on desktop, and the whole canvas on a phone (whose height is
         // already the device's own setting). The canvas itself is taller on desktop, so bars that run above the band are drawn,
         // not cut off. oy moves the band down to the bottom of the canvas.
-        const h = activeDevice() === '' ? Math.min(cssH, setting('sliderTimelineHeight')) : cssH;
+        const h = activeDevice() === '' ? Math.min(cssH, bandOverride !== null ? bandOverride : setting('sliderTimelineHeight')) : cssH; // bandOverride: set by a right-drag (Right Click Height)
         const oy = cssH - h;
         if (!w || !h) return;
         if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(cssH * dpr)) {
@@ -590,8 +595,16 @@ export function createTimeline(canvas, data) {
         // individual song ticks when zoomed in far enough to tell songs apart: from Song Ticks Start Showing (the pixels between songs) upward
         if (i1 - i0 > 0 && w / (i1 - i0) >= setting('sliderSongTickMinSpacing')) {
             const wr = setting('rangeBarSongTickWidth') || { min: 1, max: 1 };
-            const wMin = Math.max(1, Math.round(Math.min(wr.min, wr.max))), wMax = Math.max(wMin, Math.round(Math.max(wr.min, wr.max))), tickH = Math.max(0, setting('sliderSongTickHeight'));
-            const tickW = wMax; // without Scale Song Ticks every tick is as wide as the Max
+            const wMinT = Math.max(1, Math.round(Math.min(wr.min, wr.max))), wMaxT = Math.max(wMinT, Math.round(Math.max(wr.min, wr.max))), tickH = Math.max(0, setting('sliderSongTickHeight'));
+            // The THINNEST tick (a tick of one song): its width is picked from the Thinnest Song Tick Width Min / Max by the zoom curve (X: 0 = fully zoomed in, 1 = fully
+            // zoomed out, the same scale as Zoom Limits). Without Scale Song Ticks every tick is that thin; with it, ticks grow from that width up to the Max along the
+            // Song Tick Scale Curve. Every width stays between the Song Tick Width Min (floor) and Max (widest).
+            const tr = setting('rangeBarSongTickThinWidth') || { min: 1, max: 1 };
+            const thinT = Math.min(tr.min, tr.max) + Math.abs(tr.max - tr.min) * curveValue(setting('curveEditorSongTickThinZoom'), zoomFraction('limits'));
+            // Tick Width Transition Time: the numbers the widths come from (thinnest width, floor, widest, busiest tick's song count) ease toward their new values
+            // instead of snapping; 0 = snap, and the widths are then whole pixels.
+            const smoothMs = Math.max(0, setting('sliderSongTickWidthTransitionMs'));
+            const clampWith = (v, a, b) => Math.max(a, Math.min(b, Math.max(1, smoothMs > 0 ? v : Math.round(v))));
             const grayOp = setting('sliderFilterGrayOpacity') / 100, grayCol = setting('colorFilterGray');
             if (setting('checkboxSongTickScale')) {
                 // Scale With Datapoints: the songs that land in the same pixel column are ONE tick, as tall as the Height slider times the curve at
@@ -606,21 +619,24 @@ export function createTimeline(canvas, data) {
                 }
                 let maxN = 1;
                 cols.forEach(c => { if (c.n > maxN) maxN = c.n; });
+                const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxT, thin: thinT, maxN });
                 const curve = setting('curveEditorSongTickScale');
                 cols.forEach((c, x) => {
-                    const t = maxN > 1 ? (c.n - 1) / (maxN - 1) : 1;
+                    const t = ts.maxN > 1 ? Math.min(1, (c.n - 1) / (ts.maxN - 1)) : 1;
                     const off = !!filterFn && !c.on;
                     ctx.globalAlpha = off ? grayOp : 0.9;
                     ctx.fillStyle = off ? grayCol : playheadColor;
-                    const cv = curveValue(curve, t), tw = Math.max(1, Math.round(wMin + (wMax - wMin) * cv)); // width and height both follow the curve: Min..Max px wide, Height x the curve tall
-                    ctx.fillRect(x - Math.floor(tw / 2), topH + 1, tw, tickH * cv);
+                    const cv = curveValue(curve, t), tw = clampWith(ts.thin + (ts.wMax - ts.thin) * cv, ts.wMin, ts.wMax); // width: from the thinnest tick's width up to the Max along the curve; height: Height x the curve
+                    ctx.fillRect(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), topH + 1, tw, tickH * cv);
                 });
             } else {
+                const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxT, thin: thinT, maxN: 1 });
+                const tickW = clampWith(ts.thin, ts.wMin, ts.wMax);
                 for (let i = i0; i < i1; i++) {
                     const off = !!filterFn && !filterFn(i);
                     ctx.globalAlpha = off ? grayOp : 0.9;
                     ctx.fillStyle = off ? grayCol : playheadColor;
-                    ctx.fillRect(Math.round(xOf(vt[i])) - Math.floor(tickW / 2), topH + 1, tickW, tickH); // one mark per song; it hangs down from the graph's bottom edge
+                    ctx.fillRect(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), topH + 1, tickW, tickH); // one mark per song; it hangs down from the graph's bottom edge
                 }
             }
         }
@@ -645,6 +661,23 @@ export function createTimeline(canvas, data) {
         }
     }
 
+    // The numbers the song ticks' widths are worked out from, eased toward their targets over Tick Width Transition Time (called while drawing; it asks for
+    // another frame until they have arrived). target = { wMin, wMax, thin, maxN }.
+    let tickShown = null, tickAnimT = 0, tickRaf = 0;
+    function tickWidthsNow(target) {
+        const dur = Math.max(0, setting('sliderSongTickWidthTransitionMs')), now = performance.now();
+        if (!tickShown || dur === 0) { tickShown = { ...target }; tickAnimT = now; return tickShown; }
+        let dt = now - tickAnimT; if (dt > 100) dt = 16; if (dt < 0) dt = 0; // the first frame after a pause starts from where the widths were
+        tickAnimT = now;
+        const k = 1 - Math.exp(-dt / (dur / 3));
+        let moving = false;
+        for (const key of ['wMin', 'wMax', 'thin', 'maxN']) {
+            tickShown[key] += (target[key] - tickShown[key]) * k;
+            if (Math.abs(target[key] - tickShown[key]) > 0.02) moving = true; else tickShown[key] = target[key];
+        }
+        if (moving && !tickRaf) tickRaf = requestAnimationFrame(() => { tickRaf = 0; draw(); });
+        return tickShown;
+    }
     // A curve editor's value (0..1) at x (0..1): the dev panel's own evaluator when it is there, else straight lines between the points.
     function curveValue(curve, x) {
         const pts = curve && curve.points && curve.points.length ? curve.points : [{ x: 0, y: 1 }, { x: 1, y: 1 }];
@@ -696,5 +729,5 @@ export function createTimeline(canvas, data) {
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setFilter, setSongData, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
+    return { draw, setBandHeight, bandHeight, setFilter, setSongData, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }

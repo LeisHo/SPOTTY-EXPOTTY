@@ -7925,11 +7925,14 @@
             { tab, group: TL, id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
             { tab, group: TL, id: 'sliderTimelineBarOpacity', type: 'slider', label: 'Timeline Bar Opacity (x):', min: 0.1, max: 1, step: 0.05, value: 0.8 },
             { tab, group: TL, id: 'sliderBarWidth', type: 'slider', label: 'Bar Width / Granularity (Px):', min: 1, max: 40, step: 1, value: 3 },
-            { tab, group: TL, id: 'rangeBarSongTickWidth', type: 'range-bar', label: 'Song Tick Width Min / Max (Px; Min Only Matters When Scaled With Songs):', trackMin: 1, trackMax: 20, unit: 'px', defaultValue: { min: 1, max: 1 } },
+            { tab, group: TL, id: 'rangeBarSongTickWidth', type: 'range-bar', label: 'Song Tick Width Min / Max (Px; Min Is The Floor For Every Tick, Max The Widest Tick):', trackMin: 1, trackMax: 20, unit: 'px', defaultValue: { min: 1, max: 1 } },
+            { tab, group: TL, id: 'rangeBarSongTickThinWidth', type: 'range-bar', label: 'Thinnest Song Tick Width Min / Max (Px; The Zoom Curve Below Picks Between Them):', trackMin: 1, trackMax: 20, unit: 'px', defaultValue: { min: 1, max: 1 } },
+            { tab, group: TL, id: 'curveEditorSongTickThinZoom', type: 'curve-editor', label: 'Thinnest Song Tick Width Per Zoom (X: Timeline Zoom, 0 = Zoomed In, 1 = Zoomed Out; Y: Between The Thinnest Min And Max):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 0 }], defaultMethod: 'monotone' },
+            { tab, group: TL, id: 'sliderSongTickWidthTransitionMs', type: 'slider', label: 'Song Tick Width Transition Time (Ms, 0 = Snap):', min: 0, max: 3000, step: 10, value: 250 },
             { tab, group: TL, id: 'sliderSongTickHeight', type: 'slider', label: 'Song Tick Height (Px, Grows Downward From The Graph):', min: 0, max: 80, step: 1, value: 3 },
             { tab, group: TL, id: 'sliderSongTickMinSpacing', type: 'slider', label: 'Song Ticks Start Showing At (Px Between Songs, Lower = Visible Further Zoomed Out):', min: 0.1, max: 40, step: 0.1, value: 4 },
             { tab, group: TL, id: 'checkboxSongTickScale', type: 'checkbox', label: 'Scale Song Ticks With The Number Of Songs They Represent', value: false },
-            { tab, group: TL, id: 'curveEditorSongTickScale', type: 'curve-editor', label: 'Song Tick Scale Curve (X: Songs In The Tick, 0 = One, 1 = The Most In View; Y: Share Of The Height):', defaultPoints: [{ x: 0, y: 0.35 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
+            { tab, group: TL, id: 'curveEditorSongTickScale', type: 'curve-editor', label: 'Song Tick Scale Curve (X: Songs In The Tick, 0 = One / Thinnest, 1 = The Most In View / Widest; Y: How Far Along From The Thinnest Width To The Widest, And Share Of The Height):', defaultPoints: [{ x: 0, y: 0.35 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
             // Only the bars stretch (upward); nothing else moves, the cover is positioned independently of the timeline.
             { tab, group: TL, id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 60, max: 900, step: 5, value: 200 },
             // Off: bars snap to the new height when the zoom changes. On: they ease to it over the duration below (shown only while on).

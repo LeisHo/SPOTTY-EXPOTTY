@@ -555,9 +555,10 @@ async function boot() {
     function applyTimelineBox() {
         const tl = el('spxTimeline').style;
         const rcH = setting('checkboxRcHeightEnabled') ? (rcHeight !== null ? rcHeight : setting('sliderRcGraphHeight')) : 0;
-        if (rcH > 0) tl.setProperty('height', rcH + 'px', 'important'); // set by a right-drag (or the dev panel's Graph Height); 0 = automatic
-        else if (activeDevice() === '') tl.setProperty('height', 'calc(100dvh - 14px)', 'important');
-        else tl.removeProperty('height');
+        // set by a right-drag (or the dev panel's Graph Height); 0 = automatic. On desktop the canvas stays as tall as the window and the right-drag sets the
+        // graph BAND inside it (the Timeline Height setting is what normally sets it); on a phone the canvas is the graph, so its height is set.
+        if (activeDevice() === '') { timeline.setBandHeight(rcH > 0 ? rcH : null); tl.setProperty('height', 'calc(100dvh - 14px)', 'important'); }
+        else { timeline.setBandHeight(null); if (rcH > 0) tl.setProperty('height', rcH + 'px', 'important'); else tl.removeProperty('height'); }
         timeline.draw(); // the band height is a setting: redraw when it changes
     }
     window.addEventListener('resize', () => { applyTextElementStyles(); applyTimelineBox(); }); // the line count and the device depend on the width
@@ -1014,8 +1015,8 @@ async function boot() {
                 timeline.panPx(dx * setting('sliderRcPanSpeed') * (setting('checkboxRcPanInvert') ? -1 : 1));
             }
             if (setting('checkboxRcHeightEnabled') && (p.hActive || Math.abs(tdy) >= setting('sliderRcHeightThreshold'))) {
-                if (!p.hActive) { p.hActive = true; p.h0 = el('spxTimeline').getBoundingClientRect().height; p.hY0 = e.clientY; }
-                const maxH = Math.max(60, innerHeight * setting('sliderRcHeightMaxPct') / 100);
+                if (!p.hActive) { p.hActive = true; p.h0 = timeline.bandHeight(); p.hY0 = e.clientY; }
+                const maxH = Math.max(60, Math.min(el('spxTimeline').getBoundingClientRect().height, innerHeight * setting('sliderRcHeightMaxPct') / 100));
                 const hh = clamp(p.h0 + (p.hY0 - e.clientY) * setting('sliderRcHeightSpeed') * (setting('checkboxRcHeightInvert') ? -1 : 1), setting('sliderRcHeightMin'), maxH);
                 rcHeight = Math.round(hh);
                 const ctl = document.getElementById('sliderRcGraphHeight'); // dev mode: the slider follows the drag so Sync saves it
