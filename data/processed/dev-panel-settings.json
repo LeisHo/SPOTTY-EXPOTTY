@@ -441,7 +441,7 @@
     "sliderTitleLiftShadowOpacity": 0.5,
     "selectBackgroundMode": "blurCover",
     "sliderBackgroundOpacity": 1,
-    "sliderBackgroundBrightness": 1.24,
+    "sliderBackgroundBrightness": 1,
     "sliderBackgroundSaturation": 1.28,
     "sliderBackgroundTransition": 1950,
     "colorBackgroundColor": "#0d0f12",
@@ -27874,6 +27874,11 @@
         "sliderBgAnimZoom": "100",
         "sliderBgAnimOpacity": "57",
         "selectBgAnimBlend": "normal"
+      }
+    },
+    "selectBackgroundMode": {
+      "blurCover": {
+        "sliderBackgroundBrightness": "1"
       }
     }
   },
