@@ -7803,6 +7803,7 @@
         add({ tab, id: 'sliderTxt' + p + 'LetterSpacing', type: 'slider', label: 'Letter Spacing (Px):', min: -5, max: 30, step: 0.1, value: 0 }, elemContent);
         add({ tab, id: 'sliderTxt' + p + 'LineSpacing', type: 'slider', label: 'Line Spacing (x):', min: 0.5, max: 3, step: 0.05, value: d.lineSpacing }, elemContent);
         add({ tab, id: 'sliderTxt' + p + 'Opacity', type: 'slider', label: 'Opacity:', min: 0, max: 1, step: 0.01, value: 1 }, elemContent);
+        add({ tab, id: 'sliderTxt' + p + 'OffsetY', type: 'slider', label: 'Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 }, elemContent);
         add({ tab, id: 'checkboxTxt' + p + 'WordWrap', type: 'checkbox', label: 'Word Wrap', value: true }, elemContent);
         add({ tab, id: 'sliderTxt' + p + 'MaxWidth', type: 'slider', label: 'Max Width (Px):', min: 20, max: 2400, step: 1, value: 900 }, elemContent);
         add({

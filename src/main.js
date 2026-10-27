@@ -7,7 +7,7 @@
 // button. Every on-screen element's position and scale is owned by the UI Layout Engine (lib/ui-engine).
 import {
     createUIElement, updateElement, setContextValue, getActiveContext, resolveAndApplyAll, captureAllLayoutConfigs, registerStorageBackend, loadLayoutConfig,
-    resetLayoutConfig,
+    resetLayoutConfig, getElement,
 } from '../lib/ui-engine/registry.mjs';
 import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
@@ -490,6 +490,14 @@ async function boot() {
             st.letterSpacing = setting('sliderTxt' + p + 'LetterSpacing') + 'px';
             st.lineHeight = String(setting('sliderTxt' + p + 'LineSpacing'));
             st.opacity = String(setting('sliderTxt' + p + 'Opacity'));
+            // Y Offset: the CSS translate property, so the engine's own transform (anchor centering) is untouched. The Artist and the Album line are placed
+            // RELATIVE to the element above (the engine's anchor follows that element's translate), so each one's translate is its own offset minus the offset of
+            // the element it hangs from: that way every offset moves only its own text instead of dragging the lines below along.
+            const hostId = ({ SongTitle: 'spxTitle', Artist: 'spxArtist', AlbumDate: 'spxMeta' })[p];
+            let rel = null; try { const pos = getElement(hostId).layout.position; rel = pos && pos.mode === 'relative' ? pos.relativeTo : null; } catch (e) { /* not registered yet */ }
+            const parent = TEXT_ELEMENTS.find(([q]) => ({ SongTitle: 'spxTitle', Artist: 'spxArtist', AlbumDate: 'spxMeta' })[q] === rel);
+            const own = setting('sliderTxt' + p + 'OffsetY'), up = parent && setting('checkboxTxt' + parent[0] + 'Enabled') ? setting('sliderTxt' + parent[0] + 'OffsetY') : 0;
+            st.translate = '0px ' + (own - up) + 'px';
             st.maxWidth = setting('sliderTxt' + p + 'MaxWidth') + 'px';
             const outlineOn = setting('checkboxTxt' + p + 'OutlineEnabled');
             st.webkitTextStrokeWidth = outlineOn ? setting('sliderTxt' + p + 'OutlineThickness') + 'px' : '0px';

@@ -290,6 +290,7 @@ Object.entries(TEXT_ELEMENT_DEFAULTS).forEach(([p, d]) => Object.assign(DEFAULTS
     ['sliderTxt' + p + 'LetterSpacing']: 0,
     ['sliderTxt' + p + 'LineSpacing']: d.lineSpacing,
     ['sliderTxt' + p + 'Opacity']: 1,
+    ['sliderTxt' + p + 'OffsetY']: 0,
     ['checkboxTxt' + p + 'WordWrap']: true,
     ['sliderTxt' + p + 'MaxWidth']: 900,
     ['selectTxt' + p + 'Overflow']: 'wrap',
