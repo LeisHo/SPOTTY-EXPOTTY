@@ -1227,3 +1227,7 @@ Direct report: Debug's own Pause Logs/Copy All Logs/Clear All Logs/Export Logs e
 
 2026-10-27 - Song Tick Opacity slider
 - Owner: a slider for the song ticks' opacity in the tick group. Added "Song Tick Opacity (%)" (0-100, default 90 = the old fixed value) right under Song Tick Height; it sets the opacity of ticks that pass the filter (filtered-out gray ticks keep the Gray-out opacity setting). Checked in the dev panel: the slider sits in the same group as the height slider and 40 drew the ticks at alpha 0.4.
+
+2026-10-27 - Startup play button: the embed's play() is sent inside the click
+- Owner: after a refresh both the startup play button and the main (cover) play button had to be clicked. Cause (from the code, NOT reproduced: the Browser pane lets the embed autoplay at load, so the first click was never blocked there): the start click ran loadUri() and sent play() only 350 ms later; a browser lets the embed start only while the click is fresh, and the cover button worked because its play() is sent in the click itself. playViaEmbed (handoff.js) now sends play() right after loadUri inside the click, and again at 350 ms and 1000 ms if the player still isn't playing (stops if you paused or changed song).
+- Checked: syntax, the start button still runs the start path (hides the screen and opens the login window once). Not verified in a browser that blocks autoplay; please test on your side.

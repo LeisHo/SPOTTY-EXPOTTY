@@ -201,7 +201,11 @@ function playViaEmbed(trackId) {
     loadedId = trackId;
     logEvent('playback', `EMBED loadUri ${trackId} sent`);
     controller.loadUri('spotify:track:' + trackId);
-    setTimeout(() => { try { logEvent('playback', 'EMBED play() sent (350ms after loadUri)'); controller.play(); } catch (e) { /* embed not ready yet */ } }, 350);
+    // play() is sent at once, still inside the click that started playback (a browser only lets the embed start while that click is fresh; a play() sent
+    // only after a delay was ignored on the first start, so a second press was needed), then again after the track has loaded if it is not playing yet.
+    try { logEvent('playback', 'EMBED play() sent at once (inside the click)'); controller.play(); } catch (e) { /* embed not ready yet */ }
+    const again = ms => setTimeout(() => { if (!wantPlaying || loadedId !== trackId || playing) return; try { logEvent('playback', 'EMBED play() sent again (' + ms + 'ms after loadUri)'); controller.play(); } catch (e) { /* embed not ready yet */ } }, ms);
+    again(350); again(1000);
     return true;
 }
 
