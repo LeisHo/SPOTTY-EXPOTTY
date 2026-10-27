@@ -28939,7 +28939,7 @@
       "sliderSongDataFontSize": 12,
       "sliderSongDataItemGap": 70,
       "sliderSongDataBtnSize": 18,
-      "sliderSongDataOffsetY": 30,
+      "sliderSongDataOffsetY": 32,
       "sliderTxtSongTitleOffsetY": -15,
       "sliderTxtAlbumDateOffsetY": -15,
       "sliderTitleMaxLines": 3,
@@ -28948,7 +28948,7 @@
       "sliderTxtAlbumDateMaxWidth": 250,
       "sliderTxtArtistFontSize": 20,
       "sliderSongDataIconGap": 4,
-      "sliderSongAddDateOffsetY": -8
+      "sliderSongAddDateOffsetY": -14
     },
     "landscape": {}
   },
