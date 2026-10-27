@@ -147,6 +147,7 @@ export function createFilter(songs, { host, onChange }) {
             r.row.classList.toggle('on', narrowed(f));
         });
         panel.classList.toggle('no-nums', !setting('checkboxFilterShowNumbers'));
+        panel.classList.toggle('no-range-text', !setting('checkboxFilterShowRangeText')); // the "36 BPM - 209 BPM" text between the two end numbers
         countEl.style.display = setting('checkboxFilterShowCount') ? '' : 'none';
         if (setting('checkboxFilterShowCount')) countEl.textContent = countPassing() + '/' + songs.length + ' songs';
     }

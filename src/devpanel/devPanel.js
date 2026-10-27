@@ -8279,6 +8279,7 @@
             { tab, group: FLB, id: 'sliderFilterNumberGrayOpacity', type: 'slider', label: 'Grayed Number Opacity (%):', min: 0, max: 100, step: 1, value: 25 },
             // the panel
             { tab, group: FLB, id: 'checkboxFilterShowNumbers', type: 'checkbox', label: 'Panel: Show Numbers', value: true },
+            { tab, group: FLB, id: 'checkboxFilterShowRangeText', type: 'checkbox', label: 'Panel: Show Selected Range Text (36 BPM - 209 BPM):', value: false },
             { tab, group: FLB, id: 'checkboxFilterShowCount', type: 'checkbox', label: 'Panel: Show Matching Song Count', value: false },
             { tab, group: FLB, id: 'checkboxFilterCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
             { tab, group: FLB, id: 'sliderFilterPanelWidth', type: 'slider', label: 'Panel Default Width (Px):', min: 160, max: 600, step: 1, value: 260 },

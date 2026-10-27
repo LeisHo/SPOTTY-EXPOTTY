@@ -210,6 +210,7 @@
 .spx-flt-nums .spx-flt-val { flex: 1; text-align: center; padding: 0 4px; }
 .spx-flt-row.on .spx-flt-val { color: var(--flt-accent); }
 .spx-filter-panel.no-nums .spx-flt-nums { display: none; }
+.spx-filter-panel.no-range-text .spx-flt-nums .spx-flt-val { display: none; }
 .spx-flt-count { text-align: center; opacity: .75; margin-top: 2px; }
 .spx-flt-ico svg { width: var(--spx-flt-ico, 20px); height: var(--spx-flt-ico, 20px); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .spx-flt-row.on .spx-flt-top { color: var(--flt-accent); opacity: 1; }

@@ -180,7 +180,7 @@ export const DEFAULTS = {
     sliderFilterPanelIconSize: 20, sliderFilterPanelBlur: 6, sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
     sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
-    selectFilterMissing: 'hide', checkboxFilterShowNumbers: true, checkboxFilterShowCount: false, checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,
+    selectFilterMissing: 'hide', checkboxFilterShowNumbers: true, checkboxFilterShowRangeText: false, checkboxFilterShowCount: false, checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,
     selectFilterIconStyle: '0', selectSongDataIconStyle: '0', sliderVolIconOffsetY: 0, sliderShuffleIconOffsetY: 0, sliderFilterIconOffsetY: 0, sliderSongDataBtnOffsetY: 0, sliderStartPlayOffsetY: 0, sliderLastButtonOffsetY: 0, sliderNextButtonOffsetY: 0, sliderPlayGlyphOffsetY: 0, selectTempoIconStyle: '0', selectValenceIconStyle: '0', selectDanceIconStyle: '0', selectEnergyIconStyle: '0',
     sliderFilterCoverGrayscale: 100, sliderFilterCoverBrightness: 100, sliderFilterCoverContrast: 100, sliderFilterTextBrightness: 100, sliderFilterCoverTransitionMs: 250, sliderFilterGraphGrayscale: 100,
     checkboxFilterReturnEnabled: true, sliderFilterReturnDelay: 3, sliderFilterReturnDuration: 600, selectFilterReturnEasing: 'ease-in-out', selectFilterReturnRestore: 'end',
