@@ -482,7 +482,7 @@
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
     "selectBgAnimMode": "patches",
-    "sliderBgAnimSpeed": 126.5,
+    "sliderBgAnimSpeed": 180,
     "sliderBgAnimCenterX": 0,
     "sliderBgAnimCenterY": 0,
     "sliderBgAnimStartStopMs": 2000,
@@ -27981,7 +27981,7 @@
         "sliderBgAnimWarpDrift": "600"
       },
       "patches": {
-        "sliderBgAnimSpeed": "126.5",
+        "sliderBgAnimSpeed": "180",
         "sliderBgAnimCenterX": "0",
         "sliderBgAnimCenterY": "0",
         "sliderBgAnimZoom": "131",
