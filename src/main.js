@@ -873,7 +873,9 @@ async function boot() {
         schedulePreload();
         // Pausing the Web Playback SDK here and sending its play request 100 ms later raced (the play could fail or be undone by the pause), so with the SDK ready
         // and preview clips off the playing song is left alone: the next play request replaces it (and doHandoff pauses it if no request is sent).
-        if (handedOff) { logEvent('playback', 'EMBED song stopped: moved to another song'); if (!(sdkIsReady() && !previewClipsOn())) pauseEmbed(); handedOff = false; }
+        // With preview clips off nothing else would sound in the gap, so the playing song is left playing until the next one's play request replaces it (the SDK or the embed
+        // switches songs by itself); pausing it here made every Next / Last / scroll a silence of up to a second or two. doHandoff stops it if no request is sent.
+        if (handedOff) { const replaceNext = !previewClipsOn() && interacted && isUnlocked() && setting('checkboxHandoffEnabled') && volume.get() > 0; logEvent('playback', replaceNext ? 'EMBED song left playing: the next song replaces it' : 'EMBED song stopped: moved to another song'); if (!replaceNext) pauseEmbed(); handedOff = false; }
         playClip(clipKey(songs[idx]));
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
@@ -902,7 +904,7 @@ async function boot() {
                 } else { previewHold = songs[playIdx].id; playTrack(songs[playIdx].id, startMs); } // 0 = hard cut: the preview still holds until the song plays
                 handedOff = true;
             }
-            else { stopClip(); if (sdkIsReady() && !previewClipsOn()) pauseEmbed(); } // no request is coming: the song that was left playing stops now
+            else { stopClip(); if (!previewClipsOn()) pauseEmbed(); } // no request is coming: the song that was left playing stops now
         };
         handoffTimer = setTimeout(doHandoff, handoffDelay);
         // Auto Next Song: a song with no preview clip is held for the set time, then the next song plays.
