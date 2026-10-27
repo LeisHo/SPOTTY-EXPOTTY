@@ -587,16 +587,41 @@ export function createTimeline(canvas, data) {
         });
         ctx.letterSpacing = '0px';
 
-        // individual song ticks when zoomed in far enough to tell songs apart
-        if (i1 - i0 > 0 && (i1 - i0) * 4 < w) {
-            ctx.globalAlpha = 0.9;
-            ctx.fillStyle = playheadColor;
-            const tickW = Math.max(1, Math.round(setting('sliderSongTickWidth'))), tickH = Math.max(0, setting('sliderSongTickHeight'));
-            for (let i = i0; i < i1; i++) {
-                const off = !!filterFn && !filterFn(i);
-                ctx.globalAlpha = off ? setting('sliderFilterGrayOpacity') / 100 : 0.9;
-                ctx.fillStyle = off ? setting('colorFilterGray') : playheadColor;
-                ctx.fillRect(Math.round(xOf(vt[i])) - Math.floor(tickW / 2), topH + 1, tickW, tickH); // one mark per song; it hangs down from the graph's bottom edge
+        // individual song ticks when zoomed in far enough to tell songs apart: from Song Ticks Start Showing (the pixels between songs) upward
+        if (i1 - i0 > 0 && w / (i1 - i0) >= setting('sliderSongTickMinSpacing')) {
+            const wr = setting('rangeBarSongTickWidth') || { min: 1, max: 1 };
+            const wMin = Math.max(1, Math.round(Math.min(wr.min, wr.max))), wMax = Math.max(wMin, Math.round(Math.max(wr.min, wr.max))), tickH = Math.max(0, setting('sliderSongTickHeight'));
+            const tickW = wMax; // without Scale Song Ticks every tick is as wide as the Max
+            const grayOp = setting('sliderFilterGrayOpacity') / 100, grayCol = setting('colorFilterGray');
+            if (setting('checkboxSongTickScale')) {
+                // Scale With Datapoints: the songs that land in the same pixel column are ONE tick, as tall as the Height slider times the curve at
+                // (songs in this tick - 1) / (songs in the busiest tick in view - 1); a tick is gray only when none of its songs passes the filter
+                const cols = new Map();
+                for (let i = i0; i < i1; i++) {
+                    const x = Math.round(xOf(vt[i]));
+                    let c = cols.get(x);
+                    if (!c) { c = { n: 0, on: false }; cols.set(x, c); }
+                    c.n++;
+                    if (!(filterFn && !filterFn(i))) c.on = true;
+                }
+                let maxN = 1;
+                cols.forEach(c => { if (c.n > maxN) maxN = c.n; });
+                const curve = setting('curveEditorSongTickScale');
+                cols.forEach((c, x) => {
+                    const t = maxN > 1 ? (c.n - 1) / (maxN - 1) : 1;
+                    const off = !!filterFn && !c.on;
+                    ctx.globalAlpha = off ? grayOp : 0.9;
+                    ctx.fillStyle = off ? grayCol : playheadColor;
+                    const cv = curveValue(curve, t), tw = Math.max(1, Math.round(wMin + (wMax - wMin) * cv)); // width and height both follow the curve: Min..Max px wide, Height x the curve tall
+                    ctx.fillRect(x - Math.floor(tw / 2), topH + 1, tw, tickH * cv);
+                });
+            } else {
+                for (let i = i0; i < i1; i++) {
+                    const off = !!filterFn && !filterFn(i);
+                    ctx.globalAlpha = off ? grayOp : 0.9;
+                    ctx.fillStyle = off ? grayCol : playheadColor;
+                    ctx.fillRect(Math.round(xOf(vt[i])) - Math.floor(tickW / 2), topH + 1, tickW, tickH); // one mark per song; it hangs down from the graph's bottom edge
+                }
             }
         }
 
@@ -620,6 +645,14 @@ export function createTimeline(canvas, data) {
         }
     }
 
+    // A curve editor's value (0..1) at x (0..1): the dev panel's own evaluator when it is there, else straight lines between the points.
+    function curveValue(curve, x) {
+        const pts = curve && curve.points && curve.points.length ? curve.points : [{ x: 0, y: 1 }, { x: 1, y: 1 }];
+        let y;
+        if (typeof window.evaluateCurveEditorPoints === 'function') y = window.evaluateCurveEditorPoints(pts, x, (curve && curve.method) || 'monotone');
+        else { const q = [...pts].sort((a, b) => a.x - b.x); y = x <= q[0].x ? q[0].y : q[q.length - 1].y; for (let k = 0; k < q.length - 1; k++) if (x <= q[k + 1].x) { y = q[k].y + ((x - q[k].x) / ((q[k + 1].x - q[k].x) || 1)) * (q[k + 1].y - q[k].y); break; } }
+        return Math.min(1, Math.max(0, y));
+    }
     // Where the current zoom sits between the smallest and largest span, 0 = fully zoomed in, 1 = fully zoomed
     // out, on the same log scale as the Zoom Limits slider. range 'limits' (default) spans the slider's
     // min..max; 'full' spans everything (2 minutes .. the whole timeline).

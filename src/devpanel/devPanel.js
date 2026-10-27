@@ -1118,8 +1118,15 @@
         input.focus();
     }
 
+    // The control a settings row stands for. A button row (Play / Pause, Next Song, Last Song) has no id on the row itself, only on its button, so looking at
+    // the row alone found nothing and clicking such a row while assigning a hotkey silently did nothing (and no badge was drawn).
+    function hotkeyRowId(row) {
+        if (row.dataset.controlId || row.id) return row.dataset.controlId || row.id;
+        const inner = row.querySelector('button[id], input[id], select[id], textarea[id]');
+        return inner ? inner.id : '';
+    }
     function startHotkeyEdit(row) {
-        const rowId = row.dataset.controlId || row.id;
+        const rowId = hotkeyRowId(row);
         if (!rowId) return;
         openHotkeyCapture(row, rowId, () => renderAllHotkeyBadges());
     }
@@ -1142,7 +1149,7 @@
     }
 
     function renderHotkeyBadgesForRow(row) {
-        const rowId = row.dataset.controlId || row.id;
+        const rowId = hotkeyRowId(row);
         const key = Object.keys(devHotkeys).find(k => devHotkeys[k].id === rowId);
 
         // Remove existing badge
@@ -7918,8 +7925,11 @@
             { tab, group: TL, id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
             { tab, group: TL, id: 'sliderTimelineBarOpacity', type: 'slider', label: 'Timeline Bar Opacity (x):', min: 0.1, max: 1, step: 0.05, value: 0.8 },
             { tab, group: TL, id: 'sliderBarWidth', type: 'slider', label: 'Bar Width / Granularity (Px):', min: 1, max: 40, step: 1, value: 3 },
-            { tab, group: TL, id: 'sliderSongTickWidth', type: 'slider', label: 'Song Tick Width (Px, The Marks Under The Graph When Zoomed In):', min: 1, max: 20, step: 1, value: 1 },
+            { tab, group: TL, id: 'rangeBarSongTickWidth', type: 'range-bar', label: 'Song Tick Width Min / Max (Px; Min Only Matters When Scaled With Songs):', trackMin: 1, trackMax: 20, unit: 'px', defaultValue: { min: 1, max: 1 } },
             { tab, group: TL, id: 'sliderSongTickHeight', type: 'slider', label: 'Song Tick Height (Px, Grows Downward From The Graph):', min: 0, max: 80, step: 1, value: 3 },
+            { tab, group: TL, id: 'sliderSongTickMinSpacing', type: 'slider', label: 'Song Ticks Start Showing At (Px Between Songs, Lower = Visible Further Zoomed Out):', min: 0.1, max: 40, step: 0.1, value: 4 },
+            { tab, group: TL, id: 'checkboxSongTickScale', type: 'checkbox', label: 'Scale Song Ticks With The Number Of Songs They Represent', value: false },
+            { tab, group: TL, id: 'curveEditorSongTickScale', type: 'curve-editor', label: 'Song Tick Scale Curve (X: Songs In The Tick, 0 = One, 1 = The Most In View; Y: Share Of The Height):', defaultPoints: [{ x: 0, y: 0.35 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
             // Only the bars stretch (upward); nothing else moves, the cover is positioned independently of the timeline.
             { tab, group: TL, id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 60, max: 900, step: 5, value: 200 },
             // Off: bars snap to the new height when the zoom changes. On: they ease to it over the duration below (shown only while on).
@@ -8409,8 +8419,8 @@
             Nav: { on: true, color: '#f2f2f2', size: 26, op: 100, hoverOp: 100, time: 150, hoverSize: 30, clickSize: 22, animHoverOp: 100, animClickOp: 70, releaseSize: 32 },
         };
         [
-            ['Play', 'Play Button', 'Play Button Animation', [['buttonPlayPause', 'Play / Pause (Left-Click To Set A Hotkey)']]],
-            ['Nav', 'Next And Last Song Buttons', 'Next And Last Button Animation', [['buttonNextSong', 'Next Song (Left-Click To Set A Hotkey)'], ['buttonPrevSong', 'Last Song (Left-Click To Set A Hotkey)']]],
+            ['Play', 'Play Button', 'Play Button Animation', [['buttonPlayPause', 'Play / Pause']]],
+            ['Nav', 'Next And Last Song Buttons', 'Next And Last Button Animation', [['buttonNextSong', 'Next Song'], ['buttonPrevSong', 'Last Song']]],
         ].forEach(([P, G, A, keys]) => {
             const d = BTN_DEF[P];
             uiLayoutContent.appendChild(createDevGroupElement(G, tab));
