@@ -501,9 +501,10 @@
     "sliderBgAnimBreathPeriod": 4,
     "sliderBgAnimBreathMin": 0,
     "sliderBgAnimBreathMax": 100,
-    "rangeBarBgAnimRingThickness": "{\"min\":0.1,\"max\":5}",
+    "rangeBarBgAnimRingThickness": "{\"min\":0.01,\"max\":0.5}",
     "curveEditorBgAnimRingThickness": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.6337038596877189,\"y\":0}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.16968989035190118,\"y\":-0.2075002034505209}}],\"method\":\"monotone\",\"bgOpacity\":0}",
-    "sliderBgAnimRingSpeedStep": 0.3,
+    "sliderBgAnimRingSpeedStep": 0.2,
+    "checkboxBgAnimRingReverse": false,
     "sliderBgAnimRingEdgeBlur": 0,
     "checkboxBgAnimRingAlternate": true,
     "sliderBgAnimSwirlRadius": 3705,
@@ -6031,6 +6032,10 @@
                       {
                         "type": "row",
                         "key": "selectBgAnimWarpDriftDir"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxBgAnimRingReverse"
                       }
                     ],
                     "rowKeys": [
@@ -6070,7 +6075,8 @@
                       "rangeBarBgAnimSwirlStrength",
                       "curveEditorBgAnimSwirlStrength",
                       "selectBgAnimPatchDriftDir",
-                      "selectBgAnimWarpDriftDir"
+                      "selectBgAnimWarpDriftDir",
+                      "checkboxBgAnimRingReverse"
                     ],
                     "subgroups": []
                   }
@@ -6274,6 +6280,10 @@
                     {
                       "type": "row",
                       "key": "selectBgAnimWarpDriftDir"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxBgAnimRingReverse"
                     }
                   ],
                   "rowKeys": [
@@ -6313,7 +6323,8 @@
                     "rangeBarBgAnimSwirlStrength",
                     "curveEditorBgAnimSwirlStrength",
                     "selectBgAnimPatchDriftDir",
-                    "selectBgAnimWarpDriftDir"
+                    "selectBgAnimWarpDriftDir",
+                    "checkboxBgAnimRingReverse"
                   ],
                   "subgroups": []
                 }
@@ -10823,6 +10834,10 @@
                     {
                       "type": "row",
                       "key": "selectBgAnimWarpDriftDir"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxBgAnimRingReverse"
                     }
                   ],
                   "rowKeys": [
@@ -10862,7 +10877,8 @@
                     "rangeBarBgAnimSwirlStrength",
                     "curveEditorBgAnimSwirlStrength",
                     "selectBgAnimPatchDriftDir",
-                    "selectBgAnimWarpDriftDir"
+                    "selectBgAnimWarpDriftDir",
+                    "checkboxBgAnimRingReverse"
                   ],
                   "subgroups": []
                 }
@@ -11066,6 +11082,10 @@
                   {
                     "type": "row",
                     "key": "selectBgAnimWarpDriftDir"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxBgAnimRingReverse"
                   }
                 ],
                 "rowKeys": [
@@ -11105,7 +11125,8 @@
                   "rangeBarBgAnimSwirlStrength",
                   "curveEditorBgAnimSwirlStrength",
                   "selectBgAnimPatchDriftDir",
-                  "selectBgAnimWarpDriftDir"
+                  "selectBgAnimWarpDriftDir",
+                  "checkboxBgAnimRingReverse"
                 ],
                 "subgroups": []
               }
@@ -28011,8 +28032,9 @@
         "sliderBgAnimOpacity": "27",
         "selectBgAnimBlend": "normal",
         "sliderBgAnimRingEdgeBlur": "0",
-        "sliderBgAnimRingSpeedStep": "0.3",
-        "checkboxBgAnimRingAlternate": true
+        "sliderBgAnimRingSpeedStep": "0.2",
+        "checkboxBgAnimRingAlternate": true,
+        "checkboxBgAnimRingReverse": false
       },
       "swirl": {
         "sliderBgAnimSpeed": "262.5",
