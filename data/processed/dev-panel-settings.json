@@ -35,9 +35,9 @@
     "rangeBarSongTickThinWidth": "{\"min\":1,\"max\":1}",
     "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderSongTickWidthTransitionMs": 250,
-    "sliderSongTickHeight": 11,
-    "sliderSongTickMinSpacing": 4,
-    "checkboxSongTickScale": false,
+    "sliderSongTickHeight": 35,
+    "sliderSongTickMinSpacing": 0.1,
+    "checkboxSongTickScale": true,
     "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0.35},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderTimelineHeight": 190,
     "checkboxTimelineHeightTransition": true,
@@ -566,10 +566,10 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 134,
-    "top": 56,
-    "width": 458,
-    "height": 606
+    "left": 92,
+    "top": 145,
+    "width": 1284,
+    "height": 307
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -17799,49 +17799,60 @@
             }
           },
           {
-            "type": "row",
-            "key": "sliderSongTickHeight"
-          },
-          {
-            "type": "row",
-            "key": "rangeBarSongTickWidth"
-          },
-          {
-            "type": "row",
-            "key": "rangeBarSongTickThinWidth"
-          },
-          {
-            "type": "row",
-            "key": "curveEditorSongTickThinZoom"
-          },
-          {
-            "type": "row",
-            "key": "sliderSongTickWidthTransitionMs"
-          },
-          {
-            "type": "row",
-            "key": "sliderSongTickMinSpacing"
-          },
-          {
-            "type": "row",
-            "key": "checkboxSongTickScale"
-          },
-          {
-            "type": "row",
-            "key": "curveEditorSongTickScale"
+            "type": "group",
+            "section": {
+              "key": "desktop:New Group (28)",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "checkboxSongTickScale"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSongTickMinSpacing"
+                },
+                {
+                  "type": "row",
+                  "key": "rangeBarSongTickThinWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "rangeBarSongTickWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSongTickHeight"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorSongTickThinZoom"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorSongTickScale"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSongTickWidthTransitionMs"
+                }
+              ],
+              "rowKeys": [
+                "checkboxSongTickScale",
+                "sliderSongTickMinSpacing",
+                "rangeBarSongTickThinWidth",
+                "rangeBarSongTickWidth",
+                "sliderSongTickHeight",
+                "curveEditorSongTickThinZoom",
+                "curveEditorSongTickScale",
+                "sliderSongTickWidthTransitionMs"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
-          "rangeBarTimelineZoomLimits",
-          "sliderSongTickHeight",
-          "rangeBarSongTickWidth",
-          "rangeBarSongTickThinWidth",
-          "curveEditorSongTickThinZoom",
-          "sliderSongTickWidthTransitionMs",
-          "sliderSongTickMinSpacing",
-          "checkboxSongTickScale",
-          "curveEditorSongTickScale"
+          "rangeBarTimelineZoomLimits"
         ],
         "subgroups": [
           {
@@ -18378,6 +18389,54 @@
               "sliderRcHeightThreshold",
               "sliderRcHeightMin",
               "sliderRcHeightMaxPct"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:New Group (28)",
+            "items": [
+              {
+                "type": "row",
+                "key": "checkboxSongTickScale"
+              },
+              {
+                "type": "row",
+                "key": "sliderSongTickMinSpacing"
+              },
+              {
+                "type": "row",
+                "key": "rangeBarSongTickThinWidth"
+              },
+              {
+                "type": "row",
+                "key": "rangeBarSongTickWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderSongTickHeight"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorSongTickThinZoom"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorSongTickScale"
+              },
+              {
+                "type": "row",
+                "key": "sliderSongTickWidthTransitionMs"
+              }
+            ],
+            "rowKeys": [
+              "checkboxSongTickScale",
+              "sliderSongTickMinSpacing",
+              "rangeBarSongTickThinWidth",
+              "rangeBarSongTickWidth",
+              "sliderSongTickHeight",
+              "curveEditorSongTickThinZoom",
+              "curveEditorSongTickScale",
+              "sliderSongTickWidthTransitionMs"
             ],
             "subgroups": []
           }
@@ -38152,8 +38211,9 @@
     "desktop:Scale Numbers": true,
     "desktop:Ticks": true,
     "desktop:Song Add Date": true,
-    "desktop:Right Click Pan": false,
-    "desktop:Right Click Height": false,
+    "desktop:Right Click Pan": true,
+    "desktop:Right Click Height": true,
+    "desktop:New Group (28)": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
@@ -39138,7 +39198,8 @@
     "sliderMobileFilterPanelRowsOffsetY": null,
     "sliderLandscapeFilterPanelRowsOffsetY": null,
     "sliderMobileFilterPanelRowGap": null,
-    "sliderLandscapeFilterPanelRowGap": null
+    "sliderLandscapeFilterPanelRowGap": null,
+    "desktop:New Group (28)": "GRAPH TICKS"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -39173,7 +39234,8 @@
     "desktop:New Group (24)",
     "desktop:New Group (27)",
     "desktop:New Group (26)",
-    "desktop:New Group (25)"
+    "desktop:New Group (25)",
+    "desktop:New Group (28)"
   ],
   "lockedGroups": [
     "desktop:Dev Panel",
@@ -39210,7 +39272,7 @@
     "desktop:Startup"
   ],
   "lockedSliderBounds": [],
-  "textEditModeEnabled": false,
+  "textEditModeEnabled": true,
   "hotkeys": {
     "s": {
       "id": "devHeaderSyncBtn",
