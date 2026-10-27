@@ -192,7 +192,7 @@ export const DEFAULTS = {
 
     // Song Data button + row, Right Click Pan / Height
     checkboxSongDataEnabled: true, sliderSongDataBtnSize: 20, sliderSongDataBtnOffsetX: 0, sliderSongDataBtnEdge: 14, sliderSongDataBtnOffOpacity: 45, sliderSongDataBtnOnOpacity: 100, colorSongDataBtn: '#f2f2f2', colorSongDataBtnOn: '#1db954', sliderSongDataClickTolerance: 0, sliderSongDataHoverTolerance: 0, sliderSongDataIconSize: 16, sliderSongDataFontSize: 13, checkboxSongDataBold: true, colorSongData: '#ffffff', sliderSongDataOpacity: 0.9, sliderSongDataIconGap: 5, sliderSongDataItemGap: 14, sliderSongDataFadeMs: 250, sliderSongDataEdgeOffset: 14, sliderSongDataOffsetY: 0, sliderSongDataDecimals: 2,
-    checkboxRcPanEnabled: true, sliderRcPanSpeed: 1, checkboxRcPanInvert: false, sliderRcPanThreshold: 0, checkboxRcHeightEnabled: true, sliderRcHeightSpeed: 1, checkboxRcHeightInvert: false, sliderRcHeightThreshold: 12, sliderRcHeightMin: 60, sliderRcHeightMaxPct: 100, sliderRcGraphHeight: 0,
+    checkboxRcPanEnabled: true, sliderRcPanSpeed: 1, checkboxRcPanInvert: false, sliderRcPanThreshold: 0, checkboxRcHeightEnabled: true, sliderRcHeightSpeed: 1, checkboxRcHeightInvert: false, sliderRcHeightThreshold: 12, sliderRcHeightMin: 60, sliderRcHeightMaxPct: 100,
 
     // Background > Animation (bgAnimation.js)
     selectBgAnimMode: 'none', sliderBgAnimSpeed: 6, sliderBgAnimCenterX: 0, sliderBgAnimCenterY: 0, sliderBgAnimStartStopMs: 2000,

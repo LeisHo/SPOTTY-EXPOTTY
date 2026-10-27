@@ -53,7 +53,6 @@
     "sliderRcHeightThreshold": 0,
     "sliderRcHeightMin": 60,
     "sliderRcHeightMaxPct": 100,
-    "sliderRcGraphHeight": 638,
     "checkboxScrubLineDrag": true,
     "sliderScrubLineAnimTime": 50,
     "sliderScrubLineHoverWidth": 3,
@@ -17760,10 +17759,6 @@
                 {
                   "type": "row",
                   "key": "sliderRcHeightMaxPct"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderRcGraphHeight"
                 }
               ],
               "rowKeys": [
@@ -17771,8 +17766,7 @@
                 "checkboxRcHeightInvert",
                 "sliderRcHeightThreshold",
                 "sliderRcHeightMin",
-                "sliderRcHeightMaxPct",
-                "sliderRcGraphHeight"
+                "sliderRcHeightMaxPct"
               ],
               "subgroups": []
             }
@@ -18319,10 +18313,6 @@
               {
                 "type": "row",
                 "key": "sliderRcHeightMaxPct"
-              },
-              {
-                "type": "row",
-                "key": "sliderRcGraphHeight"
               }
             ],
             "rowKeys": [
@@ -18330,8 +18320,7 @@
               "checkboxRcHeightInvert",
               "sliderRcHeightThreshold",
               "sliderRcHeightMin",
-              "sliderRcHeightMaxPct",
-              "sliderRcGraphHeight"
+              "sliderRcHeightMaxPct"
             ],
             "subgroups": []
           }

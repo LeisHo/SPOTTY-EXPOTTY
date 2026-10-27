@@ -219,7 +219,7 @@ async function boot() {
     let stepImmediate = false; // set by stepSong() so that one song change skips the handoff delay
     // Audio-feature filter (Filter button, filter.js). Created further down; until then every song passes.
     let flt = null;
-    let songDataOn = false, rcHeight = null; // Song Data button state; the graph height set by a right-drag (null = the dev panel's value)
+    let songDataOn = false, rcHeight = null; // Song Data button state; the graph height set by a right-drag (null = the Timeline Height setting; not saved)
     const filterOn = () => !!flt && flt.active() && !!setting('checkboxFilterButtonEnabled');
     const songOk = i => !filterOn() || flt.passes(i);
     // The filter only decides which songs get played NEXT. idx = the song shown (text, cover, playhead); playIdx = the song actually
@@ -270,7 +270,7 @@ async function boot() {
     }
     const randomPassingSong = () => { const pool = []; for (let i = 0; i < songs.length; i++) if (songOk(i)) pool.push(i); return pool.length ? pool[Math.floor(Math.random() * pool.length)] : Math.floor(Math.random() * songs.length); };
     // (capture phase: runs before the generic settings listener below, so applyLook sees the flag)
-    ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; if (/RcGraphHeight$/.test((e.target && e.target.id) || '') && !e.__spxFromDrag) rcHeight = null; }, true));
+    ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; if (/TimelineHeight$/.test((e.target && e.target.id) || '') && rcHeight !== null && !window.__spxBulkApply) { rcHeight = null; applyTimelineBox(); } /* the Timeline Height slider is the default: moving it drops the right-drag scale */ }, true));
 
     const timeline = createTimeline(el('spxTimeline'), data);
     window.spxRedrawTimeline = () => timeline.draw();
@@ -554,7 +554,7 @@ async function boot() {
     // Timeline Height setting (the engine's per-device value), so the forced height is removed there.
     function applyTimelineBox() {
         const tl = el('spxTimeline').style;
-        const rcH = setting('checkboxRcHeightEnabled') ? (rcHeight !== null ? rcHeight : setting('sliderRcGraphHeight')) : 0;
+        const rcH = setting('checkboxRcHeightEnabled') && rcHeight !== null ? rcHeight : 0; // the right-drag's scale for this visit only; otherwise the Timeline Height setting is the height
         // set by a right-drag (or the dev panel's Graph Height); 0 = automatic. On desktop the canvas stays as tall as the window and the right-drag sets the
         // graph BAND inside it (the Timeline Height setting is what normally sets it); on a phone the canvas is the graph, so its height is set.
         if (activeDevice() === '') { timeline.setBandHeight(rcH > 0 ? rcH : null); tl.setProperty('height', 'calc(100dvh - 14px)', 'important'); }
@@ -1019,8 +1019,6 @@ async function boot() {
                 const maxH = Math.max(60, Math.min(el('spxTimeline').getBoundingClientRect().height, innerHeight * setting('sliderRcHeightMaxPct') / 100));
                 const hh = clamp(p.h0 + (p.hY0 - e.clientY) * setting('sliderRcHeightSpeed') * (setting('checkboxRcHeightInvert') ? -1 : 1), setting('sliderRcHeightMin'), maxH);
                 rcHeight = Math.round(hh);
-                const ctl = document.getElementById('sliderRcGraphHeight'); // dev mode: the slider follows the drag so Sync saves it
-                if (ctl) { ctl.value = rcHeight; const ev = new Event('input', { bubbles: true }); ev.__spxFromDrag = true; ctl.dispatchEvent(ev); }
                 applyTimelineBox();
             }
             timeline.draw();

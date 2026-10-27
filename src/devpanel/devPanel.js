@@ -7966,7 +7966,6 @@
             { tab, group: RCH, id: 'sliderRcHeightThreshold', type: 'slider', label: 'Height Start Threshold (Px):', min: 0, max: 200, step: 1, value: 12 },
             { tab, group: RCH, id: 'sliderRcHeightMin', type: 'slider', label: 'Minimum Graph Height (Px):', min: 20, max: 600, step: 1, value: 60 },
             { tab, group: RCH, id: 'sliderRcHeightMaxPct', type: 'slider', label: 'Maximum Graph Height (% Of Screen):', min: 20, max: 100, step: 1, value: 100 },
-            { tab, group: RCH, id: 'sliderRcGraphHeight', type: 'slider', label: 'Graph Height (Px, 0 = Automatic):', min: 0, max: 2000, step: 1, value: 0 },
         ];
         renderControlArray(RCP_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_RC_PAN', RCP_CONTROLS);
