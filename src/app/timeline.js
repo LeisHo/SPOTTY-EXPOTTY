@@ -607,7 +607,7 @@ export function createTimeline(canvas, data) {
             const clampWith = (v, a, b) => Math.max(a, Math.min(b, Math.max(1, smoothMs > 0 ? v : Math.round(v))));
             const grayOp = setting('sliderFilterGrayOpacity') / 100, grayCol = setting('colorFilterGray');
             if (setting('checkboxSongTickScale')) {
-                // Scale With Datapoints: the songs that land in the same pixel column are ONE tick, as tall as the Height slider times the curve at
+                // Scale With Datapoints: the songs that land in the same pixel column are ONE tick, as tall as the Height slider (every tick the same height); the curve sets its width, at
                 // (songs in this tick - 1) / (songs in the busiest tick in view - 1); a tick is gray only when none of its songs passes the filter
                 const cols = new Map();
                 for (let i = i0; i < i1; i++) {
@@ -627,7 +627,7 @@ export function createTimeline(canvas, data) {
                     ctx.globalAlpha = off ? grayOp : 0.9;
                     ctx.fillStyle = off ? grayCol : playheadColor;
                     const cv = curveValue(curve, t), tw = clampWith(ts.thin + (ts.wMax - ts.thin) * cv, ts.wMin, ts.wMax); // width: from the thinnest tick's width up to the Max along the curve; height: Height x the curve
-                    ctx.fillRect(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), topH + 1, tw, tickH * cv);
+                    ctx.fillRect(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), topH + 1, tw, tickH);
                 });
             } else {
                 const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxT, thin: thinT, maxN: 1 });

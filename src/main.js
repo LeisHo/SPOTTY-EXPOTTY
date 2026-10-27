@@ -557,7 +557,10 @@ async function boot() {
         const rcH = setting('checkboxRcHeightEnabled') && rcHeight !== null ? rcHeight : 0; // the right-drag's scale for this visit only; otherwise the Timeline Height setting is the height
         // set by a right-drag (or the dev panel's Graph Height); 0 = automatic. On desktop the canvas stays as tall as the window and the right-drag sets the
         // graph BAND inside it (the Timeline Height setting is what normally sets it); on a phone the canvas is the graph, so its height is set.
-        if (activeDevice() === '') { timeline.setBandHeight(rcH > 0 ? rcH : null); tl.setProperty('height', 'calc(100dvh - 14px)', 'important'); }
+        if (activeDevice() === '') { // Minimum Graph Height is a floor for the default too (the Timeline Height slider), not only for the drag
+            const floor = setting('checkboxRcHeightEnabled') ? setting('sliderRcHeightMin') : 0, base = setting('sliderTimelineHeight'), eff = Math.max(floor, rcH > 0 ? rcH : base);
+            timeline.setBandHeight(eff !== base ? eff : null); tl.setProperty('height', 'calc(100dvh - 14px)', 'important');
+        }
         else { timeline.setBandHeight(null); if (rcH > 0) tl.setProperty('height', rcH + 'px', 'important'); else tl.removeProperty('height'); }
         timeline.draw(); // the band height is a setting: redraw when it changes
     }
@@ -1016,7 +1019,7 @@ async function boot() {
             }
             if (setting('checkboxRcHeightEnabled') && (p.hActive || Math.abs(tdy) >= setting('sliderRcHeightThreshold'))) {
                 if (!p.hActive) { p.hActive = true; p.h0 = timeline.bandHeight(); p.hY0 = e.clientY; }
-                const maxH = Math.max(60, Math.min(el('spxTimeline').getBoundingClientRect().height, innerHeight * setting('sliderRcHeightMaxPct') / 100));
+                const maxH = Math.max(60, Math.min(activeDevice() === '' ? el('spxTimeline').getBoundingClientRect().height : innerHeight, innerHeight * setting('sliderRcHeightMaxPct') / 100)); // desktop: the band can grow up to the canvas (as tall as the window); phone: the canvas is the graph
                 const hh = clamp(p.h0 + (p.hY0 - e.clientY) * setting('sliderRcHeightSpeed') * (setting('checkboxRcHeightInvert') ? -1 : 1), setting('sliderRcHeightMin'), maxH);
                 rcHeight = Math.round(hh);
                 applyTimelineBox();
