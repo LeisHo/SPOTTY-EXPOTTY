@@ -8287,6 +8287,7 @@
             { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetY', type: 'slider', label: 'Panel Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },
             { tab, group: FLB, id: 'colorFilterPanelBg', type: 'color', label: 'Panel Background Color:', value: '#14161a' },
+            { tab, group: FLB, id: 'sliderFilterPanelBlur', type: 'slider', label: 'Panel Background Blur (Px, Of The UI Behind It):', min: 0, max: 60, step: 1, value: 6 },
             { tab, group: FLB, id: 'sliderFilterPanelBgOpacity', type: 'slider', label: 'Panel Background Opacity (%):', min: 0, max: 100, step: 1, value: 92 },
             { tab, group: FLB, id: 'colorFilterPanelAccent', type: 'color', label: 'Panel Slider Color:', value: '#1db954' },
         ];
@@ -8524,6 +8525,7 @@
             { tab, group: SH, id: 'checkboxShadowCover', type: 'checkbox', label: 'Album Cover Shadow:', value: true },
             { tab, group: SH, id: 'checkboxShadowVolume', type: 'checkbox', label: 'Volume Icon, Slider Bar And Circle Shadow:', value: true },
             { tab, group: SH, id: 'checkboxShadowNav', type: 'checkbox', label: 'Previous / Next Button Shadow:', value: true },
+            { tab, group: SH, id: 'checkboxShadowFilterPanel', type: 'checkbox', label: 'Filter Panel Shadow:', value: true },
             { tab, group: SH, id: 'checkboxShadowTitleLift', type: 'checkbox', label: 'Song Title Lift Animation Shadow:', value: true },
         ];
         renderControlArray(SH_CONTROLS, 'renderSpottyDevControls');
@@ -8536,6 +8538,7 @@
             { g: 'Album Cover Shadow', k: 'Cover', spread: true, op: 0.53, blur: 28, spreadPx: 0, angle: 90, depth: 8 },
             { g: 'Volume Shadow', k: 'Volume', op: 0.67, blur: 3, angle: 90, depth: 1 },
             { g: 'Previous / Next Shadow', k: 'Nav', op: 0.67, blur: 3, angle: 90, depth: 1 },
+            { g: 'Filter Panel Shadow', k: 'FilterPanel', spread: true, op: 0.67, blur: 24, spreadPx: 0, angle: 90, depth: 6 },
             { g: 'Title Lift Shadow', k: 'TitleLift', colorOnly: true },
         ];
         SHADOW_SUBGROUPS.forEach(({ g, k, spread, colorOnly, op, blur, spreadPx, angle, depth }) => {

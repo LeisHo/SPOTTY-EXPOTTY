@@ -661,7 +661,8 @@ async function boot() {
             applyFilterIcon(el('spxFilter').querySelector('svg'), iconIndex(setting('selectFilterIconStyle')));
             const ps = flt && flt.panel.style;
             if (ps) {
-                ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-ico', setting('sliderFilterPanelIconSize') + 'px'); ps.setProperty('--spx-flt-font', setting('sliderFilterPanelFontSize') + 'px');
+                ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-ico', setting('sliderFilterPanelIconSize') + 'px'); ps.setProperty('--spx-flt-blur', setting('sliderFilterPanelBlur') + 'px');
+                { const sf = shadowOf('FilterPanel'); ps.setProperty('--shadow-flt-panel', setting('checkboxShadowFilterPanel') ? `${sf.x} ${sf.y} ${sf.blur} ${setting('sliderShadowFilterPanelSpread')}px ${sf.c}` : 'none'); } // Shadows > Filter Panel Shadow ps.setProperty('--spx-flt-font', setting('sliderFilterPanelFontSize') + 'px');
                 ps.setProperty('--spx-flt-bg', rgbaOf(setting('colorFilterPanelBg'), setting('sliderFilterPanelBgOpacity') / 100)); ps.setProperty('--spx-flt-accent', setting('colorFilterPanelAccent'));
                 flt.refresh(); syncFilterUi(); timeline.setFilter(filterOn() ? flt.passes : null);
                 if (flt.open) placeFilterPanel();

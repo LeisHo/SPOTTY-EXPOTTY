@@ -79,6 +79,7 @@ export const DEFAULTS = {
     checkboxShadowCover: true,
     checkboxShadowVolume: true,
     checkboxShadowNav: true,
+    checkboxShadowFilterPanel: true, colorShadowFilterPanel: '#000000', sliderShadowFilterPanelOpacity: 0.67, sliderShadowFilterPanelBlur: 24, sliderShadowFilterPanelSpread: 0, sliderShadowFilterPanelAngle: 90, sliderShadowFilterPanelDepth: 6,
     checkboxShadowTitleLift: true,
     sliderCoverScale: 1,
     sliderCoverOffsetX: 0,
@@ -176,7 +177,7 @@ export const DEFAULTS = {
     sliderNavEdgeOffset: 14,
     // Filter button + panel (UI Layout > Audio Buttons > FILTER)
     checkboxFilterButtonEnabled: true, sliderFilterIconSize: 20, sliderFilterIconOffsetX: 0, sliderFilterGapBelowShuffle: 0, sliderFilterEdgeOffset: 14,
-    sliderFilterPanelIconSize: 20, sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
+    sliderFilterPanelIconSize: 20, sliderFilterPanelBlur: 6, sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
     sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
     selectFilterMissing: 'hide', checkboxFilterShowNumbers: true, checkboxFilterShowCount: false, checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,

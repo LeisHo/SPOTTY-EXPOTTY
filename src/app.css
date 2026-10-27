@@ -193,7 +193,7 @@
 .spx-filter[hidden] { display: none; }
 .spx-app.no-shadow-vol .spx-filter { filter: none; }
 .spx-filter-panel { position: fixed; z-index: 2147482000; width: var(--spx-flt-width, 260px); box-sizing: border-box; padding: 10px 12px 12px; border-radius: 10px; color: #f2f2f2; font-size: var(--spx-flt-font, 12px);
-    background: var(--spx-flt-bg, rgba(20,22,26,0.92)); box-shadow: 0 6px 24px #000a; backdrop-filter: blur(6px); --flt-accent: var(--spx-flt-accent, #1db954); }
+    background: var(--spx-flt-bg, rgba(20,22,26,0.92)); box-shadow: var(--shadow-flt-panel, 0 6px 24px #000a); backdrop-filter: blur(var(--spx-flt-blur, 6px)); -webkit-backdrop-filter: blur(var(--spx-flt-blur, 6px)); --flt-accent: var(--spx-flt-accent, #1db954); }
 .spx-filter-panel[hidden] { display: none; }
 .spx-flt-resize { position: absolute; top: 0; bottom: 0; width: 8px; cursor: ew-resize; z-index: 0; touch-action: none; }
 .spx-flt-resize-l { left: 0; }
