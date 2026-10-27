@@ -36,9 +36,9 @@
     "sliderTimelineHeightTransitionMs": 990,
     "sliderTimelineScaleGap": 54,
     "sliderPlayheadWidth": 3,
-    "sliderPlayheadHeight": 57,
+    "sliderPlayheadHeight": 60,
     "sliderPlayheadOpacity": 70,
-    "sliderPlayheadStartHeight": 63,
+    "sliderPlayheadStartHeight": 70,
     "rangeBarTimelineZoomLimits": "{\"min\":64,\"max\":100}",
     "buttonOpenLayoutInspector": "",
     "checkboxRcPanEnabled": true,
@@ -559,7 +559,7 @@
     "left": 35,
     "top": 53,
     "width": 350,
-    "height": 519
+    "height": 431
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -27658,9 +27658,9 @@
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
     "desktop:Timeline Look": false,
-    "desktop:New Group (4)": true,
+    "desktop:New Group (4)": false,
     "desktop:Click and Drag": true,
-    "desktop:Visual Style": true,
+    "desktop:Visual Style": false,
     "desktop:Album Cover Colors": true,
     "desktop:New Group (3)": true,
     "desktop:Timeline Scale": true,
