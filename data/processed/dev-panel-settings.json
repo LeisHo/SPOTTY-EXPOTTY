@@ -175,7 +175,7 @@
     "checkboxTxtAlbumDateOutlineEnabled": false,
     "colorTxtAlbumDateOutlineColor": "#000000",
     "sliderTxtAlbumDateOutlineThickness": 2,
-    "checkboxGlobalOverrideEnabled": false,
+    "checkboxGlobalOverrideEnabled": true,
     "checkboxOverridePlay": false,
     "checkboxOverrideNext": false,
     "checkboxOverrideLast": false,
@@ -227,7 +227,7 @@
     "checkboxShuffleButtonEnabled": true,
     "sliderShuffleIconSize": 25,
     "sliderShuffleIconOffsetX": 0,
-    "sliderShuffleOffOpacity": 46,
+    "sliderShuffleOffOpacity": 45,
     "sliderShuffleOnOpacity": 75,
     "sliderShuffleEdgeOffset": 14,
     "sliderShuffleClickTolerance": 3,
@@ -243,7 +243,7 @@
     "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
     "checkboxFilterButtonEnabled": true,
-    "sliderFilterIconSize": 26,
+    "sliderFilterIconSize": 25,
     "sliderFilterIconOffsetX": 0,
     "sliderFilterGapBelowShuffle": 0,
     "sliderFilterEdgeOffset": 14,
@@ -258,9 +258,9 @@
     "selectFilterMissing": "hide",
     "checkboxFilterSkipOnStep": true,
     "selectFilterIconStyle": "3",
-    "selectTempoIconStyle": "0",
+    "selectTempoIconStyle": "1",
     "selectValenceIconStyle": "0",
-    "selectDanceIconStyle": "0",
+    "selectDanceIconStyle": "6",
     "selectEnergyIconStyle": "0",
     "sliderFilterCoverGrayscale": 100,
     "sliderFilterCoverBrightness": 100,
@@ -288,15 +288,15 @@
     "sliderFilterPanelBgOpacity": 92,
     "colorFilterPanelAccent": "#1db954",
     "checkboxSongDataEnabled": true,
-    "selectSongDataIconStyle": "0",
-    "sliderSongDataBtnSize": 20,
+    "selectSongDataIconStyle": "1",
+    "sliderSongDataBtnSize": 25,
     "sliderSongDataBtnOffsetX": 0,
     "sliderSongDataBtnGap": 0,
     "sliderSongDataBtnEdge": 14,
     "sliderSongDataBtnOffOpacity": 45,
-    "sliderSongDataBtnOnOpacity": 100,
+    "sliderSongDataBtnOnOpacity": 75,
     "colorSongDataBtn": "#f2f2f2",
-    "colorSongDataBtnOn": "#1db954",
+    "colorSongDataBtnOn": "#ffffff",
     "sliderSongDataClickTolerance": 0,
     "sliderSongDataHoverTolerance": 0,
     "sliderSongDataIconSize": 16,
@@ -4089,6 +4089,10 @@
                     "items": [
                       {
                         "type": "row",
+                        "key": "selectSongDataIconStyle"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderSongDataBtnSize"
                       },
                       {
@@ -4170,13 +4174,10 @@
                       {
                         "type": "row",
                         "key": "sliderSongDataDecimals"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectSongDataIconStyle"
                       }
                     ],
                     "rowKeys": [
+                      "selectSongDataIconStyle",
                       "sliderSongDataBtnSize",
                       "sliderSongDataBtnOffsetX",
                       "sliderSongDataBtnGap",
@@ -4197,8 +4198,7 @@
                       "sliderSongDataEdgeOffset",
                       "sliderSongDataOffsetY",
                       "sliderSongDataTempoDecimals",
-                      "sliderSongDataDecimals",
-                      "selectSongDataIconStyle"
+                      "sliderSongDataDecimals"
                     ],
                     "subgroups": []
                   }
@@ -5139,6 +5139,10 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "selectSongDataIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderSongDataBtnSize"
                     },
                     {
@@ -5220,13 +5224,10 @@
                     {
                       "type": "row",
                       "key": "sliderSongDataDecimals"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectSongDataIconStyle"
                     }
                   ],
                   "rowKeys": [
+                    "selectSongDataIconStyle",
                     "sliderSongDataBtnSize",
                     "sliderSongDataBtnOffsetX",
                     "sliderSongDataBtnGap",
@@ -5247,8 +5248,7 @@
                     "sliderSongDataEdgeOffset",
                     "sliderSongDataOffsetY",
                     "sliderSongDataTempoDecimals",
-                    "sliderSongDataDecimals",
-                    "selectSongDataIconStyle"
+                    "sliderSongDataDecimals"
                   ],
                   "subgroups": []
                 }
@@ -8467,6 +8467,10 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "selectSongDataIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderSongDataBtnSize"
                     },
                     {
@@ -8548,13 +8552,10 @@
                     {
                       "type": "row",
                       "key": "sliderSongDataDecimals"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectSongDataIconStyle"
                     }
                   ],
                   "rowKeys": [
+                    "selectSongDataIconStyle",
                     "sliderSongDataBtnSize",
                     "sliderSongDataBtnOffsetX",
                     "sliderSongDataBtnGap",
@@ -8575,8 +8576,7 @@
                     "sliderSongDataEdgeOffset",
                     "sliderSongDataOffsetY",
                     "sliderSongDataTempoDecimals",
-                    "sliderSongDataDecimals",
-                    "selectSongDataIconStyle"
+                    "sliderSongDataDecimals"
                   ],
                   "subgroups": []
                 }
@@ -9517,6 +9517,10 @@
                 "items": [
                   {
                     "type": "row",
+                    "key": "selectSongDataIconStyle"
+                  },
+                  {
+                    "type": "row",
                     "key": "sliderSongDataBtnSize"
                   },
                   {
@@ -9598,13 +9602,10 @@
                   {
                     "type": "row",
                     "key": "sliderSongDataDecimals"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectSongDataIconStyle"
                   }
                 ],
                 "rowKeys": [
+                  "selectSongDataIconStyle",
                   "sliderSongDataBtnSize",
                   "sliderSongDataBtnOffsetX",
                   "sliderSongDataBtnGap",
@@ -9625,8 +9626,7 @@
                   "sliderSongDataEdgeOffset",
                   "sliderSongDataOffsetY",
                   "sliderSongDataTempoDecimals",
-                  "sliderSongDataDecimals",
-                  "selectSongDataIconStyle"
+                  "sliderSongDataDecimals"
                 ],
                 "subgroups": []
               }
@@ -23781,7 +23781,7 @@
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
     "desktop:Filter Button": true,
-    "desktop:Song Data": true,
+    "desktop:Song Data": false,
     "desktop:Background": true,
     "desktop:Animation": false,
     "desktop:Album Cover": true,
@@ -23790,7 +23790,7 @@
     "desktop:Volume Shadow": true,
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
-    "desktop:Global Override": false,
+    "desktop:Global Override": true,
     "desktop:Standard Button Animation": false,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
