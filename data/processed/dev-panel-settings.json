@@ -176,20 +176,20 @@
     "colorTxtAlbumDateOutlineColor": "#000000",
     "sliderTxtAlbumDateOutlineThickness": 2,
     "checkboxGlobalOverrideEnabled": true,
-    "checkboxOverridePlay": false,
-    "checkboxOverrideNext": false,
-    "checkboxOverrideLast": false,
-    "checkboxOverrideShuffle": false,
-    "checkboxOverrideVolume": false,
+    "checkboxOverridePlay": true,
+    "checkboxOverrideNext": true,
+    "checkboxOverrideLast": true,
+    "checkboxOverrideShuffle": true,
+    "checkboxOverrideVolume": true,
     "colorGlobalOverride": "#ffffff",
-    "sliderGlobalOverrideOnOpacity": 100,
-    "sliderGlobalOverrideOpacity": 100,
-    "checkboxGlobalOverrideAnim": false,
+    "sliderGlobalOverrideOnOpacity": 75,
+    "sliderGlobalOverrideOpacity": 45,
+    "checkboxGlobalOverrideAnim": true,
     "sliderGlobalAnimTime": 150,
     "sliderGlobalAnimHoverSize": 115,
-    "sliderGlobalAnimClickSize": 85,
-    "sliderGlobalAnimReleaseSize": 120,
-    "sliderGlobalAnimHoverOpacity": 100,
+    "sliderGlobalAnimClickSize": 90,
+    "sliderGlobalAnimReleaseSize": 100,
+    "sliderGlobalAnimHoverOpacity": 85,
     "sliderGlobalAnimClickOpacity": 70,
     "checkboxSongBarEnabled": true,
     "sliderSongBarHeight": 2,
@@ -6404,6 +6404,10 @@
                   "key": "sliderGlobalOverrideOpacity"
                 },
                 {
+                  "type": "row",
+                  "key": "sliderGlobalOverrideOnOpacity"
+                },
+                {
                   "type": "group",
                   "section": {
                     "key": "desktop:Standard Button Animation",
@@ -6443,10 +6447,6 @@
                     ],
                     "subgroups": []
                   }
-                },
-                {
-                  "type": "row",
-                  "key": "sliderGlobalOverrideOnOpacity"
                 }
               ],
               "rowKeys": [
@@ -10979,6 +10979,10 @@
                 "key": "sliderGlobalOverrideOpacity"
               },
               {
+                "type": "row",
+                "key": "sliderGlobalOverrideOnOpacity"
+              },
+              {
                 "type": "group",
                 "section": {
                   "key": "desktop:Standard Button Animation",
@@ -11018,10 +11022,6 @@
                   ],
                   "subgroups": []
                 }
-              },
-              {
-                "type": "row",
-                "key": "sliderGlobalOverrideOnOpacity"
               }
             ],
             "rowKeys": [
@@ -24320,8 +24320,8 @@
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
     "desktop:Filter Panel Shadow": true,
-    "desktop:Global Override": true,
-    "desktop:Standard Button Animation": true,
+    "desktop:Global Override": false,
+    "desktop:Standard Button Animation": false,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
