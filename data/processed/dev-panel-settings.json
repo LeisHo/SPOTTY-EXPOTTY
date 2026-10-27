@@ -182,6 +182,7 @@
     "checkboxOverrideShuffle": false,
     "checkboxOverrideVolume": false,
     "colorGlobalOverride": "#ffffff",
+    "sliderGlobalOverrideOnOpacity": 100,
     "sliderGlobalOverrideOpacity": 100,
     "checkboxGlobalOverrideAnim": false,
     "sliderGlobalAnimTime": 150,
@@ -202,6 +203,7 @@
     "sliderSongBarHoverOpacity": 80,
     "sliderSongBarClickOpacity": 80,
     "sliderSongBarAnimTime": 250,
+    "selectVolIconStyle": "6",
     "checkboxVolumeButtonEnabled": true,
     "sliderVolMutedOpacity": 45,
     "sliderVolIconOpacity": 80,
@@ -209,6 +211,7 @@
     "sliderVolEdgeOffset": 6,
     "sliderVolIconSize": 32,
     "sliderVolIconOffsetX": 6,
+    "sliderVolIconOffsetY": 0,
     "sliderVolCircleRadius": 6,
     "sliderVolBarWidth": 6,
     "sliderVolBarLength": 154,
@@ -217,16 +220,17 @@
     "colorVolCircle": "#ffffff",
     "sliderVolHoverTolerance": 37,
     "sliderVolClickTolerance": 50,
-    "selectVolIconStyle": "6",
     "sliderVolAnimDuration": 190,
     "curveEditorVolAnimSpeedCurve": "{\"points\":[{\"x\":0,\"y\":0.5952784220377605,\"h1\":{\"x\":0.504492481784282,\"y\":0.05047709147135415}},{\"x\":1,\"y\":1,\"h2\":{\"x\":0,\"y\":-0.44892730712890627}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderCoverScale": 1.65,
     "sliderCoverOffsetX": 0,
     "sliderCoverOffsetY": -45,
     "checkboxCoverBoundingBox": false,
+    "selectShuffleIconStyle": "1",
     "checkboxShuffleButtonEnabled": true,
     "sliderShuffleIconSize": 25,
     "sliderShuffleIconOffsetX": 0,
+    "sliderShuffleIconOffsetY": 0,
     "sliderShuffleOffOpacity": 45,
     "sliderShuffleOnOpacity": 75,
     "sliderShuffleEdgeOffset": 14,
@@ -234,7 +238,6 @@
     "sliderShuffleHoverTolerance": 6,
     "colorShuffleIcon": "#f2f2f2",
     "colorShuffleOn": "#ffffff",
-    "selectShuffleIconStyle": "1",
     "checkboxShuffleAnimEnabled": true,
     "sliderShuffleAnimTime": 70,
     "sliderShuffleAnimHoverSize": 23,
@@ -242,9 +245,15 @@
     "sliderShuffleAnimReleaseSize": 20,
     "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
+    "selectFilterIconStyle": "3",
+    "selectTempoIconStyle": "1",
+    "selectValenceIconStyle": "0",
+    "selectDanceIconStyle": "6",
+    "selectEnergyIconStyle": "6",
     "checkboxFilterButtonEnabled": true,
     "sliderFilterIconSize": 25,
     "sliderFilterIconOffsetX": 0,
+    "sliderFilterIconOffsetY": 0,
     "sliderFilterGapBelowShuffle": 0,
     "sliderFilterEdgeOffset": 14,
     "sliderFilterOffOpacity": 45,
@@ -257,11 +266,6 @@
     "sliderFilterGrayOpacity": 35,
     "selectFilterMissing": "hide",
     "checkboxFilterSkipOnStep": true,
-    "selectFilterIconStyle": "3",
-    "selectTempoIconStyle": "1",
-    "selectValenceIconStyle": "0",
-    "selectDanceIconStyle": "6",
-    "selectEnergyIconStyle": "6",
     "sliderFilterCoverGrayscale": 100,
     "sliderFilterCoverBrightness": 100,
     "sliderFilterCoverContrast": 100,
@@ -278,19 +282,23 @@
     "sliderFilterTickGrayOpacity": 25,
     "sliderFilterNumberGrayOpacity": 25,
     "checkboxFilterShowNumbers": true,
+    "checkboxFilterShowRangeText": false,
     "checkboxFilterShowCount": false,
     "checkboxFilterCloseOnOutside": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 12,
+    "sliderFilterPanelIconSize": 20,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": 6,
     "colorFilterPanelBg": "#4f4f4f",
+    "sliderFilterPanelBlur": 6,
     "sliderFilterPanelBgOpacity": 4,
     "colorFilterPanelAccent": "#878787",
-    "checkboxSongDataEnabled": true,
     "selectSongDataIconStyle": "1",
+    "checkboxSongDataEnabled": true,
     "sliderSongDataBtnSize": 25,
     "sliderSongDataBtnOffsetX": 0,
+    "sliderSongDataBtnOffsetY": 0,
     "sliderSongDataBtnGap": 0,
     "sliderSongDataBtnEdge": 14,
     "sliderSongDataBtnOffOpacity": 45,
@@ -317,10 +325,11 @@
     "sliderVolBtnAnimReleaseSize": 20,
     "sliderVolBtnAnimHoverOpacity": 100,
     "sliderVolBtnAnimClickOpacity": 100,
-    "sliderPlayGlyphOpacityPlaying": 70,
-    "sliderPlayGlyphOpacityPaused": 100,
     "selectPlayIconStyle": "10",
     "selectPauseIconStyle": "3",
+    "sliderPlayGlyphOpacityPlaying": 70,
+    "sliderPlayGlyphOpacityPaused": 100,
+    "sliderPlayGlyphOffsetY": 0,
     "sliderPlayClickTolerance": 0,
     "sliderPlayHoverTolerance": 0,
     "checkboxPlayButtonEnabled": true,
@@ -339,6 +348,8 @@
     "selectNavIconStyle": "3",
     "sliderLastButtonEdgeOffset": 23,
     "sliderNextButtonEdgeOffset": 23,
+    "sliderLastButtonOffsetY": 0,
+    "sliderNextButtonOffsetY": 0,
     "sliderNavClickTolerance": 0,
     "sliderNavHoverTolerance": 0,
     "checkboxNavButtonEnabled": true,
@@ -372,6 +383,7 @@
     "checkboxShadowCover": false,
     "checkboxShadowVolume": false,
     "checkboxShadowNav": false,
+    "checkboxShadowFilterPanel": false,
     "checkboxShadowTitleLift": false,
     "colorShadowCover": "#000000",
     "sliderShadowCoverOpacity": 0.53,
@@ -389,6 +401,12 @@
     "sliderShadowNavBlur": 3,
     "sliderShadowNavAngle": 90,
     "sliderShadowNavDepth": 1,
+    "colorShadowFilterPanel": "#000000",
+    "sliderShadowFilterPanelOpacity": 0.67,
+    "sliderShadowFilterPanelBlur": 24,
+    "sliderShadowFilterPanelSpread": 0,
+    "sliderShadowFilterPanelAngle": 90,
+    "sliderShadowFilterPanelDepth": 6,
     "colorShadowTitleLift": "#000000",
     "checkboxBracketsSmaller": true,
     "sliderBracketsFontPct": 69,
@@ -496,6 +514,7 @@
     "checkboxStartCenterOnCover": true,
     "checkboxStartButtonEnabled": true,
     "sliderStartPlaySize": 50,
+    "sliderStartPlayOffsetY": 0,
     "checkboxStartTransitionAfterRelease": true,
     "checkboxStartPlayAnimEnabled": true,
     "selectStartPlayAnimMode": "grow",
@@ -3249,6 +3268,10 @@
                       {
                         "type": "row",
                         "key": "sliderVolEdgeOffset"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderVolIconOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -3268,7 +3291,8 @@
                       "sliderVolIconOpacity",
                       "sliderVolClickTolerance",
                       "sliderVolHoverOpacity",
-                      "sliderVolEdgeOffset"
+                      "sliderVolEdgeOffset",
+                      "sliderVolIconOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -3401,6 +3425,10 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPlayGlyphOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -3414,7 +3442,8 @@
                       "sliderPlayGlyphOpacityPlaying",
                       "sliderPlayGlyphOpacityPaused",
                       "sliderPlayClickTolerance",
-                      "sliderPlayHoverTolerance"
+                      "sliderPlayHoverTolerance",
+                      "sliderPlayGlyphOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -3547,6 +3576,14 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLastButtonOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderNextButtonOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -3560,7 +3597,9 @@
                       "sliderLastButtonEdgeOffset",
                       "sliderNextButtonEdgeOffset",
                       "sliderNavClickTolerance",
-                      "sliderNavHoverTolerance"
+                      "sliderNavHoverTolerance",
+                      "sliderLastButtonOffsetY",
+                      "sliderNextButtonOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -3689,6 +3728,10 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShuffleIconOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -3701,7 +3744,8 @@
                       "sliderShuffleOnOpacity",
                       "sliderShuffleClickTolerance",
                       "sliderShuffleHoverTolerance",
-                      "sliderShuffleEdgeOffset"
+                      "sliderShuffleEdgeOffset",
+                      "sliderShuffleIconOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -4030,6 +4074,22 @@
                       {
                         "type": "row",
                         "key": "checkboxFilterShowCount"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterIconOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterShowRangeText"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelBlur"
                       }
                     ],
                     "rowKeys": [
@@ -4077,7 +4137,11 @@
                       "sliderFilterCoverContrast",
                       "sliderFilterTextBrightness",
                       "checkboxFilterShowNumbers",
-                      "checkboxFilterShowCount"
+                      "checkboxFilterShowCount",
+                      "sliderFilterIconOffsetY",
+                      "checkboxFilterShowRangeText",
+                      "sliderFilterPanelIconSize",
+                      "sliderFilterPanelBlur"
                     ],
                     "subgroups": []
                   }
@@ -4174,6 +4238,10 @@
                       {
                         "type": "row",
                         "key": "sliderSongDataDecimals"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataBtnOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -4198,7 +4266,8 @@
                       "sliderSongDataEdgeOffset",
                       "sliderSongDataOffsetY",
                       "sliderSongDataTempoDecimals",
-                      "sliderSongDataDecimals"
+                      "sliderSongDataDecimals",
+                      "sliderSongDataBtnOffsetY"
                     ],
                     "subgroups": []
                   }
@@ -4317,6 +4386,10 @@
                     {
                       "type": "row",
                       "key": "sliderVolEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderVolIconOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -4336,7 +4409,8 @@
                     "sliderVolIconOpacity",
                     "sliderVolClickTolerance",
                     "sliderVolHoverOpacity",
-                    "sliderVolEdgeOffset"
+                    "sliderVolEdgeOffset",
+                    "sliderVolIconOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -4466,6 +4540,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayGlyphOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -4479,7 +4557,8 @@
                     "sliderPlayGlyphOpacityPlaying",
                     "sliderPlayGlyphOpacityPaused",
                     "sliderPlayClickTolerance",
-                    "sliderPlayHoverTolerance"
+                    "sliderPlayHoverTolerance",
+                    "sliderPlayGlyphOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -4609,6 +4688,14 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLastButtonOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNextButtonOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -4622,7 +4709,9 @@
                     "sliderLastButtonEdgeOffset",
                     "sliderNextButtonEdgeOffset",
                     "sliderNavClickTolerance",
-                    "sliderNavHoverTolerance"
+                    "sliderNavHoverTolerance",
+                    "sliderLastButtonOffsetY",
+                    "sliderNextButtonOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -4748,6 +4837,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleIconOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -4760,7 +4853,8 @@
                     "sliderShuffleOnOpacity",
                     "sliderShuffleClickTolerance",
                     "sliderShuffleHoverTolerance",
-                    "sliderShuffleEdgeOffset"
+                    "sliderShuffleEdgeOffset",
+                    "sliderShuffleIconOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -5083,6 +5177,22 @@
                     {
                       "type": "row",
                       "key": "checkboxFilterShowCount"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterIconOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowRangeText"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelBlur"
                     }
                   ],
                   "rowKeys": [
@@ -5130,7 +5240,11 @@
                     "sliderFilterCoverContrast",
                     "sliderFilterTextBrightness",
                     "checkboxFilterShowNumbers",
-                    "checkboxFilterShowCount"
+                    "checkboxFilterShowCount",
+                    "sliderFilterIconOffsetY",
+                    "checkboxFilterShowRangeText",
+                    "sliderFilterPanelIconSize",
+                    "sliderFilterPanelBlur"
                   ],
                   "subgroups": []
                 },
@@ -5224,6 +5338,10 @@
                     {
                       "type": "row",
                       "key": "sliderSongDataDecimals"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongDataBtnOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -5248,7 +5366,8 @@
                     "sliderSongDataEdgeOffset",
                     "sliderSongDataOffsetY",
                     "sliderSongDataTempoDecimals",
-                    "sliderSongDataDecimals"
+                    "sliderSongDataDecimals",
+                    "sliderSongDataBtnOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -5889,6 +6008,10 @@
                   "key": "checkboxShadowTitleLift"
                 },
                 {
+                  "type": "row",
+                  "key": "checkboxShadowFilterPanel"
+                },
+                {
                   "type": "group",
                   "section": {
                     "key": "desktop:Album Cover Shadow",
@@ -6016,13 +6139,55 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Filter Panel Shadow",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "colorShadowFilterPanel"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowFilterPanelOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowFilterPanelBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowFilterPanelSpread"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowFilterPanelAngle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderShadowFilterPanelDepth"
+                      }
+                    ],
+                    "rowKeys": [
+                      "colorShadowFilterPanel",
+                      "sliderShadowFilterPanelOpacity",
+                      "sliderShadowFilterPanelBlur",
+                      "sliderShadowFilterPanelSpread",
+                      "sliderShadowFilterPanelAngle",
+                      "sliderShadowFilterPanelDepth"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [
                 "checkboxShadowCover",
                 "checkboxShadowVolume",
                 "checkboxShadowNav",
-                "checkboxShadowTitleLift"
+                "checkboxShadowTitleLift",
+                "checkboxShadowFilterPanel"
               ],
               "subgroups": [
                 {
@@ -6141,6 +6306,44 @@
                     "colorShadowTitleLift"
                   ],
                   "subgroups": []
+                },
+                {
+                  "key": "desktop:Filter Panel Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowFilterPanel"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelSpread"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelAngle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelDepth"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowFilterPanel",
+                    "sliderShadowFilterPanelOpacity",
+                    "sliderShadowFilterPanelBlur",
+                    "sliderShadowFilterPanelSpread",
+                    "sliderShadowFilterPanelAngle",
+                    "sliderShadowFilterPanelDepth"
+                  ],
+                  "subgroups": []
                 }
               ]
             }
@@ -6218,6 +6421,10 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "row",
+                  "key": "sliderGlobalOverrideOnOpacity"
                 }
               ],
               "rowKeys": [
@@ -6227,7 +6434,8 @@
                 "checkboxOverrideShuffle",
                 "checkboxOverrideVolume",
                 "colorGlobalOverride",
-                "sliderGlobalOverrideOpacity"
+                "sliderGlobalOverrideOpacity",
+                "sliderGlobalOverrideOnOpacity"
               ],
               "subgroups": [
                 {
@@ -7627,6 +7835,10 @@
                     {
                       "type": "row",
                       "key": "sliderVolEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderVolIconOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -7646,7 +7858,8 @@
                     "sliderVolIconOpacity",
                     "sliderVolClickTolerance",
                     "sliderVolHoverOpacity",
-                    "sliderVolEdgeOffset"
+                    "sliderVolEdgeOffset",
+                    "sliderVolIconOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -7779,6 +7992,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPlayGlyphOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -7792,7 +8009,8 @@
                     "sliderPlayGlyphOpacityPlaying",
                     "sliderPlayGlyphOpacityPaused",
                     "sliderPlayClickTolerance",
-                    "sliderPlayHoverTolerance"
+                    "sliderPlayHoverTolerance",
+                    "sliderPlayGlyphOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -7925,6 +8143,14 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLastButtonOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderNextButtonOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -7938,7 +8164,9 @@
                     "sliderLastButtonEdgeOffset",
                     "sliderNextButtonEdgeOffset",
                     "sliderNavClickTolerance",
-                    "sliderNavHoverTolerance"
+                    "sliderNavHoverTolerance",
+                    "sliderLastButtonOffsetY",
+                    "sliderNextButtonOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -8067,6 +8295,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShuffleIconOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -8079,7 +8311,8 @@
                     "sliderShuffleOnOpacity",
                     "sliderShuffleClickTolerance",
                     "sliderShuffleHoverTolerance",
-                    "sliderShuffleEdgeOffset"
+                    "sliderShuffleEdgeOffset",
+                    "sliderShuffleIconOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -8408,6 +8641,22 @@
                     {
                       "type": "row",
                       "key": "checkboxFilterShowCount"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterIconOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowRangeText"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelBlur"
                     }
                   ],
                   "rowKeys": [
@@ -8455,7 +8704,11 @@
                     "sliderFilterCoverContrast",
                     "sliderFilterTextBrightness",
                     "checkboxFilterShowNumbers",
-                    "checkboxFilterShowCount"
+                    "checkboxFilterShowCount",
+                    "sliderFilterIconOffsetY",
+                    "checkboxFilterShowRangeText",
+                    "sliderFilterPanelIconSize",
+                    "sliderFilterPanelBlur"
                   ],
                   "subgroups": []
                 }
@@ -8552,6 +8805,10 @@
                     {
                       "type": "row",
                       "key": "sliderSongDataDecimals"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSongDataBtnOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -8576,7 +8833,8 @@
                     "sliderSongDataEdgeOffset",
                     "sliderSongDataOffsetY",
                     "sliderSongDataTempoDecimals",
-                    "sliderSongDataDecimals"
+                    "sliderSongDataDecimals",
+                    "sliderSongDataBtnOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -8695,6 +8953,10 @@
                   {
                     "type": "row",
                     "key": "sliderVolEdgeOffset"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderVolIconOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -8714,7 +8976,8 @@
                   "sliderVolIconOpacity",
                   "sliderVolClickTolerance",
                   "sliderVolHoverOpacity",
-                  "sliderVolEdgeOffset"
+                  "sliderVolEdgeOffset",
+                  "sliderVolIconOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -8844,6 +9107,10 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPlayGlyphOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -8857,7 +9124,8 @@
                   "sliderPlayGlyphOpacityPlaying",
                   "sliderPlayGlyphOpacityPaused",
                   "sliderPlayClickTolerance",
-                  "sliderPlayHoverTolerance"
+                  "sliderPlayHoverTolerance",
+                  "sliderPlayGlyphOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -8987,6 +9255,14 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLastButtonOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderNextButtonOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -9000,7 +9276,9 @@
                   "sliderLastButtonEdgeOffset",
                   "sliderNextButtonEdgeOffset",
                   "sliderNavClickTolerance",
-                  "sliderNavHoverTolerance"
+                  "sliderNavHoverTolerance",
+                  "sliderLastButtonOffsetY",
+                  "sliderNextButtonOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -9126,6 +9404,10 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShuffleIconOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -9138,7 +9420,8 @@
                   "sliderShuffleOnOpacity",
                   "sliderShuffleClickTolerance",
                   "sliderShuffleHoverTolerance",
-                  "sliderShuffleEdgeOffset"
+                  "sliderShuffleEdgeOffset",
+                  "sliderShuffleIconOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -9461,6 +9744,22 @@
                   {
                     "type": "row",
                     "key": "checkboxFilterShowCount"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterIconOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterShowRangeText"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterPanelIconSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterPanelBlur"
                   }
                 ],
                 "rowKeys": [
@@ -9508,7 +9807,11 @@
                   "sliderFilterCoverContrast",
                   "sliderFilterTextBrightness",
                   "checkboxFilterShowNumbers",
-                  "checkboxFilterShowCount"
+                  "checkboxFilterShowCount",
+                  "sliderFilterIconOffsetY",
+                  "checkboxFilterShowRangeText",
+                  "sliderFilterPanelIconSize",
+                  "sliderFilterPanelBlur"
                 ],
                 "subgroups": []
               },
@@ -9602,6 +9905,10 @@
                   {
                     "type": "row",
                     "key": "sliderSongDataDecimals"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSongDataBtnOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -9626,7 +9933,8 @@
                   "sliderSongDataEdgeOffset",
                   "sliderSongDataOffsetY",
                   "sliderSongDataTempoDecimals",
-                  "sliderSongDataDecimals"
+                  "sliderSongDataDecimals",
+                  "sliderSongDataBtnOffsetY"
                 ],
                 "subgroups": []
               }
@@ -10258,6 +10566,10 @@
                 "key": "checkboxShadowTitleLift"
               },
               {
+                "type": "row",
+                "key": "checkboxShadowFilterPanel"
+              },
+              {
                 "type": "group",
                 "section": {
                   "key": "desktop:Album Cover Shadow",
@@ -10385,13 +10697,55 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Filter Panel Shadow",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "colorShadowFilterPanel"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelSpread"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelAngle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderShadowFilterPanelDepth"
+                    }
+                  ],
+                  "rowKeys": [
+                    "colorShadowFilterPanel",
+                    "sliderShadowFilterPanelOpacity",
+                    "sliderShadowFilterPanelBlur",
+                    "sliderShadowFilterPanelSpread",
+                    "sliderShadowFilterPanelAngle",
+                    "sliderShadowFilterPanelDepth"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [
               "checkboxShadowCover",
               "checkboxShadowVolume",
               "checkboxShadowNav",
-              "checkboxShadowTitleLift"
+              "checkboxShadowTitleLift",
+              "checkboxShadowFilterPanel"
             ],
             "subgroups": [
               {
@@ -10510,6 +10864,44 @@
                   "colorShadowTitleLift"
                 ],
                 "subgroups": []
+              },
+              {
+                "key": "desktop:Filter Panel Shadow",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "colorShadowFilterPanel"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowFilterPanelOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowFilterPanelBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowFilterPanelSpread"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowFilterPanelAngle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderShadowFilterPanelDepth"
+                  }
+                ],
+                "rowKeys": [
+                  "colorShadowFilterPanel",
+                  "sliderShadowFilterPanelOpacity",
+                  "sliderShadowFilterPanelBlur",
+                  "sliderShadowFilterPanelSpread",
+                  "sliderShadowFilterPanelAngle",
+                  "sliderShadowFilterPanelDepth"
+                ],
+                "subgroups": []
               }
             ]
           },
@@ -10584,6 +10976,10 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "row",
+                "key": "sliderGlobalOverrideOnOpacity"
               }
             ],
             "rowKeys": [
@@ -10593,7 +10989,8 @@
               "checkboxOverrideShuffle",
               "checkboxOverrideVolume",
               "colorGlobalOverride",
-              "sliderGlobalOverrideOpacity"
+              "sliderGlobalOverrideOpacity",
+              "sliderGlobalOverrideOnOpacity"
             ],
             "subgroups": [
               {
@@ -12686,10 +13083,15 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "row",
+                  "key": "sliderStartPlayOffsetY"
                 }
               ],
               "rowKeys": [
-                "sliderStartPlaySize"
+                "sliderStartPlaySize",
+                "sliderStartPlayOffsetY"
               ],
               "subgroups": [
                 {
@@ -12948,10 +13350,15 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "row",
+                "key": "sliderStartPlayOffsetY"
               }
             ],
             "rowKeys": [
-              "sliderStartPlaySize"
+              "sliderStartPlaySize",
+              "sliderStartPlayOffsetY"
             ],
             "subgroups": [
               {
@@ -15643,6 +16050,15 @@
                     "rowKeys": [],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Filter Panel Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [],
@@ -15667,6 +16083,12 @@
                 },
                 {
                   "key": "mobile:Title Lift Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "mobile:Filter Panel Shadow",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
@@ -15747,6 +16169,10 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileGlobalOverrideOnOpacity"
                 }
               ],
               "rowKeys": [
@@ -15756,7 +16182,8 @@
                 "checkboxMobileOverrideShuffle",
                 "checkboxMobileOverrideVolume",
                 "colorMobileGlobalOverride",
-                "sliderMobileGlobalOverrideOpacity"
+                "sliderMobileGlobalOverrideOpacity",
+                "sliderMobileGlobalOverrideOnOpacity"
               ],
               "subgroups": [
                 {
@@ -17764,6 +18191,15 @@
                   "rowKeys": [],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Filter Panel Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [],
@@ -17788,6 +18224,12 @@
               },
               {
                 "key": "mobile:Title Lift Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "mobile:Filter Panel Shadow",
                 "items": [],
                 "rowKeys": [],
                 "subgroups": []
@@ -17865,6 +18307,10 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileGlobalOverrideOnOpacity"
               }
             ],
             "rowKeys": [
@@ -17874,7 +18320,8 @@
               "checkboxMobileOverrideShuffle",
               "checkboxMobileOverrideVolume",
               "colorMobileGlobalOverride",
-              "sliderMobileGlobalOverrideOpacity"
+              "sliderMobileGlobalOverrideOpacity",
+              "sliderMobileGlobalOverrideOnOpacity"
             ],
             "subgroups": [
               {
@@ -20979,6 +21426,15 @@
                     "rowKeys": [],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Filter Panel Shadow",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [],
@@ -21003,6 +21459,12 @@
                 },
                 {
                   "key": "landscape:Title Lift Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                },
+                {
+                  "key": "landscape:Filter Panel Shadow",
                   "items": [],
                   "rowKeys": [],
                   "subgroups": []
@@ -21083,6 +21545,10 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeGlobalOverrideOnOpacity"
                 }
               ],
               "rowKeys": [
@@ -21092,7 +21558,8 @@
                 "checkboxLandscapeOverrideShuffle",
                 "checkboxLandscapeOverrideVolume",
                 "colorLandscapeGlobalOverride",
-                "sliderLandscapeGlobalOverrideOpacity"
+                "sliderLandscapeGlobalOverrideOpacity",
+                "sliderLandscapeGlobalOverrideOnOpacity"
               ],
               "subgroups": [
                 {
@@ -23100,6 +23567,15 @@
                   "rowKeys": [],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Filter Panel Shadow",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [],
@@ -23124,6 +23600,12 @@
               },
               {
                 "key": "landscape:Title Lift Shadow",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              },
+              {
+                "key": "landscape:Filter Panel Shadow",
                 "items": [],
                 "rowKeys": [],
                 "subgroups": []
@@ -23201,6 +23683,10 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeGlobalOverrideOnOpacity"
               }
             ],
             "rowKeys": [
@@ -23210,7 +23696,8 @@
               "checkboxLandscapeOverrideShuffle",
               "checkboxLandscapeOverrideVolume",
               "colorLandscapeGlobalOverride",
-              "sliderLandscapeGlobalOverrideOpacity"
+              "sliderLandscapeGlobalOverrideOpacity",
+              "sliderLandscapeGlobalOverrideOnOpacity"
             ],
             "subgroups": [
               {
@@ -23747,7 +24234,7 @@
   },
   "sectionCollapseState": {
     "desktop:Saved Dev Settings": true,
-    "desktop:Dev Panel": true,
+    "desktop:Dev Panel": false,
     "desktop:MECHANICS": true,
     "desktop:PANEL UI": true,
     "desktop:TEXT": true,
@@ -23780,16 +24267,17 @@
     "desktop:Shuffle Button Animation": true,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
-    "desktop:Filter Button": false,
+    "desktop:Filter Button": true,
     "desktop:Song Data": true,
     "desktop:Background": true,
     "desktop:Animation": true,
     "desktop:Album Cover": true,
-    "desktop:Shadows": true,
+    "desktop:Shadows": false,
     "desktop:Album Cover Shadow": true,
     "desktop:Volume Shadow": true,
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
+    "desktop:Filter Panel Shadow": true,
     "desktop:Global Override": true,
     "desktop:Standard Button Animation": true,
     "desktop:Scrub Audio": true,
@@ -23859,6 +24347,7 @@
     "mobile:Volume Shadow": false,
     "mobile:Previous / Next Shadow": false,
     "mobile:Title Lift Shadow": false,
+    "mobile:Filter Panel Shadow": false,
     "mobile:Global Override": false,
     "mobile:Standard Button Animation": false,
     "mobile:Scrub Audio": false,
@@ -23928,6 +24417,7 @@
     "landscape:Volume Shadow": false,
     "landscape:Previous / Next Shadow": false,
     "landscape:Title Lift Shadow": false,
+    "landscape:Filter Panel Shadow": false,
     "landscape:Global Override": false,
     "landscape:Standard Button Animation": false,
     "landscape:Scrub Audio": false,
@@ -24516,7 +25006,11 @@
     "landscape:Standard Button Animation": null,
     "landscape:Global Override": null,
     "landscape:Right Click Pan": null,
-    "landscape:Right Click Height": null
+    "landscape:Right Click Height": null,
+    "mobile:Filter Panel Shadow": null,
+    "sliderMobileGlobalOverrideOnOpacity": null,
+    "landscape:Filter Panel Shadow": null,
+    "sliderLandscapeGlobalOverrideOnOpacity": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
