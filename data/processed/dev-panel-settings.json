@@ -121,7 +121,7 @@
     "checkboxInvertPinch": false,
     "selectUiFont": "Poppins",
     "checkboxTxtSongTitleEnabled": true,
-    "sliderTxtSongTitleFontSize": 51,
+    "sliderTxtSongTitleFontSize": 40,
     "colorTxtSongTitleColor": "#f2f2f2",
     "checkboxTxtSongTitleBold": true,
     "checkboxTxtSongTitleItalic": false,
@@ -553,9 +553,9 @@
   },
   "layout": {
     "left": 35,
-    "top": 209,
+    "top": 346,
     "width": 350,
-    "height": 570
+    "height": 80
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -14599,6 +14599,10 @@
                         "key": "sliderMobileTxtSongTitleFontSize"
                       },
                       {
+                        "type": "row",
+                        "key": "sliderMobileTxtSongTitleMaxWidth"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "mobile:Track Title Button Animation",
@@ -14716,7 +14720,8 @@
                       }
                     ],
                     "rowKeys": [
-                      "sliderMobileTxtSongTitleFontSize"
+                      "sliderMobileTxtSongTitleFontSize",
+                      "sliderMobileTxtSongTitleMaxWidth"
                     ],
                     "subgroups": [
                       {
@@ -14931,6 +14936,10 @@
                       "key": "sliderMobileTxtSongTitleFontSize"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderMobileTxtSongTitleMaxWidth"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "mobile:Track Title Button Animation",
@@ -15048,7 +15057,8 @@
                     }
                   ],
                   "rowKeys": [
-                    "sliderMobileTxtSongTitleFontSize"
+                    "sliderMobileTxtSongTitleFontSize",
+                    "sliderMobileTxtSongTitleMaxWidth"
                   ],
                   "subgroups": [
                     {
@@ -17254,6 +17264,10 @@
                       "key": "sliderMobileTxtSongTitleFontSize"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderMobileTxtSongTitleMaxWidth"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "mobile:Track Title Button Animation",
@@ -17371,7 +17385,8 @@
                     }
                   ],
                   "rowKeys": [
-                    "sliderMobileTxtSongTitleFontSize"
+                    "sliderMobileTxtSongTitleFontSize",
+                    "sliderMobileTxtSongTitleMaxWidth"
                   ],
                   "subgroups": [
                     {
@@ -17586,6 +17601,10 @@
                     "key": "sliderMobileTxtSongTitleFontSize"
                   },
                   {
+                    "type": "row",
+                    "key": "sliderMobileTxtSongTitleMaxWidth"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "mobile:Track Title Button Animation",
@@ -17703,7 +17722,8 @@
                   }
                 ],
                 "rowKeys": [
-                  "sliderMobileTxtSongTitleFontSize"
+                  "sliderMobileTxtSongTitleFontSize",
+                  "sliderMobileTxtSongTitleMaxWidth"
                 ],
                 "subgroups": [
                   {
@@ -20982,6 +21002,10 @@
                         "key": "sliderLandscapeTxtSongTitleFontSize"
                       },
                       {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "landscape:Track Title Button Animation",
@@ -21099,7 +21123,8 @@
                       }
                     ],
                     "rowKeys": [
-                      "sliderLandscapeTxtSongTitleFontSize"
+                      "sliderLandscapeTxtSongTitleFontSize",
+                      "sliderLandscapeTxtSongTitleMaxWidth"
                     ],
                     "subgroups": [
                       {
@@ -21314,6 +21339,10 @@
                       "key": "sliderLandscapeTxtSongTitleFontSize"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "landscape:Track Title Button Animation",
@@ -21431,7 +21460,8 @@
                     }
                   ],
                   "rowKeys": [
-                    "sliderLandscapeTxtSongTitleFontSize"
+                    "sliderLandscapeTxtSongTitleFontSize",
+                    "sliderLandscapeTxtSongTitleMaxWidth"
                   ],
                   "subgroups": [
                     {
@@ -23637,6 +23667,10 @@
                       "key": "sliderLandscapeTxtSongTitleFontSize"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "landscape:Track Title Button Animation",
@@ -23754,7 +23788,8 @@
                     }
                   ],
                   "rowKeys": [
-                    "sliderLandscapeTxtSongTitleFontSize"
+                    "sliderLandscapeTxtSongTitleFontSize",
+                    "sliderLandscapeTxtSongTitleMaxWidth"
                   ],
                   "subgroups": [
                     {
@@ -23969,6 +24004,10 @@
                     "key": "sliderLandscapeTxtSongTitleFontSize"
                   },
                   {
+                    "type": "row",
+                    "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "landscape:Track Title Button Animation",
@@ -24086,7 +24125,8 @@
                   }
                 ],
                 "rowKeys": [
-                  "sliderLandscapeTxtSongTitleFontSize"
+                  "sliderLandscapeTxtSongTitleFontSize",
+                  "sliderLandscapeTxtSongTitleMaxWidth"
                 ],
                 "subgroups": [
                   {
@@ -26755,11 +26795,11 @@
     "desktop:UI Layout": false,
     "desktop:Text": false,
     "desktop:Font": true,
-    "desktop:Song Title": true,
+    "desktop:Song Title": false,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
     "desktop:Artist": true,
-    "desktop:Album & Date": false,
+    "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
@@ -27589,7 +27629,9 @@
     "rangeBarMobileBgAnimSwirlStrength": null,
     "rangeBarLandscapeBgAnimSwirlStrength": null,
     "curveEditorMobileBgAnimSwirlStrength": null,
-    "curveEditorLandscapeBgAnimSwirlStrength": null
+    "curveEditorLandscapeBgAnimSwirlStrength": null,
+    "sliderMobileTxtSongTitleMaxWidth": null,
+    "sliderLandscapeTxtSongTitleMaxWidth": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -27848,7 +27890,8 @@
     "curveEditorBgAnimRingThickness": true,
     "sliderBgAnimRingEdgeBlur": true,
     "rangeBarBgAnimSwirlStrength": true,
-    "curveEditorBgAnimSwirlStrength": true
+    "curveEditorBgAnimSwirlStrength": true,
+    "sliderTxtSongTitleMaxWidth": true
   },
   "devIndependence": {
     "mobile": {
@@ -27889,7 +27932,8 @@
       "sliderAlbumColorTransitionMs": false,
       "sliderCoverOffsetY": true,
       "sliderNavButtonOpacity": true,
-      "textArtistSeparator": false
+      "textArtistSeparator": false,
+      "sliderTxtSongTitleMaxWidth": true
     },
     "landscape": {}
   },
@@ -27932,7 +27976,8 @@
       "sliderAlbumColorTransitionMs": 300,
       "sliderCoverOffsetY": -99,
       "sliderNavButtonOpacity": 80,
-      "textArtistSeparator": "  &  "
+      "textArtistSeparator": "  &  ",
+      "sliderTxtSongTitleMaxWidth": 300
     },
     "landscape": {}
   },
