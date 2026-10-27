@@ -95,6 +95,7 @@
     "colorSongAddDate": "#ffffff",
     "sliderSongAddDateLetterSpacing": 0.8,
     "sliderSongAddDateOpacity": 0.89,
+    "sliderSongAddDateOffsetY": 0,
     "checkboxAlbumColorsEnabled": true,
     "selectAlbumColorMode": "vividGradient",
     "sliderAlbumColorSaturation": 1.25,
@@ -129,6 +130,7 @@
     "sliderTxtSongTitleLetterSpacing": 0,
     "sliderTxtSongTitleLineSpacing": 1.1,
     "sliderTxtSongTitleOpacity": 1,
+    "sliderTxtSongTitleOffsetY": 0,
     "checkboxTxtSongTitleWordWrap": true,
     "sliderTxtSongTitleMaxWidth": 2400,
     "selectTxtSongTitleOverflow": "wrap",
@@ -146,13 +148,14 @@
     "sliderTxtArtistLetterSpacing": 0,
     "sliderTxtArtistLineSpacing": 1.2,
     "sliderTxtArtistOpacity": 1,
+    "sliderTxtArtistOffsetY": 0,
     "checkboxTxtArtistWordWrap": true,
     "sliderTxtArtistMaxWidth": 2400,
     "selectTxtArtistOverflow": "wrap",
     "textArtistSeparator": "  &  ",
     "sliderArtistSeparatorPct": 73,
     "checkboxScaleArtistMultiline": true,
-    "sliderArtistMaxLines": 2,
+    "sliderArtistMaxLines": 8,
     "checkboxScaleArtistToMatch": true,
     "checkboxTxtArtistOutlineEnabled": false,
     "colorTxtArtistOutlineColor": "#000000",
@@ -166,6 +169,7 @@
     "sliderTxtAlbumDateLetterSpacing": 0,
     "sliderTxtAlbumDateLineSpacing": 1.2,
     "sliderTxtAlbumDateOpacity": 1,
+    "sliderTxtAlbumDateOffsetY": 0,
     "checkboxTxtAlbumDateWordWrap": true,
     "sliderTxtAlbumDateMaxWidth": 2000,
     "selectTxtAlbumDateOverflow": "wrap",
@@ -553,9 +557,9 @@
   },
   "layout": {
     "left": 26,
-    "top": 209,
+    "top": 293,
     "width": 350,
-    "height": 428
+    "height": 80
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -2119,6 +2123,10 @@
                         "key": "sliderTitleMaxLines"
                       },
                       {
+                        "type": "row",
+                        "key": "sliderTxtSongTitleOffsetY"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "desktop:Outline",
@@ -2141,7 +2149,8 @@
                       "sliderTxtSongTitleMaxWidth",
                       "selectTxtSongTitleOverflow",
                       "checkboxScaleTitleMultiline",
-                      "sliderTitleMaxLines"
+                      "sliderTitleMaxLines",
+                      "sliderTxtSongTitleOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -2336,6 +2345,10 @@
                         "key": "checkboxScaleArtistToMatch"
                       },
                       {
+                        "type": "row",
+                        "key": "sliderTxtArtistOffsetY"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "desktop:Outline",
@@ -2361,7 +2374,8 @@
                       "checkboxScaleArtistMultiline",
                       "sliderArtistMaxLines",
                       "sliderArtistSeparatorPct",
-                      "checkboxScaleArtistToMatch"
+                      "checkboxScaleArtistToMatch",
+                      "sliderTxtArtistOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -2474,6 +2488,10 @@
                       {
                         "type": "row",
                         "key": "checkboxScaleAlbumDateToMatch"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtAlbumDateOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -2490,7 +2508,8 @@
                       "selectTxtAlbumDateOverflow",
                       "checkboxScaleAlbumDateMultiline",
                       "sliderAlbumDateMaxLines",
-                      "checkboxScaleAlbumDateToMatch"
+                      "checkboxScaleAlbumDateToMatch",
+                      "sliderTxtAlbumDateOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -2738,6 +2757,10 @@
                       "key": "sliderTitleMaxLines"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderTxtSongTitleOffsetY"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -2760,7 +2783,8 @@
                     "sliderTxtSongTitleMaxWidth",
                     "selectTxtSongTitleOverflow",
                     "checkboxScaleTitleMultiline",
-                    "sliderTitleMaxLines"
+                    "sliderTitleMaxLines",
+                    "sliderTxtSongTitleOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -2952,6 +2976,10 @@
                       "key": "checkboxScaleArtistToMatch"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderTxtArtistOffsetY"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -2977,7 +3005,8 @@
                     "checkboxScaleArtistMultiline",
                     "sliderArtistMaxLines",
                     "sliderArtistSeparatorPct",
-                    "checkboxScaleArtistToMatch"
+                    "checkboxScaleArtistToMatch",
+                    "sliderTxtArtistOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -3087,6 +3116,10 @@
                     {
                       "type": "row",
                       "key": "checkboxScaleAlbumDateToMatch"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtAlbumDateOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -3103,7 +3136,8 @@
                     "selectTxtAlbumDateOverflow",
                     "checkboxScaleAlbumDateMultiline",
                     "sliderAlbumDateMaxLines",
-                    "checkboxScaleAlbumDateToMatch"
+                    "checkboxScaleAlbumDateToMatch",
+                    "sliderTxtAlbumDateOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -6927,6 +6961,10 @@
                       "key": "sliderTitleMaxLines"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderTxtSongTitleOffsetY"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -6949,7 +6987,8 @@
                     "sliderTxtSongTitleMaxWidth",
                     "selectTxtSongTitleOverflow",
                     "checkboxScaleTitleMultiline",
-                    "sliderTitleMaxLines"
+                    "sliderTitleMaxLines",
+                    "sliderTxtSongTitleOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -7144,6 +7183,10 @@
                       "key": "checkboxScaleArtistToMatch"
                     },
                     {
+                      "type": "row",
+                      "key": "sliderTxtArtistOffsetY"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -7169,7 +7212,8 @@
                     "checkboxScaleArtistMultiline",
                     "sliderArtistMaxLines",
                     "sliderArtistSeparatorPct",
-                    "checkboxScaleArtistToMatch"
+                    "checkboxScaleArtistToMatch",
+                    "sliderTxtArtistOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -7282,6 +7326,10 @@
                     {
                       "type": "row",
                       "key": "checkboxScaleAlbumDateToMatch"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTxtAlbumDateOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -7298,7 +7346,8 @@
                     "selectTxtAlbumDateOverflow",
                     "checkboxScaleAlbumDateMultiline",
                     "sliderAlbumDateMaxLines",
-                    "checkboxScaleAlbumDateToMatch"
+                    "checkboxScaleAlbumDateToMatch",
+                    "sliderTxtAlbumDateOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -7546,6 +7595,10 @@
                     "key": "sliderTitleMaxLines"
                   },
                   {
+                    "type": "row",
+                    "key": "sliderTxtSongTitleOffsetY"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "desktop:Outline",
@@ -7568,7 +7621,8 @@
                   "sliderTxtSongTitleMaxWidth",
                   "selectTxtSongTitleOverflow",
                   "checkboxScaleTitleMultiline",
-                  "sliderTitleMaxLines"
+                  "sliderTitleMaxLines",
+                  "sliderTxtSongTitleOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -7760,6 +7814,10 @@
                     "key": "checkboxScaleArtistToMatch"
                   },
                   {
+                    "type": "row",
+                    "key": "sliderTxtArtistOffsetY"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "desktop:Outline",
@@ -7785,7 +7843,8 @@
                   "checkboxScaleArtistMultiline",
                   "sliderArtistMaxLines",
                   "sliderArtistSeparatorPct",
-                  "checkboxScaleArtistToMatch"
+                  "checkboxScaleArtistToMatch",
+                  "sliderTxtArtistOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -7895,6 +7954,10 @@
                   {
                     "type": "row",
                     "key": "checkboxScaleAlbumDateToMatch"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTxtAlbumDateOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -7911,7 +7974,8 @@
                   "selectTxtAlbumDateOverflow",
                   "checkboxScaleAlbumDateMultiline",
                   "sliderAlbumDateMaxLines",
-                  "checkboxScaleAlbumDateToMatch"
+                  "checkboxScaleAlbumDateToMatch",
+                  "sliderTxtAlbumDateOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -12807,6 +12871,10 @@
                 {
                   "type": "row",
                   "key": "sliderSongAddDateOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSongAddDateOffsetY"
                 }
               ],
               "rowKeys": [
@@ -12814,7 +12882,8 @@
                 "checkboxSongAddDateBold",
                 "colorSongAddDate",
                 "sliderSongAddDateLetterSpacing",
-                "sliderSongAddDateOpacity"
+                "sliderSongAddDateOpacity",
+                "sliderSongAddDateOffsetY"
               ],
               "subgroups": []
             }
@@ -13357,6 +13426,10 @@
               {
                 "type": "row",
                 "key": "sliderSongAddDateOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderSongAddDateOffsetY"
               }
             ],
             "rowKeys": [
@@ -13364,7 +13437,8 @@
               "checkboxSongAddDateBold",
               "colorSongAddDate",
               "sliderSongAddDateLetterSpacing",
-              "sliderSongAddDateOpacity"
+              "sliderSongAddDateOpacity",
+              "sliderSongAddDateOffsetY"
             ],
             "subgroups": []
           },
@@ -14717,11 +14791,16 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtSongTitleOffsetY"
                       }
                     ],
                     "rowKeys": [
                       "sliderMobileTxtSongTitleFontSize",
-                      "sliderMobileTxtSongTitleMaxWidth"
+                      "sliderMobileTxtSongTitleMaxWidth",
+                      "sliderMobileTxtSongTitleOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -14860,13 +14939,18 @@
                       {
                         "type": "row",
                         "key": "sliderMobileArtistMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtArtistOffsetY"
                       }
                     ],
                     "rowKeys": [
                       "sliderMobileTxtArtistFontSize",
                       "textArtistSeparator",
                       "checkboxMobileScaleArtistMultiline",
-                      "sliderMobileArtistMaxLines"
+                      "sliderMobileArtistMaxLines",
+                      "sliderMobileTxtArtistOffsetY"
                     ],
                     "subgroups": []
                   }
@@ -14888,10 +14972,15 @@
                           "rowKeys": [],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtAlbumDateOffsetY"
                       }
                     ],
                     "rowKeys": [
-                      "sliderMobileTxtAlbumDateFontSize"
+                      "sliderMobileTxtAlbumDateFontSize",
+                      "sliderMobileTxtAlbumDateOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -15054,11 +15143,16 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTxtSongTitleOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "sliderMobileTxtSongTitleFontSize",
-                    "sliderMobileTxtSongTitleMaxWidth"
+                    "sliderMobileTxtSongTitleMaxWidth",
+                    "sliderMobileTxtSongTitleOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -15194,13 +15288,18 @@
                     {
                       "type": "row",
                       "key": "sliderMobileArtistMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTxtArtistOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "sliderMobileTxtArtistFontSize",
                     "textArtistSeparator",
                     "checkboxMobileScaleArtistMultiline",
-                    "sliderMobileArtistMaxLines"
+                    "sliderMobileArtistMaxLines",
+                    "sliderMobileTxtArtistOffsetY"
                   ],
                   "subgroups": []
                 },
@@ -15219,10 +15318,15 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTxtAlbumDateOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderMobileTxtAlbumDateFontSize"
+                    "sliderMobileTxtAlbumDateFontSize",
+                    "sliderMobileTxtAlbumDateOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -17492,11 +17596,16 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTxtSongTitleOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "sliderMobileTxtSongTitleFontSize",
-                    "sliderMobileTxtSongTitleMaxWidth"
+                    "sliderMobileTxtSongTitleMaxWidth",
+                    "sliderMobileTxtSongTitleOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -17635,13 +17744,18 @@
                     {
                       "type": "row",
                       "key": "sliderMobileArtistMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTxtArtistOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "sliderMobileTxtArtistFontSize",
                     "textArtistSeparator",
                     "checkboxMobileScaleArtistMultiline",
-                    "sliderMobileArtistMaxLines"
+                    "sliderMobileArtistMaxLines",
+                    "sliderMobileTxtArtistOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -17663,10 +17777,15 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderMobileTxtAlbumDateOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderMobileTxtAlbumDateFontSize"
+                    "sliderMobileTxtAlbumDateFontSize",
+                    "sliderMobileTxtAlbumDateOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -17829,11 +17948,16 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTxtSongTitleOffsetY"
                   }
                 ],
                 "rowKeys": [
                   "sliderMobileTxtSongTitleFontSize",
-                  "sliderMobileTxtSongTitleMaxWidth"
+                  "sliderMobileTxtSongTitleMaxWidth",
+                  "sliderMobileTxtSongTitleOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -17969,13 +18093,18 @@
                   {
                     "type": "row",
                     "key": "sliderMobileArtistMaxLines"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTxtArtistOffsetY"
                   }
                 ],
                 "rowKeys": [
                   "sliderMobileTxtArtistFontSize",
                   "textArtistSeparator",
                   "checkboxMobileScaleArtistMultiline",
-                  "sliderMobileArtistMaxLines"
+                  "sliderMobileArtistMaxLines",
+                  "sliderMobileTxtArtistOffsetY"
                 ],
                 "subgroups": []
               },
@@ -17994,10 +18123,15 @@
                       "rowKeys": [],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderMobileTxtAlbumDateOffsetY"
                   }
                 ],
                 "rowKeys": [
-                  "sliderMobileTxtAlbumDateFontSize"
+                  "sliderMobileTxtAlbumDateFontSize",
+                  "sliderMobileTxtAlbumDateOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -21340,11 +21474,16 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtSongTitleOffsetY"
                       }
                     ],
                     "rowKeys": [
                       "sliderLandscapeTxtSongTitleFontSize",
-                      "sliderLandscapeTxtSongTitleMaxWidth"
+                      "sliderLandscapeTxtSongTitleMaxWidth",
+                      "sliderLandscapeTxtSongTitleOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -21483,13 +21622,18 @@
                       {
                         "type": "row",
                         "key": "sliderLandscapeArtistMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtArtistOffsetY"
                       }
                     ],
                     "rowKeys": [
                       "sliderLandscapeTxtArtistFontSize",
                       "textArtistSeparator",
                       "checkboxLandscapeScaleArtistMultiline",
-                      "sliderLandscapeArtistMaxLines"
+                      "sliderLandscapeArtistMaxLines",
+                      "sliderLandscapeTxtArtistOffsetY"
                     ],
                     "subgroups": []
                   }
@@ -21511,10 +21655,15 @@
                           "rowKeys": [],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtAlbumDateOffsetY"
                       }
                     ],
                     "rowKeys": [
-                      "sliderLandscapeTxtAlbumDateFontSize"
+                      "sliderLandscapeTxtAlbumDateFontSize",
+                      "sliderLandscapeTxtAlbumDateOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -21677,11 +21826,16 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtSongTitleOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "sliderLandscapeTxtSongTitleFontSize",
-                    "sliderLandscapeTxtSongTitleMaxWidth"
+                    "sliderLandscapeTxtSongTitleMaxWidth",
+                    "sliderLandscapeTxtSongTitleOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -21817,13 +21971,18 @@
                     {
                       "type": "row",
                       "key": "sliderLandscapeArtistMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtArtistOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "sliderLandscapeTxtArtistFontSize",
                     "textArtistSeparator",
                     "checkboxLandscapeScaleArtistMultiline",
-                    "sliderLandscapeArtistMaxLines"
+                    "sliderLandscapeArtistMaxLines",
+                    "sliderLandscapeTxtArtistOffsetY"
                   ],
                   "subgroups": []
                 },
@@ -21842,10 +22001,15 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtAlbumDateOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderLandscapeTxtAlbumDateFontSize"
+                    "sliderLandscapeTxtAlbumDateFontSize",
+                    "sliderLandscapeTxtAlbumDateOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -24115,11 +24279,16 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtSongTitleOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "sliderLandscapeTxtSongTitleFontSize",
-                    "sliderLandscapeTxtSongTitleMaxWidth"
+                    "sliderLandscapeTxtSongTitleMaxWidth",
+                    "sliderLandscapeTxtSongTitleOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -24258,13 +24427,18 @@
                     {
                       "type": "row",
                       "key": "sliderLandscapeArtistMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtArtistOffsetY"
                     }
                   ],
                   "rowKeys": [
                     "sliderLandscapeTxtArtistFontSize",
                     "textArtistSeparator",
                     "checkboxLandscapeScaleArtistMultiline",
-                    "sliderLandscapeArtistMaxLines"
+                    "sliderLandscapeArtistMaxLines",
+                    "sliderLandscapeTxtArtistOffsetY"
                   ],
                   "subgroups": []
                 }
@@ -24286,10 +24460,15 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderLandscapeTxtAlbumDateOffsetY"
                     }
                   ],
                   "rowKeys": [
-                    "sliderLandscapeTxtAlbumDateFontSize"
+                    "sliderLandscapeTxtAlbumDateFontSize",
+                    "sliderLandscapeTxtAlbumDateOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -24452,11 +24631,16 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTxtSongTitleOffsetY"
                   }
                 ],
                 "rowKeys": [
                   "sliderLandscapeTxtSongTitleFontSize",
-                  "sliderLandscapeTxtSongTitleMaxWidth"
+                  "sliderLandscapeTxtSongTitleMaxWidth",
+                  "sliderLandscapeTxtSongTitleOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -24592,13 +24776,18 @@
                   {
                     "type": "row",
                     "key": "sliderLandscapeArtistMaxLines"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTxtArtistOffsetY"
                   }
                 ],
                 "rowKeys": [
                   "sliderLandscapeTxtArtistFontSize",
                   "textArtistSeparator",
                   "checkboxLandscapeScaleArtistMultiline",
-                  "sliderLandscapeArtistMaxLines"
+                  "sliderLandscapeArtistMaxLines",
+                  "sliderLandscapeTxtArtistOffsetY"
                 ],
                 "subgroups": []
               },
@@ -24617,10 +24806,15 @@
                       "rowKeys": [],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderLandscapeTxtAlbumDateOffsetY"
                   }
                 ],
                 "rowKeys": [
-                  "sliderLandscapeTxtAlbumDateFontSize"
+                  "sliderLandscapeTxtAlbumDateFontSize",
+                  "sliderLandscapeTxtAlbumDateOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -27233,13 +27427,13 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": true,
+    "desktop:Text": false,
     "desktop:Font": true,
     "desktop:Song Title": false,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
-    "desktop:Artist": true,
-    "desktop:Album & Date": true,
+    "desktop:Artist": false,
+    "desktop:Album & Date": false,
     "desktop:Brackets Smaller Text": true,
     "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
@@ -27303,15 +27497,15 @@
     "mobile:Debug": true,
     "mobile:Snapshot": false,
     "mobile:UI Layout": false,
-    "mobile:Text": true,
+    "mobile:Text": false,
     "mobile:Font": true,
-    "mobile:Song Title": true,
+    "mobile:Song Title": false,
     "mobile:Track Title Button Animation": true,
     "mobile:Artist": false,
     "mobile:Album & Date": false,
     "mobile:Outline": false,
     "mobile:Brackets Smaller Text": false,
-    "mobile:New Group (7)": false,
+    "mobile:New Group (7)": true,
     "mobile:Volume Button": true,
     "mobile:Volume Button Animation": false,
     "mobile:Play Button": true,
@@ -28093,7 +28287,13 @@
     "sliderMobileSongDataFontSize": null,
     "sliderLandscapeSongDataFontSize": null,
     "sliderMobileSongDataOffsetY": null,
-    "sliderLandscapeSongDataOffsetY": null
+    "sliderLandscapeSongDataOffsetY": null,
+    "sliderMobileTxtSongTitleOffsetY": null,
+    "sliderLandscapeTxtSongTitleOffsetY": null,
+    "sliderMobileTxtArtistOffsetY": null,
+    "sliderLandscapeTxtArtistOffsetY": null,
+    "sliderMobileTxtAlbumDateOffsetY": null,
+    "sliderLandscapeTxtAlbumDateOffsetY": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -28364,7 +28564,10 @@
     "sliderSongDataIconGap": true,
     "sliderSongDataIconSize": true,
     "sliderSongDataFontSize": true,
-    "sliderSongDataOffsetY": true
+    "sliderSongDataOffsetY": true,
+    "sliderTxtSongTitleOffsetY": true,
+    "sliderTxtArtistOffsetY": true,
+    "sliderTxtAlbumDateOffsetY": true
   },
   "devIndependence": {
     "mobile": {
@@ -28418,7 +28621,10 @@
       "sliderSongDataIconGap": true,
       "sliderSongDataFontSize": true,
       "sliderSongDataIconSize": true,
-      "sliderSongDataOffsetY": true
+      "sliderSongDataOffsetY": true,
+      "sliderTxtSongTitleOffsetY": true,
+      "sliderTxtArtistOffsetY": true,
+      "sliderTxtAlbumDateOffsetY": true
     },
     "landscape": {}
   },
@@ -28472,7 +28678,9 @@
       "sliderSongDataFontSize": 12,
       "sliderSongDataItemGap": 70,
       "sliderSongDataBtnSize": 18,
-      "sliderSongDataOffsetY": 22
+      "sliderSongDataOffsetY": 22,
+      "sliderTxtSongTitleOffsetY": -15,
+      "sliderTxtAlbumDateOffsetY": 17
     },
     "landscape": {}
   },
