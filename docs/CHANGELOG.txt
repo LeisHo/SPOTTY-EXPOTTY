@@ -1098,3 +1098,6 @@ Direct report: Debug's own Pause Logs/Copy All Logs/Clear All Logs/Export Logs e
 
 2026-10-27 - Show Song Data button: icons imported from data/BUTTON ICONS/DATA/ICONS
 - New dropdown "Button Icon Style" at the top of UI > AUDIO BUTTONS > Song Data, listing DATA-49 to DATA-54 (6 icons; DATA-48.svg is an empty file and was skipped, like PAUSE-132). Same generator as the other buttons (scripts/active/build_button_icons.js, key `data`); applySongDataIcon() in iconStyles.js. Default is the first icon, so the button's look changes from the old hand-drawn page icon until a style is chosen. Checked in the page: the dropdown lists 6 options and choosing one swaps the button's icon (sdata0 -> sdata3, viewBox 0 0 42.52 42.52). Not judged by eye at small sizes.
+
+2026-10-27 - Song Data icons re-imported (owner updated the files)
+- data/BUTTON ICONS/DATA/ICONS now holds BUTTON ICONS-48 to -54 (the DATA-NN names are gone; BUTTON ICONS-48 is empty and skipped). The generator was re-run: the Song Data dropdown lists BUTTON ICONS-49 to BUTTON ICONS-54 (6 icons). No other button's icons changed. While the folder was being replaced the generator briefly saw both sets (12 icons); only the settled folder is committed. Dropdown labels are file names, so the Song Data ones now read "BUTTON ICONS-NN". Saved Song Data icon numbers keep their position (0-5).
