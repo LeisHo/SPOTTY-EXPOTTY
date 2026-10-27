@@ -8654,6 +8654,7 @@
             { tab, group: BG, id: 'sliderBackgroundOpacity', type: 'slider', label: 'Opacity (x):', min: 0, max: 1, step: 0.01, value: 1 },
             { tab, group: BG, id: 'sliderBackgroundBrightness', type: 'slider', label: 'Brightness (x):', min: 0.1, max: 2.5, step: 0.01, value: 1 },
             { tab, group: BG, id: 'sliderBackgroundSaturation', type: 'slider', label: 'Saturation (x):', min: 0, max: 3, step: 0.01, value: 1 },
+            { tab, group: BG, id: 'sliderBackgroundDither', type: 'slider', label: 'Banding Dither (Levels, 0 = Off):', min: 0, max: 4, step: 0.1, value: 1 },
             { tab, group: BG, id: 'sliderBackgroundTransition', type: 'slider', label: 'Crossfade Between Songs (Ms):', min: 0, max: 3000, step: 10, value: 400 },
             // A: color
             { tab, group: BG, id: 'colorBackgroundColor', type: 'color', label: 'Background Color:', value: '#0d0f12' },

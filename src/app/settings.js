@@ -206,7 +206,7 @@ export const DEFAULTS = {
 
     // Background
     selectBackgroundMode: 'none',
-    sliderBackgroundOpacity: 1,
+    sliderBackgroundDither: 1, sliderBackgroundOpacity: 1,
     sliderBackgroundBrightness: 1,
     sliderBackgroundSaturation: 1,
     sliderBackgroundTransition: 400,

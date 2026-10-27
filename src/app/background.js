@@ -226,7 +226,29 @@ export function createBackground({ canvas, prevCanvas, coverEl, coverImg, getPal
             g.addColorStop(1, css(col, 0));
             ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
         }
+        ditherBackground();
         drawn = true;
+    }
+
+    // Banding fix: a canvas holds 8 bits per channel, so a very smooth dark blur or gradient is drawn in steps of ONE level that are several pixels wide, and
+    // the Brightness / Saturation filter on the canvas stretches those steps into visible streaks. A little random noise (about +-1 level) breaks the steps up.
+    // The noise is gray, drawn at a very low alpha over the finished picture; Banding Dither sets how strong it is (0 = off).
+    let noiseTile = null;
+    function ditherBackground() {
+        const amt = setting('sliderBackgroundDither');
+        if (!(amt > 0) || setting('selectBackgroundMode') === 'none') return;
+        if (!noiseTile) {
+            noiseTile = document.createElement('canvas'); noiseTile.width = noiseTile.height = 256;
+            const nx = noiseTile.getContext('2d'), id = nx.createImageData(256, 256);
+            for (let i = 0; i < id.data.length; i += 4) { const v = (Math.random() * 256) | 0; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; }
+            nx.putImageData(id, 0, 0);
+        }
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0); // device pixels, so the noise is 1 px grain at any pixel ratio
+        ctx.globalAlpha = Math.min(1, (amt * 2) / 255);
+        ctx.fillStyle = ctx.createPattern(noiseTile, 'repeat');
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
     }
 
     // A new cover arrived: crossfade from what was on screen to the new frame.
