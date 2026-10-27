@@ -217,7 +217,7 @@
     "colorVolCircle": "#ffffff",
     "sliderVolHoverTolerance": 37,
     "sliderVolClickTolerance": 50,
-    "selectVolIconStyle": "0",
+    "selectVolIconStyle": "6",
     "sliderVolAnimDuration": 190,
     "curveEditorVolAnimSpeedCurve": "{\"points\":[{\"x\":0,\"y\":0.5952784220377605,\"h1\":{\"x\":0.504492481784282,\"y\":0.05047709147135415}},{\"x\":1,\"y\":1,\"h2\":{\"x\":0,\"y\":-0.44892730712890627}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderCoverScale": 1.65,
@@ -3142,6 +3142,10 @@
                     "items": [
                       {
                         "type": "row",
+                        "key": "selectVolIconStyle"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderVolIconSize"
                       },
                       {
@@ -3198,10 +3202,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "selectVolIconStyle"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderVolHoverOpacity"
                       },
                       {
@@ -3251,6 +3251,7 @@
                       }
                     ],
                     "rowKeys": [
+                      "selectVolIconStyle",
                       "sliderVolIconSize",
                       "sliderVolCircleRadius",
                       "sliderVolBarWidth",
@@ -3265,7 +3266,6 @@
                       "sliderVolIconOffsetX",
                       "sliderVolIconOpacity",
                       "sliderVolClickTolerance",
-                      "selectVolIconStyle",
                       "sliderVolHoverOpacity",
                       "sliderVolEdgeOffset"
                     ],
@@ -4166,6 +4166,10 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "selectVolIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderVolIconSize"
                     },
                     {
@@ -4222,10 +4226,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "selectVolIconStyle"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderVolHoverOpacity"
                     },
                     {
@@ -4275,6 +4275,7 @@
                     }
                   ],
                   "rowKeys": [
+                    "selectVolIconStyle",
                     "sliderVolIconSize",
                     "sliderVolCircleRadius",
                     "sliderVolBarWidth",
@@ -4289,7 +4290,6 @@
                     "sliderVolIconOffsetX",
                     "sliderVolIconOpacity",
                     "sliderVolClickTolerance",
-                    "selectVolIconStyle",
                     "sliderVolHoverOpacity",
                     "sliderVolEdgeOffset"
                   ],
@@ -7429,6 +7429,10 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "selectVolIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderVolIconSize"
                     },
                     {
@@ -7485,10 +7489,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "selectVolIconStyle"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderVolHoverOpacity"
                     },
                     {
@@ -7538,6 +7538,7 @@
                     }
                   ],
                   "rowKeys": [
+                    "selectVolIconStyle",
                     "sliderVolIconSize",
                     "sliderVolCircleRadius",
                     "sliderVolBarWidth",
@@ -7552,7 +7553,6 @@
                     "sliderVolIconOffsetX",
                     "sliderVolIconOpacity",
                     "sliderVolClickTolerance",
-                    "selectVolIconStyle",
                     "sliderVolHoverOpacity",
                     "sliderVolEdgeOffset"
                   ],
@@ -8453,6 +8453,10 @@
                 "items": [
                   {
                     "type": "row",
+                    "key": "selectVolIconStyle"
+                  },
+                  {
+                    "type": "row",
                     "key": "sliderVolIconSize"
                   },
                   {
@@ -8509,10 +8513,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "selectVolIconStyle"
-                  },
-                  {
-                    "type": "row",
                     "key": "sliderVolHoverOpacity"
                   },
                   {
@@ -8562,6 +8562,7 @@
                   }
                 ],
                 "rowKeys": [
+                  "selectVolIconStyle",
                   "sliderVolIconSize",
                   "sliderVolCircleRadius",
                   "sliderVolBarWidth",
@@ -8576,7 +8577,6 @@
                   "sliderVolIconOffsetX",
                   "sliderVolIconOpacity",
                   "sliderVolClickTolerance",
-                  "selectVolIconStyle",
                   "sliderVolHoverOpacity",
                   "sliderVolEdgeOffset"
                 ],
@@ -23587,9 +23587,9 @@
     "desktop:Album & Date": false,
     "desktop:Brackets Smaller Text": true,
     "desktop:New Group (7)": false,
-    "desktop:Volume Button": true,
+    "desktop:Volume Button": false,
     "desktop:Volume Button Animation": true,
-    "desktop:Play Button": false,
+    "desktop:Play Button": true,
     "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": true,
     "desktop:Next And Last Button Animation": true,
