@@ -1139,3 +1139,6 @@ Direct report: Debug's own Pause Logs/Copy All Logs/Clear All Logs/Export Logs e
 
 2026-10-27 - Global Override: Filter and Show Song Data checkboxes
 - Global Override gets "Filter Button" and "Show Song Data Button" checkboxes (ids checkboxOverrideFilter / checkboxOverrideSongData), handled like Shuffle: the override color and Opacity Off / On are applied to the button's own off / on variables (--spx-filter-off-op / -on-op, --spx-sd-off-op / -on-op), so the on state uses Opacity On and the off state Opacity Off, and the Standard Button Animation applies too. Checked: with the override on and Off 15 %, color magenta, both buttons read opacity 0.15 and rgb(255, 0, 255) (their off state); unticking them gave back 0.45 and rgb(242, 242, 242). The On state was not checked by eye.
+
+2026-10-27 - Global Override: the Filter and Show Song Data checkboxes default to on
+- checkboxOverrideFilter and checkboxOverrideSongData now default to ticked (dev panel and settings.js fallback). The saved settings file has no value for them yet, so they come up ticked; the other buttons' ticks are unchanged. The override only acts while the group's own "Enabled" is on (it is saved as on). Checked in the page: both read checked on a fresh load (the local test page has the override's Enabled off, as there are no saved settings loaded locally).
