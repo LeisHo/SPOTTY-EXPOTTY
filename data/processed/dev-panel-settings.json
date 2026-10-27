@@ -559,7 +559,7 @@
     "left": 35,
     "top": 53,
     "width": 350,
-    "height": 385
+    "height": 519
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -20618,8 +20618,15 @@
             "type": "group",
             "section": {
               "key": "mobile:Song Add Date",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongAddDateOffsetY"
+                }
+              ],
+              "rowKeys": [
+                "sliderMobileSongAddDateOffsetY"
+              ],
               "subgroups": []
             }
           },
@@ -20725,8 +20732,15 @@
           },
           {
             "key": "mobile:Song Add Date",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderMobileSongAddDateOffsetY"
+              }
+            ],
+            "rowKeys": [
+              "sliderMobileSongAddDateOffsetY"
+            ],
             "subgroups": []
           },
           {
@@ -27381,8 +27395,15 @@
             "type": "group",
             "section": {
               "key": "landscape:Song Add Date",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongAddDateOffsetY"
+                }
+              ],
+              "rowKeys": [
+                "sliderLandscapeSongAddDateOffsetY"
+              ],
               "subgroups": []
             }
           },
@@ -27488,8 +27509,15 @@
           },
           {
             "key": "landscape:Song Add Date",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongAddDateOffsetY"
+              }
+            ],
+            "rowKeys": [
+              "sliderLandscapeSongAddDateOffsetY"
+            ],
             "subgroups": []
           },
           {
@@ -27586,7 +27614,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -27595,7 +27623,7 @@
     "desktop:Artist": true,
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
-    "desktop:New Group (7)": false,
+    "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:Volume Button Animation": true,
     "desktop:Play Button": true,
@@ -27605,7 +27633,7 @@
     "desktop:Shuffle Button": true,
     "desktop:Shuffle Button Animation": true,
     "desktop:Filter Button": true,
-    "desktop:Song Data": false,
+    "desktop:Song Data": true,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
     "desktop:Global Override": true,
@@ -27629,7 +27657,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": true,
+    "desktop:Timeline Look": false,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
@@ -27638,7 +27666,7 @@
     "desktop:Timeline Scale": true,
     "desktop:Scale Numbers": true,
     "desktop:Ticks": true,
-    "desktop:Song Add Date": true,
+    "desktop:Song Add Date": false,
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
     "desktop:Startup": true,
@@ -28463,7 +28491,41 @@
     "sliderMobileTxtAlbumDateMaxWidth": null,
     "sliderLandscapeTxtAlbumDateMaxWidth": null,
     "sliderMobileTxtSongTitleLetterSpacing": null,
-    "sliderLandscapeTxtSongTitleLetterSpacing": null
+    "sliderLandscapeTxtSongTitleLetterSpacing": null,
+    "sliderMobileScaleNumbersFontSize": null,
+    "sliderLandscapeScaleNumbersFontSize": null,
+    "checkboxMobileScaleNumbersBold": null,
+    "checkboxLandscapeScaleNumbersBold": null,
+    "colorMobileScaleNumbers": null,
+    "colorLandscapeScaleNumbers": null,
+    "sliderMobileScaleNumbersLetterSpacing": null,
+    "sliderLandscapeScaleNumbersLetterSpacing": null,
+    "sliderMobileScaleNumbersOpacity": null,
+    "sliderLandscapeScaleNumbersOpacity": null,
+    "sliderMobileScaleNumbersOffsetX": null,
+    "sliderLandscapeScaleNumbersOffsetX": null,
+    "colorMobileTickMark": null,
+    "colorLandscapeTickMark": null,
+    "sliderMobileTickOpacity": null,
+    "sliderLandscapeTickOpacity": null,
+    "sliderMobileTickWidth": null,
+    "sliderLandscapeTickWidth": null,
+    "sliderMobileTickHeight": null,
+    "sliderLandscapeTickHeight": null,
+    "sliderMobileTickStartHeight": null,
+    "sliderLandscapeTickStartHeight": null,
+    "sliderMobileSongAddDateFontSize": null,
+    "sliderLandscapeSongAddDateFontSize": null,
+    "checkboxMobileSongAddDateBold": null,
+    "checkboxLandscapeSongAddDateBold": null,
+    "colorMobileSongAddDate": null,
+    "colorLandscapeSongAddDate": null,
+    "sliderMobileSongAddDateLetterSpacing": null,
+    "sliderLandscapeSongAddDateLetterSpacing": null,
+    "sliderMobileSongAddDateOpacity": null,
+    "sliderLandscapeSongAddDateOpacity": null,
+    "sliderMobileSongAddDateOffsetY": null,
+    "sliderLandscapeSongAddDateOffsetY": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -28742,7 +28804,24 @@
     "sliderTitleMaxLines": true,
     "sliderTxtArtistMaxWidth": true,
     "sliderTxtAlbumDateMaxWidth": true,
-    "sliderTxtSongTitleLetterSpacing": false
+    "sliderTxtSongTitleLetterSpacing": false,
+    "sliderScaleNumbersFontSize": false,
+    "checkboxScaleNumbersBold": false,
+    "colorScaleNumbers": false,
+    "sliderScaleNumbersLetterSpacing": false,
+    "sliderScaleNumbersOpacity": false,
+    "sliderScaleNumbersOffsetX": false,
+    "colorTickMark": false,
+    "sliderTickOpacity": false,
+    "sliderTickWidth": false,
+    "sliderTickHeight": false,
+    "sliderTickStartHeight": false,
+    "sliderSongAddDateFontSize": false,
+    "checkboxSongAddDateBold": false,
+    "colorSongAddDate": false,
+    "sliderSongAddDateLetterSpacing": false,
+    "sliderSongAddDateOpacity": false,
+    "sliderSongAddDateOffsetY": true
   },
   "devIndependence": {
     "mobile": {
@@ -28805,7 +28884,8 @@
       "sliderTxtAlbumDateFontSize": true,
       "sliderTxtAlbumDateMaxWidth": true,
       "sliderTxtArtistMaxWidth": true,
-      "sliderTxtArtistFontSize": true
+      "sliderTxtArtistFontSize": true,
+      "sliderSongAddDateOffsetY": true
     },
     "landscape": {}
   },
@@ -28867,7 +28947,8 @@
       "sliderTxtArtistOffsetY": -15,
       "sliderTxtAlbumDateMaxWidth": 250,
       "sliderTxtArtistFontSize": 20,
-      "sliderSongDataIconGap": 5
+      "sliderSongDataIconGap": 4,
+      "sliderSongAddDateOffsetY": -8
     },
     "landscape": {}
   },
