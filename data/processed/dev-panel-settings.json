@@ -556,7 +556,7 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 26,
+    "left": 27,
     "top": 368.7916564941406,
     "width": 350,
     "height": 410
@@ -27659,9 +27659,9 @@
     "mobile:UI Layout": false,
     "mobile:Text": false,
     "mobile:Font": true,
-    "mobile:Song Title": false,
+    "mobile:Song Title": true,
     "mobile:Track Title Button Animation": true,
-    "mobile:Artist": true,
+    "mobile:Artist": false,
     "mobile:Album & Date": false,
     "mobile:Outline": false,
     "mobile:Brackets Smaller Text": false,
@@ -28858,10 +28858,10 @@
       "sliderSongDataBtnSize": 18,
       "sliderSongDataOffsetY": 22,
       "sliderTxtSongTitleOffsetY": -15,
-      "sliderTxtAlbumDateOffsetY": -20,
+      "sliderTxtAlbumDateOffsetY": -15,
       "sliderTitleMaxLines": 3,
       "sliderAlbumDateMaxLines": 2,
-      "sliderTxtArtistOffsetY": -20
+      "sliderTxtArtistOffsetY": -15
     },
     "landscape": {}
   },
