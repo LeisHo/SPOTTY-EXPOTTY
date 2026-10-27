@@ -38213,7 +38213,7 @@
     "desktop:Artist": true,
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
-    "desktop:Test Text Mode": true,
+    "desktop:Test Text Mode": false,
     "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
