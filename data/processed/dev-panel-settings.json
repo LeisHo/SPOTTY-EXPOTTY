@@ -31,6 +31,7 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
+    "sliderSongTickWidth": 0.008,
     "sliderSongTickHeight": 11,
     "sliderTimelineHeight": 190,
     "checkboxTimelineHeightTransition": true,
@@ -262,7 +263,7 @@
     "selectValenceIconStyle": "0",
     "selectDanceIconStyle": "6",
     "selectEnergyIconStyle": "6",
-    "checkboxFilterButtonEnabled": true,
+    "checkboxFilterButtonEnabled": false,
     "sliderFilterIconSize": 25,
     "sliderFilterIconOffsetX": 0,
     "sliderFilterIconOffsetY": 25,
@@ -17778,48 +17779,18 @@
           },
           {
             "type": "row",
-            "key": "rangeBarSongTickWidth"
-          },
-          {
-            "type": "row",
-            "key": "rangeBarSongTickThinWidth"
-          },
-          {
-            "type": "row",
-            "key": "curveEditorSongTickThinZoom"
-          },
-          {
-            "type": "row",
-            "key": "sliderSongTickWidthTransitionMs"
+            "key": "sliderSongTickWidth"
           },
           {
             "type": "row",
             "key": "sliderSongTickHeight"
-          },
-          {
-            "type": "row",
-            "key": "sliderSongTickMinSpacing"
-          },
-          {
-            "type": "row",
-            "key": "checkboxSongTickScale"
-          },
-          {
-            "type": "row",
-            "key": "curveEditorSongTickScale"
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
           "rangeBarTimelineZoomLimits",
-          "rangeBarSongTickWidth",
-          "rangeBarSongTickThinWidth",
-          "curveEditorSongTickThinZoom",
-          "sliderSongTickWidthTransitionMs",
-          "sliderSongTickHeight",
-          "sliderSongTickMinSpacing",
-          "checkboxSongTickScale",
-          "curveEditorSongTickScale"
+          "sliderSongTickWidth",
+          "sliderSongTickHeight"
         ],
         "subgroups": [
           {
