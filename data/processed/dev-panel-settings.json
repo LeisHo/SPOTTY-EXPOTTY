@@ -95,7 +95,7 @@
     "colorSongAddDate": "#ffffff",
     "sliderSongAddDateLetterSpacing": 0.8,
     "sliderSongAddDateOpacity": 0.89,
-    "sliderSongAddDateOffsetY": 0,
+    "sliderSongAddDateOffsetY": -3,
     "checkboxAlbumColorsEnabled": true,
     "selectAlbumColorMode": "vividGradient",
     "sliderAlbumColorSaturation": 1.25,
@@ -557,9 +557,9 @@
   },
   "layout": {
     "left": 35,
-    "top": 460,
+    "top": 53,
     "width": 350,
-    "height": 225
+    "height": 385
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -27572,7 +27572,7 @@
     ]
   },
   "sectionCollapseState": {
-    "desktop:Saved Dev Settings": true,
+    "desktop:Saved Dev Settings": false,
     "desktop:Dev Panel": true,
     "desktop:MECHANICS": true,
     "desktop:PANEL UI": true,
@@ -27586,7 +27586,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:Text": false,
     "desktop:Font": true,
     "desktop:Song Title": false,
@@ -27629,16 +27629,16 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": true,
+    "desktop:Timeline Look": false,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
     "desktop:Album Cover Colors": true,
     "desktop:New Group (3)": true,
-    "desktop:Timeline Scale": true,
+    "desktop:Timeline Scale": false,
     "desktop:Scale Numbers": true,
     "desktop:Ticks": true,
-    "desktop:Song Add Date": true,
+    "desktop:Song Add Date": false,
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
     "desktop:Startup": true,
