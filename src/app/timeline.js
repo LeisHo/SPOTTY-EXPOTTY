@@ -9,6 +9,7 @@
 // The current song is always floor(pos): the last song added AT OR BEFORE the playhead's
 // time, so landing in an empty stretch plays the most recent earlier song.
 import { setting, activeDevice } from './settings.js';
+import { FEATURE_ICON_PATHS } from './filter.js';
 
 const SPACING_MS = 1000;
 const MIN_SPAN_MS = 120000;
@@ -339,9 +340,15 @@ export function createTimeline(canvas, data) {
         const barPx = clamp(setting('sliderBarWidth'), 1, 60);
         const nb = Math.max(1, Math.floor(w / barPx));
         const bw = w / nb;
-        const bins = new Array(nb).fill(null);
-        for (let i = i0; i < i1; i++) {
-            const b = clamp(Math.floor(((vt[i] - viewStart) / span) * nb), 0, nb - 1);
+        // Every bar covers the same fixed slice of time (binVt) on a grid that starts at time 0, so which songs share a bar - and with
+        // them the bar's colors - do not change while the view is panned; only zooming changes the grouping. offX = where the first
+        // (partly visible) bar starts, left of the screen edge.
+        const binVt = span / nb, k0 = Math.floor(viewStart / binVt);
+        const offX = ((k0 * binVt) - viewStart) / span * w;
+        const bins = new Array(nb + 2).fill(null);
+        const j0 = lowerBound(vt, k0 * binVt), j1 = lowerBound(vt, (k0 + nb + 2) * binVt);
+        for (let i = j0; i < j1; i++) {
+            const b = clamp(Math.floor(vt[i] / binVt) - k0, 0, nb + 1);
             if (!bins[b]) bins[b] = { a: i, b: i + 1 }; else bins[b].b = i + 1;
         }
         let maxBin = 1;
@@ -358,7 +365,7 @@ export function createTimeline(canvas, data) {
         if (style === 'none') {
             bins.forEach((bn, b) => {
                 if (!bn) return;
-                const n = bn.b - bn.a, ok = validOf(bn), full = binH(bn), x = b * bw, ww = Math.max(1, bw - 0.5);
+                const n = bn.b - bn.a, ok = validOf(bn), full = binH(bn), x = b * bw + offX, ww = Math.max(1, bw - 0.5);
                 if (ok === n || !flatGray) { paintFill(ctx, binColorOf(bn), x, topH - full, ww, full, accentCss, baseAlpha); return; }
                 const okH = full * ok / n; // the passing songs keep their colour at the bottom, the rest of the bar is gray
                 if (okH > 0) paintFill(ctx, binColorOf(bn), x, topH - okH, ww, okH, accentCss, baseAlpha);
@@ -372,7 +379,7 @@ export function createTimeline(canvas, data) {
                 const paint = binColorOf(bn);
                 let rgb = paint ? (paint.solid || (paint.gradient && paint.gradient[paint.gradient.length >> 1]) || paint.stack[paint.stack.length - 1]) : hexToRgb(accent);
                 if (flatGray && validOf(bn) === 0) rgb = hexToRgb(setting('colorFilterGray')); // nothing in this bar passes the filter
-                const x = b * bw + bw / 2, top = topH - binH(bn);
+                const x = b * bw + offX + bw / 2, top = topH - binH(bn);
                 ctx.save();
                 ctx.shadowColor = rgbCss(rgb, intensity);
                 ctx.shadowBlur = radius;
@@ -402,7 +409,7 @@ export function createTimeline(canvas, data) {
             if (colorOpts.on) bins.forEach((bn, b) => {
                 if (!bn) return;
                 const p = binColorOf(bn);
-                if (p) colPts.push({ x: (b + 0.5) * bw, rgb: p.solid || (p.gradient && p.gradient[p.gradient.length >> 1]) || p.stack[p.stack.length >> 1] });
+                if (p) colPts.push({ x: (b + 0.5) * bw + offX, rgb: p.solid || (p.gradient && p.gradient[p.gradient.length >> 1]) || p.stack[p.stack.length >> 1] });
             });
             let lastF = 0;
             const stop = (x, rgb) => { const f = Math.max(lastF, clamp(x / w, 0, 1)); lastF = f; grad.addColorStop(f, rgbCss(rgb, 1)); };
@@ -429,12 +436,12 @@ export function createTimeline(canvas, data) {
             if (paints.some(p => p && (p.stack || p.gradient))) {
                 ctx.clip();
                 const fallbackCss = rgbCss(hexToRgb(accent), 1);
-                for (let b = 0; b < nb; b++) {
+                for (let b = 0; b < nb + 2; b++) {
                     let p = paints[b];
-                    for (let d = 1; !p && d < nb; d++) p = paints[b - d] || paints[b + d] || null; // nearest bar that has colours
-                    const x0 = b * bw, x1 = Math.min(ys.length, Math.ceil((b + 1) * bw) + 1);
+                    for (let d = 1; !p && d < nb + 2; d++) p = paints[b - d] || paints[b + d] || null; // nearest bar that has colours
+                    const x0 = b * bw + offX, x1 = Math.min(ys.length, Math.ceil(x0 + bw) + 1);
                     let top = topH;
-                    for (let x = Math.floor(x0); x < x1; x++) top = Math.min(top, ys[x] === undefined ? topH : ys[x]);
+                    for (let x = Math.max(0, Math.floor(x0)); x < x1; x++) top = Math.min(top, ys[x] === undefined ? topH : ys[x]);
                     paintFill(ctx, p, x0, top, bw + 0.5, Math.max(1, topH - top), fallbackCss, 1);
                 }
             } else {
@@ -496,7 +503,7 @@ export function createTimeline(canvas, data) {
             const mx = easedScale('ribbon', Math.max(1e-6, ...cnt));
             // faint bars underneath keep the individual add dates readable
             ctx.globalAlpha = barsA;
-            bins.forEach((bn, b) => { if (bn) { ctx.fillStyle = accentCss; ctx.fillRect(b * bw, topH - binH(bn), Math.max(1, bw - 0.5), binH(bn)); } });
+            bins.forEach((bn, b) => { if (bn) { ctx.fillStyle = accentCss; ctx.fillRect(b * bw + offX, topH - binH(bn), Math.max(1, bw - 0.5), binH(bn)); } });
             ctx.globalAlpha = 1;
             const mid = topH / 2;
             for (let x = 0; x < cols; x++) {
@@ -504,7 +511,7 @@ export function createTimeline(canvas, data) {
                 const f = fcnt[x] > 1e-6 ? fsum[x] / fcnt[x] : 0.5;
                 let rgb = hslToRgb([220 - f * 180, 0.75, 0.45 + f * 0.15]); // low = cool blue, high = warm yellow
                 if (colorOpts.on) { // album colours under this pixel column instead of the feature hue
-                    const bi = clamp(Math.floor((x / cols) * nb), 0, nb - 1);
+                    const bi = clamp(Math.floor(((x / cols) * w - offX) / bw), 0, nb + 1);
                     const bn = bins[bi];
                     const p = bn && binColorOf(bn);
                     if (p) rgb = p.solid || (p.gradient && p.gradient[p.gradient.length >> 1]) || p.stack[p.stack.length >> 1];
@@ -525,6 +532,31 @@ export function createTimeline(canvas, data) {
             ctx.fillText(dateLine, w / 2, h - axisH - dateH / 2 + 4.5); // centred in the strip between the graph and the scale text
             ctx.textAlign = 'start';
             ctx.letterSpacing = '0px';
+        }
+
+        // Song Data (the button under Shuffle): tempo / valence / danceability / energy of the shown song, each as an icon and a number,
+        // right-aligned on the same row as the add date.
+        if (songData && songData.length) {
+            const fsz = setting('sliderSongDataFontSize'), ic = setting('sliderSongDataIconSize'), gIc = setting('sliderSongDataIconGap'), gIt = setting('sliderSongDataItemGap');
+            ctx.globalAlpha = setting('sliderSongDataOpacity');
+            ctx.fillStyle = ctx.strokeStyle = setting('colorSongData');
+            ctx.font = `${setting('checkboxSongDataBold') ? 'bold ' : ''}${fsz}px ${getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif'}`;
+            ctx.letterSpacing = '0px';
+            ctx.textAlign = 'start';
+            const items = songData.map(it => ({ ...it, tw: ctx.measureText(it.text).width }));
+            const total = items.reduce((sum, it) => sum + ic + gIc + it.tw, 0) + gIt * (items.length - 1);
+            let x = w - setting('sliderSongDataEdgeOffset') - total;
+            const base = h - axisH - dateH / 2 + 4.5 + setting('sliderSongDataOffsetY'); // the date line's text baseline
+            items.forEach(it => {
+                ctx.save();
+                ctx.translate(x, base - fsz * 0.35 - ic / 2); // icon centred on the middle of the digits
+                ctx.scale(ic / 24, ic / 24);
+                ctx.lineWidth = 1.8; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+                (it.paths || []).forEach(d => ctx.stroke(new Path2D(d)));
+                ctx.restore();
+                ctx.fillText(it.text, x + ic + gIc, base);
+                x += ic + gIc + it.tw + gIt;
+            });
         }
 
         // axis
@@ -599,10 +631,16 @@ export function createTimeline(canvas, data) {
         if (fn) { cumValid = new Uint32Array(n + 1); for (let i = 0; i < n; i++) cumValid[i + 1] = cumValid[i] + (fn(i) ? 1 : 0); }
         draw();
     }
+    // Song Data row: [{ key, text }] or null. The icon paths come from the filter panel's icons.
+    let songData = null;
+    function setSongData(items) {
+        songData = items ? items.map(it => ({ ...it, paths: [...(FEATURE_ICON_PATHS[it.key] || '').matchAll(/ d="([^"]+)"/g)].map(m => m[1]) })) : null;
+        draw();
+    }
     let dateLine = '';
     function setDateLine(t) { if (t !== dateLine) { dateLine = t; draw(); } }
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setFilter, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
+    return { draw, setFilter, setSongData, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }

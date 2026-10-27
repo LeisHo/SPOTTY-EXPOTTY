@@ -7,13 +7,14 @@
 import { setting } from './settings.js';
 
 const FEATURES = [
-    { key: 'tp', label: 'Tempo', unit: ' BPM', step: 'any', dp: 1 },
-    { key: 'v', label: 'Valence', unit: '', step: 'any', dp: 3 },
-    { key: 'dn', label: 'Danceability', unit: '', step: 'any', dp: 3 },
-    { key: 'e', label: 'Energy', unit: '', step: 'any', dp: 3 },
+    { key: 'tp', label: 'Tempo', unit: ' BPM', step: 'any', dp: 0 },
+    { key: 'v', label: 'Valence', unit: '', step: 'any', dp: 1 },
+    { key: 'dn', label: 'Danceability', unit: '', step: 'any', dp: 1 },
+    { key: 'e', label: 'Energy', unit: '', step: 'any', dp: 1 },
 ];
 const STORE = 'spxFilter';
 // the panel shows an icon instead of each feature's name (the name is its tooltip)
+export const FEATURE_ICON_PATHS = {} ; // filled below (the same icons are drawn on the timeline by the Song Data row)
 const ICONS = {
     tp: '<path d="M8 21h8l-2.5-17h-3z"/><path d="M12 16l4.5-9"/><path d="M9.5 12h5"/>', // metronome
     v: '<circle cx="12" cy="12" r="9"/><path d="M8 14.2c1.2 2.2 6.8 2.2 8 0"/><path d="M9 9.8h.01M15 9.8h.01"/>', // smiley
@@ -22,6 +23,7 @@ const ICONS = {
 };
 
 // tempo 0 is Spotify's "no data" placeholder, so it counts as missing like a null does
+Object.assign(FEATURE_ICON_PATHS, ICONS);
 // A row whose tempo, valence and danceability are all exactly 0 has no audio analysis (3 songs): those 3 values are missing, not real zeros.
 const noAnalysis = s => s.tp === 0 && s.v === 0 && s.dn === 0;
 const valueOf = (s, k) => { const v = s[k]; return typeof v === 'number' && !(k !== 'e' && noAnalysis(s)) && !(k === 'tp' && v <= 0) ? v : null; };
@@ -64,7 +66,7 @@ export function createFilter(songs, { host, onChange }) {
     panel.className = 'spx-filter-panel';
     panel.id = 'spxFilterPanel';
     panel.hidden = true;
-    panel.innerHTML = '<div class="spx-flt-head"><button type="button" class="spx-flt-clear" title="Clear filters" aria-label="Clear filters"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></button></div><div class="spx-flt-rows"></div>';
+    panel.innerHTML = '<div class="spx-flt-head"><button type="button" class="spx-flt-clear" title="Clear filters" aria-label="Clear filters"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></button></div><div class="spx-flt-rows"></div><div class="spx-flt-count"></div>';
     // Horizontal resize: two thin strips on the panel's left and right edges. They sit inside the panel's own padding, below the
     // sliders (z-index), and the slider rows start inside that padding, so a press that could be either is always the slider's.
     const WIDTH_KEY = 'spxFilterWidth', MIN_W = 160;
@@ -101,7 +103,7 @@ export function createFilter(songs, { host, onChange }) {
     });
     try { const w = parseFloat(localStorage.getItem(WIDTH_KEY)); if (w >= MIN_W) panel.style.width = w + 'px'; } catch (e) { /* storage blocked */ }
     host.appendChild(panel);
-    const rowsEl = panel.querySelector('.spx-flt-rows');
+    const rowsEl = panel.querySelector('.spx-flt-rows'), countEl = panel.querySelector('.spx-flt-count');
     const rows = {};
     const fmt = (f, v) => v.toFixed(f.dp) + f.unit;
 
@@ -109,12 +111,13 @@ export function createFilter(songs, { host, onChange }) {
         const [lo, hi] = ext[f.key];
         const row = document.createElement('div');
         row.className = 'spx-flt-row';
-        row.innerHTML = `<div class="spx-flt-top"><span class="spx-flt-ico" title="${f.label}" aria-label="${f.label}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[f.key]}</svg></span><span class="spx-flt-val"></span></div>
+        row.innerHTML = `<div class="spx-flt-top"><span class="spx-flt-ico" title="${f.label}" aria-label="${f.label}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[f.key]}</svg></span></div>
             <div class="spx-flt-range"><div class="spx-flt-track"><div class="spx-flt-fill"></div></div>
             <input type="range" class="spx-flt-min" min="${lo}" max="${hi}" step="any" aria-label="${f.label} minimum">
-            <input type="range" class="spx-flt-max" min="${lo}" max="${hi}" step="any" aria-label="${f.label} maximum"></div>`;
+            <input type="range" class="spx-flt-max" min="${lo}" max="${hi}" step="any" aria-label="${f.label} maximum"></div>
+            <div class="spx-flt-nums"><span class="spx-flt-lo"></span><span class="spx-flt-val"></span><span class="spx-flt-hi"></span></div>`;
         rowsEl.appendChild(row);
-        const r = rows[f.key] = { f, row, val: row.querySelector('.spx-flt-val'), fill: row.querySelector('.spx-flt-fill'), min: row.querySelector('.spx-flt-min'), max: row.querySelector('.spx-flt-max') };
+        const r = rows[f.key] = { f, row, lo: row.querySelector('.spx-flt-lo'), hi: row.querySelector('.spx-flt-hi'), val: row.querySelector('.spx-flt-val'), fill: row.querySelector('.spx-flt-fill'), min: row.querySelector('.spx-flt-min'), max: row.querySelector('.spx-flt-max') };
         const fromInputs = which => {
             let a = parseFloat(r.min.value), b = parseFloat(r.max.value);
             if (a > b) { if (which === 'min') a = b; else b = a; }
@@ -142,11 +145,15 @@ export function createFilter(songs, { host, onChange }) {
             const r = rows[f.key], [lo, hi] = ext[f.key], [a, b] = range[f.key];
             r.min.value = a; r.max.value = b;
             r.val.textContent = fmt(f, a) + ' - ' + fmt(f, b);
+            r.lo.textContent = lo.toFixed(f.dp); r.hi.textContent = hi.toFixed(f.dp); // the dataset's own lowest / highest value at the two ends
             const span = hi - lo || 1;
             r.fill.style.left = ((a - lo) / span * 100) + '%';
             r.fill.style.width = ((b - a) / span * 100) + '%';
             r.row.classList.toggle('on', narrowed(f));
         });
+        panel.classList.toggle('no-nums', !setting('checkboxFilterShowNumbers'));
+        countEl.style.display = setting('checkboxFilterShowCount') ? '' : 'none';
+        if (setting('checkboxFilterShowCount')) countEl.textContent = countPassing() + '/' + songs.length + ' songs';
     }
     function commit() {
         try { localStorage.setItem(STORE, JSON.stringify(range)); } catch (e) { /* storage blocked */ }

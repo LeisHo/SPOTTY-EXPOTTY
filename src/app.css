@@ -175,7 +175,15 @@
 .spx-shuffle[aria-pressed="true"] { --bs-op: var(--spx-shuffle-on-op, 1); color: var(--spx-shuffle-on-color, #1db954); }
 .spx-shuffle[hidden] { display: none; }
 /* Filter (under the shuffle icon): opens the audio-feature filter panel (filter.js) */
-.spx-filter { z-index: 4; position: absolute; right: var(--spx-filter-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-filter-gap, 0px)); width: calc(var(--spx-filter-icon, 20px) + 20px); height: calc(var(--spx-filter-icon, 20px) + 20px);
+/* Song Data button (between Shuffle and Filter): the four audio numbers of the shown song appear on the timeline's add-date row */
+.spx-songdata { z-index: 4; position: absolute; right: var(--spx-sd-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-sd-gap, 0px)); width: calc(var(--spx-sd-icon, 20px) + 20px); height: calc(var(--spx-sd-icon, 20px) + 20px);
+    border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-sd-color, #f2f2f2); --bs-op: var(--spx-sd-off-op, 0.45); cursor: pointer;
+    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-sd-x, 0px) 0; }
+.spx-songdata svg { width: var(--spx-sd-icon, 20px); height: var(--spx-sd-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spx-songdata[aria-pressed="true"] { --bs-op: var(--spx-sd-on-op, 1); color: var(--spx-sd-on-color, #1db954); }
+.spx-songdata[hidden] { display: none; }
+.spx-app.no-shadow-vol .spx-songdata { filter: none; }
+.spx-filter { z-index: 4; position: absolute; right: var(--spx-filter-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-sd-offset, 0px) + var(--spx-filter-gap, 0px)); width: calc(var(--spx-filter-icon, 20px) + 20px); height: calc(var(--spx-filter-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-filter-color, #f2f2f2); --bs-op: var(--spx-filter-off-op, 0.45); cursor: pointer;
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-filter-x, 0px) 0; }
 .spx-filter svg { width: var(--spx-filter-icon, 20px); height: var(--spx-filter-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -194,8 +202,13 @@
 .spx-flt-clear:hover { opacity: 1; }
 .spx-flt-clear svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .spx-flt-row { margin: 8px 0 12px; }
-.spx-flt-top { display: flex; justify-content: space-between; align-items: center; opacity: .85; }
+.spx-flt-top { display: flex; justify-content: center; align-items: center; opacity: .85; }
 .spx-flt-ico { display: inline-flex; }
+.spx-flt-nums { display: flex; justify-content: space-between; align-items: baseline; font-size: .9em; opacity: .8; margin-top: 1px; }
+.spx-flt-nums .spx-flt-val { flex: 1; text-align: center; padding: 0 4px; }
+.spx-flt-row.on .spx-flt-val { color: var(--flt-accent); }
+.spx-filter-panel.no-nums .spx-flt-nums { display: none; }
+.spx-flt-count { text-align: center; opacity: .75; margin-top: 2px; }
 .spx-flt-ico svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .spx-flt-row.on .spx-flt-top { color: var(--flt-accent); opacity: 1; }
 .spx-flt-range { position: relative; height: 22px; }

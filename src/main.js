@@ -80,6 +80,7 @@ async function boot() {
                 </div></div>
             </div>
             <button type="button" class="spx-shuffle bs-host" id="spxShuffle" aria-label="Shuffle" aria-pressed="false" title="Shuffle off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+            <button type="button" class="spx-songdata bs-host" id="spxSongData" aria-label="Song data" aria-pressed="false" title="Song data off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></button>
             <button type="button" class="spx-filter bs-host" id="spxFilter" aria-label="Filter songs" aria-pressed="false" aria-expanded="false" title="Filter off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg></button>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart"><button type="button" class="spx-start-play" id="spxStartBtn" aria-label="Start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button></div>
@@ -218,12 +219,22 @@ async function boot() {
     let stepImmediate = false; // set by stepSong() so that one song change skips the handoff delay
     // Audio-feature filter (Filter button, filter.js). Created further down; until then every song passes.
     let flt = null;
+    let songDataOn = false, rcHeight = null; // Song Data button state; the graph height set by a right-drag (null = the dev panel's value)
     const filterOn = () => !!flt && flt.active() && !!setting('checkboxFilterButtonEnabled');
     const songOk = i => !filterOn() || flt.passes(i);
     // The filter only decides which songs get played NEXT. idx = the song shown (text, cover, playhead); playIdx = the song actually
     // playing (-1 = none yet). They differ while a clicked filtered-out song is only being looked at: it plays nothing and does not
     // interrupt the playing song, and after a delay the playhead animates back to the playing song.
     let playIdx = -1, returnTimer = 0, returnRaf = 0, returningToPlaying = false;
+    // Song Data: tempo / valence / danceability / energy of the shown song, drawn by the timeline on the add-date row.
+    function updateSongData() {
+        const on = songDataOn && !!setting('checkboxSongDataEnabled');
+        if (!on || !songs[idx]) { timeline.setSongData(null); return; }
+        const s = songs[idx], none = typeof s.tp === 'number' && s.tp === 0 && s.v === 0 && s.dn === 0; // an all-zero row has no analysis
+        const num = (k, dp) => (typeof s[k] === 'number' && !(none && k !== 'e') ? s[k].toFixed(dp) : '-');
+        const dp = setting('sliderSongDataDecimals');
+        timeline.setSongData([{ key: 'tp', text: num('tp', setting('sliderSongDataTempoDecimals')) }, { key: 'v', text: num('v', dp) }, { key: 'dn', text: num('dn', dp) }, { key: 'e', text: num('e', dp) }]);
+    }
     const viewOnlyNow = () => filterOn() && idx !== playIdx && !flt.passes(idx);
     function cancelReturn() { clearTimeout(returnTimer); returnTimer = 0; if (returnRaf) { cancelAnimationFrame(returnRaf); returnRaf = 0; } }
     function startReturnTimer() {
@@ -259,7 +270,7 @@ async function boot() {
     }
     const randomPassingSong = () => { const pool = []; for (let i = 0; i < songs.length; i++) if (songOk(i)) pool.push(i); return pool.length ? pool[Math.floor(Math.random() * pool.length)] : Math.floor(Math.random() * songs.length); };
     // (capture phase: runs before the generic settings listener below, so applyLook sees the flag)
-    ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; }, true));
+    ['input', 'change'].forEach(t => document.addEventListener(t, e => { if (/TimelineHeight$/.test((e.target && e.target.id) || '')) heightTouched = true; if (/RcGraphHeight$/.test((e.target && e.target.id) || '') && !e.__spxFromDrag) rcHeight = null; }, true));
 
     const timeline = createTimeline(el('spxTimeline'), data);
     window.spxRedrawTimeline = () => timeline.draw();
@@ -424,7 +435,7 @@ async function boot() {
         BS_PROPS.forEach(k => { if (v[k] !== undefined) btn.style.setProperty(k, v[k]); });
     }
     // Hover Tolerance (Shuffle, Next/Last, Play): the hover state also shows while the pointer is within the tolerance of the button.
-    const HOVER_TOL = [['spxShuffle', 'sliderShuffleHoverTolerance'], ['spxFilter', 'sliderFilterHoverTolerance'], ['spxPrev', 'sliderNavHoverTolerance'], ['spxNext', 'sliderNavHoverTolerance'], ['spxCover', 'sliderPlayHoverTolerance']];
+    const HOVER_TOL = [['spxShuffle', 'sliderShuffleHoverTolerance'], ['spxFilter', 'sliderFilterHoverTolerance'], ['spxSongData', 'sliderSongDataHoverTolerance'], ['spxPrev', 'sliderNavHoverTolerance'], ['spxNext', 'sliderNavHoverTolerance'], ['spxCover', 'sliderPlayHoverTolerance']];
     const distToRect = (r, x, y) => Math.hypot(Math.max(r.left - x, 0, x - r.right), Math.max(r.top - y, 0, y - r.bottom));
     document.addEventListener('pointermove', e => {
         if (e.pointerType === 'touch') return;
@@ -533,7 +544,9 @@ async function boot() {
     // Timeline Height setting (the engine's per-device value), so the forced height is removed there.
     function applyTimelineBox() {
         const tl = el('spxTimeline').style;
-        if (activeDevice() === '') tl.setProperty('height', 'calc(100dvh - 14px)', 'important');
+        const rcH = setting('checkboxRcHeightEnabled') ? (rcHeight !== null ? rcHeight : setting('sliderRcGraphHeight')) : 0;
+        if (rcH > 0) tl.setProperty('height', rcH + 'px', 'important'); // set by a right-drag (or the dev panel's Graph Height); 0 = automatic
+        else if (activeDevice() === '') tl.setProperty('height', 'calc(100dvh - 14px)', 'important');
         else tl.removeProperty('height');
         timeline.draw(); // the band height is a setting: redraw when it changes
     }
@@ -624,6 +637,15 @@ async function boot() {
         bgAnim.refresh();
         { // Filter button + panel
             const a = el('spxApp').style, c = (k, v) => a.setProperty(k, v);
+            { // Song Data button: its own look, and the Filter button moves down by its height
+                const sdOn = !!setting('checkboxSongDataEnabled'), ic = setting('sliderSongDataBtnSize');
+                el('spxSongData').hidden = !sdOn;
+                c('--spx-sd-icon', ic + 'px'); c('--spx-sd-x', setting('sliderSongDataBtnOffsetX') + 'px'); c('--spx-sd-edge', setting('sliderSongDataBtnEdge') + 'px'); c('--spx-sd-gap', setting('sliderSongDataBtnGap') + 'px');
+                c('--spx-sd-off-op', String(setting('sliderSongDataBtnOffOpacity') / 100)); c('--spx-sd-on-op', String(setting('sliderSongDataBtnOnOpacity') / 100));
+                c('--spx-sd-color', setting('colorSongDataBtn')); c('--spx-sd-on-color', setting('colorSongDataBtnOn'));
+                c('--spx-sd-offset', sdOn ? (ic + 20 + setting('sliderSongDataBtnGap')) + 'px' : '0px');
+                updateSongData();
+            }
             el('spxFilter').hidden = !setting('checkboxFilterButtonEnabled');
             c('--spx-filter-icon', setting('sliderFilterIconSize') + 'px'); c('--spx-filter-x', setting('sliderFilterIconOffsetX') + 'px');
             c('--spx-filter-gap', setting('sliderFilterGapBelowShuffle') + 'px'); c('--spx-filter-edge', setting('sliderFilterEdgeOffset') + 'px');
@@ -758,6 +780,7 @@ async function boot() {
         applyTextElementStyles(); // re-run Shrink to Fit against the new text (a no-op for every other Overflow mode)
         timeline.setDateLine(fmtAdded(s.t));
         el('spxApp').classList.toggle('view-filtered', viewOnlyNow());
+        updateSongData();
         scheduleCover();
         background.onSongChanged(); // palette-driven modes change with the song even if the cover image did not; fades like a new cover
     }
@@ -884,8 +907,8 @@ async function boot() {
     // re-dispatch it as a click on that button.
     let redirectBtn = null;
     // Click Tolerance (Shuffle, Next/Last, Play): each button's hit area grows by its own tolerance in px.
-    const clickTolOf = b => (b.id === 'spxShuffle' ? setting('sliderShuffleClickTolerance') : b.id === 'spxFilter' ? setting('sliderFilterClickTolerance') : (b.id === 'spxPrev' || b.id === 'spxNext') ? setting('sliderNavClickTolerance') : b.id === 'spxCover' ? setting('sliderPlayClickTolerance') : 0);
-    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxFilter'), el('spxTitleLink'), el('spxStartBtn')].find(b => {
+    const clickTolOf = b => (b.id === 'spxShuffle' ? setting('sliderShuffleClickTolerance') : b.id === 'spxFilter' ? setting('sliderFilterClickTolerance') : b.id === 'spxSongData' ? setting('sliderSongDataClickTolerance') : (b.id === 'spxPrev' || b.id === 'spxNext') ? setting('sliderNavClickTolerance') : b.id === 'spxCover' ? setting('sliderPlayClickTolerance') : 0);
+    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxSongData'), el('spxFilter'), el('spxTitleLink'), el('spxStartBtn')].find(b => {
         const r = b.getBoundingClientRect(), p = clickTolOf(b);
         return x >= r.left - p && x <= r.right + p && y >= r.top - p && y <= r.bottom + p;
     });
@@ -945,8 +968,21 @@ async function boot() {
             timeline.zoomBy(Math.pow(pinchDist / d, setting('sliderPinchZoomSpeed') * (setting('checkboxInvertPinch') ? -1 : 1)));
             pinchDist = d;
             timeline.draw();
-        } else if (p.pan) { // right-button drag: pan the view
-            timeline.panPx(dx);
+        } else if (p.pan) { // right-button drag: pan the view sideways (Right Click Pan) and / or set the graph's height by dragging up (Right Click Height)
+            const tdx = e.clientX - p.startX, tdy = e.clientY - p.startY;
+            if (setting('checkboxRcPanEnabled') && (p.panActive || Math.abs(tdx) >= setting('sliderRcPanThreshold'))) {
+                p.panActive = true;
+                timeline.panPx(dx * setting('sliderRcPanSpeed') * (setting('checkboxRcPanInvert') ? -1 : 1));
+            }
+            if (setting('checkboxRcHeightEnabled') && (p.hActive || Math.abs(tdy) >= setting('sliderRcHeightThreshold'))) {
+                if (!p.hActive) { p.hActive = true; p.h0 = el('spxTimeline').getBoundingClientRect().height; p.hY0 = e.clientY; }
+                const maxH = Math.max(60, innerHeight * setting('sliderRcHeightMaxPct') / 100);
+                const hh = clamp(p.h0 + (p.hY0 - e.clientY) * setting('sliderRcHeightSpeed') * (setting('checkboxRcHeightInvert') ? -1 : 1), setting('sliderRcHeightMin'), maxH);
+                rcHeight = Math.round(hh);
+                const ctl = document.getElementById('sliderRcGraphHeight'); // dev mode: the slider follows the drag so Sync saves it
+                if (ctl) { ctl.value = rcHeight; const ev = new Event('input', { bubbles: true }); ev.__spxFromDrag = true; ctl.dispatchEvent(ev); }
+                applyTimelineBox();
+            }
             timeline.draw();
         } else if (p.moved) {
             if (p.type === 'mouse') { // click-drag zooms, drag right = zoom in
@@ -1071,7 +1107,17 @@ async function boot() {
     window.addEventListener('resize', () => { if (flt.open) placeFilterPanel(); });
     timeline.setFilter(filterOn() ? flt.passes : null);
     syncFilterUi();
-    window.__spxState = () => ({ idx, playIdx, pass: songOk(idx), view: viewOnlyNow(), pos, shuffleOn, filterOn: filterOn() }); // read by tests
+    // ---- Song Data button (between Shuffle and Filter)
+    const songDataBtn = el('spxSongData');
+    try { songDataOn = localStorage.getItem('spxSongData') === '1'; } catch (e) { /* storage blocked */ }
+    const syncSongDataUi = () => { songDataBtn.setAttribute('aria-pressed', String(songDataOn)); songDataBtn.title = songDataOn ? 'Song data on' : 'Song data off'; updateSongData(); };
+    songDataBtn.addEventListener('click', () => {
+        songDataOn = !songDataOn;
+        try { localStorage.setItem('spxSongData', songDataOn ? '1' : '0'); } catch (e) { /* storage blocked */ }
+        syncSongDataUi();
+    });
+    syncSongDataUi();
+    window.__spxState = () => ({ ptrs: ptrs.size, rcHeight, idx, playIdx, pass: songOk(idx), view: viewOnlyNow(), pos, shuffleOn, filterOn: filterOn() }); // read by tests
     // dev-panel buttons (so a hotkey can be assigned to them there)
     document.addEventListener('click', e => {
         const b = e.target && e.target.closest && e.target.closest('button');

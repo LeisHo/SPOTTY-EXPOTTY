@@ -179,13 +179,17 @@ export const DEFAULTS = {
     sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
     sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
-    selectFilterMissing: 'hide', checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,
+    selectFilterMissing: 'hide', checkboxFilterShowNumbers: true, checkboxFilterShowCount: false, checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,
     selectFilterIconStyle: '0',
     sliderFilterCoverGrayscale: 100, sliderFilterCoverBrightness: 100, sliderFilterCoverTransitionMs: 250, sliderFilterGraphGrayscale: 100,
     checkboxFilterReturnEnabled: true, sliderFilterReturnDelay: 3, sliderFilterReturnDuration: 600, selectFilterReturnEasing: 'ease-in-out', selectFilterReturnRestore: 'end',
     checkboxFilterGrayTicks: true, colorFilterTickGray: '#6b7280', sliderFilterTickGrayOpacity: 25, sliderFilterNumberGrayOpacity: 25,
     sliderFilterPanelWidth: 260, sliderFilterPanelFontSize: 12, sliderFilterPanelOffsetX: 0, sliderFilterPanelOffsetY: 6,
     colorFilterPanelBg: '#14161a', sliderFilterPanelBgOpacity: 92, colorFilterPanelAccent: '#1db954',
+
+    // Song Data button + row, Right Click Pan / Height
+    checkboxSongDataEnabled: true, sliderSongDataBtnSize: 20, sliderSongDataBtnOffsetX: 0, sliderSongDataBtnGap: 0, sliderSongDataBtnEdge: 14, sliderSongDataBtnOffOpacity: 45, sliderSongDataBtnOnOpacity: 100, colorSongDataBtn: '#f2f2f2', colorSongDataBtnOn: '#1db954', sliderSongDataClickTolerance: 0, sliderSongDataHoverTolerance: 0, sliderSongDataIconSize: 16, sliderSongDataFontSize: 13, checkboxSongDataBold: true, colorSongData: '#ffffff', sliderSongDataOpacity: 0.9, sliderSongDataIconGap: 5, sliderSongDataItemGap: 14, sliderSongDataEdgeOffset: 14, sliderSongDataOffsetY: 0, sliderSongDataTempoDecimals: 0, sliderSongDataDecimals: 2,
+    checkboxRcPanEnabled: true, sliderRcPanSpeed: 1, checkboxRcPanInvert: false, sliderRcPanThreshold: 0, checkboxRcHeightEnabled: true, sliderRcHeightSpeed: 1, checkboxRcHeightInvert: false, sliderRcHeightThreshold: 12, sliderRcHeightMin: 60, sliderRcHeightMaxPct: 100, sliderRcGraphHeight: 0,
 
     // Background > Animation (bgAnimation.js)
     selectBgAnimMode: 'none', sliderBgAnimSpeed: 6, sliderBgAnimCenterX: 0, sliderBgAnimCenterY: 0, sliderBgAnimStartStopMs: 2000,

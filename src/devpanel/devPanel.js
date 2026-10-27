@@ -7883,6 +7883,31 @@
         ];
         renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_CONTROLS', SPOTTY_CONTROLS);
+        // Timeline > Right Click Pan / Right Click Height: what a right-button drag on the timeline does
+        const RCP = 'Right Click Pan', RCH = 'Right Click Height';
+        findGroupContent(tab, TL, 'renderSpottyDevControls', 'sliderPlayheadStartHeight').appendChild(createDevGroupElement(RCP, tab));
+        findGroupContent(tab, TL, 'renderSpottyDevControls', 'sliderPlayheadStartHeight').appendChild(createDevGroupElement(RCH, tab));
+        const RCP_CONTROLS = [
+            { tab, group: RCP, id: 'checkboxRcPanEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: RCP, id: 'sliderRcPanSpeed', type: 'slider', label: 'Pan Speed (x):', min: 0.1, max: 5, step: 0.05, value: 1 },
+            { tab, group: RCP, id: 'checkboxRcPanInvert', type: 'checkbox', label: 'Invert Pan Direction', value: false },
+            { tab, group: RCP, id: 'sliderRcPanThreshold', type: 'slider', label: 'Pan Start Threshold (Px):', min: 0, max: 100, step: 1, value: 0 },
+        ];
+        const RCH_CONTROLS = [
+            { tab, group: RCH, id: 'checkboxRcHeightEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: RCH, id: 'sliderRcHeightSpeed', type: 'slider', label: 'Height Drag Speed (x):', min: 0.1, max: 5, step: 0.05, value: 1 },
+            { tab, group: RCH, id: 'checkboxRcHeightInvert', type: 'checkbox', label: 'Invert Height Direction (Drag Down = Taller)', value: false },
+            { tab, group: RCH, id: 'sliderRcHeightThreshold', type: 'slider', label: 'Height Start Threshold (Px):', min: 0, max: 200, step: 1, value: 12 },
+            { tab, group: RCH, id: 'sliderRcHeightMin', type: 'slider', label: 'Minimum Graph Height (Px):', min: 20, max: 600, step: 1, value: 60 },
+            { tab, group: RCH, id: 'sliderRcHeightMaxPct', type: 'slider', label: 'Maximum Graph Height (% Of Screen):', min: 20, max: 100, step: 1, value: 100 },
+            { tab, group: RCH, id: 'sliderRcGraphHeight', type: 'slider', label: 'Graph Height (Px, 0 = Automatic):', min: 0, max: 2000, step: 1, value: 0 },
+        ];
+        renderControlArray(RCP_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_RC_PAN', RCP_CONTROLS);
+        makeDevGroupToggleable(tab, RCP, 'checkboxRcPanEnabled');
+        renderControlArray(RCH_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_RC_HEIGHT', RCH_CONTROLS);
+        makeDevGroupToggleable(tab, RCH, 'checkboxRcHeightEnabled');
         // Click and Drag (Scrub Line): a toggle group with the same animation settings as a standard button animation group
         const CD = 'Click and Drag';
         const CD_CONTROLS = [
@@ -8239,6 +8264,8 @@
             { tab, group: FLB, id: 'sliderFilterTickGrayOpacity', type: 'slider', label: 'Grayed Tick Opacity (%):', min: 0, max: 100, step: 1, value: 25 },
             { tab, group: FLB, id: 'sliderFilterNumberGrayOpacity', type: 'slider', label: 'Grayed Number Opacity (%):', min: 0, max: 100, step: 1, value: 25 },
             // the panel
+            { tab, group: FLB, id: 'checkboxFilterShowNumbers', type: 'checkbox', label: 'Panel: Show Numbers', value: true },
+            { tab, group: FLB, id: 'checkboxFilterShowCount', type: 'checkbox', label: 'Panel: Show Matching Song Count', value: false },
             { tab, group: FLB, id: 'checkboxFilterCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
             { tab, group: FLB, id: 'sliderFilterPanelWidth', type: 'slider', label: 'Panel Default Width (Px):', min: 160, max: 600, step: 1, value: 260 },
             { tab, group: FLB, id: 'sliderFilterPanelFontSize', type: 'slider', label: 'Panel Font Size (Px):', min: 8, max: 32, step: 1, value: 12 },
@@ -8250,6 +8277,36 @@
         ];
         renderControlArray(FLB_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_FILTER_CONTROLS', FLB_CONTROLS);
+        // Song Data (between Shuffle and Filter): a button that shows the shown song's tempo / valence / danceability / energy on the add-date row
+        const SDG = 'Song Data';
+        uiLayoutContent.appendChild(createDevGroupElement(SDG, tab));
+        const SDG_CONTROLS = [
+            { tab, group: SDG, id: 'checkboxSongDataEnabled', type: 'checkbox', label: 'Enabled (Shows The Song Data Button)', value: true },
+            { tab, group: SDG, id: 'sliderSongDataBtnSize', type: 'slider', label: 'Button Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
+            { tab, group: SDG, id: 'sliderSongDataBtnOffsetX', type: 'slider', label: 'Button Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: SDG, id: 'sliderSongDataBtnGap', type: 'slider', label: 'Gap Below Shuffle (Px):', min: -40, max: 200, step: 1, value: 0 },
+            { tab, group: SDG, id: 'sliderSongDataBtnEdge', type: 'slider', label: 'Button Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
+            { tab, group: SDG, id: 'sliderSongDataBtnOffOpacity', type: 'slider', label: 'Button Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
+            { tab, group: SDG, id: 'sliderSongDataBtnOnOpacity', type: 'slider', label: 'Button On Icon Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: SDG, id: 'colorSongDataBtn', type: 'color', label: 'Button Icon Color (Off):', value: '#f2f2f2' },
+            { tab, group: SDG, id: 'colorSongDataBtnOn', type: 'color', label: 'Button Icon Color (On):', value: '#1db954' },
+            { tab, group: SDG, id: 'sliderSongDataClickTolerance', type: 'slider', label: 'Click Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
+            { tab, group: SDG, id: 'sliderSongDataHoverTolerance', type: 'slider', label: 'Hover Tolerance Outside Button (Px):', min: 0, max: 200, step: 1, value: 0 },
+            { tab, group: SDG, id: 'sliderSongDataIconSize', type: 'slider', label: 'Data Row Icon Size (Px):', min: 6, max: 80, step: 1, value: 16 },
+            { tab, group: SDG, id: 'sliderSongDataFontSize', type: 'slider', label: 'Data Row Font Size (Px):', min: 6, max: 80, step: 1, value: 13 },
+            { tab, group: SDG, id: 'checkboxSongDataBold', type: 'checkbox', label: 'Data Row Bold', value: true },
+            { tab, group: SDG, id: 'colorSongData', type: 'color', label: 'Data Row Color:', value: '#ffffff' },
+            { tab, group: SDG, id: 'sliderSongDataOpacity', type: 'slider', label: 'Data Row Opacity:', min: 0, max: 1, step: 0.01, value: 0.9 },
+            { tab, group: SDG, id: 'sliderSongDataIconGap', type: 'slider', label: 'Gap Between Icon And Number (Px):', min: 0, max: 60, step: 1, value: 5 },
+            { tab, group: SDG, id: 'sliderSongDataItemGap', type: 'slider', label: 'Gap Between The Four Items (Px):', min: 0, max: 200, step: 1, value: 14 },
+            { tab, group: SDG, id: 'sliderSongDataEdgeOffset', type: 'slider', label: 'Data Row Offset From Right Edge (Px):', min: 0, max: 600, step: 1, value: 14 },
+            { tab, group: SDG, id: 'sliderSongDataOffsetY', type: 'slider', label: 'Data Row Y Offset (Px):', min: -200, max: 200, step: 1, value: 0 },
+            { tab, group: SDG, id: 'sliderSongDataTempoDecimals', type: 'slider', label: 'Tempo Decimals:', min: 0, max: 3, step: 1, value: 0 },
+            { tab, group: SDG, id: 'sliderSongDataDecimals', type: 'slider', label: 'Valence / Danceability / Energy Decimals:', min: 0, max: 4, step: 1, value: 2 },
+        ];
+        renderControlArray(SDG_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SONGDATA_CONTROLS', SDG_CONTROLS);
+        makeDevGroupToggleable(tab, SDG, 'checkboxSongDataEnabled');
         // Volume Button Animation: the same hover / click / release animation as the other buttons. Separate from the slider's open/close animation.
         const VBA = 'Volume Button Animation';
         const VBA_CONTROLS = [

@@ -3912,6 +3912,127 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Song Data",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxSongDataEnabled"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataBtnSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataBtnOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataBtnGap"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataBtnEdge"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataBtnOffOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataBtnOnOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorSongDataBtn"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorSongDataBtnOn"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataClickTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataHoverTolerance"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxSongDataBold"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorSongData"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataIconGap"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataItemGap"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataEdgeOffset"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataTempoDecimals"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSongDataDecimals"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxSongDataEnabled",
+                      "sliderSongDataBtnSize",
+                      "sliderSongDataBtnOffsetX",
+                      "sliderSongDataBtnGap",
+                      "sliderSongDataBtnEdge",
+                      "sliderSongDataBtnOffOpacity",
+                      "sliderSongDataBtnOnOpacity",
+                      "colorSongDataBtn",
+                      "colorSongDataBtnOn",
+                      "sliderSongDataClickTolerance",
+                      "sliderSongDataHoverTolerance",
+                      "sliderSongDataIconSize",
+                      "sliderSongDataFontSize",
+                      "checkboxSongDataBold",
+                      "colorSongData",
+                      "sliderSongDataOpacity",
+                      "sliderSongDataIconGap",
+                      "sliderSongDataItemGap",
+                      "sliderSongDataEdgeOffset",
+                      "sliderSongDataOffsetY",
+                      "sliderSongDataTempoDecimals",
+                      "sliderSongDataDecimals"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [],
@@ -9760,6 +9881,83 @@
                 "colorSongAddDate",
                 "sliderSongAddDateLetterSpacing",
                 "sliderSongAddDateOpacity"
+              ],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Right Click Pan",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "checkboxRcPanEnabled"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderRcPanSpeed"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxRcPanInvert"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderRcPanThreshold"
+                }
+              ],
+              "rowKeys": [
+                "checkboxRcPanEnabled",
+                "sliderRcPanSpeed",
+                "checkboxRcPanInvert",
+                "sliderRcPanThreshold"
+              ],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Right Click Height",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "checkboxRcHeightEnabled"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderRcHeightSpeed"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxRcHeightInvert"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderRcHeightThreshold"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderRcHeightMin"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderRcHeightMaxPct"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderRcGraphHeight"
+                }
+              ],
+              "rowKeys": [
+                "checkboxRcHeightEnabled",
+                "sliderRcHeightSpeed",
+                "checkboxRcHeightInvert",
+                "sliderRcHeightThreshold",
+                "sliderRcHeightMin",
+                "sliderRcHeightMaxPct",
+                "sliderRcGraphHeight"
               ],
               "subgroups": []
             }
