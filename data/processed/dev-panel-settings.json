@@ -31,8 +31,14 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
-    "sliderSongTickWidth": 0.008,
+    "rangeBarSongTickWidth": "{\"min\":1,\"max\":1}",
+    "rangeBarSongTickThinWidth": "{\"min\":1,\"max\":1}",
+    "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "sliderSongTickWidthTransitionMs": 250,
     "sliderSongTickHeight": 11,
+    "sliderSongTickMinSpacing": 4,
+    "checkboxSongTickScale": false,
+    "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0.35},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderTimelineHeight": 190,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
@@ -50,8 +56,8 @@
     "checkboxRcHeightEnabled": true,
     "sliderRcHeightSpeed": 1,
     "checkboxRcHeightInvert": false,
-    "sliderRcHeightThreshold": 0,
-    "sliderRcHeightMin": 60,
+    "sliderRcHeightThreshold": 42,
+    "sliderRcHeightMin": 578,
     "sliderRcHeightMaxPct": 100,
     "checkboxScrubLineDrag": true,
     "sliderScrubLineAnimTime": 50,
@@ -303,6 +309,7 @@
     "checkboxFilterPanelKeepVisible": true,
     "sliderFilterPanelIconOffsetY": 1,
     "sliderFilterPanelCountFontSize": 12,
+    "sliderFilterPanelNumbersOffsetY": 1,
     "sliderFilterPanelIconSize": 23,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": 6,
@@ -562,7 +569,7 @@
     "left": 134,
     "top": 56,
     "width": 458,
-    "height": 399
+    "height": 606
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -4760,6 +4767,10 @@
                       {
                         "type": "row",
                         "key": "sliderFilterPanelCountFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterPanelNumbersOffsetY"
                       }
                     ],
                     "rowKeys": [
@@ -4775,7 +4786,8 @@
                       "sliderFilterIconOffsetY",
                       "sliderFilterIconOffsetX",
                       "sliderFilterEdgeOffset",
-                      "sliderFilterPanelCountFontSize"
+                      "sliderFilterPanelCountFontSize",
+                      "sliderFilterPanelNumbersOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -7212,6 +7224,10 @@
                     {
                       "type": "row",
                       "key": "sliderFilterPanelCountFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelNumbersOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -7227,7 +7243,8 @@
                     "sliderFilterIconOffsetY",
                     "sliderFilterIconOffsetX",
                     "sliderFilterEdgeOffset",
-                    "sliderFilterPanelCountFontSize"
+                    "sliderFilterPanelCountFontSize",
+                    "sliderFilterPanelNumbersOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -12004,6 +12021,10 @@
                     {
                       "type": "row",
                       "key": "sliderFilterPanelCountFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterPanelNumbersOffsetY"
                     }
                   ],
                   "rowKeys": [
@@ -12019,7 +12040,8 @@
                     "sliderFilterIconOffsetY",
                     "sliderFilterIconOffsetX",
                     "sliderFilterEdgeOffset",
-                    "sliderFilterPanelCountFontSize"
+                    "sliderFilterPanelCountFontSize",
+                    "sliderFilterPanelNumbersOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -14456,6 +14478,10 @@
                   {
                     "type": "row",
                     "key": "sliderFilterPanelCountFontSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterPanelNumbersOffsetY"
                   }
                 ],
                 "rowKeys": [
@@ -14471,7 +14497,8 @@
                   "sliderFilterIconOffsetY",
                   "sliderFilterIconOffsetX",
                   "sliderFilterEdgeOffset",
-                  "sliderFilterPanelCountFontSize"
+                  "sliderFilterPanelCountFontSize",
+                  "sliderFilterPanelNumbersOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -17773,18 +17800,48 @@
           },
           {
             "type": "row",
-            "key": "sliderSongTickWidth"
+            "key": "sliderSongTickHeight"
           },
           {
             "type": "row",
-            "key": "sliderSongTickHeight"
+            "key": "rangeBarSongTickWidth"
+          },
+          {
+            "type": "row",
+            "key": "rangeBarSongTickThinWidth"
+          },
+          {
+            "type": "row",
+            "key": "curveEditorSongTickThinZoom"
+          },
+          {
+            "type": "row",
+            "key": "sliderSongTickWidthTransitionMs"
+          },
+          {
+            "type": "row",
+            "key": "sliderSongTickMinSpacing"
+          },
+          {
+            "type": "row",
+            "key": "checkboxSongTickScale"
+          },
+          {
+            "type": "row",
+            "key": "curveEditorSongTickScale"
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
           "rangeBarTimelineZoomLimits",
-          "sliderSongTickWidth",
-          "sliderSongTickHeight"
+          "sliderSongTickHeight",
+          "rangeBarSongTickWidth",
+          "rangeBarSongTickThinWidth",
+          "curveEditorSongTickThinZoom",
+          "sliderSongTickWidthTransitionMs",
+          "sliderSongTickMinSpacing",
+          "checkboxSongTickScale",
+          "curveEditorSongTickScale"
         ],
         "subgroups": [
           {
@@ -38019,7 +38076,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -38029,7 +38086,7 @@
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": false,
+    "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
@@ -38048,7 +38105,7 @@
     "desktop:New Group (14)": true,
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": false,
+    "desktop:Filter Button": true,
     "desktop:New Group (16)": true,
     "desktop:New Group (17)": true,
     "desktop:New Group (18)": true,
@@ -38085,7 +38142,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": true,
+    "desktop:Timeline Look": false,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
@@ -38095,8 +38152,8 @@
     "desktop:Scale Numbers": true,
     "desktop:Ticks": true,
     "desktop:Song Add Date": true,
-    "desktop:Right Click Pan": true,
-    "desktop:Right Click Height": true,
+    "desktop:Right Click Pan": false,
+    "desktop:Right Click Height": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
