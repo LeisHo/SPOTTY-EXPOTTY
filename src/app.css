@@ -38,8 +38,8 @@
 .spx-cover ::selection, .spx-cover::selection { background: transparent; }
 .spx-cover img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
 .spx-cover img:not([src]) { visibility: hidden; }
-.spx-cover img { transition: filter var(--spx-flt-cover-ms, 250ms); }
-.spx-app.view-filtered .spx-cover img { filter: grayscale(var(--spx-flt-cover-gray, 1)) brightness(var(--spx-flt-cover-bright, 1)) contrast(var(--spx-flt-cover-contrast, 1)); }
+.spx-cover img { transition: filter var(--spx-flt-cover-ms, 250ms); filter: brightness(var(--spx-cover-bright, 1)); } /* Album Cover > Brightness */
+.spx-app.view-filtered .spx-cover img { filter: grayscale(var(--spx-flt-cover-gray, 1)) brightness(calc(var(--spx-flt-cover-bright, 1) * var(--spx-cover-bright, 1))) contrast(var(--spx-flt-cover-contrast, 1)); }
 .spx-title, .spx-artist, .spx-meta { transition: filter var(--spx-flt-cover-ms, 250ms); }
 .spx-app.view-filtered .spx-title, .spx-app.view-filtered .spx-artist, .spx-app.view-filtered .spx-meta { filter: brightness(var(--spx-flt-text-bright, 1)); } /* the text of a filtered-out song */ /* a filtered-out song shown on the timeline (not playing) */
 .spx-cover-glyph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff; text-shadow: 0 2px 12px #000c; background: #0003; opacity: .9; transition: opacity .15s, background .15s; }
@@ -96,6 +96,9 @@
 .spx-vol-btn:hover { color: #fff; }
 .spx-vol-btn { transition: opacity .15s; }
 .spx-vol-btn:not([data-level="mute"]) { opacity: var(--spx-vol-op, 1); }
+/* Global Override > Standard Button Animation: its hover / press opacity replaces the volume button's own (Off) opacity while hovered / pressed */
+.spx-vol-btn.bs-hover:not([data-level="mute"]) { opacity: var(--spx-vol-op-hover, var(--spx-vol-op, 1)); }
+.spx-vol-btn.bs-press:not([data-level="mute"]) { opacity: var(--spx-vol-op-press, var(--spx-vol-op-hover, var(--spx-vol-op, 1))); }
 .spx-vol-btn:not([data-level="mute"]):hover { opacity: var(--spx-vol-hover-op, 1); }
 .spx-vol-btn[data-level="mute"] { opacity: var(--spx-vol-muted-opacity, 0.4); } /* dev panel: UI Layout > Volume Button > Muted Icon Opacity */
 .spx-vol-btn svg { width: var(--spx-vol-icon); height: var(--spx-vol-icon); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

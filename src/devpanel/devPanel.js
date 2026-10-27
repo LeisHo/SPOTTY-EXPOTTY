@@ -8208,6 +8208,7 @@
         const AC2_CONTROLS = [
             { tab, group: AC2, id: 'sliderCoverScale', type: 'slider', label: 'Album Cover Scale (x):', min: 0.2, max: 4, step: 0.05, value: 1 },
             { tab, group: AC2, id: 'sliderCoverOffsetX', type: 'slider', label: 'Album Cover X Offset (Px):', min: -1500, max: 1500, step: 1, value: 0 },
+            { tab, group: AC2, id: 'sliderCoverBrightness', type: 'slider', label: 'Album Cover Brightness (%):', min: 0, max: 200, step: 1, value: 100 },
             { tab, group: AC2, id: 'sliderCoverOffsetY', type: 'slider', label: 'Album Cover Y Offset (Px):', min: -1500, max: 1500, step: 1, value: 0 },
             // Shows the cover's real box (the outline) and its centre (the small ring): for checking where the cover sits.
             { tab, group: AC2, id: 'checkboxCoverBoundingBox', type: 'checkbox', label: 'Bounding Box:', value: false },

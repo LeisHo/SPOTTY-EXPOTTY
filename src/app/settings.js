@@ -154,7 +154,7 @@ export const DEFAULTS = {
     checkboxScaleArtistMultiline: false, sliderArtistMaxLines: 2,
     checkboxScaleAlbumDateMultiline: false, sliderAlbumDateMaxLines: 2,
     checkboxScaleArtistToMatch: false, checkboxScaleAlbumDateToMatch: false,
-    sliderVolIconOpacity: 100, sliderVolClickTolerance: 12, selectVolIconStyle: '0', sliderShuffleOnOpacity: 100, selectShuffleIconStyle: '0',
+    sliderVolIconOpacity: 100, sliderCoverBrightness: 100, sliderVolClickTolerance: 12, selectVolIconStyle: '0', sliderShuffleOnOpacity: 100, selectShuffleIconStyle: '0',
     sliderPlayGlyphOpacityPlaying: 100, sliderPlayGlyphOpacityPaused: 100, selectPlayIconStyle: '0', selectPauseIconStyle: '0', selectNavIconStyle: '0',
     sliderVolHoverOpacity: 100, sliderShuffleOnOpacity: 100,
     sliderNextButtonEdgeOffset: 14, sliderLastButtonEdgeOffset: 14,

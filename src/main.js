@@ -588,10 +588,13 @@ async function boot() {
             if (ticked) {
                 st.setProperty('color', col); st.setProperty(t.opVar, op);
                 if (t.onVar) st.setProperty(t.onVar, onOp);
-                if (anim) Object.entries(animVars).forEach(([k, v]) => st.setProperty(k, v));
+                // Volume's opacity sits on the button itself (not its icon), so the hover / press opacity has to replace it there, not be multiplied with it
+                if (anim) Object.entries(animVars).forEach(([k, v]) => { if (t.k === 'Volume' && (k === '--bs-op-hover' || k === '--bs-op-press')) return; st.setProperty(k, v); });
+                if (t.k === 'Volume') { if (anim) { st.setProperty('--spx-vol-op-hover', animVars['--bs-op-hover']); st.setProperty('--spx-vol-op-press', animVars['--bs-op-press']); } else { st.removeProperty('--spx-vol-op-hover'); st.removeProperty('--spx-vol-op-press'); } }
             } else {
                 st.removeProperty('color'); st.removeProperty(t.opVar);
                 if (t.onVar) st.removeProperty(t.onVar);
+                if (t.k === 'Volume') { st.removeProperty('--spx-vol-op-hover'); st.removeProperty('--spx-vol-op-press'); }
             }
         });
     }
@@ -682,6 +685,7 @@ async function boot() {
         el('spxApp').style.setProperty('--spx-shuffle-color', setting('colorShuffleIcon'));
         el('spxApp').style.setProperty('--spx-shuffle-on-color', setting('colorShuffleOn'));
         el('spxApp').style.setProperty('--spx-vol-op', String(setting('sliderVolIconOpacity') / 100));
+        el('spxApp').style.setProperty('--spx-cover-bright', String(setting('sliderCoverBrightness') / 100)); // Album Cover > Brightness
         el('spxApp').style.setProperty('--spx-shuffle-on-op', String(setting('sliderShuffleOnOpacity') / 100));
         el('spxApp').style.setProperty('--spx-glyph-op-playing', String(setting('sliderPlayGlyphOpacityPlaying') / 100));
         el('spxApp').style.setProperty('--spx-glyph-op-paused', String(setting('sliderPlayGlyphOpacityPaused') / 100));
