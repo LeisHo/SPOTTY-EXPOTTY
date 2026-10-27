@@ -38145,8 +38145,8 @@
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": false,
-    "desktop:Volume Button": false,
+    "desktop:New Group (7)": true,
+    "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
     "desktop:New Group (6)": true,
@@ -38201,7 +38201,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": false,
+    "desktop:Timeline Look": true,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
@@ -38213,7 +38213,7 @@
     "desktop:Song Add Date": true,
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
-    "desktop:New Group (28)": false,
+    "desktop:New Group (28)": true,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
@@ -39274,7 +39274,7 @@
     "desktop:Startup"
   ],
   "lockedSliderBounds": [],
-  "textEditModeEnabled": true,
+  "textEditModeEnabled": false,
   "hotkeys": {
     "s": {
       "id": "devHeaderSyncBtn",
