@@ -8336,7 +8336,7 @@
             { tab, group: SDG, id: 'colorSongData', type: 'color', label: 'Data Row Color:', value: '#ffffff' },
             { tab, group: SDG, id: 'sliderSongDataOpacity', type: 'slider', label: 'Data Row Opacity:', min: 0, max: 1, step: 0.01, value: 0.9 },
             { tab, group: SDG, id: 'sliderSongDataIconGap', type: 'slider', label: 'Gap Between Icon And Number (Px):', min: 0, max: 60, step: 1, value: 5 },
-            { tab, group: SDG, id: 'sliderSongDataItemGap', type: 'slider', label: 'Gap Between The Four Items (Px):', min: 0, max: 200, step: 1, value: 14 },
+            { tab, group: SDG, id: 'sliderSongDataItemGap', type: 'slider', label: 'X Gap Between The Data Items (Px):', min: 0, max: 200, step: 1, value: 14 },
             { tab, group: SDG, id: 'sliderSongDataEdgeOffset', type: 'slider', label: 'Data Row Offset From Right Edge (Px):', min: 0, max: 600, step: 1, value: 14 },
             { tab, group: SDG, id: 'sliderSongDataOffsetY', type: 'slider', label: 'Data Row Y Offset (Px):', min: -200, max: 200, step: 1, value: 0 },
             { tab, group: SDG, id: 'sliderSongDataTempoDecimals', type: 'slider', label: 'Tempo Decimals:', min: 0, max: 3, step: 1, value: 0 },
