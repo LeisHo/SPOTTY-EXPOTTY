@@ -444,7 +444,7 @@
     "sliderBackgroundOpacity": 1,
     "sliderBackgroundBrightness": 1.3,
     "sliderBackgroundSaturation": 1.28,
-    "sliderBackgroundDither": 5,
+    "sliderBackgroundDither": 4,
     "sliderBackgroundTransition": 1950,
     "colorBackgroundColor": "#0d0f12",
     "curveEditorBackgroundGradient": "{\"stops\":[{\"p\":0,\"c\":\"#1db954\"},{\"p\":1,\"c\":\"#0d0f12\"}]}",
@@ -482,11 +482,11 @@
     "sliderSpotlightCenterY": 73,
     "colorSpotlightEdgeColor": "#0d0f12",
     "selectBgAnimMode": "warp",
-    "sliderBgAnimSpeed": 93,
+    "sliderBgAnimSpeed": 77.5,
     "sliderBgAnimCenterX": 0,
     "sliderBgAnimCenterY": 0,
     "sliderBgAnimStartStopMs": 3000,
-    "curveEditorBgAnimStartStop": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "curveEditorBgAnimStartStop": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.2147454358232241,\"y\":0}},{\"x\":0.6851959754298688,\"y\":0.3325002034505208,\"h1\":{\"x\":0.10708017595909614,\"y\":0.16000061035156254},\"h2\":{\"x\":-0.11527206490868874,\"y\":-0.19333292643229172}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.16500879500840304,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderBgAnimZoom": 100,
     "sliderBgAnimResolution": 100,
     "sliderBgAnimMaxFps": 60,
@@ -496,6 +496,7 @@
     "sliderBgAnimPatchCoverage": 47,
     "sliderBgAnimPatchSoftness": 93,
     "sliderBgAnimPatchDrift": 215,
+    "selectBgAnimPatchDriftDir": "diagonal",
     "sliderBgAnimPatchOctaves": 4,
     "sliderBgAnimBreathPeriod": 4,
     "sliderBgAnimBreathMin": 0,
@@ -516,6 +517,7 @@
     "sliderBgAnimWarpLacunarity": 4,
     "sliderBgAnimWarpGain": 0.1,
     "sliderBgAnimWarpDrift": 600,
+    "selectBgAnimWarpDriftDir": "diagonal",
     "buttonRunStartup": "",
     "sliderStartOverlayOpacity": 0.51,
     "sliderStartFadeMs": 300,
@@ -6021,6 +6023,14 @@
                       {
                         "type": "row",
                         "key": "curveEditorBgAnimSwirlStrength"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectBgAnimPatchDriftDir"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectBgAnimWarpDriftDir"
                       }
                     ],
                     "rowKeys": [
@@ -6058,7 +6068,9 @@
                       "curveEditorBgAnimRingThickness",
                       "sliderBgAnimRingEdgeBlur",
                       "rangeBarBgAnimSwirlStrength",
-                      "curveEditorBgAnimSwirlStrength"
+                      "curveEditorBgAnimSwirlStrength",
+                      "selectBgAnimPatchDriftDir",
+                      "selectBgAnimWarpDriftDir"
                     ],
                     "subgroups": []
                   }
@@ -6254,6 +6266,14 @@
                     {
                       "type": "row",
                       "key": "curveEditorBgAnimSwirlStrength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectBgAnimPatchDriftDir"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectBgAnimWarpDriftDir"
                     }
                   ],
                   "rowKeys": [
@@ -6291,7 +6311,9 @@
                     "curveEditorBgAnimRingThickness",
                     "sliderBgAnimRingEdgeBlur",
                     "rangeBarBgAnimSwirlStrength",
-                    "curveEditorBgAnimSwirlStrength"
+                    "curveEditorBgAnimSwirlStrength",
+                    "selectBgAnimPatchDriftDir",
+                    "selectBgAnimWarpDriftDir"
                   ],
                   "subgroups": []
                 }
@@ -10793,6 +10815,14 @@
                     {
                       "type": "row",
                       "key": "curveEditorBgAnimSwirlStrength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectBgAnimPatchDriftDir"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectBgAnimWarpDriftDir"
                     }
                   ],
                   "rowKeys": [
@@ -10830,7 +10860,9 @@
                     "curveEditorBgAnimRingThickness",
                     "sliderBgAnimRingEdgeBlur",
                     "rangeBarBgAnimSwirlStrength",
-                    "curveEditorBgAnimSwirlStrength"
+                    "curveEditorBgAnimSwirlStrength",
+                    "selectBgAnimPatchDriftDir",
+                    "selectBgAnimWarpDriftDir"
                   ],
                   "subgroups": []
                 }
@@ -11026,6 +11058,14 @@
                   {
                     "type": "row",
                     "key": "curveEditorBgAnimSwirlStrength"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectBgAnimPatchDriftDir"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectBgAnimWarpDriftDir"
                   }
                 ],
                 "rowKeys": [
@@ -11063,7 +11103,9 @@
                   "curveEditorBgAnimRingThickness",
                   "sliderBgAnimRingEdgeBlur",
                   "rangeBarBgAnimSwirlStrength",
-                  "curveEditorBgAnimSwirlStrength"
+                  "curveEditorBgAnimSwirlStrength",
+                  "selectBgAnimPatchDriftDir",
+                  "selectBgAnimWarpDriftDir"
                 ],
                 "subgroups": []
               }
@@ -27978,7 +28020,7 @@
         "selectBgAnimBlend": "normal"
       },
       "warp": {
-        "sliderBgAnimSpeed": "93",
+        "sliderBgAnimSpeed": "77.5",
         "sliderBgAnimCenterX": "0",
         "sliderBgAnimCenterY": "0",
         "sliderBgAnimZoom": "100",
