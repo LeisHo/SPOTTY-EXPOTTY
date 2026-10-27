@@ -31,6 +31,8 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
+    "sliderSongTickWidth": 1,
+    "sliderSongTickHeight": 3,
     "sliderTimelineHeight": 190,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
@@ -265,7 +267,6 @@
     "sliderFilterIconSize": 18,
     "sliderFilterIconOffsetX": 0,
     "sliderFilterIconOffsetY": 25,
-    "sliderFilterGapBelowShuffle": 28,
     "sliderFilterEdgeOffset": 14,
     "sliderFilterOffOpacity": 45,
     "sliderFilterOnOpacity": 75,
@@ -298,10 +299,11 @@
     "checkboxFilterCloseOnOutside": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 13,
-    "sliderFilterPanelRowGap": -11,
+    "sliderFilterPanelRowGap": -5,
     "sliderFilterPanelRowsOffsetY": -24,
     "checkboxFilterPanelKeepVisible": true,
     "sliderFilterPanelIconOffsetY": 1,
+    "sliderFilterPanelCountFontSize": 12,
     "sliderFilterPanelIconSize": 23,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": 6,
@@ -314,7 +316,6 @@
     "sliderSongDataBtnSize": 18,
     "sliderSongDataBtnOffsetX": 0,
     "sliderSongDataBtnOffsetY": 10,
-    "sliderSongDataBtnGap": 4,
     "sliderSongDataBtnEdge": 14,
     "sliderSongDataBtnOffOpacity": 45,
     "sliderSongDataBtnOnOpacity": 100,
@@ -332,7 +333,6 @@
     "sliderSongDataItemGap": 40,
     "sliderSongDataEdgeOffset": 14,
     "sliderSongDataOffsetY": 0,
-    "sliderSongDataTempoDecimals": 3,
     "sliderSongDataDecimals": 2,
     "checkboxVolBtnAnimEnabled": true,
     "sliderVolBtnAnimTime": 100,
@@ -560,8 +560,8 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 175,
-    "top": 30,
+    "left": 134,
+    "top": 56,
     "width": 595,
     "height": 583
   },
@@ -4760,7 +4760,7 @@
                       },
                       {
                         "type": "row",
-                        "key": "sliderFilterGapBelowShuffle"
+                        "key": "sliderFilterPanelCountFontSize"
                       }
                     ],
                     "rowKeys": [
@@ -4776,7 +4776,7 @@
                       "sliderFilterIconOffsetY",
                       "sliderFilterIconOffsetX",
                       "sliderFilterEdgeOffset",
-                      "sliderFilterGapBelowShuffle"
+                      "sliderFilterPanelCountFontSize"
                     ],
                     "subgroups": [
                       {
@@ -5361,14 +5361,6 @@
                           ],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderSongDataBtnGap"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderSongDataTempoDecimals"
                       }
                     ],
                     "rowKeys": [
@@ -5378,9 +5370,7 @@
                       "sliderSongDataBtnSize",
                       "sliderSongDataBtnOffsetX",
                       "sliderSongDataBtnOffsetY",
-                      "sliderSongDataBtnEdge",
-                      "sliderSongDataBtnGap",
-                      "sliderSongDataTempoDecimals"
+                      "sliderSongDataBtnEdge"
                     ],
                     "subgroups": [
                       {
@@ -7222,7 +7212,7 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderFilterGapBelowShuffle"
+                      "key": "sliderFilterPanelCountFontSize"
                     }
                   ],
                   "rowKeys": [
@@ -7238,7 +7228,7 @@
                     "sliderFilterIconOffsetY",
                     "sliderFilterIconOffsetX",
                     "sliderFilterEdgeOffset",
-                    "sliderFilterGapBelowShuffle"
+                    "sliderFilterPanelCountFontSize"
                   ],
                   "subgroups": [
                     {
@@ -7820,14 +7810,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderSongDataBtnGap"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderSongDataTempoDecimals"
                     }
                   ],
                   "rowKeys": [
@@ -7837,9 +7819,7 @@
                     "sliderSongDataBtnSize",
                     "sliderSongDataBtnOffsetX",
                     "sliderSongDataBtnOffsetY",
-                    "sliderSongDataBtnEdge",
-                    "sliderSongDataBtnGap",
-                    "sliderSongDataTempoDecimals"
+                    "sliderSongDataBtnEdge"
                   ],
                   "subgroups": [
                     {
@@ -12024,7 +12004,7 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderFilterGapBelowShuffle"
+                      "key": "sliderFilterPanelCountFontSize"
                     }
                   ],
                   "rowKeys": [
@@ -12040,7 +12020,7 @@
                     "sliderFilterIconOffsetY",
                     "sliderFilterIconOffsetX",
                     "sliderFilterEdgeOffset",
-                    "sliderFilterGapBelowShuffle"
+                    "sliderFilterPanelCountFontSize"
                   ],
                   "subgroups": [
                     {
@@ -12625,14 +12605,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderSongDataBtnGap"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderSongDataTempoDecimals"
                     }
                   ],
                   "rowKeys": [
@@ -12642,9 +12614,7 @@
                     "sliderSongDataBtnSize",
                     "sliderSongDataBtnOffsetX",
                     "sliderSongDataBtnOffsetY",
-                    "sliderSongDataBtnEdge",
-                    "sliderSongDataBtnGap",
-                    "sliderSongDataTempoDecimals"
+                    "sliderSongDataBtnEdge"
                   ],
                   "subgroups": [
                     {
@@ -14486,7 +14456,7 @@
                   },
                   {
                     "type": "row",
-                    "key": "sliderFilterGapBelowShuffle"
+                    "key": "sliderFilterPanelCountFontSize"
                   }
                 ],
                 "rowKeys": [
@@ -14502,7 +14472,7 @@
                   "sliderFilterIconOffsetY",
                   "sliderFilterIconOffsetX",
                   "sliderFilterEdgeOffset",
-                  "sliderFilterGapBelowShuffle"
+                  "sliderFilterPanelCountFontSize"
                 ],
                 "subgroups": [
                   {
@@ -15084,14 +15054,6 @@
                       ],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderSongDataBtnGap"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderSongDataTempoDecimals"
                   }
                 ],
                 "rowKeys": [
@@ -15101,9 +15063,7 @@
                   "sliderSongDataBtnSize",
                   "sliderSongDataBtnOffsetX",
                   "sliderSongDataBtnOffsetY",
-                  "sliderSongDataBtnEdge",
-                  "sliderSongDataBtnGap",
-                  "sliderSongDataTempoDecimals"
+                  "sliderSongDataBtnEdge"
                 ],
                 "subgroups": [
                   {
@@ -17816,11 +17776,21 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "sliderSongTickWidth"
+          },
+          {
+            "type": "row",
+            "key": "sliderSongTickHeight"
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
-          "rangeBarTimelineZoomLimits"
+          "rangeBarTimelineZoomLimits",
+          "sliderSongTickWidth",
+          "sliderSongTickHeight"
         ],
         "subgroups": [
           {
@@ -21090,11 +21060,11 @@
                                   },
                                   {
                                     "type": "row",
-                                    "key": "sliderMobileFilterPanelIconOffsetY"
+                                    "key": "sliderMobileFilterPanelRowsOffsetY"
                                   },
                                   {
                                     "type": "row",
-                                    "key": "sliderMobileFilterPanelRowsOffsetY"
+                                    "key": "sliderMobileFilterPanelIconOffsetY"
                                   },
                                   {
                                     "type": "row",
@@ -21104,8 +21074,8 @@
                                 "rowKeys": [
                                   "sliderMobileFilterPanelFontSize",
                                   "sliderMobileFilterPanelIconSize",
-                                  "sliderMobileFilterPanelIconOffsetY",
                                   "sliderMobileFilterPanelRowsOffsetY",
+                                  "sliderMobileFilterPanelIconOffsetY",
                                   "sliderMobileFilterPanelRowGap"
                                 ],
                                 "subgroups": []
@@ -21127,11 +21097,11 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterPanelIconOffsetY"
+                                  "key": "sliderMobileFilterPanelRowsOffsetY"
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterPanelRowsOffsetY"
+                                  "key": "sliderMobileFilterPanelIconOffsetY"
                                 },
                                 {
                                   "type": "row",
@@ -21141,8 +21111,8 @@
                               "rowKeys": [
                                 "sliderMobileFilterPanelFontSize",
                                 "sliderMobileFilterPanelIconSize",
-                                "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowsOffsetY",
+                                "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -21254,11 +21224,11 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterPanelIconOffsetY"
+                                  "key": "sliderMobileFilterPanelRowsOffsetY"
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterPanelRowsOffsetY"
+                                  "key": "sliderMobileFilterPanelIconOffsetY"
                                 },
                                 {
                                   "type": "row",
@@ -21268,8 +21238,8 @@
                               "rowKeys": [
                                 "sliderMobileFilterPanelFontSize",
                                 "sliderMobileFilterPanelIconSize",
-                                "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowsOffsetY",
+                                "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -21291,11 +21261,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelIconOffsetY"
+                                "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelRowsOffsetY"
+                                "key": "sliderMobileFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -21305,8 +21275,8 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
+                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -22456,11 +22426,11 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterPanelIconOffsetY"
+                                  "key": "sliderMobileFilterPanelRowsOffsetY"
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterPanelRowsOffsetY"
+                                  "key": "sliderMobileFilterPanelIconOffsetY"
                                 },
                                 {
                                   "type": "row",
@@ -22470,8 +22440,8 @@
                               "rowKeys": [
                                 "sliderMobileFilterPanelFontSize",
                                 "sliderMobileFilterPanelIconSize",
-                                "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowsOffsetY",
+                                "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -22493,11 +22463,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelIconOffsetY"
+                                "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelRowsOffsetY"
+                                "key": "sliderMobileFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -22507,8 +22477,8 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
+                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -22620,11 +22590,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelIconOffsetY"
+                                "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelRowsOffsetY"
+                                "key": "sliderMobileFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -22634,8 +22604,8 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
+                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -22657,11 +22627,11 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterPanelIconOffsetY"
+                              "key": "sliderMobileFilterPanelRowsOffsetY"
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterPanelRowsOffsetY"
+                              "key": "sliderMobileFilterPanelIconOffsetY"
                             },
                             {
                               "type": "row",
@@ -22671,8 +22641,8 @@
                           "rowKeys": [
                             "sliderMobileFilterPanelFontSize",
                             "sliderMobileFilterPanelIconSize",
-                            "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowsOffsetY",
+                            "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -25317,11 +25287,11 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterPanelIconOffsetY"
+                                  "key": "sliderMobileFilterPanelRowsOffsetY"
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterPanelRowsOffsetY"
+                                  "key": "sliderMobileFilterPanelIconOffsetY"
                                 },
                                 {
                                   "type": "row",
@@ -25331,8 +25301,8 @@
                               "rowKeys": [
                                 "sliderMobileFilterPanelFontSize",
                                 "sliderMobileFilterPanelIconSize",
-                                "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowsOffsetY",
+                                "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -25354,11 +25324,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelIconOffsetY"
+                                "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelRowsOffsetY"
+                                "key": "sliderMobileFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -25368,8 +25338,8 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
+                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -25481,11 +25451,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelIconOffsetY"
+                                "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelRowsOffsetY"
+                                "key": "sliderMobileFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -25495,8 +25465,8 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
+                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -25518,11 +25488,11 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterPanelIconOffsetY"
+                              "key": "sliderMobileFilterPanelRowsOffsetY"
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterPanelRowsOffsetY"
+                              "key": "sliderMobileFilterPanelIconOffsetY"
                             },
                             {
                               "type": "row",
@@ -25532,8 +25502,8 @@
                           "rowKeys": [
                             "sliderMobileFilterPanelFontSize",
                             "sliderMobileFilterPanelIconSize",
-                            "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowsOffsetY",
+                            "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -26683,11 +26653,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelIconOffsetY"
+                                "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterPanelRowsOffsetY"
+                                "key": "sliderMobileFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -26697,8 +26667,8 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
+                              "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -26720,11 +26690,11 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterPanelIconOffsetY"
+                              "key": "sliderMobileFilterPanelRowsOffsetY"
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterPanelRowsOffsetY"
+                              "key": "sliderMobileFilterPanelIconOffsetY"
                             },
                             {
                               "type": "row",
@@ -26734,8 +26704,8 @@
                           "rowKeys": [
                             "sliderMobileFilterPanelFontSize",
                             "sliderMobileFilterPanelIconSize",
-                            "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowsOffsetY",
+                            "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -26847,11 +26817,11 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterPanelIconOffsetY"
+                              "key": "sliderMobileFilterPanelRowsOffsetY"
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterPanelRowsOffsetY"
+                              "key": "sliderMobileFilterPanelIconOffsetY"
                             },
                             {
                               "type": "row",
@@ -26861,8 +26831,8 @@
                           "rowKeys": [
                             "sliderMobileFilterPanelFontSize",
                             "sliderMobileFilterPanelIconSize",
-                            "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowsOffsetY",
+                            "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -26884,11 +26854,11 @@
                           },
                           {
                             "type": "row",
-                            "key": "sliderMobileFilterPanelIconOffsetY"
+                            "key": "sliderMobileFilterPanelRowsOffsetY"
                           },
                           {
                             "type": "row",
-                            "key": "sliderMobileFilterPanelRowsOffsetY"
+                            "key": "sliderMobileFilterPanelIconOffsetY"
                           },
                           {
                             "type": "row",
@@ -26898,8 +26868,8 @@
                         "rowKeys": [
                           "sliderMobileFilterPanelFontSize",
                           "sliderMobileFilterPanelIconSize",
-                          "sliderMobileFilterPanelIconOffsetY",
                           "sliderMobileFilterPanelRowsOffsetY",
+                          "sliderMobileFilterPanelIconOffsetY",
                           "sliderMobileFilterPanelRowGap"
                         ],
                         "subgroups": []
@@ -30659,11 +30629,11 @@
                                   },
                                   {
                                     "type": "row",
-                                    "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                    "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                   },
                                   {
                                     "type": "row",
-                                    "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                    "key": "sliderLandscapeFilterPanelIconOffsetY"
                                   },
                                   {
                                     "type": "row",
@@ -30673,8 +30643,8 @@
                                 "rowKeys": [
                                   "sliderLandscapeFilterPanelFontSize",
                                   "sliderLandscapeFilterPanelIconSize",
-                                  "sliderLandscapeFilterPanelIconOffsetY",
                                   "sliderLandscapeFilterPanelRowsOffsetY",
+                                  "sliderLandscapeFilterPanelIconOffsetY",
                                   "sliderLandscapeFilterPanelRowGap"
                                 ],
                                 "subgroups": []
@@ -30696,11 +30666,11 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                  "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                  "key": "sliderLandscapeFilterPanelIconOffsetY"
                                 },
                                 {
                                   "type": "row",
@@ -30710,8 +30680,8 @@
                               "rowKeys": [
                                 "sliderLandscapeFilterPanelFontSize",
                                 "sliderLandscapeFilterPanelIconSize",
-                                "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowsOffsetY",
+                                "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -30823,11 +30793,11 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                  "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                  "key": "sliderLandscapeFilterPanelIconOffsetY"
                                 },
                                 {
                                   "type": "row",
@@ -30837,8 +30807,8 @@
                               "rowKeys": [
                                 "sliderLandscapeFilterPanelFontSize",
                                 "sliderLandscapeFilterPanelIconSize",
-                                "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowsOffsetY",
+                                "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -30860,11 +30830,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                "key": "sliderLandscapeFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -30874,8 +30844,8 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
+                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -32025,11 +31995,11 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                  "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                  "key": "sliderLandscapeFilterPanelIconOffsetY"
                                 },
                                 {
                                   "type": "row",
@@ -32039,8 +32009,8 @@
                               "rowKeys": [
                                 "sliderLandscapeFilterPanelFontSize",
                                 "sliderLandscapeFilterPanelIconSize",
-                                "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowsOffsetY",
+                                "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -32062,11 +32032,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                "key": "sliderLandscapeFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -32076,8 +32046,8 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
+                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -32189,11 +32159,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                "key": "sliderLandscapeFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -32203,8 +32173,8 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
+                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -32226,11 +32196,11 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterPanelIconOffsetY"
+                              "key": "sliderLandscapeFilterPanelRowsOffsetY"
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                              "key": "sliderLandscapeFilterPanelIconOffsetY"
                             },
                             {
                               "type": "row",
@@ -32240,8 +32210,8 @@
                           "rowKeys": [
                             "sliderLandscapeFilterPanelFontSize",
                             "sliderLandscapeFilterPanelIconSize",
-                            "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowsOffsetY",
+                            "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -34886,11 +34856,11 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                  "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                  "key": "sliderLandscapeFilterPanelIconOffsetY"
                                 },
                                 {
                                   "type": "row",
@@ -34900,8 +34870,8 @@
                               "rowKeys": [
                                 "sliderLandscapeFilterPanelFontSize",
                                 "sliderLandscapeFilterPanelIconSize",
-                                "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowsOffsetY",
+                                "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowGap"
                               ],
                               "subgroups": []
@@ -34923,11 +34893,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                "key": "sliderLandscapeFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -34937,8 +34907,8 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
+                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -35050,11 +35020,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                "key": "sliderLandscapeFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -35064,8 +35034,8 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
+                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -35087,11 +35057,11 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterPanelIconOffsetY"
+                              "key": "sliderLandscapeFilterPanelRowsOffsetY"
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                              "key": "sliderLandscapeFilterPanelIconOffsetY"
                             },
                             {
                               "type": "row",
@@ -35101,8 +35071,8 @@
                           "rowKeys": [
                             "sliderLandscapeFilterPanelFontSize",
                             "sliderLandscapeFilterPanelIconSize",
-                            "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowsOffsetY",
+                            "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -36252,11 +36222,11 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelIconOffsetY"
+                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                                "key": "sliderLandscapeFilterPanelIconOffsetY"
                               },
                               {
                                 "type": "row",
@@ -36266,8 +36236,8 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
+                              "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
                             ],
                             "subgroups": []
@@ -36289,11 +36259,11 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterPanelIconOffsetY"
+                              "key": "sliderLandscapeFilterPanelRowsOffsetY"
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                              "key": "sliderLandscapeFilterPanelIconOffsetY"
                             },
                             {
                               "type": "row",
@@ -36303,8 +36273,8 @@
                           "rowKeys": [
                             "sliderLandscapeFilterPanelFontSize",
                             "sliderLandscapeFilterPanelIconSize",
-                            "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowsOffsetY",
+                            "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -36416,11 +36386,11 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterPanelIconOffsetY"
+                              "key": "sliderLandscapeFilterPanelRowsOffsetY"
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                              "key": "sliderLandscapeFilterPanelIconOffsetY"
                             },
                             {
                               "type": "row",
@@ -36430,8 +36400,8 @@
                           "rowKeys": [
                             "sliderLandscapeFilterPanelFontSize",
                             "sliderLandscapeFilterPanelIconSize",
-                            "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowsOffsetY",
+                            "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowGap"
                           ],
                           "subgroups": []
@@ -36453,11 +36423,11 @@
                           },
                           {
                             "type": "row",
-                            "key": "sliderLandscapeFilterPanelIconOffsetY"
+                            "key": "sliderLandscapeFilterPanelRowsOffsetY"
                           },
                           {
                             "type": "row",
-                            "key": "sliderLandscapeFilterPanelRowsOffsetY"
+                            "key": "sliderLandscapeFilterPanelIconOffsetY"
                           },
                           {
                             "type": "row",
@@ -36467,8 +36437,8 @@
                         "rowKeys": [
                           "sliderLandscapeFilterPanelFontSize",
                           "sliderLandscapeFilterPanelIconSize",
-                          "sliderLandscapeFilterPanelIconOffsetY",
                           "sliderLandscapeFilterPanelRowsOffsetY",
+                          "sliderLandscapeFilterPanelIconOffsetY",
                           "sliderLandscapeFilterPanelRowGap"
                         ],
                         "subgroups": []
