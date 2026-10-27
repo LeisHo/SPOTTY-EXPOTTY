@@ -150,12 +150,12 @@
     "sliderTxtArtistOpacity": 1,
     "sliderTxtArtistOffsetY": 0,
     "checkboxTxtArtistWordWrap": true,
-    "sliderTxtArtistMaxWidth": 2400,
+    "sliderTxtArtistMaxWidth": 700,
     "selectTxtArtistOverflow": "wrap",
     "textArtistSeparator": "  &  ",
     "sliderArtistSeparatorPct": 73,
     "checkboxScaleArtistMultiline": true,
-    "sliderArtistMaxLines": 1,
+    "sliderArtistMaxLines": 2,
     "checkboxScaleArtistToMatch": true,
     "checkboxTxtArtistOutlineEnabled": false,
     "colorTxtArtistOutlineColor": "#000000",
@@ -556,10 +556,10 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 27,
-    "top": 368.7916564941406,
+    "left": 35,
+    "top": 276,
     "width": 350,
-    "height": 410
+    "height": 409
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -27662,7 +27662,7 @@
     "mobile:Song Title": true,
     "mobile:Track Title Button Animation": true,
     "mobile:Artist": false,
-    "mobile:Album & Date": false,
+    "mobile:Album & Date": true,
     "mobile:Outline": false,
     "mobile:Brackets Smaller Text": false,
     "mobile:New Group (7)": true,
@@ -28802,7 +28802,9 @@
       "sliderTxtAlbumDateOffsetY": true,
       "sliderTitleMaxLines": true,
       "sliderAlbumDateMaxLines": true,
-      "sliderTxtAlbumDateFontSize": true
+      "sliderTxtAlbumDateFontSize": true,
+      "sliderTxtAlbumDateMaxWidth": true,
+      "sliderTxtArtistMaxWidth": true
     },
     "landscape": {}
   },
@@ -28846,7 +28848,7 @@
       "sliderCoverOffsetY": -99,
       "sliderNavButtonOpacity": 80,
       "textArtistSeparator": "  &  ",
-      "sliderTxtSongTitleMaxWidth": 300,
+      "sliderTxtSongTitleMaxWidth": 700,
       "sliderVolIconSize": 25,
       "sliderNavButtonSize": 18,
       "sliderPlayButtonSize": 20,
@@ -28861,7 +28863,8 @@
       "sliderTxtAlbumDateOffsetY": -15,
       "sliderTitleMaxLines": 3,
       "sliderAlbumDateMaxLines": 2,
-      "sliderTxtArtistOffsetY": -15
+      "sliderTxtArtistOffsetY": -15,
+      "sliderTxtAlbumDateMaxWidth": 250
     },
     "landscape": {}
   },
