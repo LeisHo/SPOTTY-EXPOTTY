@@ -572,6 +572,9 @@ async function boot() {
             { k: 'Last', host: el('spxPrev'), kind: 'bs' },
             { k: 'Shuffle', host: el('spxShuffle'), kind: 'plain', opVar: '--spx-shuffle-off-op', onVar: '--spx-shuffle-on-op' }, // Shuffle's CSS picks the off / on variable from aria-pressed
             { k: 'Volume', host: el('spxVolume').querySelector('.spx-vol-btn'), kind: 'plain', opVar: '--spx-vol-op' },
+            // Filter and Show Song Data have an on / off state like Shuffle: their CSS picks the off / on opacity variable from aria-pressed
+            { k: 'Filter', host: el('spxFilter'), kind: 'plain', opVar: '--spx-filter-off-op', onVar: '--spx-filter-on-op' },
+            { k: 'SongData', host: el('spxSongData'), kind: 'plain', opVar: '--spx-sd-off-op', onVar: '--spx-sd-on-op' },
         ];
         targets.forEach(t => {
             const ticked = on && !!g('checkboxOverride' + t.k), st = t.host.style;

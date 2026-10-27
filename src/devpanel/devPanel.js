@@ -8126,6 +8126,8 @@
             { tab, group: GO, id: 'checkboxOverrideLast', type: 'checkbox', label: 'Last Button', value: false },
             { tab, group: GO, id: 'checkboxOverrideShuffle', type: 'checkbox', label: 'Shuffle Button', value: false },
             { tab, group: GO, id: 'checkboxOverrideVolume', type: 'checkbox', label: 'Volume Button', value: false },
+            { tab, group: GO, id: 'checkboxOverrideFilter', type: 'checkbox', label: 'Filter Button', value: false },
+            { tab, group: GO, id: 'checkboxOverrideSongData', type: 'checkbox', label: 'Show Song Data Button', value: false },
             { tab, group: GO, id: 'colorGlobalOverride', type: 'color', label: 'Color:', value: '#ffffff' },
             // On = a button that is switched on (Shuffle). Off = the same button switched off, and for buttons with no on / off (Play, Next, Last, Volume) the opacity when not hovered.
             // The Off slider keeps the id of the old single Opacity slider, so a saved value carries over.
