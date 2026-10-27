@@ -178,7 +178,7 @@ export const DEFAULTS = {
     sliderNavEdgeOffset: 14,
     // Filter button + panel (UI Layout > Audio Buttons > FILTER)
     checkboxFilterButtonEnabled: true, sliderFilterIconSize: 20, sliderFilterIconOffsetX: 0, sliderFilterEdgeOffset: 14,
-    sliderFilterPanelIconSize: 20, sliderFilterPanelCountFontSize: 12, sliderSongTickWidth: 1, sliderSongTickHeight: 3, sliderFilterPanelIconOffsetY: 0, checkboxFilterPanelKeepVisible: false, sliderFilterPanelRowGap: 12, sliderFilterPanelRowsOffsetY: 0, sliderFilterPanelBlur: 6, sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
+    sliderFilterPanelIconSize: 20, sliderFilterPanelNumbersOffsetY: 1, sliderFilterPanelCountFontSize: 12, sliderSongTickWidth: 1, sliderSongTickHeight: 3, sliderFilterPanelIconOffsetY: 0, checkboxFilterPanelKeepVisible: false, sliderFilterPanelRowGap: 12, sliderFilterPanelRowsOffsetY: 0, sliderFilterPanelBlur: 6, sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
     sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
     selectFilterMissing: 'hide', checkboxFilterShowNumbers: true, checkboxFilterShowRangeText: false, checkboxFilterShowCount: false, checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,

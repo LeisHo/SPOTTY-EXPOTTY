@@ -4685,6 +4685,10 @@
                                   },
                                   {
                                     "type": "row",
+                                    "key": "sliderFilterPanelNumbersOffsetY"
+                                  },
+                                  {
+                                    "type": "row",
                                     "key": "sliderFilterPanelRowsOffsetY"
                                   },
                                   {
@@ -4699,6 +4703,7 @@
                                 "rowKeys": [
                                   "sliderFilterPanelFontSize",
                                   "sliderFilterPanelIconSize",
+                                  "sliderFilterPanelNumbersOffsetY",
                                   "sliderFilterPanelRowsOffsetY",
                                   "sliderFilterPanelIconOffsetY",
                                   "sliderFilterPanelRowGap"

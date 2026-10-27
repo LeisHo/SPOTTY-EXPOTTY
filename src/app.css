@@ -211,7 +211,7 @@
 .spx-flt-row { margin: 0; }
 .spx-flt-top { display: flex; justify-content: center; align-items: center; opacity: .85; margin-bottom: var(--spx-flt-ico-gap, 0px); } /* the icon's distance from its slider (negative = closer) */
 .spx-flt-ico { display: inline-flex; }
-.spx-flt-nums { display: flex; justify-content: space-between; align-items: baseline; font-size: .9em; opacity: .8; margin-top: 1px; }
+.spx-flt-nums { display: flex; justify-content: space-between; align-items: baseline; font-size: .9em; opacity: .8; margin-top: var(--spx-flt-nums-gap, 1px); } /* the numbers' distance from their slider (negative = closer) */
 .spx-flt-nums .spx-flt-val { flex: 1; text-align: center; padding: 0 4px; }
 .spx-flt-row.on .spx-flt-val { color: var(--flt-accent); }
 .spx-filter-panel.no-nums .spx-flt-nums { display: none; }
