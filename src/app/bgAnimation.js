@@ -38,8 +38,11 @@ uniform float uMode, uAngle, uTau, uZoom;
 uniform float uOpacity;
 uniform float uPatchScale, uPatchCover, uPatchSoft, uPatchDrift, uPatchOct;
 uniform float uBreathPeriod, uBreathMin, uBreathMax;
-uniform float uRingW, uRingStep, uRingAlt, uRingBlur;
-uniform float uSwirlR, uSwirlPow, uSwirlInv, uSwirlTwist;
+uniform float uRingStep, uRingAlt, uRingBlur, uRingLast;
+uniform vec4 uEdge[16];      // outer edge (px from the centre) of rings 0..63, 4 per vector; later rings are uRingLast thick
+uniform vec2 uSwirlRange;    // turn amount at the curve's Y = 0 and Y = 1 (fraction of the full turn)
+uniform vec4 uSwirlLut[9];   // the swirl curve sampled at 32 points (the last value repeated)
+uniform float uSwirlR, uSwirlInv, uSwirlTwist;
 uniform float uWarpStr, uWarpScale, uWarpOct, uWarpLac, uWarpGain, uWarpDrift;
 varying vec2 vP;
 
@@ -72,6 +75,22 @@ vec4 samp(vec2 src) {
     return texture2D(uTex, uv);
 }
 
+// the swirl curve at f = 0..31 (linear between the samples; loop-indexed because a fragment shader cannot index a uniform array freely)
+float lutAt(float f) {
+    f = clamp(f, 0.0, 31.0);
+    float v = 0.0;
+    for (int j = 0; j < 8; j++) {
+        float b = float(j * 4);
+        if (f >= b && f < b + 4.0) {
+            vec4 e = uSwirlLut[j], n = vec4(e.y, e.z, e.w, uSwirlLut[j + 1].x);
+            float u = f - b;
+            float a = u < 1.0 ? e.x : (u < 2.0 ? e.y : (u < 3.0 ? e.z : e.w));
+            float c2 = u < 1.0 ? n.x : (u < 2.0 ? n.y : (u < 3.0 ? n.z : n.w));
+            v = mix(a, c2, fract(u));
+        }
+    }
+    return v;
+}
 // the picture as ring k shows it (every ring turns by its own angle)
 vec4 ringColor(vec2 d, float k) {
     float sgn = uRingAlt > 0.5 ? (mod(abs(k), 2.0) < 1.0 ? 1.0 : -1.0) : 1.0;
@@ -97,8 +116,22 @@ void main() {
         q = rot(d, uAngle);
         alpha = mix(uBreathMin, uBreathMax, 0.5 + 0.5 * sin(6.2831853 * uTau / max(uBreathPeriod, 0.05)));
     } else if (m == 4) {     // rings
-        float x = length(d) / max(uRingW, 1.0);
-        float k = floor(x), t = x - k;
+        float len = length(d);
+        float prevE = 0.0, r0 = 0.0, r1 = 1.0, k = 0.0;
+        bool done = false;
+        for (int j = 0; j < 16; j++) {
+            vec4 e = uEdge[j];
+            float b = float(j * 4);
+            if (!done) {
+                if (len < e.x) { k = b; r0 = prevE; r1 = e.x; done = true; }
+                else if (len < e.y) { k = b + 1.0; r0 = e.x; r1 = e.y; done = true; }
+                else if (len < e.z) { k = b + 2.0; r0 = e.y; r1 = e.z; done = true; }
+                else if (len < e.w) { k = b + 3.0; r0 = e.z; r1 = e.w; done = true; }
+                prevE = e.w;
+            }
+        }
+        if (!done) { float lt = max(uRingLast, 1.0); float n = floor((len - prevE) / lt); k = 64.0 + n; r0 = prevE + n * lt; r1 = r0 + lt; }
+        float t = (len - r0) / max(r1 - r0, 1.0);
         float b = clamp(uRingBlur, 0.0, 1.0) * 0.5; // half the width of the blended band, as a fraction of a ring
         c = ringColor(d, k);
         // blur the edges: near a ring's inner / outer edge it is mixed with its neighbour's picture (half and half exactly on the edge)
@@ -108,7 +141,8 @@ void main() {
         }
         direct = true;
     } else if (m == 5) {     // swirl
-        float w = pow(clamp(1.0 - length(d) / max(uSwirlR, 1.0), 0.0, 1.0), uSwirlPow);
+        float xs = clamp(length(d) / max(uSwirlR, 1.0), 0.0, 1.0); // 0 = the centre, 1 = the swirl radius
+        float w = mix(uSwirlRange.x, uSwirlRange.y, lutAt(xs * 31.0));
         if (uSwirlInv > 0.5) w = 1.0 - w;
         q = rot(d, (uAngle + uSwirlTwist) * w);
     } else if (m == 6) {     // domain warp
@@ -209,12 +243,39 @@ export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, cur
         f('uPatchScale', setting('sliderBgAnimPatchScale') * px); f('uPatchCover', setting('sliderBgAnimPatchCoverage') / 100);
         f('uPatchSoft', setting('sliderBgAnimPatchSoftness') / 100); f('uPatchDrift', setting('sliderBgAnimPatchDrift') * px); f('uPatchOct', setting('sliderBgAnimPatchOctaves'));
         f('uBreathPeriod', setting('sliderBgAnimBreathPeriod')); f('uBreathMin', setting('sliderBgAnimBreathMin') / 100); f('uBreathMax', setting('sliderBgAnimBreathMax') / 100);
-        f('uRingW', setting('sliderBgAnimRingWidth') * px); f('uRingStep', setting('sliderBgAnimRingSpeedStep')); f('uRingAlt', setting('checkboxBgAnimRingAlternate') ? 1 : 0); f('uRingBlur', setting('sliderBgAnimRingEdgeBlur') / 100);
-        f('uSwirlR', setting('sliderBgAnimSwirlRadius') * px); f('uSwirlPow', setting('sliderBgAnimSwirlFalloff')); f('uSwirlInv', setting('checkboxBgAnimSwirlInvert') ? 1 : 0);
+        f('uRingStep', setting('sliderBgAnimRingSpeedStep')); f('uRingAlt', setting('checkboxBgAnimRingAlternate') ? 1 : 0); f('uRingBlur', setting('sliderBgAnimRingEdgeBlur') / 100);
+        f('uSwirlR', setting('sliderBgAnimSwirlRadius') * px); f('uSwirlInv', setting('checkboxBgAnimSwirlInvert') ? 1 : 0);
         f('uSwirlTwist', (setting('sliderBgAnimSwirlTwist') * Math.PI) / 180);
         f('uWarpStr', setting('sliderBgAnimWarpStrength') * px); f('uWarpScale', setting('sliderBgAnimWarpScale') * px);
         f('uWarpOct', setting('sliderBgAnimWarpOctaves')); f('uWarpLac', setting('sliderBgAnimWarpLacunarity')); f('uWarpGain', setting('sliderBgAnimWarpGain'));
         f('uWarpDrift', setting('sliderBgAnimWarpDrift') * px);
+        if (m === 4) { // ring edges: thickness = Min + (Max - Min) x the curve at (ring number / number of rings)
+            const rg = setting('rangeBarBgAnimRingThickness') || { min: 120, max: 120 }, cv = setting('curveEditorBgAnimRingThickness');
+            const tmin = Math.max(2, Math.min(rg.min, rg.max) * px), tmax = Math.max(tmin, Math.max(rg.min, rg.max) * px);
+            const far = Math.hypot(Math.max(cx, pw - cx), Math.max(cy, ph - cy)); // the farthest corner: rings are needed out to here
+            const edges = new Float32Array(64);
+            let N = Math.min(64, Math.max(1, Math.round(far / ((tmin + tmax) / 2))));
+            let last = tmax, n = 0;
+            for (let it = 0; it < 4; it++) { // the number of rings depends on their thicknesses, which depend on the number of rings: settle it
+                let sum = 0; n = 0;
+                for (let k = 0; k < 64; k++) {
+                    last = tmin + (tmax - tmin) * curveY(cv, N > 1 ? Math.min(1, k / (N - 1)) : 0);
+                    sum += last; edges[k] = sum; n = k + 1;
+                    if (sum >= far) break;
+                }
+                N = Math.max(1, n);
+            }
+            for (let k = n; k < 64; k++) edges[k] = 1e9;
+            if (U['uEdge[0]'] !== undefined) gl.uniform4fv(U['uEdge[0]'], edges);
+            f('uRingLast', last);
+        } else if (m === 5) { // swirl: turn amount = Min + (Max - Min) x the curve at (distance from the centre / swirl radius)
+            const sr = setting('rangeBarBgAnimSwirlStrength') || { min: 0, max: 100 }, cv = setting('curveEditorBgAnimSwirlStrength');
+            const lut = new Float32Array(36);
+            for (let i = 0; i < 32; i++) lut[i] = curveY(cv, i / 31);
+            for (let i = 32; i < 36; i++) lut[i] = lut[31];
+            if (U['uSwirlLut[0]'] !== undefined) gl.uniform4fv(U['uSwirlLut[0]'], lut);
+            if (U.uSwirlRange !== undefined && U.uSwirlRange !== null) gl.uniform2f(U.uSwirlRange, Math.min(sr.min, sr.max) / 100, Math.max(sr.min, sr.max) / 100);
+        }
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);

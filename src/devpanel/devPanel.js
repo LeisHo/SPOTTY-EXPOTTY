@@ -8700,13 +8700,15 @@
             { tab, group: BGA, id: 'sliderBgAnimBreathMin', type: 'slider', label: 'Breathing Minimum Opacity (%):', min: 0, max: 100, step: 1, value: 0 },
             { tab, group: BGA, id: 'sliderBgAnimBreathMax', type: 'slider', label: 'Breathing Maximum Opacity (%):', min: 0, max: 100, step: 1, value: 100 },
             // Ring Bands
-            { tab, group: BGA, id: 'sliderBgAnimRingWidth', type: 'slider', label: 'Ring Width (Px):', min: 10, max: 1200, step: 1, value: 120 },
+            { tab, group: BGA, id: 'rangeBarBgAnimRingThickness', type: 'range-bar', label: 'Ring Thickness Min / Max (Px):', trackMin: 4, trackMax: 1200, unit: 'px', defaultValue: { min: 120, max: 120 } },
+            { tab, group: BGA, id: 'curveEditorBgAnimRingThickness', type: 'curve-editor', label: 'Ring Thickness Curve (X: Innermost To Outermost Ring, Y: Thickness Between Min And Max):', defaultPoints: [{ x: 0, y: 0.5 }, { x: 1, y: 0.5 }], defaultMethod: 'monotone' },
             { tab, group: BGA, id: 'sliderBgAnimRingSpeedStep', type: 'slider', label: 'Speed Change Per Ring (x):', min: -2, max: 2, step: 0.05, value: 0.5 },
             { tab, group: BGA, id: 'sliderBgAnimRingEdgeBlur', type: 'slider', label: 'Ring Edge Blur (% Of Ring Width):', min: 0, max: 100, step: 1, value: 0 },
             { tab, group: BGA, id: 'checkboxBgAnimRingAlternate', type: 'checkbox', label: 'Alternate Direction Per Ring', value: true },
             // Swirl
             { tab, group: BGA, id: 'sliderBgAnimSwirlRadius', type: 'slider', label: 'Swirl Radius (Px):', min: 50, max: 4000, step: 5, value: 700 },
-            { tab, group: BGA, id: 'sliderBgAnimSwirlFalloff', type: 'slider', label: 'Swirl Falloff (Power):', min: 0.2, max: 6, step: 0.05, value: 1.5 },
+            { tab, group: BGA, id: 'rangeBarBgAnimSwirlStrength', type: 'range-bar', label: 'Swirl Turn Min / Max (% Of The Full Turn):', trackMin: 0, trackMax: 100, unit: '%', defaultValue: { min: 0, max: 100 } },
+            { tab, group: BGA, id: 'curveEditorBgAnimSwirlStrength', type: 'curve-editor', label: 'Swirl Turn Curve (X: Album Center To Swirl Radius, Y: Turn Between Min And Max):', defaultPoints: [{ x: 0, y: 1 }, { x: 0.25, y: 0.65 }, { x: 0.5, y: 0.35 }, { x: 0.75, y: 0.1 }, { x: 1, y: 0 }], defaultMethod: 'monotone' },
             { tab, group: BGA, id: 'checkboxBgAnimSwirlInvert', type: 'checkbox', label: 'Edges Turn Instead Of The Center', value: false },
             { tab, group: BGA, id: 'sliderBgAnimSwirlTwist', type: 'slider', label: 'Static Twist (Deg):', min: -720, max: 720, step: 1, value: 0 },
             // Domain Warp
@@ -8757,8 +8759,8 @@
                     rotation: [],
                     patches: ['selectBgAnimBlend', 'sliderBgAnimOpacity', 'sliderBgAnimPatchScale', 'sliderBgAnimPatchCoverage', 'sliderBgAnimPatchSoftness', 'sliderBgAnimPatchDrift', 'sliderBgAnimPatchOctaves'],
                     breathing: ['selectBgAnimBlend', 'sliderBgAnimBreathPeriod', 'sliderBgAnimBreathMin', 'sliderBgAnimBreathMax'],
-                    rings: ['sliderBgAnimRingWidth', 'sliderBgAnimRingSpeedStep', 'sliderBgAnimRingEdgeBlur', 'checkboxBgAnimRingAlternate'],
-                    swirl: ['sliderBgAnimSwirlRadius', 'sliderBgAnimSwirlFalloff', 'checkboxBgAnimSwirlInvert', 'sliderBgAnimSwirlTwist'],
+                    rings: ['rangeBarBgAnimRingThickness', 'curveEditorBgAnimRingThickness', 'sliderBgAnimRingSpeedStep', 'sliderBgAnimRingEdgeBlur', 'checkboxBgAnimRingAlternate'],
+                    swirl: ['sliderBgAnimSwirlRadius', 'rangeBarBgAnimSwirlStrength', 'curveEditorBgAnimSwirlStrength', 'checkboxBgAnimSwirlInvert', 'sliderBgAnimSwirlTwist'],
                     warp: ['sliderBgAnimWarpStrength', 'sliderBgAnimWarpScale', 'sliderBgAnimWarpOctaves', 'sliderBgAnimWarpLacunarity', 'sliderBgAnimWarpGain', 'sliderBgAnimWarpDrift'],
                     overlay: ['selectBgAnimBlend', 'sliderBgAnimOpacity'],
                 },
