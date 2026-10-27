@@ -31,8 +31,8 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
-    "sliderSongTickWidth": 1,
-    "sliderSongTickHeight": 3,
+    "sliderSongTickWidth": 0.008,
+    "sliderSongTickHeight": 11,
     "sliderTimelineHeight": 190,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
@@ -263,7 +263,7 @@
     "selectValenceIconStyle": "0",
     "selectDanceIconStyle": "6",
     "selectEnergyIconStyle": "6",
-    "checkboxFilterButtonEnabled": true,
+    "checkboxFilterButtonEnabled": false,
     "sliderFilterIconSize": 18,
     "sliderFilterIconOffsetX": 0,
     "sliderFilterIconOffsetY": 25,
@@ -562,8 +562,8 @@
   "layout": {
     "left": 134,
     "top": 56,
-    "width": 595,
-    "height": 583
+    "width": 811,
+    "height": 404
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -4685,10 +4685,6 @@
                                   },
                                   {
                                     "type": "row",
-                                    "key": "sliderFilterPanelNumbersOffsetY"
-                                  },
-                                  {
-                                    "type": "row",
                                     "key": "sliderFilterPanelRowsOffsetY"
                                   },
                                   {
@@ -4703,7 +4699,6 @@
                                 "rowKeys": [
                                   "sliderFilterPanelFontSize",
                                   "sliderFilterPanelIconSize",
-                                  "sliderFilterPanelNumbersOffsetY",
                                   "sliderFilterPanelRowsOffsetY",
                                   "sliderFilterPanelIconOffsetY",
                                   "sliderFilterPanelRowGap"
@@ -38044,11 +38039,11 @@
     "desktop:Artist": true,
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
-    "desktop:Test Text Mode": false,
+    "desktop:Test Text Mode": true,
     "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
-    "desktop:New Group (8)": false,
+    "desktop:New Group (8)": true,
     "desktop:New Group (6)": true,
     "desktop:Volume Button Animation": true,
     "desktop:New Group (9)": true,
@@ -38064,16 +38059,16 @@
     "desktop:New Group (14)": true,
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": false,
-    "desktop:New Group (16)": false,
+    "desktop:Filter Button": true,
+    "desktop:New Group (16)": true,
     "desktop:New Group (17)": true,
     "desktop:New Group (18)": true,
     "desktop:New Group (23)": true,
     "desktop:New Group (20)": true,
     "desktop:New Group (22)": true,
     "desktop:New Group (21)": true,
-    "desktop:New Group (19)": false,
-    "desktop:New Group (24)": false,
+    "desktop:New Group (19)": true,
+    "desktop:New Group (24)": true,
     "desktop:Song Data": true,
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
@@ -38101,8 +38096,8 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": true,
-    "desktop:New Group (4)": false,
+    "desktop:Timeline Look": false,
+    "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
     "desktop:Album Cover Colors": true,
