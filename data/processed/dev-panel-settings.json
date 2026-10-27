@@ -288,6 +288,7 @@
     "sliderFilterPanelBgOpacity": 92,
     "colorFilterPanelAccent": "#1db954",
     "checkboxSongDataEnabled": true,
+    "selectSongDataIconStyle": "0",
     "sliderSongDataBtnSize": 20,
     "sliderSongDataBtnOffsetX": 0,
     "sliderSongDataBtnGap": 0,
@@ -494,7 +495,7 @@
     "colorStartOverlay": "#0d0f12",
     "checkboxStartCenterOnCover": true,
     "checkboxStartButtonEnabled": true,
-    "sliderStartPlaySize": 64,
+    "sliderStartPlaySize": 50,
     "checkboxStartTransitionAfterRelease": true,
     "checkboxStartPlayAnimEnabled": true,
     "selectStartPlayAnimMode": "grow",
@@ -506,8 +507,8 @@
     "sliderStartPlayPulseScale": 1.08,
     "sliderStartPlayPulseInDuration": 90,
     "sliderStartPlayPulseOutDuration": 180,
-    "sliderStartPlayGrowScale": 1.28,
-    "sliderStartPlayGrowPressScale": 0.94,
+    "sliderStartPlayGrowScale": 1.2,
+    "sliderStartPlayGrowPressScale": 1,
     "sliderStartPlayGlowRadius": 18,
     "sliderStartPlayGlowOpacity": 0.8,
     "colorStartPlayGlowColor": "#1db954",
@@ -520,10 +521,10 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 35,
-    "top": 108,
+    "left": 49,
+    "top": 107,
     "width": 342,
-    "height": 671
+    "height": 570
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -4169,6 +4170,10 @@
                       {
                         "type": "row",
                         "key": "sliderSongDataDecimals"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectSongDataIconStyle"
                       }
                     ],
                     "rowKeys": [
@@ -4192,7 +4197,8 @@
                       "sliderSongDataEdgeOffset",
                       "sliderSongDataOffsetY",
                       "sliderSongDataTempoDecimals",
-                      "sliderSongDataDecimals"
+                      "sliderSongDataDecimals",
+                      "selectSongDataIconStyle"
                     ],
                     "subgroups": []
                   }
@@ -5214,6 +5220,10 @@
                     {
                       "type": "row",
                       "key": "sliderSongDataDecimals"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectSongDataIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -5237,7 +5247,8 @@
                     "sliderSongDataEdgeOffset",
                     "sliderSongDataOffsetY",
                     "sliderSongDataTempoDecimals",
-                    "sliderSongDataDecimals"
+                    "sliderSongDataDecimals",
+                    "selectSongDataIconStyle"
                   ],
                   "subgroups": []
                 }
@@ -8537,6 +8548,10 @@
                     {
                       "type": "row",
                       "key": "sliderSongDataDecimals"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectSongDataIconStyle"
                     }
                   ],
                   "rowKeys": [
@@ -8560,7 +8575,8 @@
                     "sliderSongDataEdgeOffset",
                     "sliderSongDataOffsetY",
                     "sliderSongDataTempoDecimals",
-                    "sliderSongDataDecimals"
+                    "sliderSongDataDecimals",
+                    "selectSongDataIconStyle"
                   ],
                   "subgroups": []
                 }
@@ -9582,6 +9598,10 @@
                   {
                     "type": "row",
                     "key": "sliderSongDataDecimals"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectSongDataIconStyle"
                   }
                 ],
                 "rowKeys": [
@@ -9605,7 +9625,8 @@
                   "sliderSongDataEdgeOffset",
                   "sliderSongDataOffsetY",
                   "sliderSongDataTempoDecimals",
-                  "sliderSongDataDecimals"
+                  "sliderSongDataDecimals",
+                  "selectSongDataIconStyle"
                 ],
                 "subgroups": []
               }
@@ -14466,15 +14487,15 @@
                     "items": [
                       {
                         "type": "row",
+                        "key": "buttonPlayPause"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderMobilePlayButtonSize"
                       },
                       {
                         "type": "row",
                         "key": "sliderMobilePlayButtonOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "buttonPlayPause"
                       },
                       {
                         "type": "group",
@@ -14519,9 +14540,9 @@
                       }
                     ],
                     "rowKeys": [
+                      "buttonPlayPause",
                       "sliderMobilePlayButtonSize",
-                      "sliderMobilePlayButtonOpacity",
-                      "buttonPlayPause"
+                      "sliderMobilePlayButtonOpacity"
                     ],
                     "subgroups": [
                       {
@@ -14583,15 +14604,6 @@
                         "key": "buttonPrevSong"
                       },
                       {
-                        "type": "group",
-                        "section": {
-                          "key": "mobile:Next And Last Button Animation",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      },
-                      {
                         "type": "row",
                         "key": "sliderMobileLastButtonEdgeOffset"
                       },
@@ -14602,6 +14614,15 @@
                       {
                         "type": "row",
                         "key": "sliderMobileNavClickTolerance"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:Next And Last Button Animation",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
                       }
                     ],
                     "rowKeys": [
@@ -14617,6 +14638,96 @@
                         "key": "mobile:Next And Last Button Animation",
                         "items": [],
                         "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Shuffle Button",
+                    "items": [
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:Shuffle Button Animation",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimReleaseSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileShuffleAnimClickOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobileShuffleAnimTime",
+                            "sliderMobileShuffleAnimHoverSize",
+                            "sliderMobileShuffleAnimClickSize",
+                            "sliderMobileShuffleAnimReleaseSize",
+                            "sliderMobileShuffleAnimHoverOpacity",
+                            "sliderMobileShuffleAnimClickOpacity"
+                          ],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [],
+                    "subgroups": [
+                      {
+                        "key": "mobile:Shuffle Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileShuffleAnimTime",
+                          "sliderMobileShuffleAnimHoverSize",
+                          "sliderMobileShuffleAnimClickSize",
+                          "sliderMobileShuffleAnimReleaseSize",
+                          "sliderMobileShuffleAnimHoverOpacity",
+                          "sliderMobileShuffleAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     ]
@@ -14717,96 +14828,6 @@
                           "sliderMobileSongBarHoverOpacity",
                           "sliderMobileSongBarClickOpacity",
                           "sliderMobileSongBarAnimTime"
-                        ],
-                        "subgroups": []
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "mobile:Shuffle Button",
-                    "items": [
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "mobile:Shuffle Button Animation",
-                          "items": [
-                            {
-                              "type": "row",
-                              "key": "sliderMobileShuffleAnimTime"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderMobileShuffleAnimHoverSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderMobileShuffleAnimClickSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderMobileShuffleAnimReleaseSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderMobileShuffleAnimHoverOpacity"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderMobileShuffleAnimClickOpacity"
-                            }
-                          ],
-                          "rowKeys": [
-                            "sliderMobileShuffleAnimTime",
-                            "sliderMobileShuffleAnimHoverSize",
-                            "sliderMobileShuffleAnimClickSize",
-                            "sliderMobileShuffleAnimReleaseSize",
-                            "sliderMobileShuffleAnimHoverOpacity",
-                            "sliderMobileShuffleAnimClickOpacity"
-                          ],
-                          "subgroups": []
-                        }
-                      }
-                    ],
-                    "rowKeys": [],
-                    "subgroups": [
-                      {
-                        "key": "mobile:Shuffle Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimTime"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimHoverSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimClickSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimReleaseSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimHoverOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimClickOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderMobileShuffleAnimTime",
-                          "sliderMobileShuffleAnimHoverSize",
-                          "sliderMobileShuffleAnimClickSize",
-                          "sliderMobileShuffleAnimReleaseSize",
-                          "sliderMobileShuffleAnimHoverOpacity",
-                          "sliderMobileShuffleAnimClickOpacity"
                         ],
                         "subgroups": []
                       }
@@ -14977,15 +14998,15 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "buttonPlayPause"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderMobilePlayButtonSize"
                     },
                     {
                       "type": "row",
                       "key": "sliderMobilePlayButtonOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "buttonPlayPause"
                     },
                     {
                       "type": "group",
@@ -15030,9 +15051,9 @@
                     }
                   ],
                   "rowKeys": [
+                    "buttonPlayPause",
                     "sliderMobilePlayButtonSize",
-                    "sliderMobilePlayButtonOpacity",
-                    "buttonPlayPause"
+                    "sliderMobilePlayButtonOpacity"
                   ],
                   "subgroups": [
                     {
@@ -15091,15 +15112,6 @@
                       "key": "buttonPrevSong"
                     },
                     {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:Next And Last Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
                       "type": "row",
                       "key": "sliderMobileLastButtonEdgeOffset"
                     },
@@ -15110,6 +15122,15 @@
                     {
                       "type": "row",
                       "key": "sliderMobileNavClickTolerance"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
@@ -15125,6 +15146,93 @@
                       "key": "mobile:Next And Last Button Animation",
                       "items": [],
                       "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                },
+                {
+                  "key": "mobile:Shuffle Button",
+                  "items": [
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Shuffle Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileShuffleAnimTime",
+                          "sliderMobileShuffleAnimHoverSize",
+                          "sliderMobileShuffleAnimClickSize",
+                          "sliderMobileShuffleAnimReleaseSize",
+                          "sliderMobileShuffleAnimHoverOpacity",
+                          "sliderMobileShuffleAnimClickOpacity"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "mobile:Shuffle Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileShuffleAnimTime",
+                        "sliderMobileShuffleAnimHoverSize",
+                        "sliderMobileShuffleAnimClickSize",
+                        "sliderMobileShuffleAnimReleaseSize",
+                        "sliderMobileShuffleAnimHoverOpacity",
+                        "sliderMobileShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -15222,93 +15330,6 @@
                         "sliderMobileSongBarHoverOpacity",
                         "sliderMobileSongBarClickOpacity",
                         "sliderMobileSongBarAnimTime"
-                      ],
-                      "subgroups": []
-                    }
-                  ]
-                },
-                {
-                  "key": "mobile:Shuffle Button",
-                  "items": [
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:Shuffle Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimTime"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimHoverSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimClickSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimReleaseSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimHoverOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimClickOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderMobileShuffleAnimTime",
-                          "sliderMobileShuffleAnimHoverSize",
-                          "sliderMobileShuffleAnimClickSize",
-                          "sliderMobileShuffleAnimReleaseSize",
-                          "sliderMobileShuffleAnimHoverOpacity",
-                          "sliderMobileShuffleAnimClickOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [],
-                  "subgroups": [
-                    {
-                      "key": "mobile:Shuffle Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimTime"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimHoverSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimClickSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimReleaseSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimHoverOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimClickOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderMobileShuffleAnimTime",
-                        "sliderMobileShuffleAnimHoverSize",
-                        "sliderMobileShuffleAnimClickSize",
-                        "sliderMobileShuffleAnimReleaseSize",
-                        "sliderMobileShuffleAnimHoverOpacity",
-                        "sliderMobileShuffleAnimClickOpacity"
                       ],
                       "subgroups": []
                     }
@@ -16596,15 +16617,15 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "buttonPlayPause"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderMobilePlayButtonSize"
                     },
                     {
                       "type": "row",
                       "key": "sliderMobilePlayButtonOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "buttonPlayPause"
                     },
                     {
                       "type": "group",
@@ -16649,9 +16670,9 @@
                     }
                   ],
                   "rowKeys": [
+                    "buttonPlayPause",
                     "sliderMobilePlayButtonSize",
-                    "sliderMobilePlayButtonOpacity",
-                    "buttonPlayPause"
+                    "sliderMobilePlayButtonOpacity"
                   ],
                   "subgroups": [
                     {
@@ -16713,15 +16734,6 @@
                       "key": "buttonPrevSong"
                     },
                     {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:Next And Last Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
                       "type": "row",
                       "key": "sliderMobileLastButtonEdgeOffset"
                     },
@@ -16732,6 +16744,15 @@
                     {
                       "type": "row",
                       "key": "sliderMobileNavClickTolerance"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
@@ -16747,6 +16768,96 @@
                       "key": "mobile:Next And Last Button Animation",
                       "items": [],
                       "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Shuffle Button",
+                  "items": [
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Shuffle Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileShuffleAnimTime",
+                          "sliderMobileShuffleAnimHoverSize",
+                          "sliderMobileShuffleAnimClickSize",
+                          "sliderMobileShuffleAnimReleaseSize",
+                          "sliderMobileShuffleAnimHoverOpacity",
+                          "sliderMobileShuffleAnimClickOpacity"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "mobile:Shuffle Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileShuffleAnimTime",
+                        "sliderMobileShuffleAnimHoverSize",
+                        "sliderMobileShuffleAnimClickSize",
+                        "sliderMobileShuffleAnimReleaseSize",
+                        "sliderMobileShuffleAnimHoverOpacity",
+                        "sliderMobileShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -16847,96 +16958,6 @@
                         "sliderMobileSongBarHoverOpacity",
                         "sliderMobileSongBarClickOpacity",
                         "sliderMobileSongBarAnimTime"
-                      ],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "mobile:Shuffle Button",
-                  "items": [
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:Shuffle Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimTime"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimHoverSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimClickSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimReleaseSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimHoverOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderMobileShuffleAnimClickOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderMobileShuffleAnimTime",
-                          "sliderMobileShuffleAnimHoverSize",
-                          "sliderMobileShuffleAnimClickSize",
-                          "sliderMobileShuffleAnimReleaseSize",
-                          "sliderMobileShuffleAnimHoverOpacity",
-                          "sliderMobileShuffleAnimClickOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [],
-                  "subgroups": [
-                    {
-                      "key": "mobile:Shuffle Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimTime"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimHoverSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimClickSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimReleaseSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimHoverOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimClickOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderMobileShuffleAnimTime",
-                        "sliderMobileShuffleAnimHoverSize",
-                        "sliderMobileShuffleAnimClickSize",
-                        "sliderMobileShuffleAnimReleaseSize",
-                        "sliderMobileShuffleAnimHoverOpacity",
-                        "sliderMobileShuffleAnimClickOpacity"
                       ],
                       "subgroups": []
                     }
@@ -17107,15 +17128,15 @@
                 "items": [
                   {
                     "type": "row",
+                    "key": "buttonPlayPause"
+                  },
+                  {
+                    "type": "row",
                     "key": "sliderMobilePlayButtonSize"
                   },
                   {
                     "type": "row",
                     "key": "sliderMobilePlayButtonOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "buttonPlayPause"
                   },
                   {
                     "type": "group",
@@ -17160,9 +17181,9 @@
                   }
                 ],
                 "rowKeys": [
+                  "buttonPlayPause",
                   "sliderMobilePlayButtonSize",
-                  "sliderMobilePlayButtonOpacity",
-                  "buttonPlayPause"
+                  "sliderMobilePlayButtonOpacity"
                 ],
                 "subgroups": [
                   {
@@ -17221,15 +17242,6 @@
                     "key": "buttonPrevSong"
                   },
                   {
-                    "type": "group",
-                    "section": {
-                      "key": "mobile:Next And Last Button Animation",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  },
-                  {
                     "type": "row",
                     "key": "sliderMobileLastButtonEdgeOffset"
                   },
@@ -17240,6 +17252,15 @@
                   {
                     "type": "row",
                     "key": "sliderMobileNavClickTolerance"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:Next And Last Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
                   }
                 ],
                 "rowKeys": [
@@ -17255,6 +17276,93 @@
                     "key": "mobile:Next And Last Button Animation",
                     "items": [],
                     "rowKeys": [],
+                    "subgroups": []
+                  }
+                ]
+              },
+              {
+                "key": "mobile:Shuffle Button",
+                "items": [
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:Shuffle Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileShuffleAnimTime",
+                        "sliderMobileShuffleAnimHoverSize",
+                        "sliderMobileShuffleAnimClickSize",
+                        "sliderMobileShuffleAnimReleaseSize",
+                        "sliderMobileShuffleAnimHoverOpacity",
+                        "sliderMobileShuffleAnimClickOpacity"
+                      ],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [],
+                "subgroups": [
+                  {
+                    "key": "mobile:Shuffle Button Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimReleaseSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileShuffleAnimClickOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileShuffleAnimTime",
+                      "sliderMobileShuffleAnimHoverSize",
+                      "sliderMobileShuffleAnimClickSize",
+                      "sliderMobileShuffleAnimReleaseSize",
+                      "sliderMobileShuffleAnimHoverOpacity",
+                      "sliderMobileShuffleAnimClickOpacity"
+                    ],
                     "subgroups": []
                   }
                 ]
@@ -17352,93 +17460,6 @@
                       "sliderMobileSongBarHoverOpacity",
                       "sliderMobileSongBarClickOpacity",
                       "sliderMobileSongBarAnimTime"
-                    ],
-                    "subgroups": []
-                  }
-                ]
-              },
-              {
-                "key": "mobile:Shuffle Button",
-                "items": [
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "mobile:Shuffle Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimTime"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimHoverSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimClickSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimReleaseSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimHoverOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderMobileShuffleAnimClickOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderMobileShuffleAnimTime",
-                        "sliderMobileShuffleAnimHoverSize",
-                        "sliderMobileShuffleAnimClickSize",
-                        "sliderMobileShuffleAnimReleaseSize",
-                        "sliderMobileShuffleAnimHoverOpacity",
-                        "sliderMobileShuffleAnimClickOpacity"
-                      ],
-                      "subgroups": []
-                    }
-                  }
-                ],
-                "rowKeys": [],
-                "subgroups": [
-                  {
-                    "key": "mobile:Shuffle Button Animation",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderMobileShuffleAnimTime"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileShuffleAnimHoverSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileShuffleAnimClickSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileShuffleAnimReleaseSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileShuffleAnimHoverOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileShuffleAnimClickOpacity"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderMobileShuffleAnimTime",
-                      "sliderMobileShuffleAnimHoverSize",
-                      "sliderMobileShuffleAnimClickSize",
-                      "sliderMobileShuffleAnimReleaseSize",
-                      "sliderMobileShuffleAnimHoverOpacity",
-                      "sliderMobileShuffleAnimClickOpacity"
                     ],
                     "subgroups": []
                   }
@@ -19802,15 +19823,15 @@
                     "items": [
                       {
                         "type": "row",
+                        "key": "buttonPlayPause"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderLandscapePlayButtonSize"
                       },
                       {
                         "type": "row",
                         "key": "sliderLandscapePlayButtonOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "buttonPlayPause"
                       },
                       {
                         "type": "group",
@@ -19855,9 +19876,9 @@
                       }
                     ],
                     "rowKeys": [
+                      "buttonPlayPause",
                       "sliderLandscapePlayButtonSize",
-                      "sliderLandscapePlayButtonOpacity",
-                      "buttonPlayPause"
+                      "sliderLandscapePlayButtonOpacity"
                     ],
                     "subgroups": [
                       {
@@ -19919,15 +19940,6 @@
                         "key": "buttonPrevSong"
                       },
                       {
-                        "type": "group",
-                        "section": {
-                          "key": "landscape:Next And Last Button Animation",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      },
-                      {
                         "type": "row",
                         "key": "sliderLandscapeLastButtonEdgeOffset"
                       },
@@ -19938,6 +19950,15 @@
                       {
                         "type": "row",
                         "key": "sliderLandscapeNavClickTolerance"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:Next And Last Button Animation",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
                       }
                     ],
                     "rowKeys": [
@@ -19953,6 +19974,96 @@
                         "key": "landscape:Next And Last Button Animation",
                         "items": [],
                         "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Shuffle Button",
+                    "items": [
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:Shuffle Button Animation",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimTime"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimHoverSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimClickSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimReleaseSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeShuffleAnimClickOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeShuffleAnimTime",
+                            "sliderLandscapeShuffleAnimHoverSize",
+                            "sliderLandscapeShuffleAnimClickSize",
+                            "sliderLandscapeShuffleAnimReleaseSize",
+                            "sliderLandscapeShuffleAnimHoverOpacity",
+                            "sliderLandscapeShuffleAnimClickOpacity"
+                          ],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [],
+                    "subgroups": [
+                      {
+                        "key": "landscape:Shuffle Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeShuffleAnimTime",
+                          "sliderLandscapeShuffleAnimHoverSize",
+                          "sliderLandscapeShuffleAnimClickSize",
+                          "sliderLandscapeShuffleAnimReleaseSize",
+                          "sliderLandscapeShuffleAnimHoverOpacity",
+                          "sliderLandscapeShuffleAnimClickOpacity"
+                        ],
                         "subgroups": []
                       }
                     ]
@@ -20053,96 +20164,6 @@
                           "sliderLandscapeSongBarHoverOpacity",
                           "sliderLandscapeSongBarClickOpacity",
                           "sliderLandscapeSongBarAnimTime"
-                        ],
-                        "subgroups": []
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "landscape:Shuffle Button",
-                    "items": [
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "landscape:Shuffle Button Animation",
-                          "items": [
-                            {
-                              "type": "row",
-                              "key": "sliderLandscapeShuffleAnimTime"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderLandscapeShuffleAnimHoverSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderLandscapeShuffleAnimClickSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderLandscapeShuffleAnimReleaseSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderLandscapeShuffleAnimHoverOpacity"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderLandscapeShuffleAnimClickOpacity"
-                            }
-                          ],
-                          "rowKeys": [
-                            "sliderLandscapeShuffleAnimTime",
-                            "sliderLandscapeShuffleAnimHoverSize",
-                            "sliderLandscapeShuffleAnimClickSize",
-                            "sliderLandscapeShuffleAnimReleaseSize",
-                            "sliderLandscapeShuffleAnimHoverOpacity",
-                            "sliderLandscapeShuffleAnimClickOpacity"
-                          ],
-                          "subgroups": []
-                        }
-                      }
-                    ],
-                    "rowKeys": [],
-                    "subgroups": [
-                      {
-                        "key": "landscape:Shuffle Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimTime"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimHoverSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimClickSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimReleaseSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimHoverOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimClickOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderLandscapeShuffleAnimTime",
-                          "sliderLandscapeShuffleAnimHoverSize",
-                          "sliderLandscapeShuffleAnimClickSize",
-                          "sliderLandscapeShuffleAnimReleaseSize",
-                          "sliderLandscapeShuffleAnimHoverOpacity",
-                          "sliderLandscapeShuffleAnimClickOpacity"
                         ],
                         "subgroups": []
                       }
@@ -20313,15 +20334,15 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "buttonPlayPause"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderLandscapePlayButtonSize"
                     },
                     {
                       "type": "row",
                       "key": "sliderLandscapePlayButtonOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "buttonPlayPause"
                     },
                     {
                       "type": "group",
@@ -20366,9 +20387,9 @@
                     }
                   ],
                   "rowKeys": [
+                    "buttonPlayPause",
                     "sliderLandscapePlayButtonSize",
-                    "sliderLandscapePlayButtonOpacity",
-                    "buttonPlayPause"
+                    "sliderLandscapePlayButtonOpacity"
                   ],
                   "subgroups": [
                     {
@@ -20427,15 +20448,6 @@
                       "key": "buttonPrevSong"
                     },
                     {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:Next And Last Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
                       "type": "row",
                       "key": "sliderLandscapeLastButtonEdgeOffset"
                     },
@@ -20446,6 +20458,15 @@
                     {
                       "type": "row",
                       "key": "sliderLandscapeNavClickTolerance"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
@@ -20461,6 +20482,93 @@
                       "key": "landscape:Next And Last Button Animation",
                       "items": [],
                       "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                },
+                {
+                  "key": "landscape:Shuffle Button",
+                  "items": [
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Shuffle Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeShuffleAnimTime",
+                          "sliderLandscapeShuffleAnimHoverSize",
+                          "sliderLandscapeShuffleAnimClickSize",
+                          "sliderLandscapeShuffleAnimReleaseSize",
+                          "sliderLandscapeShuffleAnimHoverOpacity",
+                          "sliderLandscapeShuffleAnimClickOpacity"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "landscape:Shuffle Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeShuffleAnimTime",
+                        "sliderLandscapeShuffleAnimHoverSize",
+                        "sliderLandscapeShuffleAnimClickSize",
+                        "sliderLandscapeShuffleAnimReleaseSize",
+                        "sliderLandscapeShuffleAnimHoverOpacity",
+                        "sliderLandscapeShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -20558,93 +20666,6 @@
                         "sliderLandscapeSongBarHoverOpacity",
                         "sliderLandscapeSongBarClickOpacity",
                         "sliderLandscapeSongBarAnimTime"
-                      ],
-                      "subgroups": []
-                    }
-                  ]
-                },
-                {
-                  "key": "landscape:Shuffle Button",
-                  "items": [
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:Shuffle Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimTime"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimHoverSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimClickSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimReleaseSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimHoverOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimClickOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderLandscapeShuffleAnimTime",
-                          "sliderLandscapeShuffleAnimHoverSize",
-                          "sliderLandscapeShuffleAnimClickSize",
-                          "sliderLandscapeShuffleAnimReleaseSize",
-                          "sliderLandscapeShuffleAnimHoverOpacity",
-                          "sliderLandscapeShuffleAnimClickOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [],
-                  "subgroups": [
-                    {
-                      "key": "landscape:Shuffle Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimTime"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimHoverSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimClickSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimReleaseSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimHoverOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimClickOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderLandscapeShuffleAnimTime",
-                        "sliderLandscapeShuffleAnimHoverSize",
-                        "sliderLandscapeShuffleAnimClickSize",
-                        "sliderLandscapeShuffleAnimReleaseSize",
-                        "sliderLandscapeShuffleAnimHoverOpacity",
-                        "sliderLandscapeShuffleAnimClickOpacity"
                       ],
                       "subgroups": []
                     }
@@ -21932,15 +21953,15 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "buttonPlayPause"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderLandscapePlayButtonSize"
                     },
                     {
                       "type": "row",
                       "key": "sliderLandscapePlayButtonOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "buttonPlayPause"
                     },
                     {
                       "type": "group",
@@ -21985,9 +22006,9 @@
                     }
                   ],
                   "rowKeys": [
+                    "buttonPlayPause",
                     "sliderLandscapePlayButtonSize",
-                    "sliderLandscapePlayButtonOpacity",
-                    "buttonPlayPause"
+                    "sliderLandscapePlayButtonOpacity"
                   ],
                   "subgroups": [
                     {
@@ -22049,15 +22070,6 @@
                       "key": "buttonPrevSong"
                     },
                     {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:Next And Last Button Animation",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
                       "type": "row",
                       "key": "sliderLandscapeLastButtonEdgeOffset"
                     },
@@ -22068,6 +22080,15 @@
                     {
                       "type": "row",
                       "key": "sliderLandscapeNavClickTolerance"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Next And Last Button Animation",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
@@ -22083,6 +22104,96 @@
                       "key": "landscape:Next And Last Button Animation",
                       "items": [],
                       "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Shuffle Button",
+                  "items": [
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Shuffle Button Animation",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimTime"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimReleaseSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeShuffleAnimClickOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeShuffleAnimTime",
+                          "sliderLandscapeShuffleAnimHoverSize",
+                          "sliderLandscapeShuffleAnimClickSize",
+                          "sliderLandscapeShuffleAnimReleaseSize",
+                          "sliderLandscapeShuffleAnimHoverOpacity",
+                          "sliderLandscapeShuffleAnimClickOpacity"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "landscape:Shuffle Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeShuffleAnimTime",
+                        "sliderLandscapeShuffleAnimHoverSize",
+                        "sliderLandscapeShuffleAnimClickSize",
+                        "sliderLandscapeShuffleAnimReleaseSize",
+                        "sliderLandscapeShuffleAnimHoverOpacity",
+                        "sliderLandscapeShuffleAnimClickOpacity"
+                      ],
                       "subgroups": []
                     }
                   ]
@@ -22183,96 +22294,6 @@
                         "sliderLandscapeSongBarHoverOpacity",
                         "sliderLandscapeSongBarClickOpacity",
                         "sliderLandscapeSongBarAnimTime"
-                      ],
-                      "subgroups": []
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "landscape:Shuffle Button",
-                  "items": [
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:Shuffle Button Animation",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimTime"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimHoverSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimClickSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimReleaseSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimHoverOpacity"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderLandscapeShuffleAnimClickOpacity"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderLandscapeShuffleAnimTime",
-                          "sliderLandscapeShuffleAnimHoverSize",
-                          "sliderLandscapeShuffleAnimClickSize",
-                          "sliderLandscapeShuffleAnimReleaseSize",
-                          "sliderLandscapeShuffleAnimHoverOpacity",
-                          "sliderLandscapeShuffleAnimClickOpacity"
-                        ],
-                        "subgroups": []
-                      }
-                    }
-                  ],
-                  "rowKeys": [],
-                  "subgroups": [
-                    {
-                      "key": "landscape:Shuffle Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimTime"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimHoverSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimClickSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimReleaseSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimHoverOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimClickOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderLandscapeShuffleAnimTime",
-                        "sliderLandscapeShuffleAnimHoverSize",
-                        "sliderLandscapeShuffleAnimClickSize",
-                        "sliderLandscapeShuffleAnimReleaseSize",
-                        "sliderLandscapeShuffleAnimHoverOpacity",
-                        "sliderLandscapeShuffleAnimClickOpacity"
                       ],
                       "subgroups": []
                     }
@@ -22443,15 +22464,15 @@
                 "items": [
                   {
                     "type": "row",
+                    "key": "buttonPlayPause"
+                  },
+                  {
+                    "type": "row",
                     "key": "sliderLandscapePlayButtonSize"
                   },
                   {
                     "type": "row",
                     "key": "sliderLandscapePlayButtonOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "buttonPlayPause"
                   },
                   {
                     "type": "group",
@@ -22496,9 +22517,9 @@
                   }
                 ],
                 "rowKeys": [
+                  "buttonPlayPause",
                   "sliderLandscapePlayButtonSize",
-                  "sliderLandscapePlayButtonOpacity",
-                  "buttonPlayPause"
+                  "sliderLandscapePlayButtonOpacity"
                 ],
                 "subgroups": [
                   {
@@ -22557,15 +22578,6 @@
                     "key": "buttonPrevSong"
                   },
                   {
-                    "type": "group",
-                    "section": {
-                      "key": "landscape:Next And Last Button Animation",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  },
-                  {
                     "type": "row",
                     "key": "sliderLandscapeLastButtonEdgeOffset"
                   },
@@ -22576,6 +22588,15 @@
                   {
                     "type": "row",
                     "key": "sliderLandscapeNavClickTolerance"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:Next And Last Button Animation",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
                   }
                 ],
                 "rowKeys": [
@@ -22591,6 +22612,93 @@
                     "key": "landscape:Next And Last Button Animation",
                     "items": [],
                     "rowKeys": [],
+                    "subgroups": []
+                  }
+                ]
+              },
+              {
+                "key": "landscape:Shuffle Button",
+                "items": [
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:Shuffle Button Animation",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimTime"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimReleaseSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeShuffleAnimClickOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeShuffleAnimTime",
+                        "sliderLandscapeShuffleAnimHoverSize",
+                        "sliderLandscapeShuffleAnimClickSize",
+                        "sliderLandscapeShuffleAnimReleaseSize",
+                        "sliderLandscapeShuffleAnimHoverOpacity",
+                        "sliderLandscapeShuffleAnimClickOpacity"
+                      ],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [],
+                "subgroups": [
+                  {
+                    "key": "landscape:Shuffle Button Animation",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimTime"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimHoverSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimClickSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimReleaseSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimHoverOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeShuffleAnimClickOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeShuffleAnimTime",
+                      "sliderLandscapeShuffleAnimHoverSize",
+                      "sliderLandscapeShuffleAnimClickSize",
+                      "sliderLandscapeShuffleAnimReleaseSize",
+                      "sliderLandscapeShuffleAnimHoverOpacity",
+                      "sliderLandscapeShuffleAnimClickOpacity"
+                    ],
                     "subgroups": []
                   }
                 ]
@@ -22688,93 +22796,6 @@
                       "sliderLandscapeSongBarHoverOpacity",
                       "sliderLandscapeSongBarClickOpacity",
                       "sliderLandscapeSongBarAnimTime"
-                    ],
-                    "subgroups": []
-                  }
-                ]
-              },
-              {
-                "key": "landscape:Shuffle Button",
-                "items": [
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "landscape:Shuffle Button Animation",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimTime"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimHoverSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimClickSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimReleaseSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimHoverOpacity"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderLandscapeShuffleAnimClickOpacity"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderLandscapeShuffleAnimTime",
-                        "sliderLandscapeShuffleAnimHoverSize",
-                        "sliderLandscapeShuffleAnimClickSize",
-                        "sliderLandscapeShuffleAnimReleaseSize",
-                        "sliderLandscapeShuffleAnimHoverOpacity",
-                        "sliderLandscapeShuffleAnimClickOpacity"
-                      ],
-                      "subgroups": []
-                    }
-                  }
-                ],
-                "rowKeys": [],
-                "subgroups": [
-                  {
-                    "key": "landscape:Shuffle Button Animation",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeShuffleAnimTime"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeShuffleAnimHoverSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeShuffleAnimClickSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeShuffleAnimReleaseSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeShuffleAnimHoverOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeShuffleAnimClickOpacity"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderLandscapeShuffleAnimTime",
-                      "sliderLandscapeShuffleAnimHoverSize",
-                      "sliderLandscapeShuffleAnimClickSize",
-                      "sliderLandscapeShuffleAnimReleaseSize",
-                      "sliderLandscapeShuffleAnimHoverOpacity",
-                      "sliderLandscapeShuffleAnimClickOpacity"
                     ],
                     "subgroups": []
                   }
@@ -23755,7 +23776,7 @@
     "desktop:Play Button Animation": true,
     "desktop:Next And Last Song Buttons": true,
     "desktop:Next And Last Button Animation": true,
-    "desktop:Shuffle Button": false,
+    "desktop:Shuffle Button": true,
     "desktop:Shuffle Button Animation": true,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
@@ -23775,7 +23796,7 @@
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
     "desktop:No Preview": true,
-    "desktop:New Group": false,
+    "desktop:New Group": true,
     "desktop:Scrub Preload": true,
     "desktop:Scrub Input": false,
     "desktop:Touch Scrub And Pinch": true,
@@ -23793,8 +23814,8 @@
     "desktop:Song Add Date": true,
     "desktop:Right Click Pan": false,
     "desktop:Right Click Height": false,
-    "desktop:Startup": true,
-    "desktop:Start Button": true,
+    "desktop:Startup": false,
+    "desktop:Start Button": false,
     "desktop:Start Button Animation": true,
     "mobile:Dev Panel": true,
     "mobile:MECHANICS": false,
@@ -23824,10 +23845,10 @@
     "mobile:Play Button Animation": false,
     "mobile:Next And Last Song Buttons": true,
     "mobile:Next And Last Button Animation": false,
-    "mobile:Song Timeline": false,
-    "mobile:Song Timeline Animation": false,
     "mobile:Shuffle Button": false,
     "mobile:Shuffle Button Animation": false,
+    "mobile:Song Timeline": false,
+    "mobile:Song Timeline Animation": false,
     "mobile:Filter Button": false,
     "mobile:Song Data": false,
     "mobile:Background": true,
@@ -23893,10 +23914,10 @@
     "landscape:Play Button Animation": false,
     "landscape:Next And Last Song Buttons": false,
     "landscape:Next And Last Button Animation": false,
-    "landscape:Song Timeline": false,
-    "landscape:Song Timeline Animation": false,
     "landscape:Shuffle Button": false,
     "landscape:Shuffle Button Animation": false,
+    "landscape:Song Timeline": false,
+    "landscape:Song Timeline Animation": false,
     "landscape:Filter Button": false,
     "landscape:Song Data": false,
     "landscape:Background": false,
