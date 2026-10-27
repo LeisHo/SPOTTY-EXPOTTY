@@ -261,7 +261,7 @@
     "selectTempoIconStyle": "1",
     "selectValenceIconStyle": "0",
     "selectDanceIconStyle": "6",
-    "selectEnergyIconStyle": "0",
+    "selectEnergyIconStyle": "6",
     "sliderFilterCoverGrayscale": 100,
     "sliderFilterCoverBrightness": 100,
     "sliderFilterCoverContrast": 100,
@@ -284,9 +284,9 @@
     "sliderFilterPanelFontSize": 12,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": 6,
-    "colorFilterPanelBg": "#14161a",
-    "sliderFilterPanelBgOpacity": 92,
-    "colorFilterPanelAccent": "#1db954",
+    "colorFilterPanelBg": "#4f4f4f",
+    "sliderFilterPanelBgOpacity": 4,
+    "colorFilterPanelAccent": "#878787",
     "checkboxSongDataEnabled": true,
     "selectSongDataIconStyle": "1",
     "sliderSongDataBtnSize": 25,
@@ -3319,7 +3319,7 @@
                     "items": [
                       {
                         "type": "row",
-                        "key": "selectPlayIconStyle"
+                        "key": "buttonPlayPause"
                       },
                       {
                         "type": "row",
@@ -3327,7 +3327,7 @@
                       },
                       {
                         "type": "row",
-                        "key": "buttonPlayPause"
+                        "key": "selectPlayIconStyle"
                       },
                       {
                         "type": "row",
@@ -3404,9 +3404,9 @@
                       }
                     ],
                     "rowKeys": [
-                      "selectPlayIconStyle",
-                      "selectPauseIconStyle",
                       "buttonPlayPause",
+                      "selectPauseIconStyle",
+                      "selectPlayIconStyle",
                       "colorPlayButton",
                       "sliderPlayButtonSize",
                       "sliderPlayButtonOpacity",
@@ -3857,22 +3857,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "selectTempoIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectValenceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectDanceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectEnergyIconStyle"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxFilterButtonEnabled"
                       },
                       {
@@ -4017,6 +4001,22 @@
                       },
                       {
                         "type": "row",
+                        "key": "selectTempoIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectValenceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectDanceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectEnergyIconStyle"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderFilterCoverContrast"
                       },
                       {
@@ -4034,10 +4034,6 @@
                     ],
                     "rowKeys": [
                       "selectFilterIconStyle",
-                      "selectTempoIconStyle",
-                      "selectValenceIconStyle",
-                      "selectDanceIconStyle",
-                      "selectEnergyIconStyle",
                       "checkboxFilterButtonEnabled",
                       "sliderFilterIconSize",
                       "sliderFilterIconOffsetX",
@@ -4074,6 +4070,10 @@
                       "colorFilterPanelBg",
                       "sliderFilterPanelBgOpacity",
                       "colorFilterPanelAccent",
+                      "selectTempoIconStyle",
+                      "selectValenceIconStyle",
+                      "selectDanceIconStyle",
+                      "selectEnergyIconStyle",
                       "sliderFilterCoverContrast",
                       "sliderFilterTextBrightness",
                       "checkboxFilterShowNumbers",
@@ -23767,7 +23767,7 @@
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
     "desktop:Artist": true,
-    "desktop:Album & Date": false,
+    "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
@@ -23780,10 +23780,10 @@
     "desktop:Shuffle Button Animation": true,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
-    "desktop:Filter Button": true,
-    "desktop:Song Data": false,
+    "desktop:Filter Button": false,
+    "desktop:Song Data": true,
     "desktop:Background": true,
-    "desktop:Animation": false,
+    "desktop:Animation": true,
     "desktop:Album Cover": true,
     "desktop:Shadows": true,
     "desktop:Album Cover Shadow": true,
@@ -23791,16 +23791,16 @@
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
     "desktop:Global Override": true,
-    "desktop:Standard Button Animation": false,
+    "desktop:Standard Button Animation": true,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
     "desktop:No Preview": true,
     "desktop:New Group": true,
     "desktop:Scrub Preload": true,
-    "desktop:Scrub Input": false,
+    "desktop:Scrub Input": true,
     "desktop:Touch Scrub And Pinch": true,
-    "desktop:Wheel Scrub Per Notch Curve": false,
+    "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
     "desktop:Timeline Look": true,
     "desktop:New Group (4)": true,
@@ -23812,10 +23812,10 @@
     "desktop:Scale Numbers": true,
     "desktop:Ticks": true,
     "desktop:Song Add Date": true,
-    "desktop:Right Click Pan": false,
-    "desktop:Right Click Height": false,
-    "desktop:Startup": false,
-    "desktop:Start Button": false,
+    "desktop:Right Click Pan": true,
+    "desktop:Right Click Height": true,
+    "desktop:Startup": true,
+    "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
     "mobile:Dev Panel": true,
     "mobile:MECHANICS": false,
