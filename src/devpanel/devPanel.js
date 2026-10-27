@@ -8741,6 +8741,7 @@
             { tab, group: BGA, id: 'sliderBgAnimPatchCoverage', type: 'slider', label: 'Patch Coverage (%):', min: 0, max: 100, step: 1, value: 50 },
             { tab, group: BGA, id: 'sliderBgAnimPatchSoftness', type: 'slider', label: 'Patch Edge Softness (%):', min: 1, max: 100, step: 1, value: 40 },
             { tab, group: BGA, id: 'sliderBgAnimPatchDrift', type: 'slider', label: 'Patch Drift Speed (Px/S):', min: 0, max: 600, step: 1, value: 30 },
+            { tab, group: BGA, id: 'selectBgAnimPatchDriftDir', type: 'select', label: 'Drift Direction:', value: 'diagonal', options: [{ value: 'diagonal', text: 'Drift Diagonally (Down And Right)' }, { value: 'toward', text: 'Drift Toward The Center' }, { value: 'away', text: 'Drift Away From Center' }] },
             { tab, group: BGA, id: 'sliderBgAnimPatchOctaves', type: 'slider', label: 'Patch Noise Octaves:', min: 1, max: 6, step: 1, value: 3 },
             // Breathing Fade
             { tab, group: BGA, id: 'sliderBgAnimBreathPeriod', type: 'slider', label: 'Breathing Period (S):', min: 0.5, max: 120, step: 0.5, value: 8 },
@@ -8765,6 +8766,7 @@
             { tab, group: BGA, id: 'sliderBgAnimWarpLacunarity', type: 'slider', label: 'Warp Lacunarity (x):', min: 1.1, max: 4, step: 0.05, value: 2 },
             { tab, group: BGA, id: 'sliderBgAnimWarpGain', type: 'slider', label: 'Warp Gain (x):', min: 0.1, max: 0.9, step: 0.01, value: 0.5 },
             { tab, group: BGA, id: 'sliderBgAnimWarpDrift', type: 'slider', label: 'Warp Drift Speed (Px/S):', min: 0, max: 600, step: 1, value: 40 },
+            { tab, group: BGA, id: 'selectBgAnimWarpDriftDir', type: 'select', label: 'Drift Direction:', value: 'diagonal', options: [{ value: 'diagonal', text: 'Drift Diagonally (Down And Right)' }, { value: 'toward', text: 'Drift Toward The Center' }, { value: 'away', text: 'Drift Away From Center' }] },
         ];
         renderControlArray(BGA_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_BG_ANIM_CONTROLS', BGA_CONTROLS);
@@ -8805,11 +8807,11 @@
             {
                 select: 'selectBgAnimMode', map: {
                     rotation: [],
-                    patches: ['selectBgAnimBlend', 'sliderBgAnimPatchScale', 'sliderBgAnimPatchCoverage', 'sliderBgAnimPatchSoftness', 'sliderBgAnimPatchDrift', 'sliderBgAnimPatchOctaves'],
+                    patches: ['selectBgAnimBlend', 'sliderBgAnimPatchScale', 'sliderBgAnimPatchCoverage', 'sliderBgAnimPatchSoftness', 'sliderBgAnimPatchDrift', 'selectBgAnimPatchDriftDir', 'sliderBgAnimPatchOctaves'],
                     breathing: ['selectBgAnimBlend', 'sliderBgAnimBreathPeriod', 'sliderBgAnimBreathMin', 'sliderBgAnimBreathMax'],
                     rings: ['rangeBarBgAnimRingThickness', 'curveEditorBgAnimRingThickness', 'sliderBgAnimRingSpeedStep', 'sliderBgAnimRingEdgeBlur', 'checkboxBgAnimRingAlternate'],
                     swirl: ['sliderBgAnimSwirlRadius', 'rangeBarBgAnimSwirlStrength', 'curveEditorBgAnimSwirlStrength', 'checkboxBgAnimSwirlInvert', 'sliderBgAnimSwirlTwist'],
-                    warp: ['sliderBgAnimWarpStrength', 'sliderBgAnimWarpScale', 'sliderBgAnimWarpOctaves', 'sliderBgAnimWarpLacunarity', 'sliderBgAnimWarpGain', 'sliderBgAnimWarpDrift'],
+                    warp: ['sliderBgAnimWarpStrength', 'sliderBgAnimWarpScale', 'sliderBgAnimWarpOctaves', 'sliderBgAnimWarpLacunarity', 'sliderBgAnimWarpGain', 'sliderBgAnimWarpDrift', 'selectBgAnimWarpDriftDir'],
                     overlay: ['selectBgAnimBlend'],
                 },
                 // shown for every mode except "none"

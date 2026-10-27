@@ -14,6 +14,7 @@
 // slows it down the same way, then hides the layer.
 import { setting } from './settings.js';
 
+const DRIFT_DIRS = { diagonal: 0, toward: 1, away: 2 }; // Drift Direction dropdown -> shader mode
 const MODES = { rotation: 1, patches: 2, breathing: 3, rings: 4, swirl: 5, warp: 6, overlay: 7 };
 
 const VERT = `
@@ -36,14 +37,14 @@ uniform vec2 uRes;
 uniform vec2 uCenter, uTexel;
 uniform float uMode, uAngle, uTau, uZoom;
 uniform float uOpacity;
-uniform float uPatchScale, uPatchCover, uPatchSoft, uPatchDrift, uPatchOct;
+uniform float uPatchScale, uPatchCover, uPatchSoft, uPatchDrift, uPatchOct, uPatchDir;
 uniform float uBreathPeriod, uBreathMin, uBreathMax;
 uniform float uRingStep, uRingAlt, uRingBlur, uRingLast;
 uniform vec4 uEdge[16];      // outer edge (px from the centre) of rings 0..63, 4 per vector; later rings are uRingLast thick
 uniform vec2 uSwirlRange;    // turn amount at the curve's Y = 0 and Y = 1 (fraction of the full turn)
 uniform vec4 uSwirlLut[9];   // the swirl curve sampled at 32 points (the last value repeated)
 uniform float uSwirlR, uSwirlInv, uSwirlTwist;
-uniform float uWarpStr, uWarpScale, uWarpOct, uWarpLac, uWarpGain, uWarpDrift;
+uniform float uWarpStr, uWarpScale, uWarpOct, uWarpLac, uWarpGain, uWarpDrift, uWarpDir;
 varying vec2 vP;
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
@@ -65,6 +66,14 @@ float fbm(vec2 p, float oct, float lac, float gain) {
     return v / max(s, 0.0001);
 }
 vec2 rot(vec2 v, float a) { float c = cos(a), s = sin(a); return vec2(c * v.x - s * v.y, s * v.x + c * v.y); }
+// Where a drifting noise pattern is sampled after it has moved s px: mode 0 = the pattern slides down and to the right (the original drift),
+// 1 = it flows toward the rotation center, 2 = away from it. The pattern is read s px "behind" its movement, along the direction from the center.
+vec2 driftSample(vec2 p, float mode, float s) {
+    if (mode < 0.5) return p + vec2(0.6, 0.8) * s;
+    vec2 dd = p - uCenter;
+    vec2 r = dd / max(length(dd), 1.0);
+    return mode < 1.5 ? p + r * s : p - r * s;
+}
 // mirrored lookup: the picture is reflected past its edges, so a turned copy never shows empty corners
 vec4 samp(vec2 src) {
     vec2 uv = src / uRes;
@@ -108,7 +117,7 @@ void main() {
         q = rot(d, uAngle);
     } else if (m == 2) {     // patches
         q = rot(d, uAngle);
-        float n = fbm(p / uPatchScale + vec2(0.6, 0.8) * uTau * uPatchDrift / uPatchScale, uPatchOct, 2.0, 0.5);
+        float n = fbm(driftSample(p, uPatchDir, uTau * uPatchDrift) / uPatchScale, uPatchOct, 2.0, 0.5);
         float thr = mix(0.78, 0.22, uPatchCover);
         float soft = max(0.005, uPatchSoft * 0.35);
         alpha = smoothstep(thr - soft, thr + soft, n);
@@ -146,7 +155,7 @@ void main() {
         if (uSwirlInv > 0.5) w = 1.0 - w;
         q = rot(d, (uAngle + uSwirlTwist) * w);
     } else if (m == 6) {     // domain warp
-        vec2 pp = p / uWarpScale + vec2(0.6, 0.8) * uTau * uWarpDrift / uWarpScale;
+        vec2 pp = driftSample(p, uWarpDir, uTau * uWarpDrift) / uWarpScale;
         vec2 disp = (vec2(fbm(pp, uWarpOct, uWarpLac, uWarpGain), fbm(pp + vec2(5.2, 1.3), uWarpOct, uWarpLac, uWarpGain)) - 0.5) * 2.0 * uWarpStr;
         q = rot(d + disp, uAngle);
     } else {                 // overlay (a rotated duplicate on top)
@@ -241,14 +250,14 @@ export function createBgAnimation({ bgCanvas, prevCanvas, fxCanvas, coverEl, cur
         f('uZoom', setting('sliderBgAnimZoom') / 100);
         f('uOpacity', setting('sliderBgAnimOpacity') / 100);
         f('uPatchScale', setting('sliderBgAnimPatchScale') * px); f('uPatchCover', setting('sliderBgAnimPatchCoverage') / 100);
-        f('uPatchSoft', setting('sliderBgAnimPatchSoftness') / 100); f('uPatchDrift', setting('sliderBgAnimPatchDrift') * px); f('uPatchOct', setting('sliderBgAnimPatchOctaves'));
+        f('uPatchSoft', setting('sliderBgAnimPatchSoftness') / 100); f('uPatchDrift', setting('sliderBgAnimPatchDrift') * px); f('uPatchDir', DRIFT_DIRS[setting('selectBgAnimPatchDriftDir')] || 0); f('uPatchOct', setting('sliderBgAnimPatchOctaves'));
         f('uBreathPeriod', setting('sliderBgAnimBreathPeriod')); f('uBreathMin', setting('sliderBgAnimBreathMin') / 100); f('uBreathMax', setting('sliderBgAnimBreathMax') / 100);
         f('uRingStep', setting('sliderBgAnimRingSpeedStep')); f('uRingAlt', setting('checkboxBgAnimRingAlternate') ? 1 : 0); f('uRingBlur', setting('sliderBgAnimRingEdgeBlur') / 100);
         f('uSwirlR', setting('sliderBgAnimSwirlRadius') * px); f('uSwirlInv', setting('checkboxBgAnimSwirlInvert') ? 1 : 0);
         f('uSwirlTwist', (setting('sliderBgAnimSwirlTwist') * Math.PI) / 180);
         f('uWarpStr', setting('sliderBgAnimWarpStrength') * px); f('uWarpScale', setting('sliderBgAnimWarpScale') * px);
         f('uWarpOct', setting('sliderBgAnimWarpOctaves')); f('uWarpLac', setting('sliderBgAnimWarpLacunarity')); f('uWarpGain', setting('sliderBgAnimWarpGain'));
-        f('uWarpDrift', setting('sliderBgAnimWarpDrift') * px);
+        f('uWarpDrift', setting('sliderBgAnimWarpDrift') * px); f('uWarpDir', DRIFT_DIRS[setting('selectBgAnimWarpDriftDir')] || 0);
         if (m === 4) { // ring edges: thickness = Min + (Max - Min) x the curve at (ring number / number of rings)
             const rg = setting('rangeBarBgAnimRingThickness') || { min: 120, max: 120 }, cv = setting('curveEditorBgAnimRingThickness');
             const tmin = Math.max(2, Math.min(rg.min, rg.max) * px), tmax = Math.max(tmin, Math.max(rg.min, rg.max) * px);
