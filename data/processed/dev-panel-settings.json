@@ -2,7 +2,7 @@
   "controls": {
     "listPickerSavedDevSettings": "{\"items\":[],\"groupOrder\":[],\"defaultName\":null}",
     "checkboxScrubAudioEnabled": true,
-    "checkboxPlayPreviewClips": false,
+    "checkboxPlayPreviewClips": true,
     "sliderScrubVolume": 0.7,
     "sliderClipStartMin": 0,
     "sliderClipStartMax": 28,
