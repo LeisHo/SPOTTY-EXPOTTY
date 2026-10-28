@@ -474,9 +474,12 @@ async function boot() {
     // Box WIDTH/POSITION stay engine-owned (CLAUDE.md's own architecture note) -- Max Width is
     // applied as a plain CSS max-width (never shrinks the engine's own box, only caps it), with no
     // margin/position changes, so it can't fight the Layout Engine for ownership of these boxes.
+    // Test Text Mode is a dev tool: it only ever applies in dev mode, so a visitor never sees the test text whatever the saved settings say.
+    const testTextOn = () => document.documentElement.classList.contains('dev-mode') && !!setting('checkboxTestTextEnabled');
     const TEXT_ELEMENTS = [['SongTitle', () => el('spxTitle')], ['Artist', () => el('spxArtist')], ['AlbumDate', () => el('spxMeta')]];
-    // If Over Max Lines > Scroll: the text sits in a box max-lines tall and scrolls through itself. One animation frame loop drives every scrolling text.
+    // If Over Max Lines > Scroll: the text goes on ONE line and scrolls sideways (a ticker) through its box. One animation frame loop drives every scrolling text.
     const scrollStates = {};
+    window.spxScrollStates = scrollStates; // dev check
     let scrollRaf = 0;
     function runScrolls() {
         const now = performance.now();
@@ -492,10 +495,12 @@ async function boot() {
             else if (t < c.ps + toEnd) off = (t - c.ps) * c.v; // scrolling to the end of the text
             else if (t < c.ps + toEnd + c.pe) off = c.E; // end pause
             else off = c.E + (t - c.ps - toEnd - c.pe) * c.v; // continuous only: on into the copy of the beginning; the cycle then restarts at 0 (identical picture)
-            c.node.scrollTop = Math.min(off, c.continuous ? c.D : c.E);
+            c.node.scrollLeft = Math.min(off, c.continuous ? c.D : c.E);
         }
         scrollRaf = any ? requestAnimationFrame(runScrolls) : 0;
     }
+    // the width the node's own text takes when a continuous-scroll copy has been appended after it
+    const wrapExtra = node => { const w = node.querySelector(':scope > [data-spx-clone]'); return w ? w.getBoundingClientRect().width : 0; };
     function applyTextElementStyles() {
         const effective = {}; // the final font size of each element, for the Scale Down to Match options
         TEXT_ELEMENTS.forEach(([p, getNode]) => {
@@ -539,7 +544,7 @@ async function boot() {
             const prevScroll = scrollStates[p];
             delete scrollStates[p];
             node.querySelectorAll(':scope > [data-spx-clone]').forEach(n => n.remove());
-            st.maxHeight = ''; node.scrollTop = 0;
+            st.maxHeight = ''; node.scrollTop = 0; node.scrollLeft = 0;
             const overMode = multi && overflow !== 'scale' ? setting('select' + multi + 'OverMaxLines') : 'none';
             if (overMode === 'scale' || overMode === 'scroll') {
                 const maxLines = setting('slider' + multi + 'MaxLines');
@@ -572,24 +577,22 @@ async function boot() {
                         }
                     }
                     st.fontSize = fs + 'px';
-                } else if (!fits(size)) { // Scroll: keep the size; show maxLines lines and scroll through the rest
-                    const V = maxLines * size * lineMul, Hc = node.getBoundingClientRect().height - pad; // viewport / whole text, content heights
+                } else if (!fits(size) || node.scrollWidth > node.clientWidth + 1) { // Scroll: keep the size; the text goes on one line and slides sideways through the box
                     const continuous = !!setting('checkbox' + multi + 'ScrollContinuous');
-                    st.maxHeight = (cs.boxSizing === 'border-box' ? V + pad : V) + 'px';
-                    st.overflow = 'hidden';
+                    st.whiteSpace = 'nowrap'; st.overflow = 'hidden'; st.textOverflow = 'clip'; node.scrollLeft = 0; // a scroll container keeps its old offset when overflow changes: measure from the start
                     let D = 0;
-                    if (continuous) { // the beginning of the text follows the end after a one-line gap, so the scroll loops without a jump
-                        const wrap = document.createElement('div');
+                    if (continuous) { // the beginning of the text follows the end after a gap, so the scroll loops without a jump
+                        const wrap = document.createElement('span');
                         wrap.dataset.spxClone = '1';
-                        wrap.style.cssText = 'pointer-events:none;padding-top:' + (size * lineMul) + 'px';
+                        wrap.style.cssText = 'pointer-events:none;display:inline-block;white-space:nowrap;padding-left:' + (size * 2) + 'px';
                         Array.from(node.childNodes).forEach(c => { const cl = c.cloneNode(true); if (cl.querySelectorAll) cl.querySelectorAll('[id]').forEach(n => n.removeAttribute('id')); if (cl.removeAttribute) cl.removeAttribute('id'); wrap.appendChild(cl); });
                         node.appendChild(wrap);
-                        D = wrap.getBoundingClientRect().top - node.getBoundingClientRect().top + size * lineMul - (parseFloat(cs.paddingTop) || 0); // measured scroll distance after which the copy sits exactly where the beginning was
+                        D = wrap.getBoundingClientRect().left - node.getBoundingClientRect().left + size * 2 - (parseFloat(cs.paddingLeft) || 0); // measured scroll distance after which the copy sits exactly where the beginning was
                     }
-                    const E = Math.max(1, Hc - V); // scroll offset at which the last line is visible
+                    const E = Math.max(1, (continuous ? node.scrollWidth - (wrapExtra(node)) : node.scrollWidth) - node.clientWidth); // scroll offset at which the end of the text is visible
                     const v = Math.max(1, setting('slider' + multi + 'ScrollSpeed')), ps = setting('slider' + multi + 'ScrollStartPauseMs') / 1000, pe = setting('slider' + multi + 'ScrollEndPauseMs') / 1000;
                     const total = ps + E / v + pe + (continuous ? (D - E) / v : 0);
-                    const sig = [size, maxLines, E, D, v, ps, pe, continuous].join('|');
+                    const sig = [size, E, D, v, ps, pe, continuous].join('|');
                     scrollStates[p] = { node, E, D, v, ps, pe, continuous, total, sig, t0: prevScroll && prevScroll.sig === sig ? prevScroll.t0 : performance.now() }; // unchanged text and settings: the scroll carries on instead of restarting
                     if (!scrollRaf) scrollRaf = requestAnimationFrame(runScrolls);
                 }
@@ -600,7 +603,7 @@ async function boot() {
             }
             // A single word wider than the box would overflow it (a wrapped line can only break between words): shrink the font
             // until the widest word fits on its line. Wrapping modes only; Truncate / Clip / Shrink to Fit / no-wrap choose their own way.
-            if (overflow === 'wrap' && setting('checkboxTxt' + p + 'WordWrap')) {
+            if (overflow === 'wrap' && setting('checkboxTxt' + p + 'WordWrap') && !scrollStates[p]) { // (not while the text scrolls: it is one long line on purpose)
                 const wordFits = f => { st.fontSize = f + 'px'; return node.scrollWidth <= node.clientWidth + 1; };
                 const cur = parseFloat(st.fontSize);
                 if (!wordFits(cur)) {
@@ -674,7 +677,7 @@ async function boot() {
     }
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
-        { const t = !!setting('checkboxTestTextEnabled'), sig = [t, t && setting('textTestSong'), t && setting('textTestArtist'), t && setting('textTestAlbum')].join(''); if (songs[idx] && sig !== textSig) renderText(); }
+        { const t = testTextOn(), sig = [t, t && setting('textTestSong'), t && setting('textTestArtist'), t && setting('textTestAlbum')].join(''); if (songs[idx] && sig !== textSig) renderText(); }
         applyTextElementStyles();
         // Shows Spotify's own player so you can see whether it says "Log in" / "Preview" and log in INSIDE it.
         document.querySelector('.spx-embed').classList.toggle('spx-embed-visible', !!setting('checkboxShowSpotifyPlayer') && !sdkIsReady()); // the iframe is idle (and shows a stale preview UI) while the SDK plays
@@ -865,7 +868,7 @@ async function boot() {
     // use ';' between names, as the data does, so the Artist Name Separator can be tried out too.
     let textSig = '';
     function renderText() {
-        const s = songs[idx], test = !!setting('checkboxTestTextEnabled');
+        const s = songs[idx], test = testTextOn();
         textSig = [test, test && setting('textTestSong'), test && setting('textTestArtist'), test && setting('textTestAlbum')].join('\u0001');
         const link = el('spxTitleLink');
         // Bracketed text (round or square, with its brackets) is wrapped in .spx-bracket so Brackets Smaller Text can size it
