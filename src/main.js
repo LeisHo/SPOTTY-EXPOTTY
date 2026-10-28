@@ -11,7 +11,7 @@ import {
 } from '../lib/ui-engine/registry.mjs';
 import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
-import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn, seekClip, clipLength } from './app/clipPlayer.js';
+import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn, seekClip, clipLength, onClipState, setOnClipEnded, pauseClip, resumeClip } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
 import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon, applySongDataIcon } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
@@ -1164,12 +1164,14 @@ async function boot() {
     syncShuffleUi();
     // The preview ended. Loop Preview on (default): the embed restarts the same song (return false). Off: move on to the next song,
     // and shuffle always picks the next one, as before.
-    setOnEnded(() => {
+    const onSongEnded = () => {
         if (!shuffleOn && setting('checkboxLoopPreview')) return false;
         logEvent('playback', shuffleOn ? 'SONG ended: shuffle picks the next song' : 'SONG ended: Loop Preview is off, moves to the next song');
         stepSong(1, true);
         return true;
-    });
+    };
+    setOnEnded(onSongEnded);
+    setOnClipEnded(onSongEnded); // a preview clip reaching its end does the same (it used to just stop)
     const stepSong = (d, fromPlaying) => {
         if (d === -1) { // Last: the song that was playing before this one, wherever it was in the list (and whatever shuffle is doing)
             while (playedHistory.length && playedHistory[playedHistory.length - 1] === playIdx) playedHistory.pop(); // drop the current song
@@ -1358,6 +1360,15 @@ async function boot() {
         logEvent('playback', 'USER play/pause (cover or Space)');
         if (!isUnlocked()) playFromStart();
         clearTimeout(handoffTimer);
+        // Preview-only listening (handoff off / muted): the button pauses and resumes the clip. It used to start the Spotify song, which played on the
+        // owner's Spotify desktop app, and showed a play icon while the clip played.
+        const spotifyWouldPlay = interacted && isUnlocked() && setting('checkboxHandoffEnabled') && realPlayAllowed();
+        if (!isPlaying() && previewClipsOn() && !spotifyWouldPlay) {
+            if (clipIsPlaying()) { pauseClip(); logEvent('playback', 'USER paused the preview clip'); }
+            else if (!resumeClip()) playClip(clipKey(songs[playIdx >= 0 ? playIdx : idx]));
+            refreshPlayUi();
+            return;
+        }
         stopClip();
         toggleTrack(songs[playIdx >= 0 ? playIdx : idx].id); // the PLAYING song: while a filtered-out song is only being viewed, idx is not the one that plays
     }
@@ -1455,10 +1466,16 @@ async function boot() {
     requestAnimationFrame(trackStartOnCover);
     window.addEventListener('resize', placeNav);
     placeNav();
-    onPlayState(playing => {
-        el('spxCover').classList.toggle('playing', playing);
+    // The play / pause icon shows the real state: the Spotify song OR the preview clip playing.
+    function refreshPlayUi() {
+        const shown = isPlaying() || clipIsPlaying();
+        el('spxCover').classList.toggle('playing', shown);
         bgAnim.refresh(); // the background animation runs only while playing
-        el('spxCover').setAttribute('aria-label', playing ? 'Pause' : 'Play');
+        el('spxCover').setAttribute('aria-label', shown ? 'Pause' : 'Play');
+    }
+    onClipState(refreshPlayUi);
+    onPlayState(playing => {
+        refreshPlayUi();
         // The preview stops only once the full song is actually playing (see previewHold above).
         if (playing && previewHold && songs[idx] && songs[idx].id === previewHold) {
             previewHold = null;

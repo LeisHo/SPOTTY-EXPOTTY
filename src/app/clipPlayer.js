@@ -48,6 +48,12 @@ export function setMasterVolume(v) {
     masterVolume = Math.min(1, Math.max(0, v));
     if (current) current.audio.volume = Math.min(1, Math.max(0, setting('sliderScrubVolume'))) * masterVolume; // live, on the clip playing now
 }
+// Callbacks from main.js: the clip started / paused / ended (the play button follows them), and a clip reaching its end (return true = handled, e.g. moved to the next song; false = loop it).
+let clipStateHandler = null, clipEndedHandler = null;
+export const onClipState = fn => { clipStateHandler = fn; };
+export const setOnClipEnded = fn => { clipEndedHandler = fn; };
+export function pauseClip() { if (current && !current.audio.paused) { current.audio.pause(); return true; } return false; }
+export function resumeClip() { if (current && current.audio.paused) { current.audio.play().catch(() => {}); return true; } return false; }
 export function isUnlocked() { return unlocked; }
 
 async function fetchUrls(ids) {
@@ -96,6 +102,13 @@ function entry(did) {
         registerClip(audio);
         p = { did, audio, dead: false, urlAt: 0, fade: 0 };
         pool.set(did, p);
+        ['play', 'pause', 'playing'].forEach(ev => audio.addEventListener(ev, () => { if (clipStateHandler) clipStateHandler(); }));
+        audio.addEventListener('ended', () => {
+            if (current !== p) return;
+            logEvent('playback', `CLIP ended ${did}`);
+            if (clipEndedHandler && clipEndedHandler()) return;
+            try { audio.currentTime = 0; audio.play().catch(() => {}); logEvent('playback', `CLIP loops ${did}`); } catch (e) { /* not seekable */ }
+        });
         ['progress', 'canplay', 'loadeddata'].forEach(ev => audio.addEventListener(ev, () => noteReady(p)));
         audio.addEventListener('waiting', () => { if (current === p) logEvent('playback', `CLIP STALL ${did}: waiting for data (${bufferedEnd(audio).toFixed(1)}s buffered)`); });
         audio.addEventListener('error', () => {
