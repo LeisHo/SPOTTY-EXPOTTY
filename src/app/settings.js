@@ -8,6 +8,10 @@
 
 export const DEFAULTS = {
     checkboxScrubAudioEnabled: true,
+    checkboxModEnabled: true, sliderModTempo: 1, sliderModKey: 0, sliderModOctave: 0, sliderModFineCents: 0, selectModRelative: 'off',
+    sliderModBass: 0, sliderModMid: 0, sliderModTreble: 0, sliderModLowPass: 20000, sliderModHighPass: 20,
+    sliderModGain: 0, sliderModPan: 0, checkboxModMono: false, sliderModDistortion: 0,
+    sliderModEchoMix: 0, sliderModEchoTime: 300, sliderModEchoFeedback: 35, sliderModReverbMix: 0, sliderModReverbDecay: 1.8,
     checkboxPlayPreviewClips: true,
     sliderScrubVolume: 0.7,
     sliderClipStartMin: 2,

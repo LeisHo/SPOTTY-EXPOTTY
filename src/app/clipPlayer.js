@@ -6,6 +6,7 @@
 import { setting } from './settings.js';
 import { logEvent } from './debugLog.js';
 import { isLoggedIn } from './spotifyAuth.js';
+import { registerClip, unregisterClip } from './audioMods.js';
 
 const URL_TTL_MS = 10 * 60 * 1000;
 const NULL_TTL_MS = 20 * 1000;
@@ -79,6 +80,7 @@ const MIN_BUFFERED_S = 2;
 function drop(p) {
     clearInterval(p.fade);
     p.audio.pause();
+    unregisterClip(p.audio);
     p.audio.removeAttribute('src');
     p.audio.load();
     pool.delete(p.did);
@@ -91,6 +93,7 @@ function entry(did) {
     if (!p) {
         const audio = new Audio();
         audio.preload = 'auto';
+        registerClip(audio);
         p = { did, audio, dead: false, urlAt: 0, fade: 0 };
         pool.set(did, p);
         ['progress', 'canplay', 'loadeddata'].forEach(ev => audio.addEventListener(ev, () => noteReady(p)));

@@ -8533,6 +8533,43 @@
         // Snapshot: its own subgroup within Debug (direct request, 2026-10-25, matching Handy Dandies'
         // own Debug > Snapshot group) -- was flat alongside the other Debug buttons above. Built directly
         // (not via renderControlArray(), which only resolves TOP-LEVEL groups) so it can nest.
+        // Scrub Audio > Modifiers: dev-only live changes to the preview clips (src/app/audioMods.js). Nested, so built directly.
+        {
+            const scrubContent = findGroupContent(tab, 'Scrub Audio', 'renderSpottyDevControls', 'checkboxScrubAudioEnabled');
+            const modSec = createDevGroupElement('Modifiers', tab);
+            scrubContent.appendChild(modSec);
+            const modContent = modSec.querySelector(':scope > .dev-section-content');
+            const G = 'Modifiers';
+            const MOD_CONTROLS = [
+                { tab, group: G, id: 'checkboxModEnabled', type: 'checkbox', label: 'Modifiers Enabled (Dev Mode, Preview Clips Only):', value: true },
+                { tab, group: G, id: 'sliderModTempo', type: 'slider', label: 'Tempo (x, Pitch Kept):', min: 0.5, max: 2, step: 0.01, value: 1 },
+                { tab, group: G, id: 'sliderModKey', type: 'slider', label: 'Key (Semitones):', min: -12, max: 12, step: 1, value: 0 },
+                { tab, group: G, id: 'sliderModOctave', type: 'slider', label: 'Octave:', min: -2, max: 2, step: 1, value: 0 },
+                { tab, group: G, id: 'sliderModFineCents', type: 'slider', label: 'Fine Tune (Cents):', min: -100, max: 100, step: 1, value: 0 },
+                { tab, group: G, id: 'selectModRelative', type: 'select', label: 'Relative Key Shift (Major <-> Minor Feel):', value: 'off', options: [{ value: 'off', text: 'Off' }, { value: 'minor', text: 'Major To Relative Minor (-3)' }, { value: 'major', text: 'Minor To Relative Major (+3)' }] },
+                { tab, group: G, id: 'sliderModBass', type: 'slider', label: 'Bass (Db):', min: -15, max: 15, step: 0.5, value: 0 },
+                { tab, group: G, id: 'sliderModMid', type: 'slider', label: 'Mids (Db):', min: -15, max: 15, step: 0.5, value: 0 },
+                { tab, group: G, id: 'sliderModTreble', type: 'slider', label: 'Treble (Db):', min: -15, max: 15, step: 0.5, value: 0 },
+                { tab, group: G, id: 'sliderModLowPass', type: 'slider', label: 'Low Pass Cutoff (Hz, 20000 = Off):', min: 200, max: 20000, step: 50, value: 20000 },
+                { tab, group: G, id: 'sliderModHighPass', type: 'slider', label: 'High Pass Cutoff (Hz, 20 = Off):', min: 20, max: 2000, step: 5, value: 20 },
+                { tab, group: G, id: 'sliderModGain', type: 'slider', label: 'Gain (Db):', min: -24, max: 12, step: 0.5, value: 0 },
+                { tab, group: G, id: 'sliderModPan', type: 'slider', label: 'Pan (Left -1 To Right 1):', min: -1, max: 1, step: 0.05, value: 0 },
+                { tab, group: G, id: 'checkboxModMono', type: 'checkbox', label: 'Mono:', value: false },
+                { tab, group: G, id: 'sliderModDistortion', type: 'slider', label: 'Distortion (%):', min: 0, max: 100, step: 1, value: 0 },
+                { tab, group: G, id: 'sliderModEchoMix', type: 'slider', label: 'Echo Mix (%):', min: 0, max: 100, step: 1, value: 0 },
+                { tab, group: G, id: 'sliderModEchoTime', type: 'slider', label: 'Echo Time (Ms):', min: 20, max: 1000, step: 10, value: 300 },
+                { tab, group: G, id: 'sliderModEchoFeedback', type: 'slider', label: 'Echo Feedback (%):', min: 0, max: 90, step: 1, value: 35 },
+                { tab, group: G, id: 'sliderModReverbMix', type: 'slider', label: 'Reverb Mix (%):', min: 0, max: 100, step: 1, value: 0 },
+                { tab, group: G, id: 'sliderModReverbDecay', type: 'slider', label: 'Reverb Decay (S):', min: 0.3, max: 5, step: 0.1, value: 1.8 },
+            ];
+            MOD_CONTROLS.forEach(ctrl => {
+                const row = buildUniformControlRow(ctrl);
+                if (ctrl.type === 'checkbox') row.querySelector('input').checked = !!ctrl.value;
+                if (ctrl.type === 'select') row.querySelector('select').value = ctrl.value;
+                modContent.appendChild(row);
+            });
+            registerDevControlArray('SPOTTY_MODIFIER_CONTROLS', MOD_CONTROLS);
+        }
         {
             const debugContentForSnapshot = findGroupContent(tab, DBG, 'renderSpottyDevControls', 'buttonDebugPause');
             const snapSec = createDevGroupElement('Snapshot', tab);

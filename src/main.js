@@ -15,6 +15,7 @@ import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVol
 import { initVolume } from './app/volume.js';
 import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon, applySongDataIcon } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
+import { initAudioMods } from './app/audioMods.js';
 import { logEvent } from './app/debugLog.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo } from './app/handoff.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
@@ -1524,6 +1525,7 @@ async function boot() {
     timeline.setPos(pos); // the app's position (a random start sets it): the scrub line must follow it, not reset to the start
     timeline.draw();
     schedulePreload();
+    initAudioMods(); // dev-only preview-clip modifiers (audioMods.js)
     initDebugTools(); // Debug group: PAUSE, Pause/Copy/Clear/Export Logs, frame rate, snapshot (debugTools.js)
     window.spotty = { songs, volume, seek, moveTo, timeline, get idx() { return idx; }, get pos() { return pos; }, poolInfo, playClip, unlock };
 }
