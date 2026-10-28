@@ -971,7 +971,9 @@ async function boot() {
                 } else { previewHold = songs[playIdx].id; playTrack(songs[playIdx].id, startMs); } // 0 = hard cut: the preview still holds until the song plays
                 handedOff = true;
             }
-            else { stopClip(); if (!previewClipsOn()) pauseEmbed(); } // no request is coming: the song that was left playing stops now
+            // No Spotify request is coming (handoff off / muted). The preview clip is then the only sound there is, so it keeps playing (it loops) until the next song change;
+            // stopping it here cut every clip at the handoff delay (3 s) and made clip-only listening, and the dev-panel audio modifiers, unusable.
+            else if (!previewClipsOn()) { stopClip(); pauseEmbed(); } // preview clips off: the song that was left playing stops now
         };
         handoffTimer = setTimeout(doHandoff, handoffDelay);
         // Auto Next Song: a song with no preview clip is held for the set time, then the next song plays.
