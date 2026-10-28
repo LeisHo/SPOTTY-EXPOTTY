@@ -258,10 +258,10 @@
     "sliderVolClickTolerance": 50,
     "sliderVolAnimDuration": 190,
     "curveEditorVolAnimSpeedCurve": "{\"points\":[{\"x\":0,\"y\":0.5952784220377605,\"h1\":{\"x\":0.504492481784282,\"y\":0.05047709147135415}},{\"x\":1,\"y\":1,\"h2\":{\"x\":0,\"y\":-0.44892730712890627}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
-    "sliderCoverScale": 1.8,
+    "sliderCoverScale": 1.7,
     "sliderCoverOffsetX": 0,
     "sliderCoverBrightness": 100,
-    "sliderCoverOffsetY": -42,
+    "sliderCoverOffsetY": -34,
     "checkboxCoverBoundingBox": false,
     "selectShuffleIconStyle": "1",
     "checkboxShuffleButtonEnabled": true,
@@ -38846,13 +38846,13 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": false,
+    "desktop:Text": true,
     "desktop:Font": true,
-    "desktop:Song Title": false,
+    "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
-    "desktop:Artist": false,
-    "desktop:Album & Date": false,
+    "desktop:Artist": true,
+    "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
     "desktop:New Group (7)": true,
@@ -38894,7 +38894,7 @@
     "desktop:Standard Button Animation": true,
     "desktop:Background": true,
     "desktop:Animation": true,
-    "desktop:Album Cover": true,
+    "desktop:Album Cover": false,
     "desktop:Shadows": true,
     "desktop:Album Cover Shadow": true,
     "desktop:Volume Shadow": true,
@@ -40730,7 +40730,7 @@
           "size": {
             "width": {
               "mode": "fixed",
-              "value": "90vw"
+              "value": "62vw"
             },
             "height": {
               "mode": "content"
