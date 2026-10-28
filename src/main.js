@@ -1350,7 +1350,9 @@ async function boot() {
     };
     document.addEventListener('pointerdown', onFirstGesture, { capture: true });
     document.addEventListener('keydown', onFirstGesture, { capture: true, once: true });
-    playFromStart();
+    // Nothing plays until the start button is pressed (startFromIcon -> playFromStart). This call used to run at page load, which unlocked sound and
+    // started the Spotify song (or a clip) before any click. Only with the start button turned off in the dev panel is there nothing to press, so then it still starts by itself.
+    if (!setting('checkboxStartButtonEnabled')) playFromStart();
 
     function togglePlayback() {
         logEvent('playback', 'USER play/pause (cover or Space)');
