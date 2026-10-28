@@ -474,6 +474,27 @@ async function boot() {
     // applied as a plain CSS max-width (never shrinks the engine's own box, only caps it), with no
     // margin/position changes, so it can't fight the Layout Engine for ownership of these boxes.
     const TEXT_ELEMENTS = [['SongTitle', () => el('spxTitle')], ['Artist', () => el('spxArtist')], ['AlbumDate', () => el('spxMeta')]];
+    // If Over Max Lines > Scroll: the text sits in a box max-lines tall and scrolls through itself. One animation frame loop drives every scrolling text.
+    const scrollStates = {};
+    let scrollRaf = 0;
+    function runScrolls() {
+        const now = performance.now();
+        let any = false;
+        for (const p of Object.keys(scrollStates)) {
+            const c = scrollStates[p];
+            if (!c.node.isConnected) { delete scrollStates[p]; continue; }
+            any = true;
+            const t = ((now - c.t0) / 1000) % c.total; // seconds into this cycle
+            const toEnd = c.E / c.v;
+            let off;
+            if (t < c.ps) off = 0; // start pause
+            else if (t < c.ps + toEnd) off = (t - c.ps) * c.v; // scrolling to the end of the text
+            else if (t < c.ps + toEnd + c.pe) off = c.E; // end pause
+            else off = c.E + (t - c.ps - toEnd - c.pe) * c.v; // continuous only: on into the copy of the beginning; the cycle then restarts at 0 (identical picture)
+            c.node.scrollTop = Math.min(off, c.continuous ? c.D : c.E);
+        }
+        scrollRaf = any ? requestAnimationFrame(runScrolls) : 0;
+    }
     function applyTextElementStyles() {
         const effective = {}; // the final font size of each element, for the Scale Down to Match options
         TEXT_ELEMENTS.forEach(([p, getNode]) => {
@@ -512,14 +533,18 @@ async function boot() {
             else if (overflow === 'scale') { st.whiteSpace = 'nowrap'; st.overflow = 'visible'; st.textOverflow = ''; }
             else { st.whiteSpace = setting('checkboxTxt' + p + 'WordWrap') ? 'pre-line' : 'nowrap'; st.overflow = ''; st.textOverflow = ''; }
             st.fontSize = size + 'px';
-            // Scale Down If Multiline (Song Title, Artist): shrink the font until the text wraps to at most the line limit
+            // If Over Max Lines (None / Scale Down / Scroll): what happens when the text needs more lines than Max Lines at the set size
             const multi = { SongTitle: 'Title', Artist: 'Artist', AlbumDate: 'AlbumDate' }[p];
-            if (multi && overflow !== 'scale' && setting('checkboxScale' + multi + 'Multiline')) {
+            const prevScroll = scrollStates[p];
+            delete scrollStates[p];
+            node.querySelectorAll(':scope > [data-spx-clone]').forEach(n => n.remove());
+            st.maxHeight = ''; node.scrollTop = 0;
+            const overMode = multi && overflow !== 'scale' ? setting('select' + multi + 'OverMaxLines') : 'none';
+            if (overMode === 'scale' || overMode === 'scroll') {
                 const maxLines = setting('slider' + multi + 'MaxLines');
                 const lineMul = parseFloat(st.lineHeight) || 1.2;
                 // Line count = content height / line height (not fragment rectangles, which count a smaller bracketed span
-                // or a differently-aligned fragment as an extra line). Keep the set size when it already fits; otherwise
-                // find the largest size (0.5 px steps) that still fits within the line limit.
+                // or a differently-aligned fragment as an extra line).
                 const cs = getComputedStyle(node);
                 const pad = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
                 const fits = f => {
@@ -527,15 +552,46 @@ async function boot() {
                     return (node.getBoundingClientRect().height - pad) <= maxLines * f * lineMul + 1;
                 };
                 let fs = size;
-                if (!fits(size)) {
-                    let lo = 6, hi = size; // lo is the fallback if nothing fits
-                    for (let i = 0; i < 12 && hi - lo > 0.5; i++) {
-                        const mid = (lo + hi) / 2;
-                        if (fits(mid)) lo = mid; else hi = mid;
+                if (overMode === 'scale') {
+                    if (!fits(size)) {
+                        if (setting('select' + multi + 'ScalingMode') === 'interval') {
+                            // Scale By Set Intervals: size, size - step, size - 2 x step ... until it fits (never below 6 px)
+                            const step = Math.max(0.5, Math.abs(setting('slider' + multi + 'ScaleInterval')));
+                            fs = size - step;
+                            while (fs > 6 && !fits(fs)) fs -= step;
+                            fs = Math.max(6, fs);
+                        } else {
+                            // Scale to Minimum Required Size: the largest size that still fits (0.05 px resolution), so it never shrinks more than needed
+                            let lo = 6, hi = size; // lo is the fallback if nothing fits
+                            for (let i = 0; i < 20 && hi - lo > 0.05; i++) {
+                                const mid = (lo + hi) / 2;
+                                if (fits(mid)) lo = mid; else hi = mid;
+                            }
+                            fs = lo;
+                        }
                     }
-                    fs = lo;
+                    st.fontSize = fs + 'px';
+                } else if (!fits(size)) { // Scroll: keep the size; show maxLines lines and scroll through the rest
+                    const V = maxLines * size * lineMul, Hc = node.getBoundingClientRect().height - pad; // viewport / whole text, content heights
+                    const continuous = !!setting('checkbox' + multi + 'ScrollContinuous');
+                    st.maxHeight = (cs.boxSizing === 'border-box' ? V + pad : V) + 'px';
+                    st.overflow = 'hidden';
+                    let D = 0;
+                    if (continuous) { // the beginning of the text follows the end after a one-line gap, so the scroll loops without a jump
+                        const wrap = document.createElement('div');
+                        wrap.dataset.spxClone = '1';
+                        wrap.style.cssText = 'pointer-events:none;padding-top:' + (size * lineMul) + 'px';
+                        Array.from(node.childNodes).forEach(c => { const cl = c.cloneNode(true); if (cl.querySelectorAll) cl.querySelectorAll('[id]').forEach(n => n.removeAttribute('id')); if (cl.removeAttribute) cl.removeAttribute('id'); wrap.appendChild(cl); });
+                        node.appendChild(wrap);
+                        D = wrap.getBoundingClientRect().top - node.getBoundingClientRect().top + size * lineMul - (parseFloat(cs.paddingTop) || 0); // measured scroll distance after which the copy sits exactly where the beginning was
+                    }
+                    const E = Math.max(1, Hc - V); // scroll offset at which the last line is visible
+                    const v = Math.max(1, setting('slider' + multi + 'ScrollSpeed')), ps = setting('slider' + multi + 'ScrollStartPauseMs') / 1000, pe = setting('slider' + multi + 'ScrollEndPauseMs') / 1000;
+                    const total = ps + E / v + pe + (continuous ? (D - E) / v : 0);
+                    const sig = [size, maxLines, E, D, v, ps, pe, continuous].join('|');
+                    scrollStates[p] = { node, E, D, v, ps, pe, continuous, total, sig, t0: prevScroll && prevScroll.sig === sig ? prevScroll.t0 : performance.now() }; // unchanged text and settings: the scroll carries on instead of restarting
+                    if (!scrollRaf) scrollRaf = requestAnimationFrame(runScrolls);
                 }
-                st.fontSize = fs + 'px';
             }
             if (overflow === 'scale') { // Shrink to Fit: back off from the configured size until it fits
                 let fs = size;
@@ -792,8 +848,12 @@ async function boot() {
     let artistRaw = '';
     // The artist line: each name is a text node; the separator between them is a span with its own font size, and
     // white-space: pre so several spaces stay several spaces (normal white-space collapses them into one).
+    let artistLineKey = null;
     const setArtistLine = () => {
         const node = el('spxArtist');
+        const key = artistRaw + '' + setting('textArtistSeparator');
+        if (key === artistLineKey && node.firstChild) return; // unchanged: keep the nodes (a scrolling artist line has its copy appended to them)
+        artistLineKey = key;
         node.replaceChildren();
         artistRaw.split(';').forEach((name, i) => {
             if (i) { const sep = document.createElement('span'); sep.className = 'spx-sep'; sep.textContent = setting('textArtistSeparator'); node.appendChild(sep); }

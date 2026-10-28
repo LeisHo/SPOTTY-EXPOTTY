@@ -142,7 +142,6 @@
     "checkboxTxtSongTitleWordWrap": true,
     "sliderTxtSongTitleMaxWidth": 2400,
     "selectTxtSongTitleOverflow": "wrap",
-    "checkboxScaleTitleMultiline": true,
     "sliderTitleMaxLines": 2,
     "checkboxTxtSongTitleOutlineEnabled": false,
     "colorTxtSongTitleOutlineColor": "#000000",
@@ -162,7 +161,6 @@
     "selectTxtArtistOverflow": "wrap",
     "textArtistSeparator": "  &  ",
     "sliderArtistSeparatorPct": 73,
-    "checkboxScaleArtistMultiline": true,
     "sliderArtistMaxLines": 2,
     "checkboxScaleArtistToMatch": true,
     "checkboxTxtArtistOutlineEnabled": false,
@@ -181,7 +179,6 @@
     "checkboxTxtAlbumDateWordWrap": true,
     "sliderTxtAlbumDateMaxWidth": 2000,
     "selectTxtAlbumDateOverflow": "wrap",
-    "checkboxScaleAlbumDateMultiline": true,
     "sliderAlbumDateMaxLines": 1,
     "checkboxScaleAlbumDateToMatch": true,
     "checkboxTxtAlbumDateOutlineEnabled": false,
@@ -564,7 +561,10 @@
     "sliderStartPlayLiftPx": 6,
     "sliderStartPlayLiftPressPx": 2,
     "sliderStartPlayLiftShadowBlur": 14,
-    "sliderStartPlayLiftShadowOpacity": 0.5
+    "sliderStartPlayLiftShadowOpacity": 0.5,
+    "selectTitleOverMaxLines": "scale",
+    "selectArtistOverMaxLines": "scale",
+    "selectAlbumDateOverMaxLines": "scale"
   },
   "layout": {
     "left": 134,
@@ -2161,11 +2161,35 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxScaleTitleMultiline"
+                        "key": "selectTitleOverMaxLines"
                       },
                       {
                         "type": "row",
                         "key": "sliderTitleMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectTitleScalingMode"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleScaleInterval"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleScrollSpeed"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleScrollStartPauseMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleScrollEndPauseMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTitleScrollContinuous"
                       },
                       {
                         "type": "row",
@@ -2193,8 +2217,14 @@
                       "checkboxTxtSongTitleWordWrap",
                       "sliderTxtSongTitleMaxWidth",
                       "selectTxtSongTitleOverflow",
-                      "checkboxScaleTitleMultiline",
+                      "selectTitleOverMaxLines",
                       "sliderTitleMaxLines",
+                      "selectTitleScalingMode",
+                      "sliderTitleScaleInterval",
+                      "sliderTitleScrollSpeed",
+                      "sliderTitleScrollStartPauseMs",
+                      "sliderTitleScrollEndPauseMs",
+                      "checkboxTitleScrollContinuous",
                       "sliderTxtSongTitleOffsetY"
                     ],
                     "subgroups": [
@@ -2375,11 +2405,35 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxScaleArtistMultiline"
+                        "key": "selectArtistOverMaxLines"
                       },
                       {
                         "type": "row",
                         "key": "sliderArtistMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectArtistScalingMode"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistScaleInterval"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistScrollSpeed"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistScrollStartPauseMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistScrollEndPauseMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxArtistScrollContinuous"
                       },
                       {
                         "type": "row",
@@ -2416,8 +2470,14 @@
                       "sliderTxtArtistMaxWidth",
                       "selectTxtArtistOverflow",
                       "textArtistSeparator",
-                      "checkboxScaleArtistMultiline",
+                      "selectArtistOverMaxLines",
                       "sliderArtistMaxLines",
+                      "selectArtistScalingMode",
+                      "sliderArtistScaleInterval",
+                      "sliderArtistScrollSpeed",
+                      "sliderArtistScrollStartPauseMs",
+                      "sliderArtistScrollEndPauseMs",
+                      "checkboxArtistScrollContinuous",
                       "sliderArtistSeparatorPct",
                       "checkboxScaleArtistToMatch",
                       "sliderTxtArtistOffsetY"
@@ -2524,11 +2584,35 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxScaleAlbumDateMultiline"
+                        "key": "selectAlbumDateOverMaxLines"
                       },
                       {
                         "type": "row",
                         "key": "sliderAlbumDateMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectAlbumDateScalingMode"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAlbumDateScaleInterval"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAlbumDateScrollSpeed"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAlbumDateScrollStartPauseMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAlbumDateScrollEndPauseMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxAlbumDateScrollContinuous"
                       },
                       {
                         "type": "row",
@@ -2551,8 +2635,14 @@
                       "checkboxTxtAlbumDateWordWrap",
                       "sliderTxtAlbumDateMaxWidth",
                       "selectTxtAlbumDateOverflow",
-                      "checkboxScaleAlbumDateMultiline",
+                      "selectAlbumDateOverMaxLines",
                       "sliderAlbumDateMaxLines",
+                      "selectAlbumDateScalingMode",
+                      "sliderAlbumDateScaleInterval",
+                      "sliderAlbumDateScrollSpeed",
+                      "sliderAlbumDateScrollStartPauseMs",
+                      "sliderAlbumDateScrollEndPauseMs",
+                      "checkboxAlbumDateScrollContinuous",
                       "checkboxScaleAlbumDateToMatch",
                       "sliderTxtAlbumDateOffsetY"
                     ],
@@ -2821,11 +2911,35 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxScaleTitleMultiline"
+                      "key": "selectTitleOverMaxLines"
                     },
                     {
                       "type": "row",
                       "key": "sliderTitleMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectTitleScalingMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScaleInterval"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScrollSpeed"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScrollStartPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScrollEndPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTitleScrollContinuous"
                     },
                     {
                       "type": "row",
@@ -2853,8 +2967,14 @@
                     "checkboxTxtSongTitleWordWrap",
                     "sliderTxtSongTitleMaxWidth",
                     "selectTxtSongTitleOverflow",
-                    "checkboxScaleTitleMultiline",
+                    "selectTitleOverMaxLines",
                     "sliderTitleMaxLines",
+                    "selectTitleScalingMode",
+                    "sliderTitleScaleInterval",
+                    "sliderTitleScrollSpeed",
+                    "sliderTitleScrollStartPauseMs",
+                    "sliderTitleScrollEndPauseMs",
+                    "checkboxTitleScrollContinuous",
                     "sliderTxtSongTitleOffsetY"
                   ],
                   "subgroups": [
@@ -3032,11 +3152,35 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxScaleArtistMultiline"
+                      "key": "selectArtistOverMaxLines"
                     },
                     {
                       "type": "row",
                       "key": "sliderArtistMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectArtistScalingMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistScaleInterval"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistScrollSpeed"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistScrollStartPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistScrollEndPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxArtistScrollContinuous"
                     },
                     {
                       "type": "row",
@@ -3073,8 +3217,14 @@
                     "sliderTxtArtistMaxWidth",
                     "selectTxtArtistOverflow",
                     "textArtistSeparator",
-                    "checkboxScaleArtistMultiline",
+                    "selectArtistOverMaxLines",
                     "sliderArtistMaxLines",
+                    "selectArtistScalingMode",
+                    "sliderArtistScaleInterval",
+                    "sliderArtistScrollSpeed",
+                    "sliderArtistScrollStartPauseMs",
+                    "sliderArtistScrollEndPauseMs",
+                    "checkboxArtistScrollContinuous",
                     "sliderArtistSeparatorPct",
                     "checkboxScaleArtistToMatch",
                     "sliderTxtArtistOffsetY"
@@ -3178,11 +3328,35 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxScaleAlbumDateMultiline"
+                      "key": "selectAlbumDateOverMaxLines"
                     },
                     {
                       "type": "row",
                       "key": "sliderAlbumDateMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectAlbumDateScalingMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateScaleInterval"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateScrollSpeed"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateScrollStartPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateScrollEndPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxAlbumDateScrollContinuous"
                     },
                     {
                       "type": "row",
@@ -3205,8 +3379,14 @@
                     "checkboxTxtAlbumDateWordWrap",
                     "sliderTxtAlbumDateMaxWidth",
                     "selectTxtAlbumDateOverflow",
-                    "checkboxScaleAlbumDateMultiline",
+                    "selectAlbumDateOverMaxLines",
                     "sliderAlbumDateMaxLines",
+                    "selectAlbumDateScalingMode",
+                    "sliderAlbumDateScaleInterval",
+                    "sliderAlbumDateScrollSpeed",
+                    "sliderAlbumDateScrollStartPauseMs",
+                    "sliderAlbumDateScrollEndPauseMs",
+                    "checkboxAlbumDateScrollContinuous",
                     "checkboxScaleAlbumDateToMatch",
                     "sliderTxtAlbumDateOffsetY"
                   ],
@@ -9418,11 +9598,35 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxScaleTitleMultiline"
+                      "key": "selectTitleOverMaxLines"
                     },
                     {
                       "type": "row",
                       "key": "sliderTitleMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectTitleScalingMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScaleInterval"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScrollSpeed"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScrollStartPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderTitleScrollEndPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTitleScrollContinuous"
                     },
                     {
                       "type": "row",
@@ -9450,8 +9654,14 @@
                     "checkboxTxtSongTitleWordWrap",
                     "sliderTxtSongTitleMaxWidth",
                     "selectTxtSongTitleOverflow",
-                    "checkboxScaleTitleMultiline",
+                    "selectTitleOverMaxLines",
                     "sliderTitleMaxLines",
+                    "selectTitleScalingMode",
+                    "sliderTitleScaleInterval",
+                    "sliderTitleScrollSpeed",
+                    "sliderTitleScrollStartPauseMs",
+                    "sliderTitleScrollEndPauseMs",
+                    "checkboxTitleScrollContinuous",
                     "sliderTxtSongTitleOffsetY"
                   ],
                   "subgroups": [
@@ -9632,11 +9842,35 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxScaleArtistMultiline"
+                      "key": "selectArtistOverMaxLines"
                     },
                     {
                       "type": "row",
                       "key": "sliderArtistMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectArtistScalingMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistScaleInterval"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistScrollSpeed"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistScrollStartPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderArtistScrollEndPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxArtistScrollContinuous"
                     },
                     {
                       "type": "row",
@@ -9673,8 +9907,14 @@
                     "sliderTxtArtistMaxWidth",
                     "selectTxtArtistOverflow",
                     "textArtistSeparator",
-                    "checkboxScaleArtistMultiline",
+                    "selectArtistOverMaxLines",
                     "sliderArtistMaxLines",
+                    "selectArtistScalingMode",
+                    "sliderArtistScaleInterval",
+                    "sliderArtistScrollSpeed",
+                    "sliderArtistScrollStartPauseMs",
+                    "sliderArtistScrollEndPauseMs",
+                    "checkboxArtistScrollContinuous",
                     "sliderArtistSeparatorPct",
                     "checkboxScaleArtistToMatch",
                     "sliderTxtArtistOffsetY"
@@ -9781,11 +10021,35 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxScaleAlbumDateMultiline"
+                      "key": "selectAlbumDateOverMaxLines"
                     },
                     {
                       "type": "row",
                       "key": "sliderAlbumDateMaxLines"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectAlbumDateScalingMode"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateScaleInterval"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateScrollSpeed"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateScrollStartPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAlbumDateScrollEndPauseMs"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxAlbumDateScrollContinuous"
                     },
                     {
                       "type": "row",
@@ -9808,8 +10072,14 @@
                     "checkboxTxtAlbumDateWordWrap",
                     "sliderTxtAlbumDateMaxWidth",
                     "selectTxtAlbumDateOverflow",
-                    "checkboxScaleAlbumDateMultiline",
+                    "selectAlbumDateOverMaxLines",
                     "sliderAlbumDateMaxLines",
+                    "selectAlbumDateScalingMode",
+                    "sliderAlbumDateScaleInterval",
+                    "sliderAlbumDateScrollSpeed",
+                    "sliderAlbumDateScrollStartPauseMs",
+                    "sliderAlbumDateScrollEndPauseMs",
+                    "checkboxAlbumDateScrollContinuous",
                     "checkboxScaleAlbumDateToMatch",
                     "sliderTxtAlbumDateOffsetY"
                   ],
@@ -10078,11 +10348,35 @@
                   },
                   {
                     "type": "row",
-                    "key": "checkboxScaleTitleMultiline"
+                    "key": "selectTitleOverMaxLines"
                   },
                   {
                     "type": "row",
                     "key": "sliderTitleMaxLines"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectTitleScalingMode"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTitleScaleInterval"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTitleScrollSpeed"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTitleScrollStartPauseMs"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderTitleScrollEndPauseMs"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTitleScrollContinuous"
                   },
                   {
                     "type": "row",
@@ -10110,8 +10404,14 @@
                   "checkboxTxtSongTitleWordWrap",
                   "sliderTxtSongTitleMaxWidth",
                   "selectTxtSongTitleOverflow",
-                  "checkboxScaleTitleMultiline",
+                  "selectTitleOverMaxLines",
                   "sliderTitleMaxLines",
+                  "selectTitleScalingMode",
+                  "sliderTitleScaleInterval",
+                  "sliderTitleScrollSpeed",
+                  "sliderTitleScrollStartPauseMs",
+                  "sliderTitleScrollEndPauseMs",
+                  "checkboxTitleScrollContinuous",
                   "sliderTxtSongTitleOffsetY"
                 ],
                 "subgroups": [
@@ -10289,11 +10589,35 @@
                   },
                   {
                     "type": "row",
-                    "key": "checkboxScaleArtistMultiline"
+                    "key": "selectArtistOverMaxLines"
                   },
                   {
                     "type": "row",
                     "key": "sliderArtistMaxLines"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectArtistScalingMode"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderArtistScaleInterval"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderArtistScrollSpeed"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderArtistScrollStartPauseMs"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderArtistScrollEndPauseMs"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxArtistScrollContinuous"
                   },
                   {
                     "type": "row",
@@ -10330,8 +10654,14 @@
                   "sliderTxtArtistMaxWidth",
                   "selectTxtArtistOverflow",
                   "textArtistSeparator",
-                  "checkboxScaleArtistMultiline",
+                  "selectArtistOverMaxLines",
                   "sliderArtistMaxLines",
+                  "selectArtistScalingMode",
+                  "sliderArtistScaleInterval",
+                  "sliderArtistScrollSpeed",
+                  "sliderArtistScrollStartPauseMs",
+                  "sliderArtistScrollEndPauseMs",
+                  "checkboxArtistScrollContinuous",
                   "sliderArtistSeparatorPct",
                   "checkboxScaleArtistToMatch",
                   "sliderTxtArtistOffsetY"
@@ -10435,11 +10765,35 @@
                   },
                   {
                     "type": "row",
-                    "key": "checkboxScaleAlbumDateMultiline"
+                    "key": "selectAlbumDateOverMaxLines"
                   },
                   {
                     "type": "row",
                     "key": "sliderAlbumDateMaxLines"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectAlbumDateScalingMode"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAlbumDateScaleInterval"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAlbumDateScrollSpeed"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAlbumDateScrollStartPauseMs"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAlbumDateScrollEndPauseMs"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxAlbumDateScrollContinuous"
                   },
                   {
                     "type": "row",
@@ -10462,8 +10816,14 @@
                   "checkboxTxtAlbumDateWordWrap",
                   "sliderTxtAlbumDateMaxWidth",
                   "selectTxtAlbumDateOverflow",
-                  "checkboxScaleAlbumDateMultiline",
+                  "selectAlbumDateOverMaxLines",
                   "sliderAlbumDateMaxLines",
+                  "selectAlbumDateScalingMode",
+                  "sliderAlbumDateScaleInterval",
+                  "sliderAlbumDateScrollSpeed",
+                  "sliderAlbumDateScrollStartPauseMs",
+                  "sliderAlbumDateScrollEndPauseMs",
+                  "checkboxAlbumDateScrollContinuous",
                   "checkboxScaleAlbumDateToMatch",
                   "sliderTxtAlbumDateOffsetY"
                 ],

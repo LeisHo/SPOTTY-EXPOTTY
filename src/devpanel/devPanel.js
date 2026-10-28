@@ -7850,17 +7850,34 @@
         // Artist only: the separator used when a track has several artists (the data stores them joined with ';')
         if (elementName === 'Artist') add({ tab, id: 'textArtistSeparator', type: 'text', label: 'Artist Name Separator:', value: ';' }, elemContent);
         if (elementName === 'Artist') add({ tab, id: 'sliderArtistSeparatorPct', type: 'slider', label: 'Separator Font Size (% Of Artist):', min: 10, max: 300, step: 1, value: 100 }, elemContent);
-        // Scale Down If Multiline (Song Title and Artist): the line limit is only shown while the checkbox is on
+        // If Over Max Lines (Song Title, Artist, Album & Date): None / Scale Down / Scroll. Only the settings of the chosen option are shown.
         const MULTI_KEYS = { 'Song Title': 'Title', 'Artist': 'Artist', 'Album & Date': 'AlbumDate' };
         if (MULTI_KEYS[elementName]) {
             const k = MULTI_KEYS[elementName];
-            const multiRow = add({ tab, id: 'checkboxScale' + k + 'Multiline', type: 'checkbox', label: 'Scale Down If Multiline:', value: false }, elemContent);
-            const maxRow = add({ tab, id: 'slider' + k + 'MaxLines', type: 'slider', label: 'Max Lines (Scales Down Past This):', min: 1, max: 8, step: 1, value: 2 }, elemContent);
-            const multiBox = multiRow.querySelector('input');
-            const syncMaxLines = () => { maxRow.style.display = multiBox.checked ? '' : 'none'; };
-            multiBox.addEventListener('change', syncMaxLines);
-            setInterval(syncMaxLines, 700); // catches the saved state restored after the panel is built
-            syncMaxLines();
+            add({ tab, id: 'select' + k + 'OverMaxLines', type: 'select', label: 'If Over Max Lines:', value: 'none', options: [{ value: 'none', text: 'None' }, { value: 'scale', text: 'Scale Down' }, { value: 'scroll', text: 'Scroll' }] }, elemContent);
+            add({ tab, id: 'slider' + k + 'MaxLines', type: 'slider', label: 'Max Lines:', min: 1, max: 8, step: 1, value: 2 }, elemContent);
+            add({ tab, id: 'select' + k + 'ScalingMode', type: 'select', label: 'Scaling Mode:', value: 'min', options: [{ value: 'min', text: 'Scale to Minimum Required Size' }, { value: 'interval', text: 'Scale By Set Intervals' }] }, elemContent);
+            add({ tab, id: 'slider' + k + 'ScaleInterval', type: 'slider', label: 'Scale Interval (Px, Negative = Smaller):', min: -50, max: -1, step: 1, value: -5 }, elemContent);
+            add({ tab, id: 'slider' + k + 'ScrollSpeed', type: 'slider', label: 'Scroll Speed (Px Per Second):', min: 5, max: 400, step: 1, value: 40 }, elemContent);
+            add({ tab, id: 'slider' + k + 'ScrollStartPauseMs', type: 'slider', label: 'Scroll Start Pause (Ms):', min: 0, max: 10000, step: 50, value: 1500 }, elemContent);
+            add({ tab, id: 'slider' + k + 'ScrollEndPauseMs', type: 'slider', label: 'Scroll End Pause (Ms):', min: 0, max: 10000, step: 50, value: 1500 }, elemContent);
+            add({ tab, id: 'checkbox' + k + 'ScrollContinuous', type: 'checkbox', label: 'Continuous Scrolling', value: false }, elemContent);
+            const rowOf = (type, dev, name) => { const e = document.getElementById(type + dev + name); return e ? e.closest('.dev-row') : null; };
+            const show = (row, on) => { if (row) row.style.display = on ? '' : 'none'; };
+            const syncOver = () => ['', 'Mobile', 'Landscape'].forEach(dev => {
+                const modeEl = document.getElementById('select' + dev + k + 'OverMaxLines');
+                if (!modeEl) return;
+                const m = modeEl.value, sm = (document.getElementById('select' + dev + k + 'ScalingMode') || {}).value;
+                show(rowOf('slider', dev, k + 'MaxLines'), m !== 'none');
+                show(rowOf('select', dev, k + 'ScalingMode'), m === 'scale');
+                show(rowOf('slider', dev, k + 'ScaleInterval'), m === 'scale' && sm === 'interval');
+                ['ScrollSpeed', 'ScrollStartPauseMs', 'ScrollEndPauseMs'].forEach(n => show(rowOf('slider', dev, k + n), m === 'scroll'));
+                show(rowOf('checkbox', dev, k + 'ScrollContinuous'), m === 'scroll');
+            });
+            elemContent.addEventListener('change', syncOver);
+            elemContent.addEventListener('input', syncOver);
+            setInterval(syncOver, 700); // catches the saved state restored after the panel is built
+            syncOver();
         }
         // Scale Down to Match: this element's font size is capped at the size of the element above it (Artist -> Song Title, Album & Date -> Artist)
         if (elementName === 'Artist') add({ tab, id: 'checkboxScaleArtistToMatch', type: 'checkbox', label: 'Scale Down to Match Song Title', value: false }, elemContent);
