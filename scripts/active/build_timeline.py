@@ -55,6 +55,8 @@ for f in sorted(glob.glob(os.path.join(BASE, "*.csv"))):
                 "a": r["Artist Name(s)"],
                 "al": r["Album Name"],
                 "ry": (r.get("Release Date") or "")[:4],
+                "rd": (r.get("Release Date") or "").strip(),
+                "du": int(num(r.get("Duration (ms)"), 0) or 0),
                 "t": r["Added At"],
                 "p": pidx,
                 "d": d or 0,

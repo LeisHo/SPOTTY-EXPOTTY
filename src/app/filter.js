@@ -5,13 +5,34 @@
 // follow the "Songs With No Audio Data" setting (hide = they fail). Nothing is removed from the timeline: failing
 // songs are drawn gray and are not played (main.js / timeline.js use passes(i)).
 import { setting } from './settings.js';
-import { featureIconHtml, ICON_BOX } from './iconStyles.js';
+import { featureIconHtml, customIconHtml, ICON_BOX } from './iconStyles.js';
 
+// Name Lengths / Song Date / Song Length: each is shown (and applied) only while its dev-panel checkbox is on. Icons are simple stand-ins
+// (title letter, person, disc, calendar, clock) until the owner's own icon files exist. `get` returns the song's value, or null if it has none.
+const pad2 = n => String(n).padStart(2, '0');
+const DAY = 86400000;
+const dateOf = s => { const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(s.rd || ''); return m ? Date.UTC(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1) / DAY : null; };
+const fmtDate = v => { const d = new Date(Math.round(v) * DAY); return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate()); };
+const fmtLen = v => { const t = Math.round(v); return Math.floor(t / 60) + ':' + pad2(t % 60); };
+const lenOf = k => s => (typeof s[k] === 'string' && s[k].length ? s[k].length : null);
+const CIRCLE = (cx, cy, r) => `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0z`;
+const EXTRA_ICONS = {
+    ln: [['M7 7h28.5v6.5H24.6V36h-6.7V13.5H7z', 0]],
+    la: [[CIRCLE(21.26, 13, 8), 0], ['M5 37c0-8.5 7-13 16.26-13S37.5 28.5 37.5 37z', 0]],
+    lb: [[CIRCLE(21.26, 21.26, 17.26) + CIRCLE(21.26, 21.26, 4.5), 1]],
+    rd: [['M11 4h4.5v5h11.5V4h4.5v5h4a2.5 2.5 0 0 1 2.5 2.5v22a2.5 2.5 0 0 1-2.5 2.5H7a2.5 2.5 0 0 1-2.5-2.5v-22A2.5 2.5 0 0 1 7 9h4zM9 18v15.5h24.5V18z', 1]],
+    du: [[CIRCLE(21.26, 21.26, 17.26) + CIRCLE(21.26, 21.26, 13.5), 1], ['M19.4 11.5h3.7v9.2l6.4 3.7-1.85 3.2-8.25-4.8z', 0]],
+};
 const FEATURES = [
     { key: 'tp', label: 'Tempo', unit: ' BPM', step: 'any', dp: 0 },
     { key: 'v', label: 'Valence', unit: '', step: 'any', dp: 1 },
     { key: 'dn', label: 'Danceability', unit: '', step: 'any', dp: 1 },
     { key: 'e', label: 'Energy', unit: '', step: 'any', dp: 1 },
+    { key: 'ln', label: 'Song Title Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('n') },
+    { key: 'la', label: 'Artist Name Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('a') },
+    { key: 'lb', label: 'Album Title Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('al') },
+    { key: 'rd', label: 'Song Date', unit: '', dp: 0, gate: 'checkboxFilterSongDate', get: dateOf, format: fmtDate },
+    { key: 'du', label: 'Song Length', unit: '', dp: 0, gate: 'checkboxFilterSongLength', get: s => (typeof s.du === 'number' && s.du > 0 ? s.du / 1000 : null), format: fmtLen },
 ];
 const STORE = 'spxFilter';
 // the panel shows an icon instead of each feature's name (the name is its tooltip); the icon is the dev panel's choice for that feature
@@ -20,7 +41,8 @@ export const FEATURE_ICON_SETTING = { tp: 'selectTempoIconStyle', v: 'selectVale
 // tempo 0 is Spotify's "no data" placeholder, so it counts as missing like a null does
 // A row whose tempo, valence and danceability are all exactly 0 has no audio analysis (3 songs): those 3 values are missing, not real zeros.
 const noAnalysis = s => s.tp === 0 && s.v === 0 && s.dn === 0;
-const valueOf = (s, k) => { const v = s[k]; return typeof v === 'number' && !(k !== 'e' && noAnalysis(s)) && !(k === 'tp' && v <= 0) ? v : null; };
+const valueOf = (s, k) => { const x = FEATURES.find(f => f.key === k); if (x && x.get) return x.get(s);
+     const v = s[k]; return typeof v === 'number' && !(k !== 'e' && noAnalysis(s)) && !(k === 'tp' && v <= 0) ? v : null; };
 
 export function createFilter(songs, { host, onChange }) {
     // dataset extents
@@ -41,7 +63,10 @@ export function createFilter(songs, { host, onChange }) {
         });
     } catch (e) { /* storage blocked or unreadable */ }
 
-    const narrowed = f => range[f.key][0] > ext[f.key][0] || range[f.key][1] < ext[f.key][1];
+    const gateOn = {};
+    const readGates = () => FEATURES.forEach(f => { gateOn[f.key] = !f.gate || !!setting(f.gate); });
+    readGates();
+    const narrowed = f => gateOn[f.key] && (range[f.key][0] > ext[f.key][0] || range[f.key][1] < ext[f.key][1]);
     const active = () => FEATURES.some(narrowed);
     function passes(i) {
         const s = songs[i];
@@ -99,7 +124,7 @@ export function createFilter(songs, { host, onChange }) {
     host.appendChild(panel);
     const rowsEl = panel.querySelector('.spx-flt-rows'), countEl = panel.querySelector('.spx-flt-count');
     const rows = {};
-    const fmt = (f, v) => v.toFixed(f.dp) + f.unit;
+    const fmt = (f, v) => f.format ? f.format(v) : v.toFixed(f.dp) + f.unit;
 
     FEATURES.forEach(f => {
         const [lo, hi] = ext[f.key];
@@ -135,12 +160,19 @@ export function createFilter(songs, { host, onChange }) {
         r.max.addEventListener('input', () => fromInputs('max'));
     });
     function refresh() {
-        FEATURES.forEach(f => { const r = rows[f.key], v = setting(FEATURE_ICON_SETTING[f.key]); if (r.ico.dataset.icon !== String(v)) { r.ico.dataset.icon = String(v); r.ico.innerHTML = featureIconHtml(f.key, v); } });
+        readGates();
+        let firstShown = true;
+        FEATURES.forEach(f => { const r = rows[f.key], shown = gateOn[f.key]; r.row.style.display = shown ? '' : 'none'; r.row.style.marginTop = shown && firstShown ? '0' : ''; if (shown) firstShown = false; });
+        FEATURES.forEach(f => {
+            const r = rows[f.key];
+            if (EXTRA_ICONS[f.key]) { if (!r.ico.dataset.icon) { r.ico.dataset.icon = 'x'; r.ico.innerHTML = customIconHtml(EXTRA_ICONS[f.key]); } return; }
+            const v = setting(FEATURE_ICON_SETTING[f.key]); if (r.ico.dataset.icon !== String(v)) { r.ico.dataset.icon = String(v); r.ico.innerHTML = featureIconHtml(f.key, v); }
+        });
         FEATURES.forEach(f => {
             const r = rows[f.key], [lo, hi] = ext[f.key], [a, b] = range[f.key];
             r.min.value = a; r.max.value = b;
             r.val.textContent = fmt(f, a) + ' - ' + fmt(f, b);
-            r.lo.textContent = lo.toFixed(f.dp); r.hi.textContent = hi.toFixed(f.dp); // the dataset's own lowest / highest value at the two ends
+            r.lo.textContent = f.format ? f.format(lo) : lo.toFixed(f.dp); r.hi.textContent = f.format ? f.format(hi) : hi.toFixed(f.dp); // the dataset's own lowest / highest value at the two ends
             const span = hi - lo || 1;
             r.fill.style.left = ((a - lo) / span * 100) + '%';
             r.fill.style.width = ((b - a) / span * 100) + '%';

@@ -40,4 +40,6 @@ export function applySongDataIcon(svg, i) { setIcon(svg, 'sdata' + i, shapes(pic
 // The four audio-feature icons (filter panel and Song Data row): key is tp / v / dn / e. Returns the icon's SVG markup and its shapes.
 export const featureIcon = (key, i) => pick(key, iconIndex(i));
 export const featureIconHtml = (key, i) => shapes(featureIcon(key, i));
+// Any other icon (the filter panel's name / date / length rows): a list of [pathData, evenOdd] shapes on the same box.
+export const customIconHtml = icon => shapes({ p: icon });
 export { ICON_BOX };
