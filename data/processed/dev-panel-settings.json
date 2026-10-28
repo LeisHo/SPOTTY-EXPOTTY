@@ -5,8 +5,8 @@
     "checkboxPlayPreviewClips": false,
     "sliderScrubVolume": 0.7,
     "sliderClipStartMin": 0,
-    "sliderClipStartMax": 0,
-    "checkboxStartAtBuffer": false,
+    "sliderClipStartMax": 28,
+    "checkboxStartAtBuffer": true,
     "sliderClipFadeOut": 500,
     "checkboxColdStartClips": true,
     "checkboxRandomStartSong": true,
@@ -20,12 +20,12 @@
     "checkboxInvertZoomDrag": false,
     "sliderDefaultTimelineSpanDays": 4900,
     "checkboxFullScaleOnStartup": true,
-    "checkboxHandoffEnabled": true,
+    "checkboxHandoffEnabled": false,
     "checkboxSpotifyLoginOnStart": true,
     "buttonSpotifyLogin": "",
     "checkboxShowSpotifyPlayer": false,
     "sliderHandoffCrossfade": 0,
-    "sliderHandoffDelay": 100,
+    "sliderHandoffDelay": 30000,
     "sliderHandoffStartOffset": 0,
     "colorTimelineAccent": "#ffffff",
     "colorTimelinePlayhead": "#ffffff",
@@ -142,7 +142,14 @@
     "checkboxTxtSongTitleWordWrap": true,
     "sliderTxtSongTitleMaxWidth": 2400,
     "selectTxtSongTitleOverflow": "wrap",
+    "selectTitleOverMaxLines": "scale",
     "sliderTitleMaxLines": 2,
+    "selectTitleScalingMode": "min",
+    "sliderTitleScaleInterval": -5,
+    "sliderTitleScrollSpeed": 40,
+    "sliderTitleScrollStartPauseMs": 1500,
+    "sliderTitleScrollEndPauseMs": 1500,
+    "checkboxTitleScrollContinuous": false,
     "checkboxTxtSongTitleOutlineEnabled": false,
     "colorTxtSongTitleOutlineColor": "#000000",
     "sliderTxtSongTitleOutlineThickness": 2,
@@ -161,7 +168,14 @@
     "selectTxtArtistOverflow": "wrap",
     "textArtistSeparator": "  &  ",
     "sliderArtistSeparatorPct": 73,
+    "selectArtistOverMaxLines": "scale",
     "sliderArtistMaxLines": 2,
+    "selectArtistScalingMode": "min",
+    "sliderArtistScaleInterval": -5,
+    "sliderArtistScrollSpeed": 40,
+    "sliderArtistScrollStartPauseMs": 1500,
+    "sliderArtistScrollEndPauseMs": 1500,
+    "checkboxArtistScrollContinuous": false,
     "checkboxScaleArtistToMatch": true,
     "checkboxTxtArtistOutlineEnabled": false,
     "colorTxtArtistOutlineColor": "#000000",
@@ -179,7 +193,14 @@
     "checkboxTxtAlbumDateWordWrap": true,
     "sliderTxtAlbumDateMaxWidth": 2000,
     "selectTxtAlbumDateOverflow": "wrap",
+    "selectAlbumDateOverMaxLines": "scale",
     "sliderAlbumDateMaxLines": 1,
+    "selectAlbumDateScalingMode": "min",
+    "sliderAlbumDateScaleInterval": -5,
+    "sliderAlbumDateScrollSpeed": 40,
+    "sliderAlbumDateScrollStartPauseMs": 1500,
+    "sliderAlbumDateScrollEndPauseMs": 1500,
+    "checkboxAlbumDateScrollContinuous": false,
     "checkboxScaleAlbumDateToMatch": true,
     "checkboxTxtAlbumDateOutlineEnabled": false,
     "colorTxtAlbumDateOutlineColor": "#000000",
@@ -393,6 +414,26 @@
     "sliderFrameRateRefreshMs": 500,
     "checkboxLogPlayback": true,
     "checkboxLogPreload": true,
+    "checkboxModEnabled": true,
+    "sliderModTempo": 5,
+    "sliderModKey": 8,
+    "sliderModOctave": 0,
+    "sliderModFineCents": 0,
+    "selectModRelative": "off",
+    "sliderModBass": 0,
+    "sliderModMid": 0,
+    "sliderModTreble": 0,
+    "sliderModLowPass": 20000,
+    "sliderModHighPass": 20,
+    "sliderModGain": 0,
+    "sliderModPan": 0,
+    "checkboxModMono": false,
+    "sliderModDistortion": 0,
+    "sliderModEchoMix": 0,
+    "sliderModEchoTime": 300,
+    "sliderModEchoFeedback": 35,
+    "sliderModReverbMix": 0,
+    "sliderModReverbDecay": 1.8,
     "checkboxSnapshotViewport": true,
     "checkboxSnapshotMouse": true,
     "checkboxSnapshotPlayback": true,
@@ -561,16 +602,13 @@
     "sliderStartPlayLiftPx": 6,
     "sliderStartPlayLiftPressPx": 2,
     "sliderStartPlayLiftShadowBlur": 14,
-    "sliderStartPlayLiftShadowOpacity": 0.5,
-    "selectTitleOverMaxLines": "scale",
-    "selectArtistOverMaxLines": "scale",
-    "selectAlbumDateOverMaxLines": "scale"
+    "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
     "left": 134,
     "top": 56,
-    "width": 350,
-    "height": 420
+    "width": 568,
+    "height": 650
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -16955,6 +16993,117 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Modifiers",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "checkboxModEnabled"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModTempo"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModKey"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModOctave"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModFineCents"
+                },
+                {
+                  "type": "row",
+                  "key": "selectModRelative"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModBass"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModMid"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModTreble"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModLowPass"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModHighPass"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModGain"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModPan"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxModMono"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModDistortion"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModEchoMix"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModEchoTime"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModEchoFeedback"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModReverbMix"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderModReverbDecay"
+                }
+              ],
+              "rowKeys": [
+                "checkboxModEnabled",
+                "sliderModTempo",
+                "sliderModKey",
+                "sliderModOctave",
+                "sliderModFineCents",
+                "selectModRelative",
+                "sliderModBass",
+                "sliderModMid",
+                "sliderModTreble",
+                "sliderModLowPass",
+                "sliderModHighPass",
+                "sliderModGain",
+                "sliderModPan",
+                "checkboxModMono",
+                "sliderModDistortion",
+                "sliderModEchoMix",
+                "sliderModEchoTime",
+                "sliderModEchoFeedback",
+                "sliderModReverbMix",
+                "sliderModReverbDecay"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -17044,6 +17193,114 @@
             "rowKeys": [
               "checkboxAutoNextSong",
               "sliderNoPreviewHoldSeconds"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:Modifiers",
+            "items": [
+              {
+                "type": "row",
+                "key": "checkboxModEnabled"
+              },
+              {
+                "type": "row",
+                "key": "sliderModTempo"
+              },
+              {
+                "type": "row",
+                "key": "sliderModKey"
+              },
+              {
+                "type": "row",
+                "key": "sliderModOctave"
+              },
+              {
+                "type": "row",
+                "key": "sliderModFineCents"
+              },
+              {
+                "type": "row",
+                "key": "selectModRelative"
+              },
+              {
+                "type": "row",
+                "key": "sliderModBass"
+              },
+              {
+                "type": "row",
+                "key": "sliderModMid"
+              },
+              {
+                "type": "row",
+                "key": "sliderModTreble"
+              },
+              {
+                "type": "row",
+                "key": "sliderModLowPass"
+              },
+              {
+                "type": "row",
+                "key": "sliderModHighPass"
+              },
+              {
+                "type": "row",
+                "key": "sliderModGain"
+              },
+              {
+                "type": "row",
+                "key": "sliderModPan"
+              },
+              {
+                "type": "row",
+                "key": "checkboxModMono"
+              },
+              {
+                "type": "row",
+                "key": "sliderModDistortion"
+              },
+              {
+                "type": "row",
+                "key": "sliderModEchoMix"
+              },
+              {
+                "type": "row",
+                "key": "sliderModEchoTime"
+              },
+              {
+                "type": "row",
+                "key": "sliderModEchoFeedback"
+              },
+              {
+                "type": "row",
+                "key": "sliderModReverbMix"
+              },
+              {
+                "type": "row",
+                "key": "sliderModReverbDecay"
+              }
+            ],
+            "rowKeys": [
+              "checkboxModEnabled",
+              "sliderModTempo",
+              "sliderModKey",
+              "sliderModOctave",
+              "sliderModFineCents",
+              "selectModRelative",
+              "sliderModBass",
+              "sliderModMid",
+              "sliderModTreble",
+              "sliderModLowPass",
+              "sliderModHighPass",
+              "sliderModGain",
+              "sliderModPan",
+              "checkboxModMono",
+              "sliderModDistortion",
+              "sliderModEchoMix",
+              "sliderModEchoTime",
+              "sliderModEchoFeedback",
+              "sliderModReverbMix",
+              "sliderModReverbDecay"
             ],
             "subgroups": []
           }
@@ -20285,10 +20542,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxMobileScaleArtistMultiline"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderMobileArtistMaxLines"
                       },
                       {
@@ -20300,7 +20553,6 @@
                       "sliderMobileTxtArtistFontSize",
                       "sliderMobileTxtArtistMaxWidth",
                       "textArtistSeparator",
-                      "checkboxMobileScaleArtistMultiline",
                       "sliderMobileArtistMaxLines",
                       "sliderMobileTxtArtistOffsetY"
                     ],
@@ -20680,10 +20932,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxMobileScaleArtistMultiline"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderMobileArtistMaxLines"
                     },
                     {
@@ -20695,7 +20943,6 @@
                     "sliderMobileTxtArtistFontSize",
                     "sliderMobileTxtArtistMaxWidth",
                     "textArtistSeparator",
-                    "checkboxMobileScaleArtistMultiline",
                     "sliderMobileArtistMaxLines",
                     "sliderMobileTxtArtistOffsetY"
                   ],
@@ -24515,10 +24762,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxMobileScaleArtistMultiline"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderMobileArtistMaxLines"
                     },
                     {
@@ -24530,7 +24773,6 @@
                     "sliderMobileTxtArtistFontSize",
                     "sliderMobileTxtArtistMaxWidth",
                     "textArtistSeparator",
-                    "checkboxMobileScaleArtistMultiline",
                     "sliderMobileArtistMaxLines",
                     "sliderMobileTxtArtistOffsetY"
                   ],
@@ -24910,10 +25152,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "checkboxMobileScaleArtistMultiline"
-                  },
-                  {
-                    "type": "row",
                     "key": "sliderMobileArtistMaxLines"
                   },
                   {
@@ -24925,7 +25163,6 @@
                   "sliderMobileTxtArtistFontSize",
                   "sliderMobileTxtArtistMaxWidth",
                   "textArtistSeparator",
-                  "checkboxMobileScaleArtistMultiline",
                   "sliderMobileArtistMaxLines",
                   "sliderMobileTxtArtistOffsetY"
                 ],
@@ -28466,6 +28703,15 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Modifiers",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [],
@@ -28491,6 +28737,12 @@
           },
           {
             "key": "mobile:No Preview",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Modifiers",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -29883,10 +30135,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxLandscapeScaleArtistMultiline"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderLandscapeArtistMaxLines"
                       },
                       {
@@ -29898,7 +30146,6 @@
                       "sliderLandscapeTxtArtistFontSize",
                       "sliderLandscapeTxtArtistMaxWidth",
                       "textArtistSeparator",
-                      "checkboxLandscapeScaleArtistMultiline",
                       "sliderLandscapeArtistMaxLines",
                       "sliderLandscapeTxtArtistOffsetY"
                     ],
@@ -30278,10 +30525,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxLandscapeScaleArtistMultiline"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderLandscapeArtistMaxLines"
                     },
                     {
@@ -30293,7 +30536,6 @@
                     "sliderLandscapeTxtArtistFontSize",
                     "sliderLandscapeTxtArtistMaxWidth",
                     "textArtistSeparator",
-                    "checkboxLandscapeScaleArtistMultiline",
                     "sliderLandscapeArtistMaxLines",
                     "sliderLandscapeTxtArtistOffsetY"
                   ],
@@ -34113,10 +34355,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxLandscapeScaleArtistMultiline"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderLandscapeArtistMaxLines"
                     },
                     {
@@ -34128,7 +34366,6 @@
                     "sliderLandscapeTxtArtistFontSize",
                     "sliderLandscapeTxtArtistMaxWidth",
                     "textArtistSeparator",
-                    "checkboxLandscapeScaleArtistMultiline",
                     "sliderLandscapeArtistMaxLines",
                     "sliderLandscapeTxtArtistOffsetY"
                   ],
@@ -34508,10 +34745,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "checkboxLandscapeScaleArtistMultiline"
-                  },
-                  {
-                    "type": "row",
                     "key": "sliderLandscapeArtistMaxLines"
                   },
                   {
@@ -34523,7 +34756,6 @@
                   "sliderLandscapeTxtArtistFontSize",
                   "sliderLandscapeTxtArtistMaxWidth",
                   "textArtistSeparator",
-                  "checkboxLandscapeScaleArtistMultiline",
                   "sliderLandscapeArtistMaxLines",
                   "sliderLandscapeTxtArtistOffsetY"
                 ],
@@ -38064,6 +38296,15 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Modifiers",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [],
@@ -38089,6 +38330,12 @@
           },
           {
             "key": "landscape:No Preview",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:Modifiers",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -38598,17 +38845,17 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": false,
-    "desktop:Text": false,
+    "desktop:UI Layout": true,
+    "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
     "desktop:Artist": true,
-    "desktop:Album & Date": false,
+    "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": false,
+    "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
@@ -38627,12 +38874,12 @@
     "desktop:New Group (14)": true,
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": false,
+    "desktop:Filter Button": true,
     "desktop:New Group (16)": true,
     "desktop:New Group (17)": true,
-    "desktop:New Group (18)": false,
+    "desktop:New Group (18)": true,
     "desktop:New Group (23)": true,
-    "desktop:New Group (20)": false,
+    "desktop:New Group (20)": true,
     "desktop:New Group (22)": true,
     "desktop:New Group (21)": true,
     "desktop:New Group (19)": true,
@@ -38654,10 +38901,11 @@
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
     "desktop:Filter Panel Shadow": true,
-    "desktop:Scrub Audio": true,
-    "desktop:New Group (2)": true,
-    "desktop:Spotify Handoff": true,
+    "desktop:Scrub Audio": false,
+    "desktop:New Group (2)": false,
+    "desktop:Spotify Handoff": false,
     "desktop:No Preview": true,
+    "desktop:Modifiers": false,
     "desktop:New Group": true,
     "desktop:Scrub Preload": true,
     "desktop:Scrub Input": true,
@@ -38752,6 +39000,7 @@
     "mobile:New Group (2)": false,
     "mobile:Spotify Handoff": true,
     "mobile:No Preview": false,
+    "mobile:Modifiers": false,
     "mobile:New Group": false,
     "mobile:Scrub Preload": false,
     "mobile:Scrub Input": false,
@@ -38846,6 +39095,7 @@
     "landscape:New Group (2)": false,
     "landscape:Spotify Handoff": false,
     "landscape:No Preview": false,
+    "landscape:Modifiers": false,
     "landscape:New Group": false,
     "landscape:Scrub Preload": false,
     "landscape:Scrub Input": false,
@@ -39668,7 +39918,9 @@
     "rangeBarSongTickWidth": null,
     "desktop:New Group (28)": "TICKS",
     "mobile:New Group (28)": "TICKS",
-    "landscape:New Group (28)": "TICKS"
+    "landscape:New Group (28)": "TICKS",
+    "mobile:Modifiers": null,
+    "landscape:Modifiers": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
