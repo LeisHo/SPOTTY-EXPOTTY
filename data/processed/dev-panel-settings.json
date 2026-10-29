@@ -40,7 +40,7 @@
     "checkboxSongTickInvert": true,
     "checkboxSongTickBoth": false,
     "checkboxTicksBehindBars": true,
-    "sliderSongTickOpacity": 41,
+    "sliderSongTickOpacity": 27,
     "sliderSongTickMinSpacing": 0.1,
     "checkboxSongTickScale": true,
     "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":1,\"h1\":{\"x\":0.31997971323844665,\"y\":0}},{\"x\":1,\"y\":0.04431432088216147,\"h2\":{\"x\":-0.5177484789764912,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
