@@ -41447,7 +41447,7 @@
     "desktop:Match Graph Colors": false,
     "desktop:Opacity Per Zoom": true,
     "desktop:Opacity Per Width": false,
-    "desktop:Opacity On Zoom": true,
+    "desktop:Opacity On Zoom": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
