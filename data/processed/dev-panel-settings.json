@@ -43263,10 +43263,13 @@
       "spxTitle": {
         "layout": {
           "position": {
-            "mode": "relative",
-            "relativeTo": "spxArtist",
-            "myAnchor": "bottom-center",
-            "targetAnchor": "top-center"
+            "mode": "anchor",
+            "horizontal": {
+              "anchor": "center"
+            },
+            "vertical": {
+              "anchor": "top"
+            }
           },
           "size": {
             "width": {
@@ -43295,9 +43298,9 @@
         "layout": {
           "position": {
             "mode": "relative",
-            "relativeTo": "spxMeta",
-            "myAnchor": "bottom-center",
-            "targetAnchor": "top-center",
+            "relativeTo": "spxTitle",
+            "myAnchor": "top-center",
+            "targetAnchor": "bottom-center",
             "gap": "0px"
           },
           "size": {
