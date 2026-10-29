@@ -8374,10 +8374,15 @@
             // extra filters in the panel (off = no slider and no filtering by it)
             { tab, group: FLB, id: 'checkboxFilterNameLengths', type: 'checkbox', label: 'Name Lengths (Song Title, Artist, Album Title)', value: false },
             { tab, group: FLB, id: 'checkboxFilterIndividualArtists', type: 'checkbox', label: 'Individual Artists (Each Artist Name Counted On Its Own; A Song Passes If Any Artist Fits)', value: false },
+            { tab, group: FLB, id: 'checkboxFilterShowValueNameLengths', type: 'checkbox', label: 'Show Value Under Each Name Length Slider', value: false },
             { tab, group: FLB, id: 'checkboxFilterSongDate', type: 'checkbox', label: 'Song Date (Release Date)', value: false },
+            { tab, group: FLB, id: 'checkboxFilterShowValueSongDate', type: 'checkbox', label: 'Show Value Under The Song Date Slider (Years)', value: false },
             { tab, group: FLB, id: 'checkboxFilterSongLength', type: 'checkbox', label: 'Song Length', value: false },
+            { tab, group: FLB, id: 'checkboxFilterShowValueSongLength', type: 'checkbox', label: 'Show Value Under The Song Length Slider', value: false },
             // the panel
             { tab, group: FLB, id: 'checkboxFilterShowNumbers', type: 'checkbox', label: 'Panel: Show Numbers', value: true },
+            { tab, group: FLB, id: 'checkboxFilterShowValueOriginal', type: 'checkbox', label: 'Show Value Under The Tempo, Valence, Danceability And Energy Sliders', value: false },
+            { tab, group: FLB, id: 'sliderFilterValueOffsetY', type: 'slider', label: 'Shown Values: Y Offset (Px, All Sliders)', min: -40, max: 40, step: 1, value: 0 },
             { tab, group: FLB, id: 'checkboxFilterShowRangeText', type: 'checkbox', label: 'Panel: Show Selected Range Text (36 BPM - 209 BPM):', value: false },
             { tab, group: FLB, id: 'checkboxFilterShowCount', type: 'checkbox', label: 'Panel: Show Matching Song Count', value: false },
             { tab, group: FLB, id: 'checkboxFilterCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },

@@ -214,6 +214,11 @@
 .spx-flt-nums { display: flex; justify-content: space-between; align-items: baseline; font-size: .9em; opacity: .8; margin-top: var(--spx-flt-nums-gap, 1px); } /* the numbers' distance from their slider (negative = closer) */
 .spx-flt-nums .spx-flt-val { flex: 1; text-align: center; padding: 0 4px; }
 .spx-flt-row.on .spx-flt-val { color: var(--flt-accent); }
+.spx-flt-cur { display: none; text-align: center; font-size: .9em; line-height: 1.2; opacity: .8; pointer-events: none; margin-top: var(--spx-flt-nums-gap, 1px); transform: translateY(calc(var(--spx-flt-cur-y, 0) * 1px)); }
+.spx-flt-row.show-cur .spx-flt-cur { display: block; }
+.spx-flt-row.show-cur .spx-flt-nums .spx-flt-val { display: none; }
+.spx-filter-panel:not(.no-nums) .spx-flt-row.show-cur .spx-flt-cur { margin-top: -1.2em; } /* the slider's end numbers share this line: the value sits between them */
+.spx-flt-row.on .spx-flt-cur { color: var(--flt-accent); }
 .spx-filter-panel.no-nums .spx-flt-nums { display: none; }
 .spx-filter-panel.no-range-text .spx-flt-nums .spx-flt-val { display: none; }
 .spx-flt-count { text-align: center; opacity: .75; margin-top: 2px; font-size: var(--spx-flt-count-font, 12px); }

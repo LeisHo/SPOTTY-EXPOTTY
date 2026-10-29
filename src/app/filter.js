@@ -14,6 +14,7 @@ const pad2 = n => String(n).padStart(2, '0');
 const DAY = 86400000;
 const dateOf = s => { const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(s.od || s.rd || ''); /* od = the song's own earlier date (merge_original_dates.py), else the album's */ return m && +m[1] >= 1000 ? Date.UTC(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1) / DAY : null; };
 const fmtDate = v => { const d = new Date(Math.round(v) * DAY); return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate()); };
+const fmtYear = v => String(new Date(Math.round(v) * DAY).getUTCFullYear()); // Song Date shows only the year
 const fmtLen = v => { const t = Math.round(v); return Math.floor(t / 60) + ':' + pad2(t % 60); };
 let indiv = false; // Individual Artists: each artist of a song is its own length instead of the joined text
 const artistLens = s => { const p = typeof s.a === 'string' ? s.a.split(';').map(x => x.trim()).filter(Boolean) : []; return indiv ? (p.length ? p.map(x => x.length) : null) : (typeof s.a === 'string' && s.a.length ? s.a.length : null); };
@@ -27,15 +28,15 @@ const EXTRA_ICONS = {
     du: [[CIRCLE(21.26, 21.26, 17.26) + CIRCLE(21.26, 21.26, 13.5), 1], ['M19.4 11.5h3.7v9.2l6.4 3.7-1.85 3.2-8.25-4.8z', 0]],
 };
 const FEATURES = [
-    { key: 'tp', label: 'Tempo', unit: ' BPM', step: 'any', dp: 0 },
-    { key: 'v', label: 'Valence', unit: '', step: 'any', dp: 1 },
-    { key: 'dn', label: 'Danceability', unit: '', step: 'any', dp: 1 },
-    { key: 'e', label: 'Energy', unit: '', step: 'any', dp: 1 },
-    { key: 'ln', label: 'Song Title Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('n') },
-    { key: 'la', label: 'Artist Name Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: artistLens },
-    { key: 'lb', label: 'Album Title Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('al') },
-    { key: 'rd', label: 'Song Date', unit: '', dp: 0, gate: 'checkboxFilterSongDate', get: dateOf, format: fmtDate },
-    { key: 'du', label: 'Song Length', unit: '', dp: 0, gate: 'checkboxFilterSongLength', get: s => (typeof s.du === 'number' && s.du > 0 ? s.du / 1000 : null), format: fmtLen },
+    { key: 'tp', showVal: 'checkboxFilterShowValueOriginal', label: 'Tempo', unit: ' BPM', step: 'any', dp: 0 },
+    { key: 'v', showVal: 'checkboxFilterShowValueOriginal', label: 'Valence', unit: '', step: 'any', dp: 1 },
+    { key: 'dn', showVal: 'checkboxFilterShowValueOriginal', label: 'Danceability', unit: '', step: 'any', dp: 1 },
+    { key: 'e', showVal: 'checkboxFilterShowValueOriginal', label: 'Energy', unit: '', step: 'any', dp: 1 },
+    { key: 'ln', showVal: 'checkboxFilterShowValueNameLengths', label: 'Song Title Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('n') },
+    { key: 'la', showVal: 'checkboxFilterShowValueNameLengths', label: 'Artist Name Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: artistLens },
+    { key: 'lb', showVal: 'checkboxFilterShowValueNameLengths', label: 'Album Title Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('al') },
+    { key: 'rd', showVal: 'checkboxFilterShowValueSongDate', label: 'Song Date', unit: '', dp: 0, gate: 'checkboxFilterSongDate', get: dateOf, format: fmtYear },
+    { key: 'du', showVal: 'checkboxFilterShowValueSongLength', label: 'Song Length', unit: '', dp: 0, gate: 'checkboxFilterSongLength', get: s => (typeof s.du === 'number' && s.du > 0 ? s.du / 1000 : null), format: fmtLen },
 ];
 const STORE = 'spxFilter';
 // the panel shows an icon instead of each feature's name (the name is its tooltip); the icon is the dev panel's choice for that feature
@@ -150,9 +151,10 @@ export function createFilter(songs, { host, onChange }) {
             <div class="spx-flt-range"><div class="spx-flt-track"><div class="spx-flt-fill"></div></div>
             <input type="range" class="spx-flt-min" min="${lo}" max="${hi}" step="any" aria-label="${f.label} minimum">
             <input type="range" class="spx-flt-max" min="${lo}" max="${hi}" step="any" aria-label="${f.label} maximum"></div>
-            <div class="spx-flt-nums"><span class="spx-flt-lo"></span><span class="spx-flt-val"></span><span class="spx-flt-hi"></span></div>`;
+            <div class="spx-flt-nums"><span class="spx-flt-lo"></span><span class="spx-flt-val"></span><span class="spx-flt-hi"></span></div>
+            <div class="spx-flt-cur"></div>`;
         rowsEl.appendChild(row);
-        const r = rows[f.key] = { f, row, ico: row.querySelector('.spx-flt-ico svg'), lo: row.querySelector('.spx-flt-lo'), hi: row.querySelector('.spx-flt-hi'), val: row.querySelector('.spx-flt-val'), fill: row.querySelector('.spx-flt-fill'), min: row.querySelector('.spx-flt-min'), max: row.querySelector('.spx-flt-max') };
+        const r = rows[f.key] = { f, row, ico: row.querySelector('.spx-flt-ico svg'), lo: row.querySelector('.spx-flt-lo'), hi: row.querySelector('.spx-flt-hi'), val: row.querySelector('.spx-flt-val'), cur: row.querySelector('.spx-flt-cur'), fill: row.querySelector('.spx-flt-fill'), min: row.querySelector('.spx-flt-min'), max: row.querySelector('.spx-flt-max') };
         const fromInputs = which => {
             let a = parseFloat(r.min.value), b = parseFloat(r.max.value);
             if (a > b) { if (which === 'min') a = b; else b = a; }
@@ -188,6 +190,7 @@ export function createFilter(songs, { host, onChange }) {
             const r = rows[f.key], [lo, hi] = ext[f.key], [a, b] = range[f.key];
             r.min.value = a; r.max.value = b;
             r.val.textContent = fmt(f, a) + ' - ' + fmt(f, b);
+            r.cur.textContent = r.val.textContent; r.row.classList.toggle('show-cur', !!setting(f.showVal)); // Show Value: the selected range, centred under the slider
             r.lo.textContent = f.format ? f.format(lo) : lo.toFixed(f.dp); r.hi.textContent = f.format ? f.format(hi) : hi.toFixed(f.dp); // the dataset's own lowest / highest value at the two ends
             const span = hi - lo || 1;
             r.fill.style.left = ((a - lo) / span * 100) + '%';
