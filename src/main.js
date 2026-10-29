@@ -58,16 +58,16 @@ async function boot() {
             <canvas class="spx-bg spx-bg-prev" id="spxBgPrev"></canvas>
             <canvas class="spx-bg" id="spxBg"></canvas>
             <canvas class="spx-bg spx-bg-fx" id="spxBgFx"></canvas>
-            <div class="ui-element spx-title" id="spxTitle"><a id="spxTitleLink" target="_blank" rel="noopener noreferrer">Loading…</a></div>
-            <div class="ui-element spx-artist" id="spxArtist"></div>
-            <div class="ui-element spx-meta" id="spxMeta"></div>
-            <!-- the timeline precedes the cover in the DOM: CSS anchor positioning (the cover is placed relative to it)
-                requires the anchor target to come earlier in tree order than the element anchored to it -->
-            <canvas class="ui-element spx-timeline" id="spxTimeline"></canvas>
+            <!-- the cover comes BEFORE the text and the timeline in the DOM: CSS anchor positioning (the engine's relative mode) needs the anchor target to come earlier in tree
+                order than the element anchored to it, so title / artist / album line / prev / next can all be anchored to the cover. Its z-index (0) keeps it under the text (2). -->
             <button class="ui-element spx-cover bs-host" id="spxCover" type="button" aria-label="Play">
                 <img id="spxCoverImg" alt="" draggable="false" crossorigin="anonymous">
                 <span class="spx-play-glyph"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M7 4l13 8-13 8z"/><path class="ico-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></span>
             </button>
+            <div class="ui-element spx-title" id="spxTitle"><a id="spxTitleLink" target="_blank" rel="noopener noreferrer">Loading…</a></div>
+            <div class="ui-element spx-artist" id="spxArtist"></div>
+            <div class="ui-element spx-meta" id="spxMeta"></div>
+            <canvas class="ui-element spx-timeline" id="spxTimeline"></canvas>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
             <div class="spx-sdk-status" id="spxSdkStatus" hidden></div>
             <div class="spx-songbar" id="spxSongBar"><div class="spx-songbar-empty"></div><div class="spx-songbar-fill"></div><div class="spx-songbar-hit" id="spxSongBarHit"></div><div class="spx-songbar-marker"></div></div>
