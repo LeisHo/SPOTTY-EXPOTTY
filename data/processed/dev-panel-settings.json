@@ -42,7 +42,7 @@
     "checkboxSongTickScale": true,
     "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.31997971323844665,\"y\":0}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.5177484789764912,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderTimelineHeight": 180,
-    "sliderTimelineOffsetY": 0,
+    "sliderTimelineOffsetY": 2,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
     "sliderTimelineScaleGap": 28,
