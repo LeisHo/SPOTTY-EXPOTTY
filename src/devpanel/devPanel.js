@@ -8373,6 +8373,7 @@
             { tab, group: FLB, id: 'sliderFilterNumberGrayOpacity', type: 'slider', label: 'Grayed Number Opacity (%):', min: 0, max: 100, step: 1, value: 25 },
             // extra filters in the panel (off = no slider and no filtering by it)
             { tab, group: FLB, id: 'checkboxFilterNameLengths', type: 'checkbox', label: 'Name Lengths (Song Title, Artist, Album Title)', value: false },
+            { tab, group: FLB, id: 'checkboxFilterIndividualArtists', type: 'checkbox', label: 'Individual Artists (Each Artist Name Counted On Its Own; A Song Passes If Any Artist Fits)', value: false },
             { tab, group: FLB, id: 'checkboxFilterSongDate', type: 'checkbox', label: 'Song Date (Release Date)', value: false },
             { tab, group: FLB, id: 'checkboxFilterSongLength', type: 'checkbox', label: 'Song Length', value: false },
             // the panel

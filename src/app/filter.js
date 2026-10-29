@@ -15,6 +15,8 @@ const DAY = 86400000;
 const dateOf = s => { const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(s.od || s.rd || ''); /* od = the song's own earlier date (merge_original_dates.py), else the album's */ return m && +m[1] >= 1000 ? Date.UTC(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1) / DAY : null; };
 const fmtDate = v => { const d = new Date(Math.round(v) * DAY); return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate()); };
 const fmtLen = v => { const t = Math.round(v); return Math.floor(t / 60) + ':' + pad2(t % 60); };
+let indiv = false; // Individual Artists: each artist of a song is its own length instead of the joined text
+const artistLens = s => { const p = typeof s.a === 'string' ? s.a.split(';').map(x => x.trim()).filter(Boolean) : []; return indiv ? (p.length ? p.map(x => x.length) : null) : (typeof s.a === 'string' && s.a.length ? s.a.length : null); };
 const lenOf = k => s => { const t = typeof s[k] === 'string' ? (k === 'n' ? cleanTitle(s[k]) : s[k]) : ''; return t.length ? t.length : null; }; // the title is measured as shown (decoration stripped)
 const CIRCLE = (cx, cy, r) => `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0z`;
 const EXTRA_ICONS = {
@@ -30,7 +32,7 @@ const FEATURES = [
     { key: 'dn', label: 'Danceability', unit: '', step: 'any', dp: 1 },
     { key: 'e', label: 'Energy', unit: '', step: 'any', dp: 1 },
     { key: 'ln', label: 'Song Title Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('n') },
-    { key: 'la', label: 'Artist Name Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('a') },
+    { key: 'la', label: 'Artist Name Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: artistLens },
     { key: 'lb', label: 'Album Title Length', unit: '', dp: 0, gate: 'checkboxFilterNameLengths', get: lenOf('al') },
     { key: 'rd', label: 'Song Date', unit: '', dp: 0, gate: 'checkboxFilterSongDate', get: dateOf, format: fmtDate },
     { key: 'du', label: 'Song Length', unit: '', dp: 0, gate: 'checkboxFilterSongLength', get: s => (typeof s.du === 'number' && s.du > 0 ? s.du / 1000 : null), format: fmtLen },
@@ -47,13 +49,15 @@ const valueOf = (s, k) => { const x = FEATURES.find(f => f.key === k); if (x && 
 
 export function createFilter(songs, { host, onChange }) {
     // dataset extents
+    indiv = !!setting('checkboxFilterIndividualArtists');
     const ext = {};
-    FEATURES.forEach(f => {
+    const extOf = f => {
         let lo = Infinity, hi = -Infinity;
-        songs.forEach(s => { const v = valueOf(s, f.key); if (v !== null) { if (v < lo) lo = v; if (v > hi) hi = v; } });
+        songs.forEach(s => { const v = valueOf(s, f.key); (Array.isArray(v) ? v : v === null ? [] : [v]).forEach(x => { if (x < lo) lo = x; if (x > hi) hi = x; }); });
         if (!isFinite(lo)) { lo = 0; hi = 1; }
-        ext[f.key] = [lo, hi]; // exactly the lowest and highest value present in the data
-    });
+        return [lo, hi]; // exactly the lowest and highest value present in the data
+    };
+    FEATURES.forEach(f => { ext[f.key] = extOf(f); });
     const range = {};
     FEATURES.forEach(f => { range[f.key] = ext[f.key].slice(); });
     try {
@@ -65,7 +69,17 @@ export function createFilter(songs, { host, onChange }) {
     } catch (e) { /* storage blocked or unreadable */ }
 
     const gateOn = {};
-    const readGates = () => FEATURES.forEach(f => { gateOn[f.key] = !f.gate || !!setting(f.gate); });
+    let rows = null; // the panel rows, once built
+    const readGates = () => {
+        FEATURES.forEach(f => { gateOn[f.key] = !f.gate || !!setting(f.gate); });
+        const now = !!setting('checkboxFilterIndividualArtists');
+        if (now !== indiv) { // Individual Artists was toggled: the Artist Name Length slider's dataset extents change, so its range starts over
+            indiv = now;
+            const fa = FEATURES.find(x => x.key === 'la');
+            ext.la = extOf(fa); range.la = ext.la.slice();
+            if (rows) { rows.la.min.min = rows.la.max.min = ext.la[0]; rows.la.min.max = rows.la.max.max = ext.la[1]; }
+        }
+    };
     readGates();
     const narrowed = f => gateOn[f.key] && (range[f.key][0] > ext[f.key][0] || range[f.key][1] < ext[f.key][1]);
     const active = () => FEATURES.some(narrowed);
@@ -75,6 +89,7 @@ export function createFilter(songs, { host, onChange }) {
             if (!narrowed(f)) continue;
             const v = valueOf(s, f.key);
             if (v === null) { if (setting('selectFilterMissing') === 'hide') return false; continue; }
+            if (Array.isArray(v)) { if (!v.some(x => x >= range[f.key][0] - 1e-9 && x <= range[f.key][1] + 1e-9)) return false; continue; } // several values (Individual Artists): one artist in range is enough
             if (v < range[f.key][0] - 1e-9 || v > range[f.key][1] + 1e-9) return false;
         }
         return true;
@@ -124,7 +139,7 @@ export function createFilter(songs, { host, onChange }) {
     try { const w = parseFloat(localStorage.getItem(WIDTH_KEY)); if (w >= MIN_W) panel.style.width = w + 'px'; } catch (e) { /* storage blocked */ }
     host.appendChild(panel);
     const rowsEl = panel.querySelector('.spx-flt-rows'), countEl = panel.querySelector('.spx-flt-count');
-    const rows = {};
+    rows = {};
     const fmt = (f, v) => f.format ? f.format(v) : v.toFixed(f.dp) + f.unit;
 
     FEATURES.forEach(f => {
