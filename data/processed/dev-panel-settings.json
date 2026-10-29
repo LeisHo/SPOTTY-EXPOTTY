@@ -36,10 +36,11 @@
     "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "curveEditorSongTickThickZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderSongTickWidthTransitionMs": 500,
-    "sliderSongTickHeight": 900,
+    "sliderSongTickHeight": 800,
     "checkboxSongTickInvert": true,
     "checkboxSongTickBoth": false,
-    "sliderSongTickOpacity": 27,
+    "checkboxTicksBehindBars": true,
+    "sliderSongTickOpacity": 18,
     "sliderSongTickMinSpacing": 0.1,
     "checkboxSongTickScale": true,
     "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.31997971323844665,\"y\":0}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.5177484789764912,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
@@ -119,6 +120,12 @@
     "selectTickColorMode": "graph",
     "sliderTickColorSaturation": 1,
     "sliderTickColorBrightness": 1,
+    "checkboxTickOpacityZoomEnabled": false,
+    "rangeBarTickOpacityZoom": "{\"min\":0,\"max\":100}",
+    "curveEditorTickOpacityZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "checkboxTickOpacityWidthEnabled": false,
+    "rangeBarTickOpacityWidth": "{\"min\":0,\"max\":100}",
+    "curveEditorTickOpacityWidth": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "checkboxAutoNextSong": true,
     "sliderNoPreviewHoldSeconds": 2,
     "checkboxWheelCurveEnabled": true,
@@ -359,10 +366,16 @@
     "sliderFilterPanelBlur": 1,
     "sliderFilterPanelBgOpacity": 3,
     "colorFilterPanelAccent": "#878787",
+    "checkboxFilterPanelResizable": true,
+    "checkboxFilterPanelScrollable": false,
+    "checkboxFilterPanelDraggable": false,
     "checkboxFilterSongCountEnabled": true,
+    "checkboxFilterSongCountTop": false,
     "sliderFilterSongCountFontSize": 12,
     "sliderFilterSongCountOffsetX": 0,
     "sliderFilterSongCountOffsetY": 0,
+    "sliderFilterSongCountLetterSpacing": 0,
+    "sliderFilterSongCountNumberGap": 4,
     "checkboxFilterSongCountBold": true,
     "checkboxFilterSongCountItalic": false,
     "selectSongDataIconStyle": "1",
@@ -634,10 +647,10 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 103,
+    "left": 35.28570556640625,
     "top": 21.637481689453125,
-    "width": 795,
-    "height": 578
+    "width": 350,
+    "height": 565
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -5203,6 +5216,18 @@
                             {
                               "type": "row",
                               "key": "checkboxFilterSongCountItalic"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterSongCountTop"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterSongCountLetterSpacing"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterSongCountNumberGap"
                             }
                           ],
                           "rowKeys": [
@@ -5210,7 +5235,36 @@
                             "sliderFilterSongCountOffsetX",
                             "sliderFilterSongCountOffsetY",
                             "checkboxFilterSongCountBold",
-                            "checkboxFilterSongCountItalic"
+                            "checkboxFilterSongCountItalic",
+                            "checkboxFilterSongCountTop",
+                            "sliderFilterSongCountLetterSpacing",
+                            "sliderFilterSongCountNumberGap"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Panel",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterPanelResizable"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterPanelScrollable"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterPanelDraggable"
+                            }
+                          ],
+                          "rowKeys": [
+                            "checkboxFilterPanelResizable",
+                            "checkboxFilterPanelScrollable",
+                            "checkboxFilterPanelDraggable"
                           ],
                           "subgroups": []
                         }
@@ -5762,6 +5816,18 @@
                           {
                             "type": "row",
                             "key": "checkboxFilterSongCountItalic"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterSongCountTop"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountLetterSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountNumberGap"
                           }
                         ],
                         "rowKeys": [
@@ -5769,7 +5835,33 @@
                           "sliderFilterSongCountOffsetX",
                           "sliderFilterSongCountOffsetY",
                           "checkboxFilterSongCountBold",
-                          "checkboxFilterSongCountItalic"
+                          "checkboxFilterSongCountItalic",
+                          "checkboxFilterSongCountTop",
+                          "sliderFilterSongCountLetterSpacing",
+                          "sliderFilterSongCountNumberGap"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:Panel",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelScrollable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelDraggable"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxFilterPanelResizable",
+                          "checkboxFilterPanelScrollable",
+                          "checkboxFilterPanelDraggable"
                         ],
                         "subgroups": []
                       }
@@ -7862,6 +7954,18 @@
                           {
                             "type": "row",
                             "key": "checkboxFilterSongCountItalic"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterSongCountTop"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountLetterSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountNumberGap"
                           }
                         ],
                         "rowKeys": [
@@ -7869,7 +7973,36 @@
                           "sliderFilterSongCountOffsetX",
                           "sliderFilterSongCountOffsetY",
                           "checkboxFilterSongCountBold",
-                          "checkboxFilterSongCountItalic"
+                          "checkboxFilterSongCountItalic",
+                          "checkboxFilterSongCountTop",
+                          "sliderFilterSongCountLetterSpacing",
+                          "sliderFilterSongCountNumberGap"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Panel",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelScrollable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelDraggable"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxFilterPanelResizable",
+                          "checkboxFilterPanelScrollable",
+                          "checkboxFilterPanelDraggable"
                         ],
                         "subgroups": []
                       }
@@ -8421,6 +8554,18 @@
                         {
                           "type": "row",
                           "key": "checkboxFilterSongCountItalic"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterSongCountTop"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountLetterSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountNumberGap"
                         }
                       ],
                       "rowKeys": [
@@ -8428,7 +8573,33 @@
                         "sliderFilterSongCountOffsetX",
                         "sliderFilterSongCountOffsetY",
                         "checkboxFilterSongCountBold",
-                        "checkboxFilterSongCountItalic"
+                        "checkboxFilterSongCountItalic",
+                        "checkboxFilterSongCountTop",
+                        "sliderFilterSongCountLetterSpacing",
+                        "sliderFilterSongCountNumberGap"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:Panel",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelScrollable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelDraggable"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxFilterPanelResizable",
+                        "checkboxFilterPanelScrollable",
+                        "checkboxFilterPanelDraggable"
                       ],
                       "subgroups": []
                     }
@@ -13101,6 +13272,18 @@
                           {
                             "type": "row",
                             "key": "checkboxFilterSongCountItalic"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterSongCountTop"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountLetterSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountNumberGap"
                           }
                         ],
                         "rowKeys": [
@@ -13108,7 +13291,36 @@
                           "sliderFilterSongCountOffsetX",
                           "sliderFilterSongCountOffsetY",
                           "checkboxFilterSongCountBold",
-                          "checkboxFilterSongCountItalic"
+                          "checkboxFilterSongCountItalic",
+                          "checkboxFilterSongCountTop",
+                          "sliderFilterSongCountLetterSpacing",
+                          "sliderFilterSongCountNumberGap"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Panel",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelScrollable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelDraggable"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxFilterPanelResizable",
+                          "checkboxFilterPanelScrollable",
+                          "checkboxFilterPanelDraggable"
                         ],
                         "subgroups": []
                       }
@@ -13660,6 +13872,18 @@
                         {
                           "type": "row",
                           "key": "checkboxFilterSongCountItalic"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterSongCountTop"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountLetterSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountNumberGap"
                         }
                       ],
                       "rowKeys": [
@@ -13667,7 +13891,33 @@
                         "sliderFilterSongCountOffsetX",
                         "sliderFilterSongCountOffsetY",
                         "checkboxFilterSongCountBold",
-                        "checkboxFilterSongCountItalic"
+                        "checkboxFilterSongCountItalic",
+                        "checkboxFilterSongCountTop",
+                        "sliderFilterSongCountLetterSpacing",
+                        "sliderFilterSongCountNumberGap"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:Panel",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelScrollable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelDraggable"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxFilterPanelResizable",
+                        "checkboxFilterPanelScrollable",
+                        "checkboxFilterPanelDraggable"
                       ],
                       "subgroups": []
                     }
@@ -15760,6 +16010,18 @@
                         {
                           "type": "row",
                           "key": "checkboxFilterSongCountItalic"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterSongCountTop"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountLetterSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountNumberGap"
                         }
                       ],
                       "rowKeys": [
@@ -15767,7 +16029,36 @@
                         "sliderFilterSongCountOffsetX",
                         "sliderFilterSongCountOffsetY",
                         "checkboxFilterSongCountBold",
-                        "checkboxFilterSongCountItalic"
+                        "checkboxFilterSongCountItalic",
+                        "checkboxFilterSongCountTop",
+                        "sliderFilterSongCountLetterSpacing",
+                        "sliderFilterSongCountNumberGap"
+                      ],
+                      "subgroups": []
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Panel",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelScrollable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelDraggable"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxFilterPanelResizable",
+                        "checkboxFilterPanelScrollable",
+                        "checkboxFilterPanelDraggable"
                       ],
                       "subgroups": []
                     }
@@ -16319,6 +16610,18 @@
                       {
                         "type": "row",
                         "key": "checkboxFilterSongCountItalic"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterSongCountTop"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterSongCountLetterSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterSongCountNumberGap"
                       }
                     ],
                     "rowKeys": [
@@ -16326,7 +16629,33 @@
                       "sliderFilterSongCountOffsetX",
                       "sliderFilterSongCountOffsetY",
                       "checkboxFilterSongCountBold",
-                      "checkboxFilterSongCountItalic"
+                      "checkboxFilterSongCountItalic",
+                      "checkboxFilterSongCountTop",
+                      "sliderFilterSongCountLetterSpacing",
+                      "sliderFilterSongCountNumberGap"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:Panel",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterPanelResizable"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterPanelScrollable"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterPanelDraggable"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxFilterPanelResizable",
+                      "checkboxFilterPanelScrollable",
+                      "checkboxFilterPanelDraggable"
                     ],
                     "subgroups": []
                   }
@@ -19511,6 +19840,52 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "checkboxTicksBehindBars"
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Opacity Per Zoom",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "rangeBarTickOpacityZoom"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorTickOpacityZoom"
+                }
+              ],
+              "rowKeys": [
+                "rangeBarTickOpacityZoom",
+                "curveEditorTickOpacityZoom"
+              ],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Opacity Per Width",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "rangeBarTickOpacityWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorTickOpacityWidth"
+                }
+              ],
+              "rowKeys": [
+                "rangeBarTickOpacityWidth",
+                "curveEditorTickOpacityWidth"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -19518,7 +19893,8 @@
           "sliderTimelineOffsetY",
           "rangeBarTimelineZoomLimits",
           "curveEditorSongTickThickZoom",
-          "checkboxSongTickBoth"
+          "checkboxSongTickBoth",
+          "checkboxTicksBehindBars"
         ],
         "subgroups": [
           {
@@ -20142,6 +20518,42 @@
               "selectTickColorMode",
               "sliderTickColorSaturation",
               "sliderTickColorBrightness"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:Opacity Per Zoom",
+            "items": [
+              {
+                "type": "row",
+                "key": "rangeBarTickOpacityZoom"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorTickOpacityZoom"
+              }
+            ],
+            "rowKeys": [
+              "rangeBarTickOpacityZoom",
+              "curveEditorTickOpacityZoom"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:Opacity Per Width",
+            "items": [
+              {
+                "type": "row",
+                "key": "rangeBarTickOpacityWidth"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorTickOpacityWidth"
+              }
+            ],
+            "rowKeys": [
+              "rangeBarTickOpacityWidth",
+              "curveEditorTickOpacityWidth"
             ],
             "subgroups": []
           }
@@ -22952,6 +23364,15 @@
                           "rowKeys": [],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:Panel",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
                       }
                     ],
                     "rowKeys": [],
@@ -23141,6 +23562,12 @@
                       },
                       {
                         "key": "mobile:Panel Song Count",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:Panel",
                         "items": [],
                         "rowKeys": [],
                         "subgroups": []
@@ -24380,6 +24807,15 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Panel",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [],
@@ -24569,6 +25005,12 @@
                     },
                     {
                       "key": "mobile:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:Panel",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -27293,6 +27735,15 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Panel",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [],
@@ -27482,6 +27933,12 @@
                     },
                     {
                       "key": "mobile:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:Panel",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -28721,6 +29178,15 @@
                       "rowKeys": [],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:Panel",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
                   }
                 ],
                 "rowKeys": [],
@@ -28910,6 +29376,12 @@
                   },
                   {
                     "key": "mobile:Panel Song Count",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "mobile:Panel",
                     "items": [],
                     "rowKeys": [],
                     "subgroups": []
@@ -30325,6 +30797,67 @@
             "type": "group",
             "section": {
               "key": "mobile:New Group (28)",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "checkboxMobileSongTickScale"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxMobileSongTickInvert"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongTickOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongTickHeight"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongTickMinSpacing"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileSongTickWidthTransitionMs"
+                },
+                {
+                  "type": "row",
+                  "key": "rangeBarMobileSongTickWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "rangeBarMobileSongTickThinWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorMobileSongTickThinZoom"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorMobileSongTickScale"
+                }
+              ],
+              "rowKeys": [
+                "checkboxMobileSongTickScale",
+                "checkboxMobileSongTickInvert",
+                "sliderMobileSongTickOpacity",
+                "sliderMobileSongTickHeight",
+                "sliderMobileSongTickMinSpacing",
+                "sliderMobileSongTickWidthTransitionMs",
+                "rangeBarMobileSongTickWidth",
+                "rangeBarMobileSongTickThinWidth",
+                "curveEditorMobileSongTickThinZoom",
+                "curveEditorMobileSongTickScale"
+              ],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Match Graph Colors",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -30333,7 +30866,16 @@
           {
             "type": "group",
             "section": {
-              "key": "mobile:Match Graph Colors",
+              "key": "mobile:Opacity Per Zoom",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Opacity Per Width",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -30466,12 +31008,76 @@
           },
           {
             "key": "mobile:New Group (28)",
+            "items": [
+              {
+                "type": "row",
+                "key": "checkboxMobileSongTickScale"
+              },
+              {
+                "type": "row",
+                "key": "checkboxMobileSongTickInvert"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileSongTickOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileSongTickHeight"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileSongTickMinSpacing"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileSongTickWidthTransitionMs"
+              },
+              {
+                "type": "row",
+                "key": "rangeBarMobileSongTickWidth"
+              },
+              {
+                "type": "row",
+                "key": "rangeBarMobileSongTickThinWidth"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorMobileSongTickThinZoom"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorMobileSongTickScale"
+              }
+            ],
+            "rowKeys": [
+              "checkboxMobileSongTickScale",
+              "checkboxMobileSongTickInvert",
+              "sliderMobileSongTickOpacity",
+              "sliderMobileSongTickHeight",
+              "sliderMobileSongTickMinSpacing",
+              "sliderMobileSongTickWidthTransitionMs",
+              "rangeBarMobileSongTickWidth",
+              "rangeBarMobileSongTickThinWidth",
+              "curveEditorMobileSongTickThinZoom",
+              "curveEditorMobileSongTickScale"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Match Graph Colors",
             "items": [],
             "rowKeys": [],
             "subgroups": []
           },
           {
-            "key": "mobile:Match Graph Colors",
+            "key": "mobile:Opacity Per Zoom",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Opacity Per Width",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -32808,6 +33414,15 @@
                           "rowKeys": [],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:Panel",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
                       }
                     ],
                     "rowKeys": [],
@@ -32997,6 +33612,12 @@
                       },
                       {
                         "key": "landscape:Panel Song Count",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:Panel",
                         "items": [],
                         "rowKeys": [],
                         "subgroups": []
@@ -34236,6 +34857,15 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Panel",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [],
@@ -34425,6 +35055,12 @@
                     },
                     {
                       "key": "landscape:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:Panel",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -37149,6 +37785,15 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Panel",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [],
@@ -37338,6 +37983,12 @@
                     },
                     {
                       "key": "landscape:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:Panel",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -38577,6 +39228,15 @@
                       "rowKeys": [],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:Panel",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
                   }
                 ],
                 "rowKeys": [],
@@ -38766,6 +39426,12 @@
                   },
                   {
                     "key": "landscape:Panel Song Count",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "landscape:Panel",
                     "items": [],
                     "rowKeys": [],
                     "subgroups": []
@@ -40181,6 +40847,67 @@
             "type": "group",
             "section": {
               "key": "landscape:New Group (28)",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "checkboxLandscapeSongTickScale"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxLandscapeSongTickInvert"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongTickOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongTickHeight"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongTickMinSpacing"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeSongTickWidthTransitionMs"
+                },
+                {
+                  "type": "row",
+                  "key": "rangeBarLandscapeSongTickWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "rangeBarLandscapeSongTickThinWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorLandscapeSongTickThinZoom"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorLandscapeSongTickScale"
+                }
+              ],
+              "rowKeys": [
+                "checkboxLandscapeSongTickScale",
+                "checkboxLandscapeSongTickInvert",
+                "sliderLandscapeSongTickOpacity",
+                "sliderLandscapeSongTickHeight",
+                "sliderLandscapeSongTickMinSpacing",
+                "sliderLandscapeSongTickWidthTransitionMs",
+                "rangeBarLandscapeSongTickWidth",
+                "rangeBarLandscapeSongTickThinWidth",
+                "curveEditorLandscapeSongTickThinZoom",
+                "curveEditorLandscapeSongTickScale"
+              ],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Match Graph Colors",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -40189,7 +40916,16 @@
           {
             "type": "group",
             "section": {
-              "key": "landscape:Match Graph Colors",
+              "key": "landscape:Opacity Per Zoom",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Opacity Per Width",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -40322,12 +41058,76 @@
           },
           {
             "key": "landscape:New Group (28)",
+            "items": [
+              {
+                "type": "row",
+                "key": "checkboxLandscapeSongTickScale"
+              },
+              {
+                "type": "row",
+                "key": "checkboxLandscapeSongTickInvert"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongTickOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongTickHeight"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongTickMinSpacing"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeSongTickWidthTransitionMs"
+              },
+              {
+                "type": "row",
+                "key": "rangeBarLandscapeSongTickWidth"
+              },
+              {
+                "type": "row",
+                "key": "rangeBarLandscapeSongTickThinWidth"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorLandscapeSongTickThinZoom"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorLandscapeSongTickScale"
+              }
+            ],
+            "rowKeys": [
+              "checkboxLandscapeSongTickScale",
+              "checkboxLandscapeSongTickInvert",
+              "sliderLandscapeSongTickOpacity",
+              "sliderLandscapeSongTickHeight",
+              "sliderLandscapeSongTickMinSpacing",
+              "sliderLandscapeSongTickWidthTransitionMs",
+              "rangeBarLandscapeSongTickWidth",
+              "rangeBarLandscapeSongTickThinWidth",
+              "curveEditorLandscapeSongTickThinZoom",
+              "curveEditorLandscapeSongTickScale"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:Match Graph Colors",
             "items": [],
             "rowKeys": [],
             "subgroups": []
           },
           {
-            "key": "landscape:Match Graph Colors",
+            "key": "landscape:Opacity Per Zoom",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:Opacity Per Width",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -40414,7 +41214,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -40424,7 +41224,7 @@
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": false,
+    "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
@@ -40455,7 +41255,8 @@
     "desktop:New Group (21)": true,
     "desktop:New Group (17)": true,
     "desktop:New Group (16)": true,
-    "desktop:Panel Song Count": false,
+    "desktop:Panel Song Count": true,
+    "desktop:Panel": true,
     "desktop:Song Data": true,
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
@@ -40497,7 +41298,9 @@
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
     "desktop:New Group (28)": false,
-    "desktop:Match Graph Colors": false,
+    "desktop:Match Graph Colors": true,
+    "desktop:Opacity Per Zoom": true,
+    "desktop:Opacity Per Width": true,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
@@ -40555,6 +41358,7 @@
     "mobile:New Group (17)": false,
     "mobile:New Group (16)": false,
     "mobile:Panel Song Count": false,
+    "mobile:Panel": false,
     "mobile:Song Data": true,
     "mobile:New Group (25)": false,
     "mobile:New Group (26)": false,
@@ -40597,6 +41401,8 @@
     "mobile:Right Click Height": false,
     "mobile:New Group (28)": false,
     "mobile:Match Graph Colors": false,
+    "mobile:Opacity Per Zoom": false,
+    "mobile:Opacity Per Width": false,
     "mobile:Startup": true,
     "mobile:Start Button": false,
     "mobile:Start Button Animation": false,
@@ -40654,6 +41460,7 @@
     "landscape:New Group (17)": false,
     "landscape:New Group (16)": false,
     "landscape:Panel Song Count": false,
+    "landscape:Panel": false,
     "landscape:Song Data": false,
     "landscape:New Group (25)": false,
     "landscape:New Group (26)": false,
@@ -40696,6 +41503,8 @@
     "landscape:Right Click Height": false,
     "landscape:New Group (28)": false,
     "landscape:Match Graph Colors": false,
+    "landscape:Opacity Per Zoom": false,
+    "landscape:Opacity Per Width": false,
     "landscape:Startup": false,
     "landscape:Start Button": false,
     "landscape:Start Button Animation": false
@@ -41516,7 +42325,33 @@
     "landscape:New Group (30)": "ICONS",
     "landscape:New Group (29)": "OFFSET",
     "landscape:Panel Song Count": null,
-    "landscape:Match Graph Colors": null
+    "landscape:Match Graph Colors": null,
+    "mobile:Panel": null,
+    "mobile:Opacity Per Zoom": null,
+    "mobile:Opacity Per Width": null,
+    "landscape:Panel": null,
+    "landscape:Opacity Per Zoom": null,
+    "landscape:Opacity Per Width": null,
+    "checkboxMobileSongTickScale": null,
+    "checkboxLandscapeSongTickScale": null,
+    "checkboxMobileSongTickInvert": null,
+    "checkboxLandscapeSongTickInvert": null,
+    "sliderMobileSongTickOpacity": null,
+    "sliderLandscapeSongTickOpacity": null,
+    "sliderMobileSongTickHeight": null,
+    "sliderLandscapeSongTickHeight": null,
+    "sliderMobileSongTickMinSpacing": "Tick Visibility Per Zoom",
+    "sliderLandscapeSongTickMinSpacing": "Tick Visibility Per Zoom",
+    "sliderMobileSongTickWidthTransitionMs": null,
+    "sliderLandscapeSongTickWidthTransitionMs": null,
+    "rangeBarMobileSongTickWidth": null,
+    "rangeBarLandscapeSongTickWidth": null,
+    "rangeBarMobileSongTickThinWidth": null,
+    "rangeBarLandscapeSongTickThinWidth": null,
+    "curveEditorMobileSongTickThinZoom": null,
+    "curveEditorLandscapeSongTickThinZoom": null,
+    "curveEditorMobileSongTickScale": null,
+    "curveEditorLandscapeSongTickScale": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -41842,7 +42677,17 @@
     "sliderFilterPanelIconSize": true,
     "sliderFilterPanelIconOffsetY": true,
     "sliderFilterPanelRowsOffsetY": true,
-    "sliderFilterPanelRowGap": true
+    "sliderFilterPanelRowGap": true,
+    "checkboxSongTickScale": true,
+    "checkboxSongTickInvert": true,
+    "sliderSongTickOpacity": true,
+    "sliderSongTickHeight": true,
+    "sliderSongTickMinSpacing": true,
+    "sliderSongTickWidthTransitionMs": true,
+    "rangeBarSongTickWidth": true,
+    "rangeBarSongTickThinWidth": true,
+    "curveEditorSongTickThinZoom": true,
+    "curveEditorSongTickScale": true
   },
   "devIndependence": {
     "mobile": {
