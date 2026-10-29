@@ -34,10 +34,12 @@
     "rangeBarSongTickWidth": "{\"min\":0.1,\"max\":14}",
     "rangeBarSongTickThinWidth": "{\"min\":0.1,\"max\":3}",
     "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "curveEditorSongTickThickZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderSongTickWidthTransitionMs": 500,
-    "sliderSongTickHeight": 79300,
+    "sliderSongTickHeight": 900,
     "checkboxSongTickInvert": true,
-    "sliderSongTickOpacity": 32,
+    "checkboxSongTickBoth": false,
+    "sliderSongTickOpacity": 27,
     "sliderSongTickMinSpacing": 0.1,
     "checkboxSongTickScale": true,
     "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.31997971323844665,\"y\":0}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.5177484789764912,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
@@ -113,6 +115,10 @@
     "sliderAlbumColorBrightness": 1.15,
     "checkboxAlbumColorTransition": false,
     "sliderAlbumColorTransitionMs": 300,
+    "checkboxTickMatchGraphColors": false,
+    "selectTickColorMode": "graph",
+    "sliderTickColorSaturation": 1,
+    "sliderTickColorBrightness": 1,
     "checkboxAutoNextSong": true,
     "sliderNoPreviewHoldSeconds": 2,
     "checkboxWheelCurveEnabled": true,
@@ -327,11 +333,16 @@
     "sliderFilterTickGrayOpacity": 25,
     "sliderFilterNumberGrayOpacity": 25,
     "checkboxFilterNameLengths": true,
+    "checkboxFilterIndividualArtists": true,
+    "checkboxFilterShowValueNameLengths": true,
     "checkboxFilterSongDate": true,
+    "checkboxFilterShowValueSongDate": true,
     "checkboxFilterSongLength": true,
+    "checkboxFilterShowValueSongLength": true,
     "checkboxFilterShowNumbers": true,
+    "checkboxFilterShowValueOriginal": false,
+    "sliderFilterValueOffsetY": 0,
     "checkboxFilterShowRangeText": false,
-    "checkboxFilterShowCount": true,
     "checkboxFilterCloseOnOutside": true,
     "checkboxFilterClickToExit": true,
     "sliderFilterPanelWidth": 260,
@@ -340,7 +351,6 @@
     "sliderFilterPanelRowsOffsetY": -24,
     "checkboxFilterPanelKeepVisible": false,
     "sliderFilterPanelIconOffsetY": 1,
-    "sliderFilterPanelCountFontSize": 12,
     "sliderFilterPanelNumbersOffsetY": 1,
     "sliderFilterPanelIconSize": 23,
     "sliderFilterPanelOffsetX": 0,
@@ -349,6 +359,12 @@
     "sliderFilterPanelBlur": 1,
     "sliderFilterPanelBgOpacity": 3,
     "colorFilterPanelAccent": "#878787",
+    "checkboxFilterSongCountEnabled": true,
+    "sliderFilterSongCountFontSize": 12,
+    "sliderFilterSongCountOffsetX": 0,
+    "sliderFilterSongCountOffsetY": 0,
+    "checkboxFilterSongCountBold": true,
+    "checkboxFilterSongCountItalic": false,
     "selectSongDataIconStyle": "1",
     "checkboxSongDataEnabled": true,
     "sliderSongDataBtnSize": 25,
@@ -4609,10 +4625,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "sliderFilterPanelCountFontSize"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxFilterClickToExit"
                       },
                       {
@@ -4716,10 +4728,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "checkboxFilterShowCount"
-                            },
-                            {
-                              "type": "row",
                               "key": "checkboxFilterShowRangeText"
                             },
                             {
@@ -4791,7 +4799,6 @@
                             "checkboxFilterPanelKeepVisible",
                             "checkboxFilterCloseOnOutside",
                             "checkboxFilterShowNumbers",
-                            "checkboxFilterShowCount",
                             "checkboxFilterShowRangeText",
                             "sliderFilterPanelWidth",
                             "sliderFilterPanelOffsetX",
@@ -5147,6 +5154,66 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterIndividualArtists"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterShowValueNameLengths"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterShowValueSongDate"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterShowValueSongLength"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterShowValueOriginal"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterValueOffsetY"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Panel Song Count",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderFilterSongCountFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterSongCountOffsetX"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterSongCountOffsetY"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterSongCountBold"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterSongCountItalic"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderFilterSongCountFontSize",
+                            "sliderFilterSongCountOffsetX",
+                            "sliderFilterSongCountOffsetY",
+                            "checkboxFilterSongCountBold",
+                            "checkboxFilterSongCountItalic"
+                          ],
+                          "subgroups": []
+                        }
                       }
                     ],
                     "rowKeys": [
@@ -5154,8 +5221,13 @@
                       "checkboxFilterNameLengths",
                       "checkboxFilterSongLength",
                       "checkboxFilterSongDate",
-                      "sliderFilterPanelCountFontSize",
-                      "checkboxFilterClickToExit"
+                      "checkboxFilterClickToExit",
+                      "checkboxFilterIndividualArtists",
+                      "checkboxFilterShowValueNameLengths",
+                      "checkboxFilterShowValueSongDate",
+                      "checkboxFilterShowValueSongLength",
+                      "checkboxFilterShowValueOriginal",
+                      "sliderFilterValueOffsetY"
                     ],
                     "subgroups": [
                       {
@@ -5251,10 +5323,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterShowCount"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterShowRangeText"
                           },
                           {
@@ -5326,7 +5394,6 @@
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
                           "checkboxFilterShowNumbers",
-                          "checkboxFilterShowCount",
                           "checkboxFilterShowRangeText",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
@@ -5670,6 +5737,39 @@
                         "rowKeys": [
                           "sliderFilterOffOpacity",
                           "sliderFilterOnOpacity"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:Panel Song Count",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetY"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterSongCountBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterSongCountItalic"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderFilterSongCountFontSize",
+                          "sliderFilterSongCountOffsetX",
+                          "sliderFilterSongCountOffsetY",
+                          "checkboxFilterSongCountBold",
+                          "checkboxFilterSongCountItalic"
                         ],
                         "subgroups": []
                       }
@@ -7184,10 +7284,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderFilterPanelCountFontSize"
-                    },
-                    {
-                      "type": "row",
                       "key": "checkboxFilterClickToExit"
                     },
                     {
@@ -7291,10 +7387,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterShowCount"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterShowRangeText"
                           },
                           {
@@ -7366,7 +7458,6 @@
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
                           "checkboxFilterShowNumbers",
-                          "checkboxFilterShowCount",
                           "checkboxFilterShowRangeText",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
@@ -7722,6 +7813,66 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterIndividualArtists"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowValueNameLengths"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowValueSongDate"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowValueSongLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowValueOriginal"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterValueOffsetY"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Panel Song Count",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetY"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterSongCountBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterSongCountItalic"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderFilterSongCountFontSize",
+                          "sliderFilterSongCountOffsetX",
+                          "sliderFilterSongCountOffsetY",
+                          "checkboxFilterSongCountBold",
+                          "checkboxFilterSongCountItalic"
+                        ],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
@@ -7729,8 +7880,13 @@
                     "checkboxFilterNameLengths",
                     "checkboxFilterSongLength",
                     "checkboxFilterSongDate",
-                    "sliderFilterPanelCountFontSize",
-                    "checkboxFilterClickToExit"
+                    "checkboxFilterClickToExit",
+                    "checkboxFilterIndividualArtists",
+                    "checkboxFilterShowValueNameLengths",
+                    "checkboxFilterShowValueSongDate",
+                    "checkboxFilterShowValueSongLength",
+                    "checkboxFilterShowValueOriginal",
+                    "sliderFilterValueOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -7826,10 +7982,6 @@
                         },
                         {
                           "type": "row",
-                          "key": "checkboxFilterShowCount"
-                        },
-                        {
-                          "type": "row",
                           "key": "checkboxFilterShowRangeText"
                         },
                         {
@@ -7901,7 +8053,6 @@
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
                         "checkboxFilterShowNumbers",
-                        "checkboxFilterShowCount",
                         "checkboxFilterShowRangeText",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
@@ -8245,6 +8396,39 @@
                       "rowKeys": [
                         "sliderFilterOffOpacity",
                         "sliderFilterOnOpacity"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:Panel Song Count",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetX"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetY"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterSongCountBold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterSongCountItalic"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderFilterSongCountFontSize",
+                        "sliderFilterSongCountOffsetX",
+                        "sliderFilterSongCountOffsetY",
+                        "checkboxFilterSongCountBold",
+                        "checkboxFilterSongCountItalic"
                       ],
                       "subgroups": []
                     }
@@ -12339,10 +12523,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "sliderFilterPanelCountFontSize"
-                    },
-                    {
-                      "type": "row",
                       "key": "checkboxFilterClickToExit"
                     },
                     {
@@ -12446,10 +12626,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterShowCount"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterShowRangeText"
                           },
                           {
@@ -12521,7 +12697,6 @@
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
                           "checkboxFilterShowNumbers",
-                          "checkboxFilterShowCount",
                           "checkboxFilterShowRangeText",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
@@ -12877,6 +13052,66 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterIndividualArtists"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowValueNameLengths"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowValueSongDate"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowValueSongLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterShowValueOriginal"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterValueOffsetY"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Panel Song Count",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetY"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterSongCountBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterSongCountItalic"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderFilterSongCountFontSize",
+                          "sliderFilterSongCountOffsetX",
+                          "sliderFilterSongCountOffsetY",
+                          "checkboxFilterSongCountBold",
+                          "checkboxFilterSongCountItalic"
+                        ],
+                        "subgroups": []
+                      }
                     }
                   ],
                   "rowKeys": [
@@ -12884,8 +13119,13 @@
                     "checkboxFilterNameLengths",
                     "checkboxFilterSongLength",
                     "checkboxFilterSongDate",
-                    "sliderFilterPanelCountFontSize",
-                    "checkboxFilterClickToExit"
+                    "checkboxFilterClickToExit",
+                    "checkboxFilterIndividualArtists",
+                    "checkboxFilterShowValueNameLengths",
+                    "checkboxFilterShowValueSongDate",
+                    "checkboxFilterShowValueSongLength",
+                    "checkboxFilterShowValueOriginal",
+                    "sliderFilterValueOffsetY"
                   ],
                   "subgroups": [
                     {
@@ -12981,10 +13221,6 @@
                         },
                         {
                           "type": "row",
-                          "key": "checkboxFilterShowCount"
-                        },
-                        {
-                          "type": "row",
                           "key": "checkboxFilterShowRangeText"
                         },
                         {
@@ -13056,7 +13292,6 @@
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
                         "checkboxFilterShowNumbers",
-                        "checkboxFilterShowCount",
                         "checkboxFilterShowRangeText",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
@@ -13400,6 +13635,39 @@
                       "rowKeys": [
                         "sliderFilterOffOpacity",
                         "sliderFilterOnOpacity"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:Panel Song Count",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetX"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetY"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterSongCountBold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterSongCountItalic"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderFilterSongCountFontSize",
+                        "sliderFilterSongCountOffsetX",
+                        "sliderFilterSongCountOffsetY",
+                        "checkboxFilterSongCountBold",
+                        "checkboxFilterSongCountItalic"
                       ],
                       "subgroups": []
                     }
@@ -14914,10 +15182,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "sliderFilterPanelCountFontSize"
-                  },
-                  {
-                    "type": "row",
                     "key": "checkboxFilterClickToExit"
                   },
                   {
@@ -15021,10 +15285,6 @@
                         },
                         {
                           "type": "row",
-                          "key": "checkboxFilterShowCount"
-                        },
-                        {
-                          "type": "row",
                           "key": "checkboxFilterShowRangeText"
                         },
                         {
@@ -15096,7 +15356,6 @@
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
                         "checkboxFilterShowNumbers",
-                        "checkboxFilterShowCount",
                         "checkboxFilterShowRangeText",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
@@ -15452,6 +15711,66 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterIndividualArtists"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterShowValueNameLengths"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterShowValueSongDate"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterShowValueSongLength"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterShowValueOriginal"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterValueOffsetY"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Panel Song Count",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetX"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetY"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterSongCountBold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterSongCountItalic"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderFilterSongCountFontSize",
+                        "sliderFilterSongCountOffsetX",
+                        "sliderFilterSongCountOffsetY",
+                        "checkboxFilterSongCountBold",
+                        "checkboxFilterSongCountItalic"
+                      ],
+                      "subgroups": []
+                    }
                   }
                 ],
                 "rowKeys": [
@@ -15459,8 +15778,13 @@
                   "checkboxFilterNameLengths",
                   "checkboxFilterSongLength",
                   "checkboxFilterSongDate",
-                  "sliderFilterPanelCountFontSize",
-                  "checkboxFilterClickToExit"
+                  "checkboxFilterClickToExit",
+                  "checkboxFilterIndividualArtists",
+                  "checkboxFilterShowValueNameLengths",
+                  "checkboxFilterShowValueSongDate",
+                  "checkboxFilterShowValueSongLength",
+                  "checkboxFilterShowValueOriginal",
+                  "sliderFilterValueOffsetY"
                 ],
                 "subgroups": [
                   {
@@ -15556,10 +15880,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxFilterShowCount"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxFilterShowRangeText"
                       },
                       {
@@ -15631,7 +15951,6 @@
                       "checkboxFilterPanelKeepVisible",
                       "checkboxFilterCloseOnOutside",
                       "checkboxFilterShowNumbers",
-                      "checkboxFilterShowCount",
                       "checkboxFilterShowRangeText",
                       "sliderFilterPanelWidth",
                       "sliderFilterPanelOffsetX",
@@ -15975,6 +16294,39 @@
                     "rowKeys": [
                       "sliderFilterOffOpacity",
                       "sliderFilterOnOpacity"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:Panel Song Count",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderFilterSongCountFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterSongCountOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterSongCountOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterSongCountBold"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterSongCountItalic"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderFilterSongCountFontSize",
+                      "sliderFilterSongCountOffsetX",
+                      "sliderFilterSongCountOffsetY",
+                      "checkboxFilterSongCountBold",
+                      "checkboxFilterSongCountItalic"
                     ],
                     "subgroups": []
                   }
@@ -19125,12 +19477,48 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "curveEditorSongTickThickZoom"
+          },
+          {
+            "type": "row",
+            "key": "checkboxSongTickBoth"
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Match Graph Colors",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "selectTickColorMode"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderTickColorSaturation"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderTickColorBrightness"
+                }
+              ],
+              "rowKeys": [
+                "selectTickColorMode",
+                "sliderTickColorSaturation",
+                "sliderTickColorBrightness"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
           "sliderTimelineOffsetY",
-          "rangeBarTimelineZoomLimits"
+          "rangeBarTimelineZoomLimits",
+          "curveEditorSongTickThickZoom",
+          "checkboxSongTickBoth"
         ],
         "subgroups": [
           {
@@ -19731,6 +20119,29 @@
               "rangeBarSongTickThinWidth",
               "curveEditorSongTickThinZoom",
               "curveEditorSongTickScale"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:Match Graph Colors",
+            "items": [
+              {
+                "type": "row",
+                "key": "selectTickColorMode"
+              },
+              {
+                "type": "row",
+                "key": "sliderTickColorSaturation"
+              },
+              {
+                "type": "row",
+                "key": "sliderTickColorBrightness"
+              }
+            ],
+            "rowKeys": [
+              "selectTickColorMode",
+              "sliderTickColorSaturation",
+              "sliderTickColorBrightness"
             ],
             "subgroups": []
           }
@@ -22333,100 +22744,35 @@
                     "key": "mobile:Filter Button",
                     "items": [
                       {
-                        "type": "row",
-                        "key": "sliderMobileFilterIconSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileFilterIconOffsetY"
-                      },
-                      {
                         "type": "group",
                         "section": {
-                          "key": "mobile:New Group (16)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "mobile:New Group (17)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "mobile:New Group (18)",
+                          "key": "mobile:New Group (30)",
                           "items": [
                             {
-                              "type": "group",
-                              "section": {
-                                "key": "mobile:New Group (23)",
-                                "items": [],
-                                "rowKeys": [],
-                                "subgroups": []
-                              }
-                            },
-                            {
-                              "type": "group",
-                              "section": {
-                                "key": "mobile:New Group (20)",
-                                "items": [],
-                                "rowKeys": [],
-                                "subgroups": []
-                              }
-                            },
-                            {
-                              "type": "group",
-                              "section": {
-                                "key": "mobile:New Group (22)",
-                                "items": [],
-                                "rowKeys": [],
-                                "subgroups": []
-                              }
-                            },
-                            {
-                              "type": "group",
-                              "section": {
-                                "key": "mobile:New Group (21)",
-                                "items": [],
-                                "rowKeys": [],
-                                "subgroups": []
-                              }
+                              "type": "row",
+                              "key": "sliderMobileFilterIconSize"
                             }
                           ],
-                          "rowKeys": [],
-                          "subgroups": [
+                          "rowKeys": [
+                            "sliderMobileFilterIconSize"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (29)",
+                          "items": [
                             {
-                              "key": "mobile:New Group (23)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            },
-                            {
-                              "key": "mobile:New Group (20)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            },
-                            {
-                              "key": "mobile:New Group (22)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            },
-                            {
-                              "key": "mobile:New Group (21)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
+                              "type": "row",
+                              "key": "sliderMobileFilterIconOffsetY"
                             }
-                          ]
+                          ],
+                          "rowKeys": [
+                            "sliderMobileFilterIconOffsetY"
+                          ],
+                          "subgroups": []
                         }
                       },
                       {
@@ -22508,92 +22854,133 @@
                             }
                           ]
                         }
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderMobileFilterIconSize",
-                      "sliderMobileFilterIconOffsetY"
-                    ],
-                    "subgroups": [
-                      {
-                        "key": "mobile:New Group (16)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
                       },
                       {
-                        "key": "mobile:New Group (17)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "mobile:New Group (18)",
-                        "items": [
-                          {
-                            "type": "group",
-                            "section": {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (18)",
+                          "items": [
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "mobile:New Group (23)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            },
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "mobile:New Group (20)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            },
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "mobile:New Group (22)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            },
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "mobile:New Group (21)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            }
+                          ],
+                          "rowKeys": [],
+                          "subgroups": [
+                            {
                               "key": "mobile:New Group (23)",
                               "items": [],
                               "rowKeys": [],
                               "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
+                            },
+                            {
                               "key": "mobile:New Group (20)",
                               "items": [],
                               "rowKeys": [],
                               "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
+                            },
+                            {
                               "key": "mobile:New Group (22)",
                               "items": [],
                               "rowKeys": [],
                               "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
+                            },
+                            {
                               "key": "mobile:New Group (21)",
                               "items": [],
                               "rowKeys": [],
                               "subgroups": []
                             }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (17)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (16)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:Panel Song Count",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [],
+                    "subgroups": [
+                      {
+                        "key": "mobile:New Group (30)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileFilterIconSize"
                           }
                         ],
-                        "rowKeys": [],
-                        "subgroups": [
+                        "rowKeys": [
+                          "sliderMobileFilterIconSize"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (29)",
+                        "items": [
                           {
-                            "key": "mobile:New Group (23)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "mobile:New Group (20)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "mobile:New Group (22)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "mobile:New Group (21)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
+                            "type": "row",
+                            "key": "sliderMobileFilterIconOffsetY"
                           }
-                        ]
+                        ],
+                        "rowKeys": [
+                          "sliderMobileFilterIconOffsetY"
+                        ],
+                        "subgroups": []
                       },
                       {
                         "key": "mobile:New Group (19)",
@@ -22671,6 +23058,92 @@
                             "subgroups": []
                           }
                         ]
+                      },
+                      {
+                        "key": "mobile:New Group (18)",
+                        "items": [
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (23)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (20)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (22)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (21)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [],
+                        "subgroups": [
+                          {
+                            "key": "mobile:New Group (23)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          },
+                          {
+                            "key": "mobile:New Group (20)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          },
+                          {
+                            "key": "mobile:New Group (22)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          },
+                          {
+                            "key": "mobile:New Group (21)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        ]
+                      },
+                      {
+                        "key": "mobile:New Group (17)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (16)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:Panel Song Count",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
                       }
                     ]
                   }
@@ -23699,100 +24172,35 @@
                   "key": "mobile:Filter Button",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderMobileFilterIconSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileFilterIconOffsetY"
-                    },
-                    {
                       "type": "group",
                       "section": {
-                        "key": "mobile:New Group (16)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:New Group (17)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:New Group (18)",
+                        "key": "mobile:New Group (30)",
                         "items": [
                           {
-                            "type": "group",
-                            "section": {
-                              "key": "mobile:New Group (23)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "mobile:New Group (20)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "mobile:New Group (22)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "mobile:New Group (21)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
+                            "type": "row",
+                            "key": "sliderMobileFilterIconSize"
                           }
                         ],
-                        "rowKeys": [],
-                        "subgroups": [
+                        "rowKeys": [
+                          "sliderMobileFilterIconSize"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (29)",
+                        "items": [
                           {
-                            "key": "mobile:New Group (23)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "mobile:New Group (20)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "mobile:New Group (22)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "mobile:New Group (21)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
+                            "type": "row",
+                            "key": "sliderMobileFilterIconOffsetY"
                           }
-                        ]
+                        ],
+                        "rowKeys": [
+                          "sliderMobileFilterIconOffsetY"
+                        ],
+                        "subgroups": []
                       }
                     },
                     {
@@ -23874,92 +24282,133 @@
                           }
                         ]
                       }
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderMobileFilterIconSize",
-                    "sliderMobileFilterIconOffsetY"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "mobile:New Group (16)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
                     },
                     {
-                      "key": "mobile:New Group (17)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "mobile:New Group (18)",
-                      "items": [
-                        {
-                          "type": "group",
-                          "section": {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (18)",
+                        "items": [
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (23)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (20)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (22)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (21)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [],
+                        "subgroups": [
+                          {
                             "key": "mobile:New Group (23)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "mobile:New Group (20)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "mobile:New Group (22)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "mobile:New Group (21)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
                           }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (17)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (16)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Panel Song Count",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "mobile:New Group (30)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileFilterIconSize"
                         }
                       ],
-                      "rowKeys": [],
-                      "subgroups": [
+                      "rowKeys": [
+                        "sliderMobileFilterIconSize"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (29)",
+                      "items": [
                         {
-                          "key": "mobile:New Group (23)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "mobile:New Group (20)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "mobile:New Group (22)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "mobile:New Group (21)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
+                          "type": "row",
+                          "key": "sliderMobileFilterIconOffsetY"
                         }
-                      ]
+                      ],
+                      "rowKeys": [
+                        "sliderMobileFilterIconOffsetY"
+                      ],
+                      "subgroups": []
                     },
                     {
                       "key": "mobile:New Group (19)",
@@ -24037,6 +24486,92 @@
                           "subgroups": []
                         }
                       ]
+                    },
+                    {
+                      "key": "mobile:New Group (18)",
+                      "items": [
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (23)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (20)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (22)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (21)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [],
+                      "subgroups": [
+                        {
+                          "key": "mobile:New Group (23)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "mobile:New Group (20)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "mobile:New Group (22)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "mobile:New Group (21)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "mobile:New Group (17)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (16)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
                     }
                   ]
                 },
@@ -26550,100 +27085,35 @@
                   "key": "mobile:Filter Button",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderMobileFilterIconSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileFilterIconOffsetY"
-                    },
-                    {
                       "type": "group",
                       "section": {
-                        "key": "mobile:New Group (16)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:New Group (17)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:New Group (18)",
+                        "key": "mobile:New Group (30)",
                         "items": [
                           {
-                            "type": "group",
-                            "section": {
-                              "key": "mobile:New Group (23)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "mobile:New Group (20)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "mobile:New Group (22)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "mobile:New Group (21)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
+                            "type": "row",
+                            "key": "sliderMobileFilterIconSize"
                           }
                         ],
-                        "rowKeys": [],
-                        "subgroups": [
+                        "rowKeys": [
+                          "sliderMobileFilterIconSize"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (29)",
+                        "items": [
                           {
-                            "key": "mobile:New Group (23)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "mobile:New Group (20)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "mobile:New Group (22)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "mobile:New Group (21)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
+                            "type": "row",
+                            "key": "sliderMobileFilterIconOffsetY"
                           }
-                        ]
+                        ],
+                        "rowKeys": [
+                          "sliderMobileFilterIconOffsetY"
+                        ],
+                        "subgroups": []
                       }
                     },
                     {
@@ -26725,92 +27195,133 @@
                           }
                         ]
                       }
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderMobileFilterIconSize",
-                    "sliderMobileFilterIconOffsetY"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "mobile:New Group (16)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
                     },
                     {
-                      "key": "mobile:New Group (17)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "mobile:New Group (18)",
-                      "items": [
-                        {
-                          "type": "group",
-                          "section": {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (18)",
+                        "items": [
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (23)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (20)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (22)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (21)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [],
+                        "subgroups": [
+                          {
                             "key": "mobile:New Group (23)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "mobile:New Group (20)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "mobile:New Group (22)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "mobile:New Group (21)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
                           }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (17)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (16)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Panel Song Count",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "mobile:New Group (30)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileFilterIconSize"
                         }
                       ],
-                      "rowKeys": [],
-                      "subgroups": [
+                      "rowKeys": [
+                        "sliderMobileFilterIconSize"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (29)",
+                      "items": [
                         {
-                          "key": "mobile:New Group (23)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "mobile:New Group (20)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "mobile:New Group (22)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "mobile:New Group (21)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
+                          "type": "row",
+                          "key": "sliderMobileFilterIconOffsetY"
                         }
-                      ]
+                      ],
+                      "rowKeys": [
+                        "sliderMobileFilterIconOffsetY"
+                      ],
+                      "subgroups": []
                     },
                     {
                       "key": "mobile:New Group (19)",
@@ -26888,6 +27399,92 @@
                           "subgroups": []
                         }
                       ]
+                    },
+                    {
+                      "key": "mobile:New Group (18)",
+                      "items": [
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (23)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (20)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (22)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (21)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [],
+                      "subgroups": [
+                        {
+                          "key": "mobile:New Group (23)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "mobile:New Group (20)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "mobile:New Group (22)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "mobile:New Group (21)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "mobile:New Group (17)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (16)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
                     }
                   ]
                 }
@@ -27916,100 +28513,35 @@
                 "key": "mobile:Filter Button",
                 "items": [
                   {
-                    "type": "row",
-                    "key": "sliderMobileFilterIconSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderMobileFilterIconOffsetY"
-                  },
-                  {
                     "type": "group",
                     "section": {
-                      "key": "mobile:New Group (16)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "mobile:New Group (17)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "mobile:New Group (18)",
+                      "key": "mobile:New Group (30)",
                       "items": [
                         {
-                          "type": "group",
-                          "section": {
-                            "key": "mobile:New Group (23)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
-                            "key": "mobile:New Group (20)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
-                            "key": "mobile:New Group (22)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
-                            "key": "mobile:New Group (21)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          }
+                          "type": "row",
+                          "key": "sliderMobileFilterIconSize"
                         }
                       ],
-                      "rowKeys": [],
-                      "subgroups": [
+                      "rowKeys": [
+                        "sliderMobileFilterIconSize"
+                      ],
+                      "subgroups": []
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (29)",
+                      "items": [
                         {
-                          "key": "mobile:New Group (23)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "mobile:New Group (20)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "mobile:New Group (22)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "mobile:New Group (21)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
+                          "type": "row",
+                          "key": "sliderMobileFilterIconOffsetY"
                         }
-                      ]
+                      ],
+                      "rowKeys": [
+                        "sliderMobileFilterIconOffsetY"
+                      ],
+                      "subgroups": []
                     }
                   },
                   {
@@ -28091,92 +28623,133 @@
                         }
                       ]
                     }
-                  }
-                ],
-                "rowKeys": [
-                  "sliderMobileFilterIconSize",
-                  "sliderMobileFilterIconOffsetY"
-                ],
-                "subgroups": [
-                  {
-                    "key": "mobile:New Group (16)",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
                   },
                   {
-                    "key": "mobile:New Group (17)",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  },
-                  {
-                    "key": "mobile:New Group (18)",
-                    "items": [
-                      {
-                        "type": "group",
-                        "section": {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (18)",
+                      "items": [
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (23)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (20)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (22)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (21)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [],
+                      "subgroups": [
+                        {
                           "key": "mobile:New Group (23)",
                           "items": [],
                           "rowKeys": [],
                           "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
+                        },
+                        {
                           "key": "mobile:New Group (20)",
                           "items": [],
                           "rowKeys": [],
                           "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
+                        },
+                        {
                           "key": "mobile:New Group (22)",
                           "items": [],
                           "rowKeys": [],
                           "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
+                        },
+                        {
                           "key": "mobile:New Group (21)",
                           "items": [],
                           "rowKeys": [],
                           "subgroups": []
                         }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (17)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (16)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [],
+                "subgroups": [
+                  {
+                    "key": "mobile:New Group (30)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileFilterIconSize"
                       }
                     ],
-                    "rowKeys": [],
-                    "subgroups": [
+                    "rowKeys": [
+                      "sliderMobileFilterIconSize"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "mobile:New Group (29)",
+                    "items": [
                       {
-                        "key": "mobile:New Group (23)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "mobile:New Group (20)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "mobile:New Group (22)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "mobile:New Group (21)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
+                        "type": "row",
+                        "key": "sliderMobileFilterIconOffsetY"
                       }
-                    ]
+                    ],
+                    "rowKeys": [
+                      "sliderMobileFilterIconOffsetY"
+                    ],
+                    "subgroups": []
                   },
                   {
                     "key": "mobile:New Group (19)",
@@ -28254,6 +28827,92 @@
                         "subgroups": []
                       }
                     ]
+                  },
+                  {
+                    "key": "mobile:New Group (18)",
+                    "items": [
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (23)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (20)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (22)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (21)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [],
+                    "subgroups": [
+                      {
+                        "key": "mobile:New Group (23)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (20)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (22)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (21)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  },
+                  {
+                    "key": "mobile:New Group (17)",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "mobile:New Group (16)",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "mobile:Panel Song Count",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
                   }
                 ]
               },
@@ -29670,6 +30329,15 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Match Graph Colors",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [],
@@ -29798,6 +30466,12 @@
           },
           {
             "key": "mobile:New Group (28)",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Match Graph Colors",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -31926,100 +32600,35 @@
                     "key": "landscape:Filter Button",
                     "items": [
                       {
-                        "type": "row",
-                        "key": "sliderLandscapeFilterIconSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeFilterIconOffsetY"
-                      },
-                      {
                         "type": "group",
                         "section": {
-                          "key": "landscape:New Group (16)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "landscape:New Group (17)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "landscape:New Group (18)",
+                          "key": "landscape:New Group (30)",
                           "items": [
                             {
-                              "type": "group",
-                              "section": {
-                                "key": "landscape:New Group (23)",
-                                "items": [],
-                                "rowKeys": [],
-                                "subgroups": []
-                              }
-                            },
-                            {
-                              "type": "group",
-                              "section": {
-                                "key": "landscape:New Group (20)",
-                                "items": [],
-                                "rowKeys": [],
-                                "subgroups": []
-                              }
-                            },
-                            {
-                              "type": "group",
-                              "section": {
-                                "key": "landscape:New Group (22)",
-                                "items": [],
-                                "rowKeys": [],
-                                "subgroups": []
-                              }
-                            },
-                            {
-                              "type": "group",
-                              "section": {
-                                "key": "landscape:New Group (21)",
-                                "items": [],
-                                "rowKeys": [],
-                                "subgroups": []
-                              }
+                              "type": "row",
+                              "key": "sliderLandscapeFilterIconSize"
                             }
                           ],
-                          "rowKeys": [],
-                          "subgroups": [
+                          "rowKeys": [
+                            "sliderLandscapeFilterIconSize"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (29)",
+                          "items": [
                             {
-                              "key": "landscape:New Group (23)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            },
-                            {
-                              "key": "landscape:New Group (20)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            },
-                            {
-                              "key": "landscape:New Group (22)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            },
-                            {
-                              "key": "landscape:New Group (21)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
+                              "type": "row",
+                              "key": "sliderLandscapeFilterIconOffsetY"
                             }
-                          ]
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeFilterIconOffsetY"
+                          ],
+                          "subgroups": []
                         }
                       },
                       {
@@ -32101,92 +32710,133 @@
                             }
                           ]
                         }
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderLandscapeFilterIconSize",
-                      "sliderLandscapeFilterIconOffsetY"
-                    ],
-                    "subgroups": [
-                      {
-                        "key": "landscape:New Group (16)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
                       },
                       {
-                        "key": "landscape:New Group (17)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "landscape:New Group (18)",
-                        "items": [
-                          {
-                            "type": "group",
-                            "section": {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (18)",
+                          "items": [
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "landscape:New Group (23)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            },
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "landscape:New Group (20)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            },
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "landscape:New Group (22)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            },
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "landscape:New Group (21)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            }
+                          ],
+                          "rowKeys": [],
+                          "subgroups": [
+                            {
                               "key": "landscape:New Group (23)",
                               "items": [],
                               "rowKeys": [],
                               "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
+                            },
+                            {
                               "key": "landscape:New Group (20)",
                               "items": [],
                               "rowKeys": [],
                               "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
+                            },
+                            {
                               "key": "landscape:New Group (22)",
                               "items": [],
                               "rowKeys": [],
                               "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
+                            },
+                            {
                               "key": "landscape:New Group (21)",
                               "items": [],
                               "rowKeys": [],
                               "subgroups": []
                             }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (17)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (16)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:Panel Song Count",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [],
+                    "subgroups": [
+                      {
+                        "key": "landscape:New Group (30)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeFilterIconSize"
                           }
                         ],
-                        "rowKeys": [],
-                        "subgroups": [
+                        "rowKeys": [
+                          "sliderLandscapeFilterIconSize"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (29)",
+                        "items": [
                           {
-                            "key": "landscape:New Group (23)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "landscape:New Group (20)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "landscape:New Group (22)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "landscape:New Group (21)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
+                            "type": "row",
+                            "key": "sliderLandscapeFilterIconOffsetY"
                           }
-                        ]
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeFilterIconOffsetY"
+                        ],
+                        "subgroups": []
                       },
                       {
                         "key": "landscape:New Group (19)",
@@ -32264,6 +32914,92 @@
                             "subgroups": []
                           }
                         ]
+                      },
+                      {
+                        "key": "landscape:New Group (18)",
+                        "items": [
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (23)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (20)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (22)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (21)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [],
+                        "subgroups": [
+                          {
+                            "key": "landscape:New Group (23)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          },
+                          {
+                            "key": "landscape:New Group (20)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          },
+                          {
+                            "key": "landscape:New Group (22)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          },
+                          {
+                            "key": "landscape:New Group (21)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        ]
+                      },
+                      {
+                        "key": "landscape:New Group (17)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (16)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:Panel Song Count",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
                       }
                     ]
                   }
@@ -33292,100 +34028,35 @@
                   "key": "landscape:Filter Button",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeFilterIconSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeFilterIconOffsetY"
-                    },
-                    {
                       "type": "group",
                       "section": {
-                        "key": "landscape:New Group (16)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:New Group (17)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:New Group (18)",
+                        "key": "landscape:New Group (30)",
                         "items": [
                           {
-                            "type": "group",
-                            "section": {
-                              "key": "landscape:New Group (23)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "landscape:New Group (20)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "landscape:New Group (22)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "landscape:New Group (21)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
+                            "type": "row",
+                            "key": "sliderLandscapeFilterIconSize"
                           }
                         ],
-                        "rowKeys": [],
-                        "subgroups": [
+                        "rowKeys": [
+                          "sliderLandscapeFilterIconSize"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (29)",
+                        "items": [
                           {
-                            "key": "landscape:New Group (23)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "landscape:New Group (20)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "landscape:New Group (22)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "landscape:New Group (21)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
+                            "type": "row",
+                            "key": "sliderLandscapeFilterIconOffsetY"
                           }
-                        ]
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeFilterIconOffsetY"
+                        ],
+                        "subgroups": []
                       }
                     },
                     {
@@ -33467,92 +34138,133 @@
                           }
                         ]
                       }
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderLandscapeFilterIconSize",
-                    "sliderLandscapeFilterIconOffsetY"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "landscape:New Group (16)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
                     },
                     {
-                      "key": "landscape:New Group (17)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "landscape:New Group (18)",
-                      "items": [
-                        {
-                          "type": "group",
-                          "section": {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (18)",
+                        "items": [
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (23)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (20)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (22)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (21)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [],
+                        "subgroups": [
+                          {
                             "key": "landscape:New Group (23)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "landscape:New Group (20)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "landscape:New Group (22)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "landscape:New Group (21)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
                           }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (17)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (16)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Panel Song Count",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "landscape:New Group (30)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeFilterIconSize"
                         }
                       ],
-                      "rowKeys": [],
-                      "subgroups": [
+                      "rowKeys": [
+                        "sliderLandscapeFilterIconSize"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (29)",
+                      "items": [
                         {
-                          "key": "landscape:New Group (23)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "landscape:New Group (20)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "landscape:New Group (22)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "landscape:New Group (21)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
+                          "type": "row",
+                          "key": "sliderLandscapeFilterIconOffsetY"
                         }
-                      ]
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeFilterIconOffsetY"
+                      ],
+                      "subgroups": []
                     },
                     {
                       "key": "landscape:New Group (19)",
@@ -33630,6 +34342,92 @@
                           "subgroups": []
                         }
                       ]
+                    },
+                    {
+                      "key": "landscape:New Group (18)",
+                      "items": [
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (23)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (20)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (22)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (21)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [],
+                      "subgroups": [
+                        {
+                          "key": "landscape:New Group (23)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "landscape:New Group (20)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "landscape:New Group (22)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "landscape:New Group (21)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "landscape:New Group (17)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (16)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
                     }
                   ]
                 },
@@ -36143,100 +36941,35 @@
                   "key": "landscape:Filter Button",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeFilterIconSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeFilterIconOffsetY"
-                    },
-                    {
                       "type": "group",
                       "section": {
-                        "key": "landscape:New Group (16)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:New Group (17)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:New Group (18)",
+                        "key": "landscape:New Group (30)",
                         "items": [
                           {
-                            "type": "group",
-                            "section": {
-                              "key": "landscape:New Group (23)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "landscape:New Group (20)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "landscape:New Group (22)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
-                          },
-                          {
-                            "type": "group",
-                            "section": {
-                              "key": "landscape:New Group (21)",
-                              "items": [],
-                              "rowKeys": [],
-                              "subgroups": []
-                            }
+                            "type": "row",
+                            "key": "sliderLandscapeFilterIconSize"
                           }
                         ],
-                        "rowKeys": [],
-                        "subgroups": [
+                        "rowKeys": [
+                          "sliderLandscapeFilterIconSize"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (29)",
+                        "items": [
                           {
-                            "key": "landscape:New Group (23)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "landscape:New Group (20)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "landscape:New Group (22)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          },
-                          {
-                            "key": "landscape:New Group (21)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
+                            "type": "row",
+                            "key": "sliderLandscapeFilterIconOffsetY"
                           }
-                        ]
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeFilterIconOffsetY"
+                        ],
+                        "subgroups": []
                       }
                     },
                     {
@@ -36318,92 +37051,133 @@
                           }
                         ]
                       }
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderLandscapeFilterIconSize",
-                    "sliderLandscapeFilterIconOffsetY"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "landscape:New Group (16)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
                     },
                     {
-                      "key": "landscape:New Group (17)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "landscape:New Group (18)",
-                      "items": [
-                        {
-                          "type": "group",
-                          "section": {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (18)",
+                        "items": [
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (23)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (20)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (22)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (21)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [],
+                        "subgroups": [
+                          {
                             "key": "landscape:New Group (23)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "landscape:New Group (20)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "landscape:New Group (22)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
+                          },
+                          {
                             "key": "landscape:New Group (21)",
                             "items": [],
                             "rowKeys": [],
                             "subgroups": []
                           }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (17)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (16)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Panel Song Count",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "landscape:New Group (30)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeFilterIconSize"
                         }
                       ],
-                      "rowKeys": [],
-                      "subgroups": [
+                      "rowKeys": [
+                        "sliderLandscapeFilterIconSize"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (29)",
+                      "items": [
                         {
-                          "key": "landscape:New Group (23)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "landscape:New Group (20)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "landscape:New Group (22)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "landscape:New Group (21)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
+                          "type": "row",
+                          "key": "sliderLandscapeFilterIconOffsetY"
                         }
-                      ]
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeFilterIconOffsetY"
+                      ],
+                      "subgroups": []
                     },
                     {
                       "key": "landscape:New Group (19)",
@@ -36481,6 +37255,92 @@
                           "subgroups": []
                         }
                       ]
+                    },
+                    {
+                      "key": "landscape:New Group (18)",
+                      "items": [
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (23)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (20)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (22)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (21)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [],
+                      "subgroups": [
+                        {
+                          "key": "landscape:New Group (23)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "landscape:New Group (20)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "landscape:New Group (22)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        },
+                        {
+                          "key": "landscape:New Group (21)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "landscape:New Group (17)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (16)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
                     }
                   ]
                 }
@@ -37509,100 +38369,35 @@
                 "key": "landscape:Filter Button",
                 "items": [
                   {
-                    "type": "row",
-                    "key": "sliderLandscapeFilterIconSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderLandscapeFilterIconOffsetY"
-                  },
-                  {
                     "type": "group",
                     "section": {
-                      "key": "landscape:New Group (16)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "landscape:New Group (17)",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "landscape:New Group (18)",
+                      "key": "landscape:New Group (30)",
                       "items": [
                         {
-                          "type": "group",
-                          "section": {
-                            "key": "landscape:New Group (23)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
-                            "key": "landscape:New Group (20)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
-                            "key": "landscape:New Group (22)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          }
-                        },
-                        {
-                          "type": "group",
-                          "section": {
-                            "key": "landscape:New Group (21)",
-                            "items": [],
-                            "rowKeys": [],
-                            "subgroups": []
-                          }
+                          "type": "row",
+                          "key": "sliderLandscapeFilterIconSize"
                         }
                       ],
-                      "rowKeys": [],
-                      "subgroups": [
+                      "rowKeys": [
+                        "sliderLandscapeFilterIconSize"
+                      ],
+                      "subgroups": []
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (29)",
+                      "items": [
                         {
-                          "key": "landscape:New Group (23)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "landscape:New Group (20)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "landscape:New Group (22)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        },
-                        {
-                          "key": "landscape:New Group (21)",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
+                          "type": "row",
+                          "key": "sliderLandscapeFilterIconOffsetY"
                         }
-                      ]
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeFilterIconOffsetY"
+                      ],
+                      "subgroups": []
                     }
                   },
                   {
@@ -37684,92 +38479,133 @@
                         }
                       ]
                     }
-                  }
-                ],
-                "rowKeys": [
-                  "sliderLandscapeFilterIconSize",
-                  "sliderLandscapeFilterIconOffsetY"
-                ],
-                "subgroups": [
-                  {
-                    "key": "landscape:New Group (16)",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
                   },
                   {
-                    "key": "landscape:New Group (17)",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  },
-                  {
-                    "key": "landscape:New Group (18)",
-                    "items": [
-                      {
-                        "type": "group",
-                        "section": {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (18)",
+                      "items": [
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (23)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (20)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (22)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (21)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [],
+                      "subgroups": [
+                        {
                           "key": "landscape:New Group (23)",
                           "items": [],
                           "rowKeys": [],
                           "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
+                        },
+                        {
                           "key": "landscape:New Group (20)",
                           "items": [],
                           "rowKeys": [],
                           "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
+                        },
+                        {
                           "key": "landscape:New Group (22)",
                           "items": [],
                           "rowKeys": [],
                           "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
+                        },
+                        {
                           "key": "landscape:New Group (21)",
                           "items": [],
                           "rowKeys": [],
                           "subgroups": []
                         }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (17)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (16)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:Panel Song Count",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [],
+                "subgroups": [
+                  {
+                    "key": "landscape:New Group (30)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeFilterIconSize"
                       }
                     ],
-                    "rowKeys": [],
-                    "subgroups": [
+                    "rowKeys": [
+                      "sliderLandscapeFilterIconSize"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "landscape:New Group (29)",
+                    "items": [
                       {
-                        "key": "landscape:New Group (23)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "landscape:New Group (20)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "landscape:New Group (22)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "landscape:New Group (21)",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
+                        "type": "row",
+                        "key": "sliderLandscapeFilterIconOffsetY"
                       }
-                    ]
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeFilterIconOffsetY"
+                    ],
+                    "subgroups": []
                   },
                   {
                     "key": "landscape:New Group (19)",
@@ -37847,6 +38683,92 @@
                         "subgroups": []
                       }
                     ]
+                  },
+                  {
+                    "key": "landscape:New Group (18)",
+                    "items": [
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (23)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (20)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (22)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (21)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [],
+                    "subgroups": [
+                      {
+                        "key": "landscape:New Group (23)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (20)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (22)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (21)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  },
+                  {
+                    "key": "landscape:New Group (17)",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "landscape:New Group (16)",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "landscape:Panel Song Count",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
                   }
                 ]
               },
@@ -39263,6 +40185,15 @@
               "rowKeys": [],
               "subgroups": []
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Match Graph Colors",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [],
@@ -39394,6 +40325,12 @@
             "items": [],
             "rowKeys": [],
             "subgroups": []
+          },
+          {
+            "key": "landscape:Match Graph Colors",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       },
@@ -39477,7 +40414,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": true,
+    "desktop:UI Layout": false,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -39487,7 +40424,7 @@
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": true,
+    "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
@@ -39518,6 +40455,7 @@
     "desktop:New Group (21)": true,
     "desktop:New Group (17)": true,
     "desktop:New Group (16)": true,
+    "desktop:Panel Song Count": false,
     "desktop:Song Data": true,
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
@@ -39555,10 +40493,11 @@
     "desktop:Timeline Scale": true,
     "desktop:Scale Numbers": true,
     "desktop:Ticks": true,
-    "desktop:Song Add Date": false,
+    "desktop:Song Add Date": true,
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
-    "desktop:New Group (28)": true,
+    "desktop:New Group (28)": false,
+    "desktop:Match Graph Colors": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
@@ -39604,15 +40543,18 @@
     "mobile:New Group (15)": false,
     "mobile:Shuffle Button Animation": false,
     "mobile:Filter Button": true,
-    "mobile:New Group (16)": false,
-    "mobile:New Group (17)": false,
+    "mobile:New Group (30)": false,
+    "mobile:New Group (29)": false,
+    "mobile:New Group (19)": false,
+    "mobile:New Group (24)": false,
     "mobile:New Group (18)": false,
     "mobile:New Group (23)": false,
     "mobile:New Group (20)": false,
     "mobile:New Group (22)": false,
     "mobile:New Group (21)": false,
-    "mobile:New Group (19)": false,
-    "mobile:New Group (24)": false,
+    "mobile:New Group (17)": false,
+    "mobile:New Group (16)": false,
+    "mobile:Panel Song Count": false,
     "mobile:Song Data": true,
     "mobile:New Group (25)": false,
     "mobile:New Group (26)": false,
@@ -39654,6 +40596,7 @@
     "mobile:Right Click Pan": false,
     "mobile:Right Click Height": false,
     "mobile:New Group (28)": false,
+    "mobile:Match Graph Colors": false,
     "mobile:Startup": true,
     "mobile:Start Button": false,
     "mobile:Start Button Animation": false,
@@ -39699,15 +40642,18 @@
     "landscape:New Group (15)": false,
     "landscape:Shuffle Button Animation": false,
     "landscape:Filter Button": false,
-    "landscape:New Group (16)": false,
-    "landscape:New Group (17)": false,
+    "landscape:New Group (30)": false,
+    "landscape:New Group (29)": false,
+    "landscape:New Group (19)": false,
+    "landscape:New Group (24)": false,
     "landscape:New Group (18)": false,
     "landscape:New Group (23)": false,
     "landscape:New Group (20)": false,
     "landscape:New Group (22)": false,
     "landscape:New Group (21)": false,
-    "landscape:New Group (19)": false,
-    "landscape:New Group (24)": false,
+    "landscape:New Group (17)": false,
+    "landscape:New Group (16)": false,
+    "landscape:Panel Song Count": false,
     "landscape:Song Data": false,
     "landscape:New Group (25)": false,
     "landscape:New Group (26)": false,
@@ -39749,6 +40695,7 @@
     "landscape:Right Click Pan": false,
     "landscape:Right Click Height": false,
     "landscape:New Group (28)": false,
+    "landscape:Match Graph Colors": false,
     "landscape:Startup": false,
     "landscape:Start Button": false,
     "landscape:Start Button Animation": false
@@ -40561,7 +41508,15 @@
     "sliderTickStartHeight": "Base Offset",
     "sliderTickHeight": "Height (Px)",
     "sliderTimelineScaleGap": "Graph And Timeline Spacing (Px):",
-    "sliderTimelineOffsetY": "Y Offset (Px)"
+    "sliderTimelineOffsetY": "Y Offset (Px)",
+    "mobile:New Group (30)": "ICONS",
+    "mobile:New Group (29)": "OFFSET",
+    "mobile:Panel Song Count": null,
+    "mobile:Match Graph Colors": null,
+    "landscape:New Group (30)": "ICONS",
+    "landscape:New Group (29)": "OFFSET",
+    "landscape:Panel Song Count": null,
+    "landscape:Match Graph Colors": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
