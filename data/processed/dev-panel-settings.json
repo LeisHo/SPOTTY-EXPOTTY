@@ -4593,38 +4593,6 @@
                     "items": [
                       {
                         "type": "row",
-                        "key": "selectFilterIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectTempoIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectValenceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectDanceIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectEnergyIconStyle"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderFilterIconSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorFilterIcon"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorFilterOn"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxFilterButtonEnabled"
                       },
                       {
@@ -4633,11 +4601,70 @@
                       },
                       {
                         "type": "row",
+                        "key": "checkboxFilterNameLengths"
+                      },
+                      {
+                        "type": "row",
                         "key": "checkboxFilterSongLength"
                       },
                       {
                         "type": "row",
                         "key": "sliderFilterPanelCountFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterClickToExit"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (30)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "selectFilterIconStyle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectTempoIconStyle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectValenceIconStyle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectDanceIconStyle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectEnergyIconStyle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterIconSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorFilterOn"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorFilterIcon"
+                            }
+                          ],
+                          "rowKeys": [
+                            "selectFilterIconStyle",
+                            "selectTempoIconStyle",
+                            "selectValenceIconStyle",
+                            "selectDanceIconStyle",
+                            "selectEnergyIconStyle",
+                            "sliderFilterIconSize",
+                            "colorFilterOn",
+                            "colorFilterIcon"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
                         "type": "group",
@@ -4669,14 +4696,6 @@
                           ],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterNameLengths"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterClickToExit"
                       },
                       {
                         "type": "group",
@@ -5131,22 +5150,62 @@
                       }
                     ],
                     "rowKeys": [
-                      "selectFilterIconStyle",
-                      "selectTempoIconStyle",
-                      "selectValenceIconStyle",
-                      "selectDanceIconStyle",
-                      "selectEnergyIconStyle",
-                      "sliderFilterIconSize",
-                      "colorFilterIcon",
-                      "colorFilterOn",
                       "checkboxFilterButtonEnabled",
                       "checkboxFilterSongDate",
+                      "checkboxFilterNameLengths",
                       "checkboxFilterSongLength",
                       "sliderFilterPanelCountFontSize",
-                      "checkboxFilterNameLengths",
                       "checkboxFilterClickToExit"
                     ],
                     "subgroups": [
+                      {
+                        "key": "desktop:New Group (30)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "selectFilterIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTempoIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectValenceIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectDanceIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectEnergyIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterIconSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorFilterOn"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorFilterIcon"
+                          }
+                        ],
+                        "rowKeys": [
+                          "selectFilterIconStyle",
+                          "selectTempoIconStyle",
+                          "selectValenceIconStyle",
+                          "selectDanceIconStyle",
+                          "selectEnergyIconStyle",
+                          "sliderFilterIconSize",
+                          "colorFilterOn",
+                          "colorFilterIcon"
+                        ],
+                        "subgroups": []
+                      },
                       {
                         "key": "desktop:New Group (29)",
                         "items": [
@@ -7109,38 +7168,6 @@
                   "items": [
                     {
                       "type": "row",
-                      "key": "selectFilterIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTempoIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectValenceIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectDanceIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectEnergyIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderFilterIconSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorFilterIcon"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorFilterOn"
-                    },
-                    {
-                      "type": "row",
                       "key": "checkboxFilterButtonEnabled"
                     },
                     {
@@ -7149,11 +7176,70 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxFilterNameLengths"
+                    },
+                    {
+                      "type": "row",
                       "key": "checkboxFilterSongLength"
                     },
                     {
                       "type": "row",
                       "key": "sliderFilterPanelCountFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterClickToExit"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (30)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "selectFilterIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTempoIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectValenceIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectDanceIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectEnergyIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterIconSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorFilterOn"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorFilterIcon"
+                          }
+                        ],
+                        "rowKeys": [
+                          "selectFilterIconStyle",
+                          "selectTempoIconStyle",
+                          "selectValenceIconStyle",
+                          "selectDanceIconStyle",
+                          "selectEnergyIconStyle",
+                          "sliderFilterIconSize",
+                          "colorFilterOn",
+                          "colorFilterIcon"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -7185,14 +7271,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterNameLengths"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterClickToExit"
                     },
                     {
                       "type": "group",
@@ -7647,22 +7725,62 @@
                     }
                   ],
                   "rowKeys": [
-                    "selectFilterIconStyle",
-                    "selectTempoIconStyle",
-                    "selectValenceIconStyle",
-                    "selectDanceIconStyle",
-                    "selectEnergyIconStyle",
-                    "sliderFilterIconSize",
-                    "colorFilterIcon",
-                    "colorFilterOn",
                     "checkboxFilterButtonEnabled",
                     "checkboxFilterSongDate",
+                    "checkboxFilterNameLengths",
                     "checkboxFilterSongLength",
                     "sliderFilterPanelCountFontSize",
-                    "checkboxFilterNameLengths",
                     "checkboxFilterClickToExit"
                   ],
                   "subgroups": [
+                    {
+                      "key": "desktop:New Group (30)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "selectFilterIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTempoIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectValenceIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectDanceIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectEnergyIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterIconSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorFilterOn"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorFilterIcon"
+                        }
+                      ],
+                      "rowKeys": [
+                        "selectFilterIconStyle",
+                        "selectTempoIconStyle",
+                        "selectValenceIconStyle",
+                        "selectDanceIconStyle",
+                        "selectEnergyIconStyle",
+                        "sliderFilterIconSize",
+                        "colorFilterOn",
+                        "colorFilterIcon"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "desktop:New Group (29)",
                       "items": [
@@ -12205,38 +12323,6 @@
                   "items": [
                     {
                       "type": "row",
-                      "key": "selectFilterIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTempoIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectValenceIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectDanceIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectEnergyIconStyle"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderFilterIconSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorFilterIcon"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorFilterOn"
-                    },
-                    {
-                      "type": "row",
                       "key": "checkboxFilterButtonEnabled"
                     },
                     {
@@ -12245,11 +12331,70 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxFilterNameLengths"
+                    },
+                    {
+                      "type": "row",
                       "key": "checkboxFilterSongLength"
                     },
                     {
                       "type": "row",
                       "key": "sliderFilterPanelCountFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterClickToExit"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (30)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "selectFilterIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTempoIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectValenceIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectDanceIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectEnergyIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterIconSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorFilterOn"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorFilterIcon"
+                          }
+                        ],
+                        "rowKeys": [
+                          "selectFilterIconStyle",
+                          "selectTempoIconStyle",
+                          "selectValenceIconStyle",
+                          "selectDanceIconStyle",
+                          "selectEnergyIconStyle",
+                          "sliderFilterIconSize",
+                          "colorFilterOn",
+                          "colorFilterIcon"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -12281,14 +12426,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterNameLengths"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterClickToExit"
                     },
                     {
                       "type": "group",
@@ -12743,22 +12880,62 @@
                     }
                   ],
                   "rowKeys": [
-                    "selectFilterIconStyle",
-                    "selectTempoIconStyle",
-                    "selectValenceIconStyle",
-                    "selectDanceIconStyle",
-                    "selectEnergyIconStyle",
-                    "sliderFilterIconSize",
-                    "colorFilterIcon",
-                    "colorFilterOn",
                     "checkboxFilterButtonEnabled",
                     "checkboxFilterSongDate",
+                    "checkboxFilterNameLengths",
                     "checkboxFilterSongLength",
                     "sliderFilterPanelCountFontSize",
-                    "checkboxFilterNameLengths",
                     "checkboxFilterClickToExit"
                   ],
                   "subgroups": [
+                    {
+                      "key": "desktop:New Group (30)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "selectFilterIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTempoIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectValenceIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectDanceIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectEnergyIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterIconSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorFilterOn"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorFilterIcon"
+                        }
+                      ],
+                      "rowKeys": [
+                        "selectFilterIconStyle",
+                        "selectTempoIconStyle",
+                        "selectValenceIconStyle",
+                        "selectDanceIconStyle",
+                        "selectEnergyIconStyle",
+                        "sliderFilterIconSize",
+                        "colorFilterOn",
+                        "colorFilterIcon"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "desktop:New Group (29)",
                       "items": [
@@ -14721,38 +14898,6 @@
                 "items": [
                   {
                     "type": "row",
-                    "key": "selectFilterIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectTempoIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectValenceIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectDanceIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectEnergyIconStyle"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderFilterIconSize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorFilterIcon"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorFilterOn"
-                  },
-                  {
-                    "type": "row",
                     "key": "checkboxFilterButtonEnabled"
                   },
                   {
@@ -14761,11 +14906,70 @@
                   },
                   {
                     "type": "row",
+                    "key": "checkboxFilterNameLengths"
+                  },
+                  {
+                    "type": "row",
                     "key": "checkboxFilterSongLength"
                   },
                   {
                     "type": "row",
                     "key": "sliderFilterPanelCountFontSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterClickToExit"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (30)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "selectFilterIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTempoIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectValenceIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectDanceIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectEnergyIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterIconSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorFilterOn"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorFilterIcon"
+                        }
+                      ],
+                      "rowKeys": [
+                        "selectFilterIconStyle",
+                        "selectTempoIconStyle",
+                        "selectValenceIconStyle",
+                        "selectDanceIconStyle",
+                        "selectEnergyIconStyle",
+                        "sliderFilterIconSize",
+                        "colorFilterOn",
+                        "colorFilterIcon"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
                     "type": "group",
@@ -14797,14 +15001,6 @@
                       ],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxFilterNameLengths"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxFilterClickToExit"
                   },
                   {
                     "type": "group",
@@ -15259,22 +15455,62 @@
                   }
                 ],
                 "rowKeys": [
-                  "selectFilterIconStyle",
-                  "selectTempoIconStyle",
-                  "selectValenceIconStyle",
-                  "selectDanceIconStyle",
-                  "selectEnergyIconStyle",
-                  "sliderFilterIconSize",
-                  "colorFilterIcon",
-                  "colorFilterOn",
                   "checkboxFilterButtonEnabled",
                   "checkboxFilterSongDate",
+                  "checkboxFilterNameLengths",
                   "checkboxFilterSongLength",
                   "sliderFilterPanelCountFontSize",
-                  "checkboxFilterNameLengths",
                   "checkboxFilterClickToExit"
                 ],
                 "subgroups": [
+                  {
+                    "key": "desktop:New Group (30)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "selectFilterIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectTempoIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectValenceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectDanceIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectEnergyIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorFilterOn"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorFilterIcon"
+                      }
+                    ],
+                    "rowKeys": [
+                      "selectFilterIconStyle",
+                      "selectTempoIconStyle",
+                      "selectValenceIconStyle",
+                      "selectDanceIconStyle",
+                      "selectEnergyIconStyle",
+                      "sliderFilterIconSize",
+                      "colorFilterOn",
+                      "colorFilterIcon"
+                    ],
+                    "subgroups": []
+                  },
                   {
                     "key": "desktop:New Group (29)",
                     "items": [
@@ -39266,6 +39502,7 @@
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
     "desktop:Filter Button": false,
+    "desktop:New Group (30)": true,
     "desktop:New Group (29)": true,
     "desktop:New Group (19)": true,
     "desktop:New Group (24)": true,
@@ -40313,7 +40550,8 @@
     "landscape:New Group (28)": "TICKS",
     "mobile:Modifiers": null,
     "landscape:Modifiers": null,
-    "desktop:New Group (29)": "OFFSET"
+    "desktop:New Group (29)": "OFFSET",
+    "desktop:New Group (30)": "ICONS"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -40350,7 +40588,8 @@
     "desktop:New Group (26)",
     "desktop:New Group (25)",
     "desktop:New Group (28)",
-    "desktop:New Group (29)"
+    "desktop:New Group (29)",
+    "desktop:New Group (30)"
   ],
   "lockedGroups": [
     "desktop:Dev Panel",
