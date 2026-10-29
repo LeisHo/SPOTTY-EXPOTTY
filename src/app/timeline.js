@@ -350,7 +350,8 @@ export function createTimeline(canvas, data) {
         const i0 = lowerBound(vt, viewStart), i1 = lowerBound(vt, viewEnd);
         const accentCss = rgbCss(hexToRgb(accent), baseAlpha);
 
-        // Song ticks are drawn FIRST so everything else (the bars, rows, scale, date, playhead) sits on top of them
+        // Song ticks: drawn FIRST by default ("Render Ticks Behind Bars" on) so everything else (the bars, rows, scale, date, playhead) sits on top of them; off = after the bars
+        const drawSongTicks = () => {
         ctx.save();
         // individual song ticks when zoomed in far enough to tell songs apart: from Song Ticks Start Showing (the pixels between songs) upward
         if (i1 - i0 > 0 && w / (i1 - i0) >= setting('sliderSongTickMinSpacing')) {
@@ -366,6 +367,18 @@ export function createTimeline(canvas, data) {
             const zf = zoomFraction('limits'), scaleAll = curveValue(setting('curveEditorSongTickThinZoom'), zf), scaleThick = curveValue(setting('curveEditorSongTickThickZoom'), zf);
             const thinT = Math.max(Math.min(tr.min, tr.max), Math.max(tr.min, tr.max) * scaleAll); // the thinnest tick: its Max scaled, never below its Min
             const wMaxEff = Math.max(thinT, wMaxT * scaleAll * scaleThick); // the thickest tick: the Max scaled by both curves
+            // Opacity Per Zoom: a SCALE of the tick's own opacity (min / max in % from the range bar, the curve picks between them by zoom; may be negative = invisible).
+            // Opacity Per Width: the REAL opacity (min / max in %), the curve picks between them by the tick's width inside the Song Tick Width Min..Max.
+            // Both on: the width opacity is the tick's own opacity and the zoom scale multiplies it. The result stays between 0 and 1.
+            const opzOn = !!setting('checkboxTickOpacityZoomEnabled'), opwOn = !!setting('checkboxTickOpacityWidthEnabled');
+            const opzR = setting('rangeBarTickOpacityZoom') || { min: 0, max: 100 }, opwR = setting('rangeBarTickOpacityWidth') || { min: 0, max: 100 };
+            const opzScale = opzOn ? (opzR.min + (opzR.max - opzR.min) * curveValue(setting('curveEditorTickOpacityZoom'), zf)) / 100 : 1;
+            const tickOp = tw => {
+                let o = setting('sliderSongTickOpacity') / 100;
+                if (opwOn) o = (opwR.min + (opwR.max - opwR.min) * curveValue(setting('curveEditorTickOpacityWidth'), wMaxT > wMinT ? Math.min(1, Math.max(0, (tw - wMinT) / (wMaxT - wMinT))) : 0)) / 100;
+                return Math.min(1, Math.max(0, o * opzScale));
+            };
+            let tickOpFlat = tickOp(wMinT);
             const tickO = !setting('checkboxTickMatchGraphColors') || !covers.length ? null : setting('selectTickColorMode') === 'graph' ? colorOpts : { on: true, mode: setting('selectTickColorMode'), sat: setting('sliderTickColorSaturation'), bri: setting('sliderTickColorBrightness') }; // Match Graph Colors
             const paintTick = (px, py, pw, ph, off, a, b) => { const p = !off && tickO && tickO.on ? binPaint(a, b, tickO) : null; if (p) paintFill(ctx, p, px, py, pw, ph, playheadColor, 1); else ctx.fillRect(px, py, pw, ph); };
             const both = !!setting('checkboxSongTickBoth'), tickY = both || setting('checkboxSongTickInvert') ? topH - tickH : topH + 1, tickHH = both ? tickH * 2 : tickH; // Both Sides: centred on the graph's bottom line
@@ -392,23 +405,28 @@ export function createTimeline(canvas, data) {
                 cols.forEach((c, x) => {
                     const t = ts.maxN > 1 ? Math.min(1, (c.n - 1) / (ts.maxN - 1)) : 1;
                     const off = !!filterFn && !c.on;
-                    ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
+                    ctx.globalAlpha = off ? grayOp : tickOpFlat;
                     ctx.fillStyle = off ? grayCol : playheadColor;
                     const cv = curveValue(curve, t), tw = clampWith(ts.thin + (ts.wMax - ts.thin) * cv, ts.wMin, ts.wMax); // width: from the thinnest tick's width up to the Max along the curve; height: Height x the curve
+                    if (!off) ctx.globalAlpha = tickOp(tw);
                     paintTick(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), tickY, tw, tickHH, off, c.a, c.b);
                 });
             } else {
                 const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxEff, thin: thinT, maxN: 1 });
                 const tickW = clampWith(ts.thin, ts.wMin, ts.wMax);
+                tickOpFlat = tickOp(tickW);
                 for (let i = i0; i < i1; i++) {
                     const off = !!filterFn && !filterFn(i);
-                    ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
+                    ctx.globalAlpha = off ? grayOp : tickOpFlat;
                     ctx.fillStyle = off ? grayCol : playheadColor;
                     paintTick(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), tickY, tickW, tickHH, off, i, i + 1); // one mark per song; it hangs down from the graph's bottom edge
                 }
             }
         }
         ctx.restore();
+        };
+        const ticksBehind = !!setting('checkboxTicksBehindBars');
+        if (ticksBehind) drawSongTicks();
 
 
         // bins: bar width is a setting ("granularity"); each bin knows its contiguous song range
@@ -660,6 +678,8 @@ export function createTimeline(canvas, data) {
             ctx.fillText(t.text, t.x + setting('sliderScaleNumbersOffsetX'), h - 4);
         });
         ctx.letterSpacing = '0px';
+
+        if (!ticksBehind) drawSongTicks();
 
         // playhead
         ctx.globalAlpha = phOpacity();

@@ -7955,6 +7955,7 @@
             { tab, group: TL, id: 'sliderSongTickHeight', type: 'slider', label: 'Song Tick Height (Px, Grows Downward From The Graph):', min: 0, max: 80, step: 1, value: 3 },
             { tab, group: TL, id: 'checkboxSongTickInvert', type: 'checkbox', label: 'Invert Song Ticks (Point Upwards Into The Graph Instead Of Downward)', value: false },
             { tab, group: TL, id: 'checkboxSongTickBoth', type: 'checkbox', label: 'Song Ticks Both Sides (Symmetrical Above And Below The Graph Line; Overrides Invert)', value: false },
+            { tab, group: TL, id: 'checkboxTicksBehindBars', type: 'checkbox', label: 'Render Ticks Behind The Bars (Off = In Front Of Them)', value: true },
             { tab, group: TL, id: 'sliderSongTickOpacity', type: 'slider', label: 'Song Tick Opacity (%):', min: 0, max: 100, step: 1, value: 90 },
             { tab, group: TL, id: 'sliderSongTickMinSpacing', type: 'slider', label: 'Song Ticks Start Showing At (Px Between Songs, Lower = Visible Further Zoomed Out):', min: 0.1, max: 40, step: 0.1, value: 4 },
             { tab, group: TL, id: 'checkboxSongTickScale', type: 'checkbox', label: 'Scale Song Ticks With The Number Of Songs They Represent', value: false },
@@ -8139,6 +8140,27 @@
         renderControlArray(MGC_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_TICK_COLOR_CONTROLS', MGC_CONTROLS);
         makeDevGroupToggleable(tab, MGC, 'checkboxTickMatchGraphColors');
+
+        // "Opacity Per Zoom" / "Opacity Per Width": two toggle groups that shape the song ticks' opacity; both on = they multiply (see timeline.js)
+        const OPZ = 'Opacity Per Zoom', OPW = 'Opacity Per Width';
+        findGroupContent(tab, TL, 'renderSpottyDevControls', OPZ).appendChild(createDevGroupElement(OPZ, tab));
+        const OPZ_CONTROLS = [
+            { tab, group: OPZ, id: 'checkboxTickOpacityZoomEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: OPZ, id: 'rangeBarTickOpacityZoom', type: 'range-bar', label: 'Opacity Scale Min / Max (% Of The Tick\'s Own Opacity, Not An Opacity Value; Negative Is Allowed And Shows As Invisible):', trackMin: -200, trackMax: 300, unit: '%', defaultValue: { min: 0, max: 100 } },
+            { tab, group: OPZ, id: 'curveEditorTickOpacityZoom', type: 'curve-editor', label: 'Opacity Scale Per Zoom (X: Timeline Zoom, 0 = Zoomed In, 1 = Zoomed Out; Y: Between The Min And Max Above):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
+        ];
+        renderControlArray(OPZ_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_TICK_OPACITY_ZOOM_CONTROLS', OPZ_CONTROLS);
+        makeDevGroupToggleable(tab, OPZ, 'checkboxTickOpacityZoomEnabled');
+        findGroupContent(tab, TL, 'renderSpottyDevControls', OPW).appendChild(createDevGroupElement(OPW, tab));
+        const OPW_CONTROLS = [
+            { tab, group: OPW, id: 'checkboxTickOpacityWidthEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: OPW, id: 'rangeBarTickOpacityWidth', type: 'range-bar', label: 'Opacity Min / Max (%; The Real Opacity Value):', trackMin: 0, trackMax: 100, unit: '%', defaultValue: { min: 0, max: 100 } },
+            { tab, group: OPW, id: 'curveEditorTickOpacityWidth', type: 'curve-editor', label: 'Opacity Per Tick Width (X: Tick Width, 0 = The Song Tick Width Min, 1 = The Max; Y: Between The Min And Max Above):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
+        ];
+        renderControlArray(OPW_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_TICK_OPACITY_WIDTH_CONTROLS', OPW_CONTROLS);
+        makeDevGroupToggleable(tab, OPW, 'checkboxTickOpacityWidthEnabled');
 
         // "No Preview": a nested subgroup of Scrub Audio, for songs that have no preview clip.
         const NP = 'No Preview';
