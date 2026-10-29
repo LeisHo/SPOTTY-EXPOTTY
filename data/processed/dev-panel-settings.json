@@ -36,11 +36,13 @@
     "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderSongTickWidthTransitionMs": 500,
     "sliderSongTickHeight": 8,
+    "checkboxSongTickInvert": false,
     "sliderSongTickOpacity": 53,
     "sliderSongTickMinSpacing": 0.1,
     "checkboxSongTickScale": true,
     "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.31997971323844665,\"y\":0}},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.5177484789764912,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderTimelineHeight": 180,
+    "sliderTimelineOffsetY": 0,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
     "sliderTimelineScaleGap": 28,
@@ -86,6 +88,7 @@
     "sliderRibbonThickness": 28,
     "sliderRibbonSmoothing": 24,
     "sliderRibbonBarsOpacity": 0.25,
+    "checkboxScaleSmoothPan": false,
     "sliderScaleNumbersFontSize": 14,
     "checkboxScaleNumbersBold": true,
     "colorScaleNumbers": "#ffffff",
@@ -135,6 +138,8 @@
     "checkboxTxtSongTitleBold": true,
     "checkboxTxtSongTitleItalic": false,
     "checkboxTxtSongTitleUnderline": false,
+    "checkboxTxtSongTitleCapitalize": false,
+    "checkboxTxtSongTitleLowerCase": false,
     "sliderTxtSongTitleLetterSpacing": 1.3,
     "sliderTxtSongTitleLineSpacing": 1,
     "sliderTxtSongTitleOpacity": 1,
@@ -159,6 +164,8 @@
     "checkboxTxtArtistBold": false,
     "checkboxTxtArtistItalic": false,
     "checkboxTxtArtistUnderline": false,
+    "checkboxTxtArtistCapitalize": false,
+    "checkboxTxtArtistLowerCase": false,
     "sliderTxtArtistLetterSpacing": 0.6,
     "sliderTxtArtistLineSpacing": 1.2,
     "sliderTxtArtistOpacity": 1,
@@ -186,6 +193,8 @@
     "checkboxTxtAlbumDateBold": false,
     "checkboxTxtAlbumDateItalic": false,
     "checkboxTxtAlbumDateUnderline": false,
+    "checkboxTxtAlbumDateCapitalize": false,
+    "checkboxTxtAlbumDateLowerCase": false,
     "sliderTxtAlbumDateLetterSpacing": 2.3,
     "sliderTxtAlbumDateLineSpacing": 1.2,
     "sliderTxtAlbumDateOpacity": 1,
@@ -324,6 +333,7 @@
     "checkboxFilterShowRangeText": false,
     "checkboxFilterShowCount": true,
     "checkboxFilterCloseOnOutside": true,
+    "checkboxFilterClickToExit": false,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 13,
     "sliderFilterPanelRowGap": -5,
@@ -2237,6 +2247,14 @@
                         "key": "sliderTxtSongTitleOffsetY"
                       },
                       {
+                        "type": "row",
+                        "key": "checkboxTxtSongTitleCapitalize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtSongTitleLowerCase"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "desktop:Outline",
@@ -2266,7 +2284,9 @@
                       "sliderTitleScrollStartPauseMs",
                       "sliderTitleScrollEndPauseMs",
                       "checkboxTitleScrollContinuous",
-                      "sliderTxtSongTitleOffsetY"
+                      "sliderTxtSongTitleOffsetY",
+                      "checkboxTxtSongTitleCapitalize",
+                      "checkboxTxtSongTitleLowerCase"
                     ],
                     "subgroups": [
                       {
@@ -2489,6 +2509,14 @@
                         "key": "sliderTxtArtistOffsetY"
                       },
                       {
+                        "type": "row",
+                        "key": "checkboxTxtArtistCapitalize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistLowerCase"
+                      },
+                      {
                         "type": "group",
                         "section": {
                           "key": "desktop:Outline",
@@ -2521,7 +2549,9 @@
                       "checkboxArtistScrollContinuous",
                       "sliderArtistSeparatorPct",
                       "checkboxScaleArtistToMatch",
-                      "sliderTxtArtistOffsetY"
+                      "sliderTxtArtistOffsetY",
+                      "checkboxTxtArtistCapitalize",
+                      "checkboxTxtArtistLowerCase"
                     ],
                     "subgroups": [
                       {
@@ -2662,6 +2692,14 @@
                       {
                         "type": "row",
                         "key": "sliderTxtAlbumDateOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtAlbumDateCapitalize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtAlbumDateLowerCase"
                       }
                     ],
                     "rowKeys": [
@@ -2685,7 +2723,9 @@
                       "sliderAlbumDateScrollEndPauseMs",
                       "checkboxAlbumDateScrollContinuous",
                       "checkboxScaleAlbumDateToMatch",
-                      "sliderTxtAlbumDateOffsetY"
+                      "sliderTxtAlbumDateOffsetY",
+                      "checkboxTxtAlbumDateCapitalize",
+                      "checkboxTxtAlbumDateLowerCase"
                     ],
                     "subgroups": [
                       {
@@ -2987,6 +3027,14 @@
                       "key": "sliderTxtSongTitleOffsetY"
                     },
                     {
+                      "type": "row",
+                      "key": "checkboxTxtSongTitleCapitalize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtSongTitleLowerCase"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -3016,7 +3064,9 @@
                     "sliderTitleScrollStartPauseMs",
                     "sliderTitleScrollEndPauseMs",
                     "checkboxTitleScrollContinuous",
-                    "sliderTxtSongTitleOffsetY"
+                    "sliderTxtSongTitleOffsetY",
+                    "checkboxTxtSongTitleCapitalize",
+                    "checkboxTxtSongTitleLowerCase"
                   ],
                   "subgroups": [
                     {
@@ -3236,6 +3286,14 @@
                       "key": "sliderTxtArtistOffsetY"
                     },
                     {
+                      "type": "row",
+                      "key": "checkboxTxtArtistCapitalize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtArtistLowerCase"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -3268,7 +3326,9 @@
                     "checkboxArtistScrollContinuous",
                     "sliderArtistSeparatorPct",
                     "checkboxScaleArtistToMatch",
-                    "sliderTxtArtistOffsetY"
+                    "sliderTxtArtistOffsetY",
+                    "checkboxTxtArtistCapitalize",
+                    "checkboxTxtArtistLowerCase"
                   ],
                   "subgroups": [
                     {
@@ -3406,6 +3466,14 @@
                     {
                       "type": "row",
                       "key": "sliderTxtAlbumDateOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtAlbumDateCapitalize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtAlbumDateLowerCase"
                     }
                   ],
                   "rowKeys": [
@@ -3429,7 +3497,9 @@
                     "sliderAlbumDateScrollEndPauseMs",
                     "checkboxAlbumDateScrollContinuous",
                     "checkboxScaleAlbumDateToMatch",
-                    "sliderTxtAlbumDateOffsetY"
+                    "sliderTxtAlbumDateOffsetY",
+                    "checkboxTxtAlbumDateCapitalize",
+                    "checkboxTxtAlbumDateLowerCase"
                   ],
                   "subgroups": [
                     {
@@ -5039,6 +5109,10 @@
                       {
                         "type": "row",
                         "key": "checkboxFilterSongLength"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterClickToExit"
                       }
                     ],
                     "rowKeys": [
@@ -5058,7 +5132,8 @@
                       "sliderFilterPanelNumbersOffsetY",
                       "checkboxFilterNameLengths",
                       "checkboxFilterSongDate",
-                      "checkboxFilterSongLength"
+                      "checkboxFilterSongLength",
+                      "checkboxFilterClickToExit"
                     ],
                     "subgroups": [
                       {
@@ -7511,6 +7586,10 @@
                     {
                       "type": "row",
                       "key": "checkboxFilterSongLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterClickToExit"
                     }
                   ],
                   "rowKeys": [
@@ -7530,7 +7609,8 @@
                     "sliderFilterPanelNumbersOffsetY",
                     "checkboxFilterNameLengths",
                     "checkboxFilterSongDate",
-                    "checkboxFilterSongLength"
+                    "checkboxFilterSongLength",
+                    "checkboxFilterClickToExit"
                   ],
                   "subgroups": [
                     {
@@ -9704,6 +9784,14 @@
                       "key": "sliderTxtSongTitleOffsetY"
                     },
                     {
+                      "type": "row",
+                      "key": "checkboxTxtSongTitleCapitalize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtSongTitleLowerCase"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -9733,7 +9821,9 @@
                     "sliderTitleScrollStartPauseMs",
                     "sliderTitleScrollEndPauseMs",
                     "checkboxTitleScrollContinuous",
-                    "sliderTxtSongTitleOffsetY"
+                    "sliderTxtSongTitleOffsetY",
+                    "checkboxTxtSongTitleCapitalize",
+                    "checkboxTxtSongTitleLowerCase"
                   ],
                   "subgroups": [
                     {
@@ -9956,6 +10046,14 @@
                       "key": "sliderTxtArtistOffsetY"
                     },
                     {
+                      "type": "row",
+                      "key": "checkboxTxtArtistCapitalize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtArtistLowerCase"
+                    },
+                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -9988,7 +10086,9 @@
                     "checkboxArtistScrollContinuous",
                     "sliderArtistSeparatorPct",
                     "checkboxScaleArtistToMatch",
-                    "sliderTxtArtistOffsetY"
+                    "sliderTxtArtistOffsetY",
+                    "checkboxTxtArtistCapitalize",
+                    "checkboxTxtArtistLowerCase"
                   ],
                   "subgroups": [
                     {
@@ -10129,6 +10229,14 @@
                     {
                       "type": "row",
                       "key": "sliderTxtAlbumDateOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtAlbumDateCapitalize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxTxtAlbumDateLowerCase"
                     }
                   ],
                   "rowKeys": [
@@ -10152,7 +10260,9 @@
                     "sliderAlbumDateScrollEndPauseMs",
                     "checkboxAlbumDateScrollContinuous",
                     "checkboxScaleAlbumDateToMatch",
-                    "sliderTxtAlbumDateOffsetY"
+                    "sliderTxtAlbumDateOffsetY",
+                    "checkboxTxtAlbumDateCapitalize",
+                    "checkboxTxtAlbumDateLowerCase"
                   ],
                   "subgroups": [
                     {
@@ -10454,6 +10564,14 @@
                     "key": "sliderTxtSongTitleOffsetY"
                   },
                   {
+                    "type": "row",
+                    "key": "checkboxTxtSongTitleCapitalize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtSongTitleLowerCase"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "desktop:Outline",
@@ -10483,7 +10601,9 @@
                   "sliderTitleScrollStartPauseMs",
                   "sliderTitleScrollEndPauseMs",
                   "checkboxTitleScrollContinuous",
-                  "sliderTxtSongTitleOffsetY"
+                  "sliderTxtSongTitleOffsetY",
+                  "checkboxTxtSongTitleCapitalize",
+                  "checkboxTxtSongTitleLowerCase"
                 ],
                 "subgroups": [
                   {
@@ -10703,6 +10823,14 @@
                     "key": "sliderTxtArtistOffsetY"
                   },
                   {
+                    "type": "row",
+                    "key": "checkboxTxtArtistCapitalize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtArtistLowerCase"
+                  },
+                  {
                     "type": "group",
                     "section": {
                       "key": "desktop:Outline",
@@ -10735,7 +10863,9 @@
                   "checkboxArtistScrollContinuous",
                   "sliderArtistSeparatorPct",
                   "checkboxScaleArtistToMatch",
-                  "sliderTxtArtistOffsetY"
+                  "sliderTxtArtistOffsetY",
+                  "checkboxTxtArtistCapitalize",
+                  "checkboxTxtArtistLowerCase"
                 ],
                 "subgroups": [
                   {
@@ -10873,6 +11003,14 @@
                   {
                     "type": "row",
                     "key": "sliderTxtAlbumDateOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtAlbumDateCapitalize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxTxtAlbumDateLowerCase"
                   }
                 ],
                 "rowKeys": [
@@ -10896,7 +11034,9 @@
                   "sliderAlbumDateScrollEndPauseMs",
                   "checkboxAlbumDateScrollContinuous",
                   "checkboxScaleAlbumDateToMatch",
-                  "sliderTxtAlbumDateOffsetY"
+                  "sliderTxtAlbumDateOffsetY",
+                  "checkboxTxtAlbumDateCapitalize",
+                  "checkboxTxtAlbumDateLowerCase"
                 ],
                 "subgroups": [
                   {
@@ -12503,6 +12643,10 @@
                     {
                       "type": "row",
                       "key": "checkboxFilterSongLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterClickToExit"
                     }
                   ],
                   "rowKeys": [
@@ -12522,7 +12666,8 @@
                     "sliderFilterPanelNumbersOffsetY",
                     "checkboxFilterNameLengths",
                     "checkboxFilterSongDate",
-                    "checkboxFilterSongLength"
+                    "checkboxFilterSongLength",
+                    "checkboxFilterClickToExit"
                   ],
                   "subgroups": [
                     {
@@ -14975,6 +15120,10 @@
                   {
                     "type": "row",
                     "key": "checkboxFilterSongLength"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterClickToExit"
                   }
                 ],
                 "rowKeys": [
@@ -14994,7 +15143,8 @@
                   "sliderFilterPanelNumbersOffsetY",
                   "checkboxFilterNameLengths",
                   "checkboxFilterSongDate",
-                  "checkboxFilterSongLength"
+                  "checkboxFilterSongLength",
+                  "checkboxFilterClickToExit"
                 ],
                 "subgroups": [
                   {
@@ -18332,9 +18482,15 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxScaleSmoothPan"
                 }
               ],
-              "rowKeys": [],
+              "rowKeys": [
+                "checkboxScaleSmoothPan"
+              ],
               "subgroups": [
                 {
                   "key": "desktop:Scale Numbers",
@@ -18568,11 +18724,21 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "checkboxSongTickInvert"
+          },
+          {
+            "type": "row",
+            "key": "sliderTimelineOffsetY"
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
-          "rangeBarTimelineZoomLimits"
+          "rangeBarTimelineZoomLimits",
+          "checkboxSongTickInvert",
+          "sliderTimelineOffsetY"
         ],
         "subgroups": [
           {
@@ -18941,9 +19107,15 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "row",
+                "key": "checkboxScaleSmoothPan"
               }
             ],
-            "rowKeys": [],
+            "rowKeys": [
+              "checkboxScaleSmoothPan"
+            ],
             "subgroups": [
               {
                 "key": "desktop:Scale Numbers",
