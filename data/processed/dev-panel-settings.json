@@ -309,10 +309,10 @@
     "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
     "selectFilterIconStyle": "3",
-    "selectTempoIconStyle": "8",
-    "selectValenceIconStyle": "13",
-    "selectDanceIconStyle": "7",
-    "selectEnergyIconStyle": "7",
+    "selectTempoIconStyle": "",
+    "selectValenceIconStyle": "",
+    "selectDanceIconStyle": "",
+    "selectEnergyIconStyle": "",
     "checkboxFilterButtonEnabled": true,
     "sliderFilterIconSize": 23,
     "sliderFilterIconOffsetX": 0,
@@ -43263,15 +43263,10 @@
       "spxTitle": {
         "layout": {
           "position": {
-            "mode": "anchor",
-            "horizontal": {
-              "anchor": "center",
-              "offset": "0px"
-            },
-            "vertical": {
-              "anchor": "top",
-              "offset": "12vh"
-            }
+            "mode": "relative",
+            "relativeTo": "spxArtist",
+            "myAnchor": "bottom-center",
+            "targetAnchor": "top-center"
           },
           "size": {
             "width": {
@@ -43300,10 +43295,10 @@
         "layout": {
           "position": {
             "mode": "relative",
-            "relativeTo": "spxTitle",
-            "myAnchor": "top-center",
-            "targetAnchor": "bottom-center",
-            "gap": "10px"
+            "relativeTo": "spxMeta",
+            "myAnchor": "bottom-center",
+            "targetAnchor": "top-center",
+            "gap": "0px"
           },
           "size": {
             "width": {
@@ -43333,7 +43328,7 @@
             "relativeTo": "spxCover",
             "myAnchor": "bottom-center",
             "targetAnchor": "top-center",
-            "gap": "600px"
+            "gap": "-20px"
           },
           "size": {
             "width": {
