@@ -45,7 +45,7 @@
     "sliderTimelineOffsetY": 2,
     "checkboxTimelineHeightTransition": true,
     "sliderTimelineHeightTransitionMs": 990,
-    "sliderTimelineScaleGap": 28,
+    "sliderTimelineScaleGap": 14,
     "sliderPlayheadWidth": 3,
     "sliderPlayheadHeight": 53,
     "sliderPlayheadOpacity": 70,
@@ -88,7 +88,7 @@
     "sliderRibbonThickness": 28,
     "sliderRibbonSmoothing": 24,
     "sliderRibbonBarsOpacity": 0.25,
-    "checkboxScaleSmoothPan": false,
+    "checkboxScaleSmoothPan": true,
     "sliderScaleNumbersFontSize": 14,
     "checkboxScaleNumbersBold": true,
     "colorScaleNumbers": "#ffffff",
@@ -96,17 +96,17 @@
     "sliderScaleNumbersOpacity": 0.62,
     "sliderScaleNumbersOffsetX": 9,
     "colorTickMark": "#ffffff",
-    "sliderTickOpacity": 0.67,
+    "sliderTickOpacity": 0.65,
     "sliderTickWidth": 1,
     "sliderTickHeight": 28,
-    "sliderTickStartHeight": -24,
+    "sliderTickStartHeight": -28,
     "checkboxSongAddDateEnabled": true,
     "sliderSongAddDateFontSize": 18,
     "checkboxSongAddDateBold": true,
     "colorSongAddDate": "#ffffff",
     "sliderSongAddDateLetterSpacing": 0.8,
     "sliderSongAddDateOpacity": 0.89,
-    "sliderSongAddDateOffsetY": 7,
+    "sliderSongAddDateOffsetY": 2,
     "checkboxAlbumColorsEnabled": true,
     "selectAlbumColorMode": "vividGradient",
     "sliderAlbumColorSaturation": 1.25,
@@ -620,7 +620,7 @@
   "layout": {
     "left": 103,
     "top": 21.637481689453125,
-    "width": 350,
+    "width": 795,
     "height": 578
   },
   "devPanelStyle": {
@@ -4597,15 +4597,15 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxFilterSongDate"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxFilterNameLengths"
                       },
                       {
                         "type": "row",
                         "key": "checkboxFilterSongLength"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterSongDate"
                       },
                       {
                         "type": "row",
@@ -5151,9 +5151,9 @@
                     ],
                     "rowKeys": [
                       "checkboxFilterButtonEnabled",
-                      "checkboxFilterSongDate",
                       "checkboxFilterNameLengths",
                       "checkboxFilterSongLength",
+                      "checkboxFilterSongDate",
                       "sliderFilterPanelCountFontSize",
                       "checkboxFilterClickToExit"
                     ],
@@ -7172,15 +7172,15 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxFilterSongDate"
-                    },
-                    {
-                      "type": "row",
                       "key": "checkboxFilterNameLengths"
                     },
                     {
                       "type": "row",
                       "key": "checkboxFilterSongLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterSongDate"
                     },
                     {
                       "type": "row",
@@ -7726,9 +7726,9 @@
                   ],
                   "rowKeys": [
                     "checkboxFilterButtonEnabled",
-                    "checkboxFilterSongDate",
                     "checkboxFilterNameLengths",
                     "checkboxFilterSongLength",
+                    "checkboxFilterSongDate",
                     "sliderFilterPanelCountFontSize",
                     "checkboxFilterClickToExit"
                   ],
@@ -12327,15 +12327,15 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxFilterSongDate"
-                    },
-                    {
-                      "type": "row",
                       "key": "checkboxFilterNameLengths"
                     },
                     {
                       "type": "row",
                       "key": "checkboxFilterSongLength"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterSongDate"
                     },
                     {
                       "type": "row",
@@ -12881,9 +12881,9 @@
                   ],
                   "rowKeys": [
                     "checkboxFilterButtonEnabled",
-                    "checkboxFilterSongDate",
                     "checkboxFilterNameLengths",
                     "checkboxFilterSongLength",
+                    "checkboxFilterSongDate",
                     "sliderFilterPanelCountFontSize",
                     "checkboxFilterClickToExit"
                   ],
@@ -14902,15 +14902,15 @@
                   },
                   {
                     "type": "row",
-                    "key": "checkboxFilterSongDate"
-                  },
-                  {
-                    "type": "row",
                     "key": "checkboxFilterNameLengths"
                   },
                   {
                     "type": "row",
                     "key": "checkboxFilterSongLength"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterSongDate"
                   },
                   {
                     "type": "row",
@@ -15456,9 +15456,9 @@
                 ],
                 "rowKeys": [
                   "checkboxFilterButtonEnabled",
-                  "checkboxFilterSongDate",
                   "checkboxFilterNameLengths",
                   "checkboxFilterSongLength",
+                  "checkboxFilterSongDate",
                   "sliderFilterPanelCountFontSize",
                   "checkboxFilterClickToExit"
                 ],
@@ -18803,6 +18803,10 @@
               "key": "desktop:Timeline Scale",
               "items": [
                 {
+                  "type": "row",
+                  "key": "checkboxScaleSmoothPan"
+                },
+                {
                   "type": "group",
                   "section": {
                     "key": "desktop:Scale Numbers",
@@ -18878,10 +18882,6 @@
                     ],
                     "subgroups": []
                   }
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxScaleSmoothPan"
                 }
               ],
               "rowKeys": [
@@ -18981,24 +18981,24 @@
                 },
                 {
                   "type": "row",
+                  "key": "sliderSongAddDateOffsetY"
+                },
+                {
+                  "type": "row",
                   "key": "sliderSongAddDateLetterSpacing"
                 },
                 {
                   "type": "row",
                   "key": "sliderSongAddDateOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderSongAddDateOffsetY"
                 }
               ],
               "rowKeys": [
                 "sliderSongAddDateFontSize",
                 "checkboxSongAddDateBold",
                 "colorSongAddDate",
+                "sliderSongAddDateOffsetY",
                 "sliderSongAddDateLetterSpacing",
-                "sliderSongAddDateOpacity",
-                "sliderSongAddDateOffsetY"
+                "sliderSongAddDateOpacity"
               ],
               "subgroups": []
             }
@@ -19076,6 +19076,14 @@
                 },
                 {
                   "type": "row",
+                  "key": "checkboxSongTickInvert"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderSongTickOpacity"
+                },
+                {
+                  "type": "row",
                   "key": "sliderSongTickHeight"
                 },
                 {
@@ -19101,36 +19109,28 @@
                 {
                   "type": "row",
                   "key": "curveEditorSongTickScale"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderSongTickOpacity"
                 }
               ],
               "rowKeys": [
                 "checkboxSongTickScale",
+                "checkboxSongTickInvert",
+                "sliderSongTickOpacity",
                 "sliderSongTickHeight",
                 "sliderSongTickMinSpacing",
                 "sliderSongTickWidthTransitionMs",
                 "rangeBarSongTickWidth",
                 "rangeBarSongTickThinWidth",
                 "curveEditorSongTickThinZoom",
-                "curveEditorSongTickScale",
-                "sliderSongTickOpacity"
+                "curveEditorSongTickScale"
               ],
               "subgroups": []
             }
-          },
-          {
-            "type": "row",
-            "key": "checkboxSongTickInvert"
           }
         ],
         "rowKeys": [
           "sliderTimelineScaleGap",
           "sliderTimelineOffsetY",
-          "rangeBarTimelineZoomLimits",
-          "checkboxSongTickInvert"
+          "rangeBarTimelineZoomLimits"
         ],
         "subgroups": [
           {
@@ -19424,6 +19424,10 @@
             "key": "desktop:Timeline Scale",
             "items": [
               {
+                "type": "row",
+                "key": "checkboxScaleSmoothPan"
+              },
+              {
                 "type": "group",
                 "section": {
                   "key": "desktop:Scale Numbers",
@@ -19499,10 +19503,6 @@
                   ],
                   "subgroups": []
                 }
-              },
-              {
-                "type": "row",
-                "key": "checkboxScaleSmoothPan"
               }
             ],
             "rowKeys": [
@@ -19599,24 +19599,24 @@
               },
               {
                 "type": "row",
+                "key": "sliderSongAddDateOffsetY"
+              },
+              {
+                "type": "row",
                 "key": "sliderSongAddDateLetterSpacing"
               },
               {
                 "type": "row",
                 "key": "sliderSongAddDateOpacity"
-              },
-              {
-                "type": "row",
-                "key": "sliderSongAddDateOffsetY"
               }
             ],
             "rowKeys": [
               "sliderSongAddDateFontSize",
               "checkboxSongAddDateBold",
               "colorSongAddDate",
+              "sliderSongAddDateOffsetY",
               "sliderSongAddDateLetterSpacing",
-              "sliderSongAddDateOpacity",
-              "sliderSongAddDateOffsetY"
+              "sliderSongAddDateOpacity"
             ],
             "subgroups": []
           },
@@ -19685,6 +19685,14 @@
               },
               {
                 "type": "row",
+                "key": "checkboxSongTickInvert"
+              },
+              {
+                "type": "row",
+                "key": "sliderSongTickOpacity"
+              },
+              {
+                "type": "row",
                 "key": "sliderSongTickHeight"
               },
               {
@@ -19710,22 +19718,19 @@
               {
                 "type": "row",
                 "key": "curveEditorSongTickScale"
-              },
-              {
-                "type": "row",
-                "key": "sliderSongTickOpacity"
               }
             ],
             "rowKeys": [
               "checkboxSongTickScale",
+              "checkboxSongTickInvert",
+              "sliderSongTickOpacity",
               "sliderSongTickHeight",
               "sliderSongTickMinSpacing",
               "sliderSongTickWidthTransitionMs",
               "rangeBarSongTickWidth",
               "rangeBarSongTickThinWidth",
               "curveEditorSongTickThinZoom",
-              "curveEditorSongTickScale",
-              "sliderSongTickOpacity"
+              "curveEditorSongTickScale"
             ],
             "subgroups": []
           }
@@ -39472,7 +39477,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": false,
+    "desktop:UI Layout": true,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -39482,7 +39487,7 @@
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": false,
+    "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
@@ -39501,7 +39506,7 @@
     "desktop:New Group (14)": true,
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": false,
+    "desktop:Filter Button": true,
     "desktop:New Group (30)": true,
     "desktop:New Group (29)": true,
     "desktop:New Group (19)": true,
@@ -39541,7 +39546,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": true,
+    "desktop:Timeline Look": false,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
@@ -39550,7 +39555,7 @@
     "desktop:Timeline Scale": true,
     "desktop:Scale Numbers": true,
     "desktop:Ticks": true,
-    "desktop:Song Add Date": true,
+    "desktop:Song Add Date": false,
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
     "desktop:New Group (28)": true,
@@ -40551,7 +40556,12 @@
     "mobile:Modifiers": null,
     "landscape:Modifiers": null,
     "desktop:New Group (29)": "OFFSET",
-    "desktop:New Group (30)": "ICONS"
+    "desktop:New Group (30)": "ICONS",
+    "sliderSongTickMinSpacing": "Tick Visibility Per Zoom",
+    "sliderTickStartHeight": "Base Offset",
+    "sliderTickHeight": "Height (Px)",
+    "sliderTimelineScaleGap": "Graph And Timeline Spacing (Px):",
+    "sliderTimelineOffsetY": "Y Offset (Px)"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -40589,7 +40599,12 @@
     "desktop:New Group (25)",
     "desktop:New Group (28)",
     "desktop:New Group (29)",
-    "desktop:New Group (30)"
+    "desktop:New Group (30)",
+    "sliderSongTickMinSpacing",
+    "sliderTickStartHeight",
+    "sliderTickHeight",
+    "sliderTimelineScaleGap",
+    "sliderTimelineOffsetY"
   ],
   "lockedGroups": [
     "desktop:Dev Panel",
