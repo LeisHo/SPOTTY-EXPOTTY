@@ -1211,6 +1211,11 @@ async function boot() {
     flt = createFilter(songs, { host: document.body, onChange: o => { if (o && o.layout) placeFilterPanel(); else onFilterChanged(); } });
     function placeFilterPanel() {
         const r = filterBtn.getBoundingClientRect(), pn = flt.panel;
+        if (setting('checkboxFilterPanelDraggable') && flt.userPos) { // dragged earlier: it stays where it was put (kept inside the window)
+            const pw = pn.offsetWidth || setting('sliderFilterPanelWidth'), ph = Math.min(pn.offsetHeight || 0, window.innerHeight - 8);
+            pn.style.left = Math.max(4, Math.min(window.innerWidth - pw - 4, flt.userPos.left)) + 'px'; pn.style.top = Math.max(4, Math.min(window.innerHeight - ph - 4, flt.userPos.top)) + 'px';
+            return;
+        }
         pn.style.top = Math.max(4, r.bottom + setting('sliderFilterPanelOffsetY')) + 'px';
         const w = pn.offsetWidth || setting('sliderFilterPanelWidth');
         pn.style.left = Math.max(4, Math.min(window.innerWidth - w - 4, r.right - w + setting('sliderFilterPanelOffsetX'))) + 'px';

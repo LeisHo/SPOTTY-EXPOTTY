@@ -8430,14 +8430,27 @@
         ];
         renderControlArray(FLB_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_FILTER_CONTROLS', FLB_CONTROLS);
+        // "Panel": how the filter panel itself behaves (resize / scroll / drag)
+        const FPG = 'Panel';
+        findGroupContent(tab, FLB, 'renderSpottyDevControls', FPG).appendChild(createDevGroupElement(FPG, tab));
+        const FPG_CONTROLS = [
+            { tab, group: FPG, id: 'checkboxFilterPanelResizable', type: 'checkbox', label: 'Resizable (Drag The Left, Right And Bottom Edges; Double-Click An Edge To Reset)', value: true },
+            { tab, group: FPG, id: 'checkboxFilterPanelScrollable', type: 'checkbox', label: 'Scrollable (The Sliders Scroll When The Panel Is Short; The Song Count Stays Visible)', value: false },
+            { tab, group: FPG, id: 'checkboxFilterPanelDraggable', type: 'checkbox', label: 'Draggable (Drag The Panel By Its Background)', value: false },
+        ];
+        renderControlArray(FPG_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_FILTER_PANEL_CONTROLS', FPG_CONTROLS);
         // "Panel Song Count": the "N / M songs" text under the filter panel (a toggle group; it replaces the old Show Matching Song Count checkbox and Count Font Size slider)
         const PSC = 'Panel Song Count';
         findGroupContent(tab, FLB, 'renderSpottyDevControls', PSC).appendChild(createDevGroupElement(PSC, tab));
         const PSC_CONTROLS = [
             { tab, group: PSC, id: 'checkboxFilterSongCountEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: PSC, id: 'checkboxFilterSongCountTop', type: 'checkbox', label: 'At The Top Of The Panel (Off = At The Bottom; Always Visible Either Way)', value: false },
             { tab, group: PSC, id: 'sliderFilterSongCountFontSize', type: 'slider', label: 'Font Size (Px):', min: 6, max: 40, step: 1, value: 12 },
             { tab, group: PSC, id: 'sliderFilterSongCountOffsetX', type: 'slider', label: 'X Offset (Px):', min: -200, max: 200, step: 1, value: 0 },
             { tab, group: PSC, id: 'sliderFilterSongCountOffsetY', type: 'slider', label: 'Y Offset (Px):', min: -200, max: 200, step: 1, value: 0 },
+            { tab, group: PSC, id: 'sliderFilterSongCountLetterSpacing', type: 'slider', label: 'Letter Spacing (Px):', min: -3, max: 15, step: 0.1, value: 0 },
+            { tab, group: PSC, id: 'sliderFilterSongCountNumberGap', type: 'slider', label: 'Space Between The Numbers And The "/" (Px):', min: 0, max: 40, step: 1, value: 4 },
             { tab, group: PSC, id: 'checkboxFilterSongCountBold', type: 'checkbox', label: 'Bold', value: false },
             { tab, group: PSC, id: 'checkboxFilterSongCountItalic', type: 'checkbox', label: 'Italic', value: false },
         ];

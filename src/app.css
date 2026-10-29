@@ -197,7 +197,18 @@
 .spx-app.no-shadow-vol .spx-filter { filter: none; }
 .spx-filter-panel { position: fixed; z-index: 2147482000; width: var(--spx-flt-width, 260px); box-sizing: border-box; padding: 10px 12px 12px; border-radius: 10px; color: #f2f2f2; font-size: var(--spx-flt-font, 12px);
     background: var(--spx-flt-bg, rgba(20,22,26,0.92)); box-shadow: var(--shadow-flt-panel, 0 6px 24px #000a); backdrop-filter: blur(var(--spx-flt-blur, 6px)); -webkit-backdrop-filter: blur(var(--spx-flt-blur, 6px)); --flt-accent: var(--spx-flt-accent, #1db954); }
+.spx-filter-panel { display: flex; flex-direction: column; } /* head, rows and the song count are flex items: the count stays visible while the rows clip or scroll */
 .spx-filter-panel[hidden] { display: none; }
+.spx-filter-panel .spx-flt-head { order: 0; }
+.spx-filter-panel .spx-flt-count { order: 3; flex: none; }
+.spx-filter-panel.count-top .spx-flt-count { order: 1; }
+.spx-filter-panel .spx-flt-rows { order: 2; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: hidden; padding: 0 6px; margin-left: -6px; margin-right: -6px; }
+.spx-filter-panel.scroll { max-height: calc(100dvh - 8px); }
+.spx-filter-panel.scroll .spx-flt-rows { overflow-y: auto; overscroll-behavior: contain; }
+.spx-filter-panel.no-resize .spx-flt-resize { display: none; }
+.spx-flt-resize-b { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 8px; cursor: ns-resize; }
+.spx-filter-panel.draggable { cursor: grab; }
+.spx-filter-panel.draggable input, .spx-filter-panel.draggable button { cursor: pointer; }
 .spx-flt-resize { position: absolute; top: 0; bottom: 0; width: 8px; cursor: ew-resize; z-index: 0; touch-action: none; }
 .spx-flt-resize-l { left: 0; }
 .spx-flt-resize-r { right: 0; }

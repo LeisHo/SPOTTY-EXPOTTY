@@ -106,6 +106,41 @@ export function createFilter(songs, { host, onChange }) {
     // Horizontal resize: two thin strips on the panel's left and right edges. They sit inside the panel's own padding, below the
     // sliders (z-index), and the slider rows start inside that padding, so a press that could be either is always the slider's.
     const WIDTH_KEY = 'spxFilterWidth', MIN_W = 160;
+    // Vertical resize: a strip on the bottom edge (the Panel group's Resizable checkbox switches all three strips on and off)
+    const HEIGHT_KEY = 'spxFilterHeight', MIN_H = 60;
+    { const hb = document.createElement('div');
+      hb.className = 'spx-flt-resize spx-flt-resize-b'; hb.title = 'Drag to resize (double-click to reset)';
+      panel.appendChild(hb);
+      hb.addEventListener('pointerdown', e => {
+          if (e.button !== 0) return;
+          e.preventDefault(); try { hb.setPointerCapture(e.pointerId); } catch (e2) { /* not an active pointer */ }
+          const r0 = panel.getBoundingClientRect(), y0 = e.clientY;
+          const move = ev => { panel.style.height = Math.max(MIN_H, Math.min(window.innerHeight - r0.top - 4, r0.height + ev.clientY - y0)) + 'px'; };
+          const up = () => {
+              hb.removeEventListener('pointermove', move); hb.removeEventListener('pointerup', up); hb.removeEventListener('pointercancel', up);
+              try { localStorage.setItem(HEIGHT_KEY, String(Math.round(panel.getBoundingClientRect().height))); } catch (e2) { /* storage blocked */ }
+          };
+          hb.addEventListener('pointermove', move); hb.addEventListener('pointerup', up); hb.addEventListener('pointercancel', up);
+      });
+      hb.addEventListener('dblclick', () => { panel.style.height = ''; try { localStorage.removeItem(HEIGHT_KEY); } catch (e2) { /* storage blocked */ } onChange({ layout: true }); }); }
+    // Draggable: a press on the panel's background (not on a slider, button or resize strip) moves the whole panel; its place is remembered
+    const POS_KEY = 'spxFilterPos'; let userPos = null;
+    try { const p = JSON.parse(localStorage.getItem(POS_KEY) || 'null'); if (p && Number.isFinite(p.left) && Number.isFinite(p.top)) userPos = p; } catch (e) { /* storage blocked */ }
+    panel.addEventListener('pointerdown', e => {
+        if (!setting('checkboxFilterPanelDraggable') || (e.pointerType === 'mouse' && e.button !== 0) || e.target.closest('input, button, .spx-flt-resize')) return;
+        e.preventDefault(); try { panel.setPointerCapture(e.pointerId); } catch (e2) { /* not an active pointer */ }
+        const r0 = panel.getBoundingClientRect(), x0 = e.clientX, y0 = e.clientY;
+        const move = ev => {
+            panel.style.left = Math.max(4, Math.min(window.innerWidth - r0.width - 4, r0.left + ev.clientX - x0)) + 'px';
+            panel.style.top = Math.max(4, Math.min(window.innerHeight - Math.min(r0.height, window.innerHeight - 8) - 4, r0.top + ev.clientY - y0)) + 'px';
+        };
+        const up = () => {
+            panel.removeEventListener('pointermove', move); panel.removeEventListener('pointerup', up); panel.removeEventListener('pointercancel', up);
+            userPos = { left: parseFloat(panel.style.left), top: parseFloat(panel.style.top) };
+            try { localStorage.setItem(POS_KEY, JSON.stringify(userPos)); } catch (e2) { /* storage blocked */ }
+        };
+        panel.addEventListener('pointermove', move); panel.addEventListener('pointerup', up); panel.addEventListener('pointercancel', up);
+    });
     ['l', 'r'].forEach(side => {
         const h = document.createElement('div');
         h.className = 'spx-flt-resize spx-flt-resize-' + side;
@@ -199,11 +234,25 @@ export function createFilter(songs, { host, onChange }) {
         });
         panel.classList.toggle('no-nums', !setting('checkboxFilterShowNumbers'));
         panel.classList.toggle('no-range-text', !setting('checkboxFilterShowRangeText')); // the "36 BPM - 209 BPM" text between the two end numbers
-        // Panel Song Count group: on/off, font size, X / Y offset, bold, italic
+        // Panel group: resizable / scrollable / draggable
+        const rz = !!setting('checkboxFilterPanelResizable');
+        panel.classList.toggle('no-resize', !rz);
+        panel.classList.toggle('scroll', !!setting('checkboxFilterPanelScrollable'));
+        panel.classList.toggle('draggable', !!setting('checkboxFilterPanelDraggable'));
+        panel.classList.toggle('count-top', !!setting('checkboxFilterSongCountTop'));
+        if (!rz) { panel.style.width = ''; panel.style.height = ''; }
+        else { // back to the remembered size after a Resizable off / on
+            try {
+                if (!panel.style.width) { const w0 = parseFloat(localStorage.getItem(WIDTH_KEY)); if (w0 >= MIN_W) panel.style.width = w0 + 'px'; }
+                if (!panel.style.height) { const h0 = parseFloat(localStorage.getItem(HEIGHT_KEY)); if (h0 >= MIN_H) panel.style.height = h0 + 'px'; }
+            } catch (e) { /* storage blocked */ }
+        }
+        // Panel Song Count group: on/off, font size, X / Y offset, bold, italic, letter spacing, space around the "/"
         const cOn = !!setting('checkboxFilterSongCountEnabled');
         countEl.style.display = cOn ? '' : 'none';
         if (cOn) {
-            countEl.textContent = countPassing() + ' / ' + songs.length + ' songs';
+            countEl.innerHTML = '<span>' + countPassing() + '</span><span class="spx-cnt-sep" style="margin:0 ' + setting('sliderFilterSongCountNumberGap') + 'px">/</span><span>' + songs.length + '</span> songs';
+            countEl.style.letterSpacing = setting('sliderFilterSongCountLetterSpacing') + 'px';
             countEl.style.fontSize = setting('sliderFilterSongCountFontSize') + 'px';
             countEl.style.fontWeight = setting('checkboxFilterSongCountBold') ? '700' : '400';
             countEl.style.fontStyle = setting('checkboxFilterSongCountItalic') ? 'italic' : 'normal';
@@ -219,7 +268,7 @@ export function createFilter(songs, { host, onChange }) {
     refresh();
 
     return {
-        panel, passes, active, countPassing, clear, refresh, ext, range,
+        get userPos() { return userPos; }, panel, passes, active, countPassing, clear, refresh, ext, range,
         get open() { return !panel.hidden; },
         setOpen(v) { panel.hidden = !v; if (v) refresh(); },
         describe() { return FEATURES.filter(narrowed).map(f => `${f.label} ${fmt(f, range[f.key][0])}-${fmt(f, range[f.key][1])}`).join(', ') || 'none'; },
