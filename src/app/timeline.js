@@ -429,7 +429,7 @@ export function createTimeline(canvas, data) {
                 const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxEff, thin: thinT, maxN });
                 const curve = setting('curveEditorSongTickScale');
                 cols.forEach((c, x) => {
-                    const t = ts.maxN > 1 ? Math.min(1, (c.n - 1) / (ts.maxN - 1)) : 1;
+                    const t = ts.maxN > 1 ? Math.min(1, (c.n - 1) / (ts.maxN - 1)) : 0; // only one song in the busiest tick (e.g. a single tick on screen): every tick is "one song" = the thinnest, not the widest
                     const off = !!filterFn && !c.on;
                     ctx.globalAlpha = off ? grayOp : tickOpFlat;
                     ctx.fillStyle = off ? grayCol : playheadColor;
