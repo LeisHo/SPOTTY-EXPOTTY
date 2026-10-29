@@ -399,9 +399,12 @@ export function createTimeline(canvas, data) {
             const opzOn = !!setting('checkboxTickOpacityZoomEnabled'), opwOn = !!setting('checkboxTickOpacityWidthEnabled');
             const opzR = setting('rangeBarTickOpacityZoom') || { min: 0, max: 100 }, opwR = setting('rangeBarTickOpacityWidth') || { min: 0, max: 100 };
             const opzScale = opzOn ? (opzR.min + (opzR.max - opzR.min) * curveValue(setting('curveEditorTickOpacityZoom'), zf)) / 100 : 1;
+            // Opacity On Zoom: the REAL opacity (min / max in %) by zoom. With Opacity Per Width also on, the two real opacities multiply.
+            const oozOn = !!setting('checkboxTickOpacityOnZoomEnabled'), oozR = setting('rangeBarTickOpacityOnZoom') || { min: 0, max: 100 };
+            const oozOpacity = oozOn ? (oozR.min + (oozR.max - oozR.min) * curveValue(setting('curveEditorTickOpacityOnZoom'), zf)) / 100 : 1;
             const tickOp = tw => {
-                let o = setting('sliderSongTickOpacity') / 100;
-                if (opwOn) o = (opwR.min + (opwR.max - opwR.min) * curveValue(setting('curveEditorTickOpacityWidth'), wMaxT > wMinT ? Math.min(1, Math.max(0, (tw - wMinT) / (wMaxT - wMinT))) : 0)) / 100;
+                let o = oozOn ? oozOpacity : setting('sliderSongTickOpacity') / 100;
+                if (opwOn) o = (oozOn ? oozOpacity : 1) * (opwR.min + (opwR.max - opwR.min) * curveValue(setting('curveEditorTickOpacityWidth'), wMaxT > wMinT ? Math.min(1, Math.max(0, (tw - wMinT) / (wMaxT - wMinT))) : 0)) / 100;
                 return Math.min(1, Math.max(0, o * opzScale));
             };
             let tickOpFlat = tickOp(wMinT);

@@ -8206,6 +8206,17 @@
         renderControlArray(OPZ_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_TICK_OPACITY_ZOOM_CONTROLS', OPZ_CONTROLS);
         makeDevGroupToggleable(tab, OPZ, 'checkboxTickOpacityZoomEnabled');
+        // "Opacity On Zoom": the REAL opacity of the ticks (min / max in %) picked by the zoom curve
+        const OOZ = 'Opacity On Zoom';
+        findGroupContent(tab, TL, 'renderSpottyDevControls', OOZ).appendChild(createDevGroupElement(OOZ, tab));
+        const OOZ_CONTROLS = [
+            { tab, group: OOZ, id: 'checkboxTickOpacityOnZoomEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: OOZ, id: 'rangeBarTickOpacityOnZoom', type: 'range-bar', label: 'Opacity Min / Max (%; The Real Opacity Value):', trackMin: 0, trackMax: 100, unit: '%', defaultValue: { min: 0, max: 100 } },
+            { tab, group: OOZ, id: 'curveEditorTickOpacityOnZoom', type: 'curve-editor', label: 'Opacity Per Zoom (X: Timeline Zoom, 0 = Zoomed In, 1 = Zoomed Out; Y: Between The Min And Max Above):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
+        ];
+        renderControlArray(OOZ_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_TICK_OPACITY_ONZOOM_CONTROLS', OOZ_CONTROLS);
+        makeDevGroupToggleable(tab, OOZ, 'checkboxTickOpacityOnZoomEnabled');
         findGroupContent(tab, TL, 'renderSpottyDevControls', OPW).appendChild(createDevGroupElement(OPW, tab));
         const OPW_CONTROLS = [
             { tab, group: OPW, id: 'checkboxTickOpacityWidthEnabled', type: 'checkbox', label: 'Enabled', value: false },
