@@ -5,6 +5,7 @@
 // follow the "Songs With No Audio Data" setting (hide = they fail). Nothing is removed from the timeline: failing
 // songs are drawn gray and are not played (main.js / timeline.js use passes(i)).
 import { setting } from './settings.js';
+import { cleanTitle } from './title.mjs';
 import { featureIconHtml, customIconHtml, ICON_BOX } from './iconStyles.js';
 
 // Name Lengths / Song Date / Song Length: each is shown (and applied) only while its dev-panel checkbox is on. Icons are simple stand-ins
@@ -14,7 +15,7 @@ const DAY = 86400000;
 const dateOf = s => { const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(s.rd || ''); return m ? Date.UTC(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1) / DAY : null; };
 const fmtDate = v => { const d = new Date(Math.round(v) * DAY); return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate()); };
 const fmtLen = v => { const t = Math.round(v); return Math.floor(t / 60) + ':' + pad2(t % 60); };
-const lenOf = k => s => (typeof s[k] === 'string' && s[k].length ? s[k].length : null);
+const lenOf = k => s => { const t = typeof s[k] === 'string' ? (k === 'n' ? cleanTitle(s[k]) : s[k]) : ''; return t.length ? t.length : null; }; // the title is measured as shown (decoration stripped)
 const CIRCLE = (cx, cy, r) => `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0z`;
 const EXTRA_ICONS = {
     ln: [['M7 7h28.5v6.5H24.6V36h-6.7V13.5H7z', 0]],

@@ -519,6 +519,7 @@ async function boot() {
             st.fontWeight = setting('checkboxTxt' + p + 'Bold') ? '700' : '400';
             st.fontStyle = setting('checkboxTxt' + p + 'Italic') ? 'italic' : 'normal';
             st.textDecoration = setting('checkboxTxt' + p + 'Underline') ? 'underline' : 'none';
+            st.textTransform = setting('checkboxTxt' + p + 'Capitalize') ? 'uppercase' : setting('checkboxTxt' + p + 'LowerCase') ? 'lowercase' : 'none'; // both on: Capitalize wins
             st.letterSpacing = setting('sliderTxt' + p + 'LetterSpacing') + 'px';
             st.lineHeight = String(setting('sliderTxt' + p + 'LineSpacing'));
             st.opacity = String(setting('sliderTxt' + p + 'Opacity'));
@@ -619,6 +620,7 @@ async function boot() {
     // Timeline Height setting (the engine's per-device value), so the forced height is removed there.
     function applyTimelineBox() {
         const tl = el('spxTimeline').style;
+        tl.translate = '0px ' + setting('sliderTimelineOffsetY') + 'px'; // moves the whole graph group (the canvas also draws the add date, Song Data text/icons and scale); the engine's own placement is untouched
         const rcH = setting('checkboxRcHeightEnabled') && rcHeight !== null ? rcHeight : 0; // the right-drag's scale for this visit only; otherwise the Timeline Height setting is the height
         // set by a right-drag (or the dev panel's Graph Height); 0 = automatic. On desktop the canvas stays as tall as the window and the right-drag sets the
         // graph BAND inside it (the Timeline Height setting is what normally sets it); on a phone the canvas is the graph, so its height is set.

@@ -6174,13 +6174,16 @@
         document.documentElement.style.setProperty('--dev-panel-top-px', DEV_PANEL_LAYOUT.top);
         document.documentElement.style.setProperty('--dev-panel-width-px', DEV_PANEL_LAYOUT.width);
         document.documentElement.style.setProperty('--dev-panel-height-px', DEV_PANEL_LAYOUT.height);
+        // a saved layout (made on another screen size) can put the panel past the right edge; pull it back in once it has been laid out
+        requestAnimationFrame(() => requestAnimationFrame(clampDevPanelPosition));
     }
     function clampDevPanelPosition() {
         const rect = devPanel.getBoundingClientRect();
         if (rect.width === 0 && rect.height === 0) return; // hidden - nothing to clamp yet
         const o = DEV_PANEL_HANDLE_OVERHANG_PX;
         const ox = devPanelEdgeMarginX();
-        const maxLeft = Math.max(ox, window.innerWidth - rect.width - ox);
+        if (rect.width > window.innerWidth - 2 * ox && rect.width > 160) setDevPanelLayoutVar('width', '--dev-panel-width-px', Math.max(160, window.innerWidth - 2 * ox));
+        const maxLeft = Math.max(ox, window.innerWidth - Math.min(rect.width, window.innerWidth - 2 * ox) - ox);
         const maxTop = Math.max(o, window.innerHeight - rect.height - o);
         const clampedLeft = Math.min(Math.max(ox, DEV_PANEL_LAYOUT.left), maxLeft);
         const clampedTop = Math.min(Math.max(o, DEV_PANEL_LAYOUT.top), maxTop);
@@ -7837,6 +7840,8 @@
         add({ tab, id: 'checkboxTxt' + p + 'Bold', type: 'checkbox', label: 'Bold', value: d.bold }, elemContent);
         add({ tab, id: 'checkboxTxt' + p + 'Italic', type: 'checkbox', label: 'Italic', value: false }, elemContent);
         add({ tab, id: 'checkboxTxt' + p + 'Underline', type: 'checkbox', label: 'Underline', value: false }, elemContent);
+        add({ tab, id: 'checkboxTxt' + p + 'Capitalize', type: 'checkbox', label: 'Capitalize (All Caps)', value: false }, elemContent);
+        add({ tab, id: 'checkboxTxt' + p + 'LowerCase', type: 'checkbox', label: 'Lower Case', value: false }, elemContent);
         add({ tab, id: 'sliderTxt' + p + 'LetterSpacing', type: 'slider', label: 'Letter Spacing (Px):', min: -5, max: 30, step: 0.1, value: 0 }, elemContent);
         add({ tab, id: 'sliderTxt' + p + 'LineSpacing', type: 'slider', label: 'Line Spacing (x):', min: 0.5, max: 3, step: 0.05, value: d.lineSpacing }, elemContent);
         add({ tab, id: 'sliderTxt' + p + 'Opacity', type: 'slider', label: 'Opacity:', min: 0, max: 1, step: 0.01, value: 1 }, elemContent);
@@ -7953,6 +7958,8 @@
             { tab, group: TL, id: 'curveEditorSongTickScale', type: 'curve-editor', label: 'Song Tick Scale Curve (X: Songs In The Tick, 0 = One / Thinnest, 1 = The Most In View / Widest; Y: How Far Along From The Thinnest Width To The Widest, And Share Of The Height):', defaultPoints: [{ x: 0, y: 0.35 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
             // Only the bars stretch (upward); nothing else moves, the cover is positioned independently of the timeline.
             { tab, group: TL, id: 'sliderTimelineHeight', type: 'slider', label: 'Timeline Height (Px):', min: 60, max: 900, step: 5, value: 200 },
+            // Moves the whole graph group at once: the bars, the add date, the Song Data text and icons, the scale and the playlist rows.
+            { tab, group: TL, id: 'sliderTimelineOffsetY', type: 'slider', label: 'Timeline Y Offset (Px, Whole Graph Group; Down Is Positive):', min: -400, max: 400, step: 1, value: 0 },
             // Off: bars snap to the new height when the zoom changes. On: they ease to it over the duration below (shown only while on).
             { tab, group: TL, id: 'checkboxTimelineHeightTransition', type: 'checkbox', label: 'Height Transition:', value: false },
             { tab, group: TL, id: 'sliderTimelineHeightTransitionMs', type: 'slider', label: 'Height Transition Duration (Ms):', min: 0, max: 2000, step: 10, value: 300 },
@@ -8050,6 +8057,7 @@
         findGroupContent(tab, TSC, 'renderSpottyDevControls', SN).appendChild(createDevGroupElement(SN, tab));
         findGroupContent(tab, TSC, 'renderSpottyDevControls', TK).appendChild(createDevGroupElement(TK, tab));
         const TS_CONTROLS = [
+            { tab, group: TSC, id: 'checkboxScaleSmoothPan', type: 'checkbox', label: 'Smooth Panning (Numbers And Ticks Never Jump; Off = Current Behavior)', value: false },
             { tab, group: SN, id: 'sliderScaleNumbersFontSize', type: 'slider', label: 'Font Size (Px):', min: 6, max: 60, step: 1, value: 11 },
             { tab, group: SN, id: 'checkboxScaleNumbersBold', type: 'checkbox', label: 'Bold', value: false },
             { tab, group: SN, id: 'colorScaleNumbers', type: 'color', label: 'Font Color:', value: '#ffffff' },

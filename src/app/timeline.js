@@ -150,8 +150,10 @@ export function createTimeline(canvas, data) {
     const vtOfReal = t => t + lowerBound(real, t + 1) * SPACING_MS;
     function ticks() {
         const realOf = v => v - clamp(Math.round(vtToPos(v)), 0, n - 1) * SPACING_MS;
-        const startReal = new Date(realOf(viewStart));
-        const endReal = new Date(realOf(viewStart + span));
+        const smooth = !!setting('checkboxScaleSmoothPan'); // Smooth Panning: ticks are chosen by calendar position (not from the left edge) and run past both edges
+        const ext = smooth ? span * 0.15 : 0;
+        const startReal = new Date(realOf(viewStart - ext));
+        const endReal = new Date(realOf(viewStart + span + ext));
         const out = [];
         let unit = 'year';
         if (span < 6 * 3600e3) unit = 'minute';
@@ -180,13 +182,19 @@ export function createTimeline(canvas, data) {
         let guard = 0;
         while (d <= endReal && guard++ < 5000) {
             const v0 = vtOfReal(d.getTime());
-            const tick = { x: xOf(v0), text: label(d), v0, v1: v0 };
+            const tick = { x: xOf(v0), text: label(d), v0, v1: v0, idx: unit === 'year' ? d.getFullYear() : unit === 'month' ? d.getFullYear() * 12 + d.getMonth() : Math.round(d.getTime() / ({ day: DAY, hour: 3600e3, minute: 60e3 })[unit]) };
             out.push(tick);
             step();
             tick.v1 = vtOfReal(d.getTime()); // the tick's unit (the year / month / day / hour it names) runs from v0 to v1
         }
         const thinned = [];
         let lastX = -1e9;
+        if (smooth) { // every k-th unit by its calendar index: the same ticks stay for the whole pan, only a zoom changes k
+            const unitMs = { year: 365.25 * DAY, month: 30.44 * DAY, day: DAY, hour: 3600e3, minute: 60e3 }[unit];
+            const k = Math.max(1, Math.ceil(64 / (W() * unitMs / span)));
+            out.forEach(t => { if (t.idx % k === 0) thinned.push(t); });
+            return thinned;
+        }
         out.forEach(t => { if (t.x - lastX >= 64 && t.x > -10 && t.x < W()) { thinned.push(t); lastX = t.x; } });
         return thinned;
     }
