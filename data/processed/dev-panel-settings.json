@@ -31,19 +31,19 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
-    "rangeBarSongTickWidth": "{\"min\":0.1,\"max\":10}",
+    "rangeBarSongTickWidth": "{\"min\":0.1,\"max\":20}",
     "rangeBarSongTickThinWidth": "{\"min\":0.1,\"max\":3}",
-    "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.16773625916073087,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
-    "curveEditorSongTickThickZoom": "{\"points\":[{\"x\":0,\"y\":0},{\"x\":1,\"y\":1,\"h2\":{\"x\":-0.27361702929130405,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":0,\"h2\":{\"x\":-0.16773625916073087,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "curveEditorSongTickThickZoom": "{\"points\":[{\"x\":0,\"y\":1,\"h1\":{\"x\":0.34234234234234234,\"y\":0}},{\"x\":1,\"y\":0,\"h2\":{\"x\":-0.27361702929130405,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderSongTickWidthTransitionMs": 500,
-    "sliderSongTickHeight": 800,
+    "sliderSongTickHeight": 900,
     "checkboxSongTickInvert": true,
     "checkboxSongTickBoth": false,
     "checkboxTicksBehindBars": true,
-    "sliderSongTickOpacity": 18,
+    "sliderSongTickOpacity": 10,
     "sliderSongTickMinSpacing": 0.1,
     "checkboxSongTickScale": true,
-    "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":0,\"h1\":{\"x\":0.31997971323844665,\"y\":0}},{\"x\":1,\"y\":0.9556856791178385,\"h2\":{\"x\":-0.5177484789764912,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":1,\"h1\":{\"x\":0.31997971323844665,\"y\":0}},{\"x\":1,\"y\":0.04431432088216147,\"h2\":{\"x\":-0.5177484789764912,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderTimelineHeight": 180,
     "sliderTimelineOffsetY": 2,
     "checkboxTimelineHeightTransition": true,
@@ -30858,8 +30858,25 @@
             "type": "group",
             "section": {
               "key": "mobile:Match Graph Colors",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "selectMobileTickColorMode"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileTickColorSaturation"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileTickColorBrightness"
+                }
+              ],
+              "rowKeys": [
+                "selectMobileTickColorMode",
+                "sliderMobileTickColorSaturation",
+                "sliderMobileTickColorBrightness"
+              ],
               "subgroups": []
             }
           },
@@ -31066,8 +31083,25 @@
           },
           {
             "key": "mobile:Match Graph Colors",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "selectMobileTickColorMode"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileTickColorSaturation"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileTickColorBrightness"
+              }
+            ],
+            "rowKeys": [
+              "selectMobileTickColorMode",
+              "sliderMobileTickColorSaturation",
+              "sliderMobileTickColorBrightness"
+            ],
             "subgroups": []
           },
           {
@@ -40908,8 +40942,25 @@
             "type": "group",
             "section": {
               "key": "landscape:Match Graph Colors",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "selectLandscapeTickColorMode"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeTickColorSaturation"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeTickColorBrightness"
+                }
+              ],
+              "rowKeys": [
+                "selectLandscapeTickColorMode",
+                "sliderLandscapeTickColorSaturation",
+                "sliderLandscapeTickColorBrightness"
+              ],
               "subgroups": []
             }
           },
@@ -41116,8 +41167,25 @@
           },
           {
             "key": "landscape:Match Graph Colors",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "selectLandscapeTickColorMode"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeTickColorSaturation"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeTickColorBrightness"
+              }
+            ],
+            "rowKeys": [
+              "selectLandscapeTickColorMode",
+              "sliderLandscapeTickColorSaturation",
+              "sliderLandscapeTickColorBrightness"
+            ],
             "subgroups": []
           },
           {
@@ -42351,7 +42419,13 @@
     "curveEditorMobileSongTickThinZoom": null,
     "curveEditorLandscapeSongTickThinZoom": null,
     "curveEditorMobileSongTickScale": null,
-    "curveEditorLandscapeSongTickScale": null
+    "curveEditorLandscapeSongTickScale": null,
+    "selectMobileTickColorMode": null,
+    "selectLandscapeTickColorMode": null,
+    "sliderMobileTickColorSaturation": null,
+    "sliderLandscapeTickColorSaturation": null,
+    "sliderMobileTickColorBrightness": null,
+    "sliderLandscapeTickColorBrightness": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -42687,7 +42761,10 @@
     "rangeBarSongTickWidth": true,
     "rangeBarSongTickThinWidth": true,
     "curveEditorSongTickThinZoom": true,
-    "curveEditorSongTickScale": true
+    "curveEditorSongTickScale": true,
+    "selectTickColorMode": true,
+    "sliderTickColorSaturation": true,
+    "sliderTickColorBrightness": true
   },
   "devIndependence": {
     "mobile": {
@@ -43375,6 +43452,7 @@
           }
         }
       }
-    }
+    },
+    "customIcons": {}
   }
 }
