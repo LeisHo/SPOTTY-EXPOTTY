@@ -236,6 +236,7 @@ export function createTimeline(canvas, data) {
         if (!cs.length) return null;
         const A = c => adjust(c, o.sat, o.bri);
         if (o.mode === 'stacked') return { stack: cs.map(c => A(c[0])) };
+        if (o.mode === 'vividStacked') return { stack: cs.map(c => A(c[1])) }; // the same stack, one segment per song, in each album's vivid dominant colour
         if (o.mode === 'average') return { solid: A(meanRgb(cs.map(c => c[0]))) };
         if (o.mode === 'vivid') {
             // dominant hue bucket (12 buckets) among the vivid colours, averaged
@@ -607,7 +608,7 @@ export function createTimeline(canvas, data) {
             for (let i = lo; i < hi; i++) { const v = songs[i][key]; if (v != null) pts.push({ x: xOf(vt[i]), y: topH - 4 - v * (topH - 12), i }); }
             if (pts.length) {
                 const accRgb = hexToRgb(accent);
-                const pointRgb = p => { const c = colorOpts.on ? coverOf(p.i) : null; return c ? adjust(c[colorOpts.mode === 'vivid' ? 1 : 0], colorOpts.sat, colorOpts.bri) : accRgb; };
+                const pointRgb = p => { const c = colorOpts.on ? coverOf(p.i) : null; return c ? adjust(c[colorOpts.mode === 'vivid' || colorOpts.mode === 'vividStacked' ? 1 : 0], colorOpts.sat, colorOpts.bri) : accRgb; };
                 if (fillA > 0) { // area under the line
                     ctx.beginPath(); ctx.moveTo(pts[0].x, topH);
                     pts.forEach(p => ctx.lineTo(p.x, p.y));

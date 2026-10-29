@@ -8152,6 +8152,7 @@
                 tab, group: AC, id: 'selectAlbumColorMode', type: 'select', label: 'Color Mode:', value: 'stacked',
                 options: [
                     { value: 'stacked', text: 'Stacked Albums (one segment per song)' },
+                    { value: 'vividStacked', text: 'Vivid Dominant Stacked (one segment per song, in each album\'s vivid dominant color)' },
                     { value: 'average', text: 'Average Color (mean of covers)' },
                     { value: 'vivid', text: 'Vivid Dominant (most common hue)' },
                     { value: 'vividAverage', text: 'Vivid Dominant Average (mean of the dominant color of every album)' },
@@ -8179,6 +8180,7 @@
                 options: [
                     { value: 'graph', text: 'Graph Colors (Match Whatever Scheme The Graph Has)' },
                     { value: 'stacked', text: 'Stacked Albums (one color per song)' },
+                    { value: 'vividStacked', text: 'Vivid Dominant Stacked (one color per song, in each album\'s vivid dominant color)' },
                     { value: 'average', text: 'Average Color (mean of covers)' },
                     { value: 'vivid', text: 'Vivid Dominant (most common hue)' },
                     { value: 'vividAverage', text: 'Vivid Dominant Average (mean of the dominant color of every album)' },
