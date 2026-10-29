@@ -199,8 +199,16 @@ export function createFilter(songs, { host, onChange }) {
         });
         panel.classList.toggle('no-nums', !setting('checkboxFilterShowNumbers'));
         panel.classList.toggle('no-range-text', !setting('checkboxFilterShowRangeText')); // the "36 BPM - 209 BPM" text between the two end numbers
-        countEl.style.display = setting('checkboxFilterShowCount') ? '' : 'none';
-        if (setting('checkboxFilterShowCount')) countEl.textContent = countPassing() + ' / ' + songs.length + ' songs';
+        // Panel Song Count group: on/off, font size, X / Y offset, bold, italic
+        const cOn = !!setting('checkboxFilterSongCountEnabled');
+        countEl.style.display = cOn ? '' : 'none';
+        if (cOn) {
+            countEl.textContent = countPassing() + ' / ' + songs.length + ' songs';
+            countEl.style.fontSize = setting('sliderFilterSongCountFontSize') + 'px';
+            countEl.style.fontWeight = setting('checkboxFilterSongCountBold') ? '700' : '400';
+            countEl.style.fontStyle = setting('checkboxFilterSongCountItalic') ? 'italic' : 'normal';
+            countEl.style.transform = 'translate(' + setting('sliderFilterSongCountOffsetX') + 'px, ' + setting('sliderFilterSongCountOffsetY') + 'px)';
+        }
     }
     function commit() {
         try { localStorage.setItem(STORE, JSON.stringify(range)); } catch (e) { /* storage blocked */ }

@@ -8115,6 +8115,31 @@
         registerDevControlArray('SPOTTY_ALBUM_CONTROLS', ALBUM_CONTROLS);
         makeDevGroupToggleable(tab, AC, 'checkboxAlbumColorsEnabled');
 
+        // "Match Graph Colors": colours the individual song ticks (Timeline Look > song tick settings) per song, from the album covers
+        const MGC = 'Match Graph Colors';
+        findGroupContent(tab, TL, 'renderSpottyDevControls', MGC).appendChild(createDevGroupElement(MGC, tab));
+        const MGC_CONTROLS = [
+            { tab, group: MGC, id: 'checkboxTickMatchGraphColors', type: 'checkbox', label: 'Enabled', value: false },
+            {
+                tab, group: MGC, id: 'selectTickColorMode', type: 'select', label: 'Color Mode:', value: 'graph',
+                options: [
+                    { value: 'graph', text: 'Graph Colors (Match Whatever Scheme The Graph Has)' },
+                    { value: 'stacked', text: 'Stacked Albums (one color per song)' },
+                    { value: 'average', text: 'Average Color (mean of covers)' },
+                    { value: 'vivid', text: 'Vivid Dominant (most common hue)' },
+                    { value: 'vividAverage', text: 'Vivid Dominant Average (mean of the dominant color of every album)' },
+                    { value: 'vividGradient', text: 'Vivid Dominant Gradient (through the dominant color of every album)' },
+                    { value: 'vividFirst', text: 'Vivid Dominant Color Of First Album' },
+                    { value: 'palette', text: 'Palette Gradient (top 3 colors)' },
+                ],
+            },
+            { tab, group: MGC, id: 'sliderTickColorSaturation', type: 'slider', label: 'Saturation Boost (x):', min: 0, max: 2.5, step: 0.05, value: 1 },
+            { tab, group: MGC, id: 'sliderTickColorBrightness', type: 'slider', label: 'Brightness (x):', min: 0.4, max: 1.8, step: 0.05, value: 1 },
+        ];
+        renderControlArray(MGC_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_TICK_COLOR_CONTROLS', MGC_CONTROLS);
+        makeDevGroupToggleable(tab, MGC, 'checkboxTickMatchGraphColors');
+
         // "No Preview": a nested subgroup of Scrub Audio, for songs that have no preview clip.
         const NP = 'No Preview';
         findGroupContent(tab, 'Scrub Audio', 'renderSpottyDevControls', NP).appendChild(createDevGroupElement(NP, tab));
@@ -8386,7 +8411,6 @@
             { tab, group: FLB, id: 'checkboxFilterShowValueOriginal', type: 'checkbox', label: 'Show Value Under The Tempo, Valence, Danceability And Energy Sliders', value: false },
             { tab, group: FLB, id: 'sliderFilterValueOffsetY', type: 'slider', label: 'Shown Values: Y Offset (Px, All Sliders)', min: -40, max: 40, step: 1, value: 0 },
             { tab, group: FLB, id: 'checkboxFilterShowRangeText', type: 'checkbox', label: 'Panel: Show Selected Range Text (36 BPM - 209 BPM):', value: false },
-            { tab, group: FLB, id: 'checkboxFilterShowCount', type: 'checkbox', label: 'Panel: Show Matching Song Count', value: false },
             { tab, group: FLB, id: 'checkboxFilterCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
             { tab, group: FLB, id: 'checkboxFilterClickToExit', type: 'checkbox', label: 'Click To Exit (The Closing Click Does Nothing Else; The Next Click Acts Normally)', value: false },
             { tab, group: FLB, id: 'sliderFilterPanelWidth', type: 'slider', label: 'Panel Default Width (Px):', min: 160, max: 600, step: 1, value: 260 },
@@ -8395,7 +8419,6 @@
             { tab, group: FLB, id: 'sliderFilterPanelRowsOffsetY', type: 'slider', label: 'Panel Slider Group Y Offset (Px):', min: -100, max: 100, step: 1, value: 0 },
             { tab, group: FLB, id: 'checkboxFilterPanelKeepVisible', type: 'checkbox', label: 'Keep The Filter Panel Visible:', value: false },
             { tab, group: FLB, id: 'sliderFilterPanelIconOffsetY', type: 'slider', label: 'Panel Icon Y Offset From Its Slider (Px):', min: -30, max: 80, step: 1, value: 0 },
-            { tab, group: FLB, id: 'sliderFilterPanelCountFontSize', type: 'slider', label: 'Panel Song Count Font Size (Px):', min: 6, max: 60, step: 1, value: 12 },
             { tab, group: FLB, id: 'sliderFilterPanelNumbersOffsetY', type: 'slider', label: 'Panel Numbers Y Offset From Their Slider (Px):', min: -30, max: 80, step: 1, value: 1 },
             { tab, group: FLB, id: 'sliderFilterPanelIconSize', type: 'slider', label: 'Panel Category Icon Size (Px):', min: 8, max: 120, step: 1, value: 20 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
@@ -8407,6 +8430,20 @@
         ];
         renderControlArray(FLB_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_FILTER_CONTROLS', FLB_CONTROLS);
+        // "Panel Song Count": the "N / M songs" text under the filter panel (a toggle group; it replaces the old Show Matching Song Count checkbox and Count Font Size slider)
+        const PSC = 'Panel Song Count';
+        findGroupContent(tab, FLB, 'renderSpottyDevControls', PSC).appendChild(createDevGroupElement(PSC, tab));
+        const PSC_CONTROLS = [
+            { tab, group: PSC, id: 'checkboxFilterSongCountEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: PSC, id: 'sliderFilterSongCountFontSize', type: 'slider', label: 'Font Size (Px):', min: 6, max: 40, step: 1, value: 12 },
+            { tab, group: PSC, id: 'sliderFilterSongCountOffsetX', type: 'slider', label: 'X Offset (Px):', min: -200, max: 200, step: 1, value: 0 },
+            { tab, group: PSC, id: 'sliderFilterSongCountOffsetY', type: 'slider', label: 'Y Offset (Px):', min: -200, max: 200, step: 1, value: 0 },
+            { tab, group: PSC, id: 'checkboxFilterSongCountBold', type: 'checkbox', label: 'Bold', value: false },
+            { tab, group: PSC, id: 'checkboxFilterSongCountItalic', type: 'checkbox', label: 'Italic', value: false },
+        ];
+        renderControlArray(PSC_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_FILTER_COUNT_CONTROLS', PSC_CONTROLS);
+        makeDevGroupToggleable(tab, PSC, 'checkboxFilterSongCountEnabled');
         // Song Data (between Shuffle and Filter): a button that shows the shown song's tempo / valence / danceability / energy on the add-date row
         const SDG = 'Song Data';
         uiLayoutContent.appendChild(createDevGroupElement(SDG, tab));

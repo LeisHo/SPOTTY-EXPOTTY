@@ -366,6 +366,8 @@ export function createTimeline(canvas, data) {
             const zf = zoomFraction('limits'), scaleAll = curveValue(setting('curveEditorSongTickThinZoom'), zf), scaleThick = curveValue(setting('curveEditorSongTickThickZoom'), zf);
             const thinT = Math.max(Math.min(tr.min, tr.max), Math.max(tr.min, tr.max) * scaleAll); // the thinnest tick: its Max scaled, never below its Min
             const wMaxEff = Math.max(thinT, wMaxT * scaleAll * scaleThick); // the thickest tick: the Max scaled by both curves
+            const tickO = !setting('checkboxTickMatchGraphColors') || !covers.length ? null : setting('selectTickColorMode') === 'graph' ? colorOpts : { on: true, mode: setting('selectTickColorMode'), sat: setting('sliderTickColorSaturation'), bri: setting('sliderTickColorBrightness') }; // Match Graph Colors
+            const paintTick = (px, py, pw, ph, off, a, b) => { const p = !off && tickO && tickO.on ? binPaint(a, b, tickO) : null; if (p) paintFill(ctx, p, px, py, pw, ph, playheadColor, 1); else ctx.fillRect(px, py, pw, ph); };
             const both = !!setting('checkboxSongTickBoth'), tickY = both || setting('checkboxSongTickInvert') ? topH - tickH : topH + 1, tickHH = both ? tickH * 2 : tickH; // Both Sides: centred on the graph's bottom line
             // Tick Width Transition Time: the numbers the widths come from (thinnest width, floor, widest, busiest tick's song count) ease toward their new values
             // instead of snapping; 0 = snap, and the widths are then whole pixels.
@@ -379,8 +381,8 @@ export function createTimeline(canvas, data) {
                 for (let i = i0; i < i1; i++) {
                     const x = Math.round(xOf(vt[i]));
                     let c = cols.get(x);
-                    if (!c) { c = { n: 0, on: false }; cols.set(x, c); }
-                    c.n++;
+                    if (!c) { c = { n: 0, on: false, a: i, b: i + 1 }; cols.set(x, c); }
+                    c.n++; c.b = i + 1;
                     if (!(filterFn && !filterFn(i))) c.on = true;
                 }
                 let maxN = 1;
@@ -393,7 +395,7 @@ export function createTimeline(canvas, data) {
                     ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
                     ctx.fillStyle = off ? grayCol : playheadColor;
                     const cv = curveValue(curve, t), tw = clampWith(ts.thin + (ts.wMax - ts.thin) * cv, ts.wMin, ts.wMax); // width: from the thinnest tick's width up to the Max along the curve; height: Height x the curve
-                    ctx.fillRect(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), tickY, tw, tickHH);
+                    paintTick(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), tickY, tw, tickHH, off, c.a, c.b);
                 });
             } else {
                 const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxEff, thin: thinT, maxN: 1 });
@@ -402,7 +404,7 @@ export function createTimeline(canvas, data) {
                     const off = !!filterFn && !filterFn(i);
                     ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
                     ctx.fillStyle = off ? grayCol : playheadColor;
-                    ctx.fillRect(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), tickY, tickW, tickHH); // one mark per song; it hangs down from the graph's bottom edge
+                    paintTick(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), tickY, tickW, tickHH, off, i, i + 1); // one mark per song; it hangs down from the graph's bottom edge
                 }
             }
         }
