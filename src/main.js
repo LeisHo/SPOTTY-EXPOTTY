@@ -20,6 +20,7 @@ import { logEvent } from './app/debugLog.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo } from './app/handoff.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
+import { applyCustomIcons } from './app/iconImport.js';
 import { initTitleAnim } from './app/titleAnim.js';
 import { createBackground } from './app/background.js';
 import { createFilter } from './app/filter.js';
@@ -50,6 +51,7 @@ async function boot() {
     if (!document.documentElement.classList.contains('dev-mode')) {
         const st = await loadSavedSettings();
         if (st && st.extra && st.extra.uiLayout) window.__spxPendingLayout = st.extra.uiLayout;
+        if (st && st.extra && st.extra.customIcons) applyCustomIcons(st.extra.customIcons); // imported button icons
     }
     appStage.innerHTML = `
         <div class="spx-app" id="spxApp">

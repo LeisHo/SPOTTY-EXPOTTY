@@ -6,7 +6,7 @@
 // songs are drawn gray and are not played (main.js / timeline.js use passes(i)).
 import { setting } from './settings.js';
 import { cleanTitle } from './title.mjs';
-import { featureIconHtml, customIconHtml, ICON_BOX } from './iconStyles.js';
+import { featureIconHtml, customIconHtml, iconRev, ICON_BOX } from './iconStyles.js';
 
 // Name Lengths / Song Date / Song Length: each is shown (and applied) only while its dev-panel checkbox is on. Icons are simple stand-ins
 // (title letter, person, disc, calendar, clock) until the owner's own icon files exist. `get` returns the song's value, or null if it has none.
@@ -219,7 +219,7 @@ export function createFilter(songs, { host, onChange }) {
         FEATURES.forEach(f => {
             const r = rows[f.key];
             if (EXTRA_ICONS[f.key]) { if (!r.ico.dataset.icon) { r.ico.dataset.icon = 'x'; r.ico.innerHTML = customIconHtml(EXTRA_ICONS[f.key]); } return; }
-            const v = setting(FEATURE_ICON_SETTING[f.key]); if (r.ico.dataset.icon !== String(v)) { r.ico.dataset.icon = String(v); r.ico.innerHTML = featureIconHtml(f.key, v); }
+            const v = setting(FEATURE_ICON_SETTING[f.key]), ik = v + ':' + iconRev(); if (r.ico.dataset.icon !== ik) { r.ico.dataset.icon = ik; r.ico.innerHTML = featureIconHtml(f.key, v); }
         });
         FEATURES.forEach(f => {
             const r = rows[f.key], [lo, hi] = ext[f.key], [a, b] = range[f.key];

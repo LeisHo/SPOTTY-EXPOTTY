@@ -7,12 +7,18 @@ export const iconIndex = v => Math.max(0, parseInt(v, 10) || 0);
 
 const pick = (key, i) => { const list = BUTTON_ICONS[key]; return list[Math.min(i, list.length - 1)]; };
 const FILL = 'fill:currentColor;stroke:none'; // beats the button CSS' stroke-based defaults
-const shapes = (icon, cls) => icon.p.map(([d, eo]) => `<path${cls ? ` class="${cls}"` : ''} d="${d}"${eo ? ' fill-rule="evenodd"' : ''} style="${FILL}"/>`).join('');
+// A shape is [pathData, evenOdd, transform?]: the optional transform comes from an imported SVG (its viewBox scaling / group transforms).
+const shapes = (icon, cls) => icon.p.map(([d, eo, t]) => `<path${cls ? ` class="${cls}"` : ''} d="${d}"${eo ? ' fill-rule="evenodd"' : ''}${t ? ` transform="${t}"` : ''} style="${FILL}"/>`).join('');
+// Bumped whenever an icon is imported or overwritten: every icon's "already drawn" key includes it, so a changed icon is redrawn.
+let iconRevision = 0;
+export const iconRev = () => iconRevision;
+export const bumpIconRevision = () => { iconRevision++; };
 
 // Rewrites an icon's SVG only when its choice changed, so a settings change that does not touch the icon costs nothing.
 function setIcon(svg, key, html) {
     if (!svg) return;
     svg.setAttribute('viewBox', `0 0 ${ICON_BOX} ${ICON_BOX}`);
+    key += ':' + iconRevision;
     if (svg.dataset.icon === key) return;
     svg.dataset.icon = key;
     svg.innerHTML = html;

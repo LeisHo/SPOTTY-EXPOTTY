@@ -7768,6 +7768,56 @@
     // (a direct-child selector), which the per-element Text groups and their
     // nested Outline subgroup below can't use (UI Layout > Text > <element> >
     // Outline is 3 levels deep). Ported from the template, same section.
+    // ---- Import icons: a button to the right of every icon dropdown --------------------------------------------------------------------------------------------------
+    // Pick one or several SVG files: each becomes an entry of that dropdown's list (named after the file); a name that already exists is overwritten. The work is done by
+    // src/app/iconImport.js (window.SPX_ICON_IMPORT); the lists, and the saved copy (Sync -> extra.customIcons, plus localStorage), live there.
+    const ICON_SELECT_RE = /^select(?:Mobile|Landscape)?(Vol|Shuffle|Filter|Tempo|Valence|Dance|Energy|SongData|Play|Pause|Nav)IconStyle$/;
+    const ICON_SELECT_KEY = { Vol: 'volume', Shuffle: 'shuffle', Filter: 'filter', Tempo: 'tp', Valence: 'v', Dance: 'dn', Energy: 'e', SongData: 'data', Play: 'play', Pause: 'pause', Nav: 'nav' };
+    const iconKeyOfSelect = sel => { const m = ICON_SELECT_RE.exec(sel.id || ''); return m ? ICON_SELECT_KEY[m[1]] : null; };
+    function refreshIconSelects() {
+        if (!window.SPX_ICON_IMPORT) return;
+        devPanel.querySelectorAll('select').forEach(sel => {
+            const key = iconKeyOfSelect(sel); if (!key) return;
+            const names = window.SPX_ICON_IMPORT.names(key);
+            const have = Array.from(sel.options).map(o => o.text);
+            if (have.length === names.length && have.every((t, i) => t === names[i])) return;
+            const cur = sel.value;
+            sel.innerHTML = '';
+            names.forEach((n, i) => { const o = document.createElement('option'); o.value = String(i); o.textContent = n; sel.appendChild(o); });
+            sel.value = cur;
+        });
+    }
+    window.spxRefreshIconSelects = refreshIconSelects;
+    function addIconImportButton(sel) {
+        if (sel.dataset.iconImport) return;
+        const key = iconKeyOfSelect(sel); if (!key) return;
+        sel.dataset.iconImport = '1';
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'dev-icon-import-btn'; btn.textContent = 'Import';
+        btn.title = 'Import icon files (SVG; select several at once). A file with the same name as an icon in this list overwrites it.';
+        const input = document.createElement('input');
+        input.type = 'file'; input.accept = '.svg,image/svg+xml'; input.multiple = true; input.style.display = 'none';
+        btn.addEventListener('click', e => { e.stopPropagation(); input.click(); });
+        input.addEventListener('click', e => e.stopPropagation());
+        input.addEventListener('change', async () => {
+            if (!input.files.length || !window.SPX_ICON_IMPORT) return;
+            const r = await window.SPX_ICON_IMPORT.importFiles(key, input.files);
+            input.value = '';
+            refreshIconSelects();
+            if (r.firstIndex >= 0) { sel.value = String(r.firstIndex); sel.dispatchEvent(new Event('change', { bubbles: true })); sel.dispatchEvent(new Event('input', { bubbles: true })); }
+            const msg = r.added.length + ' added, ' + r.overwritten.length + ' overwritten' + (r.failed.length ? ', ' + r.failed.length + ' failed: ' + r.failed.join('; ') : '');
+            btn.textContent = r.failed.length ? 'Import (' + r.failed.length + ' failed)' : 'Import (' + (r.added.length + r.overwritten.length) + ' ok)';
+            btn.title = msg; if (r.failed.length) console.warn('Icon import:', msg);
+            setTimeout(() => { btn.textContent = 'Import'; }, 4000);
+        });
+        sel.insertAdjacentElement('afterend', btn); btn.insertAdjacentElement('afterend', input);
+    }
+    function setupIconImportButtons() {
+        const scan = () => { devPanel.querySelectorAll('select').forEach(addIconImportButton); refreshIconSelects(); };
+        scan();
+        let t = 0; // rows for the Mobile / Landscape tabs are built later: add their buttons as they appear
+        new MutationObserver(() => { clearTimeout(t); t = setTimeout(scan, 60); }).observe(devPanel, { childList: true, subtree: true });
+    }
     function wireNestedGroupToggle(sectionEl, cb) {
         cb.classList.add('dev-group-toggle-checkbox');
         cb.title = 'Enable/disable this whole group';
@@ -7906,11 +7956,13 @@
         ['Scrub Audio', 'Scrub Preload', 'Scrub Input', 'Spotify Handoff', TL, 'UI Layout'].forEach(g =>
             document.getElementById('desktopTabContent').appendChild(createDevGroupElement(g, tab)));
         // The UI Layout Engine's saved element layouts ride along with Sync/Reset as `extra.uiLayout`.
-        devSaveCaptureExtra = () => ({ uiLayout: typeof window.spxCaptureLayout === 'function' ? window.spxCaptureLayout() : undefined });
+        devSaveCaptureExtra = () => ({ uiLayout: typeof window.spxCaptureLayout === 'function' ? window.spxCaptureLayout() : undefined, customIcons: window.SPX_ICON_IMPORT ? window.SPX_ICON_IMPORT.capture() : undefined });
         devSaveApplyExtra = extra => {
+            if (extra && extra.customIcons && window.SPX_ICON_IMPORT) window.SPX_ICON_IMPORT.apply(extra.customIcons); // imported icons (Sync / Reset)
             if (!extra || !extra.uiLayout) return;
             if (typeof window.spxApplyLayout === 'function') window.spxApplyLayout(extra.uiLayout); else window.__spxPendingLayout = extra.uiLayout;
         };
+        setupIconImportButtons();
         const FEATURES = [
             { value: 'valence', text: 'Valence (mood)' },
             { value: 'energy', text: 'Energy' },

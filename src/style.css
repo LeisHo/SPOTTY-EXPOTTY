@@ -21,7 +21,8 @@
        can persist them (they're already included in the default
        localStorage save/load) without the panel's own code needing to
        know anything about how a project stores state. */
-    .dev-panel {
+    .dev-icon-import-btn { margin-left: 6px; padding: 2px 8px; font-size: 0.85em; cursor: pointer; background: var(--dev-accent-color, #0ff); color: #000; border: 0; border-radius: 3px; flex: none; white-space: nowrap; }
+.dev-panel {
         position: fixed;
         left: calc(var(--dev-panel-left-px, 20) * 1px);
         top: calc(var(--dev-panel-top-px, 20) * 1px);
