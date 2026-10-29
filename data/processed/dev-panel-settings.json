@@ -41360,7 +41360,7 @@
     "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
-    "desktop:UI Layout": true,
+    "desktop:UI Layout": false,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -43330,10 +43330,10 @@
         "layout": {
           "position": {
             "mode": "relative",
-            "relativeTo": "spxArtist",
-            "myAnchor": "top-center",
-            "targetAnchor": "bottom-center",
-            "gap": "12px"
+            "relativeTo": "spxCover",
+            "myAnchor": "bottom-center",
+            "targetAnchor": "top-center",
+            "gap": "600px"
           },
           "size": {
             "width": {
