@@ -6873,6 +6873,16 @@
         Object.entries(values).forEach(([id, value]) => {
             const el = document.getElementById(id);
             if (!el) return;
+            // A saved slider value outside the slider's built-in range (typed in earlier, which widened the range) must WIDEN the range again, exactly as typing does:
+            // assigning it to a range input clamps it to the old max, and the next Sync would then save the clamped value over the real one.
+            if (el.type === 'range') {
+                const n = parseFloat(value);
+                if (Number.isFinite(n)) {
+                    const mn = parseFloat(el.min), mx = parseFloat(el.max);
+                    if (!isNaN(mx) && n > mx) el.max = String(n + Math.abs(n) * 0.2);
+                    if (!isNaN(mn) && n < mn) el.min = String(n - Math.abs(n) * 0.2);
+                }
+            }
             if (el.type === 'checkbox') el.checked = !!value; else el.value = value;
             el.dispatchEvent(new Event(el.tagName === 'SELECT' || el.type === 'checkbox' ? 'change' : 'input', { bubbles: true }));
         });
@@ -8004,7 +8014,7 @@
             { tab, group: TL, id: 'curveEditorSongTickThinZoom', type: 'curve-editor', label: 'Song Tick Scale Per Zoom (All Ticks; X: Timeline Zoom, 0 = Zoomed In, 1 = Zoomed Out; Y: Scale, 1 = The Widths As Set Above):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
             { tab, group: TL, id: 'curveEditorSongTickThickZoom', type: 'curve-editor', label: 'Thickest Song Tick Scale Per Zoom (X: Timeline Zoom, 0 = Zoomed In, 1 = Zoomed Out; Y: Extra Scale For The Thickest Tick On Top Of The Overall One, 1 = Scales The Same As The Thinnest):', defaultPoints: [{ x: 0, y: 1 }, { x: 1, y: 1 }], defaultMethod: 'monotone' },
             { tab, group: TL, id: 'sliderSongTickWidthTransitionMs', type: 'slider', label: 'Song Tick Width Transition Time (Ms, 0 = Snap):', min: 0, max: 3000, step: 10, value: 250 },
-            { tab, group: TL, id: 'sliderSongTickHeight', type: 'slider', label: 'Song Tick Height (Px, Grows Downward From The Graph):', min: 0, max: 80, step: 1, value: 3 },
+            { tab, group: TL, id: 'sliderSongTickHeight', type: 'slider', label: 'Song Tick Height (Px, Grows Downward From The Graph; Upward When Inverted):', min: 0, max: 1200, step: 1, value: 3 },
             { tab, group: TL, id: 'checkboxSongTickInvert', type: 'checkbox', label: 'Invert Song Ticks (Point Upwards Into The Graph Instead Of Downward)', value: false },
             { tab, group: TL, id: 'checkboxSongTickBoth', type: 'checkbox', label: 'Song Ticks Both Sides (Symmetrical Above And Below The Graph Line; Overrides Invert)', value: false },
             { tab, group: TL, id: 'checkboxTicksBehindBars', type: 'checkbox', label: 'Render Ticks Behind Everything Except The Background (Bars, Text, Album Cover; Off = In Front Of The Bars)', value: true },
