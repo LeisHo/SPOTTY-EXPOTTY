@@ -200,6 +200,30 @@ async function boot() {
     });
     window.spxCaptureLayout = () => captureAllLayoutConfigs();
     // The saved layout can arrive before the timeline data does (timeline is created later), so the redraw goes through a hook set then.
+    // CSS anchor positioning needs an anchor target to come EARLIER in the DOM than the element anchored to it, and the engine never moves DOM nodes. The owner can chain the
+    // elements in any direction in the UI Layout Inspector (title above artist above album line above cover, or the reverse), so after any style change on an element the
+    // page order is fixed up until every anchored element follows its target. An element is "anchored" while its style carries position-anchor, and its target is the sibling
+    // whose style carries the same anchor-name.
+    function orderForAnchors() {
+        const app = el('spxApp');
+        for (let guard = 0; guard < 24; guard++) {
+            let moved = false;
+            for (const n of Array.from(app.children)) {
+                const a = n.style && n.style.getPropertyValue('position-anchor');
+                if (!a) continue;
+                const target = Array.from(app.children).find(c => c !== n && c.style && c.style.getPropertyValue('anchor-name') === a);
+                if (target && (target.compareDocumentPosition(n) & Node.DOCUMENT_POSITION_PRECEDING)) { target.after(n); moved = true; break; }
+            }
+            if (!moved) break;
+        }
+    }
+    {
+        let queued = false;
+        const queue = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; orderForAnchors(); }); };
+        const mo = new MutationObserver(queue);
+        Array.from(el('spxApp').children).filter(c => c.classList.contains('ui-element')).forEach(c => mo.observe(c, { attributes: true, attributeFilter: ['style'] }));
+        queue();
+    }
     window.spxApplyLayout = state => { pendingLayout = state; loadLayoutConfig(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); };
     window.spxResetLayout = () => { resetLayoutConfig(shippedLayout); resolveAndApplyAll(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); };
 
