@@ -313,6 +313,17 @@ export function createTimeline(canvas, data) {
     // Right Click Height on desktop: the drawn graph band is the Timeline Height setting, NOT the canvas (which is as tall as the window), so a right-drag has to
     // change the band. null = use the setting. bandHeight() is what the band is right now (the drag starts from it).
     let bandOverride = null;
+    // The song ticks can live on their own canvas (#spx-ticks) BEHIND everything except the background: above the background layers, below the album cover, the text and the
+    // graph canvas. It is as big as the stage and is drawn in the timeline canvas's own coordinates (offset by where that canvas is on screen).
+    let tickCanvas = null;
+    const getTickCanvas = () => {
+        if (!tickCanvas) {
+            tickCanvas = document.createElement('canvas'); tickCanvas.className = 'spx-ticks';
+            const fx = document.getElementById('spxBgFx');
+            if (fx && fx.parentNode) fx.parentNode.insertBefore(tickCanvas, fx.nextSibling); else canvas.parentNode.insertBefore(tickCanvas, canvas);
+        }
+        return tickCanvas;
+    };
     function setBandHeight(v) { bandOverride = v > 0 ? v : null; draw(); }
     // Phone only: the canvas can be TALLER than the graph (extra room above it for tall upward song ticks); phoneBand is the graph's own height then (null = the whole canvas is the graph)
     let phoneBand = null;
@@ -366,7 +377,7 @@ export function createTimeline(canvas, data) {
         const accentCss = rgbCss(hexToRgb(accent), baseAlpha);
 
         // Song ticks: drawn FIRST by default ("Render Ticks Behind Bars" on) so everything else (the bars, rows, scale, date, playhead) sits on top of them; off = after the bars
-        const drawSongTicks = () => {
+        const drawSongTicks = ctx => {
         ctx.save();
         // individual song ticks when zoomed in far enough to tell songs apart: from Song Ticks Start Showing (the pixels between songs) upward
         if (i1 - i0 > 0 && w / (i1 - i0) >= setting('sliderSongTickMinSpacing')) {
@@ -441,7 +452,17 @@ export function createTimeline(canvas, data) {
         ctx.restore();
         };
         const ticksBehind = !!setting('checkboxTicksBehindBars');
-        if (ticksBehind) drawSongTicks();
+        const tc = getTickCanvas();
+        if (ticksBehind) {
+            const sw = tc.clientWidth, sh = tc.clientHeight;
+            if (tc.width !== Math.round(sw * dpr) || tc.height !== Math.round(sh * dpr)) { tc.width = Math.round(sw * dpr); tc.height = Math.round(sh * dpr); }
+            const tctx = tc.getContext('2d');
+            tctx.setTransform(1, 0, 0, 1, 0, 0); tctx.clearRect(0, 0, tc.width, tc.height);
+            const cr = canvas.getBoundingClientRect(), sr = tc.getBoundingClientRect();
+            tctx.setTransform(dpr, 0, 0, dpr, (cr.left - sr.left) * dpr, (cr.top - sr.top + oy) * dpr);
+            tc.style.display = '';
+            drawSongTicks(tctx);
+        } else tc.style.display = 'none';
 
 
         // bins: bar width is a setting ("granularity"); each bin knows its contiguous song range
@@ -694,7 +715,7 @@ export function createTimeline(canvas, data) {
         });
         ctx.letterSpacing = '0px';
 
-        if (!ticksBehind) drawSongTicks();
+        if (!ticksBehind) drawSongTicks(ctx);
 
         // playhead
         ctx.globalAlpha = phOpacity();

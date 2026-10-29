@@ -7955,7 +7955,7 @@
             { tab, group: TL, id: 'sliderSongTickHeight', type: 'slider', label: 'Song Tick Height (Px, Grows Downward From The Graph):', min: 0, max: 80, step: 1, value: 3 },
             { tab, group: TL, id: 'checkboxSongTickInvert', type: 'checkbox', label: 'Invert Song Ticks (Point Upwards Into The Graph Instead Of Downward)', value: false },
             { tab, group: TL, id: 'checkboxSongTickBoth', type: 'checkbox', label: 'Song Ticks Both Sides (Symmetrical Above And Below The Graph Line; Overrides Invert)', value: false },
-            { tab, group: TL, id: 'checkboxTicksBehindBars', type: 'checkbox', label: 'Render Ticks Behind The Bars (Off = In Front Of Them)', value: true },
+            { tab, group: TL, id: 'checkboxTicksBehindBars', type: 'checkbox', label: 'Render Ticks Behind Everything Except The Background (Bars, Text, Album Cover; Off = In Front Of The Bars)', value: true },
             { tab, group: TL, id: 'sliderSongTickOpacity', type: 'slider', label: 'Song Tick Opacity (%):', min: 0, max: 100, step: 1, value: 90 },
             { tab, group: TL, id: 'sliderSongTickMinSpacing', type: 'slider', label: 'Song Ticks Start Showing At (Px Between Songs, Lower = Visible Further Zoomed Out):', min: 0.1, max: 40, step: 0.1, value: 4 },
             { tab, group: TL, id: 'checkboxSongTickScale', type: 'checkbox', label: 'Scale Song Ticks With The Number Of Songs They Represent', value: false },
