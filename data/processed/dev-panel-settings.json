@@ -105,7 +105,7 @@
     "checkboxSongAddDateBold": true,
     "colorSongAddDate": "#ffffff",
     "sliderSongAddDateLetterSpacing": 0.8,
-    "sliderSongAddDateOpacity": 0.89,
+    "sliderSongAddDateOpacity": 0.82,
     "sliderSongAddDateOffsetY": 2,
     "checkboxAlbumColorsEnabled": true,
     "selectAlbumColorMode": "vividGradient",
