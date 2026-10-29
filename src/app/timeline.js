@@ -249,6 +249,18 @@ export function createTimeline(canvas, data) {
         if (o.mode === 'vividAverage') return { solid: A(meanRgb(cs.map(c => c[1]))) };
         if (o.mode === 'vividGradient') return cs.length === 1 ? { solid: A(cs[0][1]) } : { gradient: cs.map(c => A(c[1])) };
         if (o.mode === 'vividFirst') return { solid: A(cs[0][1]) };
+        // Chroma Only (the Background's "Average Color Only, Ignore Grays", from the per-cover colours we have): every colour of every cover (average, vivid, the
+        // 3 palette colours) counts in proportion to its saturation, so grays barely move the result; a cover with only grays falls back to its average.
+        if (o.mode === 'chroma') {
+            let wr = 0, wg = 0, wb = 0, ws = 0;
+            cs.forEach(c => c.forEach(col => { const sat = rgbToHsl(col)[1]; wr += col[0] * sat; wg += col[1] * sat; wb += col[2] * sat; ws += sat; }));
+            return { solid: A(ws > 0.05 ? [wr / ws, wg / ws, wb / ws] : meanRgb(cs.map(c => c[0]))) };
+        }
+        // Spotlight (the Background's "Cover Spotlight Glow"): a bright vivid core in the middle of the bar fading toward a darker average at both ends
+        if (o.mode === 'spotlight') {
+            const dim = adjust(meanRgb(cs.map(c => c[0])), o.sat, o.bri * 0.55);
+            return { gradient: [dim, A(meanRgb(cs.map(c => c[1]))), dim] };
+        }
         // palette: bottom -> top gradient of the bars' averaged palette colours
         return { gradient: [2, 3, 4].map(k => A(meanRgb(cs.map(c => c[k])))) };
     }
@@ -302,14 +314,17 @@ export function createTimeline(canvas, data) {
     // change the band. null = use the setting. bandHeight() is what the band is right now (the drag starts from it).
     let bandOverride = null;
     function setBandHeight(v) { bandOverride = v > 0 ? v : null; draw(); }
-    function bandHeight() { return activeDevice() === '' ? Math.min(canvas.clientHeight, bandOverride !== null ? bandOverride : setting('sliderTimelineHeight')) : canvas.clientHeight; }
+    // Phone only: the canvas can be TALLER than the graph (extra room above it for tall upward song ticks); phoneBand is the graph's own height then (null = the whole canvas is the graph)
+    let phoneBand = null;
+    function setPhoneBand(v) { const n = v > 0 ? v : null; if (n !== phoneBand) { phoneBand = n; draw(); } }
+    function bandHeight() { return activeDevice() === '' ? Math.min(canvas.clientHeight, bandOverride !== null ? bandOverride : setting('sliderTimelineHeight')) : (phoneBand !== null ? Math.min(canvas.clientHeight, phoneBand) : canvas.clientHeight); }
     function draw() {
         const dpr = window.devicePixelRatio || 1;
         const w = canvas.clientWidth, cssH = canvas.clientHeight;
         // The bars use the visible band: the Timeline Height setting on desktop, and the whole canvas on a phone (whose height is
         // already the device's own setting). The canvas itself is taller on desktop, so bars that run above the band are drawn,
         // not cut off. oy moves the band down to the bottom of the canvas.
-        const h = activeDevice() === '' ? Math.min(cssH, bandOverride !== null ? bandOverride : setting('sliderTimelineHeight')) : cssH; // bandOverride: set by a right-drag (Right Click Height)
+        const h = activeDevice() === '' ? Math.min(cssH, bandOverride !== null ? bandOverride : setting('sliderTimelineHeight')) : (phoneBand !== null ? Math.min(cssH, phoneBand) : cssH); // bandOverride: set by a right-drag (Right Click Height)
         const oy = cssH - h;
         if (!w || !h) return;
         if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(cssH * dpr)) {
@@ -769,5 +784,5 @@ export function createTimeline(canvas, data) {
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setBandHeight, bandHeight, setFilter, setSongData, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
+    return { draw, setBandHeight, setPhoneBand, bandHeight, setFilter, setSongData, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }

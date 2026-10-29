@@ -8132,6 +8132,8 @@
                     { value: 'vividGradient', text: 'Vivid Dominant Gradient (through the dominant color of every album)' },
                     { value: 'vividFirst', text: 'Vivid Dominant Color Of First Album' },
                     { value: 'palette', text: 'Palette Gradient (top 3 colors)' },
+                    { value: 'chroma', text: 'Chroma Only (Average Of Every Cover Color, Weighted By Saturation, Grays Ignored)' },
+                    { value: 'spotlight', text: 'Spotlight Glow (Bright Vivid Core Fading To A Dark Average At Both Ends)' },
                 ],
             },
             { tab, group: MGC, id: 'sliderTickColorSaturation', type: 'slider', label: 'Saturation Boost (x):', min: 0, max: 2.5, step: 0.05, value: 1 },

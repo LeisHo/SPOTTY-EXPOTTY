@@ -628,7 +628,16 @@ async function boot() {
             const floor = setting('checkboxRcHeightEnabled') ? setting('sliderRcHeightMin') : 0, base = setting('sliderTimelineHeight'), eff = Math.max(floor, rcH > 0 ? rcH : base);
             timeline.setBandHeight(eff !== base ? eff : null); tl.setProperty('height', 'calc(100dvh - 14px)', 'important');
         }
-        else { timeline.setBandHeight(null); if (rcH > 0) tl.setProperty('height', rcH + 'px', 'important'); else tl.removeProperty('height'); }
+        else {
+            timeline.setBandHeight(null);
+            if (rcH > 0) tl.setProperty('height', rcH + 'px', 'important'); else tl.removeProperty('height');
+            // Like desktop, the phone canvas is as tall as the window ABOVE the graph (the graph itself keeps its own height): tall upward song ticks and any graph visual that
+            // rises above the graph are drawn instead of being cropped at the canvas top.
+            const base = rcH > 0 ? rcH : el('spxTimeline').getBoundingClientRect().height;
+            const extra = Math.max(0, window.innerHeight - base - 22);
+            if (extra > 4) { tl.setProperty('height', (base + extra) + 'px', 'important'); timeline.setPhoneBand(base); }
+            else timeline.setPhoneBand(null);
+        }
         timeline.draw(); // the band height is a setting: redraw when it changes
     }
     window.addEventListener('resize', () => { applyTextElementStyles(); applyTimelineBox(); }); // the line count and the device depend on the width
