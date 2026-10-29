@@ -140,7 +140,7 @@ export const DEFAULTS = {
     sliderStartFadeMs: 300, checkboxStartCenterOnCover: false,
     sliderPlayheadStartHeight: 0,
     colorTickMark: '#ffffff', sliderTickOpacity: 0.6, sliderTickWidth: 1, sliderTickHeight: 5, sliderTickStartHeight: 0,
-    checkboxScaleSmoothPan: false, sliderScaleNumbersFontSize: 11, checkboxScaleNumbersBold: false, colorScaleNumbers: '#ffffff', sliderScaleNumbersLetterSpacing: 0, sliderScaleNumbersOpacity: 0.6, sliderScaleNumbersOffsetX: 3,
+    checkboxScaleSmoothPan: false, checkboxSongTickInvert: false, sliderScaleNumbersFontSize: 11, checkboxScaleNumbersBold: false, colorScaleNumbers: '#ffffff', sliderScaleNumbersLetterSpacing: 0, sliderScaleNumbersOpacity: 0.6, sliderScaleNumbersOffsetX: 3,
     checkboxSongAddDateEnabled: true, sliderSongAddDateFontSize: 13, checkboxSongAddDateBold: true, colorSongAddDate: '#ffffff', sliderSongAddDateLetterSpacing: 0, sliderSongAddDateOpacity: 1, sliderSongAddDateOffsetY: 0,
     checkboxShuffleButtonEnabled: true, sliderShuffleIconSize: 20, sliderShuffleIconOffsetX: 0, sliderShuffleOffOpacity: 45, colorShuffleIcon: '#f2f2f2', colorShuffleOn: '#1db954',
     // Start Button Animation: the Track Title Button Animation settings, with 'Title' replaced by 'StartPlay' (see titleAnim.js)
@@ -187,7 +187,7 @@ export const DEFAULTS = {
     curveEditorSongTickScale: { points: [{ x: 0, y: 0.35 }, { x: 1, y: 1 }], method: 'monotone' }, sliderFilterPanelIconOffsetY: 0, checkboxFilterPanelKeepVisible: false, sliderFilterPanelRowGap: 12, sliderFilterPanelRowsOffsetY: 0, sliderFilterPanelBlur: 6, sliderFilterOffOpacity: 45, sliderFilterOnOpacity: 100, colorFilterIcon: '#f2f2f2', colorFilterOn: '#1db954',
     sliderFilterClickTolerance: 0, sliderFilterHoverTolerance: 0,
     colorFilterGray: '#8a8f98', sliderFilterGrayOpacity: 35,
-    selectFilterMissing: 'hide', checkboxFilterNameLengths: false, checkboxFilterSongDate: false, checkboxFilterSongLength: false, checkboxFilterShowNumbers: true, checkboxFilterShowRangeText: false, checkboxFilterShowCount: false, checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true,
+    selectFilterMissing: 'hide', checkboxFilterNameLengths: false, checkboxFilterSongDate: false, checkboxFilterSongLength: false, checkboxFilterShowNumbers: true, checkboxFilterShowRangeText: false, checkboxFilterShowCount: false, checkboxFilterSkipOnStep: true, checkboxFilterCloseOnOutside: true, checkboxFilterClickToExit: false,
     selectFilterIconStyle: '0', selectSongDataIconStyle: '0', sliderVolIconOffsetY: 0, sliderShuffleIconOffsetY: 0, sliderFilterIconOffsetY: 0, sliderSongDataBtnOffsetY: 0, sliderStartPlayOffsetY: 0, sliderLastButtonOffsetY: 0, sliderNextButtonOffsetY: 0, sliderPlayGlyphOffsetY: 0, selectTempoIconStyle: '0', selectValenceIconStyle: '0', selectDanceIconStyle: '0', selectEnergyIconStyle: '0',
     sliderFilterCoverGrayscale: 100, sliderFilterCoverBrightness: 100, sliderFilterCoverContrast: 100, sliderFilterTextBrightness: 100, sliderFilterCoverTransitionMs: 250, sliderFilterGraphGrayscale: 100,
     checkboxFilterReturnEnabled: true, sliderFilterReturnDelay: 3, sliderFilterReturnDuration: 600, selectFilterReturnEasing: 'ease-in-out', selectFilterReturnRestore: 'end',

@@ -635,7 +635,7 @@ export function createTimeline(canvas, data) {
                     ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
                     ctx.fillStyle = off ? grayCol : playheadColor;
                     const cv = curveValue(curve, t), tw = clampWith(ts.thin + (ts.wMax - ts.thin) * cv, ts.wMin, ts.wMax); // width: from the thinnest tick's width up to the Max along the curve; height: Height x the curve
-                    ctx.fillRect(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), topH + 1, tw, tickH);
+                    ctx.fillRect(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), setting('checkboxSongTickInvert') ? topH - tickH : topH + 1, tw, tickH);
                 });
             } else {
                 const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxT, thin: thinT, maxN: 1 });
@@ -644,7 +644,7 @@ export function createTimeline(canvas, data) {
                     const off = !!filterFn && !filterFn(i);
                     ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
                     ctx.fillStyle = off ? grayCol : playheadColor;
-                    ctx.fillRect(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), topH + 1, tickW, tickH); // one mark per song; it hangs down from the graph's bottom edge
+                    ctx.fillRect(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), setting('checkboxSongTickInvert') ? topH - tickH : topH + 1, tickW, tickH); // one mark per song; it hangs down from the graph's bottom edge
                 }
             }
         }

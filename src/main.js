@@ -884,7 +884,7 @@ async function boot() {
         link.href = 'https://open.spotify.com/track/' + s.id; // the title opens the track on Spotify
         artistRaw = test ? String(setting('textTestArtist')) : s.a;
         setArtistLine();
-        el('spxMeta').textContent = test ? String(setting('textTestAlbum')) : `${s.al}${s.ry ? ' (' + s.ry + ')' : ''}${clipKey(s) || !previewClipsOn() ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
+        el('spxMeta').textContent = test ? String(setting('textTestAlbum')) : `${s.al}${s.ry && s.ry !== '0000' ? (s.al ? ' ' : '') + '(' + s.ry + ')' : ''}${clipKey(s) || !previewClipsOn() ? '' : '\nno preview clip'}`; // its own line (the line breaks via white-space: pre-line)
         applyTextElementStyles(); // re-run Shrink to Fit against the new text (a no-op for every other Overflow mode)
     }
     function render() {
@@ -1237,7 +1237,15 @@ async function boot() {
         syncFilterUi();
     });
     document.addEventListener('pointerdown', e => {
-        if (flt.open && setting('checkboxFilterCloseOnOutside') && !setting('checkboxFilterPanelKeepVisible') && !flt.panel.contains(e.target) && !filterBtn.contains(e.target)) { flt.setOpen(false); syncFilterUi(); }
+        if (flt.open && setting('checkboxFilterCloseOnOutside') && !setting('checkboxFilterPanelKeepVisible') && !flt.panel.contains(e.target) && !filterBtn.contains(e.target)) {
+            flt.setOpen(false); syncFilterUi();
+            if (setting('checkboxFilterClickToExit')) { // Click To Exit: this press only closes the panel; it must not scrub, change song or press the button under it
+                e.stopPropagation(); redirectBtn = null;
+                const eat = ev => { ev.stopPropagation(); ev.preventDefault(); window.removeEventListener('click', eat, true); clearTimeout(t); };
+                const t = setTimeout(() => window.removeEventListener('click', eat, true), 800);
+                window.addEventListener('click', eat, true);
+            }
+        }
     }, true);
     window.addEventListener('resize', () => { if (flt.open) placeFilterPanel(); });
     timeline.setFilter(filterOn() ? flt.passes : null);
