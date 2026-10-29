@@ -410,7 +410,14 @@ export function createTimeline(canvas, data) {
             let tickOpFlat = tickOp(wMinT);
             const tickO = !setting('checkboxTickMatchGraphColors') || !covers.length ? null : setting('selectTickColorMode') === 'graph' ? colorOpts : { on: true, mode: setting('selectTickColorMode'), sat: setting('sliderTickColorSaturation'), bri: setting('sliderTickColorBrightness') }; // Match Graph Colors
             const paintTick = (px, py, pw, ph, off, a, b) => { const p = !off && tickO && tickO.on ? binPaint(a, b, tickO) : null; if (p) paintFill(ctx, p, px, py, pw, ph, playheadColor, 1); else ctx.fillRect(px, py, pw, ph); };
-            const both = !!setting('checkboxSongTickBoth'), tickY = both || setting('checkboxSongTickInvert') ? topH - tickH : topH + 1, tickHH = both ? tickH * 2 : tickH; // Both Sides: centred on the graph's bottom line
+            const both = !!setting('checkboxSongTickBoth'), tickY = both || setting('checkboxSongTickInvert') ? topH - tickH : topH + 1, tickHH0 = both ? tickH * 2 : tickH; // Both Sides: centred on the graph's bottom line
+            // Clamp To Browser: the tick is cut at the window's top / bottom edge (in the graph's own coordinates: the graph's top is cr.top + oy below the window top). Only the edge the
+            // tick grows toward can be reached, so this is the bottom edge for a normal tick, the top edge for an inverted one, and both for Both Sides.
+            let tickYc = tickY, tickHHc = tickHH0;
+            if (setting('checkboxSongTickClamp')) {
+                const origin = canvas.getBoundingClientRect().top + oy, y0 = Math.max(tickYc, -origin), y1 = Math.min(tickYc + tickHH0, window.innerHeight - origin);
+                tickYc = y0; tickHHc = Math.max(0, y1 - y0);
+            }
             // Tick Width Transition Time: the numbers the widths come from (thinnest width, floor, widest, busiest tick's song count) ease toward their new values
             // instead of snapping; 0 = snap, and the widths are then whole pixels.
             const smoothMs = Math.max(0, setting('sliderSongTickWidthTransitionMs'));
@@ -438,7 +445,7 @@ export function createTimeline(canvas, data) {
                     ctx.fillStyle = off ? grayCol : playheadColor;
                     const cv = curveValue(curve, t), tw = clampWith(ts.thin + (ts.wMax - ts.thin) * cv, ts.wMin, ts.wMax); // width: from the thinnest tick's width up to the Max along the curve; height: Height x the curve
                     if (!off) ctx.globalAlpha = tickOp(tw);
-                    paintTick(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), tickY, tw, tickHH, off, c.a, c.b);
+                    paintTick(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), tickYc, tw, tickHHc, off, c.a, c.b);
                 });
             } else {
                 const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxEff, thin: thinT, maxN: 1 });
@@ -448,7 +455,7 @@ export function createTimeline(canvas, data) {
                     const off = !!filterFn && !filterFn(i);
                     ctx.globalAlpha = off ? grayOp : tickOpFlat;
                     ctx.fillStyle = off ? grayCol : playheadColor;
-                    paintTick(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), tickY, tickW, tickHH, off, i, i + 1); // one mark per song; it hangs down from the graph's bottom edge
+                    paintTick(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), tickYc, tickW, tickHHc, off, i, i + 1); // one mark per song; it hangs down from the graph's bottom edge
                 }
             }
         }
