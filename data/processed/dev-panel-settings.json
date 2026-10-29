@@ -40,7 +40,8 @@
     "checkboxSongTickInvert": true,
     "checkboxSongTickBoth": false,
     "checkboxTicksBehindBars": true,
-    "sliderSongTickOpacity": 27,
+    "checkboxSongTickClamp": false,
+    "sliderSongTickOpacity": 4,
     "sliderSongTickMinSpacing": 0.1,
     "checkboxSongTickScale": true,
     "curveEditorSongTickScale": "{\"points\":[{\"x\":0,\"y\":1,\"h1\":{\"x\":0.31997971323844665,\"y\":0}},{\"x\":1,\"y\":0.04431432088216147,\"h2\":{\"x\":-0.5177484789764912,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
@@ -116,13 +117,16 @@
     "sliderAlbumColorBrightness": 1.15,
     "checkboxAlbumColorTransition": false,
     "sliderAlbumColorTransitionMs": 300,
-    "checkboxTickMatchGraphColors": true,
-    "selectTickColorMode": "stacked",
-    "sliderTickColorSaturation": 2.1,
+    "checkboxTickMatchGraphColors": false,
+    "selectTickColorMode": "graph",
+    "sliderTickColorSaturation": 1,
     "sliderTickColorBrightness": 1,
     "checkboxTickOpacityZoomEnabled": false,
     "rangeBarTickOpacityZoom": "{\"min\":0,\"max\":100}",
     "curveEditorTickOpacityZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "checkboxTickOpacityOnZoomEnabled": false,
+    "rangeBarTickOpacityOnZoom": "{\"min\":0,\"max\":100}",
+    "curveEditorTickOpacityOnZoom": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "checkboxTickOpacityWidthEnabled": false,
     "rangeBarTickOpacityWidth": "{\"min\":0,\"max\":100}",
     "curveEditorTickOpacityWidth": "{\"points\":[{\"x\":0,\"y\":1},{\"x\":1,\"y\":1}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
@@ -19886,6 +19890,31 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "checkboxSongTickClamp"
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Opacity On Zoom",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "rangeBarTickOpacityOnZoom"
+                },
+                {
+                  "type": "row",
+                  "key": "curveEditorTickOpacityOnZoom"
+                }
+              ],
+              "rowKeys": [
+                "rangeBarTickOpacityOnZoom",
+                "curveEditorTickOpacityOnZoom"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -19894,7 +19923,8 @@
           "rangeBarTimelineZoomLimits",
           "curveEditorSongTickThickZoom",
           "checkboxSongTickBoth",
-          "checkboxTicksBehindBars"
+          "checkboxTicksBehindBars",
+          "checkboxSongTickClamp"
         ],
         "subgroups": [
           {
@@ -20554,6 +20584,24 @@
             "rowKeys": [
               "rangeBarTickOpacityWidth",
               "curveEditorTickOpacityWidth"
+            ],
+            "subgroups": []
+          },
+          {
+            "key": "desktop:Opacity On Zoom",
+            "items": [
+              {
+                "type": "row",
+                "key": "rangeBarTickOpacityOnZoom"
+              },
+              {
+                "type": "row",
+                "key": "curveEditorTickOpacityOnZoom"
+              }
+            ],
+            "rowKeys": [
+              "rangeBarTickOpacityOnZoom",
+              "curveEditorTickOpacityOnZoom"
             ],
             "subgroups": []
           }
@@ -30858,8 +30906,25 @@
             "type": "group",
             "section": {
               "key": "mobile:Match Graph Colors",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "selectMobileTickColorMode"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileTickColorSaturation"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderMobileTickColorBrightness"
+                }
+              ],
+              "rowKeys": [
+                "selectMobileTickColorMode",
+                "sliderMobileTickColorSaturation",
+                "sliderMobileTickColorBrightness"
+              ],
               "subgroups": []
             }
           },
@@ -30876,6 +30941,15 @@
             "type": "group",
             "section": {
               "key": "mobile:Opacity Per Width",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Opacity On Zoom",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -31066,8 +31140,25 @@
           },
           {
             "key": "mobile:Match Graph Colors",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "selectMobileTickColorMode"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileTickColorSaturation"
+              },
+              {
+                "type": "row",
+                "key": "sliderMobileTickColorBrightness"
+              }
+            ],
+            "rowKeys": [
+              "selectMobileTickColorMode",
+              "sliderMobileTickColorSaturation",
+              "sliderMobileTickColorBrightness"
+            ],
             "subgroups": []
           },
           {
@@ -31078,6 +31169,12 @@
           },
           {
             "key": "mobile:Opacity Per Width",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "mobile:Opacity On Zoom",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -40908,8 +41005,25 @@
             "type": "group",
             "section": {
               "key": "landscape:Match Graph Colors",
-              "items": [],
-              "rowKeys": [],
+              "items": [
+                {
+                  "type": "row",
+                  "key": "selectLandscapeTickColorMode"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeTickColorSaturation"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderLandscapeTickColorBrightness"
+                }
+              ],
+              "rowKeys": [
+                "selectLandscapeTickColorMode",
+                "sliderLandscapeTickColorSaturation",
+                "sliderLandscapeTickColorBrightness"
+              ],
               "subgroups": []
             }
           },
@@ -40926,6 +41040,15 @@
             "type": "group",
             "section": {
               "key": "landscape:Opacity Per Width",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Opacity On Zoom",
               "items": [],
               "rowKeys": [],
               "subgroups": []
@@ -41116,8 +41239,25 @@
           },
           {
             "key": "landscape:Match Graph Colors",
-            "items": [],
-            "rowKeys": [],
+            "items": [
+              {
+                "type": "row",
+                "key": "selectLandscapeTickColorMode"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeTickColorSaturation"
+              },
+              {
+                "type": "row",
+                "key": "sliderLandscapeTickColorBrightness"
+              }
+            ],
+            "rowKeys": [
+              "selectLandscapeTickColorMode",
+              "sliderLandscapeTickColorSaturation",
+              "sliderLandscapeTickColorBrightness"
+            ],
             "subgroups": []
           },
           {
@@ -41128,6 +41268,12 @@
           },
           {
             "key": "landscape:Opacity Per Width",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
+          {
+            "key": "landscape:Opacity On Zoom",
             "items": [],
             "rowKeys": [],
             "subgroups": []
@@ -41301,6 +41447,7 @@
     "desktop:Match Graph Colors": false,
     "desktop:Opacity Per Zoom": true,
     "desktop:Opacity Per Width": true,
+    "desktop:Opacity On Zoom": false,
     "desktop:Startup": true,
     "desktop:Start Button": true,
     "desktop:Start Button Animation": true,
@@ -41403,6 +41550,7 @@
     "mobile:Match Graph Colors": false,
     "mobile:Opacity Per Zoom": false,
     "mobile:Opacity Per Width": false,
+    "mobile:Opacity On Zoom": false,
     "mobile:Startup": true,
     "mobile:Start Button": false,
     "mobile:Start Button Animation": false,
@@ -41505,6 +41653,7 @@
     "landscape:Match Graph Colors": false,
     "landscape:Opacity Per Zoom": false,
     "landscape:Opacity Per Width": false,
+    "landscape:Opacity On Zoom": false,
     "landscape:Startup": false,
     "landscape:Start Button": false,
     "landscape:Start Button Animation": false
@@ -42357,7 +42506,9 @@
     "sliderMobileTickColorSaturation": null,
     "sliderLandscapeTickColorSaturation": null,
     "sliderMobileTickColorBrightness": null,
-    "sliderLandscapeTickColorBrightness": null
+    "sliderLandscapeTickColorBrightness": null,
+    "mobile:Opacity On Zoom": null,
+    "landscape:Opacity On Zoom": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -42694,9 +42845,9 @@
     "rangeBarSongTickThinWidth": true,
     "curveEditorSongTickThinZoom": true,
     "curveEditorSongTickScale": true,
-    "selectTickColorMode": false,
-    "sliderTickColorSaturation": false,
-    "sliderTickColorBrightness": false
+    "selectTickColorMode": true,
+    "sliderTickColorSaturation": true,
+    "sliderTickColorBrightness": true
   },
   "devIndependence": {
     "mobile": {
@@ -43072,28 +43223,6 @@
     "selectBackgroundMode": {
       "blurCover": {
         "sliderBackgroundBrightness": "1.3"
-      }
-    },
-    "selectAlbumColorMode": {
-      "vividGradient": {
-        "sliderAlbumColorSaturation": "1.25",
-        "sliderAlbumColorBrightness": "1.15"
-      },
-      "stacked": {
-        "sliderAlbumColorSaturation": "1.25",
-        "sliderAlbumColorBrightness": "1.15"
-      },
-      "palette": {
-        "sliderAlbumColorSaturation": "1.25",
-        "sliderAlbumColorBrightness": "1.15"
-      },
-      "average": {
-        "sliderAlbumColorSaturation": "1.25",
-        "sliderAlbumColorBrightness": "1.15"
-      },
-      "vividAverage": {
-        "sliderAlbumColorSaturation": "1.25",
-        "sliderAlbumColorBrightness": "1.15"
       }
     }
   },
