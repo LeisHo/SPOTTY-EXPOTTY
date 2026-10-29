@@ -267,7 +267,7 @@
     "sliderVolClickTolerance": 50,
     "sliderVolAnimDuration": 190,
     "curveEditorVolAnimSpeedCurve": "{\"points\":[{\"x\":0,\"y\":0.5952784220377605,\"h1\":{\"x\":0.504492481784282,\"y\":0.05047709147135415}},{\"x\":1,\"y\":1,\"h2\":{\"x\":0,\"y\":-0.44892730712890627}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
-    "sliderCoverScale": 1.7,
+    "sliderCoverScale": 2.35,
     "sliderCoverOffsetX": 0,
     "sliderCoverBrightness": 100,
     "sliderCoverOffsetY": -34,
@@ -619,7 +619,7 @@
   },
   "layout": {
     "left": 103,
-    "top": 59,
+    "top": 21.637481689453125,
     "width": 350,
     "height": 578
   },
@@ -39090,7 +39090,7 @@
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": false,
+    "desktop:New Group (7)": true,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
