@@ -350,6 +350,65 @@ export function createTimeline(canvas, data) {
         const i0 = lowerBound(vt, viewStart), i1 = lowerBound(vt, viewEnd);
         const accentCss = rgbCss(hexToRgb(accent), baseAlpha);
 
+        // Song ticks are drawn FIRST so everything else (the bars, rows, scale, date, playhead) sits on top of them
+        ctx.save();
+        // individual song ticks when zoomed in far enough to tell songs apart: from Song Ticks Start Showing (the pixels between songs) upward
+        if (i1 - i0 > 0 && w / (i1 - i0) >= setting('sliderSongTickMinSpacing')) {
+            const wr = setting('rangeBarSongTickWidth') || { min: 1, max: 1 };
+            const wMinT = Math.max(1, Math.round(Math.min(wr.min, wr.max))), wMaxT = Math.max(wMinT, Math.round(Math.max(wr.min, wr.max))), tickH = Math.max(0, setting('sliderSongTickHeight'));
+            // The THINNEST tick (a tick of one song): its width is picked from the Thinnest Song Tick Width Min / Max by the zoom curve (X: 0 = fully zoomed in, 1 = fully
+            // zoomed out, the same scale as Zoom Limits). Without Scale Song Ticks every tick is that thin; with it, ticks grow from that width up to the Max along the
+            // Song Tick Scale Curve. Every width stays between the Song Tick Width Min (floor) and Max (widest).
+            const tr = setting('rangeBarSongTickThinWidth') || { min: 1, max: 1 };
+            // Scale Per Zoom curve (the old "Thinnest Per Zoom" one): one overall scale for EVERY tick width as the zoom changes (X: zoom, Y: scale, 1 = the widths as set).
+            // Thickest Tick Per Zoom curve: how much further the THICKEST tick's scale is multiplied, so the thinnest and thickest scale at different rates (1 = the same rate);
+            // ticks in between blend from one to the other.
+            const zf = zoomFraction('limits'), scaleAll = curveValue(setting('curveEditorSongTickThinZoom'), zf), scaleThick = curveValue(setting('curveEditorSongTickThickZoom'), zf);
+            const thinT = Math.max(Math.min(tr.min, tr.max), Math.max(tr.min, tr.max) * scaleAll); // the thinnest tick: its Max scaled, never below its Min
+            const wMaxEff = Math.max(thinT, wMaxT * scaleAll * scaleThick); // the thickest tick: the Max scaled by both curves
+            const both = !!setting('checkboxSongTickBoth'), tickY = both || setting('checkboxSongTickInvert') ? topH - tickH : topH + 1, tickHH = both ? tickH * 2 : tickH; // Both Sides: centred on the graph's bottom line
+            // Tick Width Transition Time: the numbers the widths come from (thinnest width, floor, widest, busiest tick's song count) ease toward their new values
+            // instead of snapping; 0 = snap, and the widths are then whole pixels.
+            const smoothMs = Math.max(0, setting('sliderSongTickWidthTransitionMs'));
+            const clampWith = (v, a, b) => Math.max(a, Math.min(b, Math.max(1, smoothMs > 0 ? v : Math.round(v))));
+            const grayOp = setting('sliderFilterGrayOpacity') / 100, grayCol = setting('colorFilterGray');
+            if (setting('checkboxSongTickScale')) {
+                // Scale With Datapoints: the songs that land in the same pixel column are ONE tick, as tall as the Height slider (every tick the same height); the curve sets its width, at
+                // (songs in this tick - 1) / (songs in the busiest tick in view - 1); a tick is gray only when none of its songs passes the filter
+                const cols = new Map();
+                for (let i = i0; i < i1; i++) {
+                    const x = Math.round(xOf(vt[i]));
+                    let c = cols.get(x);
+                    if (!c) { c = { n: 0, on: false }; cols.set(x, c); }
+                    c.n++;
+                    if (!(filterFn && !filterFn(i))) c.on = true;
+                }
+                let maxN = 1;
+                cols.forEach(c => { if (c.n > maxN) maxN = c.n; });
+                const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxEff, thin: thinT, maxN });
+                const curve = setting('curveEditorSongTickScale');
+                cols.forEach((c, x) => {
+                    const t = ts.maxN > 1 ? Math.min(1, (c.n - 1) / (ts.maxN - 1)) : 1;
+                    const off = !!filterFn && !c.on;
+                    ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
+                    ctx.fillStyle = off ? grayCol : playheadColor;
+                    const cv = curveValue(curve, t), tw = clampWith(ts.thin + (ts.wMax - ts.thin) * cv, ts.wMin, ts.wMax); // width: from the thinnest tick's width up to the Max along the curve; height: Height x the curve
+                    ctx.fillRect(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), tickY, tw, tickHH);
+                });
+            } else {
+                const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxEff, thin: thinT, maxN: 1 });
+                const tickW = clampWith(ts.thin, ts.wMin, ts.wMax);
+                for (let i = i0; i < i1; i++) {
+                    const off = !!filterFn && !filterFn(i);
+                    ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
+                    ctx.fillStyle = off ? grayCol : playheadColor;
+                    ctx.fillRect(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), tickY, tickW, tickHH); // one mark per song; it hangs down from the graph's bottom edge
+                }
+            }
+        }
+        ctx.restore();
+
+
         // bins: bar width is a setting ("granularity"); each bin knows its contiguous song range
         const barPx = clamp(setting('sliderBarWidth'), 1, 60);
         const nb = Math.max(1, Math.floor(w / barPx));
@@ -599,55 +658,6 @@ export function createTimeline(canvas, data) {
             ctx.fillText(t.text, t.x + setting('sliderScaleNumbersOffsetX'), h - 4);
         });
         ctx.letterSpacing = '0px';
-
-        // individual song ticks when zoomed in far enough to tell songs apart: from Song Ticks Start Showing (the pixels between songs) upward
-        if (i1 - i0 > 0 && w / (i1 - i0) >= setting('sliderSongTickMinSpacing')) {
-            const wr = setting('rangeBarSongTickWidth') || { min: 1, max: 1 };
-            const wMinT = Math.max(1, Math.round(Math.min(wr.min, wr.max))), wMaxT = Math.max(wMinT, Math.round(Math.max(wr.min, wr.max))), tickH = Math.max(0, setting('sliderSongTickHeight'));
-            // The THINNEST tick (a tick of one song): its width is picked from the Thinnest Song Tick Width Min / Max by the zoom curve (X: 0 = fully zoomed in, 1 = fully
-            // zoomed out, the same scale as Zoom Limits). Without Scale Song Ticks every tick is that thin; with it, ticks grow from that width up to the Max along the
-            // Song Tick Scale Curve. Every width stays between the Song Tick Width Min (floor) and Max (widest).
-            const tr = setting('rangeBarSongTickThinWidth') || { min: 1, max: 1 };
-            const thinT = Math.min(tr.min, tr.max) + Math.abs(tr.max - tr.min) * curveValue(setting('curveEditorSongTickThinZoom'), zoomFraction('limits'));
-            // Tick Width Transition Time: the numbers the widths come from (thinnest width, floor, widest, busiest tick's song count) ease toward their new values
-            // instead of snapping; 0 = snap, and the widths are then whole pixels.
-            const smoothMs = Math.max(0, setting('sliderSongTickWidthTransitionMs'));
-            const clampWith = (v, a, b) => Math.max(a, Math.min(b, Math.max(1, smoothMs > 0 ? v : Math.round(v))));
-            const grayOp = setting('sliderFilterGrayOpacity') / 100, grayCol = setting('colorFilterGray');
-            if (setting('checkboxSongTickScale')) {
-                // Scale With Datapoints: the songs that land in the same pixel column are ONE tick, as tall as the Height slider (every tick the same height); the curve sets its width, at
-                // (songs in this tick - 1) / (songs in the busiest tick in view - 1); a tick is gray only when none of its songs passes the filter
-                const cols = new Map();
-                for (let i = i0; i < i1; i++) {
-                    const x = Math.round(xOf(vt[i]));
-                    let c = cols.get(x);
-                    if (!c) { c = { n: 0, on: false }; cols.set(x, c); }
-                    c.n++;
-                    if (!(filterFn && !filterFn(i))) c.on = true;
-                }
-                let maxN = 1;
-                cols.forEach(c => { if (c.n > maxN) maxN = c.n; });
-                const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxT, thin: thinT, maxN });
-                const curve = setting('curveEditorSongTickScale');
-                cols.forEach((c, x) => {
-                    const t = ts.maxN > 1 ? Math.min(1, (c.n - 1) / (ts.maxN - 1)) : 1;
-                    const off = !!filterFn && !c.on;
-                    ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
-                    ctx.fillStyle = off ? grayCol : playheadColor;
-                    const cv = curveValue(curve, t), tw = clampWith(ts.thin + (ts.wMax - ts.thin) * cv, ts.wMin, ts.wMax); // width: from the thinnest tick's width up to the Max along the curve; height: Height x the curve
-                    ctx.fillRect(x - (smoothMs > 0 ? tw / 2 : Math.floor(tw / 2)), setting('checkboxSongTickInvert') ? topH - tickH : topH + 1, tw, tickH);
-                });
-            } else {
-                const ts = tickWidthsNow({ wMin: wMinT, wMax: wMaxT, thin: thinT, maxN: 1 });
-                const tickW = clampWith(ts.thin, ts.wMin, ts.wMax);
-                for (let i = i0; i < i1; i++) {
-                    const off = !!filterFn && !filterFn(i);
-                    ctx.globalAlpha = off ? grayOp : setting("sliderSongTickOpacity") / 100;
-                    ctx.fillStyle = off ? grayCol : playheadColor;
-                    ctx.fillRect(Math.round(xOf(vt[i])) - (smoothMs > 0 ? tickW / 2 : Math.floor(tickW / 2)), setting('checkboxSongTickInvert') ? topH - tickH : topH + 1, tickW, tickH); // one mark per song; it hangs down from the graph's bottom edge
-                }
-            }
-        }
 
         // playhead
         ctx.globalAlpha = phOpacity();
