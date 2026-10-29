@@ -317,6 +317,9 @@
     "colorFilterTickGray": "#6b7280",
     "sliderFilterTickGrayOpacity": 25,
     "sliderFilterNumberGrayOpacity": 25,
+    "checkboxFilterNameLengths": true,
+    "checkboxFilterSongDate": true,
+    "checkboxFilterSongLength": true,
     "checkboxFilterShowNumbers": true,
     "checkboxFilterShowRangeText": false,
     "checkboxFilterShowCount": true,
@@ -605,10 +608,10 @@
     "sliderStartPlayLiftShadowOpacity": 0.5
   },
   "layout": {
-    "left": 134,
-    "top": 288,
-    "width": 523,
-    "height": 418
+    "left": 26,
+    "top": 158,
+    "width": 350,
+    "height": 578
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -5024,6 +5027,18 @@
                       {
                         "type": "row",
                         "key": "sliderFilterPanelNumbersOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterNameLengths"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterSongDate"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterSongLength"
                       }
                     ],
                     "rowKeys": [
@@ -5040,7 +5055,10 @@
                       "sliderFilterIconOffsetX",
                       "sliderFilterEdgeOffset",
                       "sliderFilterPanelCountFontSize",
-                      "sliderFilterPanelNumbersOffsetY"
+                      "sliderFilterPanelNumbersOffsetY",
+                      "checkboxFilterNameLengths",
+                      "checkboxFilterSongDate",
+                      "checkboxFilterSongLength"
                     ],
                     "subgroups": [
                       {
@@ -7481,6 +7499,18 @@
                     {
                       "type": "row",
                       "key": "sliderFilterPanelNumbersOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterNameLengths"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterSongDate"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterSongLength"
                     }
                   ],
                   "rowKeys": [
@@ -7497,7 +7527,10 @@
                     "sliderFilterIconOffsetX",
                     "sliderFilterEdgeOffset",
                     "sliderFilterPanelCountFontSize",
-                    "sliderFilterPanelNumbersOffsetY"
+                    "sliderFilterPanelNumbersOffsetY",
+                    "checkboxFilterNameLengths",
+                    "checkboxFilterSongDate",
+                    "checkboxFilterSongLength"
                   ],
                   "subgroups": [
                     {
@@ -12458,6 +12491,18 @@
                     {
                       "type": "row",
                       "key": "sliderFilterPanelNumbersOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterNameLengths"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterSongDate"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxFilterSongLength"
                     }
                   ],
                   "rowKeys": [
@@ -12474,7 +12519,10 @@
                     "sliderFilterIconOffsetX",
                     "sliderFilterEdgeOffset",
                     "sliderFilterPanelCountFontSize",
-                    "sliderFilterPanelNumbersOffsetY"
+                    "sliderFilterPanelNumbersOffsetY",
+                    "checkboxFilterNameLengths",
+                    "checkboxFilterSongDate",
+                    "checkboxFilterSongLength"
                   ],
                   "subgroups": [
                     {
@@ -14915,6 +14963,18 @@
                   {
                     "type": "row",
                     "key": "sliderFilterPanelNumbersOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterNameLengths"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterSongDate"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxFilterSongLength"
                   }
                 ],
                 "rowKeys": [
@@ -14931,7 +14991,10 @@
                   "sliderFilterIconOffsetX",
                   "sliderFilterEdgeOffset",
                   "sliderFilterPanelCountFontSize",
-                  "sliderFilterPanelNumbersOffsetY"
+                  "sliderFilterPanelNumbersOffsetY",
+                  "checkboxFilterNameLengths",
+                  "checkboxFilterSongDate",
+                  "checkboxFilterSongLength"
                 ],
                 "subgroups": [
                   {
@@ -38846,7 +38909,7 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": false,
+    "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:Track Title Button Animation": true,
@@ -38855,7 +38918,7 @@
     "desktop:Album & Date": true,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": true,
+    "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
@@ -38874,7 +38937,7 @@
     "desktop:New Group (14)": true,
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": true,
+    "desktop:Filter Button": false,
     "desktop:New Group (16)": true,
     "desktop:New Group (17)": true,
     "desktop:New Group (18)": true,
@@ -38894,7 +38957,7 @@
     "desktop:Standard Button Animation": true,
     "desktop:Background": true,
     "desktop:Animation": true,
-    "desktop:Album Cover": false,
+    "desktop:Album Cover": true,
     "desktop:Shadows": true,
     "desktop:Album Cover Shadow": true,
     "desktop:Volume Shadow": true,
