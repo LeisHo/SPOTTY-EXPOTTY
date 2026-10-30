@@ -288,7 +288,7 @@
     "sliderCoverScale": 2.35,
     "sliderCoverOffsetX": 0,
     "sliderCoverBrightness": 100,
-    "sliderCoverOffsetY": -34,
+    "sliderCoverOffsetY": 0,
     "checkboxCoverBoundingBox": false,
     "selectShuffleIconStyle": "1",
     "checkboxShuffleButtonEnabled": true,
@@ -51949,7 +51949,7 @@
       "sliderAlbumColorBrightness": false,
       "checkboxAlbumColorTransition": false,
       "sliderAlbumColorTransitionMs": false,
-      "sliderCoverOffsetY": true,
+      "sliderCoverOffsetY": false,
       "sliderNavButtonOpacity": true,
       "textArtistSeparator": false,
       "sliderTxtSongTitleMaxWidth": true,
@@ -52483,7 +52483,7 @@
             },
             "vertical": {
               "anchor": "center",
-              "offset": "-3vh"
+              "offset": "-1vh"
             }
           },
           "size": {
