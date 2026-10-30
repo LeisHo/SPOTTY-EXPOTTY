@@ -384,10 +384,10 @@
     "checkboxFilterClickToExit": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 13,
-    "sliderFilterPanelRowGap": 6,
+    "sliderFilterPanelRowGap": 14,
     "sliderFilterPanelRowsOffsetY": -24,
     "checkboxFilterPanelKeepVisible": true,
-    "sliderFilterPanelIconOffsetY": 1,
+    "sliderFilterPanelIconOffsetY": -5,
     "sliderFilterPanelNumbersOffsetY": 1,
     "sliderFilterPanelIconSize": 20,
     "sliderFilterPanelOffsetX": 0,
@@ -399,13 +399,12 @@
     "checkboxFilterPanelResizable": true,
     "checkboxFilterPanelScrollable": false,
     "checkboxFilterPanelDraggable": false,
-    "checkboxFilterSongCountEnabled": true,
-    "checkboxFilterSongCountTop": false,
-    "sliderFilterSongCountFontSize": 12,
-    "sliderFilterSongCountOffsetX": 0,
-    "sliderFilterSongCountOffsetY": 0,
-    "sliderFilterSongCountLetterSpacing": 0,
-    "sliderFilterSongCountNumberGap": 4,
+    "checkboxFilterSongCountTop": true,
+    "sliderFilterSongCountFontSize": 14,
+    "sliderFilterSongCountOffsetX": 29,
+    "sliderFilterSongCountOffsetY": -29,
+    "sliderFilterSongCountLetterSpacing": 2,
+    "sliderFilterSongCountNumberGap": 16,
     "checkboxFilterSongCountBold": true,
     "checkboxFilterSongCountItalic": false,
     "selectSongDataIconStyle": "1",
@@ -6389,18 +6388,6 @@
                           "items": [
                             {
                               "type": "row",
-                              "key": "sliderFilterSongCountFontSize"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterSongCountOffsetX"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterSongCountOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "checkboxFilterSongCountBold"
                             },
                             {
@@ -6413,6 +6400,18 @@
                             },
                             {
                               "type": "row",
+                              "key": "sliderFilterSongCountFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterSongCountOffsetX"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterSongCountOffsetY"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterSongCountLetterSpacing"
                             },
                             {
@@ -6421,12 +6420,12 @@
                             }
                           ],
                           "rowKeys": [
-                            "sliderFilterSongCountFontSize",
-                            "sliderFilterSongCountOffsetX",
-                            "sliderFilterSongCountOffsetY",
                             "checkboxFilterSongCountBold",
                             "checkboxFilterSongCountItalic",
                             "checkboxFilterSongCountTop",
+                            "sliderFilterSongCountFontSize",
+                            "sliderFilterSongCountOffsetX",
+                            "sliderFilterSongCountOffsetY",
                             "sliderFilterSongCountLetterSpacing",
                             "sliderFilterSongCountNumberGap"
                           ],
@@ -7044,18 +7043,6 @@
                         "items": [
                           {
                             "type": "row",
-                            "key": "sliderFilterSongCountFontSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterSongCountOffsetX"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterSongCountOffsetY"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterSongCountBold"
                           },
                           {
@@ -7068,6 +7055,18 @@
                           },
                           {
                             "type": "row",
+                            "key": "sliderFilterSongCountFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetY"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterSongCountLetterSpacing"
                           },
                           {
@@ -7076,12 +7075,12 @@
                           }
                         ],
                         "rowKeys": [
-                          "sliderFilterSongCountFontSize",
-                          "sliderFilterSongCountOffsetX",
-                          "sliderFilterSongCountOffsetY",
                           "checkboxFilterSongCountBold",
                           "checkboxFilterSongCountItalic",
                           "checkboxFilterSongCountTop",
+                          "sliderFilterSongCountFontSize",
+                          "sliderFilterSongCountOffsetX",
+                          "sliderFilterSongCountOffsetY",
                           "sliderFilterSongCountLetterSpacing",
                           "sliderFilterSongCountNumberGap"
                         ],
@@ -9363,18 +9362,6 @@
                         "items": [
                           {
                             "type": "row",
-                            "key": "sliderFilterSongCountFontSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterSongCountOffsetX"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterSongCountOffsetY"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterSongCountBold"
                           },
                           {
@@ -9387,6 +9374,18 @@
                           },
                           {
                             "type": "row",
+                            "key": "sliderFilterSongCountFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetY"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterSongCountLetterSpacing"
                           },
                           {
@@ -9395,12 +9394,12 @@
                           }
                         ],
                         "rowKeys": [
-                          "sliderFilterSongCountFontSize",
-                          "sliderFilterSongCountOffsetX",
-                          "sliderFilterSongCountOffsetY",
                           "checkboxFilterSongCountBold",
                           "checkboxFilterSongCountItalic",
                           "checkboxFilterSongCountTop",
+                          "sliderFilterSongCountFontSize",
+                          "sliderFilterSongCountOffsetX",
+                          "sliderFilterSongCountOffsetY",
                           "sliderFilterSongCountLetterSpacing",
                           "sliderFilterSongCountNumberGap"
                         ],
@@ -10018,18 +10017,6 @@
                       "items": [
                         {
                           "type": "row",
-                          "key": "sliderFilterSongCountFontSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterSongCountOffsetX"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterSongCountOffsetY"
-                        },
-                        {
-                          "type": "row",
                           "key": "checkboxFilterSongCountBold"
                         },
                         {
@@ -10042,6 +10029,18 @@
                         },
                         {
                           "type": "row",
+                          "key": "sliderFilterSongCountFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetX"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetY"
+                        },
+                        {
+                          "type": "row",
                           "key": "sliderFilterSongCountLetterSpacing"
                         },
                         {
@@ -10050,12 +10049,12 @@
                         }
                       ],
                       "rowKeys": [
-                        "sliderFilterSongCountFontSize",
-                        "sliderFilterSongCountOffsetX",
-                        "sliderFilterSongCountOffsetY",
                         "checkboxFilterSongCountBold",
                         "checkboxFilterSongCountItalic",
                         "checkboxFilterSongCountTop",
+                        "sliderFilterSongCountFontSize",
+                        "sliderFilterSongCountOffsetX",
+                        "sliderFilterSongCountOffsetY",
                         "sliderFilterSongCountLetterSpacing",
                         "sliderFilterSongCountNumberGap"
                       ],
@@ -16030,18 +16029,6 @@
                         "items": [
                           {
                             "type": "row",
-                            "key": "sliderFilterSongCountFontSize"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterSongCountOffsetX"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterSongCountOffsetY"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterSongCountBold"
                           },
                           {
@@ -16054,6 +16041,18 @@
                           },
                           {
                             "type": "row",
+                            "key": "sliderFilterSongCountFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterSongCountOffsetY"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterSongCountLetterSpacing"
                           },
                           {
@@ -16062,12 +16061,12 @@
                           }
                         ],
                         "rowKeys": [
-                          "sliderFilterSongCountFontSize",
-                          "sliderFilterSongCountOffsetX",
-                          "sliderFilterSongCountOffsetY",
                           "checkboxFilterSongCountBold",
                           "checkboxFilterSongCountItalic",
                           "checkboxFilterSongCountTop",
+                          "sliderFilterSongCountFontSize",
+                          "sliderFilterSongCountOffsetX",
+                          "sliderFilterSongCountOffsetY",
                           "sliderFilterSongCountLetterSpacing",
                           "sliderFilterSongCountNumberGap"
                         ],
@@ -16685,18 +16684,6 @@
                       "items": [
                         {
                           "type": "row",
-                          "key": "sliderFilterSongCountFontSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterSongCountOffsetX"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterSongCountOffsetY"
-                        },
-                        {
-                          "type": "row",
                           "key": "checkboxFilterSongCountBold"
                         },
                         {
@@ -16709,6 +16696,18 @@
                         },
                         {
                           "type": "row",
+                          "key": "sliderFilterSongCountFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetX"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetY"
+                        },
+                        {
+                          "type": "row",
                           "key": "sliderFilterSongCountLetterSpacing"
                         },
                         {
@@ -16717,12 +16716,12 @@
                         }
                       ],
                       "rowKeys": [
-                        "sliderFilterSongCountFontSize",
-                        "sliderFilterSongCountOffsetX",
-                        "sliderFilterSongCountOffsetY",
                         "checkboxFilterSongCountBold",
                         "checkboxFilterSongCountItalic",
                         "checkboxFilterSongCountTop",
+                        "sliderFilterSongCountFontSize",
+                        "sliderFilterSongCountOffsetX",
+                        "sliderFilterSongCountOffsetY",
                         "sliderFilterSongCountLetterSpacing",
                         "sliderFilterSongCountNumberGap"
                       ],
@@ -19004,18 +19003,6 @@
                       "items": [
                         {
                           "type": "row",
-                          "key": "sliderFilterSongCountFontSize"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterSongCountOffsetX"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterSongCountOffsetY"
-                        },
-                        {
-                          "type": "row",
                           "key": "checkboxFilterSongCountBold"
                         },
                         {
@@ -19028,6 +19015,18 @@
                         },
                         {
                           "type": "row",
+                          "key": "sliderFilterSongCountFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetX"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderFilterSongCountOffsetY"
+                        },
+                        {
+                          "type": "row",
                           "key": "sliderFilterSongCountLetterSpacing"
                         },
                         {
@@ -19036,12 +19035,12 @@
                         }
                       ],
                       "rowKeys": [
-                        "sliderFilterSongCountFontSize",
-                        "sliderFilterSongCountOffsetX",
-                        "sliderFilterSongCountOffsetY",
                         "checkboxFilterSongCountBold",
                         "checkboxFilterSongCountItalic",
                         "checkboxFilterSongCountTop",
+                        "sliderFilterSongCountFontSize",
+                        "sliderFilterSongCountOffsetX",
+                        "sliderFilterSongCountOffsetY",
                         "sliderFilterSongCountLetterSpacing",
                         "sliderFilterSongCountNumberGap"
                       ],
@@ -19659,18 +19658,6 @@
                     "items": [
                       {
                         "type": "row",
-                        "key": "sliderFilterSongCountFontSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderFilterSongCountOffsetX"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderFilterSongCountOffsetY"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxFilterSongCountBold"
                       },
                       {
@@ -19683,6 +19670,18 @@
                       },
                       {
                         "type": "row",
+                        "key": "sliderFilterSongCountFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterSongCountOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterSongCountOffsetY"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderFilterSongCountLetterSpacing"
                       },
                       {
@@ -19691,12 +19690,12 @@
                       }
                     ],
                     "rowKeys": [
-                      "sliderFilterSongCountFontSize",
-                      "sliderFilterSongCountOffsetX",
-                      "sliderFilterSongCountOffsetY",
                       "checkboxFilterSongCountBold",
                       "checkboxFilterSongCountItalic",
                       "checkboxFilterSongCountTop",
+                      "sliderFilterSongCountFontSize",
+                      "sliderFilterSongCountOffsetX",
+                      "sliderFilterSongCountOffsetY",
                       "sliderFilterSongCountLetterSpacing",
                       "sliderFilterSongCountNumberGap"
                     ],
@@ -47831,7 +47830,9 @@
     "landscape:New Group (39)": "OVERFLOW SCROLL",
     "landscape:New Group (38)": "Overflow",
     "mobile:Play On Device": null,
-    "landscape:Play On Device": null
+    "landscape:Play On Device": null,
+    "checkboxFilterSongCountTop": "Top Aligned",
+    "desktop:Panel Song Count": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -47884,7 +47885,8 @@
     "desktop:New Group (39)",
     "desktop:New Group (38)",
     "desktop:New Group (37)",
-    "desktop:Filter Button"
+    "desktop:Filter Button",
+    "checkboxFilterSongCountTop"
   ],
   "lockedGroups": [
     "desktop:Dev Panel",
