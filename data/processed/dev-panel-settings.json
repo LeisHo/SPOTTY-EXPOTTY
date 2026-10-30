@@ -51971,7 +51971,7 @@
             "myAnchor": "bottom-center",
             "targetAnchor": "top-center",
             "vertical": {
-              "offset": ".25ah"
+              "offset": ".5ah"
             }
           },
           "size": {
@@ -52008,7 +52008,7 @@
               "offset": "0px"
             },
             "vertical": {
-              "offset": "0.5ah"
+              "offset": "0.75ah"
             }
           },
           "size": {
@@ -52043,7 +52043,7 @@
               "offset": "0px"
             },
             "vertical": {
-              "offset": "1th"
+              "offset": ".75th"
             }
           },
           "size": {
