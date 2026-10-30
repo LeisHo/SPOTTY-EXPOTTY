@@ -17,6 +17,7 @@
 // Both directions can travel gzipped + base64 as { gz } (Vercel caps request/response
 // bodies at 4.5 MB); plain JSON is still accepted/returned.
 import zlib from 'zlib';
+import crypto from 'crypto';
 
 const DEFAULT_REPO = 'LeisHo/SPOTTY-EXPOTTY';
 const DEFAULT_BRANCH = 'main';
@@ -28,6 +29,8 @@ const scrub = v => String(v)
     .replace(/(github_pat_|gh[pousr]_)[A-Za-z0-9_]+/g, '[redacted]')
     .replace(/Bearer\s+\S+/gi, 'Bearer [redacted]');
 const safeErr = err => scrub((err && err.message) || err);
+// A file's git blob sha = sha1("blob <bytes>\0" + bytes): the same id GitHub reports as `sha`, so a raw read can say which version it returned without a second request.
+const gitBlobSha = buf => crypto.createHash('sha1').update('blob ' + buf.length + '\0').update(buf).digest('hex');
 
 export default async function handler(req, res) {
     if (req.method !== 'POST' && req.method !== 'GET') {
@@ -84,10 +87,10 @@ export default async function handler(req, res) {
             // The settings file is over 1 MB, where the Contents API omits `content` and the old code fell back to `download_url`, i.e. raw.githubusercontent.com's CDN, which keeps a
             // file for MINUTES: a refresh right after a save showed the PREVIOUS settings (checked boxes came back, and a save made from that view overwrote the newer one).
             // The raw media type returns the CURRENT file straight from the API (up to 100 MB), so ask for that first and only fall back to the older lookups if it fails.
-            let jsonText = null;
+            let jsonText = null, fileSha = null;
             try {
                 const rawResp = await ghFetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers: { ...headers, Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' });
-                if (rawResp.ok) jsonText = await rawResp.text();
+                if (rawResp.ok) { const buf = Buffer.from(await rawResp.arrayBuffer()); jsonText = buf.toString('utf-8'); fileSha = gitBlobSha(buf); }
             } catch (e) { /* fall back below */ }
             if (jsonText === null) {
             const getResp = await ghFetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers, cache: 'no-store' });
@@ -101,6 +104,7 @@ export default async function handler(req, res) {
                 return;
             }
             const getData = await getResp.json();
+            fileSha = getData.sha || null;
             if (getData.content) {
                 jsonText = Buffer.from(getData.content, 'base64').toString('utf-8');
             } else if (getData.download_url) {
@@ -118,9 +122,9 @@ export default async function handler(req, res) {
             }
             if (req.query && req.query.gz === '1') {
                 const gz = zlib.gzipSync(Buffer.from(jsonText, 'utf-8')).toString('base64');
-                res.status(200).json({ ok: true, gz });
+                res.status(200).json({ ok: true, gz, sha: fileSha });
             } else {
-                res.status(200).json({ ok: true, settings: JSON.parse(jsonText) });
+                res.status(200).json({ ok: true, settings: JSON.parse(jsonText), sha: fileSha });
             }
         } catch (err) {
             res.status(500).json({ ok: false, error: safeErr(err) });
@@ -149,6 +153,13 @@ export default async function handler(req, res) {
         if (getResp.ok) {
             const getData = await getResp.json();
             sha = getData.sha;
+            // Stale-save guard: the page sends the version it loaded (X-Base-Sha). If the file has changed since (another device or tab saved), refuse - this save would
+            // replace the newer settings with older values. No header (an older page) = no check; X-Force-Save: 1 = the owner chose to overwrite anyway.
+            const baseSha = req.headers['x-base-sha'];
+            if (baseSha && baseSha !== sha && req.headers['x-force-save'] !== '1') {
+                res.status(409).json({ ok: false, stale: true, sha, error: 'The saved settings changed since this page loaded (saved from another device or tab).' });
+                return;
+            }
         } else if (getResp.status !== 404) {
             const errText = await getResp.text();
             res.status(502).json({ ok: false, error: `GitHub lookup failed (${getResp.status}): ${scrub(errText)}` });
@@ -172,7 +183,7 @@ export default async function handler(req, res) {
             return;
         }
         const putData = await putResp.json();
-        res.status(200).json({ ok: true, commitSha: putData.commit && putData.commit.sha });
+        res.status(200).json({ ok: true, commitSha: putData.commit && putData.commit.sha, sha: putData.content && putData.content.sha }); // the new version: the page's next save is based on it
     } catch (err) {
         res.status(500).json({ ok: false, error: safeErr(err) });
     }

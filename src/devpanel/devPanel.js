@@ -6937,28 +6937,31 @@
         return JSON.parse(await new Response(stream).text());
     }
     // Resolves { ok, settings, status, error }; status 0 = network failure. Never throws.
+    // The version (git sha) of the saved file this page last loaded or saved; Sync sends it so the server can refuse a save made from older settings.
+    let remoteBaseSha = null;
     async function fetchRemoteDevSettings() {
         try {
             const resp = await fetch(DEV_PANEL_REMOTE_ENDPOINT + '?gz=1', { cache: 'no-store' });
             const body = await resp.json().catch(() => ({}));
             if (!resp.ok || body.ok !== true) return { ok: false, settings: null, status: resp.status, error: body.error };
+            if (typeof body.sha === 'string') remoteBaseSha = body.sha;
             if (typeof body.gz === 'string') return { ok: true, settings: await devPanelGunzipBase64(body.gz), status: 200 };
             return { ok: true, settings: body.settings || null, status: 200 };
         } catch (e) { return { ok: false, settings: null, status: 0, error: 'offline/unreachable' }; }
     }
     // Resolves { ok, status, error }. Never throws.
-    async function postRemoteDevSettings(secret, obj) {
+    async function postRemoteDevSettings(secret, obj, force) {
         try {
             const json = JSON.stringify(obj);
             const payload = (typeof CompressionStream === 'function') ? JSON.stringify({ gz: await devPanelGzipBase64(json) }) : json;
             const resp = await fetch(DEV_PANEL_REMOTE_ENDPOINT, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'X-Dev-Panel-Secret': secret },
+                headers: { 'Content-Type': 'application/json', 'X-Dev-Panel-Secret': secret, ...(remoteBaseSha ? { 'X-Base-Sha': remoteBaseSha } : {}), ...(force ? { 'X-Force-Save': '1' } : {}) },
                 body: payload,
             });
             const body = await resp.json().catch(() => ({}));
-            if (resp.ok && body.ok === true) return { ok: true, status: resp.status };
-            return { ok: false, status: resp.status, error: body.error || ('HTTP ' + resp.status) };
+            if (resp.ok && body.ok === true) { if (typeof body.sha === 'string') remoteBaseSha = body.sha; return { ok: true, status: resp.status }; }
+            return { ok: false, status: resp.status, stale: !!body.stale, error: body.error || ('HTTP ' + resp.status) };
         } catch (e) { return { ok: false, status: 0, error: 'offline/unreachable' }; }
     }
     // Boot-time restore: retries (500 ms doubling to a 10 s cap) ONLY while the network
@@ -7202,6 +7205,10 @@
                 secret = getDevPanelSaveSecret(true);
                 if (!secret) throw new Error('no save secret entered');
                 result = await postRemoteDevSettings(secret, payload);
+            }
+            if (!result.ok && result.status === 409 && result.stale) { // the saved file is newer than what this page loaded: ask before replacing it
+                if (!confirm('The saved settings changed since this page loaded (saved from another device or tab).\n\nSaving now REPLACES those newer settings with what is on this page.\n\nOK = overwrite them anyway.   Cancel = do not save (refresh the page to load the newer settings first).')) throw new Error('not saved: newer settings exist - refresh to load them');
+                result = await postRemoteDevSettings(secret, payload, true);
             }
             if (!result.ok) throw new Error(result.error || 'save failed');
             // Saved remotely: drop any stale local copy so it can't override the GitHub one on boot.
