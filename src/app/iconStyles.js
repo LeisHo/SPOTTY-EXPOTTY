@@ -90,6 +90,8 @@ export const EXTRA_ICON_SETS = {
         { name: 'Broadcast', p: [[circ(C, C, 4), 0], [circ(C, C, 10) + circ(C, C, 7.5), 1], [circ(C, C, 17.26) + circ(C, C, 14.5), 1]] },
     ],
 };
-const extraPick = (key, i) => { const l = EXTRA_ICON_SETS[key]; return l[Math.min(iconIndex(i), l.length - 1)]; };
-export const extraIconHtml = (key, i) => shapes(extraPick(key, i));
-export function applyDeviceIcon(svg, i) { setIcon(svg, 'devc' + i, shapes(extraPick('device', i))); }
+// The built-in options live in BUTTON_ICONS next to the imported button sets, so the dropdowns' Import button (iconImport.js) adds to / overwrites them
+// the same way (and the imported ones are saved with Sync like any other).
+Object.entries(EXTRA_ICON_SETS).forEach(([key, list]) => { if (!BUTTON_ICONS[key]) BUTTON_ICONS[key] = list.map(o => ({ n: o.name, p: o.p.map(([d, eo]) => [d, eo]) })); });
+export const extraIconHtml = (key, i) => shapes(pick(key, iconIndex(i)));
+export function applyDeviceIcon(svg, i) { setIcon(svg, 'devc' + i, shapes(pick('device', iconIndex(i)))); }

@@ -7987,8 +7987,8 @@
     // ---- Import icons: a button to the right of every icon dropdown --------------------------------------------------------------------------------------------------
     // Pick one or several SVG files: each becomes an entry of that dropdown's list (named after the file); a name that already exists is overwritten. The work is done by
     // src/app/iconImport.js (window.SPX_ICON_IMPORT); the lists, and the saved copy (Sync -> extra.customIcons, plus localStorage), live there.
-    const ICON_SELECT_RE = /^select(?:Mobile|Landscape)?(Vol|Shuffle|Filter|Tempo|Valence|Dance|Energy|SongData|Play|Pause|Nav)IconStyle$/;
-    const ICON_SELECT_KEY = { Vol: 'volume', Shuffle: 'shuffle', Filter: 'filter', Tempo: 'tp', Valence: 'v', Dance: 'dn', Energy: 'e', SongData: 'data', Play: 'play', Pause: 'pause', Nav: 'nav' };
+    const ICON_SELECT_RE = /^select(?:Mobile|Landscape)?(Vol|Shuffle|Filter|Tempo|Valence|Dance|Energy|SongData|Play|Pause|Nav|TitleLen|ArtistLen|AlbumLen|SongDate|SongLen|Device)IconStyle$/;
+    const ICON_SELECT_KEY = { Vol: 'volume', Shuffle: 'shuffle', Filter: 'filter', Tempo: 'tp', Valence: 'v', Dance: 'dn', Energy: 'e', SongData: 'data', Play: 'play', Pause: 'pause', Nav: 'nav', TitleLen: 'ln', ArtistLen: 'la', AlbumLen: 'lb', SongDate: 'rd', SongLen: 'du', Device: 'device' };
     const iconKeyOfSelect = sel => { const m = ICON_SELECT_RE.exec(sel.id || ''); return m ? ICON_SELECT_KEY[m[1]] : null; };
     function refreshIconSelects() {
         if (!window.SPX_ICON_IMPORT) return;
