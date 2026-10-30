@@ -648,11 +648,11 @@
     "sliderStartPlayLiftPressPx": 2,
     "sliderStartPlayLiftShadowBlur": 14,
     "sliderStartPlayLiftShadowOpacity": 0.5,
-    "listPickerRenderOrder": "{\"items\":[{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true},{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true}],\"groupOrder\":[],\"defaultName\":null}"
+    "listPickerRenderOrder": "{\"items\":[{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true},{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true,\"group\":\"TOP BUTTONS\"}],\"groupOrder\":[\"TOP BUTTONS\"],\"defaultName\":null}"
   },
   "layout": {
-    "left": 116,
-    "top": 35.28125,
+    "left": 118,
+    "top": 8,
     "width": 880,
     "height": 583
   },
@@ -2056,6 +2056,22 @@
           {
             "type": "row",
             "key": "buttonOpenLayoutInspector"
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Visibility / Render Order",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "listPickerRenderOrder"
+                }
+              ],
+              "rowKeys": [
+                "listPickerRenderOrder"
+              ],
+              "subgroups": []
+            }
           },
           {
             "type": "group",
@@ -10368,6 +10384,10 @@
                   "key": "sliderSpotlightMaxBrightness"
                 },
                 {
+                  "type": "row",
+                  "key": "sliderBackgroundDither"
+                },
+                {
                   "type": "group",
                   "section": {
                     "key": "desktop:Animation",
@@ -10567,10 +10587,6 @@
                     ],
                     "subgroups": []
                   }
-                },
-                {
-                  "type": "row",
-                  "key": "sliderBackgroundDither"
                 }
               ],
               "rowKeys": [
@@ -10825,6 +10841,10 @@
               "items": [
                 {
                   "type": "row",
+                  "key": "checkboxCoverBoundingBox"
+                },
+                {
+                  "type": "row",
                   "key": "sliderCoverScale"
                 },
                 {
@@ -10837,18 +10857,14 @@
                 },
                 {
                   "type": "row",
-                  "key": "checkboxCoverBoundingBox"
-                },
-                {
-                  "type": "row",
                   "key": "sliderCoverBrightness"
                 }
               ],
               "rowKeys": [
+                "checkboxCoverBoundingBox",
                 "sliderCoverScale",
                 "sliderCoverOffsetX",
                 "sliderCoverOffsetY",
-                "checkboxCoverBoundingBox",
                 "sliderCoverBrightness"
               ],
               "subgroups": []
@@ -11215,28 +11231,25 @@
                 }
               ]
             }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "desktop:Visibility / Render Order",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "listPickerRenderOrder"
-                }
-              ],
-              "rowKeys": [
-                "listPickerRenderOrder"
-              ],
-              "subgroups": []
-            }
           }
         ],
         "rowKeys": [
           "buttonOpenLayoutInspector"
         ],
         "subgroups": [
+          {
+            "key": "desktop:Visibility / Render Order",
+            "items": [
+              {
+                "type": "row",
+                "key": "listPickerRenderOrder"
+              }
+            ],
+            "rowKeys": [
+              "listPickerRenderOrder"
+            ],
+            "subgroups": []
+          },
           {
             "key": "desktop:Text",
             "items": [
@@ -19540,6 +19553,10 @@
                 "key": "sliderSpotlightMaxBrightness"
               },
               {
+                "type": "row",
+                "key": "sliderBackgroundDither"
+              },
+              {
                 "type": "group",
                 "section": {
                   "key": "desktop:Animation",
@@ -19739,10 +19756,6 @@
                   ],
                   "subgroups": []
                 }
-              },
-              {
-                "type": "row",
-                "key": "sliderBackgroundDither"
               }
             ],
             "rowKeys": [
@@ -19994,6 +20007,10 @@
             "items": [
               {
                 "type": "row",
+                "key": "checkboxCoverBoundingBox"
+              },
+              {
+                "type": "row",
                 "key": "sliderCoverScale"
               },
               {
@@ -20006,18 +20023,14 @@
               },
               {
                 "type": "row",
-                "key": "checkboxCoverBoundingBox"
-              },
-              {
-                "type": "row",
                 "key": "sliderCoverBrightness"
               }
             ],
             "rowKeys": [
+              "checkboxCoverBoundingBox",
               "sliderCoverScale",
               "sliderCoverOffsetX",
               "sliderCoverOffsetY",
-              "checkboxCoverBoundingBox",
               "sliderCoverBrightness"
             ],
             "subgroups": []
@@ -20380,19 +20393,6 @@
                 "subgroups": []
               }
             ]
-          },
-          {
-            "key": "desktop:Visibility / Render Order",
-            "items": [
-              {
-                "type": "row",
-                "key": "listPickerRenderOrder"
-              }
-            ],
-            "rowKeys": [
-              "listPickerRenderOrder"
-            ],
-            "subgroups": []
           }
         ]
       },
@@ -23977,6 +23977,15 @@
           {
             "type": "group",
             "section": {
+              "key": "mobile:Visibility / Render Order",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
               "key": "mobile:Text",
               "items": [
                 {
@@ -24001,12 +24010,46 @@
                     "key": "mobile:Song Title",
                     "items": [
                       {
-                        "type": "row",
-                        "key": "sliderMobileTxtSongTitleFontSize"
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (31)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTxtSongTitleFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTxtSongTitleOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobileTxtSongTitleFontSize",
+                            "sliderMobileTxtSongTitleOffsetY"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
-                        "type": "row",
-                        "key": "sliderMobileTxtSongTitleMaxWidth"
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (32)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTitleMaxLines"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTxtSongTitleMaxWidth"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobileTitleMaxLines",
+                            "sliderMobileTxtSongTitleMaxWidth"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
                         "type": "group",
@@ -24125,21 +24168,53 @@
                         }
                       },
                       {
-                        "type": "row",
-                        "key": "sliderMobileTitleMaxLines"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileTxtSongTitleOffsetY"
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:Brackets Smaller Text",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
                       }
                     ],
-                    "rowKeys": [
-                      "sliderMobileTxtSongTitleFontSize",
-                      "sliderMobileTxtSongTitleMaxWidth",
-                      "sliderMobileTitleMaxLines",
-                      "sliderMobileTxtSongTitleOffsetY"
-                    ],
+                    "rowKeys": [],
                     "subgroups": [
+                      {
+                        "key": "mobile:New Group (31)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtSongTitleFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtSongTitleOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtSongTitleFontSize",
+                          "sliderMobileTxtSongTitleOffsetY"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (32)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTitleMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtSongTitleMaxWidth"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTitleMaxLines",
+                          "sliderMobileTxtSongTitleMaxWidth"
+                        ],
+                        "subgroups": []
+                      },
                       {
                         "key": "mobile:Track Title Button Animation",
                         "items": [
@@ -24252,86 +24327,9 @@
                           "sliderMobileTitleLiftShadowOpacity"
                         ],
                         "subgroups": []
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "mobile:Artist",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderMobileTxtArtistFontSize"
                       },
                       {
-                        "type": "row",
-                        "key": "sliderMobileTxtArtistMaxWidth"
-                      },
-                      {
-                        "type": "row",
-                        "key": "textArtistSeparator"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileArtistMaxLines"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileTxtArtistOffsetY"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderMobileTxtArtistFontSize",
-                      "sliderMobileTxtArtistMaxWidth",
-                      "textArtistSeparator",
-                      "sliderMobileArtistMaxLines",
-                      "sliderMobileTxtArtistOffsetY"
-                    ],
-                    "subgroups": []
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "mobile:Album & Date",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderMobileTxtAlbumDateFontSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileTxtAlbumDateMaxWidth"
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "mobile:Outline",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileAlbumDateMaxLines"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderMobileTxtAlbumDateOffsetY"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderMobileTxtAlbumDateFontSize",
-                      "sliderMobileTxtAlbumDateMaxWidth",
-                      "sliderMobileAlbumDateMaxLines",
-                      "sliderMobileTxtAlbumDateOffsetY"
-                    ],
-                    "subgroups": [
-                      {
-                        "key": "mobile:Outline",
+                        "key": "mobile:Brackets Smaller Text",
                         "items": [],
                         "rowKeys": [],
                         "subgroups": []
@@ -24342,10 +24340,270 @@
                 {
                   "type": "group",
                   "section": {
-                    "key": "mobile:Brackets Smaller Text",
-                    "items": [],
+                    "key": "mobile:Artist",
+                    "items": [
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (33)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTxtArtistFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTxtArtistOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobileTxtArtistFontSize",
+                            "sliderMobileTxtArtistOffsetY"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (34)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTxtArtistMaxWidth"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileArtistMaxLines"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobileTxtArtistMaxWidth",
+                            "sliderMobileArtistMaxLines"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (36)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (35)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "textArtistSeparator"
+                            }
+                          ],
+                          "rowKeys": [
+                            "textArtistSeparator"
+                          ],
+                          "subgroups": []
+                        }
+                      }
+                    ],
                     "rowKeys": [],
-                    "subgroups": []
+                    "subgroups": [
+                      {
+                        "key": "mobile:New Group (33)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtArtistFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtArtistOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtArtistFontSize",
+                          "sliderMobileTxtArtistOffsetY"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (34)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtArtistMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileArtistMaxLines"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtArtistMaxWidth",
+                          "sliderMobileArtistMaxLines"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (36)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (35)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "textArtistSeparator"
+                          }
+                        ],
+                        "rowKeys": [
+                          "textArtistSeparator"
+                        ],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Album & Date",
+                    "items": [
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (37)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTxtAlbumDateFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTxtAlbumDateOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobileTxtAlbumDateFontSize",
+                            "sliderMobileTxtAlbumDateOffsetY"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (38)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderMobileAlbumDateMaxLines"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderMobileTxtAlbumDateMaxWidth"
+                            },
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "mobile:New Group (39)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderMobileAlbumDateMaxLines",
+                            "sliderMobileTxtAlbumDateMaxWidth"
+                          ],
+                          "subgroups": [
+                            {
+                              "key": "mobile:New Group (39)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:Outline",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [],
+                    "subgroups": [
+                      {
+                        "key": "mobile:New Group (37)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtAlbumDateFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtAlbumDateOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtAlbumDateFontSize",
+                          "sliderMobileTxtAlbumDateOffsetY"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "mobile:New Group (38)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileAlbumDateMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtAlbumDateMaxWidth"
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (39)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileAlbumDateMaxLines",
+                          "sliderMobileTxtAlbumDateMaxWidth"
+                        ],
+                        "subgroups": [
+                          {
+                            "key": "mobile:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        ]
+                      },
+                      {
+                        "key": "mobile:Outline",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
                   }
                 },
                 {
@@ -24394,12 +24652,46 @@
                   "key": "mobile:Song Title",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderMobileTxtSongTitleFontSize"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (31)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtSongTitleFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtSongTitleOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtSongTitleFontSize",
+                          "sliderMobileTxtSongTitleOffsetY"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderMobileTxtSongTitleMaxWidth"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (32)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTitleMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtSongTitleMaxWidth"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTitleMaxLines",
+                          "sliderMobileTxtSongTitleMaxWidth"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -24518,21 +24810,53 @@
                       }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderMobileTitleMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileTxtSongTitleOffsetY"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Brackets Smaller Text",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
-                  "rowKeys": [
-                    "sliderMobileTxtSongTitleFontSize",
-                    "sliderMobileTxtSongTitleMaxWidth",
-                    "sliderMobileTitleMaxLines",
-                    "sliderMobileTxtSongTitleOffsetY"
-                  ],
+                  "rowKeys": [],
                   "subgroups": [
+                    {
+                      "key": "mobile:New Group (31)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtSongTitleFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtSongTitleOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtSongTitleFontSize",
+                        "sliderMobileTxtSongTitleOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (32)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTitleMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtSongTitleMaxWidth"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTitleMaxLines",
+                        "sliderMobileTxtSongTitleMaxWidth"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "mobile:Track Title Button Animation",
                       "items": [
@@ -24645,6 +24969,12 @@
                         "sliderMobileTitleLiftShadowOpacity"
                       ],
                       "subgroups": []
+                    },
+                    {
+                      "key": "mobile:Brackets Smaller Text",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
                     }
                   ]
                 },
@@ -24652,45 +24982,192 @@
                   "key": "mobile:Artist",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderMobileTxtArtistFontSize"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (33)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtArtistFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtArtistOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtArtistFontSize",
+                          "sliderMobileTxtArtistOffsetY"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderMobileTxtArtistMaxWidth"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (34)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtArtistMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileArtistMaxLines"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtArtistMaxWidth",
+                          "sliderMobileArtistMaxLines"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "textArtistSeparator"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (36)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderMobileArtistMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileTxtArtistOffsetY"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (35)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "textArtistSeparator"
+                          }
+                        ],
+                        "rowKeys": [
+                          "textArtistSeparator"
+                        ],
+                        "subgroups": []
+                      }
                     }
                   ],
-                  "rowKeys": [
-                    "sliderMobileTxtArtistFontSize",
-                    "sliderMobileTxtArtistMaxWidth",
-                    "textArtistSeparator",
-                    "sliderMobileArtistMaxLines",
-                    "sliderMobileTxtArtistOffsetY"
-                  ],
-                  "subgroups": []
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "mobile:New Group (33)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtArtistFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtArtistOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtArtistFontSize",
+                        "sliderMobileTxtArtistOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (34)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtArtistMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileArtistMaxLines"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtArtistMaxWidth",
+                        "sliderMobileArtistMaxLines"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (36)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (35)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "textArtistSeparator"
+                        }
+                      ],
+                      "rowKeys": [
+                        "textArtistSeparator"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
                 },
                 {
                   "key": "mobile:Album & Date",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderMobileTxtAlbumDateFontSize"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (37)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtAlbumDateFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtAlbumDateOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtAlbumDateFontSize",
+                          "sliderMobileTxtAlbumDateOffsetY"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderMobileTxtAlbumDateMaxWidth"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (38)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileAlbumDateMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtAlbumDateMaxWidth"
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (39)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileAlbumDateMaxLines",
+                          "sliderMobileTxtAlbumDateMaxWidth"
+                        ],
+                        "subgroups": [
+                          {
+                            "key": "mobile:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        ]
+                      }
                     },
                     {
                       "type": "group",
@@ -24700,23 +25177,62 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileAlbumDateMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileTxtAlbumDateOffsetY"
                     }
                   ],
-                  "rowKeys": [
-                    "sliderMobileTxtAlbumDateFontSize",
-                    "sliderMobileTxtAlbumDateMaxWidth",
-                    "sliderMobileAlbumDateMaxLines",
-                    "sliderMobileTxtAlbumDateOffsetY"
-                  ],
+                  "rowKeys": [],
                   "subgroups": [
+                    {
+                      "key": "mobile:New Group (37)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtAlbumDateFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtAlbumDateOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtAlbumDateFontSize",
+                        "sliderMobileTxtAlbumDateOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (38)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileAlbumDateMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtAlbumDateMaxWidth"
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileAlbumDateMaxLines",
+                        "sliderMobileTxtAlbumDateMaxWidth"
+                      ],
+                      "subgroups": [
+                        {
+                          "key": "mobile:New Group (39)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    },
                     {
                       "key": "mobile:Outline",
                       "items": [],
@@ -24724,12 +25240,6 @@
                       "subgroups": []
                     }
                   ]
-                },
-                {
-                  "key": "mobile:Brackets Smaller Text",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
                 },
                 {
                   "key": "mobile:Test Text Mode",
@@ -28344,21 +28854,18 @@
                 }
               ]
             }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "mobile:Visibility / Render Order",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
           }
         ],
         "rowKeys": [
           "buttonOpenLayoutInspector"
         ],
         "subgroups": [
+          {
+            "key": "mobile:Visibility / Render Order",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
           {
             "key": "mobile:Text",
             "items": [
@@ -28384,12 +28891,46 @@
                   "key": "mobile:Song Title",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderMobileTxtSongTitleFontSize"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (31)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtSongTitleFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtSongTitleOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtSongTitleFontSize",
+                          "sliderMobileTxtSongTitleOffsetY"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderMobileTxtSongTitleMaxWidth"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (32)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTitleMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtSongTitleMaxWidth"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTitleMaxLines",
+                          "sliderMobileTxtSongTitleMaxWidth"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -28508,21 +29049,53 @@
                       }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderMobileTitleMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileTxtSongTitleOffsetY"
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Brackets Smaller Text",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
-                  "rowKeys": [
-                    "sliderMobileTxtSongTitleFontSize",
-                    "sliderMobileTxtSongTitleMaxWidth",
-                    "sliderMobileTitleMaxLines",
-                    "sliderMobileTxtSongTitleOffsetY"
-                  ],
+                  "rowKeys": [],
                   "subgroups": [
+                    {
+                      "key": "mobile:New Group (31)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtSongTitleFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtSongTitleOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtSongTitleFontSize",
+                        "sliderMobileTxtSongTitleOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (32)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTitleMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtSongTitleMaxWidth"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTitleMaxLines",
+                        "sliderMobileTxtSongTitleMaxWidth"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "mobile:Track Title Button Animation",
                       "items": [
@@ -28635,86 +29208,9 @@
                         "sliderMobileTitleLiftShadowOpacity"
                       ],
                       "subgroups": []
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "mobile:Artist",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderMobileTxtArtistFontSize"
                     },
                     {
-                      "type": "row",
-                      "key": "sliderMobileTxtArtistMaxWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "textArtistSeparator"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileArtistMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileTxtArtistOffsetY"
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderMobileTxtArtistFontSize",
-                    "sliderMobileTxtArtistMaxWidth",
-                    "textArtistSeparator",
-                    "sliderMobileArtistMaxLines",
-                    "sliderMobileTxtArtistOffsetY"
-                  ],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "mobile:Album & Date",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderMobileTxtAlbumDateFontSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileTxtAlbumDateMaxWidth"
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:Outline",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileAlbumDateMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderMobileTxtAlbumDateOffsetY"
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderMobileTxtAlbumDateFontSize",
-                    "sliderMobileTxtAlbumDateMaxWidth",
-                    "sliderMobileAlbumDateMaxLines",
-                    "sliderMobileTxtAlbumDateOffsetY"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "mobile:Outline",
+                      "key": "mobile:Brackets Smaller Text",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -28725,10 +29221,270 @@
               {
                 "type": "group",
                 "section": {
-                  "key": "mobile:Brackets Smaller Text",
-                  "items": [],
+                  "key": "mobile:Artist",
+                  "items": [
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (33)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtArtistFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtArtistOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtArtistFontSize",
+                          "sliderMobileTxtArtistOffsetY"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (34)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtArtistMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileArtistMaxLines"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtArtistMaxWidth",
+                          "sliderMobileArtistMaxLines"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (36)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (35)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "textArtistSeparator"
+                          }
+                        ],
+                        "rowKeys": [
+                          "textArtistSeparator"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
                   "rowKeys": [],
-                  "subgroups": []
+                  "subgroups": [
+                    {
+                      "key": "mobile:New Group (33)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtArtistFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtArtistOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtArtistFontSize",
+                        "sliderMobileTxtArtistOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (34)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtArtistMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileArtistMaxLines"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtArtistMaxWidth",
+                        "sliderMobileArtistMaxLines"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (36)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (35)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "textArtistSeparator"
+                        }
+                      ],
+                      "rowKeys": [
+                        "textArtistSeparator"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Album & Date",
+                  "items": [
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (37)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtAlbumDateFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtAlbumDateOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileTxtAlbumDateFontSize",
+                          "sliderMobileTxtAlbumDateOffsetY"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:New Group (38)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderMobileAlbumDateMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderMobileTxtAlbumDateMaxWidth"
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "mobile:New Group (39)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderMobileAlbumDateMaxLines",
+                          "sliderMobileTxtAlbumDateMaxWidth"
+                        ],
+                        "subgroups": [
+                          {
+                            "key": "mobile:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "mobile:Outline",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "mobile:New Group (37)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtAlbumDateFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtAlbumDateOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtAlbumDateFontSize",
+                        "sliderMobileTxtAlbumDateOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "mobile:New Group (38)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileAlbumDateMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtAlbumDateMaxWidth"
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileAlbumDateMaxLines",
+                        "sliderMobileTxtAlbumDateMaxWidth"
+                      ],
+                      "subgroups": [
+                        {
+                          "key": "mobile:New Group (39)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "mobile:Outline",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
                 }
               },
               {
@@ -28777,12 +29533,46 @@
                 "key": "mobile:Song Title",
                 "items": [
                   {
-                    "type": "row",
-                    "key": "sliderMobileTxtSongTitleFontSize"
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (31)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtSongTitleFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtSongTitleOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtSongTitleFontSize",
+                        "sliderMobileTxtSongTitleOffsetY"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderMobileTxtSongTitleMaxWidth"
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (32)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTitleMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtSongTitleMaxWidth"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTitleMaxLines",
+                        "sliderMobileTxtSongTitleMaxWidth"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
                     "type": "group",
@@ -28901,21 +29691,53 @@
                     }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderMobileTitleMaxLines"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderMobileTxtSongTitleOffsetY"
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:Brackets Smaller Text",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
                   }
                 ],
-                "rowKeys": [
-                  "sliderMobileTxtSongTitleFontSize",
-                  "sliderMobileTxtSongTitleMaxWidth",
-                  "sliderMobileTitleMaxLines",
-                  "sliderMobileTxtSongTitleOffsetY"
-                ],
+                "rowKeys": [],
                 "subgroups": [
+                  {
+                    "key": "mobile:New Group (31)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtSongTitleFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtSongTitleOffsetY"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileTxtSongTitleFontSize",
+                      "sliderMobileTxtSongTitleOffsetY"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "mobile:New Group (32)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTitleMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtSongTitleMaxWidth"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileTitleMaxLines",
+                      "sliderMobileTxtSongTitleMaxWidth"
+                    ],
+                    "subgroups": []
+                  },
                   {
                     "key": "mobile:Track Title Button Animation",
                     "items": [
@@ -29028,6 +29850,12 @@
                       "sliderMobileTitleLiftShadowOpacity"
                     ],
                     "subgroups": []
+                  },
+                  {
+                    "key": "mobile:Brackets Smaller Text",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
                   }
                 ]
               },
@@ -29035,45 +29863,192 @@
                 "key": "mobile:Artist",
                 "items": [
                   {
-                    "type": "row",
-                    "key": "sliderMobileTxtArtistFontSize"
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (33)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtArtistFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtArtistOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtArtistFontSize",
+                        "sliderMobileTxtArtistOffsetY"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderMobileTxtArtistMaxWidth"
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (34)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtArtistMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileArtistMaxLines"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtArtistMaxWidth",
+                        "sliderMobileArtistMaxLines"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "textArtistSeparator"
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (36)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderMobileArtistMaxLines"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderMobileTxtArtistOffsetY"
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (35)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "textArtistSeparator"
+                        }
+                      ],
+                      "rowKeys": [
+                        "textArtistSeparator"
+                      ],
+                      "subgroups": []
+                    }
                   }
                 ],
-                "rowKeys": [
-                  "sliderMobileTxtArtistFontSize",
-                  "sliderMobileTxtArtistMaxWidth",
-                  "textArtistSeparator",
-                  "sliderMobileArtistMaxLines",
-                  "sliderMobileTxtArtistOffsetY"
-                ],
-                "subgroups": []
+                "rowKeys": [],
+                "subgroups": [
+                  {
+                    "key": "mobile:New Group (33)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtArtistFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtArtistOffsetY"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileTxtArtistFontSize",
+                      "sliderMobileTxtArtistOffsetY"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "mobile:New Group (34)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtArtistMaxWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileArtistMaxLines"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileTxtArtistMaxWidth",
+                      "sliderMobileArtistMaxLines"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "mobile:New Group (36)",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "mobile:New Group (35)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "textArtistSeparator"
+                      }
+                    ],
+                    "rowKeys": [
+                      "textArtistSeparator"
+                    ],
+                    "subgroups": []
+                  }
+                ]
               },
               {
                 "key": "mobile:Album & Date",
                 "items": [
                   {
-                    "type": "row",
-                    "key": "sliderMobileTxtAlbumDateFontSize"
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (37)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtAlbumDateFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtAlbumDateOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileTxtAlbumDateFontSize",
+                        "sliderMobileTxtAlbumDateOffsetY"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderMobileTxtAlbumDateMaxWidth"
+                    "type": "group",
+                    "section": {
+                      "key": "mobile:New Group (38)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderMobileAlbumDateMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderMobileTxtAlbumDateMaxWidth"
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "mobile:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderMobileAlbumDateMaxLines",
+                        "sliderMobileTxtAlbumDateMaxWidth"
+                      ],
+                      "subgroups": [
+                        {
+                          "key": "mobile:New Group (39)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    }
                   },
                   {
                     "type": "group",
@@ -29083,23 +30058,62 @@
                       "rowKeys": [],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderMobileAlbumDateMaxLines"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderMobileTxtAlbumDateOffsetY"
                   }
                 ],
-                "rowKeys": [
-                  "sliderMobileTxtAlbumDateFontSize",
-                  "sliderMobileTxtAlbumDateMaxWidth",
-                  "sliderMobileAlbumDateMaxLines",
-                  "sliderMobileTxtAlbumDateOffsetY"
-                ],
+                "rowKeys": [],
                 "subgroups": [
+                  {
+                    "key": "mobile:New Group (37)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtAlbumDateFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtAlbumDateOffsetY"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileTxtAlbumDateFontSize",
+                      "sliderMobileTxtAlbumDateOffsetY"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "mobile:New Group (38)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderMobileAlbumDateMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderMobileTxtAlbumDateMaxWidth"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "mobile:New Group (39)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderMobileAlbumDateMaxLines",
+                      "sliderMobileTxtAlbumDateMaxWidth"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "mobile:New Group (39)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  },
                   {
                     "key": "mobile:Outline",
                     "items": [],
@@ -29107,12 +30121,6 @@
                     "subgroups": []
                   }
                 ]
-              },
-              {
-                "key": "mobile:Brackets Smaller Text",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
               },
               {
                 "key": "mobile:Test Text Mode",
@@ -32714,12 +33722,6 @@
                 "subgroups": []
               }
             ]
-          },
-          {
-            "key": "mobile:Visibility / Render Order",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
           }
         ]
       },
@@ -34091,6 +35093,15 @@
           {
             "type": "group",
             "section": {
+              "key": "landscape:Visibility / Render Order",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
+          },
+          {
+            "type": "group",
+            "section": {
               "key": "landscape:Text",
               "items": [
                 {
@@ -34115,12 +35126,46 @@
                     "key": "landscape:Song Title",
                     "items": [
                       {
-                        "type": "row",
-                        "key": "sliderLandscapeTxtSongTitleFontSize"
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (31)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTxtSongTitleFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTxtSongTitleOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeTxtSongTitleFontSize",
+                            "sliderLandscapeTxtSongTitleOffsetY"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
-                        "type": "row",
-                        "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (32)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTitleMaxLines"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeTitleMaxLines",
+                            "sliderLandscapeTxtSongTitleMaxWidth"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
                         "type": "group",
@@ -34239,21 +35284,53 @@
                         }
                       },
                       {
-                        "type": "row",
-                        "key": "sliderLandscapeTitleMaxLines"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeTxtSongTitleOffsetY"
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:Brackets Smaller Text",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
                       }
                     ],
-                    "rowKeys": [
-                      "sliderLandscapeTxtSongTitleFontSize",
-                      "sliderLandscapeTxtSongTitleMaxWidth",
-                      "sliderLandscapeTitleMaxLines",
-                      "sliderLandscapeTxtSongTitleOffsetY"
-                    ],
+                    "rowKeys": [],
                     "subgroups": [
+                      {
+                        "key": "landscape:New Group (31)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtSongTitleFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtSongTitleOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtSongTitleFontSize",
+                          "sliderLandscapeTxtSongTitleOffsetY"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (32)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTitleMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTitleMaxLines",
+                          "sliderLandscapeTxtSongTitleMaxWidth"
+                        ],
+                        "subgroups": []
+                      },
                       {
                         "key": "landscape:Track Title Button Animation",
                         "items": [
@@ -34366,86 +35443,9 @@
                           "sliderLandscapeTitleLiftShadowOpacity"
                         ],
                         "subgroups": []
-                      }
-                    ]
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "landscape:Artist",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeTxtArtistFontSize"
                       },
                       {
-                        "type": "row",
-                        "key": "sliderLandscapeTxtArtistMaxWidth"
-                      },
-                      {
-                        "type": "row",
-                        "key": "textArtistSeparator"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeArtistMaxLines"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeTxtArtistOffsetY"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderLandscapeTxtArtistFontSize",
-                      "sliderLandscapeTxtArtistMaxWidth",
-                      "textArtistSeparator",
-                      "sliderLandscapeArtistMaxLines",
-                      "sliderLandscapeTxtArtistOffsetY"
-                    ],
-                    "subgroups": []
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "landscape:Album & Date",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeTxtAlbumDateFontSize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeTxtAlbumDateMaxWidth"
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "landscape:Outline",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeAlbumDateMaxLines"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderLandscapeTxtAlbumDateOffsetY"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderLandscapeTxtAlbumDateFontSize",
-                      "sliderLandscapeTxtAlbumDateMaxWidth",
-                      "sliderLandscapeAlbumDateMaxLines",
-                      "sliderLandscapeTxtAlbumDateOffsetY"
-                    ],
-                    "subgroups": [
-                      {
-                        "key": "landscape:Outline",
+                        "key": "landscape:Brackets Smaller Text",
                         "items": [],
                         "rowKeys": [],
                         "subgroups": []
@@ -34456,10 +35456,270 @@
                 {
                   "type": "group",
                   "section": {
-                    "key": "landscape:Brackets Smaller Text",
-                    "items": [],
+                    "key": "landscape:Artist",
+                    "items": [
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (33)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTxtArtistFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTxtArtistOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeTxtArtistFontSize",
+                            "sliderLandscapeTxtArtistOffsetY"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (34)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTxtArtistMaxWidth"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeArtistMaxLines"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeTxtArtistMaxWidth",
+                            "sliderLandscapeArtistMaxLines"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (36)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (35)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "textArtistSeparator"
+                            }
+                          ],
+                          "rowKeys": [
+                            "textArtistSeparator"
+                          ],
+                          "subgroups": []
+                        }
+                      }
+                    ],
                     "rowKeys": [],
-                    "subgroups": []
+                    "subgroups": [
+                      {
+                        "key": "landscape:New Group (33)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtArtistFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtArtistOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtArtistFontSize",
+                          "sliderLandscapeTxtArtistOffsetY"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (34)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtArtistMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeArtistMaxLines"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtArtistMaxWidth",
+                          "sliderLandscapeArtistMaxLines"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (36)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (35)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "textArtistSeparator"
+                          }
+                        ],
+                        "rowKeys": [
+                          "textArtistSeparator"
+                        ],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Album & Date",
+                    "items": [
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (37)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTxtAlbumDateFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTxtAlbumDateOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeTxtAlbumDateFontSize",
+                            "sliderLandscapeTxtAlbumDateOffsetY"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (38)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeAlbumDateMaxLines"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                            },
+                            {
+                              "type": "group",
+                              "section": {
+                                "key": "landscape:New Group (39)",
+                                "items": [],
+                                "rowKeys": [],
+                                "subgroups": []
+                              }
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderLandscapeAlbumDateMaxLines",
+                            "sliderLandscapeTxtAlbumDateMaxWidth"
+                          ],
+                          "subgroups": [
+                            {
+                              "key": "landscape:New Group (39)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:Outline",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [],
+                    "subgroups": [
+                      {
+                        "key": "landscape:New Group (37)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtAlbumDateFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtAlbumDateOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtAlbumDateFontSize",
+                          "sliderLandscapeTxtAlbumDateOffsetY"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "landscape:New Group (38)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeAlbumDateMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (39)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeAlbumDateMaxLines",
+                          "sliderLandscapeTxtAlbumDateMaxWidth"
+                        ],
+                        "subgroups": [
+                          {
+                            "key": "landscape:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        ]
+                      },
+                      {
+                        "key": "landscape:Outline",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
                   }
                 },
                 {
@@ -34508,12 +35768,46 @@
                   "key": "landscape:Song Title",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtSongTitleFontSize"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (31)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtSongTitleFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtSongTitleOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtSongTitleFontSize",
+                          "sliderLandscapeTxtSongTitleOffsetY"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (32)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTitleMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTitleMaxLines",
+                          "sliderLandscapeTxtSongTitleMaxWidth"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -34632,21 +35926,53 @@
                       }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTitleMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtSongTitleOffsetY"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Brackets Smaller Text",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
-                  "rowKeys": [
-                    "sliderLandscapeTxtSongTitleFontSize",
-                    "sliderLandscapeTxtSongTitleMaxWidth",
-                    "sliderLandscapeTitleMaxLines",
-                    "sliderLandscapeTxtSongTitleOffsetY"
-                  ],
+                  "rowKeys": [],
                   "subgroups": [
+                    {
+                      "key": "landscape:New Group (31)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtSongTitleFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtSongTitleOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtSongTitleFontSize",
+                        "sliderLandscapeTxtSongTitleOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (32)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTitleMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTitleMaxLines",
+                        "sliderLandscapeTxtSongTitleMaxWidth"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "landscape:Track Title Button Animation",
                       "items": [
@@ -34759,6 +36085,12 @@
                         "sliderLandscapeTitleLiftShadowOpacity"
                       ],
                       "subgroups": []
+                    },
+                    {
+                      "key": "landscape:Brackets Smaller Text",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
                     }
                   ]
                 },
@@ -34766,45 +36098,192 @@
                   "key": "landscape:Artist",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtArtistFontSize"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (33)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtArtistFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtArtistOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtArtistFontSize",
+                          "sliderLandscapeTxtArtistOffsetY"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtArtistMaxWidth"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (34)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtArtistMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeArtistMaxLines"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtArtistMaxWidth",
+                          "sliderLandscapeArtistMaxLines"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "textArtistSeparator"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (36)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeArtistMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtArtistOffsetY"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (35)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "textArtistSeparator"
+                          }
+                        ],
+                        "rowKeys": [
+                          "textArtistSeparator"
+                        ],
+                        "subgroups": []
+                      }
                     }
                   ],
-                  "rowKeys": [
-                    "sliderLandscapeTxtArtistFontSize",
-                    "sliderLandscapeTxtArtistMaxWidth",
-                    "textArtistSeparator",
-                    "sliderLandscapeArtistMaxLines",
-                    "sliderLandscapeTxtArtistOffsetY"
-                  ],
-                  "subgroups": []
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "landscape:New Group (33)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtArtistFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtArtistOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtArtistFontSize",
+                        "sliderLandscapeTxtArtistOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (34)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtArtistMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeArtistMaxLines"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtArtistMaxWidth",
+                        "sliderLandscapeArtistMaxLines"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (36)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (35)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "textArtistSeparator"
+                        }
+                      ],
+                      "rowKeys": [
+                        "textArtistSeparator"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
                 },
                 {
                   "key": "landscape:Album & Date",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtAlbumDateFontSize"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (37)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtAlbumDateFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtAlbumDateOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtAlbumDateFontSize",
+                          "sliderLandscapeTxtAlbumDateOffsetY"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (38)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeAlbumDateMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (39)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeAlbumDateMaxLines",
+                          "sliderLandscapeTxtAlbumDateMaxWidth"
+                        ],
+                        "subgroups": [
+                          {
+                            "key": "landscape:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        ]
+                      }
                     },
                     {
                       "type": "group",
@@ -34814,23 +36293,62 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeAlbumDateMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtAlbumDateOffsetY"
                     }
                   ],
-                  "rowKeys": [
-                    "sliderLandscapeTxtAlbumDateFontSize",
-                    "sliderLandscapeTxtAlbumDateMaxWidth",
-                    "sliderLandscapeAlbumDateMaxLines",
-                    "sliderLandscapeTxtAlbumDateOffsetY"
-                  ],
+                  "rowKeys": [],
                   "subgroups": [
+                    {
+                      "key": "landscape:New Group (37)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtAlbumDateFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtAlbumDateOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtAlbumDateFontSize",
+                        "sliderLandscapeTxtAlbumDateOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (38)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeAlbumDateMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeAlbumDateMaxLines",
+                        "sliderLandscapeTxtAlbumDateMaxWidth"
+                      ],
+                      "subgroups": [
+                        {
+                          "key": "landscape:New Group (39)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    },
                     {
                       "key": "landscape:Outline",
                       "items": [],
@@ -34838,12 +36356,6 @@
                       "subgroups": []
                     }
                   ]
-                },
-                {
-                  "key": "landscape:Brackets Smaller Text",
-                  "items": [],
-                  "rowKeys": [],
-                  "subgroups": []
                 },
                 {
                   "key": "landscape:Test Text Mode",
@@ -38458,21 +39970,18 @@
                 }
               ]
             }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "landscape:Visibility / Render Order",
-              "items": [],
-              "rowKeys": [],
-              "subgroups": []
-            }
           }
         ],
         "rowKeys": [
           "buttonOpenLayoutInspector"
         ],
         "subgroups": [
+          {
+            "key": "landscape:Visibility / Render Order",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
+          },
           {
             "key": "landscape:Text",
             "items": [
@@ -38498,12 +40007,46 @@
                   "key": "landscape:Song Title",
                   "items": [
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtSongTitleFontSize"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (31)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtSongTitleFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtSongTitleOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtSongTitleFontSize",
+                          "sliderLandscapeTxtSongTitleOffsetY"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (32)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTitleMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTitleMaxLines",
+                          "sliderLandscapeTxtSongTitleMaxWidth"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -38622,21 +40165,53 @@
                       }
                     },
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTitleMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtSongTitleOffsetY"
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Brackets Smaller Text",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
                     }
                   ],
-                  "rowKeys": [
-                    "sliderLandscapeTxtSongTitleFontSize",
-                    "sliderLandscapeTxtSongTitleMaxWidth",
-                    "sliderLandscapeTitleMaxLines",
-                    "sliderLandscapeTxtSongTitleOffsetY"
-                  ],
+                  "rowKeys": [],
                   "subgroups": [
+                    {
+                      "key": "landscape:New Group (31)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtSongTitleFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtSongTitleOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtSongTitleFontSize",
+                        "sliderLandscapeTxtSongTitleOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (32)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTitleMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTitleMaxLines",
+                        "sliderLandscapeTxtSongTitleMaxWidth"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "landscape:Track Title Button Animation",
                       "items": [
@@ -38749,86 +40324,9 @@
                         "sliderLandscapeTitleLiftShadowOpacity"
                       ],
                       "subgroups": []
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "landscape:Artist",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtArtistFontSize"
                     },
                     {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtArtistMaxWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "textArtistSeparator"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeArtistMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtArtistOffsetY"
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderLandscapeTxtArtistFontSize",
-                    "sliderLandscapeTxtArtistMaxWidth",
-                    "textArtistSeparator",
-                    "sliderLandscapeArtistMaxLines",
-                    "sliderLandscapeTxtArtistOffsetY"
-                  ],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "landscape:Album & Date",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtAlbumDateFontSize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtAlbumDateMaxWidth"
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:Outline",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeAlbumDateMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderLandscapeTxtAlbumDateOffsetY"
-                    }
-                  ],
-                  "rowKeys": [
-                    "sliderLandscapeTxtAlbumDateFontSize",
-                    "sliderLandscapeTxtAlbumDateMaxWidth",
-                    "sliderLandscapeAlbumDateMaxLines",
-                    "sliderLandscapeTxtAlbumDateOffsetY"
-                  ],
-                  "subgroups": [
-                    {
-                      "key": "landscape:Outline",
+                      "key": "landscape:Brackets Smaller Text",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -38839,10 +40337,270 @@
               {
                 "type": "group",
                 "section": {
-                  "key": "landscape:Brackets Smaller Text",
-                  "items": [],
+                  "key": "landscape:Artist",
+                  "items": [
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (33)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtArtistFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtArtistOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtArtistFontSize",
+                          "sliderLandscapeTxtArtistOffsetY"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (34)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtArtistMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeArtistMaxLines"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtArtistMaxWidth",
+                          "sliderLandscapeArtistMaxLines"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (36)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (35)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "textArtistSeparator"
+                          }
+                        ],
+                        "rowKeys": [
+                          "textArtistSeparator"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
                   "rowKeys": [],
-                  "subgroups": []
+                  "subgroups": [
+                    {
+                      "key": "landscape:New Group (33)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtArtistFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtArtistOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtArtistFontSize",
+                        "sliderLandscapeTxtArtistOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (34)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtArtistMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeArtistMaxLines"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtArtistMaxWidth",
+                        "sliderLandscapeArtistMaxLines"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (36)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (35)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "textArtistSeparator"
+                        }
+                      ],
+                      "rowKeys": [
+                        "textArtistSeparator"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Album & Date",
+                  "items": [
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (37)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtAlbumDateFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtAlbumDateOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeTxtAlbumDateFontSize",
+                          "sliderLandscapeTxtAlbumDateOffsetY"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:New Group (38)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeAlbumDateMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                          },
+                          {
+                            "type": "group",
+                            "section": {
+                              "key": "landscape:New Group (39)",
+                              "items": [],
+                              "rowKeys": [],
+                              "subgroups": []
+                            }
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderLandscapeAlbumDateMaxLines",
+                          "sliderLandscapeTxtAlbumDateMaxWidth"
+                        ],
+                        "subgroups": [
+                          {
+                            "key": "landscape:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "landscape:Outline",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [],
+                  "subgroups": [
+                    {
+                      "key": "landscape:New Group (37)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtAlbumDateFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtAlbumDateOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtAlbumDateFontSize",
+                        "sliderLandscapeTxtAlbumDateOffsetY"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "landscape:New Group (38)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeAlbumDateMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeAlbumDateMaxLines",
+                        "sliderLandscapeTxtAlbumDateMaxWidth"
+                      ],
+                      "subgroups": [
+                        {
+                          "key": "landscape:New Group (39)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "landscape:Outline",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
+                  ]
                 }
               },
               {
@@ -38891,12 +40649,46 @@
                 "key": "landscape:Song Title",
                 "items": [
                   {
-                    "type": "row",
-                    "key": "sliderLandscapeTxtSongTitleFontSize"
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (31)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtSongTitleFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtSongTitleOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtSongTitleFontSize",
+                        "sliderLandscapeTxtSongTitleOffsetY"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (32)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTitleMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTitleMaxLines",
+                        "sliderLandscapeTxtSongTitleMaxWidth"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
                     "type": "group",
@@ -39015,21 +40807,53 @@
                     }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderLandscapeTitleMaxLines"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderLandscapeTxtSongTitleOffsetY"
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:Brackets Smaller Text",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
                   }
                 ],
-                "rowKeys": [
-                  "sliderLandscapeTxtSongTitleFontSize",
-                  "sliderLandscapeTxtSongTitleMaxWidth",
-                  "sliderLandscapeTitleMaxLines",
-                  "sliderLandscapeTxtSongTitleOffsetY"
-                ],
+                "rowKeys": [],
                 "subgroups": [
+                  {
+                    "key": "landscape:New Group (31)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtSongTitleFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtSongTitleOffsetY"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeTxtSongTitleFontSize",
+                      "sliderLandscapeTxtSongTitleOffsetY"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "landscape:New Group (32)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTitleMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtSongTitleMaxWidth"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeTitleMaxLines",
+                      "sliderLandscapeTxtSongTitleMaxWidth"
+                    ],
+                    "subgroups": []
+                  },
                   {
                     "key": "landscape:Track Title Button Animation",
                     "items": [
@@ -39142,6 +40966,12 @@
                       "sliderLandscapeTitleLiftShadowOpacity"
                     ],
                     "subgroups": []
+                  },
+                  {
+                    "key": "landscape:Brackets Smaller Text",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
                   }
                 ]
               },
@@ -39149,45 +40979,192 @@
                 "key": "landscape:Artist",
                 "items": [
                   {
-                    "type": "row",
-                    "key": "sliderLandscapeTxtArtistFontSize"
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (33)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtArtistFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtArtistOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtArtistFontSize",
+                        "sliderLandscapeTxtArtistOffsetY"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderLandscapeTxtArtistMaxWidth"
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (34)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtArtistMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeArtistMaxLines"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtArtistMaxWidth",
+                        "sliderLandscapeArtistMaxLines"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "textArtistSeparator"
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (36)",
+                      "items": [],
+                      "rowKeys": [],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderLandscapeArtistMaxLines"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderLandscapeTxtArtistOffsetY"
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (35)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "textArtistSeparator"
+                        }
+                      ],
+                      "rowKeys": [
+                        "textArtistSeparator"
+                      ],
+                      "subgroups": []
+                    }
                   }
                 ],
-                "rowKeys": [
-                  "sliderLandscapeTxtArtistFontSize",
-                  "sliderLandscapeTxtArtistMaxWidth",
-                  "textArtistSeparator",
-                  "sliderLandscapeArtistMaxLines",
-                  "sliderLandscapeTxtArtistOffsetY"
-                ],
-                "subgroups": []
+                "rowKeys": [],
+                "subgroups": [
+                  {
+                    "key": "landscape:New Group (33)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtArtistFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtArtistOffsetY"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeTxtArtistFontSize",
+                      "sliderLandscapeTxtArtistOffsetY"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "landscape:New Group (34)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtArtistMaxWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeArtistMaxLines"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeTxtArtistMaxWidth",
+                      "sliderLandscapeArtistMaxLines"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "landscape:New Group (36)",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "landscape:New Group (35)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "textArtistSeparator"
+                      }
+                    ],
+                    "rowKeys": [
+                      "textArtistSeparator"
+                    ],
+                    "subgroups": []
+                  }
+                ]
               },
               {
                 "key": "landscape:Album & Date",
                 "items": [
                   {
-                    "type": "row",
-                    "key": "sliderLandscapeTxtAlbumDateFontSize"
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (37)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtAlbumDateFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtAlbumDateOffsetY"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeTxtAlbumDateFontSize",
+                        "sliderLandscapeTxtAlbumDateOffsetY"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                    "type": "group",
+                    "section": {
+                      "key": "landscape:New Group (38)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeAlbumDateMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                        },
+                        {
+                          "type": "group",
+                          "section": {
+                            "key": "landscape:New Group (39)",
+                            "items": [],
+                            "rowKeys": [],
+                            "subgroups": []
+                          }
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderLandscapeAlbumDateMaxLines",
+                        "sliderLandscapeTxtAlbumDateMaxWidth"
+                      ],
+                      "subgroups": [
+                        {
+                          "key": "landscape:New Group (39)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      ]
+                    }
                   },
                   {
                     "type": "group",
@@ -39197,23 +41174,62 @@
                       "rowKeys": [],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderLandscapeAlbumDateMaxLines"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderLandscapeTxtAlbumDateOffsetY"
                   }
                 ],
-                "rowKeys": [
-                  "sliderLandscapeTxtAlbumDateFontSize",
-                  "sliderLandscapeTxtAlbumDateMaxWidth",
-                  "sliderLandscapeAlbumDateMaxLines",
-                  "sliderLandscapeTxtAlbumDateOffsetY"
-                ],
+                "rowKeys": [],
                 "subgroups": [
+                  {
+                    "key": "landscape:New Group (37)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtAlbumDateFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtAlbumDateOffsetY"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeTxtAlbumDateFontSize",
+                      "sliderLandscapeTxtAlbumDateOffsetY"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "landscape:New Group (38)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeAlbumDateMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderLandscapeTxtAlbumDateMaxWidth"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "landscape:New Group (39)",
+                          "items": [],
+                          "rowKeys": [],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderLandscapeAlbumDateMaxLines",
+                      "sliderLandscapeTxtAlbumDateMaxWidth"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "landscape:New Group (39)",
+                        "items": [],
+                        "rowKeys": [],
+                        "subgroups": []
+                      }
+                    ]
+                  },
                   {
                     "key": "landscape:Outline",
                     "items": [],
@@ -39221,12 +41237,6 @@
                     "subgroups": []
                   }
                 ]
-              },
-              {
-                "key": "landscape:Brackets Smaller Text",
-                "items": [],
-                "rowKeys": [],
-                "subgroups": []
               },
               {
                 "key": "landscape:Test Text Mode",
@@ -42828,12 +44838,6 @@
                 "subgroups": []
               }
             ]
-          },
-          {
-            "key": "landscape:Visibility / Render Order",
-            "items": [],
-            "rowKeys": [],
-            "subgroups": []
           }
         ]
       },
@@ -43621,7 +45625,8 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": false,
+    "desktop:Visibility / Render Order": false,
+    "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:New Group (31)": true,
@@ -43689,7 +45694,6 @@
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
     "desktop:Filter Panel Shadow": true,
-    "desktop:Visibility / Render Order": false,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
@@ -43734,14 +45738,24 @@
     "mobile:Debug": true,
     "mobile:Snapshot": false,
     "mobile:UI Layout": false,
+    "mobile:Visibility / Render Order": false,
     "mobile:Text": false,
     "mobile:Font": true,
     "mobile:Song Title": true,
+    "mobile:New Group (31)": false,
+    "mobile:New Group (32)": false,
     "mobile:Track Title Button Animation": true,
-    "mobile:Artist": true,
-    "mobile:Album & Date": false,
-    "mobile:Outline": false,
     "mobile:Brackets Smaller Text": false,
+    "mobile:Artist": true,
+    "mobile:New Group (33)": false,
+    "mobile:New Group (34)": false,
+    "mobile:New Group (36)": false,
+    "mobile:New Group (35)": false,
+    "mobile:Album & Date": false,
+    "mobile:New Group (37)": false,
+    "mobile:New Group (38)": false,
+    "mobile:New Group (39)": false,
+    "mobile:Outline": false,
     "mobile:Test Text Mode": true,
     "mobile:New Group (7)": true,
     "mobile:Volume Button": true,
@@ -43793,7 +45807,6 @@
     "mobile:Previous / Next Shadow": false,
     "mobile:Title Lift Shadow": false,
     "mobile:Filter Panel Shadow": false,
-    "mobile:Visibility / Render Order": false,
     "mobile:Scrub Audio": true,
     "mobile:New Group (2)": false,
     "mobile:Spotify Handoff": true,
@@ -43838,14 +45851,24 @@
     "landscape:Debug": true,
     "landscape:Snapshot": false,
     "landscape:UI Layout": false,
+    "landscape:Visibility / Render Order": false,
     "landscape:Text": false,
     "landscape:Font": false,
     "landscape:Song Title": false,
+    "landscape:New Group (31)": false,
+    "landscape:New Group (32)": false,
     "landscape:Track Title Button Animation": false,
-    "landscape:Artist": false,
-    "landscape:Album & Date": false,
-    "landscape:Outline": false,
     "landscape:Brackets Smaller Text": false,
+    "landscape:Artist": false,
+    "landscape:New Group (33)": false,
+    "landscape:New Group (34)": false,
+    "landscape:New Group (36)": false,
+    "landscape:New Group (35)": false,
+    "landscape:Album & Date": false,
+    "landscape:New Group (37)": false,
+    "landscape:New Group (38)": false,
+    "landscape:New Group (39)": false,
+    "landscape:Outline": false,
     "landscape:Test Text Mode": false,
     "landscape:New Group (7)": false,
     "landscape:Volume Button": false,
@@ -43897,7 +45920,6 @@
     "landscape:Previous / Next Shadow": false,
     "landscape:Title Lift Shadow": false,
     "landscape:Filter Panel Shadow": false,
-    "landscape:Visibility / Render Order": false,
     "landscape:Scrub Audio": false,
     "landscape:New Group (2)": false,
     "landscape:Spotify Handoff": false,
@@ -44791,7 +46813,25 @@
     "desktop:New Group (36)": "OVERFLOW SCROLL",
     "desktop:New Group (39)": "OVERFLOW SCROLL",
     "desktop:New Group (38)": "Overflow",
-    "desktop:New Group (37)": "TYPE"
+    "desktop:New Group (37)": "TYPE",
+    "mobile:New Group (31)": "TYPE",
+    "mobile:New Group (32)": "Overflow",
+    "mobile:New Group (33)": "TYPE",
+    "mobile:New Group (34)": "OVERFLOW",
+    "mobile:New Group (36)": "OVERFLOW SCROLL",
+    "mobile:New Group (35)": "SEPARATOR",
+    "mobile:New Group (37)": "TYPE",
+    "mobile:New Group (39)": "OVERFLOW SCROLL",
+    "mobile:New Group (38)": "Overflow",
+    "landscape:New Group (31)": "TYPE",
+    "landscape:New Group (32)": "Overflow",
+    "landscape:New Group (33)": "TYPE",
+    "landscape:New Group (34)": "OVERFLOW",
+    "landscape:New Group (36)": "OVERFLOW SCROLL",
+    "landscape:New Group (35)": "SEPARATOR",
+    "landscape:New Group (37)": "TYPE",
+    "landscape:New Group (39)": "OVERFLOW SCROLL",
+    "landscape:New Group (38)": "Overflow"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
