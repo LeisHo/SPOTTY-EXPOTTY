@@ -52503,10 +52503,7 @@
         "contexts": {
           "mobilePortrait": {
             "enabled": true,
-            "overrides": {
-              "widthPreferred": "34vmin",
-              "offsetY": "192px"
-            }
+            "overrides": {}
           },
           "mobileLandscape": {
             "enabled": true,
