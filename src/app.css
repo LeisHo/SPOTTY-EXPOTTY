@@ -254,3 +254,27 @@
 .spx-sdk-status { position: fixed; left: 12px; bottom: 12px; z-index: 2147481000; max-width: 320px; padding: 8px 10px; border-radius: 8px; background: #000c; color: #fff;
     font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace; white-space: pre; overflow: hidden; text-overflow: ellipsis; pointer-events: none; }
 .spx-sdk-status[hidden] { display: none; }
+
+/* Play On Device (under the Filter button): the Spotify Connect device list (devicePanel.js) */
+.spx-device { z-index: 4; position: absolute; right: var(--spx-device-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-sd-offset, 0px) + var(--spx-flt-offset, 0px)); width: calc(var(--spx-device-icon, 20px) + 20px); height: calc(var(--spx-device-icon, 20px) + 20px);
+    border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-device-color, #f2f2f2); --bs-op: var(--spx-device-off-op, 0.45); cursor: pointer;
+    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-device-x, 0px) var(--spx-device-y, 0px); }
+.spx-device svg { width: var(--spx-device-icon, 20px); height: var(--spx-device-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spx-device[aria-pressed="true"] { --bs-op: var(--spx-device-on-op, 1); color: var(--spx-device-on-color, #1db954); }
+.spx-device[hidden] { display: none; }
+.spx-app.no-shadow-vol .spx-device { filter: none; }
+.spx-device-panel { position: fixed; z-index: 2147482000; width: var(--spx-dev-width, 240px); box-sizing: border-box; padding: 10px 12px 12px; border-radius: 10px; color: #f2f2f2; font-size: var(--spx-dev-font, 13px);
+    background: var(--spx-dev-bg, rgba(20,22,26,0.92)); box-shadow: 0 6px 24px #000a; backdrop-filter: blur(var(--spx-dev-blur, 6px)); -webkit-backdrop-filter: blur(var(--spx-dev-blur, 6px)); --dev-accent: var(--spx-dev-accent, #1db954); }
+.spx-device-panel[hidden] { display: none; }
+.spx-dev-head { display: flex; align-items: center; justify-content: space-between; font-weight: 700; margin-bottom: 6px; }
+.spx-dev-refresh { background: none; border: 0; color: inherit; font-size: 1.2em; cursor: pointer; opacity: .7; padding: 0 2px; }
+.spx-dev-refresh:hover { opacity: 1; }
+.spx-dev-list { display: flex; flex-direction: column; gap: 2px; max-height: 50dvh; overflow-y: auto; }
+.spx-dev-row { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; width: 100%; text-align: left; background: none; border: 0; border-radius: 6px; padding: 6px 8px 6px 20px; color: inherit; font: inherit; cursor: pointer; position: relative; }
+.spx-dev-row:hover { background: #ffffff18; }
+.spx-dev-row.on { color: var(--dev-accent); }
+.spx-dev-row.on::before { content: ''; position: absolute; left: 8px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: var(--dev-accent); }
+.spx-dev-name { font-weight: 600; }
+.spx-dev-meta { font-size: .85em; opacity: .6; }
+.spx-dev-msg { margin-top: 6px; font-size: .85em; opacity: .7; }
+.spx-dev-login { margin-top: 4px; width: 100%; padding: 6px; border: 0; border-radius: 6px; background: var(--dev-accent); color: #000; font: inherit; font-weight: 700; cursor: pointer; }

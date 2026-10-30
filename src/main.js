@@ -17,7 +17,8 @@ import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIc
 import { initDebugTools } from './app/debugTools.js';
 import { initAudioMods } from './app/audioMods.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo, deviceApi } from './app/handoff.js';
+import { initDevicePlayer } from './app/devicePanel.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
 import { applyCustomIcons } from './app/iconImport.js';
@@ -87,6 +88,7 @@ async function boot() {
             <button type="button" class="spx-shuffle bs-host" id="spxShuffle" aria-label="Shuffle" aria-pressed="false" title="Shuffle off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
             <button type="button" class="spx-songdata bs-host" id="spxSongData" aria-label="Song data" aria-pressed="false" title="Song data off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></button>
             <button type="button" class="spx-filter bs-host" id="spxFilter" aria-label="Filter songs" aria-pressed="false" aria-expanded="false" title="Filter off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg></button>
+            <button type="button" class="spx-device bs-host" id="spxDevice" aria-label="Play on a device" aria-pressed="false" aria-expanded="false" title="Play on a device"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="13" height="10" rx="1.5"/><path d="M7 18h5M9.5 14v4"/><rect x="18" y="8" width="4" height="9" rx="1"/></svg></button>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart"><button type="button" class="spx-start-play" id="spxStartBtn" aria-label="Start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button></div>
             <div class="spx-inspector" id="spxInspectorPanel" hidden>
@@ -323,9 +325,10 @@ async function boot() {
     initTitleAnim(el('spxStartBtn'), 'StartPlay');
     // Volume (top right): scales the scrub clips. Spotify's embedded player has no volume method, so at exactly
     // 0 % the song player is simply stopped and not started (a full mute); above 0 it plays at its own level.
+    let dp = null; // Play On Device (below): while a device plays, the slider is that device's volume and the scrub clips keep this browser's level
     const volume = initVolume({
         root: el('spxVolume'),
-        onChange: v => { setMasterVolume(v); setRealVolume(v); }, // muting does not pause the real song (the SDK is silenced; the iframe embed cannot be)
+        onChange: v => { if (dp && dp.active()) { if (!dp.quiet) setRealVolume(v); } else { setMasterVolume(v); setRealVolume(v); } }, // muting does not pause the real song (the SDK is silenced; the iframe embed cannot be)
     });
 
     // Evaluate a dev-panel curve ({points, method}) at x in 0..1 -> y in 0..1, with the dev panel's own
@@ -796,6 +799,7 @@ async function boot() {
             el('spxFilter').hidden = !setting('checkboxFilterButtonEnabled');
             c('--spx-filter-icon', setting('sliderFilterIconSize') + 'px'); c('--spx-filter-x', setting('sliderFilterIconOffsetX') + 'px'); c('--spx-filter-y', setting('sliderFilterIconOffsetY') + 'px');
             c('--spx-filter-edge', setting('sliderFilterEdgeOffset') + 'px');
+            c('--spx-flt-offset', setting('checkboxFilterButtonEnabled') ? (setting('sliderFilterIconSize') + 20) + 'px' : '0px'); // the Device button sits under the Filter button
             c('--spx-filter-off-op', String(setting('sliderFilterOffOpacity') / 100)); c('--spx-filter-on-op', String(setting('sliderFilterOnOpacity') / 100));
             c('--spx-filter-color', setting('colorFilterIcon')); c('--spx-filter-on-color', setting('colorFilterOn'));
             c('--spx-flt-cover-gray', String(setting('sliderFilterCoverGrayscale') / 100)); c('--spx-flt-cover-bright', String(setting('sliderFilterCoverBrightness') / 100)); c('--spx-flt-cover-contrast', String(setting('sliderFilterCoverContrast') / 100)); c('--spx-flt-text-bright', String(setting('sliderFilterTextBrightness') / 100)); c('--spx-flt-cover-ms', setting('sliderFilterCoverTransitionMs') + 'ms');
@@ -811,6 +815,15 @@ async function boot() {
                 if (btnOn && setting('checkboxFilterPanelKeepVisible') && !flt.open) { flt.setOpen(true); syncFilterUi(); } // Keep The Filter Panel Visible
                 if (flt.open) placeFilterPanel();
             }
+        }
+        {   // Play On Device button (under Filter): its own look
+            const ap = el('spxApp').style, dOn = !!setting('checkboxDeviceButtonEnabled');
+            el('spxDevice').hidden = !dOn;
+            ap.setProperty('--spx-device-icon', setting('sliderDeviceIconSize') + 'px'); ap.setProperty('--spx-device-x', setting('sliderDeviceIconOffsetX') + 'px'); ap.setProperty('--spx-device-y', setting('sliderDeviceIconOffsetY') + 'px');
+            ap.setProperty('--spx-device-edge', setting('sliderDeviceEdgeOffset') + 'px');
+            ap.setProperty('--spx-device-off-op', String(setting('sliderDeviceOffOpacity') / 100)); ap.setProperty('--spx-device-on-op', String(setting('sliderDeviceOnOpacity') / 100));
+            ap.setProperty('--spx-device-color', setting('colorDeviceIcon')); ap.setProperty('--spx-device-on-color', setting('colorDeviceOn'));
+            if (dp) dp.applySettings();
         }
         placeNav(); // the edge offset is a setting
         el('spxApp').style.setProperty('--spx-shuffle-icon', setting('sliderShuffleIconSize') + 'px');
@@ -1061,7 +1074,7 @@ async function boot() {
     // ---- input ---------------------------------------------------------------------------
     // Desktop: wheel = scrub (a notch moves the playhead N px along the current scale), click on the
     // timeline = jump, click-drag = zoom around the playhead. Touch: drag = scrub, pinch = zoom, tap = jump.
-    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxFilterPanel, #spxCover, #spxVolume, #spxSongBar, a, button, input, select, textarea');
+    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxFilterPanel, #spxDevicePanel, #spxCover, #spxVolume, #spxSongBar, a, button, input, select, textarea');
     // The title/artist/album lines are selectable text: a drag that starts on them selects it instead of zooming.
     const inText = t => t.closest && t.closest('.spx-title, .spx-artist, .spx-meta');
     window.addEventListener('wheel', e => {
@@ -1098,7 +1111,7 @@ async function boot() {
     window.addEventListener('pointerdown', e => {
         redirectBtn = null;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
-        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxFilterPanel, #spxVolume, #spxSongBar')) return;
+        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxFilterPanel, #spxDevicePanel, #spxVolume, #spxSongBar')) return;
         redirectBtn = buttonUnder(e.clientX, e.clientY) || null;
     }, true);
     window.addEventListener('click', e => {
@@ -1260,6 +1273,10 @@ async function boot() {
         }
         stepImmediate = false;
     };
+    // ---- Play On Device button (under Filter): Spotify Connect ----
+    dp = initDevicePlayer({ button: el('spxDevice'), api: deviceApi, volume, setClipVolume: setMasterVolume,
+        player: { isPlaying, playingId, getProgress, playTrack, pauseEmbed, setRealVolume } });
+    dp.applySettings();
     // ---- Filter button (under Shuffle) + panel ----
     const filterBtn = el('spxFilter');
     flt = createFilter(songs, { host: document.body, onChange: o => { if (o && o.layout) placeFilterPanel(); else onFilterChanged(); } });

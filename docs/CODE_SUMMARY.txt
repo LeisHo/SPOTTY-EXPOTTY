@@ -11,7 +11,7 @@ FILE MAP
 See ../CLAUDE.md "File map" for the per-file list (kept there so it isn't
 duplicated in two places). Summary by folder:
 
-- `src/app/`, `src/main.js`, `src/app.css` -- the project's own app: scrubbing input, clip pool, Spotify handoff, timeline canvas.
+- `src/app/`, `src/main.js`, `src/app.css` -- the project's own app: scrubbing input, clip pool, Spotify handoff, Play On Device (devicePanel.js + the remote mode in sdkPlayer.js), timeline canvas.
 - `src/devpanel/`, `src/style.css`, `lib/ui-engine/` -- template/engine code, vendored; project settings are added via `renderSpottyDevControls()`.
 - `api/` + `scripts/active/serve.py` -- the preview-link proxy (Vercel / local) and the scaffold's optional settings-save endpoint.
 - `scripts/active/resolve_previews.py`, `build_timeline.py`, `build_cover_colors.py`, `merge_cover_colors.py` -- one-off data pipeline (Deezer ids, album cover colours -> `data/processed/timeline.json`).

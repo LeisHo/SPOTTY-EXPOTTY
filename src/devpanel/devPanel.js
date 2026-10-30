@@ -8612,6 +8612,44 @@
         renderControlArray(SHBA_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_SHUFFLE_ANIM', SHBA_CONTROLS);
         makeDevGroupToggleable(tab, SHBA, 'checkboxShuffleAnimEnabled');
+        // Play On Device (under Filter): the Spotify Connect button (src/app/devicePanel.js) and its list of the devices on the Spotify account.
+        const PD = 'Play On Device';
+        uiLayoutContent.appendChild(createDevGroupElement(PD, tab));
+        const PD_CONTROLS = [
+            { tab, group: PD, id: 'checkboxDeviceButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            // the button
+            { tab, group: PD, id: 'sliderDeviceIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
+            { tab, group: PD, id: 'sliderDeviceIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: PD, id: 'sliderDeviceIconOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: PD, id: 'sliderDeviceEdgeOffset', type: 'slider', label: 'Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
+            { tab, group: PD, id: 'sliderDeviceOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
+            { tab, group: PD, id: 'sliderDeviceOnOpacity', type: 'slider', label: 'On Icon Opacity (%) (Playing On A Device):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: PD, id: 'colorDeviceIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },
+            { tab, group: PD, id: 'colorDeviceOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
+            // what switching does
+            { tab, group: PD, id: 'checkboxDeviceMatchVolume', type: 'checkbox', label: 'Volume Slider Takes The Device\'s Volume When Picked (Off = The Slider\'s Level Is Sent To The Device)', value: true },
+            { tab, group: PD, id: 'checkboxDeviceKeepPlaying', type: 'checkbox', label: 'Keep The Song Playing When Switching (From Where It Was)', value: true },
+            { tab, group: PD, id: 'checkboxDeviceMuteClips', type: 'checkbox', label: 'Mute The Scrub Clips In This Browser While A Device Plays', value: false },
+            { tab, group: PD, id: 'checkboxDeviceRemember', type: 'checkbox', label: 'Pick The Last Device Again On Reload (If It Is Still There)', value: false },
+            { tab, group: PD, id: 'sliderDevicePollSeconds', type: 'slider', label: 'Device State Check Interval (S):', min: 0.5, max: 10, step: 0.1, value: 1.5 },
+            // the list
+            { tab, group: PD, id: 'checkboxDeviceShowThisBrowser', type: 'checkbox', label: 'List: Show This Browser', value: true },
+            { tab, group: PD, id: 'checkboxDeviceShowVolume', type: 'checkbox', label: 'List: Show Each Device\'s Volume', value: true },
+            { tab, group: PD, id: 'sliderDeviceListRefresh', type: 'slider', label: 'List: Refresh Every (S):', min: 1, max: 30, step: 1, value: 4 },
+            { tab, group: PD, id: 'checkboxDevicePanelCloseOnOutside', type: 'checkbox', label: 'List: Close When Clicking Elsewhere', value: true },
+            { tab, group: PD, id: 'checkboxDeviceCloseOnPick', type: 'checkbox', label: 'List: Close After Picking A Device', value: false },
+            { tab, group: PD, id: 'sliderDevicePanelWidth', type: 'slider', label: 'List: Width (Px):', min: 160, max: 600, step: 1, value: 240 },
+            { tab, group: PD, id: 'sliderDevicePanelFontSize', type: 'slider', label: 'List: Font Size (Px):', min: 8, max: 32, step: 1, value: 13 },
+            { tab, group: PD, id: 'sliderDevicePanelOffsetX', type: 'slider', label: 'List: X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
+            { tab, group: PD, id: 'sliderDevicePanelOffsetY', type: 'slider', label: 'List: Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },
+            { tab, group: PD, id: 'colorDevicePanelBg', type: 'color', label: 'List: Background Color:', value: '#14161a' },
+            { tab, group: PD, id: 'sliderDevicePanelBgOpacity', type: 'slider', label: 'List: Background Opacity (%):', min: 0, max: 100, step: 1, value: 92 },
+            { tab, group: PD, id: 'sliderDevicePanelBlur', type: 'slider', label: 'List: Background Blur (Px, Of The UI Behind It):', min: 0, max: 60, step: 1, value: 6 },
+            { tab, group: PD, id: 'colorDevicePanelAccent', type: 'color', label: 'List: Playing Device And Button Color:', value: '#1db954' },
+        ];
+        renderControlArray(PD_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_DEVICE_CONTROLS', PD_CONTROLS);
+        makeDevGroupToggleable(tab, PD, 'checkboxDeviceButtonEnabled');
         // Filter Button (under Shuffle): the button, the grayed-out look of filtered songs, what filtering does to playback, and the filter panel.
                 const FLB = 'Filter Button';
         uiLayoutContent.appendChild(createDevGroupElement(FLB, tab));
@@ -9408,7 +9446,7 @@
         // (the third entry); the rest are shown / hidden by renderOrder.js. src/app/renderOrder.js carries the same keys, in the same default order.
         const RO_ITEMS = [
             ['volume', 'Volume Button'], ['shuffle', 'Shuffle Button', 'checkboxShuffleButtonEnabled'], ['songdatabtn', 'Song Data Button', 'checkboxSongDataEnabled'],
-            ['filter', 'Filter Button', 'checkboxFilterButtonEnabled'], ['nav', 'Next And Last Song Buttons'], ['songbar', 'Song Timeline (Under The Cover)', 'checkboxSongBarEnabled'],
+            ['filter', 'Filter Button', 'checkboxFilterButtonEnabled'], ['device', 'Play On Device Button', 'checkboxDeviceButtonEnabled'], ['nav', 'Next And Last Song Buttons'], ['songbar', 'Song Timeline (Under The Cover)', 'checkboxSongBarEnabled'],
             ['scrub', 'Scrub Line'], ['songdata', 'Song Data Text And Icons'], ['date', 'Song Add Date', 'checkboxSongAddDateEnabled'], ['scale', 'Timeline Scale (Numbers And Ticks)'],
             ['graph', 'Graph'], ['meta', 'Album And Date Line', 'checkboxTxtAlbumDateEnabled'], ['artist', 'Artist', 'checkboxTxtArtistEnabled'], ['title', 'Song Title', 'checkboxTxtSongTitleEnabled'],
             ['play', 'Play Button', 'checkboxPlayButtonEnabled'], ['cover', 'Album Cover'], ['ticks', 'Song Ticks'], ['bgfx', 'Background Animation'], ['bg', 'Background'],

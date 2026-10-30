@@ -7,10 +7,10 @@
 import { setting } from './settings.js';
 
 // Same keys, same default order as RO_ITEMS in src/devpanel/devPanel.js (front to back).
-export const DEFAULT_KEYS = ['volume', 'shuffle', 'songdatabtn', 'filter', 'nav', 'songbar', 'scrub', 'songdata', 'date', 'scale', 'graph', 'meta', 'artist', 'title', 'play', 'cover', 'ticks', 'bgfx', 'bg'];
+export const DEFAULT_KEYS = ['volume', 'shuffle', 'songdatabtn', 'filter', 'device', 'nav', 'songbar', 'scrub', 'songdata', 'date', 'scale', 'graph', 'meta', 'artist', 'title', 'play', 'cover', 'ticks', 'bgfx', 'bg'];
 // Items whose visibility the panel does NOT link to another checkbox: renderOrder hides them (the timeline's own layers are handled in timeline.js).
 const HIDDEN_BY_CLASS = { volume: ['spxVolume'], nav: ['spxPrev', 'spxNext'], cover: ['spxCover'], bg: ['spxBg', 'spxBgPrev'], bgfx: ['spxBgFx'] };
-const Z_OF = { volume: ['spxVolume'], shuffle: ['spxShuffle'], songdatabtn: ['spxSongData'], filter: ['spxFilter'], nav: ['spxPrev', 'spxNext'], songbar: ['spxSongBar'], graph: ['spxTimeline'], bg: ['spxBg'],
+const Z_OF = { volume: ['spxVolume'], shuffle: ['spxShuffle'], songdatabtn: ['spxSongData'], filter: ['spxFilter'], device: ['spxDevice'], nav: ['spxPrev', 'spxNext'], songbar: ['spxSongBar'], graph: ['spxTimeline'], bg: ['spxBg'],
     meta: ['spxMeta'], artist: ['spxArtist'], title: ['spxTitle'], play: ['spxPlayGlyph'], cover: ['spxCover'], bgfx: ['spxBgFx'] };
 const SEP = '/';
 

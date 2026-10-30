@@ -25,6 +25,7 @@ Nothing in progress — see What's next.
 - Scaffolded the project and pushed it to GitHub (LeisHo/SPOTTY-EXPOTTY).
 - Measured preview-clip coverage, link expiry and playback latency.
 - Built the scrub player: timeline, clip pool, Spotify handoff, preview proxy, data file.
+- 2026-10-30: Play On Device (Spotify Connect) button + dev group; the volume slider controls the chosen device. Tested with a mocked Spotify API only.
 - 2026-10-24 round: wheel-scrub / click-jump / drag-zoom input, last-song-before-playhead rule, 4 timeline visual styles + album-cover colour modes, bar width + zoom limits, title link, loop fix, all elements on the UI Layout Engine with its Inspector, Component Gallery removed.
 
 ## What's next

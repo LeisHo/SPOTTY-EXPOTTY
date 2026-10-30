@@ -260,3 +260,5 @@ export const embedStatus = () => status;
 // 'preview' when the embed reports a ~30 s duration (not logged in, or the iframe can't see the login),
 // 'full' when it reports a longer one, 'unknown' before the first playing update.
 export const embedMode = () => (sdk.sdkReady() ? 'FULL (Web Playback SDK)' : lastDur <= 0 ? 'unknown' : lastDur <= 31000 ? 'preview(30s)' : 'FULL');
+// Play On Device (devicePanel.js): the Spotify Connect device list and switching, from sdkPlayer.js.
+export const deviceApi = { list: sdk.listDevices, set: sdk.sdkSetDevice, target: sdk.sdkDeviceTarget, callbacks: sdk.setDeviceCallbacks, pollMs: sdk.sdkSetPollMs, browserId: sdk.sdkBrowserDeviceId };

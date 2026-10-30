@@ -142,6 +142,10 @@ export const DEFAULTS = {
     colorTickMark: '#ffffff', sliderTickOpacity: 0.6, sliderTickWidth: 1, sliderTickHeight: 5, sliderTickStartHeight: 0,
     checkboxScaleSmoothPan: false, checkboxSongTickInvert: false, checkboxSongTickBoth: false, checkboxSongTickClamp: false, sliderScaleNumbersFontSize: 11, checkboxScaleNumbersBold: false, colorScaleNumbers: '#ffffff', sliderScaleNumbersLetterSpacing: 0, sliderScaleNumbersOpacity: 0.6, sliderScaleNumbersOffsetX: 3,
     checkboxSongAddDateEnabled: true, sliderSongAddDateFontSize: 13, checkboxSongAddDateBold: true, colorSongAddDate: '#ffffff', sliderSongAddDateLetterSpacing: 0, sliderSongAddDateOpacity: 1, sliderSongAddDateOffsetY: 0,
+    // Play On Device (UI Layout > Play On Device)
+    checkboxDeviceButtonEnabled: true, sliderDeviceIconSize: 20, sliderDeviceIconOffsetX: 0, sliderDeviceIconOffsetY: 0, sliderDeviceOffOpacity: 45, sliderDeviceOnOpacity: 100, sliderDeviceEdgeOffset: 14, colorDeviceIcon: '#f2f2f2', colorDeviceOn: '#1db954',
+    sliderDevicePollSeconds: 1.5, sliderDeviceListRefresh: 4, checkboxDeviceMatchVolume: true, checkboxDeviceKeepPlaying: true, checkboxDeviceRemember: false, checkboxDeviceMuteClips: false, checkboxDeviceShowThisBrowser: true, checkboxDeviceShowVolume: true, checkboxDevicePanelCloseOnOutside: true, checkboxDeviceCloseOnPick: false,
+    sliderDevicePanelWidth: 240, sliderDevicePanelFontSize: 13, sliderDevicePanelOffsetX: 0, sliderDevicePanelOffsetY: 6, colorDevicePanelBg: '#14161a', sliderDevicePanelBgOpacity: 92, sliderDevicePanelBlur: 6, colorDevicePanelAccent: '#1db954',
     checkboxShuffleButtonEnabled: true, sliderShuffleIconSize: 20, sliderShuffleIconOffsetX: 0, sliderShuffleOffOpacity: 45, colorShuffleIcon: '#f2f2f2', colorShuffleOn: '#1db954',
     // Start Button Animation: the Track Title Button Animation settings, with 'Title' replaced by 'StartPlay' (see titleAnim.js)
     checkboxStartPlayAnimEnabled: false, selectStartPlayAnimMode: 'bold', sliderStartPlayAnimDuration: 160, selectStartPlayAnimEasing: 'ease-out',
