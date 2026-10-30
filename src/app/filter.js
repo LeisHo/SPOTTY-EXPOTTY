@@ -227,7 +227,6 @@ export function createFilter(songs, { host, onChange }) {
             r.row.classList.toggle('on', narrowed(f));
         });
         panel.classList.toggle('no-nums', !setting('checkboxFilterShowNumbers'));
-        panel.classList.toggle('no-range-text', !setting('checkboxFilterShowRangeText')); // the "36 BPM - 209 BPM" text between the two end numbers
         // Panel group: resizable / scrollable / draggable
         const rzx = !!setting('checkboxFilterPanelResizeX'), rzy = !!setting('checkboxFilterPanelResizeY');
         panel.classList.toggle('no-resize-x', !rzx); panel.classList.toggle('no-resize-y', !rzy);
@@ -250,13 +249,15 @@ export function createFilter(songs, { host, onChange }) {
             countEl.style.fontSize = setting('sliderFilterSongCountFontSize') + 'px';
             countEl.style.fontWeight = setting('checkboxFilterSongCountBold') ? '700' : '400';
             countEl.style.fontStyle = setting('checkboxFilterSongCountItalic') ? 'italic' : 'normal';
-            countEl.style.transform = 'translate(' + setting('sliderFilterSongCountOffsetX') + 'px, ' + setting('sliderFilterSongCountOffsetY') + 'px)';
+            countEl.style.transform = 'translate(' + setting('sliderFilterSongCountOffsetX') + 'px, ' + (-setting('sliderFilterSongCountOffsetY')) + 'px)'; // X: right = positive; Y: up = positive
         }
         fit();
     }
     // Keeps every item inside the panel, whatever Y / X offsets are set: all the offsets are transforms (they move an item without moving its
-    // neighbours), so an item can end up past the edge of the box that clips it. Measured with the padding reset, then the overflow on each side
-    // is added as padding: the slider block (`.spx-flt-rows`, which clips) and the panel itself (head button, song count) both grow by it.
+    // neighbours). Measured with the padding reset: (1) the slider block (`.spx-flt-rows`, which clips) grows by any overflow past its own box -
+    // padding in, the same amount of margin out, so nothing moves; (2) the panel itself grows (padding) by what is still past ITS edge, which is
+    // all the items plus the head button and the song count - so a shift inside the panel's own spare room (the margins and padding) shows as a
+    // shift, and only what would leave the panel makes it bigger.
     function fit() {
         const S = panel.style;
         ['rt', 'rb', 'rl', 'rr', 'pt', 'pb', 'pl', 'pr'].forEach(k => S.removeProperty('--fit-' + k));
@@ -271,7 +272,7 @@ export function createFilter(songs, { host, onChange }) {
             Object.keys(m).forEach(k => { if (m[k] > 0.5) S.setProperty('--fit-' + pre + k, Math.ceil(m[k]) + 'px'); });
         };
         grow(rowsEl, rowsEl.querySelectorAll('.spx-flt-top, .spx-flt-range, .spx-flt-nums, .spx-flt-cur'), 'r');
-        grow(panel, panel.querySelectorAll('.spx-flt-head > *, .spx-flt-count'), 'p');
+        grow(panel, panel.querySelectorAll('.spx-flt-head > *, .spx-flt-count, .spx-flt-top, .spx-flt-range, .spx-flt-nums, .spx-flt-cur'), 'p');
     }
     window.addEventListener('resize', fit);
     panel.addEventListener('pointerup', () => setTimeout(fit, 0)); // after a resize drag

@@ -206,7 +206,7 @@
 .spx-filter-panel .spx-flt-head { order: 0; }
 .spx-filter-panel .spx-flt-count { order: 3; flex: none; }
 .spx-filter-panel.count-top .spx-flt-count { order: 1; }
-.spx-filter-panel .spx-flt-rows { order: 2; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: hidden; padding: var(--fit-rt, 0px) calc(6px + var(--fit-rr, 0px)) var(--fit-rb, 0px) calc(6px + var(--fit-rl, 0px)); margin-left: -6px; margin-right: -6px; }
+.spx-filter-panel .spx-flt-rows { order: 2; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: hidden; padding: var(--fit-rt, 0px) calc(6px + var(--fit-rr, 0px)) var(--fit-rb, 0px) calc(6px + var(--fit-rl, 0px)); margin-left: calc(-6px - var(--fit-rl, 0px)); margin-right: calc(-6px - var(--fit-rr, 0px)); } /* fit(): the clipping box grows by the overflow (padding) while the margin takes the same amount back, so nothing moves */
 .spx-filter-panel.scroll { max-height: calc(100dvh - 8px); }
 .spx-filter-panel.scroll .spx-flt-rows { overflow-y: auto; overscroll-behavior: contain; }
 .spx-filter-panel.no-resize .spx-flt-resize { display: none; }
@@ -222,26 +222,25 @@
 .spx-flt-clear { background: none; border: 0; color: inherit; opacity: .75; padding: 2px; margin: 0; cursor: pointer; display: inline-flex; }
 .spx-flt-clear:hover { opacity: 1; }
 .spx-flt-clear svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.spx-flt-rows { display: flex; flex-direction: column; margin: calc(8px + var(--spx-flt-rows-y, 0px)) 0 12px; }
+.spx-flt-rows { display: flex; flex-direction: column; margin: calc(8px + var(--spx-flt-rows-y, 0px) - var(--fit-rt, 0px)) 0 calc(12px - var(--fit-rb, 0px)); }
 .spx-flt-row + .spx-flt-row { margin-top: var(--spx-flt-row-gap, 12px); } /* a margin, not `gap`: a negative gap is invalid CSS and was silently dropped */ /* gap = the space between the sliders; the top margin moves the whole slider group, and both change the panel's height */
-.spx-flt-row { margin: 0; }
+.spx-flt-row { margin: 0; transform: translateY(var(--spx-flt-sl-y, 0px)); } /* Sliders Y Offset: the whole set - icon, slider, min / max numbers and value; filter.js fit() pads the panel so nothing spills */
 .spx-flt-top { display: flex; justify-content: center; align-items: center; opacity: .85; margin-bottom: var(--spx-flt-ico-gap, 0px); } /* the icon's distance from its slider (negative = closer) */
 .spx-flt-ico { display: inline-flex; }
-.spx-flt-nums { display: flex; justify-content: space-between; align-items: baseline; font-size: .9em; opacity: .8; margin-top: var(--spx-flt-nums-gap, 1px); } /* the numbers' distance from their slider (negative = closer) */
+.spx-flt-nums { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--spx-flt-mm-size, 12px); font-weight: var(--spx-flt-mm-bold, 400); transform: translateY(calc(var(--spx-flt-mm-y, 0) * -1px)); opacity: .8; margin-top: var(--spx-flt-nums-gap, 1px); } /* the numbers' distance from their slider (negative = closer) */
 .spx-flt-nums .spx-flt-val { flex: 1; text-align: center; padding: 0 4px; }
 .spx-flt-row.on .spx-flt-val { color: var(--flt-accent); }
-.spx-flt-cur { display: none; text-align: center; font-size: .9em; line-height: 1.2; opacity: .8; pointer-events: none; margin-top: var(--spx-flt-nums-gap, 1px); transform: translateY(calc(var(--spx-flt-cur-y, 0) * 1px)); }
+.spx-flt-cur { display: none; text-align: center; font-size: var(--spx-flt-val-size, 12px); font-weight: var(--spx-flt-val-bold, 400); line-height: 1.2; opacity: .8; pointer-events: none; margin-top: var(--spx-flt-nums-gap, 1px); transform: translateY(calc(var(--spx-flt-cur-y, 0) * -1px)); } /* every Y offset in this panel: positive = up, negative = down */
 .spx-flt-row.show-cur .spx-flt-cur { display: block; }
-.spx-flt-row:not(.show-cur) .spx-flt-nums { transform: translateY(calc(var(--spx-flt-cur-y, 0) * 1px)); } /* a slider with no separate value line: its end numbers / range text are its shown value, and the same Y offset moves them */
 .spx-flt-row.show-cur .spx-flt-nums .spx-flt-val { display: none; }
 .spx-filter-panel:not(.no-nums) .spx-flt-row.show-cur .spx-flt-cur { margin-top: -1.2em; } /* the slider's end numbers share this line: the value sits between them */
 .spx-flt-row.on .spx-flt-cur { color: var(--flt-accent); }
 .spx-filter-panel.no-nums .spx-flt-nums { display: none; }
-.spx-filter-panel.no-range-text .spx-flt-nums .spx-flt-val { display: none; }
+.spx-flt-nums .spx-flt-val { display: none; } /* the chosen value is the .spx-flt-cur line, shown by the group's Show Value checkbox */
 .spx-flt-count { text-align: center; opacity: .75; margin-top: 2px; font-size: var(--spx-flt-count-font, 12px); }
 .spx-flt-ico svg { width: var(--spx-flt-ico, 20px); height: var(--spx-flt-ico, 20px); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .spx-flt-row.on .spx-flt-top { color: var(--flt-accent); opacity: 1; }
-.spx-flt-range { position: relative; height: 22px; transform: translateY(var(--spx-flt-sl-y, 0px)); } /* Text/Icons/Sliders: Sliders Y Offset (all sliders); filter.js fit() pads the panel so nothing spills */
+.spx-flt-range { position: relative; height: 22px; } /* Text/Icons/Sliders: Sliders Y Offset (all sliders); filter.js fit() pads the panel so nothing spills */
 .spx-flt-track { position: absolute; left: 0; right: 0; top: 10px; height: 3px; border-radius: 2px; background: #ffffff30; }
 .spx-flt-fill { position: absolute; top: 0; bottom: 0; background: var(--flt-accent); border-radius: 2px; }
 .spx-flt-range input { position: absolute; left: 0; top: 0; width: 100%; height: 22px; margin: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
