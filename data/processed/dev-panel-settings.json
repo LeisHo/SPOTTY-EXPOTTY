@@ -696,9 +696,9 @@
   },
   "layout": {
     "left": 35,
-    "top": 306,
+    "top": 63,
     "width": 350,
-    "height": 80
+    "height": 412
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -50156,7 +50156,7 @@
     "mobile:Standard Button Animation": false,
     "mobile:Background": true,
     "mobile:Animation": false,
-    "mobile:Album Cover": false,
+    "mobile:Album Cover": true,
     "mobile:Shadows": false,
     "mobile:Album Cover Shadow": false,
     "mobile:Volume Shadow": false,
@@ -51579,7 +51579,7 @@
       "sliderRibbonSmoothing": false,
       "sliderRibbonBarsOpacity": false,
       "sliderPlayheadWidth": false,
-      "sliderPlayheadHeight": true,
+      "sliderPlayheadHeight": false,
       "sliderTimelineScaleGap": false,
       "sliderDensityColorBlend": false,
       "checkboxTimelineHeightTransition": false,
@@ -51614,8 +51614,8 @@
       "sliderTxtAlbumDateMaxWidth": true,
       "sliderTxtArtistMaxWidth": true,
       "sliderTxtArtistFontSize": true,
-      "sliderSongAddDateOffsetY": true,
-      "sliderPlayheadStartHeight": true,
+      "sliderSongAddDateOffsetY": false,
+      "sliderPlayheadStartHeight": false,
       "textTestSong": false,
       "textTestArtist": false,
       "textTestAlbum": false
@@ -51682,7 +51682,7 @@
       "sliderTxtArtistFontSize": 20,
       "sliderSongDataIconGap": 4,
       "sliderSongAddDateOffsetY": -12,
-      "sliderPlayheadStartHeight": 68,
+      "sliderPlayheadStartHeight": 30,
       "textTestSong": "HELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLET",
       "textTestArtist": "HELLO ELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
       "textTestAlbum": "HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS"
@@ -52101,7 +52101,7 @@
           "mobilePortrait": {
             "enabled": true,
             "overrides": {
-              "heightValue": "190px",
+              "heightValue": "165px",
               "offsetY": "28px"
             }
           },
