@@ -7046,6 +7046,19 @@
     // The icon style dropdowns are always the first rows of their group (owner's request): a saved layout (Sync) keeps whatever order the panel had
     // when it was saved, which put them back down the list once, so this runs after every restore and re-pins them. Order = this list.
     const ICON_DROPDOWN_ORDER = ['selectVolIconStyle', 'selectShuffleIconStyle', 'selectFilterIconStyle', 'selectTempoIconStyle', 'selectValenceIconStyle', 'selectDanceIconStyle', 'selectEnergyIconStyle', 'selectTitleLenIconStyle', 'selectArtistLenIconStyle', 'selectAlbumLenIconStyle', 'selectSongDateIconStyle', 'selectSongLenIconStyle', 'selectDeviceIconStyle', 'selectSongDataIconStyle', 'selectPlayIconStyle', 'selectPauseIconStyle', 'selectNavIconStyle'];
+    // A checkbox row = a control row whose own id starts with "checkbox" (the id prefix is the panel's control-type convention; the extra Show-in-Mobile /
+    // Independent checkboxes inside every row do not count).
+    const isCheckboxRow = el => el.classList && el.classList.contains('dev-row') && /^checkbox/.test(getRowKey(el, 0));
+    // Checkbox rows go to the TOP of their group (owner's request 2026-10-30), keeping their own order. Run once on the default layout at build, and the saved
+    // layout was reordered the same way; it is NOT re-run after every restore, so a checkbox the owner later drags elsewhere stays where it is put.
+    function pinCheckboxRowsToTop() {
+        document.querySelectorAll('.dev-section-content').forEach(content => {
+            const kids = Array.from(content.children), cbs = kids.filter(isCheckboxRow);
+            if (!cbs.length) return;
+            const firstOther = kids.find(c => !isCheckboxRow(c));
+            if (firstOther) cbs.forEach(r => content.insertBefore(r, firstOther));
+        });
+    }
     function pinIconDropdownsToTop() {
         const byParent = new Map();
         ICON_DROPDOWN_ORDER.forEach(id => {
@@ -7055,7 +7068,7 @@
             byParent.get(row.parentElement).push(row);
         });
         byParent.forEach((rows, parent) => {
-            const first = Array.from(parent.children).find(c => !rows.includes(c));
+            const first = Array.from(parent.children).find(c => !rows.includes(c) && !isCheckboxRow(c)); // after the group's checkbox rows
             rows.forEach(r => { if (first) parent.insertBefore(r, first); });
         });
     }
@@ -9690,6 +9703,7 @@
 
         // Any pre-existing local copy first (instant), then the GitHub copy replaces it as soon
         // as it arrives (it is the source of truth; ported from HANDO's boot restore).
+        pinCheckboxRowsToTop(); // the default layout (what a fresh browser sees) has every group's checkboxes first; the saved layout is applied on top of it
         applyDevPanelStateWithExtra(loadDevPanelSettings());
         fetchRemoteDevSettingsWhenReachable(got => {
             if (got.ok && got.settings) { applyDevPanelStateWithExtra(got.settings); renderAllHotkeyBadges(); }
