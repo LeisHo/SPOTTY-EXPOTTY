@@ -806,7 +806,7 @@ async function boot() {
             applyFilterIcon(el('spxFilter').querySelector('svg'), iconIndex(setting('selectFilterIconStyle')));
             const ps = flt && flt.panel.style;
             if (ps) {
-                ps.setProperty('--spx-flt-cur-y', setting('sliderFilterValueOffsetY')); ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-ico', setting('sliderFilterPanelIconSize') + 'px'); ps.setProperty('--spx-flt-row-gap', setting('sliderFilterPanelRowGap') + 'px'); ps.setProperty('--spx-flt-ico-gap', setting('sliderFilterPanelIconOffsetY') + 'px'); ps.setProperty('--spx-flt-rows-y', setting('sliderFilterPanelRowsOffsetY') + 'px'); ps.setProperty('--spx-flt-blur', setting('sliderFilterPanelBlur') + 'px');
+                ps.setProperty('--spx-flt-cur-y', setting('sliderFilterValueOffsetY')); ps.setProperty('--spx-flt-sl-y', setting('sliderFilterSlidersOffsetY') + 'px'); ps.setProperty('--spx-flt-width', setting('sliderFilterPanelWidth') + 'px'); ps.setProperty('--spx-flt-ico', setting('sliderFilterPanelIconSize') + 'px'); ps.setProperty('--spx-flt-row-gap', setting('sliderFilterPanelRowGap') + 'px'); ps.setProperty('--spx-flt-ico-gap', setting('sliderFilterPanelIconOffsetY') + 'px'); ps.setProperty('--spx-flt-rows-y', setting('sliderFilterPanelRowsOffsetY') + 'px'); ps.setProperty('--spx-flt-blur', setting('sliderFilterPanelBlur') + 'px');
                 { const sf = shadowOf('FilterPanel'); ps.setProperty('--shadow-flt-panel', setting('checkboxShadowFilterPanel') ? `${sf.x} ${sf.y} ${sf.blur} ${setting('sliderShadowFilterPanelSpread')}px ${sf.c}` : 'none'); } // Shadows > Filter Panel Shadow ps.setProperty('--spx-flt-font', setting('sliderFilterPanelFontSize') + 'px');
                 ps.setProperty('--spx-flt-bg', rgbaOf(setting('colorFilterPanelBg'), setting('sliderFilterPanelBgOpacity') / 100)); ps.setProperty('--spx-flt-accent', setting('colorFilterPanelAccent'));
                 flt.refresh(); syncFilterUi(); timeline.setFilter(filterOn() ? flt.passes : null);
@@ -877,6 +877,7 @@ async function boot() {
         placeNav();
         const uiFont = setting('selectUiFont');
         scale('--spx-font', !uiFont || uiFont === 'system' ? 'inherit' : `'${uiFont}', system-ui, sans-serif`);
+        document.documentElement.style.setProperty('--spx-font', !uiFont || uiFont === 'system' ? 'inherit' : `'${uiFont}', system-ui, sans-serif`); // the Filter and Device lists sit on <body>, outside .spx-app
         // Timeline height goes through the layout engine; the timeline is pinned by its bottom edge and
         // nothing else is positioned from it, so only the bars grow (upward).
         // On a phone the engine's own per-device height (150 px portrait / 110 px landscape) overrides the base

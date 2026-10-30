@@ -258,7 +258,29 @@ export function createFilter(songs, { host, onChange }) {
             countEl.style.fontStyle = setting('checkboxFilterSongCountItalic') ? 'italic' : 'normal';
             countEl.style.transform = 'translate(' + setting('sliderFilterSongCountOffsetX') + 'px, ' + setting('sliderFilterSongCountOffsetY') + 'px)';
         }
+        fit();
     }
+    // Keeps every item inside the panel, whatever Y / X offsets are set: all the offsets are transforms (they move an item without moving its
+    // neighbours), so an item can end up past the edge of the box that clips it. Measured with the padding reset, then the overflow on each side
+    // is added as padding: the slider block (`.spx-flt-rows`, which clips) and the panel itself (head button, song count) both grow by it.
+    function fit() {
+        const S = panel.style;
+        ['rt', 'rb', 'rl', 'rr', 'pt', 'pb', 'pl', 'pr'].forEach(k => S.removeProperty('--fit-' + k));
+        if (panel.hidden) return;
+        const grow = (box, els, pre) => {
+            const bb = box.getBoundingClientRect(), m = { t: 0, b: 0, l: 0, r: 0 };
+            els.forEach(el => {
+                const q = el.getBoundingClientRect();
+                if (!q.width && !q.height) return;
+                m.t = Math.max(m.t, bb.top - q.top); m.b = Math.max(m.b, q.bottom - bb.bottom); m.l = Math.max(m.l, bb.left - q.left); m.r = Math.max(m.r, q.right - bb.right);
+            });
+            Object.keys(m).forEach(k => { if (m[k] > 0.5) S.setProperty('--fit-' + pre + k, Math.ceil(m[k]) + 'px'); });
+        };
+        grow(rowsEl, rowsEl.querySelectorAll('.spx-flt-top, .spx-flt-range, .spx-flt-nums, .spx-flt-cur'), 'r');
+        grow(panel, panel.querySelectorAll('.spx-flt-head > *, .spx-flt-count'), 'p');
+    }
+    window.addEventListener('resize', fit);
+    panel.addEventListener('pointerup', () => setTimeout(fit, 0)); // after a resize drag
     function commit() {
         try { localStorage.setItem(STORE, JSON.stringify(range)); } catch (e) { /* storage blocked */ }
         onChange();

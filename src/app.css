@@ -116,7 +116,7 @@
 .spx-vol-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: calc(var(--spx-vol-bw) / 2); background: var(--spx-vol-fill); }
 .spx-vol-track::before { content: ''; position: absolute; inset: -12px -6px; } /* wider grab area than the thin bar */
 .spx-vol-thumb { position: absolute; top: calc(50% - var(--spx-vol-r)); width: calc(2 * var(--spx-vol-r)); height: calc(2 * var(--spx-vol-r)); border-radius: 50%; background: var(--spx-vol-thumb); box-shadow: var(--shadow-vol-box, 0 1px 4px #000a); pointer-events: none; }
-.spx-vol-label { display: none; font: 600 11px/1 system-ui, sans-serif; color: #c9d1d9; }
+.spx-vol-label { display: none; font: 600 11px/1 system-ui, sans-serif; font-family: var(--spx-font, system-ui, sans-serif); color: #c9d1d9; }
 
 /* Previous / next song buttons beside the album cover */
 .spx-nav { z-index: 4; width: 48px; height: 48px; border: 0; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; color: #f2f2f2; background: none; cursor: pointer; filter: var(--shadow-nav, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; }
@@ -199,14 +199,14 @@
 .spx-filter[aria-pressed="true"] { --bs-op: var(--spx-filter-on-op, 1); color: var(--spx-filter-on-color, #1db954); }
 .spx-filter[hidden] { display: none; }
 .spx-app.no-shadow-vol .spx-filter { filter: none; }
-.spx-filter-panel { position: fixed; z-index: 2147482000; width: var(--spx-flt-width, 260px); box-sizing: border-box; padding: 10px 12px 12px; border-radius: 10px; color: #f2f2f2; font-size: var(--spx-flt-font, 12px);
+.spx-filter-panel { position: fixed; z-index: 2147482000; width: var(--spx-flt-width, 260px); box-sizing: border-box; padding: calc(10px + var(--fit-pt, 0px)) calc(12px + var(--fit-pr, 0px)) calc(12px + var(--fit-pb, 0px)) calc(12px + var(--fit-pl, 0px)); border-radius: 10px; color: #f2f2f2; font-size: var(--spx-flt-font, 12px); font-family: var(--spx-font, inherit);
     background: var(--spx-flt-bg, rgba(20,22,26,0.92)); box-shadow: var(--shadow-flt-panel, 0 6px 24px #000a); backdrop-filter: blur(var(--spx-flt-blur, 6px)); -webkit-backdrop-filter: blur(var(--spx-flt-blur, 6px)); --flt-accent: var(--spx-flt-accent, #1db954); }
 .spx-filter-panel { display: flex; flex-direction: column; } /* head, rows and the song count are flex items: the count stays visible while the rows clip or scroll */
 .spx-filter-panel[hidden] { display: none; }
 .spx-filter-panel .spx-flt-head { order: 0; }
 .spx-filter-panel .spx-flt-count { order: 3; flex: none; }
 .spx-filter-panel.count-top .spx-flt-count { order: 1; }
-.spx-filter-panel .spx-flt-rows { order: 2; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: hidden; padding: 0 6px; margin-left: -6px; margin-right: -6px; }
+.spx-filter-panel .spx-flt-rows { order: 2; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: hidden; padding: var(--fit-rt, 0px) calc(6px + var(--fit-rr, 0px)) var(--fit-rb, 0px) calc(6px + var(--fit-rl, 0px)); margin-left: -6px; margin-right: -6px; }
 .spx-filter-panel.scroll { max-height: calc(100dvh - 8px); }
 .spx-filter-panel.scroll .spx-flt-rows { overflow-y: auto; overscroll-behavior: contain; }
 .spx-filter-panel.no-resize .spx-flt-resize { display: none; }
@@ -241,7 +241,7 @@
 .spx-flt-count { text-align: center; opacity: .75; margin-top: 2px; font-size: var(--spx-flt-count-font, 12px); }
 .spx-flt-ico svg { width: var(--spx-flt-ico, 20px); height: var(--spx-flt-ico, 20px); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .spx-flt-row.on .spx-flt-top { color: var(--flt-accent); opacity: 1; }
-.spx-flt-range { position: relative; height: 22px; }
+.spx-flt-range { position: relative; height: 22px; transform: translateY(var(--spx-flt-sl-y, 0px)); } /* Text/Icons/Sliders: Sliders Y Offset (all sliders); filter.js fit() pads the panel so nothing spills */
 .spx-flt-track { position: absolute; left: 0; right: 0; top: 10px; height: 3px; border-radius: 2px; background: #ffffff30; }
 .spx-flt-fill { position: absolute; top: 0; bottom: 0; background: var(--flt-accent); border-radius: 2px; }
 .spx-flt-range input { position: absolute; left: 0; top: 0; width: 100%; height: 22px; margin: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
@@ -265,7 +265,7 @@
 .spx-device[aria-pressed="true"] { --bs-op: var(--spx-device-on-op, 1); color: var(--spx-device-on-color, #1db954); }
 .spx-device[hidden] { display: none; }
 .spx-app.no-shadow-vol .spx-device { filter: none; }
-.spx-device-panel { position: fixed; z-index: 2147482000; width: var(--spx-dev-width, 240px); box-sizing: border-box; padding: 10px 12px 12px; border-radius: 10px; color: #f2f2f2; font-size: var(--spx-dev-font, 13px);
+.spx-device-panel { font-family: var(--spx-font, inherit); position: fixed; z-index: 2147482000; width: var(--spx-dev-width, 240px); box-sizing: border-box; padding: 10px 12px 12px; border-radius: 10px; color: #f2f2f2; font-size: var(--spx-dev-font, 13px);
     background: var(--spx-dev-bg, rgba(20,22,26,0.92)); box-shadow: 0 6px 24px #000a; backdrop-filter: blur(var(--spx-dev-blur, 6px)); -webkit-backdrop-filter: blur(var(--spx-dev-blur, 6px)); --dev-accent: var(--spx-dev-accent, #1db954); }
 .spx-device-panel[hidden] { display: none; }
 .spx-dev-head { display: flex; align-items: center; justify-content: space-between; font-weight: 700; margin-bottom: 6px; }
