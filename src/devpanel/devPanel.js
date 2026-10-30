@@ -8787,9 +8787,10 @@
         // "Panel": how the filter panel itself behaves (resize / scroll / drag)
         const FPG = FLB; // the old nested "Panel" group is gone (2026-10-30: the owner moved its settings out and it was left empty)
         const FPG_CONTROLS = [
-            { tab, group: FPG, id: 'checkboxFilterPanelResizeX', type: 'checkbox', label: 'X Resize (Drag The Left And Right Edges; Double-Click An Edge To Reset)', value: true },
-            { tab, group: FPG, id: 'checkboxFilterPanelResizeY', type: 'checkbox', label: 'Y Resize (Drag The Bottom Edge; Double-Click It To Reset)', value: true },
+            { tab, group: FPG, id: 'checkboxFilterPanelResizeX', type: 'checkbox', label: 'X Resize', value: true },
+            { tab, group: FPG, id: 'checkboxFilterPanelResizeY', type: 'checkbox', label: 'Y Resize', value: true },
             { tab, group: FPG, id: 'checkboxFilterPanelScrollable', type: 'checkbox', label: 'Scrollable (The Sliders Scroll When The Panel Is Short; The Song Count Stays Visible)', value: false },
+            { tab, group: FPG, id: 'checkboxFilterPanelScrollBar', type: 'checkbox', label: 'Show Scroll Bar', value: true },
             { tab, group: FPG, id: 'checkboxFilterPanelDraggable', type: 'checkbox', label: 'Draggable (Drag The Panel By Its Background)', value: false },
         ];
         renderControlArray(FPG_CONTROLS, 'renderSpottyDevControls');

@@ -231,6 +231,7 @@ export function createFilter(songs, { host, onChange }) {
         const rzx = !!setting('checkboxFilterPanelResizeX'), rzy = !!setting('checkboxFilterPanelResizeY');
         panel.classList.toggle('no-resize-x', !rzx); panel.classList.toggle('no-resize-y', !rzy);
         panel.classList.toggle('scroll', !!setting('checkboxFilterPanelScrollable'));
+        panel.classList.toggle('no-scrollbar', !setting('checkboxFilterPanelScrollBar'));
         panel.classList.toggle('draggable', !!setting('checkboxFilterPanelDraggable'));
         panel.classList.toggle('count-top', !!setting('checkboxFilterSongCountTop'));
         // an axis switched off goes back to the dev panel's own size on that axis; switched on again, the remembered drag size returns

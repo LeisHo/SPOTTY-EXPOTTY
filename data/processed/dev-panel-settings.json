@@ -5997,6 +5997,10 @@
                             },
                             {
                               "type": "row",
+                              "key": "checkboxFilterPanelScrollBar"
+                            },
+                            {
+                              "type": "row",
                               "key": "checkboxFilterPanelDraggable"
                             },
                             {
@@ -6230,6 +6234,7 @@
                             "checkboxFilterPanelResizeX",
                             "checkboxFilterPanelResizeY",
                             "checkboxFilterPanelScrollable",
+                            "checkboxFilterPanelScrollBar",
                             "checkboxFilterPanelDraggable",
                             "sliderFilterPanelWidth",
                             "sliderFilterPanelOffsetX",
@@ -6922,6 +6927,10 @@
                           },
                           {
                             "type": "row",
+                            "key": "checkboxFilterPanelScrollBar"
+                          },
+                          {
+                            "type": "row",
                             "key": "checkboxFilterPanelDraggable"
                           },
                           {
@@ -7155,6 +7164,7 @@
                           "checkboxFilterPanelResizeX",
                           "checkboxFilterPanelResizeY",
                           "checkboxFilterPanelScrollable",
+                          "checkboxFilterPanelScrollBar",
                           "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
@@ -9498,6 +9508,10 @@
                           },
                           {
                             "type": "row",
+                            "key": "checkboxFilterPanelScrollBar"
+                          },
+                          {
+                            "type": "row",
                             "key": "checkboxFilterPanelDraggable"
                           },
                           {
@@ -9731,6 +9745,7 @@
                           "checkboxFilterPanelResizeX",
                           "checkboxFilterPanelResizeY",
                           "checkboxFilterPanelScrollable",
+                          "checkboxFilterPanelScrollBar",
                           "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
@@ -10423,6 +10438,10 @@
                         },
                         {
                           "type": "row",
+                          "key": "checkboxFilterPanelScrollBar"
+                        },
+                        {
+                          "type": "row",
                           "key": "checkboxFilterPanelDraggable"
                         },
                         {
@@ -10656,6 +10675,7 @@
                         "checkboxFilterPanelResizeX",
                         "checkboxFilterPanelResizeY",
                         "checkboxFilterPanelScrollable",
+                        "checkboxFilterPanelScrollBar",
                         "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
@@ -16692,6 +16712,10 @@
                           },
                           {
                             "type": "row",
+                            "key": "checkboxFilterPanelScrollBar"
+                          },
+                          {
+                            "type": "row",
                             "key": "checkboxFilterPanelDraggable"
                           },
                           {
@@ -16925,6 +16949,7 @@
                           "checkboxFilterPanelResizeX",
                           "checkboxFilterPanelResizeY",
                           "checkboxFilterPanelScrollable",
+                          "checkboxFilterPanelScrollBar",
                           "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
@@ -17617,6 +17642,10 @@
                         },
                         {
                           "type": "row",
+                          "key": "checkboxFilterPanelScrollBar"
+                        },
+                        {
+                          "type": "row",
                           "key": "checkboxFilterPanelDraggable"
                         },
                         {
@@ -17850,6 +17879,7 @@
                         "checkboxFilterPanelResizeX",
                         "checkboxFilterPanelResizeY",
                         "checkboxFilterPanelScrollable",
+                        "checkboxFilterPanelScrollBar",
                         "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
@@ -20193,6 +20223,10 @@
                         },
                         {
                           "type": "row",
+                          "key": "checkboxFilterPanelScrollBar"
+                        },
+                        {
+                          "type": "row",
                           "key": "checkboxFilterPanelDraggable"
                         },
                         {
@@ -20426,6 +20460,7 @@
                         "checkboxFilterPanelResizeX",
                         "checkboxFilterPanelResizeY",
                         "checkboxFilterPanelScrollable",
+                        "checkboxFilterPanelScrollBar",
                         "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
@@ -21118,6 +21153,10 @@
                       },
                       {
                         "type": "row",
+                        "key": "checkboxFilterPanelScrollBar"
+                      },
+                      {
+                        "type": "row",
                         "key": "checkboxFilterPanelDraggable"
                       },
                       {
@@ -21351,6 +21390,7 @@
                       "checkboxFilterPanelResizeX",
                       "checkboxFilterPanelResizeY",
                       "checkboxFilterPanelScrollable",
+                      "checkboxFilterPanelScrollBar",
                       "checkboxFilterPanelDraggable",
                       "sliderFilterPanelWidth",
                       "sliderFilterPanelOffsetX",

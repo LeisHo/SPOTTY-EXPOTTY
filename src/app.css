@@ -209,6 +209,8 @@
 .spx-filter-panel .spx-flt-rows { order: 2; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: hidden; padding: var(--fit-rt, 0px) calc(6px + var(--fit-rr, 0px)) var(--fit-rb, 0px) calc(6px + var(--fit-rl, 0px)); margin-left: calc(-6px - var(--fit-rl, 0px)); margin-right: calc(-6px - var(--fit-rr, 0px)); } /* fit(): the clipping box grows by the overflow (padding) while the margin takes the same amount back, so nothing moves */
 .spx-filter-panel.scroll { max-height: calc(100dvh - 8px); }
 .spx-filter-panel.scroll .spx-flt-rows { overflow-y: auto; overscroll-behavior: contain; }
+.spx-filter-panel.no-scrollbar .spx-flt-rows { scrollbar-width: none; -ms-overflow-style: none; } /* Show Scroll Bar off: the panel still scrolls, the bar is just not drawn */
+.spx-filter-panel.no-scrollbar .spx-flt-rows::-webkit-scrollbar { display: none; }
 .spx-filter-panel.no-resize .spx-flt-resize { display: none; }
 .spx-filter-panel.no-resize-x .spx-flt-resize-l, .spx-filter-panel.no-resize-x .spx-flt-resize-r, .spx-filter-panel.no-resize-y .spx-flt-resize-b { display: none; }
 .spx-filter-panel .spx-flt-resize-b { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 10px; cursor: ns-resize; z-index: 1; } /* the panel prefix: the plain .spx-flt-resize rule below would otherwise win and turn this into a left-edge strip */
