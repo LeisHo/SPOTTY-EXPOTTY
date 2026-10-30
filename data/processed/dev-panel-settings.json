@@ -230,7 +230,7 @@
     "checkboxTxtAlbumDateOutlineEnabled": false,
     "colorTxtAlbumDateOutlineColor": "#000000",
     "sliderTxtAlbumDateOutlineThickness": 2,
-    "checkboxTestTextEnabled": false,
+    "checkboxTestTextEnabled": true,
     "textTestSong": "HELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLET",
     "textTestArtist": "HELLO ELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
     "textTestAlbum": "HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
@@ -243,6 +243,7 @@
     "checkboxOverrideFilter": true,
     "checkboxOverrideSongData": true,
     "checkboxOverrideDevice": true,
+    "checkboxOverrideStart": true,
     "colorGlobalOverride": "#ffffff",
     "sliderGlobalOverrideOnOpacity": 75,
     "sliderGlobalOverrideOpacity": 40,
@@ -309,7 +310,7 @@
     "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
     "checkboxDeviceButtonEnabled": true,
-    "selectDeviceIconStyle": "7",
+    "selectDeviceIconStyle": "",
     "sliderDeviceIconSize": 23,
     "sliderDeviceIconOffsetX": 0,
     "sliderDeviceIconOffsetY": 0,
@@ -337,14 +338,14 @@
     "sliderDevicePanelBlur": 6,
     "colorDevicePanelAccent": "#1db954",
     "selectFilterIconStyle": "3",
-    "selectTempoIconStyle": "8",
-    "selectValenceIconStyle": "13",
-    "selectDanceIconStyle": "7",
-    "selectEnergyIconStyle": "7",
-    "selectTitleLenIconStyle": "4",
+    "selectTempoIconStyle": "",
+    "selectValenceIconStyle": "",
+    "selectDanceIconStyle": "",
+    "selectEnergyIconStyle": "",
+    "selectTitleLenIconStyle": "",
     "selectArtistLenIconStyle": "0",
     "selectAlbumLenIconStyle": "0",
-    "selectSongDateIconStyle": "9",
+    "selectSongDateIconStyle": "",
     "selectSongLenIconStyle": "0",
     "checkboxFilterButtonEnabled": false,
     "sliderFilterIconSize": 23,
@@ -388,8 +389,10 @@
     "sliderFilterValueOffsetY": 8,
     "sliderFilterValueFontSize": 13,
     "checkboxFilterValueBold": false,
+    "sliderFilterValueLetterSpacing": 0,
     "sliderFilterMinMaxFontSize": 13,
     "checkboxFilterMinMaxBold": false,
+    "sliderFilterMinMaxLetterSpacing": 0,
     "sliderFilterMinMaxOffsetY": -6,
     "checkboxFilterCloseOnOutside": true,
     "checkboxFilterClickToExit": true,
@@ -7152,6 +7155,14 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterValueLetterSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderFilterMinMaxLetterSpacing"
                       }
                     ],
                     "rowKeys": [
@@ -7160,7 +7171,9 @@
                       "checkboxFilterSongLength",
                       "checkboxFilterSongDate",
                       "checkboxFilterIndividualArtists",
-                      "checkboxFilterClickToExit"
+                      "checkboxFilterClickToExit",
+                      "sliderFilterValueLetterSpacing",
+                      "sliderFilterMinMaxLetterSpacing"
                     ],
                     "subgroups": [
                       {
@@ -10707,6 +10720,14 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterValueLetterSpacing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterMinMaxLetterSpacing"
                     }
                   ],
                   "rowKeys": [
@@ -10715,7 +10736,9 @@
                     "checkboxFilterSongLength",
                     "checkboxFilterSongDate",
                     "checkboxFilterIndividualArtists",
-                    "checkboxFilterClickToExit"
+                    "checkboxFilterClickToExit",
+                    "sliderFilterValueLetterSpacing",
+                    "sliderFilterMinMaxLetterSpacing"
                   ],
                   "subgroups": [
                     {
@@ -17967,6 +17990,14 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterValueLetterSpacing"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderFilterMinMaxLetterSpacing"
                     }
                   ],
                   "rowKeys": [
@@ -17975,7 +18006,9 @@
                     "checkboxFilterSongLength",
                     "checkboxFilterSongDate",
                     "checkboxFilterIndividualArtists",
-                    "checkboxFilterClickToExit"
+                    "checkboxFilterClickToExit",
+                    "sliderFilterValueLetterSpacing",
+                    "sliderFilterMinMaxLetterSpacing"
                   ],
                   "subgroups": [
                     {
@@ -21522,6 +21555,14 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterValueLetterSpacing"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderFilterMinMaxLetterSpacing"
                   }
                 ],
                 "rowKeys": [
@@ -21530,7 +21571,9 @@
                   "checkboxFilterSongLength",
                   "checkboxFilterSongDate",
                   "checkboxFilterIndividualArtists",
-                  "checkboxFilterClickToExit"
+                  "checkboxFilterClickToExit",
+                  "sliderFilterValueLetterSpacing",
+                  "sliderFilterMinMaxLetterSpacing"
                 ],
                 "subgroups": [
                   {
@@ -30121,6 +30164,14 @@
                       },
                       {
                         "type": "row",
+                        "key": "checkboxMobileOverrideDevice"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxMobileOverrideStart"
+                      },
+                      {
+                        "type": "row",
                         "key": "colorMobileGlobalOverride"
                       },
                       {
@@ -30171,14 +30222,6 @@
                           ],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxMobileOverrideDevice"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxMobileOverrideStart"
                       }
                     ],
                     "rowKeys": [
@@ -30189,11 +30232,11 @@
                       "checkboxMobileOverrideVolume",
                       "checkboxMobileOverrideFilter",
                       "checkboxMobileOverrideSongData",
+                      "checkboxMobileOverrideDevice",
+                      "checkboxMobileOverrideStart",
                       "colorMobileGlobalOverride",
                       "sliderMobileGlobalOverrideOpacity",
-                      "sliderMobileGlobalOverrideOnOpacity",
-                      "checkboxMobileOverrideDevice",
-                      "checkboxMobileOverrideStart"
+                      "sliderMobileGlobalOverrideOnOpacity"
                     ],
                     "subgroups": [
                       {
@@ -31651,6 +31694,14 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxMobileOverrideDevice"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileOverrideStart"
+                    },
+                    {
+                      "type": "row",
                       "key": "colorMobileGlobalOverride"
                     },
                     {
@@ -31701,14 +31752,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxMobileOverrideDevice"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxMobileOverrideStart"
                     }
                   ],
                   "rowKeys": [
@@ -31719,11 +31762,11 @@
                     "checkboxMobileOverrideVolume",
                     "checkboxMobileOverrideFilter",
                     "checkboxMobileOverrideSongData",
+                    "checkboxMobileOverrideDevice",
+                    "checkboxMobileOverrideStart",
                     "colorMobileGlobalOverride",
                     "sliderMobileGlobalOverrideOpacity",
-                    "sliderMobileGlobalOverrideOnOpacity",
-                    "checkboxMobileOverrideDevice",
-                    "checkboxMobileOverrideStart"
+                    "sliderMobileGlobalOverrideOnOpacity"
                   ],
                   "subgroups": [
                     {
@@ -35194,6 +35237,14 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxMobileOverrideDevice"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileOverrideStart"
+                    },
+                    {
+                      "type": "row",
                       "key": "colorMobileGlobalOverride"
                     },
                     {
@@ -35244,14 +35295,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxMobileOverrideDevice"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxMobileOverrideStart"
                     }
                   ],
                   "rowKeys": [
@@ -35262,11 +35305,11 @@
                     "checkboxMobileOverrideVolume",
                     "checkboxMobileOverrideFilter",
                     "checkboxMobileOverrideSongData",
+                    "checkboxMobileOverrideDevice",
+                    "checkboxMobileOverrideStart",
                     "colorMobileGlobalOverride",
                     "sliderMobileGlobalOverrideOpacity",
-                    "sliderMobileGlobalOverrideOnOpacity",
-                    "checkboxMobileOverrideDevice",
-                    "checkboxMobileOverrideStart"
+                    "sliderMobileGlobalOverrideOnOpacity"
                   ],
                   "subgroups": [
                     {
@@ -36724,6 +36767,14 @@
                   },
                   {
                     "type": "row",
+                    "key": "checkboxMobileOverrideDevice"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxMobileOverrideStart"
+                  },
+                  {
+                    "type": "row",
                     "key": "colorMobileGlobalOverride"
                   },
                   {
@@ -36774,14 +36825,6 @@
                       ],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxMobileOverrideDevice"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxMobileOverrideStart"
                   }
                 ],
                 "rowKeys": [
@@ -36792,11 +36835,11 @@
                   "checkboxMobileOverrideVolume",
                   "checkboxMobileOverrideFilter",
                   "checkboxMobileOverrideSongData",
+                  "checkboxMobileOverrideDevice",
+                  "checkboxMobileOverrideStart",
                   "colorMobileGlobalOverride",
                   "sliderMobileGlobalOverrideOpacity",
-                  "sliderMobileGlobalOverrideOnOpacity",
-                  "checkboxMobileOverrideDevice",
-                  "checkboxMobileOverrideStart"
+                  "sliderMobileGlobalOverrideOnOpacity"
                 ],
                 "subgroups": [
                   {
@@ -41687,6 +41730,14 @@
                       },
                       {
                         "type": "row",
+                        "key": "checkboxLandscapeOverrideDevice"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxLandscapeOverrideStart"
+                      },
+                      {
+                        "type": "row",
                         "key": "colorLandscapeGlobalOverride"
                       },
                       {
@@ -41737,14 +41788,6 @@
                           ],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxLandscapeOverrideDevice"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxLandscapeOverrideStart"
                       }
                     ],
                     "rowKeys": [
@@ -41755,11 +41798,11 @@
                       "checkboxLandscapeOverrideVolume",
                       "checkboxLandscapeOverrideFilter",
                       "checkboxLandscapeOverrideSongData",
+                      "checkboxLandscapeOverrideDevice",
+                      "checkboxLandscapeOverrideStart",
                       "colorLandscapeGlobalOverride",
                       "sliderLandscapeGlobalOverrideOpacity",
-                      "sliderLandscapeGlobalOverrideOnOpacity",
-                      "checkboxLandscapeOverrideDevice",
-                      "checkboxLandscapeOverrideStart"
+                      "sliderLandscapeGlobalOverrideOnOpacity"
                     ],
                     "subgroups": [
                       {
@@ -43217,6 +43260,14 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxLandscapeOverrideDevice"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeOverrideStart"
+                    },
+                    {
+                      "type": "row",
                       "key": "colorLandscapeGlobalOverride"
                     },
                     {
@@ -43267,14 +43318,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxLandscapeOverrideDevice"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxLandscapeOverrideStart"
                     }
                   ],
                   "rowKeys": [
@@ -43285,11 +43328,11 @@
                     "checkboxLandscapeOverrideVolume",
                     "checkboxLandscapeOverrideFilter",
                     "checkboxLandscapeOverrideSongData",
+                    "checkboxLandscapeOverrideDevice",
+                    "checkboxLandscapeOverrideStart",
                     "colorLandscapeGlobalOverride",
                     "sliderLandscapeGlobalOverrideOpacity",
-                    "sliderLandscapeGlobalOverrideOnOpacity",
-                    "checkboxLandscapeOverrideDevice",
-                    "checkboxLandscapeOverrideStart"
+                    "sliderLandscapeGlobalOverrideOnOpacity"
                   ],
                   "subgroups": [
                     {
@@ -46760,6 +46803,14 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxLandscapeOverrideDevice"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeOverrideStart"
+                    },
+                    {
+                      "type": "row",
                       "key": "colorLandscapeGlobalOverride"
                     },
                     {
@@ -46810,14 +46861,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxLandscapeOverrideDevice"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxLandscapeOverrideStart"
                     }
                   ],
                   "rowKeys": [
@@ -46828,11 +46871,11 @@
                     "checkboxLandscapeOverrideVolume",
                     "checkboxLandscapeOverrideFilter",
                     "checkboxLandscapeOverrideSongData",
+                    "checkboxLandscapeOverrideDevice",
+                    "checkboxLandscapeOverrideStart",
                     "colorLandscapeGlobalOverride",
                     "sliderLandscapeGlobalOverrideOpacity",
-                    "sliderLandscapeGlobalOverrideOnOpacity",
-                    "checkboxLandscapeOverrideDevice",
-                    "checkboxLandscapeOverrideStart"
+                    "sliderLandscapeGlobalOverrideOnOpacity"
                   ],
                   "subgroups": [
                     {
@@ -48290,6 +48333,14 @@
                   },
                   {
                     "type": "row",
+                    "key": "checkboxLandscapeOverrideDevice"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxLandscapeOverrideStart"
+                  },
+                  {
+                    "type": "row",
                     "key": "colorLandscapeGlobalOverride"
                   },
                   {
@@ -48340,14 +48391,6 @@
                       ],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxLandscapeOverrideDevice"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxLandscapeOverrideStart"
                   }
                 ],
                 "rowKeys": [
@@ -48358,11 +48401,11 @@
                   "checkboxLandscapeOverrideVolume",
                   "checkboxLandscapeOverrideFilter",
                   "checkboxLandscapeOverrideSongData",
+                  "checkboxLandscapeOverrideDevice",
+                  "checkboxLandscapeOverrideStart",
                   "colorLandscapeGlobalOverride",
                   "sliderLandscapeGlobalOverrideOpacity",
-                  "sliderLandscapeGlobalOverrideOnOpacity",
-                  "checkboxLandscapeOverrideDevice",
-                  "checkboxLandscapeOverrideStart"
+                  "sliderLandscapeGlobalOverrideOnOpacity"
                 ],
                 "subgroups": [
                   {
@@ -49938,7 +49981,7 @@
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
     "desktop:Visibility / Render Order": true,
-    "desktop:Text": true,
+    "desktop:Text": false,
     "desktop:Font": true,
     "desktop:Song Title": true,
     "desktop:New Group (31)": true,
@@ -49955,7 +49998,7 @@
     "desktop:New Group (37)": true,
     "desktop:New Group (38)": true,
     "desktop:New Group (39)": true,
-    "desktop:Test Text Mode": true,
+    "desktop:Test Text Mode": false,
     "desktop:New Group (7)": false,
     "desktop:Play Button": true,
     "desktop:New Group (10)": true,
@@ -51156,7 +51199,9 @@
     "mobile:New Group (40)": "CURVES",
     "landscape:New Group (40)": "CURVES",
     "checkboxMobileOverrideDevice": null,
-    "checkboxLandscapeOverrideDevice": null
+    "checkboxLandscapeOverrideDevice": null,
+    "checkboxMobileOverrideStart": null,
+    "checkboxLandscapeOverrideStart": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -51921,12 +51966,12 @@
       "spxTitle": {
         "layout": {
           "position": {
-            "mode": "anchor",
-            "horizontal": {
-              "anchor": "center"
-            },
+            "mode": "relative",
+            "relativeTo": "spxArtist",
+            "myAnchor": "bottom-center",
+            "targetAnchor": "top-center",
             "vertical": {
-              "anchor": "top"
+              "offset": ".25ah"
             }
           },
           "size": {
@@ -51956,14 +52001,14 @@
         "layout": {
           "position": {
             "mode": "relative",
-            "relativeTo": "spxTitle",
-            "myAnchor": "top-center",
-            "targetAnchor": "bottom-center",
+            "relativeTo": "spxMeta",
+            "myAnchor": "bottom-center",
+            "targetAnchor": "top-center",
             "horizontal": {
               "offset": "0px"
             },
             "vertical": {
-              "offset": "0px"
+              "offset": "1ah"
             }
           },
           "size": {
@@ -51998,7 +52043,7 @@
               "offset": "0px"
             },
             "vertical": {
-              "offset": "5vh"
+              "offset": "1th"
             }
           },
           "size": {
