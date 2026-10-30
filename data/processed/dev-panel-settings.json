@@ -161,7 +161,7 @@
     "sliderTxtSongTitleOpacity": 1,
     "sliderTxtSongTitleOffsetY": 0,
     "checkboxTxtSongTitleWordWrap": true,
-    "sliderTxtSongTitleMaxWidth": 3000,
+    "sliderTxtSongTitleMaxWidth": 2400,
     "selectTxtSongTitleOverflow": "wrap",
     "selectTitleOverMaxLines": "scale",
     "sliderTitleMaxLines": 2,
@@ -231,7 +231,7 @@
     "colorTxtAlbumDateOutlineColor": "#000000",
     "sliderTxtAlbumDateOutlineThickness": 2,
     "checkboxTestTextEnabled": false,
-    "textTestSong": "HE HE HE HE HE HE HE HE HE HE HE HE HE HE HE HE HE ",
+    "textTestSong": "HELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLET",
     "textTestArtist": "HELLO ELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
     "textTestAlbum": "HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
     "checkboxGlobalOverrideEnabled": true,
@@ -695,10 +695,10 @@
     "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}"
   },
   "layout": {
-    "left": 90,
-    "top": 53,
-    "width": 525,
-    "height": 671
+    "left": 35.28570556640625,
+    "top": 129,
+    "width": 350,
+    "height": 383
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -49983,7 +49983,7 @@
     "desktop:Visibility / Render Order": true,
     "desktop:Text": false,
     "desktop:Font": true,
-    "desktop:Song Title": false,
+    "desktop:Song Title": true,
     "desktop:New Group (31)": true,
     "desktop:New Group (32)": true,
     "desktop:Track Title Button Animation": true,
@@ -50107,7 +50107,7 @@
     "mobile:New Group (34)": false,
     "mobile:New Group (36)": false,
     "mobile:New Group (35)": false,
-    "mobile:Album & Date": false,
+    "mobile:Album & Date": true,
     "mobile:New Group (37)": false,
     "mobile:New Group (38)": false,
     "mobile:New Group (39)": false,
@@ -51605,17 +51605,20 @@
       "sliderSongDataFontSize": true,
       "sliderSongDataIconSize": true,
       "sliderSongDataOffsetY": true,
-      "sliderTxtSongTitleOffsetY": true,
+      "sliderTxtSongTitleOffsetY": false,
       "sliderTxtArtistOffsetY": true,
       "sliderTxtAlbumDateOffsetY": true,
-      "sliderTitleMaxLines": true,
+      "sliderTitleMaxLines": false,
       "sliderAlbumDateMaxLines": true,
       "sliderTxtAlbumDateFontSize": true,
       "sliderTxtAlbumDateMaxWidth": true,
       "sliderTxtArtistMaxWidth": true,
       "sliderTxtArtistFontSize": true,
       "sliderSongAddDateOffsetY": true,
-      "sliderPlayheadStartHeight": true
+      "sliderPlayheadStartHeight": true,
+      "textTestSong": false,
+      "textTestArtist": false,
+      "textTestAlbum": false
     },
     "landscape": {}
   },
@@ -51679,7 +51682,10 @@
       "sliderTxtArtistFontSize": 20,
       "sliderSongDataIconGap": 4,
       "sliderSongAddDateOffsetY": -12,
-      "sliderPlayheadStartHeight": 68
+      "sliderPlayheadStartHeight": 68,
+      "textTestSong": "HELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLET",
+      "textTestArtist": "HELLO ELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
+      "textTestAlbum": "HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS"
     },
     "landscape": {}
   },
@@ -51971,13 +51977,13 @@
             "myAnchor": "bottom-center",
             "targetAnchor": "top-center",
             "vertical": {
-              "offset": ".5ah"
+              "offset": ".25ah"
             }
           },
           "size": {
             "width": {
               "mode": "fixed",
-              "value": "85vw"
+              "value": "75vw"
             },
             "height": {
               "mode": "content"
@@ -52008,13 +52014,13 @@
               "offset": "0px"
             },
             "vertical": {
-              "offset": "0.75ah"
+              "offset": "1ah"
             }
           },
           "size": {
             "width": {
               "mode": "fixed",
-              "value": "100vw"
+              "value": "90vw"
             },
             "height": {
               "mode": "content"
@@ -52043,7 +52049,7 @@
               "offset": "0px"
             },
             "vertical": {
-              "offset": ".75th"
+              "offset": "1th"
             }
           },
           "size": {
