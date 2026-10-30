@@ -157,10 +157,13 @@
 .bs-host.bs-hover .bs-icon { width: var(--bs-size-hover, var(--bs-size, 26px)); height: var(--bs-size-hover, var(--bs-size, 26px)); opacity: var(--bs-op-hover, var(--bs-op, 1)); }
 .bs-host.bs-press .bs-icon { width: var(--bs-size-press, var(--bs-size, 26px)); height: var(--bs-size-press, var(--bs-size, 26px)); opacity: var(--bs-op-press, var(--bs-op, 1)); }
 .bs-host.bs-release .bs-icon { width: var(--bs-size-release, var(--bs-size, 26px)); height: var(--bs-size-release, var(--bs-size, 26px)); opacity: var(--bs-op-hover, var(--bs-op, 1)); }
-.spx-play-glyph { translate: 0 var(--spx-play-y, 0px); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-.spx-cover.playing .ico-play, .spx-cover:not(.playing) .ico-pause { display: none; }
-.spx-cover.playing .spx-play-glyph { opacity: var(--spx-glyph-op-playing, 1); }
-.spx-cover:not(.playing) .spx-play-glyph { opacity: var(--spx-glyph-op-paused, 1); }
+.spx-play-glyph { translate: 0 calc(var(--spx-play-y, 0px) * var(--spx-cover-scale, 1)); position: absolute; display: flex; align-items: center; justify-content: center; pointer-events: none; } /* its box (left/top/right/bottom: anchor()) is set by syncGlyph() in main.js to the cover's */
+.spx-play-glyph svg { scale: var(--spx-cover-scale, 1); }
+.ro-off { display: none !important; } /* an item switched off in the render-order list that nothing else hides */
+.spx-layer { position: absolute; pointer-events: none; display: block; } /* the timeline's scale / add date / song data / scrub line canvases (timeline.js layerCtx) */
+.spx-play-glyph.playing .ico-play, .spx-play-glyph:not(.playing) .ico-pause { display: none; }
+.spx-play-glyph.playing { opacity: var(--spx-glyph-op-playing, 1); }
+.spx-play-glyph:not(.playing) { opacity: var(--spx-glyph-op-paused, 1); }
 .spx-app.no-play-glyph .spx-play-glyph { display: none; }
 /* Song Timeline (dev panel > Song Timeline): the playback bar along the album cover's bottom edge. Anchored to the bottom, so a taller bar grows upward. */
 .spx-songbar { position: absolute; left: 0; right: 0; bottom: 0; height: var(--sb-h, 4px); z-index: 3; pointer-events: none; opacity: var(--sb-op, 1); transition: opacity var(--sb-time, 160ms) linear; }

@@ -11,6 +11,7 @@
 import { setting, activeDevice } from './settings.js';
 import { FEATURE_ICON_SETTING } from './filter.js';
 import { featureIcon, ICON_BOX } from './iconStyles.js';
+import { zFor, isOn } from './renderOrder.js';
 
 const SPACING_MS = 1000;
 const MIN_SPAN_MS = 120000;
@@ -317,6 +318,7 @@ export function createTimeline(canvas, data) {
     // The song ticks can live on their own canvas (#spx-ticks) BEHIND everything except the background: above the background layers, below the album cover, the text and the
     // graph canvas. It is as big as the stage and is drawn in the timeline canvas's own coordinates (offset by where that canvas is on screen).
     let tickCanvas = null;
+    const layers = {}; // the scale / date / song data / scrub line canvases (see layerCtx in draw())
     const getTickCanvas = () => {
         if (!tickCanvas) {
             tickCanvas = document.createElement('canvas'); tickCanvas.className = 'spx-ticks';
@@ -346,6 +348,28 @@ export function createTimeline(canvas, data) {
         span = clampSpan(span);
         const ctx = canvas.getContext('2d');
         ctx.setTransform(dpr, 0, 0, dpr, 0, oy * dpr);
+        // Render order (dev panel > UI Layout > Visibility / Render Order): this canvas draws only the GRAPH. The scale, the add date, the song data row and the scrub line each
+        // get a transparent canvas of their own on top of it (same box, no pointer events), so each can sit anywhere in the front-to-back list, between the cover, the text
+        // and the buttons. layerCtx() returns that canvas's cleared 2D context in this canvas's own coordinates, or null while the item is switched off.
+        let layerBox = null;
+        const layerCtx = name => {
+            let L = layers[name];
+            if (!L) {
+                const cv = document.createElement('canvas'); cv.className = 'spx-layer'; cv.dataset.layer = name;
+                canvas.parentNode.insertBefore(cv, canvas.nextSibling);
+                L = layers[name] = { cv, c: cv.getContext('2d') };
+            }
+            const cv = L.cv;
+            if (!isOn(name)) { cv.style.display = 'none'; return null; }
+            cv.style.display = ''; cv.style.zIndex = String(zFor(name));
+            if (cv.width !== canvas.width || cv.height !== canvas.height) { cv.width = canvas.width; cv.height = canvas.height; }
+            if (!layerBox) { const ar = canvas.parentNode.getBoundingClientRect(), r0 = canvas.getBoundingClientRect(); layerBox = { l: r0.left - ar.left, t: r0.top - ar.top }; }
+            cv.style.left = layerBox.l + 'px'; cv.style.top = layerBox.t + 'px'; cv.style.width = canvas.clientWidth + 'px'; cv.style.height = canvas.clientHeight + 'px';
+            const c = L.c;
+            c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, cv.width, cv.height); c.globalAlpha = 1;
+            c.setTransform(dpr, 0, 0, dpr, 0, oy * dpr);
+            return c;
+        };
         // Album Colour Transition: when a colour-affecting input changes (zoom, pan, colour settings), keep what is on screen
         // now so it can fade out over the duration. The colours then change gradually instead of snapping.
         const colorKey = [viewStart, span, setting('checkboxAlbumColorsEnabled'), setting('selectAlbumColorMode'), setting('sliderAlbumColorSaturation'), setting('sliderAlbumColorBrightness')].join('|');
@@ -462,9 +486,9 @@ export function createTimeline(canvas, data) {
         }
         ctx.restore();
         };
-        const ticksBehind = !!setting('checkboxTicksBehindBars');
         const tc = getTickCanvas();
-        if (ticksBehind) {
+        if (isOn('ticks')) {
+            tc.style.zIndex = String(zFor('ticks'));
             const sw = tc.clientWidth, sh = tc.clientHeight;
             if (tc.width !== Math.round(sw * dpr) || tc.height !== Math.round(sh * dpr)) { tc.width = Math.round(sw * dpr); tc.height = Math.round(sh * dpr); }
             const tctx = tc.getContext('2d');
@@ -663,7 +687,8 @@ export function createTimeline(canvas, data) {
         }
 
         // exact add date/time of the current song: under the graph, above the scale text
-        if (dateLine && setting('checkboxSongAddDateEnabled')) {
+        { const ctx = layerCtx('date');
+        if (ctx && dateLine && setting('checkboxSongAddDateEnabled')) {
             ctx.globalAlpha = setting('sliderSongAddDateOpacity');
             ctx.fillStyle = setting('colorSongAddDate');
             ctx.font = `${setting('checkboxSongAddDateBold') ? 'bold ' : ''}${setting('sliderSongAddDateFontSize')}px ${getComputedStyle(canvas).fontFamily || 'system-ui, sans-serif'}`;
@@ -673,11 +698,13 @@ export function createTimeline(canvas, data) {
             ctx.textAlign = 'start';
             ctx.letterSpacing = '0px';
         }
+        }
 
         // Song Data (the button under Shuffle): tempo / valence / danceability / energy of the shown song, each as an icon and a number,
         // right-aligned on the same row as the add date.
+        { const ctx = layerCtx('songdata');
         const sdItems = songData && songData.length ? songData : (sdAlpha > 0 ? sdLast : null); // while fading out, the last row is still drawn
-        if (sdItems && sdAlpha > 0) {
+        if (ctx && sdItems && sdAlpha > 0) {
             const fsz = setting('sliderSongDataFontSize'), ic = setting('sliderSongDataIconSize'), gIc = setting('sliderSongDataIconGap'), gIt = setting('sliderSongDataItemGap');
             ctx.globalAlpha = setting('sliderSongDataOpacity') * sdAlpha; // sdAlpha: the fade when the Song Data button is switched on / off
             ctx.fillStyle = ctx.strokeStyle = setting('colorSongData');
@@ -705,9 +732,12 @@ export function createTimeline(canvas, data) {
                 x += ic + gIc + it.tw + gIt;
             });
         }
+        }
 
         // axis
         // Timeline Scale: the scale numbers and the tick marks each have their own settings
+        { const ctx = layerCtx('scale');
+        if (ctx) {
         const numFont = `${setting('checkboxScaleNumbersBold') ? 'bold ' : ''}${setting('sliderScaleNumbersFontSize')}px system-ui, sans-serif`;
         // a tick stands on its bottom edge, which sits Start Height above the scale line, and rises Height upward from there
         const tickBottom = h - axisH - setting('sliderTickStartHeight'); // negative values put the tick below the scale line
@@ -725,18 +755,25 @@ export function createTimeline(canvas, data) {
             ctx.fillText(t.text, t.x + setting('sliderScaleNumbersOffsetX'), h - 4);
         });
         ctx.letterSpacing = '0px';
+        }
+        }
 
-        if (!ticksBehind) drawSongTicks(ctx);
-
-        // playhead
+        // playhead (the scrub line)
+        { const ctx = layerCtx('scrub');
+        if (ctx) {
         ctx.globalAlpha = phOpacity();
         ctx.fillStyle = playheadColor;
         const phW = playheadW(), phH = Math.max(1, ((h - axisH) * setting('sliderPlayheadHeight')) / 100);
         const phBottom = (h - axisH) - Math.max(0, setting('sliderPlayheadStartHeight'));
         ctx.fillRect(Math.round(xOf(posToVt(pos)) - phW / 2), phBottom - phH, phW, phH);
+        }
+        }
+
+        // Graph switched off in the render-order list: the canvas stays (it is what takes the clicks) but draws nothing
+        if (!isOn('graph')) ctx.clearRect(0, -oy, w, cssH);
 
         // Album Colour Transition: the frame from before the change, fading out over the duration on top of the new frame
-        if (colorFade) {
+        if (colorFade && isOn('graph')) {
             const k = Math.min(1, (performance.now() - colorFade.t0) / colorFade.dur);
             ctx.save();
             ctx.setTransform(1, 0, 0, 1, 0, 0);

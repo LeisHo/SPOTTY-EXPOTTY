@@ -1121,7 +1121,7 @@
     .dev-lp-row-handle:hover { opacity: 1; }
     .dev-lp-row-handle:active { cursor: grabbing; }
     .dev-lp-row-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .dev-lp-export-checkbox { accent-color: var(--dev-accent-color, #0ff); cursor: pointer; flex-shrink: 0; }
+    .dev-lp-export-checkbox, .dev-lp-vis-checkbox { accent-color: var(--dev-accent-color, #0ff); cursor: pointer; flex-shrink: 0; }
     .dev-lp-group { margin-left: 4px; }
     .dev-lp-group-header {
         display: flex;

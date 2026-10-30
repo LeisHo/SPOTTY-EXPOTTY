@@ -22,6 +22,7 @@ import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLog
 import { cleanTitle } from './app/title.mjs';
 import { applyCustomIcons } from './app/iconImport.js';
 import { initTitleAnim } from './app/titleAnim.js';
+import { applyRenderOrder } from './app/renderOrder.js';
 import { createBackground } from './app/background.js';
 import { createFilter } from './app/filter.js';
 import { createBgAnimation } from './app/bgAnimation.js';
@@ -62,8 +63,9 @@ async function boot() {
                 order than the element anchored to it, so title / artist / album line / prev / next can all be anchored to the cover. Its z-index (0) keeps it under the text (2). -->
             <button class="ui-element spx-cover bs-host" id="spxCover" type="button" aria-label="Play">
                 <img id="spxCoverImg" alt="" draggable="false" crossorigin="anonymous">
-                <span class="spx-play-glyph"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M7 4l13 8-13 8z"/><path class="ico-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></span>
             </button>
+            <!-- the play / pause glyph is NOT inside the cover: it is its own item in the render-order list. It sits exactly over the cover (CSS anchor positioning, see syncGlyph) -->
+            <span class="spx-play-glyph bs-host" id="spxPlayGlyph"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M7 4l13 8-13 8z"/><path class="ico-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></span>
             <div class="ui-element spx-title" id="spxTitle"><a id="spxTitleLink" target="_blank" rel="noopener noreferrer">Loading…</a></div>
             <div class="ui-element spx-artist" id="spxArtist"></div>
             <div class="ui-element spx-meta" id="spxMeta"></div>
@@ -479,6 +481,20 @@ async function boot() {
             else if (!h.matches(':hover')) h.classList.remove('bs-hover');
         });
     });
+    // The play glyph is a sibling of the cover, not a child: it copies the cover's state classes (hover / press / release / playing) and sits exactly over it.
+    // CSS anchor positioning follows the cover's own scale and offset; the cover's anchor-name is whatever the layout engine gave it (or one set here if it has none).
+    {
+        const cover = el('spxCover'), glyph = el('spxPlayGlyph');
+        const mirror = () => ['bs-hover', 'bs-press', 'bs-release', 'playing'].forEach(c => glyph.classList.toggle(c, cover.classList.contains(c)));
+        const syncGlyph = () => {
+            let n = (cover.style.getPropertyValue('anchor-name') || '').split(',')[0].trim();
+            if (!n) { n = '--spx-cover-self'; cover.style.setProperty('anchor-name', n); }
+            const set = (k, v) => { if (glyph.style.getPropertyValue(k) !== v) glyph.style.setProperty(k, v); };
+            set('position-anchor', n); set('left', 'anchor(left)'); set('top', 'anchor(top)'); set('right', 'anchor(right)'); set('bottom', 'anchor(bottom)');
+        };
+        new MutationObserver(() => { mirror(); syncGlyph(); }).observe(cover, { attributes: true, attributeFilter: ['class', 'style'] });
+        mirror(); syncGlyph();
+    }
     // hover / press / release state classes for the styled buttons (the CSS does the animating)
     [['Play', [el('spxCover')]], ['Nav', [el('spxPrev'), el('spxNext')]], ['Shuffle', [el('spxShuffle')]], ['Volume', [el('spxVolume').querySelector('.spx-vol-btn')]]].forEach(([P, hosts]) => hosts.forEach(h => {
         h.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') h.classList.add('bs-hover'); });
@@ -682,6 +698,7 @@ async function boot() {
         // kind 'plain': a button with its own inline-free styling (Shuffle, Volume), undone by removing the inline properties.
         const targets = [
             { k: 'Play', host: el('spxCover'), kind: 'bs' },
+            { k: 'Play', host: el('spxPlayGlyph'), kind: 'bs' },
             { k: 'Next', host: el('spxNext'), kind: 'bs' },
             { k: 'Last', host: el('spxPrev'), kind: 'bs' },
             { k: 'Shuffle', host: el('spxShuffle'), kind: 'plain', opVar: '--spx-shuffle-off-op', onVar: '--spx-shuffle-on-op' }, // Shuffle's CSS picks the off / on variable from aria-pressed
@@ -714,6 +731,7 @@ async function boot() {
     }
     const applyLook = () => {
         const scale = (id, v) => el('spxApp').style.setProperty(id, String(v));
+        applyRenderOrder(); // dev panel > UI Layout > Visibility / Render Order: z-index + visibility of every item (the timeline's own layers read it in draw())
         { const t = testTextOn(), sig = [t, t && setting('textTestSong'), t && setting('textTestArtist'), t && setting('textTestAlbum')].join(''); if (songs[idx] && sig !== textSig) renderText(); }
         applyTextElementStyles();
         // Shows Spotify's own player so you can see whether it says "Log in" / "Preview" and log in INSIDE it.
@@ -727,7 +745,7 @@ async function boot() {
         });
         // Album cover scale + offset are visual only (they never move other elements); the prev/next buttons follow its Y offset.
         // Play Button + Next And Last Song Buttons (UI Layout): CSS variables on each host; off = the defaults in app.css (Nav) / no glyph (Play)
-        applyButtonStyle('Play', [el('spxCover')]);
+        applyButtonStyle('Play', [el('spxCover'), el('spxPlayGlyph')]);
         applyButtonStyle('Nav', [el('spxPrev'), el('spxNext')]);
         el('spxApp').classList.toggle('no-play-glyph', !setting('checkboxPlayButtonEnabled'));
         // Shadow sets: one CSS variable each, read by app.css. Angle 90 = straight down; x and y come from depth and angle.
@@ -832,7 +850,7 @@ async function boot() {
         el('spxVolume').style.translate = (setting('sliderVolEdgeOffset') - 14) + 'px 0px'; // the whole volume UI; 14 px is the layout's own left offset
         applyNavIcon(el('spxPrev').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), true);
         applyNavIcon(el('spxNext').querySelector('svg'), iconIndex(setting('selectNavIconStyle')), false);
-        applyCoverGlyph(el('spxCover').querySelector('.spx-play-glyph svg'), iconIndex(setting('selectPlayIconStyle')), iconIndex(setting('selectPauseIconStyle')));
+        applyCoverGlyph(el('spxPlayGlyph').querySelector('svg'), iconIndex(setting('selectPlayIconStyle')), iconIndex(setting('selectPauseIconStyle')));
         applyPlayIcon(el('spxStartBtn').querySelector('svg'), iconIndex(setting('selectPlayIconStyle')));
         // drop shadows (UI Layout > Shadows): each is a class that switches its shadow off in app.css
         [['checkboxShadowCover', 'no-shadow-cover'], ['checkboxShadowVolume', 'no-shadow-vol'], ['checkboxShadowNav', 'no-shadow-nav']].forEach(([id, cls]) => el('spxApp').classList.toggle(cls, !setting(id)));
@@ -840,6 +858,7 @@ async function boot() {
         el('spxApp').classList.toggle('show-cover-bbox', !!setting('checkboxCoverBoundingBox'));
         const cvEl = el('spxCover');
         cvEl.style.scale = String(setting('sliderCoverScale'));
+        el('spxPlayGlyph').style.setProperty('--spx-cover-scale', String(setting('sliderCoverScale')));
         cvEl.style.translate = `${setting('sliderCoverOffsetX')}px ${setting('sliderCoverOffsetY')}px`;
         keepCoverCentred();
         placeNav();
@@ -1556,6 +1575,7 @@ async function boot() {
     // once at the end instead ('spx-devrows-ready' below). Running applyLook() for each of them took ~30 s on the owner's saved settings.
     document.addEventListener('input', () => { if (!window.__spxBulkApply) applyLook(); });
     document.addEventListener('change', () => { if (!window.__spxBulkApply) applyLook(); });
+    window.addEventListener('spx-render-order', () => { applyRenderOrder(); timeline.draw(); }); // the Visibility / Render Order list changed (dev panel)
     document.addEventListener('spx-devrows-ready', applyLook); // see devPanel.js: twin rows exist only after the saved state is restored
 
     setInterval(() => {

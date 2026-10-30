@@ -2761,6 +2761,7 @@
         // unregistered desktopId (not a real control at all) short-
         // circuits here now.
         if (!desktopCtrl) return existingId || null;
+        if (desktopCtrl.type === 'list-picker') return null; // an item selector is data, never a per-device twin (its id has no device prefix, so a twin would be a duplicate id)
         const visible = isDevRowVisible(desktopId);
         if (!visible) {
             if (existingId) {
@@ -3482,6 +3483,36 @@
     function lpCommit(entry) {
         const hidden = document.getElementById(entry.ctrl.id);
         if (hidden) hidden.value = JSON.stringify({ items: entry.items, groupOrder: entry.groupOrder || [], defaultName: entry.defaultName || null });
+        // visibilityMode (SPOTTY EXPOTTY, 2026-10-30): every change to the list (a checkbox, a drag, a rename) also tells the owner of the list.
+        if (entry.ctrl.visibilityMode) {
+            if (entry.listEl && entry.listEl.isConnected) lpRefreshVisGroups(entry);
+            if (entry.ctrl.onChange) entry.ctrl.onChange(entry);
+        }
+    }
+    // visibilityMode: the path of a group element, worked out from the live DOM (a dragged group's __groupName is stale until the next render).
+    function lpGroupPathOf(groupEl) {
+        const leaf = groupEl.__groupName.split(LP_GROUP_PATH_SEP).pop();
+        const parent = groupEl.parentElement ? groupEl.parentElement.closest('.dev-lp-group') : null;
+        return parent ? lpGroupPathOf(parent) + LP_GROUP_PATH_SEP + leaf : leaf;
+    }
+    // visibilityMode: each group's checkbox is a tri-state over every item under it; a row's checkbox shows its own item.on.
+    function lpRefreshVisGroups(entry) {
+        entry.listEl.querySelectorAll('.dev-lp-row').forEach(r => { const c = r.querySelector(':scope > .dev-lp-vis-checkbox'); if (c && r.__item) c.checked = r.__item.on !== false; });
+        entry.listEl.querySelectorAll('.dev-lp-group').forEach(g => {
+            const c = g.querySelector(':scope > .dev-lp-group-header > .dev-lp-group-vis-checkbox');
+            if (!c) return;
+            const path = lpGroupPathOf(g), its = lpItemsUnderGroup(entry, path), onCount = its.filter(it => it.on !== false).length;
+            c.indeterminate = onCount > 0 && onCount < its.length;
+            c.checked = its.length > 0 && onCount === its.length;
+        });
+    }
+    // visibilityMode: the saved list is merged with the code's own item list, so an item added later appears (at the end) and a removed one disappears.
+    function lpMergeCanonical(ctrl, list) {
+        const canon = ctrl.canonicalItems(), byKey = new Map(canon.map(c => [c.key, c]));
+        const out = [], seen = new Set();
+        list.forEach(it => { const c = it && byKey.get(it.key); if (c && !seen.has(it.key)) { seen.add(it.key); out.push(Object.assign({}, it, { name: c.name })); } });
+        canon.forEach(c => { if (!seen.has(c.key)) out.push(Object.assign({}, c)); });
+        return out;
     }
     // Updates the "Default: X" / "No default set" text under a list-picker
     // and the star marker on its own row — called after every mutation
@@ -3517,6 +3548,19 @@
         handle.className = 'dev-lp-row-handle';
         handle.textContent = '⠿';
         row.appendChild(handle);
+        if (entry.ctrl.visibilityMode) { // the checkbox is VISIBILITY; the handle (drag) is the order
+            const vcb = document.createElement('input');
+            vcb.type = 'checkbox';
+            vcb.className = 'dev-lp-vis-checkbox';
+            vcb.checked = item.on !== false;
+            vcb.addEventListener('click', (e) => e.stopPropagation());
+            vcb.addEventListener('change', () => {
+                const targets = entry.multiSelected.size > 1 && entry.multiSelected.has(item) ? Array.from(entry.multiSelected) : [item];
+                targets.forEach(it => { it.on = vcb.checked; });
+                lpCommit(entry);
+            });
+            row.appendChild(vcb);
+        }
         if (entry.ctrl.exportable) {
             const cb = document.createElement('input');
             cb.type = 'checkbox';
@@ -3642,6 +3686,18 @@
         handle.className = 'dev-lp-group-handle';
         handle.textContent = '⠿';
         header.appendChild(handle);
+        if (entry.ctrl.visibilityMode) {
+            const gcb = document.createElement('input');
+            gcb.type = 'checkbox';
+            gcb.className = 'dev-lp-vis-checkbox dev-lp-group-vis-checkbox';
+            gcb.addEventListener('click', (e) => e.stopPropagation());
+            gcb.addEventListener('change', () => {
+                const groupEl = header.closest('.dev-lp-group');
+                lpItemsUnderGroup(entry, lpGroupPathOf(groupEl)).forEach(it => { it.on = gcb.checked; });
+                lpCommit(entry);
+            });
+            header.appendChild(gcb);
+        }
         if (entry.ctrl.exportable) {
             const exportCb = document.createElement('input');
             exportCb.type = 'checkbox';
@@ -3939,6 +3995,18 @@
         // extra plumbing.
         const defaultBtn = mkBtn('Set Default');
         btnRow.append(saveBtn, overwriteBtn, useBtn, renameBtn, deleteBtn, defaultBtn, addGroupBtn);
+        if (ctrl.visibilityMode) { // an item selector of FIXED items: only grouping (+ Group) and a reset make sense, no Save/Use/Rename/Delete/Default/Import/Export
+            [saveBtn, overwriteBtn, useBtn, renameBtn, deleteBtn, defaultBtn].forEach(b => { b.style.display = 'none'; });
+            const resetBtn = mkBtn('Reset Order (Keeps What Is Shown)');
+            resetBtn.addEventListener('click', () => {
+                const cur = new Map(entry.items.map(i => [i.key, i.on !== false]));
+                lpSetItems(entry, ctrl.canonicalItems().map(c => Object.assign(c, { on: cur.get(c.key) !== false })));
+                entry.groupOrder = []; entry.pendingGroups = []; entry.expandedGroups = new Set(); entry.selectedItem = null; entry.multiSelected = new Set();
+                renderLpRows(entry);
+                lpCommit(entry);
+            });
+            btnRow.appendChild(resetBtn);
+        }
         let exportBtn = null, importBtn = null;
         // Export/Import wrapped together in their own non-splitting
         // group (as ONE flex item of btnRow) — direct report 2026-09-28
@@ -4000,13 +4068,14 @@
         hidden.addEventListener('input', () => {
             let parsed;
             try { parsed = JSON.parse(hidden.value || '{}'); } catch (err) { parsed = {}; }
-            lpSetItems(entry, Array.isArray(parsed.items) ? parsed.items : []);
+            lpSetItems(entry, ctrl.visibilityMode && ctrl.canonicalItems ? lpMergeCanonical(ctrl, Array.isArray(parsed.items) ? parsed.items : []) : (Array.isArray(parsed.items) ? parsed.items : []));
             entry.groupOrder = Array.isArray(parsed.groupOrder) ? parsed.groupOrder : [];
             entry.defaultName = typeof parsed.defaultName === 'string' ? parsed.defaultName : null;
             entry.selectedItem = null;
             entry.multiSelected = new Set();
             renderLpRows(entry);
             lpRefreshDefaultIndicator(entry);
+            if (ctrl.visibilityMode) { lpRefreshVisGroups(entry); if (ctrl.onChange) ctrl.onChange(entry); }
             // CORRECTED 2026-10-15, direct clarification: "Default just
             // means the saving set on startup" — auto-apply fires on this
             // control's FIRST real restore only (the true page-load Sync
@@ -4242,6 +4311,7 @@
         if (ctrl.defaultName) entry.selectedItem = entry.items.find(it => it.name === ctrl.defaultName) || null;
         renderLpRows(entry);
         lpRefreshDefaultIndicator(entry);
+        if (ctrl.visibilityMode) { defaultIndicatorEl.style.display = 'none'; lpRefreshVisGroups(entry); ctrl.__entry = entry; }
         return row;
     }
     // {id, label, defaultPoints, defaultMethod?, caption?, maxPoints?,
@@ -8017,7 +8087,6 @@
             { tab, group: TL, id: 'sliderSongTickHeight', type: 'slider', label: 'Song Tick Height (Px, Grows Downward From The Graph; Upward When Inverted):', min: 0, max: 1200, step: 1, value: 3 },
             { tab, group: TL, id: 'checkboxSongTickInvert', type: 'checkbox', label: 'Invert Song Ticks (Point Upwards Into The Graph Instead Of Downward)', value: false },
             { tab, group: TL, id: 'checkboxSongTickBoth', type: 'checkbox', label: 'Song Ticks Both Sides (Symmetrical Above And Below The Graph Line; Overrides Invert)', value: false },
-            { tab, group: TL, id: 'checkboxTicksBehindBars', type: 'checkbox', label: 'Render Ticks Behind Everything Except The Background (Bars, Text, Album Cover; Off = In Front Of The Bars)', value: true },
             { tab, group: TL, id: 'checkboxSongTickClamp', type: 'checkbox', label: 'Clamp Tick Height To The Browser Window (Stops At The Window Edge The Ticks Grow Toward: Bottom For Normal, Top For Inverted, Both For Both Sides)', value: false },
             { tab, group: TL, id: 'sliderSongTickOpacity', type: 'slider', label: 'Song Tick Opacity (%):', min: 0, max: 100, step: 1, value: 90 },
             { tab, group: TL, id: 'sliderSongTickMinSpacing', type: 'slider', label: 'Song Ticks Start Showing At (Px Between Songs, Lower = Visible Further Zoomed Out):', min: 0.1, max: 40, step: 0.1, value: 4 },
@@ -9245,6 +9314,52 @@
                 const trRow = (document.getElementById(withDevice('sliderTimelineHeightTransitionMs', dev)) || document.getElementById('sliderTimelineHeightTransitionMs'));
                 if (tr && trRow && trRow.closest('.dev-row')) trRow.closest('.dev-row').style.display = tr.checked ? '' : 'none';
             });
+        }
+        // ---- UI Layout > Visibility / Render Order (first subgroup) ---------------------------------------------------
+        // ONE item selector for everything on screen. The checkbox on an item (or a group) is its VISIBILITY; dragging the handle reorders: the item at the TOP
+        // of the list renders in front of everything below it. Items that already have an "Enabled" checkbox elsewhere in this panel are LINKED to it both ways
+        // (the third entry); the rest are shown / hidden by renderOrder.js. src/app/renderOrder.js carries the same keys, in the same default order.
+        const RO_ITEMS = [
+            ['volume', 'Volume Button'], ['shuffle', 'Shuffle Button', 'checkboxShuffleButtonEnabled'], ['songdatabtn', 'Song Data Button', 'checkboxSongDataEnabled'],
+            ['filter', 'Filter Button', 'checkboxFilterButtonEnabled'], ['nav', 'Next And Last Song Buttons'], ['songbar', 'Song Timeline (Under The Cover)', 'checkboxSongBarEnabled'],
+            ['scrub', 'Scrub Line'], ['songdata', 'Song Data Text And Icons'], ['date', 'Song Add Date', 'checkboxSongAddDateEnabled'], ['scale', 'Timeline Scale (Numbers And Ticks)'],
+            ['graph', 'Graph'], ['meta', 'Album And Date Line', 'checkboxTxtAlbumDateEnabled'], ['artist', 'Artist', 'checkboxTxtArtistEnabled'], ['title', 'Song Title', 'checkboxTxtSongTitleEnabled'],
+            ['play', 'Play Button', 'checkboxPlayButtonEnabled'], ['cover', 'Album Cover'], ['ticks', 'Song Ticks'], ['bgfx', 'Background Animation'], ['bg', 'Background'],
+        ];
+        const RO = 'Visibility / Render Order';
+        const roGroupEl = createDevGroupElement(RO, tab);
+        uiLayoutContent.insertBefore(roGroupEl, uiLayoutContent.firstChild);
+        const roCanon = () => RO_ITEMS.map(([key, name]) => ({ key, name, on: true }));
+        const RO_LINK_BY_ID = {}, RO_LINK_BY_KEY = {};
+        RO_ITEMS.forEach(([key, , link]) => { if (link) { RO_LINK_BY_ID[link] = key; RO_LINK_BY_KEY[key] = link; } });
+        const RO_CTRL = {
+            tab, group: RO, id: 'listPickerRenderOrder', type: 'list-picker', label: 'Top Of The List = In Front:', itemLabel: 'Item',
+            visibilityMode: true, canonicalItems: roCanon, value: roCanon(), skipDeviceCheckbox: true,
+            captureCurrent: () => ({}), onUse: () => {},
+            onChange: entry => { // list -> the linked Enabled checkboxes, then the app
+                entry.items.forEach(it => {
+                    const id = RO_LINK_BY_KEY[it.key], cb = id && document.getElementById(id), want = it.on !== false;
+                    if (cb && cb.checked !== want) { cb.checked = want; cb.dispatchEvent(new Event('change', { bubbles: true })); }
+                });
+                window.dispatchEvent(new Event('spx-render-order'));
+            },
+        };
+        renderControlArray([RO_CTRL], 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_RENDER_ORDER', [RO_CTRL]);
+        // a linked Enabled checkbox changed (by hand, Undo, Reset, a restore): the list follows
+        document.addEventListener('change', e => {
+            const t = e.target, key = t && t.id && RO_LINK_BY_ID[t.id], entry = RO_CTRL.__entry;
+            if (!key || !entry) return;
+            const it = entry.items.find(i => i.key === key);
+            if (!it || (it.on !== false) === !!t.checked) return;
+            it.on = !!t.checked;
+            lpCommit(entry);
+        }, true);
+        // first build: the linked checkboxes already hold the real state (saved or default), so the list starts from them
+        if (RO_CTRL.__entry) {
+            let changed = false;
+            RO_CTRL.__entry.items.forEach(it => { const id = RO_LINK_BY_KEY[it.key], cb = id && document.getElementById(id); if (cb && (it.on !== false) !== !!cb.checked) { it.on = !!cb.checked; changed = true; } });
+            if (changed) lpCommit(RO_CTRL.__entry);
         }
         document.addEventListener('change', refreshSpottyModeVisibility);
         document.addEventListener('input', refreshSpottyModeVisibility);
