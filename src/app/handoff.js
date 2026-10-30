@@ -47,7 +47,7 @@ export function initSdkPlayer(onStatus) {
                 if (sdk.sdkReady()) { // it connected: play the waiting song, in full
                     clearPending();
                     logEvent('playback', 'SDK became ready: playing the song that was waiting for it (' + t + ')');
-                    sdk.sdkPlay(t).then(ok => { if (!ok && wantPlaying && loadedId === t) playViaEmbed(t); });
+                    sdk.sdkPlay(t).then(ok => { if (!ok && wantPlaying && loadedId === t) giveUpOn(t, sdk.sdkPlayRestricted() ? 'Spotify refuses this song (403 restriction)' : 'the first play request failed'); });
                 } else if (!sdk.sdkExpected()) { clearPending(); playViaEmbed(t); } // it failed: the iframe preview is all there is
             }
             if (onStatus) onStatus(s);
@@ -71,8 +71,10 @@ export const setOnEnded = fn => { endedHandler = fn; };
 const emit = () => listeners.forEach(fn => fn(playing));
 
 let lastDur = 0; // last non-zero duration (ms) the embed reported
+let embedLoadAt = 0; // performance.now() of the last loadUri sent to the iframe
 function handleUpdate(d) {
     lastEmbed = { position: d.position, duration: d.duration, paused: d.isPaused };
+    if (sdk.sdkReady()) return; // the SDK / a device is the player: the iframe is not in use and must not write the shared playing state (it made the play button flicker)
     const wasPlaying = playing;
     playing = !d.isPaused;
     if (d.duration > 0 && d.duration !== lastDur) {
@@ -89,8 +91,9 @@ function handleUpdate(d) {
     // last update with position == duration and isPaused still FALSE, then goes silent: it never
     // reports a pause. So the end is detected by the position reaching the duration. A plain
     // unrequested pause while playback is wanted is treated as an end too (belt and braces).
-    const atEnd = !d.isPaused && d.duration > 0 && d.position >= d.duration - 300;
-    const unrequestedStop = !playing && wasPlaying;
+    const settling = performance.now() - embedLoadAt < 3000; // loading another song makes the embed report a pause / the old song's last position: not an end
+    const atEnd = !settling && !d.isPaused && d.duration > 0 && d.position >= d.duration - 300;
+    const unrequestedStop = !settling && !playing && wasPlaying;
     if (wantPlaying && (atEnd || unrequestedStop) && performance.now() - lastRestart > 3000) {
         lastRestart = performance.now();
         if (endedHandler && endedHandler()) { logEvent('playback', 'EMBED reached the end: handled (shuffle moved to the next song)'); emit(); return; }
@@ -128,31 +131,43 @@ export function initEmbed(el, firstTrackId) {
     document.body.appendChild(s);
 }
 
+// A song Spotify would not play is not asked for again for a minute (the handoff re-fires on every scrub stop, and each ask used to start the retry chain again).
+const unplayable = new Map(); // track id -> performance.now() when it was given up
+const isUnplayable = id => unplayable.has(id) && performance.now() - unplayable.get(id) < 60000;
+function giveUpOn(trackId, why) {
+    unplayable.set(trackId, performance.now());
+    logEvent('playback', 'GAVE UP on ' + trackId + ': ' + why + ' (no iframe fallback while the Spotify player is in use)');
+    sdk.sdkPause();
+}
 export function playTrack(trackId, positionMs = 0) {
     wantPlaying = true;
+    if (sdk.sdkReady() && isUnplayable(trackId)) { loadedId = trackId; logEvent('playback', 'skipped ' + trackId + ': Spotify refused it a moment ago'); return false; }
     if (sdk.sdkReady()) {
         loadedId = trackId; queued = null;
         if (controller) { try { controller.pause(); } catch (e) { /* embed not ready */ } } // only one player plays
         clearPending();
         requestAt = performance.now(); audibleLogged = false;
-        // A play request that fails right after the SDK's own pause command (or before its device is known) is retried once after 700 ms; only if that fails
-        // too does the iframe play the song (and the SDK's old song is paused so it does not play on).
+        // A play request that fails right after the SDK's own pause command (or before its device is known) is retried once after 700 ms. A 403 (Spotify refuses
+        // the song itself) is not retried. Either way there is NO iframe fallback here: logged in, the only sound is the Spotify song, and with a device as the target
+        // the iframe would play a 30 s preview in the browser next to it.
         sdk.sdkPlay(trackId, positionMs).then(ok => {
             if (ok || !wantPlaying || loadedId !== trackId) return;
+            if (sdk.sdkPlayRestricted()) { giveUpOn(trackId, 'Spotify refuses this song (403 restriction)'); return; }
             logEvent('playback', 'SDK play request failed: retrying once in 700 ms');
             setTimeout(() => {
                 if (!wantPlaying || loadedId !== trackId) return;
-                sdk.sdkPlay(trackId, positionMs).then(ok2 => { if (!ok2 && wantPlaying && loadedId === trackId) { sdk.sdkPause(); playViaEmbed(trackId); } });
+                sdk.sdkPlay(trackId, positionMs).then(ok2 => { if (!ok2 && wantPlaying && loadedId === trackId) giveUpOn(trackId, sdk.sdkPlayRestricted() ? 'Spotify refuses this song (403 restriction)' : 'the play request failed twice'); });
             }, 700);
         });
-        // A play request can be accepted and still not switch the song. If the SDK still reports another track 3 s later, ask once more; if it still
-        // has not switched 3 s after that, let the iframe play it and stop the SDK.
-        const stillOld = () => wantPlaying && loadedId === trackId && actualId !== trackId && actualLinkedId !== trackId;
+        // A play request can be accepted and still not switch the song. "Not switched" means the player still reports the SAME track as when we asked: a different id
+        // is a switch (Spotify can report a regional copy of the song under another id, with no linked_from). Ask once more after 3 s; give up 3 s after that.
+        const before = actualId;
+        const stillOld = () => wantPlaying && loadedId === trackId && !isUnplayable(trackId) && actualId !== trackId && actualLinkedId !== trackId && actualId === before;
         setTimeout(() => {
             if (!stillOld()) return;
             logEvent('playback', 'SDK did not switch to ' + trackId + ' within 3 s (it still reports ' + actualId + '): asking again');
-            sdk.sdkPlay(trackId, positionMs).then(ok => { if (!ok && stillOld()) { sdk.sdkPause(); playViaEmbed(trackId); } });
-            setTimeout(() => { if (stillOld()) { logEvent('playback', 'SDK still on the old song: the iframe plays ' + trackId); sdk.sdkPause(); playViaEmbed(trackId); } }, 3000);
+            sdk.sdkPlay(trackId, positionMs).then(ok => { if (!ok && stillOld()) giveUpOn(trackId, sdk.sdkPlayRestricted() ? 'Spotify refuses this song (403 restriction)' : 'the play request failed'); });
+            setTimeout(() => { if (stillOld()) giveUpOn(trackId, 'the player never switched to it'); }, 3000);
         }, 3000);
         return true;
     }
@@ -168,7 +183,7 @@ export function playTrack(trackId, positionMs = 0) {
 function playViaEmbed(trackId) {
     wantPlaying = true;
     if (!controller) { queued = trackId; logEvent('playback', `EMBED playTrack ${trackId}: embed not ready yet, queued`); return false; }
-    loadedId = trackId;
+    loadedId = trackId; embedLoadAt = performance.now();
     logEvent('playback', `EMBED loadUri ${trackId} sent`);
     controller.loadUri('spotify:track:' + trackId);
     // play() is sent at once, still inside the click that started playback (a browser only lets the embed start while that click is fresh; a play() sent

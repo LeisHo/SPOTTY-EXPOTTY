@@ -60,7 +60,7 @@ export function sdkGiveUp(reason) { if (ready) return; failed = reason; loading 
 function fail(msg) { failed = msg; ready = false; loading = false; note('FAILED: ' + msg); setStatus(); }
 
 function onState(state) {
-    if (!state) return;
+    if (!state || target) return; // a Play On Device device is the target: this browser's own player (stale 'paused' events after its pause) must not overwrite the device's state
     const cur = state.track_window && state.track_window.current_track;
     // The SDK does not say "ended": a finished track shows up as paused at position 0 with the track moved into previous_tracks.
     const ended = lastState && !lastState.paused && state.paused && state.position === 0 && lastState.track_window.current_track
@@ -86,6 +86,8 @@ async function apiGet(path) {
     if (!r.ok) throw new Error('GET ' + path + ' -> ' + r.status);
     return r.json();
 }
+let lastPlayRestricted = false; // the last play request was refused with 403 "Restriction violated": Spotify refuses that song (it also did on a second device), so it is not retried and the device is not blamed
+export const sdkPlayRestricted = () => lastPlayRestricted;
 // Start a track on this device. On "device not found" (404) transfer playback and try once more.
 export async function sdkPlay(trackId, positionMs = 0) {
     if (!usable()) return false;
@@ -95,12 +97,12 @@ export async function sdkPlay(trackId, positionMs = 0) {
     try {
         try { await go(); }
         catch (e) { if (!/ 404 /.test(e.message)) throw e; note('play got 404 (device not found yet): transferring and retrying'); await transfer(); await new Promise(r => setTimeout(r, 400)); await go(); }
-        lastPlayError = null; note('play ' + trackId + ' requested' + (target ? ' on ' + target.name : '')); setStatus();
+        lastPlayError = null; lastPlayRestricted = false; note('play ' + trackId + ' requested' + (target ? ' on ' + target.name : '')); setStatus();
         if (target) { lastCmdAt = performance.now(); patchState({ paused: false, position: positionMs, id: trackId }); schedulePoll(900); }
         return true;
     } catch (e) {
-        lastPlayError = e.message.replace(/^PUT \S+ -> /, ''); note('play FAILED: ' + e.message); setStatus();
-        if (target && / (404|403) /.test(e.message)) loseDevice(target.name + ' did not answer (asleep or off?): back on this browser');
+        lastPlayError = e.message.replace(/^PUT \S+ -> /, ''); lastPlayRestricted = / 403 /.test(e.message); note('play FAILED: ' + e.message); setStatus();
+        if (target && / 404 /.test(e.message)) loseDevice(target.name + ' did not answer (asleep or off?): back on this browser');
         return false;
     }
 }
