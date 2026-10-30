@@ -8762,7 +8762,6 @@
             { tab, group: FLB, id: 'sliderFilterPanelRowsOffsetY', type: 'slider', label: 'Panel Slider Group Y Offset (Px):', min: -100, max: 100, step: 1, value: 0 },
             { tab, group: FLB, id: 'checkboxFilterPanelKeepVisible', type: 'checkbox', label: 'Keep The Filter Panel Visible:', value: false },
             { tab, group: FLB, id: 'sliderFilterPanelIconOffsetY', type: 'slider', label: 'Panel Icon Y Offset From Its Slider (Px):', min: -30, max: 80, step: 1, value: 0 },
-            { tab, group: FLB, id: 'sliderFilterPanelNumbersOffsetY', type: 'slider', label: 'Panel Numbers Y Offset From Their Slider (Px):', min: -30, max: 80, step: 1, value: 1 },
             { tab, group: FLB, id: 'sliderFilterPanelIconSize', type: 'slider', label: 'Panel Category Icon Size (Px):', min: 8, max: 120, step: 1, value: 20 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetY', type: 'slider', label: 'Panel Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },
@@ -8774,8 +8773,7 @@
         renderControlArray(FLB_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_FILTER_CONTROLS', FLB_CONTROLS);
         // "Panel": how the filter panel itself behaves (resize / scroll / drag)
-        const FPG = 'Panel';
-        findGroupContent(tab, FLB, 'renderSpottyDevControls', FPG).appendChild(createDevGroupElement(FPG, tab));
+        const FPG = FLB; // the old nested "Panel" group is gone (2026-10-30: the owner moved its settings out and it was left empty)
         const FPG_CONTROLS = [
             { tab, group: FPG, id: 'checkboxFilterPanelResizeX', type: 'checkbox', label: 'X Resize (Drag The Left And Right Edges; Double-Click An Edge To Reset)', value: true },
             { tab, group: FPG, id: 'checkboxFilterPanelResizeY', type: 'checkbox', label: 'Y Resize (Drag The Bottom Edge; Double-Click It To Reset)', value: true },

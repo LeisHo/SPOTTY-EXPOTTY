@@ -388,7 +388,6 @@
     "sliderFilterPanelRowsOffsetY": -24,
     "checkboxFilterPanelKeepVisible": true,
     "sliderFilterPanelIconOffsetY": -5,
-    "sliderFilterPanelNumbersOffsetY": 11,
     "sliderFilterPanelIconSize": 20,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": -28,
@@ -5846,17 +5845,12 @@
                                   {
                                     "type": "row",
                                     "key": "sliderFilterEdgeOffset"
-                                  },
-                                  {
-                                    "type": "row",
-                                    "key": "sliderFilterPanelNumbersOffsetY"
                                   }
                                 ],
                                 "rowKeys": [
                                   "sliderFilterIconOffsetY",
                                   "sliderFilterIconOffsetX",
-                                  "sliderFilterEdgeOffset",
-                                  "sliderFilterPanelNumbersOffsetY"
+                                  "sliderFilterEdgeOffset"
                                 ],
                                 "subgroups": []
                               }
@@ -5908,17 +5902,12 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterEdgeOffset"
-                                },
-                                {
-                                  "type": "row",
-                                  "key": "sliderFilterPanelNumbersOffsetY"
                                 }
                               ],
                               "rowKeys": [
                                 "sliderFilterIconOffsetY",
                                 "sliderFilterIconOffsetX",
-                                "sliderFilterEdgeOffset",
-                                "sliderFilterPanelNumbersOffsetY"
+                                "sliderFilterEdgeOffset"
                               ],
                               "subgroups": []
                             },
@@ -5959,6 +5948,14 @@
                             {
                               "type": "row",
                               "key": "checkboxFilterPanelResizable"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterPanelResizeX"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterPanelResizeY"
                             },
                             {
                               "type": "row",
@@ -6172,6 +6169,8 @@
                             "checkboxFilterPanelKeepVisible",
                             "checkboxFilterCloseOnOutside",
                             "checkboxFilterPanelResizable",
+                            "checkboxFilterPanelResizeX",
+                            "checkboxFilterPanelResizeY",
                             "checkboxFilterPanelScrollable",
                             "checkboxFilterPanelDraggable",
                             "sliderFilterPanelWidth",
@@ -6642,15 +6641,6 @@
                           ],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "desktop:Panel",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
                       }
                     ],
                     "rowKeys": [
@@ -6713,17 +6703,12 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterEdgeOffset"
-                                },
-                                {
-                                  "type": "row",
-                                  "key": "sliderFilterPanelNumbersOffsetY"
                                 }
                               ],
                               "rowKeys": [
                                 "sliderFilterIconOffsetY",
                                 "sliderFilterIconOffsetX",
-                                "sliderFilterEdgeOffset",
-                                "sliderFilterPanelNumbersOffsetY"
+                                "sliderFilterEdgeOffset"
                               ],
                               "subgroups": []
                             }
@@ -6775,17 +6760,12 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterEdgeOffset"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
                               }
                             ],
                             "rowKeys": [
                               "sliderFilterIconOffsetY",
                               "sliderFilterIconOffsetX",
-                              "sliderFilterEdgeOffset",
-                              "sliderFilterPanelNumbersOffsetY"
+                              "sliderFilterEdgeOffset"
                             ],
                             "subgroups": []
                           },
@@ -6823,6 +6803,14 @@
                           {
                             "type": "row",
                             "key": "checkboxFilterPanelResizable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizeX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizeY"
                           },
                           {
                             "type": "row",
@@ -7036,6 +7024,8 @@
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
                           "checkboxFilterPanelResizable",
+                          "checkboxFilterPanelResizeX",
+                          "checkboxFilterPanelResizeY",
                           "checkboxFilterPanelScrollable",
                           "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
@@ -7498,12 +7488,6 @@
                           "sliderFilterClickTolerance",
                           "sliderFilterHoverTolerance"
                         ],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "desktop:Panel",
-                        "items": [],
-                        "rowKeys": [],
                         "subgroups": []
                       }
                     ]
@@ -9217,17 +9201,12 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterEdgeOffset"
-                                },
-                                {
-                                  "type": "row",
-                                  "key": "sliderFilterPanelNumbersOffsetY"
                                 }
                               ],
                               "rowKeys": [
                                 "sliderFilterIconOffsetY",
                                 "sliderFilterIconOffsetX",
-                                "sliderFilterEdgeOffset",
-                                "sliderFilterPanelNumbersOffsetY"
+                                "sliderFilterEdgeOffset"
                               ],
                               "subgroups": []
                             }
@@ -9279,17 +9258,12 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterEdgeOffset"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
                               }
                             ],
                             "rowKeys": [
                               "sliderFilterIconOffsetY",
                               "sliderFilterIconOffsetX",
-                              "sliderFilterEdgeOffset",
-                              "sliderFilterPanelNumbersOffsetY"
+                              "sliderFilterEdgeOffset"
                             ],
                             "subgroups": []
                           },
@@ -9330,6 +9304,14 @@
                           {
                             "type": "row",
                             "key": "checkboxFilterPanelResizable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizeX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizeY"
                           },
                           {
                             "type": "row",
@@ -9543,6 +9525,8 @@
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
                           "checkboxFilterPanelResizable",
+                          "checkboxFilterPanelResizeX",
+                          "checkboxFilterPanelResizeY",
                           "checkboxFilterPanelScrollable",
                           "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
@@ -10013,15 +9997,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:Panel",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
                     }
                   ],
                   "rowKeys": [
@@ -10084,17 +10059,12 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterEdgeOffset"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
                               }
                             ],
                             "rowKeys": [
                               "sliderFilterIconOffsetY",
                               "sliderFilterIconOffsetX",
-                              "sliderFilterEdgeOffset",
-                              "sliderFilterPanelNumbersOffsetY"
+                              "sliderFilterEdgeOffset"
                             ],
                             "subgroups": []
                           }
@@ -10146,17 +10116,12 @@
                             {
                               "type": "row",
                               "key": "sliderFilterEdgeOffset"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterPanelNumbersOffsetY"
                             }
                           ],
                           "rowKeys": [
                             "sliderFilterIconOffsetY",
                             "sliderFilterIconOffsetX",
-                            "sliderFilterEdgeOffset",
-                            "sliderFilterPanelNumbersOffsetY"
+                            "sliderFilterEdgeOffset"
                           ],
                           "subgroups": []
                         },
@@ -10194,6 +10159,14 @@
                         {
                           "type": "row",
                           "key": "checkboxFilterPanelResizable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizeX"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizeY"
                         },
                         {
                           "type": "row",
@@ -10407,6 +10380,8 @@
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
                         "checkboxFilterPanelResizable",
+                        "checkboxFilterPanelResizeX",
+                        "checkboxFilterPanelResizeY",
                         "checkboxFilterPanelScrollable",
                         "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
@@ -10869,12 +10844,6 @@
                         "sliderFilterClickTolerance",
                         "sliderFilterHoverTolerance"
                       ],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "desktop:Panel",
-                      "items": [],
-                      "rowKeys": [],
                       "subgroups": []
                     }
                   ]
@@ -16281,17 +16250,12 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterEdgeOffset"
-                                },
-                                {
-                                  "type": "row",
-                                  "key": "sliderFilterPanelNumbersOffsetY"
                                 }
                               ],
                               "rowKeys": [
                                 "sliderFilterIconOffsetY",
                                 "sliderFilterIconOffsetX",
-                                "sliderFilterEdgeOffset",
-                                "sliderFilterPanelNumbersOffsetY"
+                                "sliderFilterEdgeOffset"
                               ],
                               "subgroups": []
                             }
@@ -16343,17 +16307,12 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterEdgeOffset"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
                               }
                             ],
                             "rowKeys": [
                               "sliderFilterIconOffsetY",
                               "sliderFilterIconOffsetX",
-                              "sliderFilterEdgeOffset",
-                              "sliderFilterPanelNumbersOffsetY"
+                              "sliderFilterEdgeOffset"
                             ],
                             "subgroups": []
                           },
@@ -16394,6 +16353,14 @@
                           {
                             "type": "row",
                             "key": "checkboxFilterPanelResizable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizeX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizeY"
                           },
                           {
                             "type": "row",
@@ -16607,6 +16574,8 @@
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
                           "checkboxFilterPanelResizable",
+                          "checkboxFilterPanelResizeX",
+                          "checkboxFilterPanelResizeY",
                           "checkboxFilterPanelScrollable",
                           "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
@@ -17077,15 +17046,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:Panel",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
                     }
                   ],
                   "rowKeys": [
@@ -17148,17 +17108,12 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterEdgeOffset"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
                               }
                             ],
                             "rowKeys": [
                               "sliderFilterIconOffsetY",
                               "sliderFilterIconOffsetX",
-                              "sliderFilterEdgeOffset",
-                              "sliderFilterPanelNumbersOffsetY"
+                              "sliderFilterEdgeOffset"
                             ],
                             "subgroups": []
                           }
@@ -17210,17 +17165,12 @@
                             {
                               "type": "row",
                               "key": "sliderFilterEdgeOffset"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterPanelNumbersOffsetY"
                             }
                           ],
                           "rowKeys": [
                             "sliderFilterIconOffsetY",
                             "sliderFilterIconOffsetX",
-                            "sliderFilterEdgeOffset",
-                            "sliderFilterPanelNumbersOffsetY"
+                            "sliderFilterEdgeOffset"
                           ],
                           "subgroups": []
                         },
@@ -17258,6 +17208,14 @@
                         {
                           "type": "row",
                           "key": "checkboxFilterPanelResizable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizeX"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizeY"
                         },
                         {
                           "type": "row",
@@ -17471,6 +17429,8 @@
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
                         "checkboxFilterPanelResizable",
+                        "checkboxFilterPanelResizeX",
+                        "checkboxFilterPanelResizeY",
                         "checkboxFilterPanelScrollable",
                         "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
@@ -17933,12 +17893,6 @@
                         "sliderFilterClickTolerance",
                         "sliderFilterHoverTolerance"
                       ],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "desktop:Panel",
-                      "items": [],
-                      "rowKeys": [],
                       "subgroups": []
                     }
                   ]
@@ -19652,17 +19606,12 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterEdgeOffset"
-                              },
-                              {
-                                "type": "row",
-                                "key": "sliderFilterPanelNumbersOffsetY"
                               }
                             ],
                             "rowKeys": [
                               "sliderFilterIconOffsetY",
                               "sliderFilterIconOffsetX",
-                              "sliderFilterEdgeOffset",
-                              "sliderFilterPanelNumbersOffsetY"
+                              "sliderFilterEdgeOffset"
                             ],
                             "subgroups": []
                           }
@@ -19714,17 +19663,12 @@
                             {
                               "type": "row",
                               "key": "sliderFilterEdgeOffset"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterPanelNumbersOffsetY"
                             }
                           ],
                           "rowKeys": [
                             "sliderFilterIconOffsetY",
                             "sliderFilterIconOffsetX",
-                            "sliderFilterEdgeOffset",
-                            "sliderFilterPanelNumbersOffsetY"
+                            "sliderFilterEdgeOffset"
                           ],
                           "subgroups": []
                         },
@@ -19765,6 +19709,14 @@
                         {
                           "type": "row",
                           "key": "checkboxFilterPanelResizable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizeX"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizeY"
                         },
                         {
                           "type": "row",
@@ -19978,6 +19930,8 @@
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
                         "checkboxFilterPanelResizable",
+                        "checkboxFilterPanelResizeX",
+                        "checkboxFilterPanelResizeY",
                         "checkboxFilterPanelScrollable",
                         "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
@@ -20448,15 +20402,6 @@
                       ],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "desktop:Panel",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
                   }
                 ],
                 "rowKeys": [
@@ -20519,17 +20464,12 @@
                             {
                               "type": "row",
                               "key": "sliderFilterEdgeOffset"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterPanelNumbersOffsetY"
                             }
                           ],
                           "rowKeys": [
                             "sliderFilterIconOffsetY",
                             "sliderFilterIconOffsetX",
-                            "sliderFilterEdgeOffset",
-                            "sliderFilterPanelNumbersOffsetY"
+                            "sliderFilterEdgeOffset"
                           ],
                           "subgroups": []
                         }
@@ -20581,17 +20521,12 @@
                           {
                             "type": "row",
                             "key": "sliderFilterEdgeOffset"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterPanelNumbersOffsetY"
                           }
                         ],
                         "rowKeys": [
                           "sliderFilterIconOffsetY",
                           "sliderFilterIconOffsetX",
-                          "sliderFilterEdgeOffset",
-                          "sliderFilterPanelNumbersOffsetY"
+                          "sliderFilterEdgeOffset"
                         ],
                         "subgroups": []
                       },
@@ -20629,6 +20564,14 @@
                       {
                         "type": "row",
                         "key": "checkboxFilterPanelResizable"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterPanelResizeX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterPanelResizeY"
                       },
                       {
                         "type": "row",
@@ -20842,6 +20785,8 @@
                       "checkboxFilterPanelKeepVisible",
                       "checkboxFilterCloseOnOutside",
                       "checkboxFilterPanelResizable",
+                      "checkboxFilterPanelResizeX",
+                      "checkboxFilterPanelResizeY",
                       "checkboxFilterPanelScrollable",
                       "checkboxFilterPanelDraggable",
                       "sliderFilterPanelWidth",
@@ -21304,12 +21249,6 @@
                       "sliderFilterClickTolerance",
                       "sliderFilterHoverTolerance"
                     ],
-                    "subgroups": []
-                  },
-                  {
-                    "key": "desktop:Panel",
-                    "items": [],
-                    "rowKeys": [],
                     "subgroups": []
                   }
                 ]
@@ -28704,15 +28643,6 @@
                           "rowKeys": [],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "mobile:Panel",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
                       }
                     ],
                     "rowKeys": [],
@@ -28902,12 +28832,6 @@
                       },
                       {
                         "key": "mobile:Panel Song Count",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "mobile:Panel",
                         "items": [],
                         "rowKeys": [],
                         "subgroups": []
@@ -30147,15 +30071,6 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:Panel",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
                     }
                   ],
                   "rowKeys": [],
@@ -30345,12 +30260,6 @@
                     },
                     {
                       "key": "mobile:Panel Song Count",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "mobile:Panel",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -33591,15 +33500,6 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "mobile:Panel",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
                     }
                   ],
                   "rowKeys": [],
@@ -33789,12 +33689,6 @@
                     },
                     {
                       "key": "mobile:Panel Song Count",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "mobile:Panel",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -35034,15 +34928,6 @@
                       "rowKeys": [],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "mobile:Panel",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
                   }
                 ],
                 "rowKeys": [],
@@ -35232,12 +35117,6 @@
                   },
                   {
                     "key": "mobile:Panel Song Count",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  },
-                  {
-                    "key": "mobile:Panel",
                     "items": [],
                     "rowKeys": [],
                     "subgroups": []
@@ -39835,15 +39714,6 @@
                           "rowKeys": [],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "landscape:Panel",
-                          "items": [],
-                          "rowKeys": [],
-                          "subgroups": []
-                        }
                       }
                     ],
                     "rowKeys": [],
@@ -40033,12 +39903,6 @@
                       },
                       {
                         "key": "landscape:Panel Song Count",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      },
-                      {
-                        "key": "landscape:Panel",
                         "items": [],
                         "rowKeys": [],
                         "subgroups": []
@@ -41278,15 +41142,6 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:Panel",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
                     }
                   ],
                   "rowKeys": [],
@@ -41476,12 +41331,6 @@
                     },
                     {
                       "key": "landscape:Panel Song Count",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "landscape:Panel",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -44722,15 +44571,6 @@
                         "rowKeys": [],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "landscape:Panel",
-                        "items": [],
-                        "rowKeys": [],
-                        "subgroups": []
-                      }
                     }
                   ],
                   "rowKeys": [],
@@ -44920,12 +44760,6 @@
                     },
                     {
                       "key": "landscape:Panel Song Count",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    },
-                    {
-                      "key": "landscape:Panel",
                       "items": [],
                       "rowKeys": [],
                       "subgroups": []
@@ -46165,15 +45999,6 @@
                       "rowKeys": [],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "landscape:Panel",
-                      "items": [],
-                      "rowKeys": [],
-                      "subgroups": []
-                    }
                   }
                 ],
                 "rowKeys": [],
@@ -46363,12 +46188,6 @@
                   },
                   {
                     "key": "landscape:Panel Song Count",
-                    "items": [],
-                    "rowKeys": [],
-                    "subgroups": []
-                  },
-                  {
-                    "key": "landscape:Panel",
                     "items": [],
                     "rowKeys": [],
                     "subgroups": []
