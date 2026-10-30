@@ -7,7 +7,7 @@
 // button. Every on-screen element's position and scale is owned by the UI Layout Engine (lib/ui-engine).
 import {
     createUIElement, updateElement, setContextValue, getActiveContext, resolveAndApplyAll, captureAllLayoutConfigs, registerStorageBackend, loadLayoutConfig,
-    resetLayoutConfig, getElement,
+    resetLayoutConfig, getElement, resolveAndApply,
 } from '../lib/ui-engine/registry.mjs';
 import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
@@ -250,7 +250,15 @@ async function boot() {
         });
         return out;
     }
-    window.spxCaptureLayout = () => ({ ...captureAllLayoutConfigs(), __signV: SIGN_V });
+    // Stack Shown Buttons re-points a managed button's position while a button above it is hidden (see stackRepoint()); that is runtime only, so it is swapped back out of what is saved.
+    let stackReady = false; const stackSaved = new Map(); // button id -> { origJson: the position the owner set in the Inspector, applied: the one currently in use }
+    window.spxCaptureLayout = () => {
+        const swaps = [];
+        stackSaved.forEach((st, id) => { const e = getElement(id); if (e && JSON.stringify(e.layout.position) === st.applied) { swaps.push([e, e.layout.position]); e.layout.position = JSON.parse(st.origJson); } });
+        const snap = JSON.parse(JSON.stringify(captureAllLayoutConfigs()));
+        swaps.forEach(([e, pos]) => { e.layout.position = pos; });
+        return { ...snap, __signV: SIGN_V };
+    };
     // The saved layout can arrive before the timeline data does (timeline is created later), so the redraw goes through a hook set then.
     // CSS anchor positioning needs an anchor target to come EARLIER in the DOM than the element anchored to it, and the engine never moves DOM nodes. The owner can chain the
     // elements in any direction in the UI Layout Inspector (title above artist above album line above cover, or the reverse), so after any style change on an element the
@@ -276,8 +284,8 @@ async function boot() {
         Array.from(el('spxApp').children).filter(c => c.classList.contains('ui-element')).forEach(c => mo.observe(c, { attributes: true, attributeFilter: ['style'] }));
         queue();
     }
-    window.spxApplyLayout = state => { pendingLayout = state && state.__signV === SIGN_V ? (({ __signV, ...rest }) => rest)(state) : legacyToV2(state); loadLayoutConfig(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); };
-    window.spxResetLayout = () => { resetLayoutConfig(shippedLayout); resolveAndApplyAll(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); };
+    window.spxApplyLayout = state => { stackSaved.clear(); pendingLayout = state && state.__signV === SIGN_V ? (({ __signV, ...rest }) => rest)(state) : legacyToV2(state); loadLayoutConfig(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); if (stackReady) layoutStack(); };
+    window.spxResetLayout = () => { stackSaved.clear(); resetLayoutConfig(shippedLayout); resolveAndApplyAll(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); if (stackReady) layoutStack(); };
 
     // ---- data ----------------------------------------------------------------------
     let data;
@@ -1363,10 +1371,36 @@ async function boot() {
     // ---- Filter button (under Shuffle) + panel ----
     // Stack Shown Buttons: the right-hand buttons (Shuffle, Song Data, Filter, Search) and the left-hand ones (Play On Device, under Volume) are laid out one after the other in
     // the shown ones only, each box (icon + 20 px) directly under the previous one - the same spacing they have with everything on. Off = every button keeps its own fixed place.
+    const STACK_RIGHT = [['spxShuffle', 'checkboxShuffleButtonEnabled', 'sliderShuffleIconSize'], ['spxSongData', 'checkboxSongDataEnabled', 'sliderSongDataBtnSize'], ['spxFilter', 'checkboxFilterButtonEnabled', 'sliderFilterIconSize'], ['spxSearch', 'checkboxSearchButtonEnabled', 'sliderSearchIconSize']];
+    const STACK_LEFT = [['spxDevice', 'checkboxDeviceButtonEnabled', 'sliderDeviceIconSize']];
+    const STACK_ITEMS = [...STACK_RIGHT, ...STACK_LEFT], STACK_IDS = new Set(STACK_ITEMS.map(x => x[0]));
+    stackReady = true;
+    const stackShown = id => { const it = STACK_ITEMS.find(x => x[0] === id); return !!it && !!setting(it[1]); };
+    // A button the owner placed in the Inspector is anchored to another one ("relative" mode: Shuffle -> Song Data -> Filter ...). With Stack Shown Buttons on, a button whose anchor is
+    // hidden would lose its anchor; instead it is pointed at the nearest SHOWN button further up its chain (same offsets / gap, so the spacing is the one the owner set), or, when the
+    // chain ends at a hidden button that sits at the screen edge, takes over that button's position. Runtime only: stackSaved remembers what the owner set, and capture / Sync save that.
+    function stackRepoint(on) {
+        const posOf = id => { const e = getElement(id); return e && e.layout.position; };
+        const orig = id => { const p = posOf(id); if (!p) return null; const st = stackSaved.get(id); return st && JSON.stringify(p) === st.applied ? JSON.parse(st.origJson) : p; };
+        const want = new Map();
+        if (on) STACK_ITEMS.forEach(([id]) => {
+            if (!stackShown(id)) return;
+            const p = orig(id);
+            if (!p || p.mode !== 'relative' || !STACK_IDS.has(p.relativeTo)) return;
+            let t = p.relativeTo, edge = null;
+            for (let guard = 0; STACK_IDS.has(t) && !stackShown(t) && guard < 10; guard++) { const tp = orig(t); if (tp && tp.mode === 'relative') t = tp.relativeTo; else { edge = tp; break; } }
+            const next = edge ? JSON.parse(JSON.stringify(edge)) : t !== p.relativeTo ? { ...p, relativeTo: t } : null;
+            if (next) want.set(id, { origJson: JSON.stringify(p), applied: JSON.stringify(next), next });
+        });
+        const touched = [];
+        stackSaved.forEach((st, id) => { if (want.has(id)) return; const e = getElement(id); if (e && JSON.stringify(e.layout.position) === st.applied) { e.layout.position = JSON.parse(st.origJson); touched.push(id); } stackSaved.delete(id); });
+        want.forEach((w, id) => { const e = getElement(id); if (JSON.stringify(e.layout.position) !== w.applied) { e.layout.position = w.next; touched.push(id); } stackSaved.set(id, { origJson: w.origJson, applied: w.applied }); });
+        touched.forEach(id => resolveAndApply(id));
+    }
     function layoutStack() {
-        const RIGHT = [['spxShuffle', 'checkboxShuffleButtonEnabled', 'sliderShuffleIconSize'], ['spxSongData', 'checkboxSongDataEnabled', 'sliderSongDataBtnSize'], ['spxFilter', 'checkboxFilterButtonEnabled', 'sliderFilterIconSize'], ['spxSearch', 'checkboxSearchButtonEnabled', 'sliderSearchIconSize']];
-        const LEFT = [['spxDevice', 'checkboxDeviceButtonEnabled', 'sliderDeviceIconSize']];
+        const RIGHT = STACK_RIGHT, LEFT = STACK_LEFT;
         [...RIGHT, ...LEFT].forEach(([id]) => el(id).style.removeProperty('--spx-stack-top'));
+        stackRepoint(!!setting('checkboxStackShownButtons'));
         if (!setting('checkboxStackShownButtons')) return;
         const volIc = parseFloat(el('spxApp').style.getPropertyValue('--spx-vol-icon')) || 24;
         const box = ([id, , sz]) => { const b = el(id); return (b.classList.contains('ui-icon') ? parseFloat(b.style.getPropertyValue('--ui-icon-size')) || setting(sz) : setting(sz)) + 20; };
@@ -1377,6 +1411,9 @@ async function boot() {
     { // an icon size chosen in the UI Layout Inspector changes a button's box without going through applyLook: re-stack when any of them resizes
         const ro = new ResizeObserver(() => layoutStack());
         ['spxShuffle', 'spxSongData', 'spxFilter', 'spxSearch', 'spxDevice'].forEach(id => ro.observe(el(id)));
+        let q = false; const again = () => { if (q) return; q = true; requestAnimationFrame(() => { q = false; layoutStack(); }); };
+        const mo2 = new MutationObserver(again);
+        STACK_ITEMS.forEach(([id]) => mo2.observe(el(id), { attributes: true, attributeFilter: ['style'] }));
     }
     const filterBtn = el('spxFilter');
     flt = createFilter(songs, { host: document.body, onChange: o => { if (o && o.layout) placeFilterPanel(); else onFilterChanged(); } });
