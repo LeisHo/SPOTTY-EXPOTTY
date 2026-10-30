@@ -518,6 +518,7 @@
     "sliderFrameRateRefreshMs": 500,
     "checkboxLogPlayback": true,
     "checkboxLogPreload": true,
+    "checkboxLogPlayButton": true,
     "checkboxModEnabled": false,
     "sliderModTempo": 1,
     "sliderModKey": -3,
@@ -714,7 +715,7 @@
     "left": 35,
     "top": 97,
     "width": 708,
-    "height": 416
+    "height": 744
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -2028,6 +2029,10 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "checkboxLogPlayButton"
           }
         ],
         "rowKeys": [
@@ -2039,7 +2044,8 @@
           "buttonDebugPauseLogs",
           "colorFrameRateText",
           "sliderFrameRateRefreshMs",
-          "buttonDebugSnapshot"
+          "buttonDebugSnapshot",
+          "checkboxLogPlayButton"
         ],
         "subgroups": [
           {
@@ -50493,7 +50499,7 @@
     "desktop:TABS": true,
     "desktop:BUTTONS": true,
     "desktop:Hot Keys": true,
-    "desktop:Debug": true,
+    "desktop:Debug": false,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
