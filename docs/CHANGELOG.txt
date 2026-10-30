@@ -1432,3 +1432,12 @@ Owner: "for the search button gimme a drop down to select the icon. and i cant s
 Owner: add the Search button to Global Override, and every new button of this kind from now on. Global Override > "Search Button" tick-box (checkboxOverrideSearch, on by default like Filter / Play On Device),
 target in applyGlobalOverride() (main.js, kind 'plain', --spx-search-off-op / --spx-search-on-op). Verified locally: ticking Global Override sets Search's inline colour and off-opacity exactly as Filter's
 (opacity 0.8 read back; unticking the Search box clears it). The standing rule is in CLAUDE.md (new buttons get a Global Override tick-box).
+
+--------------------------------------------------------------------------------
+2026-10-30  -  later 28 (Play On Device: no browser clip when a song ends on the device)
+
+Owner report: after a song finishes while Play On Device is on, it sometimes glitches: sound in the app for a couple of seconds, then back on the device.
+Cause (from the code, NOT reproduced: no real device here): with a device target the browser keeps its own preview clips by design. When a song ended and the app moved on to the next one
+(shuffle on, or Loop Preview off), moveTo() started that song's 30 s clip in the browser at once, and the real song reached the device only after the play request and the poll (~1-2 s).
+Fix (main.js): onSongEnded sets `silentStep` while dp.active(); moveTo() then starts no clip (`noClip`) and doHandoff() does not wait for one. The device still gets the play request at once.
+Scrubbing and Next / Last still play clips as before. Syntax-checked and the page loads; the end-of-song path itself is untested (needs a real device). If it still happens, turn on the Playback Timing log and send it.
