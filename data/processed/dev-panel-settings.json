@@ -316,7 +316,7 @@
     "sliderDeviceOffOpacity": 45,
     "sliderDeviceOnOpacity": 100,
     "colorDeviceIcon": "#f2f2f2",
-    "colorDeviceOn": "#1db954",
+    "colorDeviceOn": "#ffffff",
     "checkboxDeviceMatchVolume": true,
     "checkboxDeviceKeepPlaying": true,
     "checkboxDeviceMuteClips": false,
@@ -413,8 +413,8 @@
     "checkboxFilterSongCountEnabled": true,
     "checkboxFilterSongCountTop": true,
     "sliderFilterSongCountFontSize": 19,
-    "sliderFilterSongCountOffsetX": 36,
-    "sliderFilterSongCountOffsetY": -33,
+    "sliderFilterSongCountOffsetX": 28,
+    "sliderFilterSongCountOffsetY": 18,
     "sliderFilterSongCountLetterSpacing": 1.3,
     "sliderFilterSongCountNumberGap": 11,
     "checkboxFilterSongCountBold": false,
@@ -5997,10 +5997,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "checkboxFilterPanelScrollBar"
-                            },
-                            {
-                              "type": "row",
                               "key": "checkboxFilterPanelDraggable"
                             },
                             {
@@ -6234,7 +6230,6 @@
                             "checkboxFilterPanelResizeX",
                             "checkboxFilterPanelResizeY",
                             "checkboxFilterPanelScrollable",
-                            "checkboxFilterPanelScrollBar",
                             "checkboxFilterPanelDraggable",
                             "sliderFilterPanelWidth",
                             "sliderFilterPanelOffsetX",
@@ -6927,10 +6922,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterPanelScrollBar"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterPanelDraggable"
                           },
                           {
@@ -7164,7 +7155,6 @@
                           "checkboxFilterPanelResizeX",
                           "checkboxFilterPanelResizeY",
                           "checkboxFilterPanelScrollable",
-                          "checkboxFilterPanelScrollBar",
                           "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
@@ -9508,10 +9498,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterPanelScrollBar"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterPanelDraggable"
                           },
                           {
@@ -9745,7 +9731,6 @@
                           "checkboxFilterPanelResizeX",
                           "checkboxFilterPanelResizeY",
                           "checkboxFilterPanelScrollable",
-                          "checkboxFilterPanelScrollBar",
                           "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
@@ -10438,10 +10423,6 @@
                         },
                         {
                           "type": "row",
-                          "key": "checkboxFilterPanelScrollBar"
-                        },
-                        {
-                          "type": "row",
                           "key": "checkboxFilterPanelDraggable"
                         },
                         {
@@ -10675,7 +10656,6 @@
                         "checkboxFilterPanelResizeX",
                         "checkboxFilterPanelResizeY",
                         "checkboxFilterPanelScrollable",
-                        "checkboxFilterPanelScrollBar",
                         "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
@@ -16712,10 +16692,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterPanelScrollBar"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterPanelDraggable"
                           },
                           {
@@ -16949,7 +16925,6 @@
                           "checkboxFilterPanelResizeX",
                           "checkboxFilterPanelResizeY",
                           "checkboxFilterPanelScrollable",
-                          "checkboxFilterPanelScrollBar",
                           "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
@@ -17642,10 +17617,6 @@
                         },
                         {
                           "type": "row",
-                          "key": "checkboxFilterPanelScrollBar"
-                        },
-                        {
-                          "type": "row",
                           "key": "checkboxFilterPanelDraggable"
                         },
                         {
@@ -17879,7 +17850,6 @@
                         "checkboxFilterPanelResizeX",
                         "checkboxFilterPanelResizeY",
                         "checkboxFilterPanelScrollable",
-                        "checkboxFilterPanelScrollBar",
                         "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
@@ -20223,10 +20193,6 @@
                         },
                         {
                           "type": "row",
-                          "key": "checkboxFilterPanelScrollBar"
-                        },
-                        {
-                          "type": "row",
                           "key": "checkboxFilterPanelDraggable"
                         },
                         {
@@ -20460,7 +20426,6 @@
                         "checkboxFilterPanelResizeX",
                         "checkboxFilterPanelResizeY",
                         "checkboxFilterPanelScrollable",
-                        "checkboxFilterPanelScrollBar",
                         "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
@@ -21153,10 +21118,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxFilterPanelScrollBar"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxFilterPanelDraggable"
                       },
                       {
@@ -21390,7 +21351,6 @@
                       "checkboxFilterPanelResizeX",
                       "checkboxFilterPanelResizeY",
                       "checkboxFilterPanelScrollable",
-                      "checkboxFilterPanelScrollBar",
                       "checkboxFilterPanelDraggable",
                       "sliderFilterPanelWidth",
                       "sliderFilterPanelOffsetX",
@@ -49693,19 +49653,19 @@
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
     "desktop:Filter Button": false,
-    "desktop:New Group (30)": true,
+    "desktop:New Group (30)": false,
     "desktop:New Group (29)": true,
     "desktop:New Group (16)": true,
-    "desktop:New Group (19)": true,
+    "desktop:New Group (19)": false,
     "desktop:New Group (24)": false,
-    "desktop:Panel Song Count": true,
+    "desktop:Panel Song Count": false,
     "desktop:New Group (18)": true,
     "desktop:New Group (23)": true,
     "desktop:New Group (20)": true,
     "desktop:New Group (22)": true,
     "desktop:New Group (21)": true,
     "desktop:New Group (17)": true,
-    "desktop:Play On Device": false,
+    "desktop:Play On Device": true,
     "desktop:Song Data": true,
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
