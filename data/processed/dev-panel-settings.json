@@ -308,15 +308,15 @@
     "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
     "checkboxDeviceButtonEnabled": true,
-    "selectDeviceIconStyle": "5",
-    "sliderDeviceIconSize": 28,
+    "selectDeviceIconStyle": "7",
+    "sliderDeviceIconSize": 25,
     "sliderDeviceIconOffsetX": 0,
-    "sliderDeviceIconOffsetY": 0,
+    "sliderDeviceIconOffsetY": 5,
     "sliderDeviceEdgeOffset": 0,
     "sliderDeviceOffOpacity": 45,
     "sliderDeviceOnOpacity": 100,
     "colorDeviceIcon": "#f2f2f2",
-    "colorDeviceOn": "#1db954",
+    "colorDeviceOn": "#ffffff",
     "checkboxDeviceMatchVolume": true,
     "checkboxDeviceKeepPlaying": true,
     "checkboxDeviceMuteClips": false,
@@ -7573,6 +7573,14 @@
                       },
                       {
                         "type": "row",
+                        "key": "colorDeviceIcon"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorDeviceOn"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderDeviceIconSize"
                       },
                       {
@@ -7594,14 +7602,6 @@
                       {
                         "type": "row",
                         "key": "sliderDeviceOnOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorDeviceIcon"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorDeviceOn"
                       },
                       {
                         "type": "row",
@@ -7678,14 +7678,14 @@
                     ],
                     "rowKeys": [
                       "selectDeviceIconStyle",
+                      "colorDeviceIcon",
+                      "colorDeviceOn",
                       "sliderDeviceIconSize",
                       "sliderDeviceIconOffsetX",
                       "sliderDeviceIconOffsetY",
                       "sliderDeviceEdgeOffset",
                       "sliderDeviceOffOpacity",
                       "sliderDeviceOnOpacity",
-                      "colorDeviceIcon",
-                      "colorDeviceOn",
                       "checkboxDeviceMatchVolume",
                       "checkboxDeviceKeepPlaying",
                       "checkboxDeviceMuteClips",
@@ -10991,6 +10991,14 @@
                     },
                     {
                       "type": "row",
+                      "key": "colorDeviceIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceOn"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderDeviceIconSize"
                     },
                     {
@@ -11012,14 +11020,6 @@
                     {
                       "type": "row",
                       "key": "sliderDeviceOnOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorDeviceIcon"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorDeviceOn"
                     },
                     {
                       "type": "row",
@@ -11096,14 +11096,14 @@
                   ],
                   "rowKeys": [
                     "selectDeviceIconStyle",
+                    "colorDeviceIcon",
+                    "colorDeviceOn",
                     "sliderDeviceIconSize",
                     "sliderDeviceIconOffsetX",
                     "sliderDeviceIconOffsetY",
                     "sliderDeviceEdgeOffset",
                     "sliderDeviceOffOpacity",
                     "sliderDeviceOnOpacity",
-                    "colorDeviceIcon",
-                    "colorDeviceOn",
                     "checkboxDeviceMatchVolume",
                     "checkboxDeviceKeepPlaying",
                     "checkboxDeviceMuteClips",
@@ -18108,6 +18108,14 @@
                     },
                     {
                       "type": "row",
+                      "key": "colorDeviceIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceOn"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderDeviceIconSize"
                     },
                     {
@@ -18129,14 +18137,6 @@
                     {
                       "type": "row",
                       "key": "sliderDeviceOnOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorDeviceIcon"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorDeviceOn"
                     },
                     {
                       "type": "row",
@@ -18213,14 +18213,14 @@
                   ],
                   "rowKeys": [
                     "selectDeviceIconStyle",
+                    "colorDeviceIcon",
+                    "colorDeviceOn",
                     "sliderDeviceIconSize",
                     "sliderDeviceIconOffsetX",
                     "sliderDeviceIconOffsetY",
                     "sliderDeviceEdgeOffset",
                     "sliderDeviceOffOpacity",
                     "sliderDeviceOnOpacity",
-                    "colorDeviceIcon",
-                    "colorDeviceOn",
                     "checkboxDeviceMatchVolume",
                     "checkboxDeviceKeepPlaying",
                     "checkboxDeviceMuteClips",
@@ -21526,6 +21526,14 @@
                   },
                   {
                     "type": "row",
+                    "key": "colorDeviceIcon"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorDeviceOn"
+                  },
+                  {
+                    "type": "row",
                     "key": "sliderDeviceIconSize"
                   },
                   {
@@ -21547,14 +21555,6 @@
                   {
                     "type": "row",
                     "key": "sliderDeviceOnOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorDeviceIcon"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorDeviceOn"
                   },
                   {
                     "type": "row",
@@ -21631,14 +21631,14 @@
                 ],
                 "rowKeys": [
                   "selectDeviceIconStyle",
+                  "colorDeviceIcon",
+                  "colorDeviceOn",
                   "sliderDeviceIconSize",
                   "sliderDeviceIconOffsetX",
                   "sliderDeviceIconOffsetY",
                   "sliderDeviceEdgeOffset",
                   "sliderDeviceOffOpacity",
                   "sliderDeviceOnOpacity",
-                  "colorDeviceIcon",
-                  "colorDeviceOn",
                   "checkboxDeviceMatchVolume",
                   "checkboxDeviceKeepPlaying",
                   "checkboxDeviceMuteClips",
@@ -28878,10 +28878,6 @@
                                   },
                                   {
                                     "type": "row",
-                                    "key": "sliderMobileFilterSlidersOffsetY"
-                                  },
-                                  {
-                                    "type": "row",
                                     "key": "sliderMobileFilterPanelRowsOffsetY"
                                   },
                                   {
@@ -28896,7 +28892,6 @@
                                 "rowKeys": [
                                   "sliderMobileFilterPanelFontSize",
                                   "sliderMobileFilterPanelIconSize",
-                                  "sliderMobileFilterSlidersOffsetY",
                                   "sliderMobileFilterPanelRowsOffsetY",
                                   "sliderMobileFilterPanelIconOffsetY",
                                   "sliderMobileFilterPanelRowGap"
@@ -28936,10 +28931,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterSlidersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderMobileFilterPanelRowsOffsetY"
                                 },
                                 {
@@ -28954,7 +28945,6 @@
                               "rowKeys": [
                                 "sliderMobileFilterPanelFontSize",
                                 "sliderMobileFilterPanelIconSize",
-                                "sliderMobileFilterSlidersOffsetY",
                                 "sliderMobileFilterPanelRowsOffsetY",
                                 "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowGap"
@@ -29139,10 +29129,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterSlidersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderMobileFilterPanelRowsOffsetY"
                                 },
                                 {
@@ -29157,7 +29143,6 @@
                               "rowKeys": [
                                 "sliderMobileFilterPanelFontSize",
                                 "sliderMobileFilterPanelIconSize",
-                                "sliderMobileFilterSlidersOffsetY",
                                 "sliderMobileFilterPanelRowsOffsetY",
                                 "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowGap"
@@ -29197,10 +29182,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
@@ -29215,7 +29196,6 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterSlidersOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
                               "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
@@ -30430,10 +30410,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterSlidersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderMobileFilterPanelRowsOffsetY"
                                 },
                                 {
@@ -30448,7 +30424,6 @@
                               "rowKeys": [
                                 "sliderMobileFilterPanelFontSize",
                                 "sliderMobileFilterPanelIconSize",
-                                "sliderMobileFilterSlidersOffsetY",
                                 "sliderMobileFilterPanelRowsOffsetY",
                                 "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowGap"
@@ -30488,10 +30463,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
@@ -30506,7 +30477,6 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterSlidersOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
                               "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
@@ -30691,10 +30661,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
@@ -30709,7 +30675,6 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterSlidersOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
                               "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
@@ -30749,10 +30714,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterSlidersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderMobileFilterPanelRowsOffsetY"
                             },
                             {
@@ -30767,7 +30728,6 @@
                           "rowKeys": [
                             "sliderMobileFilterPanelFontSize",
                             "sliderMobileFilterPanelIconSize",
-                            "sliderMobileFilterSlidersOffsetY",
                             "sliderMobileFilterPanelRowsOffsetY",
                             "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowGap"
@@ -33971,10 +33931,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderMobileFilterSlidersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderMobileFilterPanelRowsOffsetY"
                                 },
                                 {
@@ -33989,7 +33945,6 @@
                               "rowKeys": [
                                 "sliderMobileFilterPanelFontSize",
                                 "sliderMobileFilterPanelIconSize",
-                                "sliderMobileFilterSlidersOffsetY",
                                 "sliderMobileFilterPanelRowsOffsetY",
                                 "sliderMobileFilterPanelIconOffsetY",
                                 "sliderMobileFilterPanelRowGap"
@@ -34029,10 +33984,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
@@ -34047,7 +33998,6 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterSlidersOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
                               "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
@@ -34232,10 +34182,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
@@ -34250,7 +34196,6 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterSlidersOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
                               "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
@@ -34290,10 +34235,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterSlidersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderMobileFilterPanelRowsOffsetY"
                             },
                             {
@@ -34308,7 +34249,6 @@
                           "rowKeys": [
                             "sliderMobileFilterPanelFontSize",
                             "sliderMobileFilterPanelIconSize",
-                            "sliderMobileFilterSlidersOffsetY",
                             "sliderMobileFilterPanelRowsOffsetY",
                             "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowGap"
@@ -35523,10 +35463,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderMobileFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderMobileFilterPanelRowsOffsetY"
                               },
                               {
@@ -35541,7 +35477,6 @@
                             "rowKeys": [
                               "sliderMobileFilterPanelFontSize",
                               "sliderMobileFilterPanelIconSize",
-                              "sliderMobileFilterSlidersOffsetY",
                               "sliderMobileFilterPanelRowsOffsetY",
                               "sliderMobileFilterPanelIconOffsetY",
                               "sliderMobileFilterPanelRowGap"
@@ -35581,10 +35516,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterSlidersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderMobileFilterPanelRowsOffsetY"
                             },
                             {
@@ -35599,7 +35530,6 @@
                           "rowKeys": [
                             "sliderMobileFilterPanelFontSize",
                             "sliderMobileFilterPanelIconSize",
-                            "sliderMobileFilterSlidersOffsetY",
                             "sliderMobileFilterPanelRowsOffsetY",
                             "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowGap"
@@ -35784,10 +35714,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderMobileFilterSlidersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderMobileFilterPanelRowsOffsetY"
                             },
                             {
@@ -35802,7 +35728,6 @@
                           "rowKeys": [
                             "sliderMobileFilterPanelFontSize",
                             "sliderMobileFilterPanelIconSize",
-                            "sliderMobileFilterSlidersOffsetY",
                             "sliderMobileFilterPanelRowsOffsetY",
                             "sliderMobileFilterPanelIconOffsetY",
                             "sliderMobileFilterPanelRowGap"
@@ -35842,10 +35767,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "sliderMobileFilterSlidersOffsetY"
-                          },
-                          {
-                            "type": "row",
                             "key": "sliderMobileFilterPanelRowsOffsetY"
                           },
                           {
@@ -35860,7 +35781,6 @@
                         "rowKeys": [
                           "sliderMobileFilterPanelFontSize",
                           "sliderMobileFilterPanelIconSize",
-                          "sliderMobileFilterSlidersOffsetY",
                           "sliderMobileFilterPanelRowsOffsetY",
                           "sliderMobileFilterPanelIconOffsetY",
                           "sliderMobileFilterPanelRowGap"
@@ -40424,10 +40344,6 @@
                                   },
                                   {
                                     "type": "row",
-                                    "key": "sliderLandscapeFilterSlidersOffsetY"
-                                  },
-                                  {
-                                    "type": "row",
                                     "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                   },
                                   {
@@ -40442,7 +40358,6 @@
                                 "rowKeys": [
                                   "sliderLandscapeFilterPanelFontSize",
                                   "sliderLandscapeFilterPanelIconSize",
-                                  "sliderLandscapeFilterSlidersOffsetY",
                                   "sliderLandscapeFilterPanelRowsOffsetY",
                                   "sliderLandscapeFilterPanelIconOffsetY",
                                   "sliderLandscapeFilterPanelRowGap"
@@ -40482,10 +40397,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterSlidersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                 },
                                 {
@@ -40500,7 +40411,6 @@
                               "rowKeys": [
                                 "sliderLandscapeFilterPanelFontSize",
                                 "sliderLandscapeFilterPanelIconSize",
-                                "sliderLandscapeFilterSlidersOffsetY",
                                 "sliderLandscapeFilterPanelRowsOffsetY",
                                 "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowGap"
@@ -40685,10 +40595,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterSlidersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                 },
                                 {
@@ -40703,7 +40609,6 @@
                               "rowKeys": [
                                 "sliderLandscapeFilterPanelFontSize",
                                 "sliderLandscapeFilterPanelIconSize",
-                                "sliderLandscapeFilterSlidersOffsetY",
                                 "sliderLandscapeFilterPanelRowsOffsetY",
                                 "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowGap"
@@ -40743,10 +40648,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
@@ -40761,7 +40662,6 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterSlidersOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
                               "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
@@ -41976,10 +41876,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterSlidersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                 },
                                 {
@@ -41994,7 +41890,6 @@
                               "rowKeys": [
                                 "sliderLandscapeFilterPanelFontSize",
                                 "sliderLandscapeFilterPanelIconSize",
-                                "sliderLandscapeFilterSlidersOffsetY",
                                 "sliderLandscapeFilterPanelRowsOffsetY",
                                 "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowGap"
@@ -42034,10 +41929,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
@@ -42052,7 +41943,6 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterSlidersOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
                               "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
@@ -42237,10 +42127,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
@@ -42255,7 +42141,6 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterSlidersOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
                               "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
@@ -42295,10 +42180,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterSlidersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderLandscapeFilterPanelRowsOffsetY"
                             },
                             {
@@ -42313,7 +42194,6 @@
                           "rowKeys": [
                             "sliderLandscapeFilterPanelFontSize",
                             "sliderLandscapeFilterPanelIconSize",
-                            "sliderLandscapeFilterSlidersOffsetY",
                             "sliderLandscapeFilterPanelRowsOffsetY",
                             "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowGap"
@@ -45517,10 +45397,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "sliderLandscapeFilterSlidersOffsetY"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "sliderLandscapeFilterPanelRowsOffsetY"
                                 },
                                 {
@@ -45535,7 +45411,6 @@
                               "rowKeys": [
                                 "sliderLandscapeFilterPanelFontSize",
                                 "sliderLandscapeFilterPanelIconSize",
-                                "sliderLandscapeFilterSlidersOffsetY",
                                 "sliderLandscapeFilterPanelRowsOffsetY",
                                 "sliderLandscapeFilterPanelIconOffsetY",
                                 "sliderLandscapeFilterPanelRowGap"
@@ -45575,10 +45450,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
@@ -45593,7 +45464,6 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterSlidersOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
                               "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
@@ -45778,10 +45648,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
@@ -45796,7 +45662,6 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterSlidersOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
                               "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
@@ -45836,10 +45701,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterSlidersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderLandscapeFilterPanelRowsOffsetY"
                             },
                             {
@@ -45854,7 +45715,6 @@
                           "rowKeys": [
                             "sliderLandscapeFilterPanelFontSize",
                             "sliderLandscapeFilterPanelIconSize",
-                            "sliderLandscapeFilterSlidersOffsetY",
                             "sliderLandscapeFilterPanelRowsOffsetY",
                             "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowGap"
@@ -47069,10 +46929,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "sliderLandscapeFilterSlidersOffsetY"
-                              },
-                              {
-                                "type": "row",
                                 "key": "sliderLandscapeFilterPanelRowsOffsetY"
                               },
                               {
@@ -47087,7 +46943,6 @@
                             "rowKeys": [
                               "sliderLandscapeFilterPanelFontSize",
                               "sliderLandscapeFilterPanelIconSize",
-                              "sliderLandscapeFilterSlidersOffsetY",
                               "sliderLandscapeFilterPanelRowsOffsetY",
                               "sliderLandscapeFilterPanelIconOffsetY",
                               "sliderLandscapeFilterPanelRowGap"
@@ -47127,10 +46982,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterSlidersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderLandscapeFilterPanelRowsOffsetY"
                             },
                             {
@@ -47145,7 +46996,6 @@
                           "rowKeys": [
                             "sliderLandscapeFilterPanelFontSize",
                             "sliderLandscapeFilterPanelIconSize",
-                            "sliderLandscapeFilterSlidersOffsetY",
                             "sliderLandscapeFilterPanelRowsOffsetY",
                             "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowGap"
@@ -47330,10 +47180,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "sliderLandscapeFilterSlidersOffsetY"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderLandscapeFilterPanelRowsOffsetY"
                             },
                             {
@@ -47348,7 +47194,6 @@
                           "rowKeys": [
                             "sliderLandscapeFilterPanelFontSize",
                             "sliderLandscapeFilterPanelIconSize",
-                            "sliderLandscapeFilterSlidersOffsetY",
                             "sliderLandscapeFilterPanelRowsOffsetY",
                             "sliderLandscapeFilterPanelIconOffsetY",
                             "sliderLandscapeFilterPanelRowGap"
@@ -47388,10 +47233,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "sliderLandscapeFilterSlidersOffsetY"
-                          },
-                          {
-                            "type": "row",
                             "key": "sliderLandscapeFilterPanelRowsOffsetY"
                           },
                           {
@@ -47406,7 +47247,6 @@
                         "rowKeys": [
                           "sliderLandscapeFilterPanelFontSize",
                           "sliderLandscapeFilterPanelIconSize",
-                          "sliderLandscapeFilterSlidersOffsetY",
                           "sliderLandscapeFilterPanelRowsOffsetY",
                           "sliderLandscapeFilterPanelIconOffsetY",
                           "sliderLandscapeFilterPanelRowGap"
@@ -49372,8 +49212,8 @@
     "desktop:New Group (30)": true,
     "desktop:New Group (29)": true,
     "desktop:New Group (16)": true,
-    "desktop:New Group (19)": false,
-    "desktop:New Group (24)": false,
+    "desktop:New Group (19)": true,
+    "desktop:New Group (24)": true,
     "desktop:Panel Song Count": true,
     "desktop:New Group (18)": true,
     "desktop:New Group (23)": true,
@@ -49381,7 +49221,7 @@
     "desktop:New Group (22)": true,
     "desktop:New Group (21)": true,
     "desktop:New Group (17)": true,
-    "desktop:Play On Device": true,
+    "desktop:Play On Device": false,
     "desktop:Song Data": true,
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
