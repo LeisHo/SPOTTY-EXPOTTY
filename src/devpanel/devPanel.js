@@ -3482,12 +3482,37 @@
 
     function lpCommit(entry) {
         const hidden = document.getElementById(entry.ctrl.id);
-        if (hidden) hidden.value = JSON.stringify({ items: entry.items, groupOrder: entry.groupOrder || [], defaultName: entry.defaultName || null });
+        if (hidden) hidden.value = JSON.stringify({ items: entry.items, groupOrder: entry.groupOrder || [], defaultName: entry.defaultName || null, topOrder: entry.ctrl.visibilityMode ? entry.topOrder : undefined });
         // visibilityMode (SPOTTY EXPOTTY, 2026-10-30): every change to the list (a checkbox, a drag, a rename) also tells the owner of the list.
         if (entry.ctrl.visibilityMode) {
             if (entry.listEl && entry.listEl.isConnected) lpRefreshVisGroups(entry);
             if (entry.ctrl.onChange) entry.ctrl.onChange(entry);
         }
+    }
+    // visibilityMode (SPOTTY EXPOTTY, 2026-10-30): single items and groups share ONE top-level list, so a group can sit above or between single items.
+    // The order is saved as tokens: 'i:<item key>' for a single item, 'g:<group name>' for a group.
+    function lpTopTokens(entry) {
+        return Array.from(entry.listEl.children).map(el => (el.__item ? 'i:' + el.__item.key : el.__groupName ? 'g:' + el.__groupName : null)).filter(Boolean);
+    }
+    // Renames a group (cascading to every nested path). Used by the Rename button; the group title itself no longer renames on click in visibilityMode.
+    function lpRenameGroup(entry, path) {
+        const oldLeaf = path.split(LP_GROUP_PATH_SEP).pop();
+        const newLeaf = prompt('Rename group to:', oldLeaf);
+        if (!newLeaf || newLeaf === oldLeaf) return;
+        if (newLeaf.includes(LP_GROUP_PATH_SEP)) { alert('Group name can\'t contain "' + LP_GROUP_PATH_SEP + '"'); return; }
+        const segments = path.split(LP_GROUP_PATH_SEP);
+        segments[segments.length - 1] = newLeaf;
+        const newPath = segments.join(LP_GROUP_PATH_SEP);
+        const prefix = path + LP_GROUP_PATH_SEP;
+        const rename = (p) => (p === path ? newPath : (p.startsWith(prefix) ? newPath + LP_GROUP_PATH_SEP + p.slice(prefix.length) : p));
+        entry.items.forEach(it => { if (it.group) it.group = rename(it.group); });
+        entry.pendingGroups = (entry.pendingGroups || []).map(rename);
+        entry.expandedGroups = new Set(Array.from(entry.expandedGroups).map(rename));
+        entry.groupOrder = (entry.groupOrder || []).map(rename);
+        if (entry.topOrder) entry.topOrder = entry.topOrder.map(t => (t.startsWith('g:') ? 'g:' + rename(t.slice(2)) : t));
+        entry.selectedGroupEl = null;
+        lpCommit(entry);
+        renderLpRows(entry);
     }
     // visibilityMode: the path of a group element, worked out from the live DOM (a dragged group's __groupName is stale until the next render).
     function lpGroupPathOf(groupEl) {
@@ -3728,22 +3753,9 @@
         title.className = 'dev-lp-group-title';
         title.textContent = path.split(LP_GROUP_PATH_SEP).pop();
         title.addEventListener('click', (e) => {
+            if (entry.ctrl.visibilityMode) return; // there a click only selects / collapses (the header's own handler); renaming is the Rename button's job
             e.stopPropagation();
-            const oldLeaf = path.split(LP_GROUP_PATH_SEP).pop();
-            const newLeaf = prompt('Rename group to:', oldLeaf);
-            if (!newLeaf || newLeaf === oldLeaf) return;
-            if (newLeaf.includes(LP_GROUP_PATH_SEP)) { alert('Group name can\'t contain "' + LP_GROUP_PATH_SEP + '"'); return; }
-            const segments = path.split(LP_GROUP_PATH_SEP);
-            segments[segments.length - 1] = newLeaf;
-            const newPath = segments.join(LP_GROUP_PATH_SEP);
-            const prefix = path + LP_GROUP_PATH_SEP;
-            const rename = (p) => (p === path ? newPath : (p.startsWith(prefix) ? newPath + LP_GROUP_PATH_SEP + p.slice(prefix.length) : p));
-            entry.items.forEach(it => { if (it.group) it.group = rename(it.group); });
-            entry.pendingGroups = (entry.pendingGroups || []).map(rename);
-            entry.expandedGroups = new Set(Array.from(entry.expandedGroups).map(rename));
-            entry.groupOrder = (entry.groupOrder || []).map(rename);
-            lpCommit(entry);
-            renderLpRows(entry);
+            lpRenameGroup(entry, path);
         });
         header.appendChild(title);
         const removeBtn = document.createElement('button');
@@ -3783,6 +3795,10 @@
         header.appendChild(removeBtn);
         header.addEventListener('click', () => {
             const g = header.closest('.dev-lp-group');
+            if (entry.ctrl.visibilityMode) { // the group the Rename button acts on
+                entry.selectedGroupEl = g;
+                entry.listEl.querySelectorAll('.dev-lp-group-header').forEach(h => h.classList.toggle('dev-lp-group-selected', h === header));
+            }
             g.classList.toggle('collapsed');
             if (g.classList.contains('collapsed')) entry.expandedGroups.delete(path);
             else {
@@ -3828,6 +3844,7 @@
         lpSetItems(entry, items);
         entry.pendingGroups = pending;
         entry.groupOrder = Array.from(entry.listEl.querySelectorAll(':scope > .dev-lp-group')).map(g => g.__groupName);
+        if (entry.ctrl.visibilityMode) entry.topOrder = lpTopTokens(entry);
         lpCommit(entry);
     }
 
@@ -3871,11 +3888,16 @@
         discoveryOrder.forEach(n => { if (!known.has(n)) topOrder.push(n); });
         entry.groupOrder = topOrder.slice();
 
-        const ungroupedBody = document.createElement('div');
-        ungroupedBody.className = 'dev-lp-ungrouped-body';
-        ungrouped.forEach(item => ungroupedBody.appendChild(renderLpItemRow(entry, item)));
-        entry.listEl.appendChild(ungroupedBody);
-        entry.ungroupedBody = ungroupedBody;
+        const vis = !!entry.ctrl.visibilityMode;
+        entry.listEl.classList.toggle('dev-lp-mixed', vis);
+        if (vis) entry.ungroupedBody = entry.listEl; // single items and groups share the top level
+        else {
+            const ungroupedBody = document.createElement('div');
+            ungroupedBody.className = 'dev-lp-ungrouped-body';
+            ungrouped.forEach(item => ungroupedBody.appendChild(renderLpItemRow(entry, item)));
+            entry.listEl.appendChild(ungroupedBody);
+            entry.ungroupedBody = ungroupedBody;
+        }
 
         function renderGroup(path, node) {
             const g = document.createElement('div');
@@ -3889,7 +3911,19 @@
             g.appendChild(body);
             return g;
         }
-        topOrder.forEach(name => entry.listEl.appendChild(renderGroup(name, root.children.get(name))));
+        if (vis) {
+            // the saved top-level order (single items and groups interleaved); without one (an older save) single items come first, then the groups
+            const singles = new Map(ungrouped.map(i => [i.key, i]));
+            const saved = Array.isArray(entry.topOrder) ? entry.topOrder : null;
+            const valid = t => (t.startsWith('g:') ? root.children.has(t.slice(2)) : singles.has(t.slice(2)));
+            let seq = (saved || []).filter(valid);
+            const have = new Set(seq);
+            const newGroups = topOrder.map(n => 'g:' + n).filter(t => !have.has(t)), newSingles = ungrouped.map(i => 'i:' + i.key).filter(t => !have.has(t));
+            seq = saved ? newGroups.concat(seq, newSingles) : newSingles.concat(newGroups);
+            entry.topOrder = seq;
+            entry.groupOrder = seq.filter(t => t.startsWith('g:')).map(t => t.slice(2));
+            seq.forEach(t => entry.listEl.appendChild(t.startsWith('g:') ? renderGroup(t.slice(2), root.children.get(t.slice(2))) : renderLpItemRow(entry, singles.get(t.slice(2)))));
+        } else topOrder.forEach(name => entry.listEl.appendChild(renderGroup(name, root.children.get(name))));
         // Group export checkboxes are purely derived (never persisted) --
         // recomputed in one pass now that every group is actually
         // attached to entry.listEl (lpRefreshGroupExportCheckbox() needs
@@ -3899,6 +3933,7 @@
         // entry.items/exportChecked, never from a sibling/child
         // checkbox's own DOM state.
         if (entry.ctrl.exportable) entry.listEl.querySelectorAll('.dev-lp-group').forEach(g => lpRefreshGroupExportCheckbox(g));
+        if (vis) lpRefreshVisGroups(entry); // a freshly drawn group's checkbox shows what its items already are (it used to start unchecked)
     }
 
     // Item/group drag-reorder, set up ONCE globally (setupDragReorder
@@ -3922,10 +3957,12 @@
             const picker = dragging.closest('.dev-list-picker');
             if (!picker) return [];
             const bodies = Array.from(picker.querySelectorAll('.dev-lp-group-body')).filter(b => !dragging.contains(b));
+            if (picker.classList.contains('dev-lp-mixed')) return [...bodies.reverse(), picker];
             return [picker, ...bodies];
         });
         setupDragReorder('.dev-lp-row-handle', '.dev-lp-row', lpSyncAllVisibleEntries, (tabRoot, dragging) => {
             const picker = dragging.closest('.dev-list-picker');
+            if (picker && picker.classList.contains('dev-lp-mixed')) return [...Array.from(picker.querySelectorAll('.dev-lp-group-body')).reverse(), picker];
             return picker ? Array.from(picker.querySelectorAll('.dev-lp-group-body, .dev-lp-ungrouped-body')) : [];
         }, (item) => {
             // Multi-select drag (direct request 2026-10-19: "if i select
@@ -3996,12 +4033,12 @@
         const defaultBtn = mkBtn('Set Default');
         btnRow.append(saveBtn, overwriteBtn, useBtn, renameBtn, deleteBtn, defaultBtn, addGroupBtn);
         if (ctrl.visibilityMode) { // an item selector of FIXED items: only grouping (+ Group) and a reset make sense, no Save/Use/Rename/Delete/Default/Import/Export
-            [saveBtn, overwriteBtn, useBtn, renameBtn, deleteBtn, defaultBtn].forEach(b => { b.style.display = 'none'; });
+            [saveBtn, overwriteBtn, useBtn, deleteBtn, defaultBtn].forEach(b => { b.style.display = 'none'; });
             const resetBtn = mkBtn('Reset Order (Keeps What Is Shown)');
             resetBtn.addEventListener('click', () => {
                 const cur = new Map(entry.items.map(i => [i.key, i.on !== false]));
                 lpSetItems(entry, ctrl.canonicalItems().map(c => Object.assign(c, { on: cur.get(c.key) !== false })));
-                entry.groupOrder = []; entry.pendingGroups = []; entry.expandedGroups = new Set(); entry.selectedItem = null; entry.multiSelected = new Set();
+                entry.groupOrder = []; entry.topOrder = undefined; entry.pendingGroups = []; entry.expandedGroups = new Set(); entry.selectedItem = null; entry.multiSelected = new Set();
                 renderLpRows(entry);
                 lpCommit(entry);
             });
@@ -4070,6 +4107,7 @@
             try { parsed = JSON.parse(hidden.value || '{}'); } catch (err) { parsed = {}; }
             lpSetItems(entry, ctrl.visibilityMode && ctrl.canonicalItems ? lpMergeCanonical(ctrl, Array.isArray(parsed.items) ? parsed.items : []) : (Array.isArray(parsed.items) ? parsed.items : []));
             entry.groupOrder = Array.isArray(parsed.groupOrder) ? parsed.groupOrder : [];
+            entry.topOrder = ctrl.visibilityMode && Array.isArray(parsed.topOrder) ? parsed.topOrder : undefined;
             entry.defaultName = typeof parsed.defaultName === 'string' ? parsed.defaultName : null;
             entry.selectedItem = null;
             entry.multiSelected = new Set();
@@ -4128,6 +4166,12 @@
         });
         useBtn.addEventListener('click', () => { if (entry.selectedItem && ctrl.onUse) ctrl.onUse(entry.selectedItem); });
         renameBtn.addEventListener('click', () => {
+            if (ctrl.visibilityMode) { // the items are fixed; Rename renames the group that was clicked last
+                const g = entry.selectedGroupEl;
+                if (!g || !g.isConnected) { flashBtn(renameBtn, 'Click a group first'); return; }
+                lpRenameGroup(entry, lpGroupPathOf(g));
+                return;
+            }
             if (!entry.selectedItem) return;
             const target = entry.selectedItem;
             const name = prompt('Rename to:', target.name);
@@ -4194,6 +4238,11 @@
                 const sepIdx = firstPath ? firstPath.lastIndexOf(LP_GROUP_PATH_SEP) : -1;
                 const parentPath = sepIdx >= 0 ? firstPath.slice(0, sepIdx) : null;
                 const fullName = parentPath ? parentPath + LP_GROUP_PATH_SEP + name : name;
+                if (ctrl.visibilityMode && !parentPath) { // the new group goes where the first selected item (or its group) was
+                    const tt = lpTopTokens(entry), anchor = firstPath ? 'g:' + firstPath : 'i:' + firstSelected.key, at = tt.indexOf(anchor);
+                    if (at >= 0) tt.splice(at, 0, 'g:' + fullName); else tt.unshift('g:' + fullName);
+                    entry.topOrder = tt;
+                }
                 if (firstPath && parentPath === null) {
                     // First item already sits in a TOP-LEVEL group (no
                     // further nesting) — insert the new group's name into

@@ -16,7 +16,7 @@ const SEP = '/';
 
 let state = new Map(); // key -> { z, on }
 
-function flatten(items, groupOrder) {
+function flatten(items, groupOrder, topOrder) {
     const root = { items: [], children: new Map() }, ungrouped = [], discovery = [];
     const nodeOf = segs => segs.reduce((n, s) => { if (!n.children.has(s)) n.children.set(s, { items: [], children: new Map() }); return n.children.get(s); }, root);
     items.forEach(it => {
@@ -28,9 +28,21 @@ function flatten(items, groupOrder) {
     const known = new Set(groupOrder || []);
     const top = (groupOrder || []).filter(n => root.children.has(n));
     discovery.forEach(n => { if (!known.has(n)) top.push(n); });
-    const out = ungrouped.slice();
-    const walk = n => { n.items.forEach(i => out.push(i)); n.children.forEach(walk); };
-    top.forEach(name => walk(root.children.get(name)));
+    const walk = (n, out) => { n.items.forEach(i => out.push(i)); n.children.forEach(c => walk(c, out)); };
+    const out = [];
+    if (Array.isArray(topOrder)) { // single items and groups interleaved, as the selector shows them
+        const singles = new Map(ungrouped.map(i => [i.key, i])), seen = new Set();
+        topOrder.forEach(t => {
+            if (typeof t !== 'string') return;
+            if (t.startsWith('g:') && root.children.has(t.slice(2)) && !seen.has(t)) { seen.add(t); walk(root.children.get(t.slice(2)), out); }
+            else if (t.startsWith('i:') && singles.has(t.slice(2)) && !seen.has(t)) { seen.add(t); out.push(singles.get(t.slice(2))); }
+        });
+        ungrouped.forEach(i => { if (!seen.has('i:' + i.key)) out.push(i); });
+        top.forEach(n => { if (!seen.has('g:' + n)) walk(root.children.get(n), out); });
+        return out;
+    }
+    ungrouped.forEach(i => out.push(i));
+    top.forEach(name => walk(root.children.get(name), out));
     return out;
 }
 
@@ -41,7 +53,7 @@ export function refresh() {
     const items = parsed && Array.isArray(parsed.items) ? parsed.items.filter(it => it && DEFAULT_KEYS.includes(it.key)) : [];
     const seen = new Set(items.map(it => it.key));
     DEFAULT_KEYS.forEach(k => { if (!seen.has(k)) items.push({ key: k, on: true }); }); // an item the saved list has never heard of goes to the back
-    const ordered = flatten(items, parsed && parsed.groupOrder);
+    const ordered = flatten(items, parsed && parsed.groupOrder, parsed && parsed.topOrder);
     const next = new Map();
     ordered.forEach((it, i) => next.set(it.key, { z: (ordered.length - i) * 10, on: it.on !== false }));
     state = next;

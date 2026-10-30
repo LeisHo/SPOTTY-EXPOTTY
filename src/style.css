@@ -1141,6 +1141,8 @@
     .dev-lp-group-body { margin-left: 14px; border-left: 1px dashed rgba(0, 255, 255, 0.25); padding-left: 6px; }
     .dev-lp-group.collapsed > .dev-lp-group-body { display: none; }
     .dev-lp-ungrouped-body { display: flex; flex-direction: column; gap: 2px; }
+    .dev-lp-mixed { display: flex; flex-direction: column; gap: 2px; }
+    .dev-lp-group-selected { background: rgba(0, 255, 255, 0.14); border-radius: 4px; }
     .dev-list-picker-actions { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
     .dev-list-picker-actions button {
         flex: 1 1 auto;
