@@ -248,8 +248,8 @@
     "sliderGlobalOverrideOpacity": 40,
     "checkboxGlobalOverrideAnim": true,
     "sliderGlobalAnimTime": 150,
-    "sliderGlobalAnimHoverSize": 115,
-    "sliderGlobalAnimClickSize": 90,
+    "sliderGlobalAnimHoverSize": 105,
+    "sliderGlobalAnimClickSize": 95,
     "sliderGlobalAnimReleaseSize": 100,
     "sliderGlobalAnimHoverOpacity": 85,
     "sliderGlobalAnimClickOpacity": 70,
@@ -346,11 +346,11 @@
     "selectAlbumLenIconStyle": "0",
     "selectSongDateIconStyle": "9",
     "selectSongLenIconStyle": "0",
-    "checkboxFilterButtonEnabled": false,
+    "checkboxFilterButtonEnabled": true,
     "sliderFilterIconSize": 23,
     "sliderFilterIconOffsetX": 0,
     "sliderFilterIconOffsetY": 7,
-    "sliderFilterEdgeOffset": 10,
+    "sliderFilterEdgeOffset": 3,
     "sliderFilterOffOpacity": 45,
     "sliderFilterOnOpacity": 75,
     "colorFilterIcon": "#f2f2f2",
@@ -689,7 +689,7 @@
     "sliderStartPlayLiftPressPx": 2,
     "sliderStartPlayLiftShadowBlur": 14,
     "sliderStartPlayLiftShadowOpacity": 0.5,
-    "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}"
+    "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}"
   },
   "layout": {
     "left": 88,
@@ -8235,6 +8235,10 @@
                       },
                       {
                         "type": "row",
+                        "key": "checkboxOverrideDevice"
+                      },
+                      {
+                        "type": "row",
                         "key": "colorGlobalOverride"
                       },
                       {
@@ -8285,10 +8289,6 @@
                           ],
                           "subgroups": []
                         }
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxOverrideDevice"
                       }
                     ],
                     "rowKeys": [
@@ -8299,10 +8299,10 @@
                       "checkboxOverrideVolume",
                       "checkboxOverrideFilter",
                       "checkboxOverrideSongData",
+                      "checkboxOverrideDevice",
                       "colorGlobalOverride",
                       "sliderGlobalOverrideOpacity",
-                      "sliderGlobalOverrideOnOpacity",
-                      "checkboxOverrideDevice"
+                      "sliderGlobalOverrideOnOpacity"
                     ],
                     "subgroups": [
                       {
@@ -11779,6 +11779,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxOverrideDevice"
+                    },
+                    {
+                      "type": "row",
                       "key": "colorGlobalOverride"
                     },
                     {
@@ -11829,10 +11833,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxOverrideDevice"
                     }
                   ],
                   "rowKeys": [
@@ -11843,10 +11843,10 @@
                     "checkboxOverrideVolume",
                     "checkboxOverrideFilter",
                     "checkboxOverrideSongData",
+                    "checkboxOverrideDevice",
                     "colorGlobalOverride",
                     "sliderGlobalOverrideOpacity",
-                    "sliderGlobalOverrideOnOpacity",
-                    "checkboxOverrideDevice"
+                    "sliderGlobalOverrideOnOpacity"
                   ],
                   "subgroups": [
                     {
@@ -19040,6 +19040,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxOverrideDevice"
+                    },
+                    {
+                      "type": "row",
                       "key": "colorGlobalOverride"
                     },
                     {
@@ -19090,10 +19094,6 @@
                         ],
                         "subgroups": []
                       }
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxOverrideDevice"
                     }
                   ],
                   "rowKeys": [
@@ -19104,10 +19104,10 @@
                     "checkboxOverrideVolume",
                     "checkboxOverrideFilter",
                     "checkboxOverrideSongData",
+                    "checkboxOverrideDevice",
                     "colorGlobalOverride",
                     "sliderGlobalOverrideOpacity",
-                    "sliderGlobalOverrideOnOpacity",
-                    "checkboxOverrideDevice"
+                    "sliderGlobalOverrideOnOpacity"
                   ],
                   "subgroups": [
                     {
@@ -22584,6 +22584,10 @@
                   },
                   {
                     "type": "row",
+                    "key": "checkboxOverrideDevice"
+                  },
+                  {
+                    "type": "row",
                     "key": "colorGlobalOverride"
                   },
                   {
@@ -22634,10 +22638,6 @@
                       ],
                       "subgroups": []
                     }
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxOverrideDevice"
                   }
                 ],
                 "rowKeys": [
@@ -22648,10 +22648,10 @@
                   "checkboxOverrideVolume",
                   "checkboxOverrideFilter",
                   "checkboxOverrideSongData",
+                  "checkboxOverrideDevice",
                   "colorGlobalOverride",
                   "sliderGlobalOverrideOpacity",
-                  "sliderGlobalOverrideOnOpacity",
-                  "checkboxOverrideDevice"
+                  "sliderGlobalOverrideOnOpacity"
                 ],
                 "subgroups": [
                   {
@@ -49920,7 +49920,7 @@
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
     "desktop:New Group (27)": true,
-    "desktop:Filter Button": true,
+    "desktop:Filter Button": false,
     "desktop:New Group (30)": false,
     "desktop:New Group (29)": false,
     "desktop:New Group (16)": true,
@@ -49936,7 +49936,7 @@
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
     "desktop:Global Override": true,
-    "desktop:Standard Button Animation": true,
+    "desktop:Standard Button Animation": false,
     "desktop:Background": true,
     "desktop:Animation": true,
     "desktop:Album Cover": true,
