@@ -1399,3 +1399,14 @@ has no saved file to restore.
 Playlist update: Trideset_Tri._Nula.csv replaced with the owner's newer export. The new export has no audio features, so scripts/active/update_playlist.py MERGES: old rows kept,
 the 40 tracks only in the new export appended in the old column layout (features from ReccoBeats for 33 of 40, Deezer ids by ISRC for 40 of 40). The owner said "maybe 20-30"; it is 40.
 timeline.json rebuilt (6,341 -> 6,381 entries), cover colours (15 new covers), original dates (27 looked up) and iTunes links re-merged. 7 new tracks have no tempo / valence / energy.
+
+--------------------------------------------------------------------------------
+2026-10-30  -  later 25 (Stack Shown Buttons with the UI Inspector)
+
+Owner question: how to fine-tune button positions in the Inspector (each button anchored to the one above) and still have Stack Shown Buttons close the gap when a middle one is hidden.
+Before: a button taken over by the Inspector ignored the stack, and a button anchored to a hidden button lost its anchor (lands at the top-left). Now (main.js stackRepoint()): with Stack Shown
+Buttons on, a shown button whose anchor is hidden is pointed at the nearest SHOWN button further up its chain (its own offsets / gap kept, so the spacing is the one set in the Inspector);
+if the chain ends at a hidden button that sits at the screen edge, it takes over that button's position. Runtime only: stackSaved remembers what the owner set and spxCaptureLayout
+swaps it back in, so Sync saves the Inspector layout, never the temporary re-pointing; an Inspector edit made while re-pointed is treated as the new original. The Inspector shows the
+re-pointed anchor while a button above is hidden. Verified live (chain Shuffle -> Song Data -> Filter -> Search): middle hidden, stack on -> Filter 90 / Search 120 (under Shuffle at 60);
+stack off -> Filter breaks to 0 (the old behaviour); first + middle hidden -> Filter takes the first's place (60); all back -> 60 / 90 / 120 / 150; saved Filter anchor stays Song Data.
