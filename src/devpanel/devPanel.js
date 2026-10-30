@@ -8729,6 +8729,32 @@
         renderControlArray(PD_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_DEVICE_CONTROLS', PD_CONTROLS);
         makeDevGroupToggleable(tab, PD, 'checkboxDeviceButtonEnabled');
+        // Search Button (right side, under Filter): a text search (Song / Artist / Album) that narrows the song list, with Stack Shown Buttons (the buttons close up the gap
+        // when one is switched off). src/app/search.js; the stacking is layoutStack() in main.js.
+        const SRB = 'Search Button';
+        uiLayoutContent.appendChild(createDevGroupElement(SRB, tab));
+        const SRB_CONTROLS = [
+            { tab, group: SRB, id: 'checkboxStackShownButtons', type: 'checkbox', label: 'Stack Shown Buttons (A Switched-Off Button Leaves No Gap; The Others Keep The Same Spacing)', value: false },
+            { tab, group: SRB, id: 'checkboxSearchButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: SRB, id: 'sliderSearchIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
+            { tab, group: SRB, id: 'sliderSearchIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: SRB, id: 'sliderSearchIconOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: SRB, id: 'sliderSearchEdgeOffset', type: 'slider', label: 'Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
+            { tab, group: SRB, id: 'sliderSearchOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
+            { tab, group: SRB, id: 'sliderSearchOnOpacity', type: 'slider', label: 'On Icon Opacity (%) (A Search Is Active):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: SRB, id: 'colorSearchIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },
+            { tab, group: SRB, id: 'colorSearchOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
+            { tab, group: SRB, id: 'sliderSearchPanelWidth', type: 'slider', label: 'Panel: Width (Px):', min: 160, max: 600, step: 1, value: 240 },
+            { tab, group: SRB, id: 'sliderSearchPanelFontSize', type: 'slider', label: 'Panel: Font Size (Px):', min: 8, max: 32, step: 1, value: 13 },
+            { tab, group: SRB, id: 'sliderSearchPanelOffsetX', type: 'slider', label: 'Panel: X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
+            { tab, group: SRB, id: 'sliderSearchPanelOffsetY', type: 'slider', label: 'Panel: Y Offset (Px, Down):', min: -100, max: 400, step: 1, value: 6 },
+            { tab, group: SRB, id: 'colorSearchPanelBg', type: 'color', label: 'Panel: Background Color:', value: '#14161a' },
+            { tab, group: SRB, id: 'sliderSearchPanelBgOpacity', type: 'slider', label: 'Panel: Background Opacity (%):', min: 0, max: 100, step: 1, value: 92 },
+            { tab, group: SRB, id: 'colorSearchPanelAccent', type: 'color', label: 'Panel: Accent Color:', value: '#1db954' },
+        ];
+        renderControlArray(SRB_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_SEARCH_CONTROLS', SRB_CONTROLS);
+        makeDevGroupToggleable(tab, SRB, 'checkboxSearchButtonEnabled');
         // Filter Button (under Shuffle): the button, the grayed-out look of filtered songs, what filtering does to playback, and the filter panel.
                 const FLB = 'Filter Button';
         uiLayoutContent.appendChild(createDevGroupElement(FLB, tab));

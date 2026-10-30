@@ -4783,6 +4783,10 @@
               "key": "desktop:New Group (7)",
               "items": [
                 {
+                  "type": "row",
+                  "key": "checkboxStackShownButtons"
+                },
+                {
                   "type": "group",
                   "section": {
                     "key": "desktop:Play Button",
@@ -8115,6 +8119,97 @@
                 {
                   "type": "group",
                   "section": {
+                    "key": "desktop:Search Button",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxSearchButtonEnabled"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchIconOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchIconOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchEdgeOffset"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchOffOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchOnOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorSearchIcon"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorSearchOn"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchPanelWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchPanelFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchPanelOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchPanelOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorSearchPanelBg"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderSearchPanelBgOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorSearchPanelAccent"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxSearchButtonEnabled",
+                      "sliderSearchIconSize",
+                      "sliderSearchIconOffsetX",
+                      "sliderSearchIconOffsetY",
+                      "sliderSearchEdgeOffset",
+                      "sliderSearchOffOpacity",
+                      "sliderSearchOnOpacity",
+                      "colorSearchIcon",
+                      "colorSearchOn",
+                      "sliderSearchPanelWidth",
+                      "sliderSearchPanelFontSize",
+                      "sliderSearchPanelOffsetX",
+                      "sliderSearchPanelOffsetY",
+                      "colorSearchPanelBg",
+                      "sliderSearchPanelBgOpacity",
+                      "colorSearchPanelAccent"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
                     "key": "desktop:Song Timeline",
                     "items": [
                       {
@@ -8365,7 +8460,9 @@
                   }
                 }
               ],
-              "rowKeys": [],
+              "rowKeys": [
+                "checkboxStackShownButtons"
+              ],
               "subgroups": [
                 {
                   "key": "desktop:Play Button",
@@ -11675,6 +11772,94 @@
                       "subgroups": []
                     }
                   ]
+                },
+                {
+                  "key": "desktop:Search Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "checkboxSearchButtonEnabled"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchIconOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchOffOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSearchIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSearchOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSearchPanelBg"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelBgOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSearchPanelAccent"
+                    }
+                  ],
+                  "rowKeys": [
+                    "checkboxSearchButtonEnabled",
+                    "sliderSearchIconSize",
+                    "sliderSearchIconOffsetX",
+                    "sliderSearchIconOffsetY",
+                    "sliderSearchEdgeOffset",
+                    "sliderSearchOffOpacity",
+                    "sliderSearchOnOpacity",
+                    "colorSearchIcon",
+                    "colorSearchOn",
+                    "sliderSearchPanelWidth",
+                    "sliderSearchPanelFontSize",
+                    "sliderSearchPanelOffsetX",
+                    "sliderSearchPanelOffsetY",
+                    "colorSearchPanelBg",
+                    "sliderSearchPanelBgOpacity",
+                    "colorSearchPanelAccent"
+                  ],
+                  "subgroups": []
                 },
                 {
                   "key": "desktop:Song Timeline",
@@ -30031,6 +30216,15 @@
                 {
                   "type": "group",
                   "section": {
+                    "key": "mobile:Search Button",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
                     "key": "mobile:Song Timeline",
                     "items": [
                       {
@@ -31562,6 +31756,12 @@
                       "subgroups": []
                     }
                   ]
+                },
+                {
+                  "key": "mobile:Search Button",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
                 },
                 {
                   "key": "mobile:Song Timeline",
@@ -41561,6 +41761,15 @@
                 {
                   "type": "group",
                   "section": {
+                    "key": "landscape:Search Button",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
                     "key": "landscape:Song Timeline",
                     "items": [
                       {
@@ -43092,6 +43301,12 @@
                       "subgroups": []
                     }
                   ]
+                },
+                {
+                  "key": "landscape:Search Button",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
                 },
                 {
                   "key": "landscape:Song Timeline",

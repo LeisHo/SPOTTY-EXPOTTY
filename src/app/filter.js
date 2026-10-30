@@ -78,16 +78,18 @@ export function createFilter(songs, { host, onChange }) {
     readGates();
     const narrowed = f => gateOn[f.key] && (range[f.key][0] > ext[f.key][0] || range[f.key][1] < ext[f.key][1]);
     const active = () => FEATURES.some(narrowed);
+    let extra = null; // { passes(i) }: the Search panel's text filter (search.js), ANDed with the ranges
     function passes(i) {
         const s = songs[i];
+        const rangesOn = !!setting('checkboxFilterButtonEnabled'); // with the Filter button off its ranges do not apply (the search still can)
         for (const f of FEATURES) {
-            if (!narrowed(f)) continue;
+            if (!rangesOn || !narrowed(f)) continue;
             const v = valueOf(s, f.key);
             if (v === null) { if (setting('selectFilterMissing') === 'hide') return false; continue; }
             if (Array.isArray(v)) { if (!v.some(x => x >= range[f.key][0] - 1e-9 && x <= range[f.key][1] + 1e-9)) return false; continue; } // several values (Individual Artists): one artist in range is enough
             if (v < range[f.key][0] - 1e-9 || v > range[f.key][1] + 1e-9) return false;
         }
-        return true;
+        return !extra || extra.passes(i);
     }
     const countPassing = () => { let n = 0; for (let i = 0; i < songs.length; i++) if (passes(i)) n++; return n; };
 
@@ -330,7 +332,7 @@ export function createFilter(songs, { host, onChange }) {
     refresh();
 
     return {
-        get userPos() { return userPos; }, get userRect() { return userRect; }, get fitGrowth() { return fitG.l + fitG.r; }, panel, passes, active, countPassing, clear, refresh, ext, range,
+        get userPos() { return userPos; }, get userRect() { return userRect; }, get fitGrowth() { return fitG.l + fitG.r; }, panel, passes, active, setExtra: x => { extra = x; }, countPassing, clear, refresh, ext, range,
         get open() { return !panel.hidden; },
         setOpen(v) { panel.hidden = !v; if (v) refresh(); },
         describe() { return FEATURES.filter(narrowed).map(f => `${f.label} ${fmt(f, range[f.key][0])}-${fmt(f, range[f.key][1])}`).join(', ') || 'none'; },

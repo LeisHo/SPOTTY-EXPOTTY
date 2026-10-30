@@ -26,6 +26,7 @@ import { initTitleAnim } from './app/titleAnim.js';
 import { applyRenderOrder } from './app/renderOrder.js';
 import { createBackground } from './app/background.js';
 import { createFilter } from './app/filter.js';
+import { createSearch } from './app/search.js';
 import { createBgAnimation } from './app/bgAnimation.js';
 
 const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
@@ -91,6 +92,7 @@ async function boot() {
             <button type="button" class="spx-songdata bs-host" id="spxSongData" aria-label="Song data" aria-pressed="false" title="Song data off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></button>
             <button type="button" class="spx-filter bs-host" id="spxFilter" aria-label="Filter songs" aria-pressed="false" aria-expanded="false" title="Filter off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg></button>
             <button type="button" class="spx-device bs-host" id="spxDevice" aria-label="Play on a device" aria-pressed="false" aria-expanded="false" title="Play on a device"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="13" height="10" rx="1.5"/><path d="M7 18h5M9.5 14v4"/><rect x="18" y="8" width="4" height="9" rx="1"/></svg></button>
+            <button type="button" class="spx-search bs-host" id="spxSearch" aria-label="Search songs" aria-pressed="false" aria-expanded="false" title="Search"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></button>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart"><button type="button" class="spx-start-play" id="spxStartBtn" aria-label="Start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button></div>
             <div class="spx-inspector" id="spxInspectorPanel" hidden>
@@ -201,7 +203,7 @@ async function boot() {
     // position to the engine: app.css switches that item's own dev-panel position rules off while it is managed (`:not(.ui-mode-flow)`). Buttons also get an Icon
     // size (`icon` block); the canvas layers are placed by timeline.js unless managed, and keep their size / colours from the dev panel.
     const unmanaged = { position: { mode: 'flow', parent: 'spxApp' } }; // flow needs a parent id; spxApp is not an engine element, so the DOM-parent check does not apply
-    [['spxShuffle', 'Shuffle Button', 'button'], ['spxSongData', 'Song Data Button', 'button'], ['spxFilter', 'Filter Button', 'button'], ['spxDevice', 'Play On Device Button', 'button'], ['spxPlayGlyph', 'Play Button', 'button'],
+    [['spxShuffle', 'Shuffle Button', 'button'], ['spxSongData', 'Song Data Button', 'button'], ['spxFilter', 'Filter Button', 'button'], ['spxSearch', 'Search Button', 'button'], ['spxDevice', 'Play On Device Button', 'button'], ['spxPlayGlyph', 'Play Button', 'button'],
         ['spxSongBar', 'Song Timeline (Under The Cover)', 'container'],
         ['spxLayerScrub', 'Scrub Line', 'container'], ['spxLayerSongdata', 'Song Data Text And Icons', 'container'], ['spxLayerDate', 'Song Add Date', 'container'], ['spxLayerScale', 'Timeline Scale (Numbers And Ticks)', 'container'],
         ['spxTicks', 'Song Ticks', 'container'], ['spxBgFx', 'Background Animation', 'container'], ['spxBg', 'Background', 'container'],
@@ -299,8 +301,9 @@ async function boot() {
     let stepImmediate = false; // set by stepSong() so that one song change skips the handoff delay
     // Audio-feature filter (Filter button, filter.js). Created further down; until then every song passes.
     let flt = null;
+    let srch = null; // the Search panel (search.js), ANDed into the filter
     let songDataOn = false, rcHeight = null; // Song Data button state; the graph height set by a right-drag (null = the Timeline Height setting; not saved)
-    const filterOn = () => !!flt && flt.active() && !!setting('checkboxFilterButtonEnabled');
+    const filterOn = () => !!flt && ((flt.active() && !!setting('checkboxFilterButtonEnabled')) || (!!srch && srch.active()));
     const songOk = i => !filterOn() || flt.passes(i);
     // The filter only decides which songs get played NEXT. idx = the song shown (text, cover, playhead); playIdx = the song actually
     // playing (-1 = none yet). They differ while a clicked filtered-out song is only being looked at: it plays nothing and does not
@@ -876,6 +879,23 @@ async function boot() {
                 if (flt.open) placeFilterPanel();
             }
         }
+        {   // Search button (right side, under Filter): its look; Stack Shown Buttons closes the gaps between the buttons that are shown
+            const a = el('spxApp').style, c = (k, v) => a.setProperty(k, v), ic = setting('sliderSearchIconSize');
+            el('spxSearch').hidden = !setting('checkboxSearchButtonEnabled');
+            c('--spx-search-icon', ic + 'px'); c('--spx-search-x', setting('sliderSearchIconOffsetX') + 'px'); c('--spx-search-y', setting('sliderSearchIconOffsetY') + 'px'); c('--spx-search-edge', setting('sliderSearchEdgeOffset') + 'px');
+            c('--spx-search-off-op', String(setting('sliderSearchOffOpacity') / 100)); c('--spx-search-on-op', String(setting('sliderSearchOnOpacity') / 100));
+            c('--spx-search-color', setting('colorSearchIcon')); c('--spx-search-on-color', setting('colorSearchOn'));
+            el('spxSearch').style.setProperty('--bs-size', ic + 'px');
+            if (srch) {
+                const ps = srch.panel.style;
+                ps.setProperty('--spx-srch-width', setting('sliderSearchPanelWidth') + 'px'); ps.setProperty('--spx-srch-font', setting('sliderSearchPanelFontSize') + 'px');
+                ps.setProperty('--spx-srch-bg', rgbaOf(setting('colorSearchPanelBg'), setting('sliderSearchPanelBgOpacity') / 100)); ps.setProperty('--spx-srch-accent', setting('colorSearchPanelAccent'));
+                if (!setting('checkboxSearchButtonEnabled') && srch.open) srch.setOpen(false);
+                syncSearchUi();
+                if (srch.open) placeSearchPanel();
+            }
+            layoutStack();
+        }
         {   // Play On Device button (under Filter): its own look
             const ap = el('spxApp').style, dOn = !!setting('checkboxDeviceButtonEnabled');
             el('spxDevice').hidden = !dOn;
@@ -1137,7 +1157,7 @@ async function boot() {
     // ---- input ---------------------------------------------------------------------------
     // Desktop: wheel = scrub (a notch moves the playhead N px along the current scale), click on the
     // timeline = jump, click-drag = zoom around the playhead. Touch: drag = scrub, pinch = zoom, tap = jump.
-    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxFilterPanel, #spxDevicePanel, #spxCover, #spxVolume, #spxSongBar, a, button, input, select, textarea');
+    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxFilterPanel, #spxSearchPanel, #spxDevicePanel, #spxCover, #spxVolume, #spxSongBar, a, button, input, select, textarea');
     // The title/artist/album lines are selectable text: a drag that starts on them selects it instead of zooming.
     const inText = t => t.closest && t.closest('.spx-title, .spx-artist, .spx-meta');
     window.addEventListener('wheel', e => {
@@ -1157,7 +1177,7 @@ async function boot() {
     let redirectBtn = null;
     // Click Tolerance (Shuffle, Next/Last, Play): each button's hit area grows by its own tolerance in px.
     const clickTolOf = b => (b.id === 'spxShuffle' ? setting('sliderShuffleClickTolerance') : b.id === 'spxFilter' ? setting('sliderFilterClickTolerance') : b.id === 'spxSongData' ? setting('sliderSongDataClickTolerance') : (b.id === 'spxPrev' || b.id === 'spxNext') ? setting('sliderNavClickTolerance') : b.id === 'spxCover' ? setting('sliderPlayClickTolerance') : 0);
-    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxSongData'), el('spxFilter'), el('spxTitleLink'), el('spxStartBtn')].find(b => {
+    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxSongData'), el('spxFilter'), el('spxSearch'), el('spxTitleLink'), el('spxStartBtn')].find(b => {
         const r = b.getBoundingClientRect(), p = clickTolOf(b);
         return x >= r.left - p && x <= r.right + p && y >= r.top - p && y <= r.bottom + p;
     });
@@ -1341,6 +1361,23 @@ async function boot() {
         player: { isPlaying, playingId, getProgress, playTrack, pauseEmbed, setRealVolume } });
     dp.applySettings();
     // ---- Filter button (under Shuffle) + panel ----
+    // Stack Shown Buttons: the right-hand buttons (Shuffle, Song Data, Filter, Search) and the left-hand ones (Play On Device, under Volume) are laid out one after the other in
+    // the shown ones only, each box (icon + 20 px) directly under the previous one - the same spacing they have with everything on. Off = every button keeps its own fixed place.
+    function layoutStack() {
+        const RIGHT = [['spxShuffle', 'checkboxShuffleButtonEnabled', 'sliderShuffleIconSize'], ['spxSongData', 'checkboxSongDataEnabled', 'sliderSongDataBtnSize'], ['spxFilter', 'checkboxFilterButtonEnabled', 'sliderFilterIconSize'], ['spxSearch', 'checkboxSearchButtonEnabled', 'sliderSearchIconSize']];
+        const LEFT = [['spxDevice', 'checkboxDeviceButtonEnabled', 'sliderDeviceIconSize']];
+        [...RIGHT, ...LEFT].forEach(([id]) => el(id).style.removeProperty('--spx-stack-top'));
+        if (!setting('checkboxStackShownButtons')) return;
+        const volIc = parseFloat(el('spxApp').style.getPropertyValue('--spx-vol-icon')) || 24;
+        const box = ([id, , sz]) => { const b = el(id); return (b.classList.contains('ui-icon') ? parseFloat(b.style.getPropertyValue('--ui-icon-size')) || setting(sz) : setting(sz)) + 20; };
+        const run = (list, y0) => { let y = y0; list.forEach(it => { if (!setting(it[1])) return; el(it[0]).style.setProperty('--spx-stack-top', y + 'px'); y += box(it); }); };
+        run(RIGHT, 14 + (volIc + 20 - (setting('sliderShuffleIconSize') + 20)) / 2);
+        run(LEFT, 14 + (setting('checkboxVolumeButtonEnabled') ? volIc + 20 : 0));
+    }
+    { // an icon size chosen in the UI Layout Inspector changes a button's box without going through applyLook: re-stack when any of them resizes
+        const ro = new ResizeObserver(() => layoutStack());
+        ['spxShuffle', 'spxSongData', 'spxFilter', 'spxSearch', 'spxDevice'].forEach(id => ro.observe(el(id)));
+    }
     const filterBtn = el('spxFilter');
     flt = createFilter(songs, { host: document.body, onChange: o => { if (o && o.layout) placeFilterPanel(); else onFilterChanged(); } });
     function placeFilterPanel() {
@@ -1359,7 +1396,7 @@ async function boot() {
         if (ur.y && setting('checkboxFilterPanelResizeY')) pn.style.top = Math.max(4, Math.min(window.innerHeight - Math.min(ur.y.height, window.innerHeight - 8) - 4, ur.y.top)) + 'px';
     }
     function syncFilterUi() {
-        const on = filterOn();
+        const on = flt.active() && !!setting('checkboxFilterButtonEnabled');
         filterBtn.setAttribute('aria-pressed', String(on));
         filterBtn.setAttribute('aria-expanded', String(flt.open));
         filterBtn.title = on ? 'Filter on: ' + flt.describe() : 'Filter off';
@@ -1390,9 +1427,27 @@ async function boot() {
             }
         }
     }, true);
-    window.addEventListener('resize', () => { if (flt.open) placeFilterPanel(); });
+    window.addEventListener('resize', () => { if (flt.open) placeFilterPanel(); if (srch && srch.open) placeSearchPanel(); });
+    // ---- Search button + panel (under Filter): Song / Artist / Album text boxes, ANDed into the filter
+    const searchBtn = el('spxSearch');
+    srch = createSearch(songs, { onChange: () => { onFilterChanged(); syncSearchUi(); } });
+    flt.setExtra(srch);
+    function placeSearchPanel() {
+        const r = searchBtn.getBoundingClientRect(), pn = srch.panel, w = pn.offsetWidth || setting('sliderSearchPanelWidth');
+        pn.style.top = Math.max(4, Math.min(window.innerHeight - (pn.offsetHeight || 0) - 4, r.bottom + setting('sliderSearchPanelOffsetY'))) + 'px';
+        pn.style.left = Math.max(4, Math.min(window.innerWidth - w - 4, r.right - w + setting('sliderSearchPanelOffsetX'))) + 'px';
+    }
+    function syncSearchUi() {
+        searchBtn.setAttribute('aria-pressed', String(srch.active()));
+        searchBtn.setAttribute('aria-expanded', String(srch.open));
+        searchBtn.title = srch.active() ? 'Search: ' + srch.describe() : 'Search';
+    }
+    searchBtn.addEventListener('click', () => { srch.setOpen(!srch.open); if (srch.open) placeSearchPanel(); syncSearchUi(); });
+    document.addEventListener('pointerdown', e => {
+        if (srch.open && !srch.panel.contains(e.target) && !searchBtn.contains(e.target)) { srch.setOpen(false); syncSearchUi(); }
+    }, true);
     timeline.setFilter(filterOn() ? flt.passes : null);
-    syncFilterUi();
+    syncFilterUi(); syncSearchUi();
     // ---- Song Data button (between Shuffle and Filter)
     const songDataBtn = el('spxSongData');
     try { songDataOn = localStorage.getItem('spxSongData') === '1'; } catch (e) { /* storage blocked */ }

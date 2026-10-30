@@ -177,7 +177,7 @@
 .spx-songbar.hov { opacity: var(--sb-hover-op, 1); } /* the pointer is over the album cover */
 .spx-songbar.press { opacity: var(--sb-click-op, 1); } /* pressed on the bar */
 /* Shuffle (under the volume icon) */
-.spx-shuffle { z-index: 4; position: absolute; right: var(--spx-shuffle-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2); /* the stage's top-right corner; the volume is at the left edge */ width: calc(var(--spx-shuffle-icon, 20px) + 20px); height: calc(var(--spx-shuffle-icon, 20px) + 20px);
+.spx-shuffle { z-index: 4; position: absolute; right: var(--spx-shuffle-edge, 14px); top: var(--spx-stack-top, calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2)); /* the stage's top-right corner; the volume is at the left edge */ width: calc(var(--spx-shuffle-icon, 20px) + 20px); height: calc(var(--spx-shuffle-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-shuffle-color, #f2f2f2); --bs-op: var(--spx-shuffle-off-op, 0.45); /* the on/off opacity is the icon's own base (the animation group's hover / press values replace it); the button stays at full opacity */ cursor: pointer;
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-shuffle-x, 0px) var(--spx-shuffle-y, 0px); }
 .spx-shuffle svg { width: var(--spx-shuffle-icon, 20px); height: var(--spx-shuffle-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -185,14 +185,14 @@
 .spx-shuffle[hidden] { display: none; }
 /* Filter (under the shuffle icon): opens the audio-feature filter panel (filter.js) */
 /* Song Data button (between Shuffle and Filter): the four audio numbers of the shown song appear on the timeline's add-date row */
-.spx-songdata { z-index: 4; position: absolute; right: var(--spx-sd-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px); width: calc(var(--spx-sd-icon, 20px) + 20px); height: calc(var(--spx-sd-icon, 20px) + 20px);
+.spx-songdata { z-index: 4; position: absolute; right: var(--spx-sd-edge, 14px); top: var(--spx-stack-top, calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px)); width: calc(var(--spx-sd-icon, 20px) + 20px); height: calc(var(--spx-sd-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-sd-color, #f2f2f2); --bs-op: var(--spx-sd-off-op, 0.45); cursor: pointer;
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-sd-x, 0px) var(--spx-sd-y, 0px); }
 .spx-songdata svg { width: var(--spx-sd-icon, 20px); height: var(--spx-sd-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .spx-songdata[aria-pressed="true"] { --bs-op: var(--spx-sd-on-op, 1); color: var(--spx-sd-on-color, #1db954); }
 .spx-songdata[hidden] { display: none; }
 .spx-app.no-shadow-vol .spx-songdata { filter: none; }
-.spx-filter { z-index: 4; position: absolute; right: var(--spx-filter-edge, 14px); top: calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-sd-offset, 0px)); width: calc(var(--spx-filter-icon, 20px) + 20px); height: calc(var(--spx-filter-icon, 20px) + 20px);
+.spx-filter { z-index: 4; position: absolute; right: var(--spx-filter-edge, 14px); top: var(--spx-stack-top, calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-sd-offset, 0px))); width: calc(var(--spx-filter-icon, 20px) + 20px); height: calc(var(--spx-filter-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-filter-color, #f2f2f2); --bs-op: var(--spx-filter-off-op, 0.45); cursor: pointer;
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-filter-x, 0px) var(--spx-filter-y, 0px); }
 .spx-filter svg { width: var(--spx-filter-icon, 20px); height: var(--spx-filter-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -260,7 +260,7 @@
 .spx-sdk-status[hidden] { display: none; }
 
 /* Play On Device (left edge, under the Volume button): the Spotify Connect device list (devicePanel.js) */
-.spx-device { z-index: 4; position: absolute; left: var(--spx-device-edge, 14px); top: calc(14px + var(--spx-vol-icon, 24px) + 20px); /* the left edge, directly under the volume button */ width: calc(var(--spx-device-icon, 20px) + 20px); height: calc(var(--spx-device-icon, 20px) + 20px);
+.spx-device { z-index: 4; position: absolute; left: var(--spx-device-edge, 14px); top: var(--spx-stack-top, calc(14px + var(--spx-vol-icon, 24px) + 20px)); /* the left edge, directly under the volume button */ width: calc(var(--spx-device-icon, 20px) + 20px); height: calc(var(--spx-device-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-device-color, #f2f2f2); --bs-op: var(--spx-device-off-op, 0.45); cursor: pointer;
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-device-x, 0px) var(--spx-device-y, 0px); }
 .spx-device svg { width: var(--spx-device-icon, 20px); height: var(--spx-device-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -286,8 +286,27 @@
 /* ---- UI Layout Inspector takeover (2026-10-30): every button / layer is its own Inspector element, UNMANAGED (engine position mode "flow") until a position mode is chosen.
    While managed (not .ui-mode-flow) the item's own dev-panel position rules are switched off. :where() keeps this at the same specificity as the item's base rule, so it wins by
    coming later but still loses to the engine's own (higher) mode rules. */
-:where(.spx-shuffle, .spx-songdata, .spx-filter, .spx-device, .spx-songbar):where(:not(.ui-mode-flow)) { right: auto; top: auto; left: auto; bottom: auto; translate: none; }
+:where(.spx-shuffle, .spx-songdata, .spx-filter, .spx-search, .spx-device, .spx-songbar):where(:not(.ui-mode-flow)) { right: auto; top: auto; left: auto; bottom: auto; translate: none; }
 .spx-songbar:where(:not(.ui-mode-flow)) { width: 100vw; }
 /* Icon size (Inspector > Icon): the button's box follows the icon (icon + 20px, like the dev-panel icon sizes do), and the animation's own base size follows it too. */
 .ui-icon { --bs-size: var(--ui-icon-size); }
-.spx-shuffle.ui-icon, .spx-songdata.ui-icon, .spx-filter.ui-icon, .spx-device.ui-icon { width: calc(var(--ui-icon-size) + 20px); height: calc(var(--ui-icon-size) + 20px); }
+.spx-shuffle.ui-icon, .spx-songdata.ui-icon, .spx-filter.ui-icon, .spx-search.ui-icon, .spx-device.ui-icon { width: calc(var(--ui-icon-size) + 20px); height: calc(var(--ui-icon-size) + 20px); }
+
+/* ---- Search button (right side, under Filter) and its panel (search.js) ---- */
+.spx-search { z-index: 4; position: absolute; right: var(--spx-search-edge, 14px); top: var(--spx-stack-top, calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-sd-offset, 0px) + var(--spx-flt-offset, 0px))); width: calc(var(--spx-search-icon, 20px) + 20px); height: calc(var(--spx-search-icon, 20px) + 20px);
+    border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-search-color, #f2f2f2); --bs-op: var(--spx-search-off-op, 0.45); cursor: pointer;
+    filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-search-x, 0px) var(--spx-search-y, 0px); }
+.spx-search svg { width: var(--spx-search-icon, 20px); height: var(--spx-search-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spx-search[aria-pressed="true"] { --bs-op: var(--spx-search-on-op, 1); color: var(--spx-search-on-color, #1db954); }
+.spx-search[hidden] { display: none; }
+.spx-app.no-shadow-vol .spx-search { filter: none; }
+.spx-search-panel { position: fixed; z-index: 2147482000; width: var(--spx-srch-width, 240px); box-sizing: border-box; padding: 10px 12px 12px; border-radius: 10px; color: #f2f2f2; font-size: var(--spx-srch-font, 13px); font-family: var(--spx-font, inherit);
+    background: var(--spx-srch-bg, rgba(20,22,26,0.92)); box-shadow: 0 6px 24px #000a; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); --srch-accent: var(--spx-srch-accent, #1db954); }
+.spx-search-panel[hidden] { display: none; }
+.spx-srch-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; opacity: .8; }
+.spx-srch-clear { border: 0; background: none; color: inherit; font: inherit; opacity: .7; cursor: pointer; padding: 2px 4px; }
+.spx-srch-clear:hover { opacity: 1; color: var(--srch-accent); }
+.spx-srch-row { display: block; margin-top: 8px; }
+.spx-srch-label { display: block; margin-bottom: 3px; opacity: .8; }
+.spx-srch-input { width: 100%; box-sizing: border-box; padding: 5px 8px; border: 1px solid #ffffff33; border-radius: 6px; background: #0000004d; color: inherit; font: inherit; outline: none; }
+.spx-srch-input:focus { border-color: var(--srch-accent); }

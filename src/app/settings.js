@@ -142,6 +142,9 @@ export const DEFAULTS = {
     colorTickMark: '#ffffff', sliderTickOpacity: 0.6, sliderTickWidth: 1, sliderTickHeight: 5, sliderTickStartHeight: 0,
     checkboxScaleSmoothPan: false, checkboxSongTickInvert: false, checkboxSongTickBoth: false, checkboxSongTickClamp: false, sliderScaleNumbersFontSize: 11, checkboxScaleNumbersBold: false, colorScaleNumbers: '#ffffff', sliderScaleNumbersLetterSpacing: 0, sliderScaleNumbersOpacity: 0.6, sliderScaleNumbersOffsetX: 3,
     checkboxSongAddDateEnabled: true, sliderSongAddDateFontSize: 13, checkboxSongAddDateBold: true, colorSongAddDate: '#ffffff', sliderSongAddDateLetterSpacing: 0, sliderSongAddDateOpacity: 1, sliderSongAddDateOffsetY: 0,
+    // Search button (right side, under Filter) + Stack Shown Buttons
+    checkboxStackShownButtons: false, checkboxSearchButtonEnabled: true, sliderSearchIconSize: 20, sliderSearchIconOffsetX: 0, sliderSearchIconOffsetY: 0, sliderSearchEdgeOffset: 14, sliderSearchOffOpacity: 45, sliderSearchOnOpacity: 100, colorSearchIcon: '#f2f2f2', colorSearchOn: '#1db954',
+    sliderSearchPanelWidth: 240, sliderSearchPanelFontSize: 13, sliderSearchPanelOffsetX: 0, sliderSearchPanelOffsetY: 6, colorSearchPanelBg: '#14161a', sliderSearchPanelBgOpacity: 92, colorSearchPanelAccent: '#1db954',
     // Play On Device (UI Layout > Play On Device)
     checkboxDeviceButtonEnabled: true, sliderDeviceIconSize: 20, sliderDeviceIconOffsetX: 0, sliderDeviceIconOffsetY: 0, sliderDeviceOffOpacity: 45, sliderDeviceOnOpacity: 100, sliderDeviceEdgeOffset: 14, colorDeviceIcon: '#f2f2f2', colorDeviceOn: '#1db954',
     sliderDevicePollSeconds: 1.5, sliderDeviceListRefresh: 4, checkboxDeviceMatchVolume: true, checkboxDeviceKeepPlaying: true, checkboxDeviceRemember: false, checkboxDeviceMuteClips: false, checkboxDeviceShowThisBrowser: true, checkboxDeviceShowVolume: true, checkboxDevicePanelCloseOnOutside: true, checkboxDeviceCloseOnPick: false,
