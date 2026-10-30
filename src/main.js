@@ -709,6 +709,7 @@ async function boot() {
             // Filter and Show Song Data have an on / off state like Shuffle: their CSS picks the off / on opacity variable from aria-pressed
             { k: 'Filter', host: el('spxFilter'), kind: 'plain', opVar: '--spx-filter-off-op', onVar: '--spx-filter-on-op' },
             { k: 'SongData', host: el('spxSongData'), kind: 'plain', opVar: '--spx-sd-off-op', onVar: '--spx-sd-on-op' },
+            { k: 'Device', host: el('spxDevice'), kind: 'plain', opVar: '--spx-device-off-op', onVar: '--spx-device-on-op' }, // Play On Device: on = a device is playing
         ];
         targets.forEach(t => {
             const ticked = on && !!g('checkboxOverride' + t.k), st = t.host.style;
