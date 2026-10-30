@@ -308,15 +308,15 @@
     "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
     "checkboxDeviceButtonEnabled": true,
-    "selectDeviceIconStyle": "7",
-    "sliderDeviceIconSize": 25,
+    "selectDeviceIconStyle": "5",
+    "sliderDeviceIconSize": 28,
     "sliderDeviceIconOffsetX": 0,
-    "sliderDeviceIconOffsetY": 5,
+    "sliderDeviceIconOffsetY": 0,
     "sliderDeviceEdgeOffset": 0,
     "sliderDeviceOffOpacity": 45,
     "sliderDeviceOnOpacity": 100,
     "colorDeviceIcon": "#f2f2f2",
-    "colorDeviceOn": "#ffffff",
+    "colorDeviceOn": "#1db954",
     "checkboxDeviceMatchVolume": true,
     "checkboxDeviceKeepPlaying": true,
     "checkboxDeviceMuteClips": false,
@@ -334,7 +334,7 @@
     "colorDevicePanelBg": "#14161a",
     "sliderDevicePanelBgOpacity": 92,
     "sliderDevicePanelBlur": 6,
-    "colorDevicePanelAccent": "#fcfcfc",
+    "colorDevicePanelAccent": "#1db954",
     "selectFilterIconStyle": "3",
     "selectTempoIconStyle": "8",
     "selectValenceIconStyle": "13",
@@ -383,19 +383,23 @@
     "checkboxFilterSongLength": true,
     "checkboxFilterShowValueSongLength": true,
     "checkboxFilterShowNumbers": true,
-    "checkboxFilterShowValueOriginal": false,
-    "sliderFilterValueOffsetY": -3,
-    "checkboxFilterShowRangeText": true,
+    "checkboxFilterShowValueOriginal": true,
+    "sliderFilterValueOffsetY": 10,
+    "sliderFilterValueFontSize": 12,
+    "checkboxFilterValueBold": true,
+    "sliderFilterMinMaxFontSize": 13,
+    "checkboxFilterMinMaxBold": false,
+    "sliderFilterMinMaxOffsetY": 1,
     "checkboxFilterCloseOnOutside": true,
     "checkboxFilterClickToExit": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 13,
-    "sliderFilterPanelRowGap": 14,
-    "sliderFilterPanelRowsOffsetY": -31,
+    "sliderFilterPanelRowGap": 6,
+    "sliderFilterPanelRowsOffsetY": -35,
     "checkboxFilterPanelKeepVisible": true,
     "sliderFilterPanelIconOffsetY": -5,
-    "sliderFilterSlidersOffsetY": 0,
-    "sliderFilterPanelIconSize": 24,
+    "sliderFilterSlidersOffsetY": -11,
+    "sliderFilterPanelIconSize": 22,
     "sliderFilterPanelOffsetX": 0,
     "sliderFilterPanelOffsetY": -28,
     "colorFilterPanelBg": "#ffffff",
@@ -6085,10 +6089,6 @@
                                   },
                                   {
                                     "type": "row",
-                                    "key": "checkboxFilterShowRangeText"
-                                  },
-                                  {
-                                    "type": "row",
                                     "key": "checkboxFilterShowValueNameLengths"
                                   },
                                   {
@@ -6105,7 +6105,27 @@
                                   },
                                   {
                                     "type": "row",
+                                    "key": "checkboxFilterValueBold"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "checkboxFilterMinMaxBold"
+                                  },
+                                  {
+                                    "type": "row",
                                     "key": "sliderFilterPanelFontSize"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterMinMaxOffsetY"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterValueFontSize"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterMinMaxFontSize"
                                   },
                                   {
                                     "type": "row",
@@ -6134,12 +6154,16 @@
                                 ],
                                 "rowKeys": [
                                   "checkboxFilterShowNumbers",
-                                  "checkboxFilterShowRangeText",
                                   "checkboxFilterShowValueNameLengths",
                                   "checkboxFilterShowValueSongDate",
                                   "checkboxFilterShowValueSongLength",
                                   "checkboxFilterShowValueOriginal",
+                                  "checkboxFilterValueBold",
+                                  "checkboxFilterMinMaxBold",
                                   "sliderFilterPanelFontSize",
+                                  "sliderFilterMinMaxOffsetY",
+                                  "sliderFilterValueFontSize",
+                                  "sliderFilterMinMaxFontSize",
                                   "sliderFilterPanelIconSize",
                                   "sliderFilterSlidersOffsetY",
                                   "sliderFilterPanelRowsOffsetY",
@@ -6276,10 +6300,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "checkboxFilterShowRangeText"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "checkboxFilterShowValueNameLengths"
                                 },
                                 {
@@ -6296,7 +6316,27 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "checkboxFilterValueBold"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterMinMaxBold"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxOffsetY"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterValueFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxFontSize"
                                 },
                                 {
                                   "type": "row",
@@ -6325,12 +6365,16 @@
                               ],
                               "rowKeys": [
                                 "checkboxFilterShowNumbers",
-                                "checkboxFilterShowRangeText",
                                 "checkboxFilterShowValueNameLengths",
                                 "checkboxFilterShowValueSongDate",
                                 "checkboxFilterShowValueSongLength",
                                 "checkboxFilterShowValueOriginal",
+                                "checkboxFilterValueBold",
+                                "checkboxFilterMinMaxBold",
                                 "sliderFilterPanelFontSize",
+                                "sliderFilterMinMaxOffsetY",
+                                "sliderFilterValueFontSize",
+                                "sliderFilterMinMaxFontSize",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterSlidersOffsetY",
                                 "sliderFilterPanelRowsOffsetY",
@@ -6970,10 +7014,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "checkboxFilterShowRangeText"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "checkboxFilterShowValueNameLengths"
                                 },
                                 {
@@ -6990,7 +7030,27 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "checkboxFilterValueBold"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterMinMaxBold"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxOffsetY"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterValueFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxFontSize"
                                 },
                                 {
                                   "type": "row",
@@ -7019,12 +7079,16 @@
                               ],
                               "rowKeys": [
                                 "checkboxFilterShowNumbers",
-                                "checkboxFilterShowRangeText",
                                 "checkboxFilterShowValueNameLengths",
                                 "checkboxFilterShowValueSongDate",
                                 "checkboxFilterShowValueSongLength",
                                 "checkboxFilterShowValueOriginal",
+                                "checkboxFilterValueBold",
+                                "checkboxFilterMinMaxBold",
                                 "sliderFilterPanelFontSize",
+                                "sliderFilterMinMaxOffsetY",
+                                "sliderFilterValueFontSize",
+                                "sliderFilterMinMaxFontSize",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterSlidersOffsetY",
                                 "sliderFilterPanelRowsOffsetY",
@@ -7161,10 +7225,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "checkboxFilterShowRangeText"
-                              },
-                              {
-                                "type": "row",
                                 "key": "checkboxFilterShowValueNameLengths"
                               },
                               {
@@ -7181,7 +7241,27 @@
                               },
                               {
                                 "type": "row",
+                                "key": "checkboxFilterValueBold"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterMinMaxBold"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxFontSize"
                               },
                               {
                                 "type": "row",
@@ -7210,12 +7290,16 @@
                             ],
                             "rowKeys": [
                               "checkboxFilterShowNumbers",
-                              "checkboxFilterShowRangeText",
                               "checkboxFilterShowValueNameLengths",
                               "checkboxFilterShowValueSongDate",
                               "checkboxFilterShowValueSongLength",
                               "checkboxFilterShowValueOriginal",
+                              "checkboxFilterValueBold",
+                              "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
+                              "sliderFilterMinMaxOffsetY",
+                              "sliderFilterValueFontSize",
+                              "sliderFilterMinMaxFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterSlidersOffsetY",
                               "sliderFilterPanelRowsOffsetY",
@@ -7573,14 +7657,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "colorDeviceIcon"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorDeviceOn"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderDeviceIconSize"
                       },
                       {
@@ -7602,6 +7678,14 @@
                       {
                         "type": "row",
                         "key": "sliderDeviceOnOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorDeviceIcon"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorDeviceOn"
                       },
                       {
                         "type": "row",
@@ -7665,27 +7749,27 @@
                       },
                       {
                         "type": "row",
-                        "key": "colorDevicePanelAccent"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderDevicePanelBgOpacity"
                       },
                       {
                         "type": "row",
                         "key": "sliderDevicePanelBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorDevicePanelAccent"
                       }
                     ],
                     "rowKeys": [
                       "selectDeviceIconStyle",
-                      "colorDeviceIcon",
-                      "colorDeviceOn",
                       "sliderDeviceIconSize",
                       "sliderDeviceIconOffsetX",
                       "sliderDeviceIconOffsetY",
                       "sliderDeviceEdgeOffset",
                       "sliderDeviceOffOpacity",
                       "sliderDeviceOnOpacity",
+                      "colorDeviceIcon",
+                      "colorDeviceOn",
                       "checkboxDeviceMatchVolume",
                       "checkboxDeviceKeepPlaying",
                       "checkboxDeviceMuteClips",
@@ -7701,9 +7785,9 @@
                       "sliderDevicePanelOffsetX",
                       "sliderDevicePanelOffsetY",
                       "colorDevicePanelBg",
-                      "colorDevicePanelAccent",
                       "sliderDevicePanelBgOpacity",
-                      "sliderDevicePanelBlur"
+                      "sliderDevicePanelBlur",
+                      "colorDevicePanelAccent"
                     ],
                     "subgroups": []
                   }
@@ -9506,10 +9590,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "checkboxFilterShowRangeText"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "checkboxFilterShowValueNameLengths"
                                 },
                                 {
@@ -9526,7 +9606,27 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "checkboxFilterValueBold"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterMinMaxBold"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxOffsetY"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterValueFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxFontSize"
                                 },
                                 {
                                   "type": "row",
@@ -9555,12 +9655,16 @@
                               ],
                               "rowKeys": [
                                 "checkboxFilterShowNumbers",
-                                "checkboxFilterShowRangeText",
                                 "checkboxFilterShowValueNameLengths",
                                 "checkboxFilterShowValueSongDate",
                                 "checkboxFilterShowValueSongLength",
                                 "checkboxFilterShowValueOriginal",
+                                "checkboxFilterValueBold",
+                                "checkboxFilterMinMaxBold",
                                 "sliderFilterPanelFontSize",
+                                "sliderFilterMinMaxOffsetY",
+                                "sliderFilterValueFontSize",
+                                "sliderFilterMinMaxFontSize",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterSlidersOffsetY",
                                 "sliderFilterPanelRowsOffsetY",
@@ -9697,10 +9801,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "checkboxFilterShowRangeText"
-                              },
-                              {
-                                "type": "row",
                                 "key": "checkboxFilterShowValueNameLengths"
                               },
                               {
@@ -9717,7 +9817,27 @@
                               },
                               {
                                 "type": "row",
+                                "key": "checkboxFilterValueBold"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterMinMaxBold"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxFontSize"
                               },
                               {
                                 "type": "row",
@@ -9746,12 +9866,16 @@
                             ],
                             "rowKeys": [
                               "checkboxFilterShowNumbers",
-                              "checkboxFilterShowRangeText",
                               "checkboxFilterShowValueNameLengths",
                               "checkboxFilterShowValueSongDate",
                               "checkboxFilterShowValueSongLength",
                               "checkboxFilterShowValueOriginal",
+                              "checkboxFilterValueBold",
+                              "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
+                              "sliderFilterMinMaxOffsetY",
+                              "sliderFilterValueFontSize",
+                              "sliderFilterMinMaxFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterSlidersOffsetY",
                               "sliderFilterPanelRowsOffsetY",
@@ -10391,10 +10515,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "checkboxFilterShowRangeText"
-                              },
-                              {
-                                "type": "row",
                                 "key": "checkboxFilterShowValueNameLengths"
                               },
                               {
@@ -10411,7 +10531,27 @@
                               },
                               {
                                 "type": "row",
+                                "key": "checkboxFilterValueBold"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterMinMaxBold"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxFontSize"
                               },
                               {
                                 "type": "row",
@@ -10440,12 +10580,16 @@
                             ],
                             "rowKeys": [
                               "checkboxFilterShowNumbers",
-                              "checkboxFilterShowRangeText",
                               "checkboxFilterShowValueNameLengths",
                               "checkboxFilterShowValueSongDate",
                               "checkboxFilterShowValueSongLength",
                               "checkboxFilterShowValueOriginal",
+                              "checkboxFilterValueBold",
+                              "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
+                              "sliderFilterMinMaxOffsetY",
+                              "sliderFilterValueFontSize",
+                              "sliderFilterMinMaxFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterSlidersOffsetY",
                               "sliderFilterPanelRowsOffsetY",
@@ -10582,10 +10726,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "checkboxFilterShowRangeText"
-                            },
-                            {
-                              "type": "row",
                               "key": "checkboxFilterShowValueNameLengths"
                             },
                             {
@@ -10602,7 +10742,27 @@
                             },
                             {
                               "type": "row",
+                              "key": "checkboxFilterValueBold"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterMinMaxBold"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxOffsetY"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterValueFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxFontSize"
                             },
                             {
                               "type": "row",
@@ -10631,12 +10791,16 @@
                           ],
                           "rowKeys": [
                             "checkboxFilterShowNumbers",
-                            "checkboxFilterShowRangeText",
                             "checkboxFilterShowValueNameLengths",
                             "checkboxFilterShowValueSongDate",
                             "checkboxFilterShowValueSongLength",
                             "checkboxFilterShowValueOriginal",
+                            "checkboxFilterValueBold",
+                            "checkboxFilterMinMaxBold",
                             "sliderFilterPanelFontSize",
+                            "sliderFilterMinMaxOffsetY",
+                            "sliderFilterValueFontSize",
+                            "sliderFilterMinMaxFontSize",
                             "sliderFilterPanelIconSize",
                             "sliderFilterSlidersOffsetY",
                             "sliderFilterPanelRowsOffsetY",
@@ -10991,14 +11155,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "colorDeviceIcon"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorDeviceOn"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderDeviceIconSize"
                     },
                     {
@@ -11020,6 +11176,14 @@
                     {
                       "type": "row",
                       "key": "sliderDeviceOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceOn"
                     },
                     {
                       "type": "row",
@@ -11083,27 +11247,27 @@
                     },
                     {
                       "type": "row",
-                      "key": "colorDevicePanelAccent"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderDevicePanelBgOpacity"
                     },
                     {
                       "type": "row",
                       "key": "sliderDevicePanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDevicePanelAccent"
                     }
                   ],
                   "rowKeys": [
                     "selectDeviceIconStyle",
-                    "colorDeviceIcon",
-                    "colorDeviceOn",
                     "sliderDeviceIconSize",
                     "sliderDeviceIconOffsetX",
                     "sliderDeviceIconOffsetY",
                     "sliderDeviceEdgeOffset",
                     "sliderDeviceOffOpacity",
                     "sliderDeviceOnOpacity",
+                    "colorDeviceIcon",
+                    "colorDeviceOn",
                     "checkboxDeviceMatchVolume",
                     "checkboxDeviceKeepPlaying",
                     "checkboxDeviceMuteClips",
@@ -11119,9 +11283,9 @@
                     "sliderDevicePanelOffsetX",
                     "sliderDevicePanelOffsetY",
                     "colorDevicePanelBg",
-                    "colorDevicePanelAccent",
                     "sliderDevicePanelBgOpacity",
-                    "sliderDevicePanelBlur"
+                    "sliderDevicePanelBlur",
+                    "colorDevicePanelAccent"
                   ],
                   "subgroups": []
                 },
@@ -16620,10 +16784,6 @@
                                 },
                                 {
                                   "type": "row",
-                                  "key": "checkboxFilterShowRangeText"
-                                },
-                                {
-                                  "type": "row",
                                   "key": "checkboxFilterShowValueNameLengths"
                                 },
                                 {
@@ -16640,7 +16800,27 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "checkboxFilterValueBold"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterMinMaxBold"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxOffsetY"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterValueFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxFontSize"
                                 },
                                 {
                                   "type": "row",
@@ -16669,12 +16849,16 @@
                               ],
                               "rowKeys": [
                                 "checkboxFilterShowNumbers",
-                                "checkboxFilterShowRangeText",
                                 "checkboxFilterShowValueNameLengths",
                                 "checkboxFilterShowValueSongDate",
                                 "checkboxFilterShowValueSongLength",
                                 "checkboxFilterShowValueOriginal",
+                                "checkboxFilterValueBold",
+                                "checkboxFilterMinMaxBold",
                                 "sliderFilterPanelFontSize",
+                                "sliderFilterMinMaxOffsetY",
+                                "sliderFilterValueFontSize",
+                                "sliderFilterMinMaxFontSize",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterSlidersOffsetY",
                                 "sliderFilterPanelRowsOffsetY",
@@ -16811,10 +16995,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "checkboxFilterShowRangeText"
-                              },
-                              {
-                                "type": "row",
                                 "key": "checkboxFilterShowValueNameLengths"
                               },
                               {
@@ -16831,7 +17011,27 @@
                               },
                               {
                                 "type": "row",
+                                "key": "checkboxFilterValueBold"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterMinMaxBold"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxFontSize"
                               },
                               {
                                 "type": "row",
@@ -16860,12 +17060,16 @@
                             ],
                             "rowKeys": [
                               "checkboxFilterShowNumbers",
-                              "checkboxFilterShowRangeText",
                               "checkboxFilterShowValueNameLengths",
                               "checkboxFilterShowValueSongDate",
                               "checkboxFilterShowValueSongLength",
                               "checkboxFilterShowValueOriginal",
+                              "checkboxFilterValueBold",
+                              "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
+                              "sliderFilterMinMaxOffsetY",
+                              "sliderFilterValueFontSize",
+                              "sliderFilterMinMaxFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterSlidersOffsetY",
                               "sliderFilterPanelRowsOffsetY",
@@ -17505,10 +17709,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "checkboxFilterShowRangeText"
-                              },
-                              {
-                                "type": "row",
                                 "key": "checkboxFilterShowValueNameLengths"
                               },
                               {
@@ -17525,7 +17725,27 @@
                               },
                               {
                                 "type": "row",
+                                "key": "checkboxFilterValueBold"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterMinMaxBold"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxFontSize"
                               },
                               {
                                 "type": "row",
@@ -17554,12 +17774,16 @@
                             ],
                             "rowKeys": [
                               "checkboxFilterShowNumbers",
-                              "checkboxFilterShowRangeText",
                               "checkboxFilterShowValueNameLengths",
                               "checkboxFilterShowValueSongDate",
                               "checkboxFilterShowValueSongLength",
                               "checkboxFilterShowValueOriginal",
+                              "checkboxFilterValueBold",
+                              "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
+                              "sliderFilterMinMaxOffsetY",
+                              "sliderFilterValueFontSize",
+                              "sliderFilterMinMaxFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterSlidersOffsetY",
                               "sliderFilterPanelRowsOffsetY",
@@ -17696,10 +17920,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "checkboxFilterShowRangeText"
-                            },
-                            {
-                              "type": "row",
                               "key": "checkboxFilterShowValueNameLengths"
                             },
                             {
@@ -17716,7 +17936,27 @@
                             },
                             {
                               "type": "row",
+                              "key": "checkboxFilterValueBold"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterMinMaxBold"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxOffsetY"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterValueFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxFontSize"
                             },
                             {
                               "type": "row",
@@ -17745,12 +17985,16 @@
                           ],
                           "rowKeys": [
                             "checkboxFilterShowNumbers",
-                            "checkboxFilterShowRangeText",
                             "checkboxFilterShowValueNameLengths",
                             "checkboxFilterShowValueSongDate",
                             "checkboxFilterShowValueSongLength",
                             "checkboxFilterShowValueOriginal",
+                            "checkboxFilterValueBold",
+                            "checkboxFilterMinMaxBold",
                             "sliderFilterPanelFontSize",
+                            "sliderFilterMinMaxOffsetY",
+                            "sliderFilterValueFontSize",
+                            "sliderFilterMinMaxFontSize",
                             "sliderFilterPanelIconSize",
                             "sliderFilterSlidersOffsetY",
                             "sliderFilterPanelRowsOffsetY",
@@ -18108,14 +18352,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "colorDeviceIcon"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorDeviceOn"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderDeviceIconSize"
                     },
                     {
@@ -18137,6 +18373,14 @@
                     {
                       "type": "row",
                       "key": "sliderDeviceOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceOn"
                     },
                     {
                       "type": "row",
@@ -18200,27 +18444,27 @@
                     },
                     {
                       "type": "row",
-                      "key": "colorDevicePanelAccent"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderDevicePanelBgOpacity"
                     },
                     {
                       "type": "row",
                       "key": "sliderDevicePanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDevicePanelAccent"
                     }
                   ],
                   "rowKeys": [
                     "selectDeviceIconStyle",
-                    "colorDeviceIcon",
-                    "colorDeviceOn",
                     "sliderDeviceIconSize",
                     "sliderDeviceIconOffsetX",
                     "sliderDeviceIconOffsetY",
                     "sliderDeviceEdgeOffset",
                     "sliderDeviceOffOpacity",
                     "sliderDeviceOnOpacity",
+                    "colorDeviceIcon",
+                    "colorDeviceOn",
                     "checkboxDeviceMatchVolume",
                     "checkboxDeviceKeepPlaying",
                     "checkboxDeviceMuteClips",
@@ -18236,9 +18480,9 @@
                     "sliderDevicePanelOffsetX",
                     "sliderDevicePanelOffsetY",
                     "colorDevicePanelBg",
-                    "colorDevicePanelAccent",
                     "sliderDevicePanelBgOpacity",
-                    "sliderDevicePanelBlur"
+                    "sliderDevicePanelBlur",
+                    "colorDevicePanelAccent"
                   ],
                   "subgroups": []
                 }
@@ -20041,10 +20285,6 @@
                               },
                               {
                                 "type": "row",
-                                "key": "checkboxFilterShowRangeText"
-                              },
-                              {
-                                "type": "row",
                                 "key": "checkboxFilterShowValueNameLengths"
                               },
                               {
@@ -20061,7 +20301,27 @@
                               },
                               {
                                 "type": "row",
+                                "key": "checkboxFilterValueBold"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterMinMaxBold"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxFontSize"
                               },
                               {
                                 "type": "row",
@@ -20090,12 +20350,16 @@
                             ],
                             "rowKeys": [
                               "checkboxFilterShowNumbers",
-                              "checkboxFilterShowRangeText",
                               "checkboxFilterShowValueNameLengths",
                               "checkboxFilterShowValueSongDate",
                               "checkboxFilterShowValueSongLength",
                               "checkboxFilterShowValueOriginal",
+                              "checkboxFilterValueBold",
+                              "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
+                              "sliderFilterMinMaxOffsetY",
+                              "sliderFilterValueFontSize",
+                              "sliderFilterMinMaxFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterSlidersOffsetY",
                               "sliderFilterPanelRowsOffsetY",
@@ -20232,10 +20496,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "checkboxFilterShowRangeText"
-                            },
-                            {
-                              "type": "row",
                               "key": "checkboxFilterShowValueNameLengths"
                             },
                             {
@@ -20252,7 +20512,27 @@
                             },
                             {
                               "type": "row",
+                              "key": "checkboxFilterValueBold"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterMinMaxBold"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxOffsetY"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterValueFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxFontSize"
                             },
                             {
                               "type": "row",
@@ -20281,12 +20561,16 @@
                           ],
                           "rowKeys": [
                             "checkboxFilterShowNumbers",
-                            "checkboxFilterShowRangeText",
                             "checkboxFilterShowValueNameLengths",
                             "checkboxFilterShowValueSongDate",
                             "checkboxFilterShowValueSongLength",
                             "checkboxFilterShowValueOriginal",
+                            "checkboxFilterValueBold",
+                            "checkboxFilterMinMaxBold",
                             "sliderFilterPanelFontSize",
+                            "sliderFilterMinMaxOffsetY",
+                            "sliderFilterValueFontSize",
+                            "sliderFilterMinMaxFontSize",
                             "sliderFilterPanelIconSize",
                             "sliderFilterSlidersOffsetY",
                             "sliderFilterPanelRowsOffsetY",
@@ -20926,10 +21210,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "checkboxFilterShowRangeText"
-                            },
-                            {
-                              "type": "row",
                               "key": "checkboxFilterShowValueNameLengths"
                             },
                             {
@@ -20946,7 +21226,27 @@
                             },
                             {
                               "type": "row",
+                              "key": "checkboxFilterValueBold"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterMinMaxBold"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxOffsetY"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterValueFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxFontSize"
                             },
                             {
                               "type": "row",
@@ -20975,12 +21275,16 @@
                           ],
                           "rowKeys": [
                             "checkboxFilterShowNumbers",
-                            "checkboxFilterShowRangeText",
                             "checkboxFilterShowValueNameLengths",
                             "checkboxFilterShowValueSongDate",
                             "checkboxFilterShowValueSongLength",
                             "checkboxFilterShowValueOriginal",
+                            "checkboxFilterValueBold",
+                            "checkboxFilterMinMaxBold",
                             "sliderFilterPanelFontSize",
+                            "sliderFilterMinMaxOffsetY",
+                            "sliderFilterValueFontSize",
+                            "sliderFilterMinMaxFontSize",
                             "sliderFilterPanelIconSize",
                             "sliderFilterSlidersOffsetY",
                             "sliderFilterPanelRowsOffsetY",
@@ -21117,10 +21421,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterShowRangeText"
-                          },
-                          {
-                            "type": "row",
                             "key": "checkboxFilterShowValueNameLengths"
                           },
                           {
@@ -21137,7 +21437,27 @@
                           },
                           {
                             "type": "row",
+                            "key": "checkboxFilterValueBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterMinMaxBold"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterPanelFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterMinMaxOffsetY"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterValueFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterMinMaxFontSize"
                           },
                           {
                             "type": "row",
@@ -21166,12 +21486,16 @@
                         ],
                         "rowKeys": [
                           "checkboxFilterShowNumbers",
-                          "checkboxFilterShowRangeText",
                           "checkboxFilterShowValueNameLengths",
                           "checkboxFilterShowValueSongDate",
                           "checkboxFilterShowValueSongLength",
                           "checkboxFilterShowValueOriginal",
+                          "checkboxFilterValueBold",
+                          "checkboxFilterMinMaxBold",
                           "sliderFilterPanelFontSize",
+                          "sliderFilterMinMaxOffsetY",
+                          "sliderFilterValueFontSize",
+                          "sliderFilterMinMaxFontSize",
                           "sliderFilterPanelIconSize",
                           "sliderFilterSlidersOffsetY",
                           "sliderFilterPanelRowsOffsetY",
@@ -21526,14 +21850,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "colorDeviceIcon"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorDeviceOn"
-                  },
-                  {
-                    "type": "row",
                     "key": "sliderDeviceIconSize"
                   },
                   {
@@ -21555,6 +21871,14 @@
                   {
                     "type": "row",
                     "key": "sliderDeviceOnOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorDeviceIcon"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorDeviceOn"
                   },
                   {
                     "type": "row",
@@ -21618,27 +21942,27 @@
                   },
                   {
                     "type": "row",
-                    "key": "colorDevicePanelAccent"
-                  },
-                  {
-                    "type": "row",
                     "key": "sliderDevicePanelBgOpacity"
                   },
                   {
                     "type": "row",
                     "key": "sliderDevicePanelBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorDevicePanelAccent"
                   }
                 ],
                 "rowKeys": [
                   "selectDeviceIconStyle",
-                  "colorDeviceIcon",
-                  "colorDeviceOn",
                   "sliderDeviceIconSize",
                   "sliderDeviceIconOffsetX",
                   "sliderDeviceIconOffsetY",
                   "sliderDeviceEdgeOffset",
                   "sliderDeviceOffOpacity",
                   "sliderDeviceOnOpacity",
+                  "colorDeviceIcon",
+                  "colorDeviceOn",
                   "checkboxDeviceMatchVolume",
                   "checkboxDeviceKeepPlaying",
                   "checkboxDeviceMuteClips",
@@ -21654,9 +21978,9 @@
                   "sliderDevicePanelOffsetX",
                   "sliderDevicePanelOffsetY",
                   "colorDevicePanelBg",
-                  "colorDevicePanelAccent",
                   "sliderDevicePanelBgOpacity",
-                  "sliderDevicePanelBlur"
+                  "sliderDevicePanelBlur",
+                  "colorDevicePanelAccent"
                 ],
                 "subgroups": []
               },
@@ -37321,12 +37645,25 @@
                   "key": "rangeBarMobileSongTickThinWidth"
                 },
                 {
-                  "type": "row",
-                  "key": "curveEditorMobileSongTickThinZoom"
-                },
-                {
-                  "type": "row",
-                  "key": "curveEditorMobileSongTickScale"
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:New Group (40)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "curveEditorMobileSongTickThinZoom"
+                      },
+                      {
+                        "type": "row",
+                        "key": "curveEditorMobileSongTickScale"
+                      }
+                    ],
+                    "rowKeys": [
+                      "curveEditorMobileSongTickThinZoom",
+                      "curveEditorMobileSongTickScale"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [
@@ -37337,11 +37674,28 @@
                 "sliderMobileSongTickMinSpacing",
                 "sliderMobileSongTickWidthTransitionMs",
                 "rangeBarMobileSongTickWidth",
-                "rangeBarMobileSongTickThinWidth",
-                "curveEditorMobileSongTickThinZoom",
-                "curveEditorMobileSongTickScale"
+                "rangeBarMobileSongTickThinWidth"
               ],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "mobile:New Group (40)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "curveEditorMobileSongTickThinZoom"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorMobileSongTickScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "curveEditorMobileSongTickThinZoom",
+                    "curveEditorMobileSongTickScale"
+                  ],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -37558,12 +37912,25 @@
                 "key": "rangeBarMobileSongTickThinWidth"
               },
               {
-                "type": "row",
-                "key": "curveEditorMobileSongTickThinZoom"
-              },
-              {
-                "type": "row",
-                "key": "curveEditorMobileSongTickScale"
+                "type": "group",
+                "section": {
+                  "key": "mobile:New Group (40)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "curveEditorMobileSongTickThinZoom"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorMobileSongTickScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "curveEditorMobileSongTickThinZoom",
+                    "curveEditorMobileSongTickScale"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [
@@ -37574,11 +37941,28 @@
               "sliderMobileSongTickMinSpacing",
               "sliderMobileSongTickWidthTransitionMs",
               "rangeBarMobileSongTickWidth",
-              "rangeBarMobileSongTickThinWidth",
-              "curveEditorMobileSongTickThinZoom",
-              "curveEditorMobileSongTickScale"
+              "rangeBarMobileSongTickThinWidth"
             ],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "mobile:New Group (40)",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "curveEditorMobileSongTickThinZoom"
+                  },
+                  {
+                    "type": "row",
+                    "key": "curveEditorMobileSongTickScale"
+                  }
+                ],
+                "rowKeys": [
+                  "curveEditorMobileSongTickThinZoom",
+                  "curveEditorMobileSongTickScale"
+                ],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "mobile:Match Graph Colors",
@@ -48787,12 +49171,25 @@
                   "key": "rangeBarLandscapeSongTickThinWidth"
                 },
                 {
-                  "type": "row",
-                  "key": "curveEditorLandscapeSongTickThinZoom"
-                },
-                {
-                  "type": "row",
-                  "key": "curveEditorLandscapeSongTickScale"
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:New Group (40)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "curveEditorLandscapeSongTickThinZoom"
+                      },
+                      {
+                        "type": "row",
+                        "key": "curveEditorLandscapeSongTickScale"
+                      }
+                    ],
+                    "rowKeys": [
+                      "curveEditorLandscapeSongTickThinZoom",
+                      "curveEditorLandscapeSongTickScale"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [
@@ -48803,11 +49200,28 @@
                 "sliderLandscapeSongTickMinSpacing",
                 "sliderLandscapeSongTickWidthTransitionMs",
                 "rangeBarLandscapeSongTickWidth",
-                "rangeBarLandscapeSongTickThinWidth",
-                "curveEditorLandscapeSongTickThinZoom",
-                "curveEditorLandscapeSongTickScale"
+                "rangeBarLandscapeSongTickThinWidth"
               ],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "landscape:New Group (40)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "curveEditorLandscapeSongTickThinZoom"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorLandscapeSongTickScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "curveEditorLandscapeSongTickThinZoom",
+                    "curveEditorLandscapeSongTickScale"
+                  ],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -49024,12 +49438,25 @@
                 "key": "rangeBarLandscapeSongTickThinWidth"
               },
               {
-                "type": "row",
-                "key": "curveEditorLandscapeSongTickThinZoom"
-              },
-              {
-                "type": "row",
-                "key": "curveEditorLandscapeSongTickScale"
+                "type": "group",
+                "section": {
+                  "key": "landscape:New Group (40)",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "curveEditorLandscapeSongTickThinZoom"
+                    },
+                    {
+                      "type": "row",
+                      "key": "curveEditorLandscapeSongTickScale"
+                    }
+                  ],
+                  "rowKeys": [
+                    "curveEditorLandscapeSongTickThinZoom",
+                    "curveEditorLandscapeSongTickScale"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [
@@ -49040,11 +49467,28 @@
               "sliderLandscapeSongTickMinSpacing",
               "sliderLandscapeSongTickWidthTransitionMs",
               "rangeBarLandscapeSongTickWidth",
-              "rangeBarLandscapeSongTickThinWidth",
-              "curveEditorLandscapeSongTickThinZoom",
-              "curveEditorLandscapeSongTickScale"
+              "rangeBarLandscapeSongTickThinWidth"
             ],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "landscape:New Group (40)",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "curveEditorLandscapeSongTickThinZoom"
+                  },
+                  {
+                    "type": "row",
+                    "key": "curveEditorLandscapeSongTickScale"
+                  }
+                ],
+                "rowKeys": [
+                  "curveEditorLandscapeSongTickThinZoom",
+                  "curveEditorLandscapeSongTickScale"
+                ],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "landscape:Match Graph Colors",
@@ -49156,7 +49600,7 @@
   },
   "sectionCollapseState": {
     "desktop:Saved Dev Settings": false,
-    "desktop:Dev Panel": false,
+    "desktop:Dev Panel": true,
     "desktop:MECHANICS": true,
     "desktop:PANEL UI": true,
     "desktop:TEXT": true,
@@ -49212,8 +49656,8 @@
     "desktop:New Group (30)": true,
     "desktop:New Group (29)": true,
     "desktop:New Group (16)": true,
-    "desktop:New Group (19)": true,
-    "desktop:New Group (24)": true,
+    "desktop:New Group (19)": false,
+    "desktop:New Group (24)": false,
     "desktop:Panel Song Count": true,
     "desktop:New Group (18)": true,
     "desktop:New Group (23)": true,
@@ -49377,6 +49821,7 @@
     "mobile:Right Click Pan": false,
     "mobile:Right Click Height": false,
     "mobile:New Group (28)": false,
+    "mobile:New Group (40)": false,
     "mobile:Match Graph Colors": false,
     "mobile:Opacity Per Zoom": false,
     "mobile:Opacity Per Width": false,
@@ -49490,6 +49935,7 @@
     "landscape:Right Click Pan": false,
     "landscape:Right Click Height": false,
     "landscape:New Group (28)": false,
+    "landscape:New Group (40)": false,
     "landscape:Match Graph Colors": false,
     "landscape:Opacity Per Zoom": false,
     "landscape:Opacity Per Width": false,
@@ -50383,7 +50829,9 @@
     "checkboxFilterSongCountTop": "Top Aligned",
     "desktop:Panel Song Count": null,
     "desktop:New Group (40)": "CURVES",
-    "checkboxSongTickClamp": "Clamp Tick Height"
+    "checkboxSongTickClamp": "Clamp Tick Height",
+    "mobile:New Group (40)": "CURVES",
+    "landscape:New Group (40)": "CURVES"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
