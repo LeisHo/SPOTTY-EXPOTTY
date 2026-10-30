@@ -39,7 +39,6 @@
     "sliderSongTickHeight": 900,
     "checkboxSongTickInvert": true,
     "checkboxSongTickBoth": false,
-    "checkboxTicksBehindBars": true,
     "checkboxSongTickClamp": false,
     "sliderSongTickOpacity": 100,
     "sliderSongTickMinSpacing": 0.1,
@@ -160,7 +159,7 @@
     "sliderTxtSongTitleLetterSpacing": 1.3,
     "sliderTxtSongTitleLineSpacing": 1,
     "sliderTxtSongTitleOpacity": 1,
-    "sliderTxtSongTitleOffsetY": -28,
+    "sliderTxtSongTitleOffsetY": 0,
     "checkboxTxtSongTitleWordWrap": true,
     "sliderTxtSongTitleMaxWidth": 2400,
     "selectTxtSongTitleOverflow": "wrap",
@@ -215,7 +214,7 @@
     "sliderTxtAlbumDateLetterSpacing": 2.3,
     "sliderTxtAlbumDateLineSpacing": 1.2,
     "sliderTxtAlbumDateOpacity": 1,
-    "sliderTxtAlbumDateOffsetY": -27,
+    "sliderTxtAlbumDateOffsetY": 0,
     "checkboxTxtAlbumDateWordWrap": true,
     "sliderTxtAlbumDateMaxWidth": 2179,
     "selectTxtAlbumDateOverflow": "wrap",
@@ -648,12 +647,13 @@
     "sliderStartPlayLiftPx": 6,
     "sliderStartPlayLiftPressPx": 2,
     "sliderStartPlayLiftShadowBlur": 14,
-    "sliderStartPlayLiftShadowOpacity": 0.5
+    "sliderStartPlayLiftShadowOpacity": 0.5,
+    "listPickerRenderOrder": "{\"items\":[{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true},{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true}],\"groupOrder\":[],\"defaultName\":null}"
   },
   "layout": {
     "left": 116,
-    "top": 39,
-    "width": 358,
+    "top": 35.28125,
+    "width": 880,
     "height": 583
   },
   "devPanelStyle": {
@@ -2085,47 +2085,109 @@
                     "items": [
                       {
                         "type": "row",
-                        "key": "sliderTxtSongTitleFontSize"
+                        "key": "sliderTxtSongTitleOffsetY"
                       },
                       {
-                        "type": "row",
-                        "key": "colorTxtSongTitleColor"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (31)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderTxtSongTitleFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorTxtSongTitleColor"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtSongTitleBold"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtSongTitleItalic"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtSongTitleUnderline"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtSongTitleCapitalize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtSongTitleLowerCase"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtSongTitleLetterSpacing"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtSongTitleLineSpacing"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtSongTitleOpacity"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderTxtSongTitleFontSize",
+                            "colorTxtSongTitleColor",
+                            "checkboxTxtSongTitleBold",
+                            "checkboxTxtSongTitleItalic",
+                            "checkboxTxtSongTitleUnderline",
+                            "checkboxTxtSongTitleCapitalize",
+                            "checkboxTxtSongTitleLowerCase",
+                            "sliderTxtSongTitleLetterSpacing",
+                            "sliderTxtSongTitleLineSpacing",
+                            "sliderTxtSongTitleOpacity"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleBold"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleItalic"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleUnderline"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleLetterSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleLineSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleWordWrap"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleMaxWidth"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectTxtSongTitleOverflow"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (32)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderTxtSongTitleMaxWidth"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtSongTitleWordWrap"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectTxtSongTitleOverflow"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTitleMaxLines"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectTitleOverMaxLines"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectTitleScalingMode"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderTxtSongTitleMaxWidth",
+                            "checkboxTxtSongTitleWordWrap",
+                            "selectTxtSongTitleOverflow",
+                            "sliderTitleMaxLines",
+                            "selectTitleOverMaxLines",
+                            "selectTitleScalingMode"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
                         "type": "group",
@@ -2245,18 +2307,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "selectTitleOverMaxLines"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTitleMaxLines"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectTitleScalingMode"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderTitleScaleInterval"
                       },
                       {
@@ -2276,18 +2326,6 @@
                         "key": "checkboxTitleScrollContinuous"
                       },
                       {
-                        "type": "row",
-                        "key": "sliderTxtSongTitleOffsetY"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleCapitalize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtSongTitleLowerCase"
-                      },
-                      {
                         "type": "group",
                         "section": {
                           "key": "desktop:Outline",
@@ -2298,30 +2336,110 @@
                       }
                     ],
                     "rowKeys": [
-                      "sliderTxtSongTitleFontSize",
-                      "colorTxtSongTitleColor",
-                      "checkboxTxtSongTitleBold",
-                      "checkboxTxtSongTitleItalic",
-                      "checkboxTxtSongTitleUnderline",
-                      "sliderTxtSongTitleLetterSpacing",
-                      "sliderTxtSongTitleLineSpacing",
-                      "sliderTxtSongTitleOpacity",
-                      "checkboxTxtSongTitleWordWrap",
-                      "sliderTxtSongTitleMaxWidth",
-                      "selectTxtSongTitleOverflow",
-                      "selectTitleOverMaxLines",
-                      "sliderTitleMaxLines",
-                      "selectTitleScalingMode",
+                      "sliderTxtSongTitleOffsetY",
                       "sliderTitleScaleInterval",
                       "sliderTitleScrollSpeed",
                       "sliderTitleScrollStartPauseMs",
                       "sliderTitleScrollEndPauseMs",
-                      "checkboxTitleScrollContinuous",
-                      "sliderTxtSongTitleOffsetY",
-                      "checkboxTxtSongTitleCapitalize",
-                      "checkboxTxtSongTitleLowerCase"
+                      "checkboxTitleScrollContinuous"
                     ],
                     "subgroups": [
+                      {
+                        "key": "desktop:New Group (31)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtSongTitleColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleItalic"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleUnderline"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleCapitalize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleLowerCase"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleLetterSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleLineSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderTxtSongTitleFontSize",
+                          "colorTxtSongTitleColor",
+                          "checkboxTxtSongTitleBold",
+                          "checkboxTxtSongTitleItalic",
+                          "checkboxTxtSongTitleUnderline",
+                          "checkboxTxtSongTitleCapitalize",
+                          "checkboxTxtSongTitleLowerCase",
+                          "sliderTxtSongTitleLetterSpacing",
+                          "sliderTxtSongTitleLineSpacing",
+                          "sliderTxtSongTitleOpacity"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:New Group (32)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleWordWrap"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTxtSongTitleOverflow"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTitleOverMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTitleScalingMode"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderTxtSongTitleMaxWidth",
+                          "checkboxTxtSongTitleWordWrap",
+                          "selectTxtSongTitleOverflow",
+                          "sliderTitleMaxLines",
+                          "selectTitleOverMaxLines",
+                          "selectTitleScalingMode"
+                        ],
+                        "subgroups": []
+                      },
                       {
                         "key": "desktop:Track Title Button Animation",
                         "items": [
@@ -2451,59 +2569,161 @@
                     "items": [
                       {
                         "type": "row",
-                        "key": "sliderTxtArtistFontSize"
+                        "key": "sliderTxtArtistOffsetY"
                       },
                       {
-                        "type": "row",
-                        "key": "colorTxtArtistColor"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (33)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderTxtArtistFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "colorTxtArtistColor"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtArtistBold"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtArtistItalic"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtArtistUnderline"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtArtistLetterSpacing"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtArtistLineSpacing"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtArtistOpacity"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtArtistLowerCase"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtArtistCapitalize"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderTxtArtistFontSize",
+                            "colorTxtArtistColor",
+                            "checkboxTxtArtistBold",
+                            "checkboxTxtArtistItalic",
+                            "checkboxTxtArtistUnderline",
+                            "sliderTxtArtistLetterSpacing",
+                            "sliderTxtArtistLineSpacing",
+                            "sliderTxtArtistOpacity",
+                            "checkboxTxtArtistLowerCase",
+                            "checkboxTxtArtistCapitalize"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
-                        "type": "row",
-                        "key": "checkboxTxtArtistBold"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (34)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "checkboxTxtArtistWordWrap"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxScaleArtistToMatch"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTxtArtistMaxWidth"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderArtistMaxLines"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectArtistOverMaxLines"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectTxtArtistOverflow"
+                            }
+                          ],
+                          "rowKeys": [
+                            "checkboxTxtArtistWordWrap",
+                            "checkboxScaleArtistToMatch",
+                            "sliderTxtArtistMaxWidth",
+                            "sliderArtistMaxLines",
+                            "selectArtistOverMaxLines",
+                            "selectTxtArtistOverflow"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
-                        "type": "row",
-                        "key": "checkboxTxtArtistItalic"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (36)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "checkboxArtistScrollContinuous"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderArtistScrollEndPauseMs"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderArtistScrollStartPauseMs"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderArtistScrollSpeed"
+                            }
+                          ],
+                          "rowKeys": [
+                            "checkboxArtistScrollContinuous",
+                            "sliderArtistScrollEndPauseMs",
+                            "sliderArtistScrollStartPauseMs",
+                            "sliderArtistScrollSpeed"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
-                        "type": "row",
-                        "key": "checkboxTxtArtistUnderline"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistLetterSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistLineSpacing"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistOpacity"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtArtistWordWrap"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistMaxWidth"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectTxtArtistOverflow"
-                      },
-                      {
-                        "type": "row",
-                        "key": "textArtistSeparator"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectArtistOverMaxLines"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderArtistMaxLines"
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:New Group (35)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "textArtistSeparator"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderArtistSeparatorPct"
+                            }
+                          ],
+                          "rowKeys": [
+                            "textArtistSeparator",
+                            "sliderArtistSeparatorPct"
+                          ],
+                          "subgroups": []
+                        }
                       },
                       {
                         "type": "row",
@@ -2512,42 +2732,6 @@
                       {
                         "type": "row",
                         "key": "sliderArtistScaleInterval"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderArtistScrollSpeed"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderArtistScrollStartPauseMs"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderArtistScrollEndPauseMs"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxArtistScrollContinuous"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderArtistSeparatorPct"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxScaleArtistToMatch"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTxtArtistOffsetY"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtArtistCapitalize"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxTxtArtistLowerCase"
                       },
                       {
                         "type": "group",
@@ -2560,33 +2744,153 @@
                       }
                     ],
                     "rowKeys": [
-                      "sliderTxtArtistFontSize",
-                      "colorTxtArtistColor",
-                      "checkboxTxtArtistBold",
-                      "checkboxTxtArtistItalic",
-                      "checkboxTxtArtistUnderline",
-                      "sliderTxtArtistLetterSpacing",
-                      "sliderTxtArtistLineSpacing",
-                      "sliderTxtArtistOpacity",
-                      "checkboxTxtArtistWordWrap",
-                      "sliderTxtArtistMaxWidth",
-                      "selectTxtArtistOverflow",
-                      "textArtistSeparator",
-                      "selectArtistOverMaxLines",
-                      "sliderArtistMaxLines",
-                      "selectArtistScalingMode",
-                      "sliderArtistScaleInterval",
-                      "sliderArtistScrollSpeed",
-                      "sliderArtistScrollStartPauseMs",
-                      "sliderArtistScrollEndPauseMs",
-                      "checkboxArtistScrollContinuous",
-                      "sliderArtistSeparatorPct",
-                      "checkboxScaleArtistToMatch",
                       "sliderTxtArtistOffsetY",
-                      "checkboxTxtArtistCapitalize",
-                      "checkboxTxtArtistLowerCase"
+                      "selectArtistScalingMode",
+                      "sliderArtistScaleInterval"
                     ],
                     "subgroups": [
+                      {
+                        "key": "desktop:New Group (33)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtArtistColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistItalic"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistUnderline"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistLetterSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistLineSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistLowerCase"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistCapitalize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderTxtArtistFontSize",
+                          "colorTxtArtistColor",
+                          "checkboxTxtArtistBold",
+                          "checkboxTxtArtistItalic",
+                          "checkboxTxtArtistUnderline",
+                          "sliderTxtArtistLetterSpacing",
+                          "sliderTxtArtistLineSpacing",
+                          "sliderTxtArtistOpacity",
+                          "checkboxTxtArtistLowerCase",
+                          "checkboxTxtArtistCapitalize"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:New Group (34)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistWordWrap"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxScaleArtistToMatch"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectArtistOverMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTxtArtistOverflow"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxTxtArtistWordWrap",
+                          "checkboxScaleArtistToMatch",
+                          "sliderTxtArtistMaxWidth",
+                          "sliderArtistMaxLines",
+                          "selectArtistOverMaxLines",
+                          "selectTxtArtistOverflow"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:New Group (36)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxArtistScrollContinuous"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistScrollEndPauseMs"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistScrollStartPauseMs"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistScrollSpeed"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxArtistScrollContinuous",
+                          "sliderArtistScrollEndPauseMs",
+                          "sliderArtistScrollStartPauseMs",
+                          "sliderArtistScrollSpeed"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:New Group (35)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "textArtistSeparator"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistSeparatorPct"
+                          }
+                        ],
+                        "rowKeys": [
+                          "textArtistSeparator",
+                          "sliderArtistSeparatorPct"
+                        ],
+                        "subgroups": []
+                      },
                       {
                         "key": "desktop:Outline",
                         "items": [],
@@ -2865,47 +3169,109 @@
                   "items": [
                     {
                       "type": "row",
-                      "key": "sliderTxtSongTitleFontSize"
+                      "key": "sliderTxtSongTitleOffsetY"
                     },
                     {
-                      "type": "row",
-                      "key": "colorTxtSongTitleColor"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (31)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtSongTitleColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleItalic"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleUnderline"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleCapitalize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleLowerCase"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleLetterSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleLineSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderTxtSongTitleFontSize",
+                          "colorTxtSongTitleColor",
+                          "checkboxTxtSongTitleBold",
+                          "checkboxTxtSongTitleItalic",
+                          "checkboxTxtSongTitleUnderline",
+                          "checkboxTxtSongTitleCapitalize",
+                          "checkboxTxtSongTitleLowerCase",
+                          "sliderTxtSongTitleLetterSpacing",
+                          "sliderTxtSongTitleLineSpacing",
+                          "sliderTxtSongTitleOpacity"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleBold"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleItalic"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleUnderline"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleLetterSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleLineSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleWordWrap"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleMaxWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTxtSongTitleOverflow"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (32)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleWordWrap"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTxtSongTitleOverflow"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTitleOverMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTitleScalingMode"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderTxtSongTitleMaxWidth",
+                          "checkboxTxtSongTitleWordWrap",
+                          "selectTxtSongTitleOverflow",
+                          "sliderTitleMaxLines",
+                          "selectTitleOverMaxLines",
+                          "selectTitleScalingMode"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -3025,18 +3391,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "selectTitleOverMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTitleScalingMode"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderTitleScaleInterval"
                     },
                     {
@@ -3056,18 +3410,6 @@
                       "key": "checkboxTitleScrollContinuous"
                     },
                     {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleOffsetY"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleCapitalize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleLowerCase"
-                    },
-                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -3078,30 +3420,110 @@
                     }
                   ],
                   "rowKeys": [
-                    "sliderTxtSongTitleFontSize",
-                    "colorTxtSongTitleColor",
-                    "checkboxTxtSongTitleBold",
-                    "checkboxTxtSongTitleItalic",
-                    "checkboxTxtSongTitleUnderline",
-                    "sliderTxtSongTitleLetterSpacing",
-                    "sliderTxtSongTitleLineSpacing",
-                    "sliderTxtSongTitleOpacity",
-                    "checkboxTxtSongTitleWordWrap",
-                    "sliderTxtSongTitleMaxWidth",
-                    "selectTxtSongTitleOverflow",
-                    "selectTitleOverMaxLines",
-                    "sliderTitleMaxLines",
-                    "selectTitleScalingMode",
+                    "sliderTxtSongTitleOffsetY",
                     "sliderTitleScaleInterval",
                     "sliderTitleScrollSpeed",
                     "sliderTitleScrollStartPauseMs",
                     "sliderTitleScrollEndPauseMs",
-                    "checkboxTitleScrollContinuous",
-                    "sliderTxtSongTitleOffsetY",
-                    "checkboxTxtSongTitleCapitalize",
-                    "checkboxTxtSongTitleLowerCase"
+                    "checkboxTitleScrollContinuous"
                   ],
                   "subgroups": [
+                    {
+                      "key": "desktop:New Group (31)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtSongTitleColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleBold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleItalic"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleUnderline"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleCapitalize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleLowerCase"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleLetterSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleLineSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderTxtSongTitleFontSize",
+                        "colorTxtSongTitleColor",
+                        "checkboxTxtSongTitleBold",
+                        "checkboxTxtSongTitleItalic",
+                        "checkboxTxtSongTitleUnderline",
+                        "checkboxTxtSongTitleCapitalize",
+                        "checkboxTxtSongTitleLowerCase",
+                        "sliderTxtSongTitleLetterSpacing",
+                        "sliderTxtSongTitleLineSpacing",
+                        "sliderTxtSongTitleOpacity"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (32)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleWordWrap"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTxtSongTitleOverflow"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTitleOverMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTitleScalingMode"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderTxtSongTitleMaxWidth",
+                        "checkboxTxtSongTitleWordWrap",
+                        "selectTxtSongTitleOverflow",
+                        "sliderTitleMaxLines",
+                        "selectTitleOverMaxLines",
+                        "selectTitleScalingMode"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "desktop:Track Title Button Animation",
                       "items": [
@@ -3228,59 +3650,161 @@
                   "items": [
                     {
                       "type": "row",
-                      "key": "sliderTxtArtistFontSize"
+                      "key": "sliderTxtArtistOffsetY"
                     },
                     {
-                      "type": "row",
-                      "key": "colorTxtArtistColor"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (33)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtArtistColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistItalic"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistUnderline"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistLetterSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistLineSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistLowerCase"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistCapitalize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderTxtArtistFontSize",
+                          "colorTxtArtistColor",
+                          "checkboxTxtArtistBold",
+                          "checkboxTxtArtistItalic",
+                          "checkboxTxtArtistUnderline",
+                          "sliderTxtArtistLetterSpacing",
+                          "sliderTxtArtistLineSpacing",
+                          "sliderTxtArtistOpacity",
+                          "checkboxTxtArtistLowerCase",
+                          "checkboxTxtArtistCapitalize"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxTxtArtistBold"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (34)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistWordWrap"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxScaleArtistToMatch"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectArtistOverMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTxtArtistOverflow"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxTxtArtistWordWrap",
+                          "checkboxScaleArtistToMatch",
+                          "sliderTxtArtistMaxWidth",
+                          "sliderArtistMaxLines",
+                          "selectArtistOverMaxLines",
+                          "selectTxtArtistOverflow"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxTxtArtistItalic"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (36)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxArtistScrollContinuous"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistScrollEndPauseMs"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistScrollStartPauseMs"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistScrollSpeed"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxArtistScrollContinuous",
+                          "sliderArtistScrollEndPauseMs",
+                          "sliderArtistScrollStartPauseMs",
+                          "sliderArtistScrollSpeed"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxTxtArtistUnderline"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistLetterSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistLineSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistWordWrap"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistMaxWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTxtArtistOverflow"
-                    },
-                    {
-                      "type": "row",
-                      "key": "textArtistSeparator"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectArtistOverMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistMaxLines"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (35)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "textArtistSeparator"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistSeparatorPct"
+                          }
+                        ],
+                        "rowKeys": [
+                          "textArtistSeparator",
+                          "sliderArtistSeparatorPct"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "row",
@@ -3289,42 +3813,6 @@
                     {
                       "type": "row",
                       "key": "sliderArtistScaleInterval"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistScrollSpeed"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistScrollStartPauseMs"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistScrollEndPauseMs"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxArtistScrollContinuous"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistSeparatorPct"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxScaleArtistToMatch"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistOffsetY"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistCapitalize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistLowerCase"
                     },
                     {
                       "type": "group",
@@ -3337,33 +3825,153 @@
                     }
                   ],
                   "rowKeys": [
-                    "sliderTxtArtistFontSize",
-                    "colorTxtArtistColor",
-                    "checkboxTxtArtistBold",
-                    "checkboxTxtArtistItalic",
-                    "checkboxTxtArtistUnderline",
-                    "sliderTxtArtistLetterSpacing",
-                    "sliderTxtArtistLineSpacing",
-                    "sliderTxtArtistOpacity",
-                    "checkboxTxtArtistWordWrap",
-                    "sliderTxtArtistMaxWidth",
-                    "selectTxtArtistOverflow",
-                    "textArtistSeparator",
-                    "selectArtistOverMaxLines",
-                    "sliderArtistMaxLines",
-                    "selectArtistScalingMode",
-                    "sliderArtistScaleInterval",
-                    "sliderArtistScrollSpeed",
-                    "sliderArtistScrollStartPauseMs",
-                    "sliderArtistScrollEndPauseMs",
-                    "checkboxArtistScrollContinuous",
-                    "sliderArtistSeparatorPct",
-                    "checkboxScaleArtistToMatch",
                     "sliderTxtArtistOffsetY",
-                    "checkboxTxtArtistCapitalize",
-                    "checkboxTxtArtistLowerCase"
+                    "selectArtistScalingMode",
+                    "sliderArtistScaleInterval"
                   ],
                   "subgroups": [
+                    {
+                      "key": "desktop:New Group (33)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtArtistColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistBold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistItalic"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistUnderline"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistLetterSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistLineSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistLowerCase"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistCapitalize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderTxtArtistFontSize",
+                        "colorTxtArtistColor",
+                        "checkboxTxtArtistBold",
+                        "checkboxTxtArtistItalic",
+                        "checkboxTxtArtistUnderline",
+                        "sliderTxtArtistLetterSpacing",
+                        "sliderTxtArtistLineSpacing",
+                        "sliderTxtArtistOpacity",
+                        "checkboxTxtArtistLowerCase",
+                        "checkboxTxtArtistCapitalize"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (34)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistWordWrap"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxScaleArtistToMatch"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectArtistOverMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTxtArtistOverflow"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxTxtArtistWordWrap",
+                        "checkboxScaleArtistToMatch",
+                        "sliderTxtArtistMaxWidth",
+                        "sliderArtistMaxLines",
+                        "selectArtistOverMaxLines",
+                        "selectTxtArtistOverflow"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (36)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxArtistScrollContinuous"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistScrollEndPauseMs"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistScrollStartPauseMs"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistScrollSpeed"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxArtistScrollContinuous",
+                        "sliderArtistScrollEndPauseMs",
+                        "sliderArtistScrollStartPauseMs",
+                        "sliderArtistScrollSpeed"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (35)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "textArtistSeparator"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistSeparatorPct"
+                        }
+                      ],
+                      "rowKeys": [
+                        "textArtistSeparator",
+                        "sliderArtistSeparatorPct"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "desktop:Outline",
                       "items": [],
@@ -10112,6 +10720,22 @@
                 }
               ]
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Visibility / Render Order",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "listPickerRenderOrder"
+                }
+              ],
+              "rowKeys": [
+                "listPickerRenderOrder"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -10144,47 +10768,109 @@
                   "items": [
                     {
                       "type": "row",
-                      "key": "sliderTxtSongTitleFontSize"
+                      "key": "sliderTxtSongTitleOffsetY"
                     },
                     {
-                      "type": "row",
-                      "key": "colorTxtSongTitleColor"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (31)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtSongTitleColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleItalic"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleUnderline"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleCapitalize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleLowerCase"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleLetterSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleLineSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleOpacity"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderTxtSongTitleFontSize",
+                          "colorTxtSongTitleColor",
+                          "checkboxTxtSongTitleBold",
+                          "checkboxTxtSongTitleItalic",
+                          "checkboxTxtSongTitleUnderline",
+                          "checkboxTxtSongTitleCapitalize",
+                          "checkboxTxtSongTitleLowerCase",
+                          "sliderTxtSongTitleLetterSpacing",
+                          "sliderTxtSongTitleLineSpacing",
+                          "sliderTxtSongTitleOpacity"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleBold"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleItalic"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleUnderline"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleLetterSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleLineSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleWordWrap"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleMaxWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTxtSongTitleOverflow"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (32)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderTxtSongTitleMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtSongTitleWordWrap"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTxtSongTitleOverflow"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTitleMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTitleOverMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTitleScalingMode"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderTxtSongTitleMaxWidth",
+                          "checkboxTxtSongTitleWordWrap",
+                          "selectTxtSongTitleOverflow",
+                          "sliderTitleMaxLines",
+                          "selectTitleOverMaxLines",
+                          "selectTitleScalingMode"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "group",
@@ -10304,18 +10990,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "selectTitleOverMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTitleMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTitleScalingMode"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderTitleScaleInterval"
                     },
                     {
@@ -10335,18 +11009,6 @@
                       "key": "checkboxTitleScrollContinuous"
                     },
                     {
-                      "type": "row",
-                      "key": "sliderTxtSongTitleOffsetY"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleCapitalize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtSongTitleLowerCase"
-                    },
-                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Outline",
@@ -10357,30 +11019,110 @@
                     }
                   ],
                   "rowKeys": [
-                    "sliderTxtSongTitleFontSize",
-                    "colorTxtSongTitleColor",
-                    "checkboxTxtSongTitleBold",
-                    "checkboxTxtSongTitleItalic",
-                    "checkboxTxtSongTitleUnderline",
-                    "sliderTxtSongTitleLetterSpacing",
-                    "sliderTxtSongTitleLineSpacing",
-                    "sliderTxtSongTitleOpacity",
-                    "checkboxTxtSongTitleWordWrap",
-                    "sliderTxtSongTitleMaxWidth",
-                    "selectTxtSongTitleOverflow",
-                    "selectTitleOverMaxLines",
-                    "sliderTitleMaxLines",
-                    "selectTitleScalingMode",
+                    "sliderTxtSongTitleOffsetY",
                     "sliderTitleScaleInterval",
                     "sliderTitleScrollSpeed",
                     "sliderTitleScrollStartPauseMs",
                     "sliderTitleScrollEndPauseMs",
-                    "checkboxTitleScrollContinuous",
-                    "sliderTxtSongTitleOffsetY",
-                    "checkboxTxtSongTitleCapitalize",
-                    "checkboxTxtSongTitleLowerCase"
+                    "checkboxTitleScrollContinuous"
                   ],
                   "subgroups": [
+                    {
+                      "key": "desktop:New Group (31)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtSongTitleColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleBold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleItalic"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleUnderline"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleCapitalize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleLowerCase"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleLetterSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleLineSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderTxtSongTitleFontSize",
+                        "colorTxtSongTitleColor",
+                        "checkboxTxtSongTitleBold",
+                        "checkboxTxtSongTitleItalic",
+                        "checkboxTxtSongTitleUnderline",
+                        "checkboxTxtSongTitleCapitalize",
+                        "checkboxTxtSongTitleLowerCase",
+                        "sliderTxtSongTitleLetterSpacing",
+                        "sliderTxtSongTitleLineSpacing",
+                        "sliderTxtSongTitleOpacity"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (32)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleWordWrap"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTxtSongTitleOverflow"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTitleOverMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTitleScalingMode"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderTxtSongTitleMaxWidth",
+                        "checkboxTxtSongTitleWordWrap",
+                        "selectTxtSongTitleOverflow",
+                        "sliderTitleMaxLines",
+                        "selectTitleOverMaxLines",
+                        "selectTitleScalingMode"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "desktop:Track Title Button Animation",
                       "items": [
@@ -10510,59 +11252,161 @@
                   "items": [
                     {
                       "type": "row",
-                      "key": "sliderTxtArtistFontSize"
+                      "key": "sliderTxtArtistOffsetY"
                     },
                     {
-                      "type": "row",
-                      "key": "colorTxtArtistColor"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (33)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "colorTxtArtistColor"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistBold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistItalic"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistUnderline"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistLetterSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistLineSpacing"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistOpacity"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistLowerCase"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistCapitalize"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderTxtArtistFontSize",
+                          "colorTxtArtistColor",
+                          "checkboxTxtArtistBold",
+                          "checkboxTxtArtistItalic",
+                          "checkboxTxtArtistUnderline",
+                          "sliderTxtArtistLetterSpacing",
+                          "sliderTxtArtistLineSpacing",
+                          "sliderTxtArtistOpacity",
+                          "checkboxTxtArtistLowerCase",
+                          "checkboxTxtArtistCapitalize"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxTxtArtistBold"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (34)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxTxtArtistWordWrap"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxScaleArtistToMatch"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTxtArtistMaxWidth"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectArtistOverMaxLines"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectTxtArtistOverflow"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxTxtArtistWordWrap",
+                          "checkboxScaleArtistToMatch",
+                          "sliderTxtArtistMaxWidth",
+                          "sliderArtistMaxLines",
+                          "selectArtistOverMaxLines",
+                          "selectTxtArtistOverflow"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxTxtArtistItalic"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (36)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxArtistScrollContinuous"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistScrollEndPauseMs"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistScrollStartPauseMs"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistScrollSpeed"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxArtistScrollContinuous",
+                          "sliderArtistScrollEndPauseMs",
+                          "sliderArtistScrollStartPauseMs",
+                          "sliderArtistScrollSpeed"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxTxtArtistUnderline"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistLetterSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistLineSpacing"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistOpacity"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistWordWrap"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistMaxWidth"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectTxtArtistOverflow"
-                    },
-                    {
-                      "type": "row",
-                      "key": "textArtistSeparator"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectArtistOverMaxLines"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistMaxLines"
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:New Group (35)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "textArtistSeparator"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderArtistSeparatorPct"
+                          }
+                        ],
+                        "rowKeys": [
+                          "textArtistSeparator",
+                          "sliderArtistSeparatorPct"
+                        ],
+                        "subgroups": []
+                      }
                     },
                     {
                       "type": "row",
@@ -10571,42 +11415,6 @@
                     {
                       "type": "row",
                       "key": "sliderArtistScaleInterval"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistScrollSpeed"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistScrollStartPauseMs"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistScrollEndPauseMs"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxArtistScrollContinuous"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderArtistSeparatorPct"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxScaleArtistToMatch"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTxtArtistOffsetY"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistCapitalize"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxTxtArtistLowerCase"
                     },
                     {
                       "type": "group",
@@ -10619,33 +11427,153 @@
                     }
                   ],
                   "rowKeys": [
-                    "sliderTxtArtistFontSize",
-                    "colorTxtArtistColor",
-                    "checkboxTxtArtistBold",
-                    "checkboxTxtArtistItalic",
-                    "checkboxTxtArtistUnderline",
-                    "sliderTxtArtistLetterSpacing",
-                    "sliderTxtArtistLineSpacing",
-                    "sliderTxtArtistOpacity",
-                    "checkboxTxtArtistWordWrap",
-                    "sliderTxtArtistMaxWidth",
-                    "selectTxtArtistOverflow",
-                    "textArtistSeparator",
-                    "selectArtistOverMaxLines",
-                    "sliderArtistMaxLines",
-                    "selectArtistScalingMode",
-                    "sliderArtistScaleInterval",
-                    "sliderArtistScrollSpeed",
-                    "sliderArtistScrollStartPauseMs",
-                    "sliderArtistScrollEndPauseMs",
-                    "checkboxArtistScrollContinuous",
-                    "sliderArtistSeparatorPct",
-                    "checkboxScaleArtistToMatch",
                     "sliderTxtArtistOffsetY",
-                    "checkboxTxtArtistCapitalize",
-                    "checkboxTxtArtistLowerCase"
+                    "selectArtistScalingMode",
+                    "sliderArtistScaleInterval"
                   ],
                   "subgroups": [
+                    {
+                      "key": "desktop:New Group (33)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtArtistColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistBold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistItalic"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistUnderline"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistLetterSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistLineSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistLowerCase"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistCapitalize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderTxtArtistFontSize",
+                        "colorTxtArtistColor",
+                        "checkboxTxtArtistBold",
+                        "checkboxTxtArtistItalic",
+                        "checkboxTxtArtistUnderline",
+                        "sliderTxtArtistLetterSpacing",
+                        "sliderTxtArtistLineSpacing",
+                        "sliderTxtArtistOpacity",
+                        "checkboxTxtArtistLowerCase",
+                        "checkboxTxtArtistCapitalize"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (34)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistWordWrap"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxScaleArtistToMatch"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectArtistOverMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTxtArtistOverflow"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxTxtArtistWordWrap",
+                        "checkboxScaleArtistToMatch",
+                        "sliderTxtArtistMaxWidth",
+                        "sliderArtistMaxLines",
+                        "selectArtistOverMaxLines",
+                        "selectTxtArtistOverflow"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (36)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxArtistScrollContinuous"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistScrollEndPauseMs"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistScrollStartPauseMs"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistScrollSpeed"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxArtistScrollContinuous",
+                        "sliderArtistScrollEndPauseMs",
+                        "sliderArtistScrollStartPauseMs",
+                        "sliderArtistScrollSpeed"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:New Group (35)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "textArtistSeparator"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistSeparatorPct"
+                        }
+                      ],
+                      "rowKeys": [
+                        "textArtistSeparator",
+                        "sliderArtistSeparatorPct"
+                      ],
+                      "subgroups": []
+                    },
                     {
                       "key": "desktop:Outline",
                       "items": [],
@@ -10924,47 +11852,109 @@
                 "items": [
                   {
                     "type": "row",
-                    "key": "sliderTxtSongTitleFontSize"
+                    "key": "sliderTxtSongTitleOffsetY"
                   },
                   {
-                    "type": "row",
-                    "key": "colorTxtSongTitleColor"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (31)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtSongTitleColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleBold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleItalic"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleUnderline"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleCapitalize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleLowerCase"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleLetterSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleLineSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleOpacity"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderTxtSongTitleFontSize",
+                        "colorTxtSongTitleColor",
+                        "checkboxTxtSongTitleBold",
+                        "checkboxTxtSongTitleItalic",
+                        "checkboxTxtSongTitleUnderline",
+                        "checkboxTxtSongTitleCapitalize",
+                        "checkboxTxtSongTitleLowerCase",
+                        "sliderTxtSongTitleLetterSpacing",
+                        "sliderTxtSongTitleLineSpacing",
+                        "sliderTxtSongTitleOpacity"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleBold"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleItalic"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleUnderline"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleLetterSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleLineSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleWordWrap"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleMaxWidth"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectTxtSongTitleOverflow"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (32)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderTxtSongTitleMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtSongTitleWordWrap"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTxtSongTitleOverflow"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTitleMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTitleOverMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTitleScalingMode"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderTxtSongTitleMaxWidth",
+                        "checkboxTxtSongTitleWordWrap",
+                        "selectTxtSongTitleOverflow",
+                        "sliderTitleMaxLines",
+                        "selectTitleOverMaxLines",
+                        "selectTitleScalingMode"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
                     "type": "group",
@@ -11084,18 +12074,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "selectTitleOverMaxLines"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTitleMaxLines"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectTitleScalingMode"
-                  },
-                  {
-                    "type": "row",
                     "key": "sliderTitleScaleInterval"
                   },
                   {
@@ -11115,18 +12093,6 @@
                     "key": "checkboxTitleScrollContinuous"
                   },
                   {
-                    "type": "row",
-                    "key": "sliderTxtSongTitleOffsetY"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleCapitalize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtSongTitleLowerCase"
-                  },
-                  {
                     "type": "group",
                     "section": {
                       "key": "desktop:Outline",
@@ -11137,30 +12103,110 @@
                   }
                 ],
                 "rowKeys": [
-                  "sliderTxtSongTitleFontSize",
-                  "colorTxtSongTitleColor",
-                  "checkboxTxtSongTitleBold",
-                  "checkboxTxtSongTitleItalic",
-                  "checkboxTxtSongTitleUnderline",
-                  "sliderTxtSongTitleLetterSpacing",
-                  "sliderTxtSongTitleLineSpacing",
-                  "sliderTxtSongTitleOpacity",
-                  "checkboxTxtSongTitleWordWrap",
-                  "sliderTxtSongTitleMaxWidth",
-                  "selectTxtSongTitleOverflow",
-                  "selectTitleOverMaxLines",
-                  "sliderTitleMaxLines",
-                  "selectTitleScalingMode",
+                  "sliderTxtSongTitleOffsetY",
                   "sliderTitleScaleInterval",
                   "sliderTitleScrollSpeed",
                   "sliderTitleScrollStartPauseMs",
                   "sliderTitleScrollEndPauseMs",
-                  "checkboxTitleScrollContinuous",
-                  "sliderTxtSongTitleOffsetY",
-                  "checkboxTxtSongTitleCapitalize",
-                  "checkboxTxtSongTitleLowerCase"
+                  "checkboxTitleScrollContinuous"
                 ],
                 "subgroups": [
+                  {
+                    "key": "desktop:New Group (31)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderTxtSongTitleFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorTxtSongTitleColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtSongTitleBold"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtSongTitleItalic"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtSongTitleUnderline"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtSongTitleCapitalize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtSongTitleLowerCase"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtSongTitleLetterSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtSongTitleLineSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtSongTitleOpacity"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderTxtSongTitleFontSize",
+                      "colorTxtSongTitleColor",
+                      "checkboxTxtSongTitleBold",
+                      "checkboxTxtSongTitleItalic",
+                      "checkboxTxtSongTitleUnderline",
+                      "checkboxTxtSongTitleCapitalize",
+                      "checkboxTxtSongTitleLowerCase",
+                      "sliderTxtSongTitleLetterSpacing",
+                      "sliderTxtSongTitleLineSpacing",
+                      "sliderTxtSongTitleOpacity"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:New Group (32)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderTxtSongTitleMaxWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtSongTitleWordWrap"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectTxtSongTitleOverflow"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTitleMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectTitleOverMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectTitleScalingMode"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderTxtSongTitleMaxWidth",
+                      "checkboxTxtSongTitleWordWrap",
+                      "selectTxtSongTitleOverflow",
+                      "sliderTitleMaxLines",
+                      "selectTitleOverMaxLines",
+                      "selectTitleScalingMode"
+                    ],
+                    "subgroups": []
+                  },
                   {
                     "key": "desktop:Track Title Button Animation",
                     "items": [
@@ -11287,59 +12333,161 @@
                 "items": [
                   {
                     "type": "row",
-                    "key": "sliderTxtArtistFontSize"
+                    "key": "sliderTxtArtistOffsetY"
                   },
                   {
-                    "type": "row",
-                    "key": "colorTxtArtistColor"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (33)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistFontSize"
+                        },
+                        {
+                          "type": "row",
+                          "key": "colorTxtArtistColor"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistBold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistItalic"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistUnderline"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistLetterSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistLineSpacing"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistOpacity"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistLowerCase"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistCapitalize"
+                        }
+                      ],
+                      "rowKeys": [
+                        "sliderTxtArtistFontSize",
+                        "colorTxtArtistColor",
+                        "checkboxTxtArtistBold",
+                        "checkboxTxtArtistItalic",
+                        "checkboxTxtArtistUnderline",
+                        "sliderTxtArtistLetterSpacing",
+                        "sliderTxtArtistLineSpacing",
+                        "sliderTxtArtistOpacity",
+                        "checkboxTxtArtistLowerCase",
+                        "checkboxTxtArtistCapitalize"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "checkboxTxtArtistBold"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (34)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxTxtArtistWordWrap"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxScaleArtistToMatch"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTxtArtistMaxWidth"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectArtistOverMaxLines"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectTxtArtistOverflow"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxTxtArtistWordWrap",
+                        "checkboxScaleArtistToMatch",
+                        "sliderTxtArtistMaxWidth",
+                        "sliderArtistMaxLines",
+                        "selectArtistOverMaxLines",
+                        "selectTxtArtistOverflow"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "checkboxTxtArtistItalic"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (36)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxArtistScrollContinuous"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistScrollEndPauseMs"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistScrollStartPauseMs"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistScrollSpeed"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxArtistScrollContinuous",
+                        "sliderArtistScrollEndPauseMs",
+                        "sliderArtistScrollStartPauseMs",
+                        "sliderArtistScrollSpeed"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
-                    "type": "row",
-                    "key": "checkboxTxtArtistUnderline"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistLetterSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistLineSpacing"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistOpacity"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtArtistWordWrap"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistMaxWidth"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectTxtArtistOverflow"
-                  },
-                  {
-                    "type": "row",
-                    "key": "textArtistSeparator"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectArtistOverMaxLines"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderArtistMaxLines"
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:New Group (35)",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "textArtistSeparator"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderArtistSeparatorPct"
+                        }
+                      ],
+                      "rowKeys": [
+                        "textArtistSeparator",
+                        "sliderArtistSeparatorPct"
+                      ],
+                      "subgroups": []
+                    }
                   },
                   {
                     "type": "row",
@@ -11348,42 +12496,6 @@
                   {
                     "type": "row",
                     "key": "sliderArtistScaleInterval"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderArtistScrollSpeed"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderArtistScrollStartPauseMs"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderArtistScrollEndPauseMs"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxArtistScrollContinuous"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderArtistSeparatorPct"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxScaleArtistToMatch"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTxtArtistOffsetY"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtArtistCapitalize"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxTxtArtistLowerCase"
                   },
                   {
                     "type": "group",
@@ -11396,33 +12508,153 @@
                   }
                 ],
                 "rowKeys": [
-                  "sliderTxtArtistFontSize",
-                  "colorTxtArtistColor",
-                  "checkboxTxtArtistBold",
-                  "checkboxTxtArtistItalic",
-                  "checkboxTxtArtistUnderline",
-                  "sliderTxtArtistLetterSpacing",
-                  "sliderTxtArtistLineSpacing",
-                  "sliderTxtArtistOpacity",
-                  "checkboxTxtArtistWordWrap",
-                  "sliderTxtArtistMaxWidth",
-                  "selectTxtArtistOverflow",
-                  "textArtistSeparator",
-                  "selectArtistOverMaxLines",
-                  "sliderArtistMaxLines",
-                  "selectArtistScalingMode",
-                  "sliderArtistScaleInterval",
-                  "sliderArtistScrollSpeed",
-                  "sliderArtistScrollStartPauseMs",
-                  "sliderArtistScrollEndPauseMs",
-                  "checkboxArtistScrollContinuous",
-                  "sliderArtistSeparatorPct",
-                  "checkboxScaleArtistToMatch",
                   "sliderTxtArtistOffsetY",
-                  "checkboxTxtArtistCapitalize",
-                  "checkboxTxtArtistLowerCase"
+                  "selectArtistScalingMode",
+                  "sliderArtistScaleInterval"
                 ],
                 "subgroups": [
+                  {
+                    "key": "desktop:New Group (33)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorTxtArtistColor"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistBold"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistItalic"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistUnderline"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistLetterSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistLineSpacing"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistLowerCase"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistCapitalize"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderTxtArtistFontSize",
+                      "colorTxtArtistColor",
+                      "checkboxTxtArtistBold",
+                      "checkboxTxtArtistItalic",
+                      "checkboxTxtArtistUnderline",
+                      "sliderTxtArtistLetterSpacing",
+                      "sliderTxtArtistLineSpacing",
+                      "sliderTxtArtistOpacity",
+                      "checkboxTxtArtistLowerCase",
+                      "checkboxTxtArtistCapitalize"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:New Group (34)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxTxtArtistWordWrap"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxScaleArtistToMatch"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTxtArtistMaxWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectArtistOverMaxLines"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectTxtArtistOverflow"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxTxtArtistWordWrap",
+                      "checkboxScaleArtistToMatch",
+                      "sliderTxtArtistMaxWidth",
+                      "sliderArtistMaxLines",
+                      "selectArtistOverMaxLines",
+                      "selectTxtArtistOverflow"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:New Group (36)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxArtistScrollContinuous"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistScrollEndPauseMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistScrollStartPauseMs"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistScrollSpeed"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxArtistScrollContinuous",
+                      "sliderArtistScrollEndPauseMs",
+                      "sliderArtistScrollStartPauseMs",
+                      "sliderArtistScrollSpeed"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:New Group (35)",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "textArtistSeparator"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderArtistSeparatorPct"
+                      }
+                    ],
+                    "rowKeys": [
+                      "textArtistSeparator",
+                      "sliderArtistSeparatorPct"
+                    ],
+                    "subgroups": []
+                  },
                   {
                     "key": "desktop:Outline",
                     "items": [],
@@ -18158,6 +19390,19 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "desktop:Visibility / Render Order",
+            "items": [
+              {
+                "type": "row",
+                "key": "listPickerRenderOrder"
+              }
+            ],
+            "rowKeys": [
+              "listPickerRenderOrder"
+            ],
+            "subgroups": []
           }
         ]
       },
@@ -19846,10 +21091,6 @@
             }
           },
           {
-            "type": "row",
-            "key": "checkboxTicksBehindBars"
-          },
-          {
             "type": "group",
             "section": {
               "key": "desktop:Opacity Per Zoom",
@@ -19923,7 +21164,6 @@
           "rangeBarTimelineZoomLimits",
           "curveEditorSongTickThickZoom",
           "checkboxSongTickBoth",
-          "checkboxTicksBehindBars",
           "checkboxSongTickClamp"
         ],
         "subgroups": [
@@ -26114,6 +27354,15 @@
                 }
               ]
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Visibility / Render Order",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -30475,6 +31724,12 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "mobile:Visibility / Render Order",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       },
@@ -36213,6 +37468,15 @@
                 }
               ]
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Visibility / Render Order",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -40574,6 +41838,12 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "landscape:Visibility / Render Order",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       },
@@ -41361,13 +42631,19 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Text": true,
+    "desktop:Text": false,
     "desktop:Font": true,
     "desktop:Song Title": true,
+    "desktop:New Group (31)": true,
+    "desktop:New Group (32)": true,
     "desktop:Track Title Button Animation": true,
     "desktop:Outline": true,
     "desktop:Artist": true,
-    "desktop:Album & Date": true,
+    "desktop:New Group (33)": true,
+    "desktop:New Group (34)": true,
+    "desktop:New Group (36)": true,
+    "desktop:New Group (35)": true,
+    "desktop:Album & Date": false,
     "desktop:Brackets Smaller Text": true,
     "desktop:Test Text Mode": true,
     "desktop:New Group (7)": true,
@@ -41420,6 +42696,7 @@
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
     "desktop:Filter Panel Shadow": true,
+    "desktop:Visibility / Render Order": false,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
@@ -41523,6 +42800,7 @@
     "mobile:Previous / Next Shadow": false,
     "mobile:Title Lift Shadow": false,
     "mobile:Filter Panel Shadow": false,
+    "mobile:Visibility / Render Order": false,
     "mobile:Scrub Audio": true,
     "mobile:New Group (2)": false,
     "mobile:Spotify Handoff": true,
@@ -41626,6 +42904,7 @@
     "landscape:Previous / Next Shadow": false,
     "landscape:Title Lift Shadow": false,
     "landscape:Filter Panel Shadow": false,
+    "landscape:Visibility / Render Order": false,
     "landscape:Scrub Audio": false,
     "landscape:New Group (2)": false,
     "landscape:Spotify Handoff": false,
@@ -42508,7 +43787,15 @@
     "sliderMobileTickColorBrightness": null,
     "sliderLandscapeTickColorBrightness": null,
     "mobile:Opacity On Zoom": null,
-    "landscape:Opacity On Zoom": null
+    "landscape:Opacity On Zoom": null,
+    "mobile:Visibility / Render Order": null,
+    "landscape:Visibility / Render Order": null,
+    "desktop:New Group (31)": "TYPE",
+    "desktop:New Group (32)": "Overflow",
+    "desktop:New Group (33)": "TYPE",
+    "desktop:New Group (34)": "OVERFLOW",
+    "desktop:New Group (35)": "SEPARATOR",
+    "desktop:New Group (36)": "OVERFLOW SCROLL"
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -42551,7 +43838,13 @@
     "sliderTickStartHeight",
     "sliderTickHeight",
     "sliderTimelineScaleGap",
-    "sliderTimelineOffsetY"
+    "sliderTimelineOffsetY",
+    "desktop:New Group (31)",
+    "desktop:New Group (32)",
+    "desktop:New Group (33)",
+    "desktop:New Group (34)",
+    "desktop:New Group (35)",
+    "desktop:New Group (36)"
   ],
   "lockedGroups": [
     "desktop:Dev Panel",
@@ -43301,7 +44594,12 @@
             "relativeTo": "spxTitle",
             "myAnchor": "top-center",
             "targetAnchor": "bottom-center",
-            "gap": "0px"
+            "horizontal": {
+              "offset": "0px"
+            },
+            "vertical": {
+              "offset": "0px"
+            }
           },
           "size": {
             "width": {
@@ -43331,7 +44629,12 @@
             "relativeTo": "spxCover",
             "myAnchor": "bottom-center",
             "targetAnchor": "top-center",
-            "gap": "-20px"
+            "horizontal": {
+              "offset": "0px"
+            },
+            "vertical": {
+              "offset": "-5vh"
+            }
           },
           "size": {
             "width": {
@@ -43445,7 +44748,12 @@
             "relativeTo": "spxCover",
             "myAnchor": "center-right",
             "targetAnchor": "center-left",
-            "gap": "0px"
+            "horizontal": {
+              "offset": "0px"
+            },
+            "vertical": {
+              "offset": "0px"
+            }
           },
           "size": {
             "width": {
@@ -43476,7 +44784,12 @@
             "relativeTo": "spxCover",
             "myAnchor": "center-left",
             "targetAnchor": "center-right",
-            "gap": "0px"
+            "horizontal": {
+              "offset": "0px"
+            },
+            "vertical": {
+              "offset": "0px"
+            }
           },
           "size": {
             "width": {
