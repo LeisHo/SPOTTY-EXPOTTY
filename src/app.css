@@ -224,7 +224,7 @@
 .spx-flt-clear svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .spx-flt-rows { display: flex; flex-direction: column; margin: calc(8px + var(--spx-flt-rows-y, 0px) - var(--fit-rt, 0px)) 0 calc(12px - var(--fit-rb, 0px)); }
 .spx-flt-row + .spx-flt-row { margin-top: var(--spx-flt-row-gap, 12px); } /* a margin, not `gap`: a negative gap is invalid CSS and was silently dropped */ /* gap = the space between the sliders; the top margin moves the whole slider group, and both change the panel's height */
-.spx-flt-row { margin: 0; transform: translateY(var(--spx-flt-sl-y, 0px)); } /* Sliders Y Offset: the whole set - icon, slider, min / max numbers and value; filter.js fit() pads the panel so nothing spills */
+.spx-flt-row { margin: 0; }
 .spx-flt-top { display: flex; justify-content: center; align-items: center; opacity: .85; margin-bottom: var(--spx-flt-ico-gap, 0px); } /* the icon's distance from its slider (negative = closer) */
 .spx-flt-ico { display: inline-flex; }
 .spx-flt-nums { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--spx-flt-mm-size, 12px); font-weight: var(--spx-flt-mm-bold, 400); transform: translateY(calc(var(--spx-flt-mm-y, 0) * -1px)); opacity: .8; margin-top: var(--spx-flt-nums-gap, 1px); } /* the numbers' distance from their slider (negative = closer) */
