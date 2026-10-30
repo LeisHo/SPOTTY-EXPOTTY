@@ -11,8 +11,8 @@ const TYPES = { computer: 'Computer', smartphone: 'Phone', speaker: 'Speaker', t
 const typeLabel = t => TYPES[String(t || '').toLowerCase()] || t || 'Device';
 const storedVolume = () => { try { const v = parseFloat(localStorage.getItem('spxVolume')); return Number.isFinite(v) ? v : 1; } catch (e) { return 1; } };
 
-// api: handoff's deviceApi. player: handoff's play state + controls. volume: the volume.js control. setClipVolume: the scrub clips' master volume.
-export function initDevicePlayer({ button, api, player, volume, setClipVolume }) {
+// api: handoff's deviceApi. player: handoff's play state + controls. volume: the volume.js control. (no clips play while logged in, which a device needs).
+export function initDevicePlayer({ button, api, player, volume }) {
     const panel = document.createElement('div');
     panel.className = 'spx-device-panel'; panel.id = 'spxDevicePanel'; panel.hidden = true;
     document.body.appendChild(panel);
@@ -102,7 +102,6 @@ export function initDevicePlayer({ button, api, player, volume, setClipVolume })
         browserVol = storedVolume();
         if (setting('checkboxDeviceMatchVolume') && t.volume != null) setSlider(t.volume, false);
         else player.setRealVolume(volume.get()); // the slider's level goes to the device instead
-        if (setting('checkboxDeviceMuteClips')) setClipVolume(0);
     }
     api.callbacks({
         onDevice: (t, reason) => {

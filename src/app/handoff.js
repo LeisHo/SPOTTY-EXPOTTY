@@ -27,33 +27,6 @@ export const onPlayState = fn => listeners.add(fn);
 let songChangeAt = 0, requestAt = 0, audibleLogged = true;
 export const noteSongChange = () => { songChangeAt = performance.now(); };
 let pendingSdkTrack = null, pendingTimer = 0;
-// ---- handoff crossfade: the preview keeps playing until the full song is AUDIBLE, then it fades out while the song fades in ----
-let audibleWait = null; // { id, fadeMs, onAudible, timer, before }
-function finishAudible(why) {
-    const w = audibleWait;
-    if (!w) return;
-    audibleWait = null;
-    clearTimeout(w.timer);
-    logEvent('playback', `HANDOFF full song audible (${why}) after ${Math.round(performance.now() - w.t0)}ms: crossfading ${w.fadeMs}ms`);
-    if (sdk.sdkReady()) sdk.sdkFadeIn(w.fadeMs);
-    w.onAudible(w.fadeMs);
-}
-function cancelAudible() {
-    if (!audibleWait) return;
-    clearTimeout(audibleWait.timer);
-    audibleWait = null;
-    if (sdk.sdkReady()) sdk.sdkRestoreVolume();
-}
-// Like playTrack, but onAudible(fadeMs) is called once the song is really playing (SDK state / iframe update), or after 3 s whatever
-// happens (so the preview can never play on forever, nor the song stay silent).
-export function playTrackCrossfade(trackId, fadeMs, onAudible, positionMs = 0) {
-    cancelAudible();
-    audibleWait = { id: trackId, fadeMs, onAudible, t0: performance.now(), before: sdk.sdkCurrentTrackId() };
-    audibleWait.timer = setTimeout(() => finishAudible('3 s timeout'), 3000);
-    if (sdk.sdkReady()) sdk.sdkPrepareFade();
-    logEvent('playback', 'HANDOFF crossfade: starting the full song silently, the preview keeps playing until it is audible');
-    return playTrack(trackId, positionMs);
-}
 const clearPending = () => { pendingSdkTrack = null; clearTimeout(pendingTimer); };
 export function initSdkPlayer(onStatus) {
     sdk.initSdk({
@@ -65,7 +38,6 @@ export function initSdkPlayer(onStatus) {
                 audibleLogged = true;
                 logEvent('playback', `FULL SONG PLAYING: ${Math.round(performance.now() - requestAt)}ms after the play request, ${Math.round(performance.now() - songChangeAt)}ms after the song change`);
             }
-            if (audibleWait && isPlayingNow && info && (info.id === audibleWait.id || info.linkedId === audibleWait.id || (info.id !== audibleWait.before && info.position < 2500))) finishAudible('sdk');
             emit();
         },
         onEnded: () => sdkEnded(),
@@ -75,7 +47,6 @@ export function initSdkPlayer(onStatus) {
                 if (sdk.sdkReady()) { // it connected: play the waiting song, in full
                     clearPending();
                     logEvent('playback', 'SDK became ready: playing the song that was waiting for it (' + t + ')');
-                    if (audibleWait) sdk.sdkPrepareFade();
                     sdk.sdkPlay(t).then(ok => { if (!ok && wantPlaying && loadedId === t) playViaEmbed(t); });
                 } else if (!sdk.sdkExpected()) { clearPending(); playViaEmbed(t); } // it failed: the iframe preview is all there is
             }
@@ -112,7 +83,6 @@ function handleUpdate(d) {
         lastPausedSeen = d.isPaused; lastBufSeen = d.isBuffering;
         logEvent('playback', `EMBED ${d.isPaused ? 'paused' : 'PLAYING'}${d.isBuffering ? ' (buffering)' : ''} at ${Math.round(d.position)}ms of ${Math.round(d.duration)}ms`);
     }
-    if (audibleWait && loadedId === audibleWait.id && !d.isPaused && d.position > 200) finishAudible('iframe');
     events.push({ t: Math.round(performance.now()), paused: d.isPaused, buffering: d.isBuffering, pos: d.position, dur: d.duration });
     if (events.length > 200) events.shift();
     // Looping. MEASURED (the __spxEvents log): at the end of a 29.7 s preview the embed sends one
@@ -213,7 +183,6 @@ export function pauseEmbed() {
     queued = null;
     wantPlaying = false;
     clearPending();
-    cancelAudible();
     logEvent('playback', 'EMBED pause requested');
     if (sdk.sdkReady()) sdk.sdkPause();
     if (controller) { try { controller.pause(); } catch (e) { /* ignore */ } }

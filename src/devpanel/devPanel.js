@@ -8219,8 +8219,7 @@
             { value: 'danceability', text: 'Danceability' },
         ];
         const SPOTTY_CONTROLS = [
-            { tab, group: 'Scrub Audio', id: 'checkboxScrubAudioEnabled', type: 'checkbox', label: 'Play Clips While Scrubbing:', value: true },
-            { tab, group: 'Scrub Audio', id: 'checkboxPlayPreviewClips', type: 'checkbox', label: 'Play Preview Clips (Off = Spotify Song Only, Once Logged In):', value: true },
+            { tab, group: 'Scrub Audio', id: 'checkboxScrubAudioEnabled', type: 'checkbox', label: 'Play Preview Clips While Scrubbing (Only When Not Logged In To Spotify):', value: true },
             { tab, group: 'Scrub Audio', id: 'sliderScrubVolume', type: 'slider', label: 'Clip Volume (x):', min: 0, max: 1, step: 0.05, value: 0.7 },
             { tab, group: 'Scrub Audio', id: 'sliderClipStartMin', type: 'slider', label: 'Clip Start Min (S):', min: 0, max: 28, step: 0.5, value: 2 },
             { tab, group: 'Scrub Audio', id: 'sliderClipStartMax', type: 'slider', label: 'Clip Start Max (S):', min: 0, max: 28, step: 0.5, value: 22 },
@@ -8228,7 +8227,7 @@
             { tab, group: 'Scrub Audio', id: 'sliderClipFadeOut', type: 'slider', label: 'Clip Fade Out (Ms):', min: 0, max: 500, step: 5, value: 30 },
             { tab, group: 'Scrub Audio', id: 'checkboxColdStartClips', type: 'checkbox', label: 'Play Clips Not Yet Preloaded:', value: true },
             { tab, group: 'Scrub Audio', id: 'checkboxRandomStartSong', type: 'checkbox', label: 'Randomize Starting Song:', value: false },
-            { tab, group: 'Scrub Audio', id: 'checkboxLoopPreview', type: 'checkbox', label: 'Loop Preview:', value: true },
+            { tab, group: 'Scrub Audio', id: 'checkboxLoopPreview', type: 'checkbox', label: 'Loop The Song / Preview When It Ends:', value: true },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadAhead', type: 'slider', label: 'Preload Ahead (Songs):', min: 0, max: 30, step: 1, value: 8 },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadBehind', type: 'slider', label: 'Preload Behind (Songs):', min: 0, max: 30, step: 1, value: 3 },
             { tab, group: 'Scrub Preload', id: 'checkboxShowPoolOverlay', type: 'checkbox', label: 'Show Preload Pool Overlay:', value: false },
@@ -8242,9 +8241,7 @@
             { tab, group: 'Spotify Handoff', id: 'checkboxSpotifyLoginOnStart', type: 'checkbox', label: 'Open Spotify Login On First Click (Until Logged In):', value: true },
             { tab, group: 'Spotify Handoff', id: 'buttonSpotifyLogin', type: 'button', label: 'Log In With Spotify', skipDeviceCheckbox: true },
             { tab, group: 'Spotify Handoff', id: 'checkboxShowSpotifyPlayer', type: 'checkbox', label: 'Show Spotify Player (To Log In Inside It):', value: false },
-            { tab, group: 'Spotify Handoff', id: 'sliderHandoffCrossfade', type: 'slider', label: 'Handoff Crossfade, Preview To Full Song (Ms, 0 = Hard Cut):', min: 0, max: 2000, step: 10, value: 250 },
             { tab, group: 'Spotify Handoff', id: 'sliderHandoffDelay', type: 'slider', label: 'Handoff Delay After Scrubbing Stops (Ms):', min: 100, max: 3000, step: 50, value: 600 },
-            { tab, group: 'Spotify Handoff', id: 'sliderHandoffStartOffset', type: 'slider', label: 'Full Song Start Offset From Preview (S):', min: -30, max: 30, step: 0.5, value: 0 },
             { tab, group: TL, id: 'colorTimelineAccent', type: 'color', label: 'Timeline Accent Color:', value: '#1db954' },
             { tab, group: TL, id: 'colorTimelinePlayhead', type: 'color', label: 'Playhead Color:', value: '#ffffff' },
             { tab, group: TL, id: 'sliderTimelineBarOpacity', type: 'slider', label: 'Timeline Bar Opacity (x):', min: 0.1, max: 1, step: 0.05, value: 0.8 },
@@ -8717,7 +8714,6 @@
             // what switching does
             { tab, group: PD, id: 'checkboxDeviceMatchVolume', type: 'checkbox', label: 'Volume Slider Takes The Device\'s Volume When Picked (Off = The Slider\'s Level Is Sent To The Device)', value: true },
             { tab, group: PD, id: 'checkboxDeviceKeepPlaying', type: 'checkbox', label: 'Keep The Song Playing When Switching (From Where It Was)', value: true },
-            { tab, group: PD, id: 'checkboxDeviceMuteClips', type: 'checkbox', label: 'Mute The Scrub Clips In This Browser While A Device Plays', value: false },
             { tab, group: PD, id: 'checkboxDeviceRemember', type: 'checkbox', label: 'Pick The Last Device Again On Reload (If It Is Still There)', value: false },
             { tab, group: PD, id: 'sliderDevicePollSeconds', type: 'slider', label: 'Device State Check Interval (S):', min: 0.5, max: 10, step: 0.1, value: 1.5 },
             // the list

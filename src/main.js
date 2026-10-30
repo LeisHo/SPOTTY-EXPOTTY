@@ -17,7 +17,7 @@ import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIc
 import { initDebugTools } from './app/debugTools.js';
 import { initAudioMods } from './app/audioMods.js';
 import { logEvent } from './app/debugLog.js';
-import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, playTrackCrossfade, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo, deviceApi } from './app/handoff.js';
+import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo, deviceApi } from './app/handoff.js';
 import { initDevicePlayer } from './app/devicePanel.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
@@ -302,12 +302,10 @@ async function boot() {
     let lastTimelineHeight = null, heightTouched = false;
     // The song whose full version the hand-off has asked for. The preview keeps playing until that full song reports it is
     // playing; if it never does, the preview carries on instead of going silent.
-    let previewHold = null;
     // The songs that settled (were actually played, not scrubbed past), oldest first; the last entry is the one playing. The Last button goes back through it,
     // with shuffle on or off.
     const playedHistory = [];
     let stepImmediate = false; // set by stepSong() so that one song change skips the handoff delay
-    let silentStep = false; // set while a song that ended on a Play On Device device moves on: that step starts no browser preview clip (it would sound here for a moment before the device takes over)
     // Audio-feature filter (Filter button, filter.js). Created further down; until then every song passes.
     let flt = null;
     let srch = null; // the Search panel (search.js), ANDed into the filter
@@ -464,7 +462,8 @@ async function boot() {
     // Only the visitor's moves on the app count. Input on the dev panel (in dev mode, the panel is open while the page loads)
     // must not cancel the jump; before this, any click or scroll there silently skipped it.
     // Muted (volume 0) must not stop playback: the Web Playback SDK is silenced by its volume, so songs keep changing silently. Only the iframe embed (no volume method) has to be left stopped.
-    const realPlayAllowed = () => volume.get() > 0 || sdkIsReady();
+    // The real song plays only while logged in (preview clips are the logged-out sound; the two never play together).
+    const realPlayAllowed = () => isLoggedIn() && (volume.get() > 0 || sdkIsReady());
     let interacted = false;
     const onVisitorInput = e => { if (!(e.target && e.target.closest && e.target.closest('#devPanel'))) interacted = true; };
     ['pointerdown', 'wheel', 'keydown'].forEach(t => window.addEventListener(t, onVisitorInput, { capture: true }));
@@ -1108,11 +1107,9 @@ async function boot() {
         // With preview clips off nothing else would sound in the gap, so the playing song is left playing until the next one's play request replaces it (the SDK or the embed
         // switches songs by itself); pausing it here made every Next / Last / scroll a silence of up to a second or two. doHandoff stops it if no request is sent.
         if (handedOff) { const replaceNext = !previewClipsOn() && interacted && isUnlocked() && setting('checkboxHandoffEnabled') && realPlayAllowed(); logEvent('playback', replaceNext ? 'EMBED song left playing: the next song replaces it' : 'EMBED song stopped: moved to another song'); if (!replaceNext) pauseEmbed(); handedOff = false; }
-        const noClip = silentStep;
-        if (!noClip) playClip(clipKey(songs[idx]));
+        playClip(clipKey(songs[idx]));
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
-        previewHold = null;
         // The handoff delay only exists so a fast wheel scrub does not send Spotify a play request per song. A single deliberate step
         // (Next / Last / shuffle step / a song ending) has nothing to wait for, so it starts at once.
         const handoffDelay = stepImmediate ? 0 : setting('sliderHandoffDelay');
@@ -1121,21 +1118,14 @@ async function boot() {
         // The handoff reads where the preview is, so it waits (up to 2 s after the song change) for a pending preview to start.
         const handoffWaitUntil = performance.now() + 2000;
         const doHandoff = () => {
-            if (!noClip && previewClipsOn() && clipKey(songs[playIdx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
+            if (previewClipsOn() && clipKey(songs[playIdx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
             handoffPending = false;
             if (playedHistory[playedHistory.length - 1] !== playIdx) { playedHistory.push(playIdx); if (playedHistory.length > 300) playedHistory.shift(); }
             const ok = interacted && isUnlocked() && setting('checkboxHandoffEnabled') && realPlayAllowed();
             logEvent('playback', `HANDOFF fired ${handoffDelay}ms after the last song change: ${ok ? 'starting the real song ' + songs[playIdx].id : 'skipped (' + (!isUnlocked() ? 'sound locked' : !setting('checkboxHandoffEnabled') ? 'handoff off' : 'muted') + ')'}`);
             if (ok) {
-                // The full song starts where the preview is now (+ the Full Song Start Offset), not at 0:00
-                const startMs = Math.max(0, clipPosition() + setting('sliderHandoffStartOffset')) * 1000;
-                const fadeMs = setting('sliderHandoffCrossfade');
-                if (fadeMs > 0) {
-                    // Crossfade: the preview keeps playing; the full song starts silent and, once it is audible (SDK / iframe report it playing),
-                    // it fades in while the preview fades out over fadeMs. No silence between the two.
-                    previewHold = null;
-                    playTrackCrossfade(songs[playIdx].id, fadeMs, ms => stopClip(ms), startMs);
-                } else { previewHold = songs[playIdx].id; playTrack(songs[playIdx].id, startMs); } // 0 = hard cut: the preview still holds until the song plays
+                // Logged in: no preview clip plays, so the song simply starts from 0:00 (no crossfade, nothing else is sounding).
+                playTrack(songs[playIdx].id);
                 handedOff = true;
             }
             // No Spotify request is coming (handoff off / muted). The preview clip is then the only sound there is, so it keeps playing (it loops) until the next song change;
@@ -1334,8 +1324,7 @@ async function boot() {
     const onSongEnded = () => {
         if (!shuffleOn && setting('checkboxLoopPreview')) return false;
         logEvent('playback', shuffleOn ? 'SONG ended: shuffle picks the next song' : 'SONG ended: Loop Preview is off, moves to the next song');
-        silentStep = !!(dp && dp.active());
-        try { stepSong(1, true); } finally { silentStep = false; }
+        stepSong(1, true);
         return true;
     };
     setOnEnded(onSongEnded);
@@ -1370,7 +1359,7 @@ async function boot() {
         stepImmediate = false;
     };
     // ---- Play On Device button (under Filter): Spotify Connect ----
-    dp = initDevicePlayer({ button: el('spxDevice'), api: deviceApi, volume, setClipVolume: setMasterVolume,
+    dp = initDevicePlayer({ button: el('spxDevice'), api: deviceApi, volume,
         player: { isPlaying, playingId, getProgress, playTrack, pauseEmbed, setRealVolume } });
     dp.applySettings();
     // ---- Filter button (under Shuffle) + panel ----
@@ -1562,7 +1551,7 @@ async function boot() {
     const startSpotifyNow = () => {
         if (isPlaying() && playingId() === songs[idx].id) return true; // already playing this song: leave it alone
         if (!isUnlocked() || !setting('checkboxHandoffEnabled') || !realPlayAllowed()) return false;
-        clearTimeout(handoffTimer); handoffPending = false; previewHold = null;
+        clearTimeout(handoffTimer); handoffPending = false;
         stopClip(); handedOff = true; toggleTrack(songs[idx].id, true);
         return true;
     };
@@ -1729,12 +1718,6 @@ async function boot() {
     onClipState(refreshPlayUi);
     onPlayState(playing => {
         refreshPlayUi();
-        // The preview stops only once the full song is actually playing (see previewHold above).
-        if (playing && previewHold && songs[idx] && songs[idx].id === previewHold) {
-            previewHold = null;
-            stopClip();
-            logEvent('playback', 'HANDOFF: the full song is playing, the preview stops');
-        }
     });
 
     // ---- UI Layout Inspector (dev only): the engine's own Inspector in a floating panel ------
@@ -1787,7 +1770,7 @@ async function boot() {
     };
     setInterval(updateSdkStatus, 500);
     initSdkPlayer(refreshLoginButton);
-    onLoginChange(() => { initSdkPlayer(refreshLoginButton); refreshLoginButton(); });
+    onLoginChange(() => { initSdkPlayer(refreshLoginButton); refreshLoginButton(); if (isLoggedIn()) stopClip(); }); // logged in: the preview clip stops, the Spotify song takes over
     setInterval(refreshLoginButton, 1500);
     document.addEventListener('pointerdown', () => activateRealPlayer(), true); // the SDK wants an activation inside a user gesture
     document.addEventListener('click', e => {

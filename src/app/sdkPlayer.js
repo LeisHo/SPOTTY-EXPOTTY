@@ -135,20 +135,6 @@ function sendRemoteVolume() {
     const wait = 160 - (performance.now() - lastVolSentAt);
     if (wait <= 0) send(); else volTimer = setTimeout(send, wait);
 } // while silent for a crossfade only the stored level changes
-// Handoff crossfade: the next song starts with the SDK volume at 0 (the preview is still playing), then sdkFadeIn() brings it up to the volume slider's level.
-export function sdkPrepareFade() { if (!ready || !player || target) return false; clearInterval(fadeTimer); quiet = true; player.setVolume(0).catch(() => {}); return true; }
-export function sdkFadeIn(ms) {
-    if (!player || target) return;
-    clearInterval(fadeTimer);
-    if (!quiet || ms <= 0) { quiet = false; player.setVolume(volume).catch(() => {}); return; }
-    const t0 = performance.now();
-    fadeTimer = setInterval(() => {
-        const f = Math.min(1, (performance.now() - t0) / ms);
-        player.setVolume(volume * f).catch(() => {});
-        if (f >= 1) { clearInterval(fadeTimer); quiet = false; }
-    }, 30);
-}
-export function sdkRestoreVolume() { clearInterval(fadeTimer); if (quiet && !target) { quiet = false; if (player) player.setVolume(volume).catch(() => {}); } }
 // Browsers want this inside a click / key press before audio may start.
 export function sdkActivate() { if (player && player.activateElement) { try { player.activateElement(); } catch (e) { /* ignore */ } } }
 // What the SDK says is loaded right now (position extrapolated while playing): used by the on-screen status box.
