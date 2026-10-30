@@ -8773,6 +8773,7 @@
             { tab, group: FLB, id: 'sliderFilterPanelRowsOffsetY', type: 'slider', label: 'Panel Slider Group Y Offset (Px, Positive = Up):', min: -100, max: 100, step: 1, value: 0 },
             { tab, group: FLB, id: 'checkboxFilterPanelKeepVisible', type: 'checkbox', label: 'Keep The Filter Panel Visible:', value: false },
             { tab, group: FLB, id: 'sliderFilterPanelIconOffsetY', type: 'slider', label: 'Panel Icon Y Offset From Its Slider (Px, Positive = Icon Up):', min: -30, max: 80, step: 1, value: 0 },
+            { tab, group: FLB, id: 'sliderFilterSlidersOffsetY', type: 'slider', label: 'Panel Sliders Y Offset (Px, Whole Set: Icon, Slider, Min / Max, Value, Positive = Up; The Panel Grows To Fit)', min: -60, max: 60, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelIconSize', type: 'slider', label: 'Panel Category Icon Size (Px):', min: 8, max: 120, step: 1, value: 20 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetX', type: 'slider', label: 'Panel X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
             { tab, group: FLB, id: 'sliderFilterPanelOffsetY', type: 'slider', label: 'Panel Y Offset (Px, Positive = Up):', min: -400, max: 100, step: 1, value: -6 },
