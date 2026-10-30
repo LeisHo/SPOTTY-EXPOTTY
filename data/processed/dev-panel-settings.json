@@ -51978,7 +51978,9 @@
       "sliderPlayheadStartHeight": true,
       "textTestSong": false,
       "textTestArtist": false,
-      "textTestAlbum": false
+      "textTestAlbum": false,
+      "sliderCoverScale": false,
+      "sliderCoverOffsetX": false
     },
     "landscape": {}
   },
@@ -52019,7 +52021,7 @@
       "sliderAlbumColorBrightness": 1.15,
       "checkboxAlbumColorTransition": false,
       "sliderAlbumColorTransitionMs": 300,
-      "sliderCoverOffsetY": 0,
+      "sliderCoverOffsetY": -578,
       "sliderNavButtonOpacity": 80,
       "textArtistSeparator": "  &  ",
       "sliderTxtSongTitleMaxWidth": 700,
@@ -52045,7 +52047,9 @@
       "sliderPlayheadStartHeight": 68,
       "textTestSong": "HELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLET",
       "textTestArtist": "HELLO ELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
-      "textTestAlbum": "HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS"
+      "textTestAlbum": "HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
+      "sliderCoverScale": 2.35,
+      "sliderCoverOffsetX": 0
     },
     "landscape": {}
   },
