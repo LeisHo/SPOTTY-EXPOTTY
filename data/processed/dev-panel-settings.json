@@ -713,7 +713,7 @@
   },
   "layout": {
     "left": 35,
-    "top": 112,
+    "top": 35.28125,
     "width": 350,
     "height": 478
   },
@@ -52483,7 +52483,7 @@
             },
             "vertical": {
               "anchor": "center",
-              "offset": "-4vh"
+              "offset": "-3vh"
             }
           },
           "size": {
