@@ -52,7 +52,7 @@
     "sliderPlayheadWidth": 4,
     "sliderPlayheadHeight": 85,
     "sliderPlayheadOpacity": 75,
-    "sliderPlayheadStartHeight": 30,
+    "sliderPlayheadStartHeight": 394,
     "rangeBarTimelineZoomLimits": "{\"min\":64,\"max\":100}",
     "buttonOpenLayoutInspector": "",
     "checkboxRcPanEnabled": true,
