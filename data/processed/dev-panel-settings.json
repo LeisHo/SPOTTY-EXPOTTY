@@ -25691,7 +25691,11 @@
           },
           {
             "type": "row",
-            "key": "sliderStartOverlayOpacity"
+            "key": "checkboxStartTransitionAfterRelease"
+          },
+          {
+            "type": "row",
+            "key": "checkboxStartCenterOnCover"
           },
           {
             "type": "row",
@@ -25699,7 +25703,11 @@
           },
           {
             "type": "row",
-            "key": "checkboxStartTransitionAfterRelease"
+            "key": "sliderStartOverlayOpacity"
+          },
+          {
+            "type": "row",
+            "key": "sliderStartFadeMs"
           },
           {
             "type": "group",
@@ -25951,23 +25959,15 @@
                 }
               ]
             }
-          },
-          {
-            "type": "row",
-            "key": "sliderStartFadeMs"
-          },
-          {
-            "type": "row",
-            "key": "checkboxStartCenterOnCover"
           }
         ],
         "rowKeys": [
           "buttonRunStartup",
-          "sliderStartOverlayOpacity",
-          "colorStartOverlay",
           "checkboxStartTransitionAfterRelease",
-          "sliderStartFadeMs",
-          "checkboxStartCenterOnCover"
+          "checkboxStartCenterOnCover",
+          "colorStartOverlay",
+          "sliderStartOverlayOpacity",
+          "sliderStartFadeMs"
         ],
         "subgroups": [
           {
@@ -49213,7 +49213,7 @@
     "desktop:New Group (29)": true,
     "desktop:New Group (16)": true,
     "desktop:New Group (19)": false,
-    "desktop:New Group (24)": true,
+    "desktop:New Group (24)": false,
     "desktop:Panel Song Count": true,
     "desktop:New Group (18)": true,
     "desktop:New Group (23)": true,
@@ -49250,7 +49250,7 @@
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
-    "desktop:Timeline Look": false,
+    "desktop:Timeline Look": true,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
     "desktop:Visual Style": true,
@@ -49262,7 +49262,7 @@
     "desktop:Song Add Date": true,
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
-    "desktop:New Group (28)": false,
+    "desktop:New Group (28)": true,
     "desktop:New Group (40)": true,
     "desktop:Match Graph Colors": true,
     "desktop:Opacity Per Zoom": true,
@@ -50457,15 +50457,12 @@
     "desktop:Wheel Scrub Per Notch Curve",
     "desktop:Starting Timeline Span Curve",
     "desktop:New Group",
-    "desktop:Start Button",
-    "desktop:Start Button Animation",
-    "desktop:Startup",
     "desktop:Mouse Log",
     "desktop:Snapshot",
     "desktop:Debug"
   ],
   "lockedSliderBounds": [],
-  "textEditModeEnabled": true,
+  "textEditModeEnabled": false,
   "hotkeys": {
     "s": {
       "id": "devHeaderSyncBtn",
