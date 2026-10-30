@@ -696,9 +696,9 @@
   },
   "layout": {
     "left": 35.28570556640625,
-    "top": 208,
+    "top": 263,
     "width": 350,
-    "height": 491
+    "height": 436
   },
   "devPanelStyle": {
     "titleFontSize": 17,
