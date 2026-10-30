@@ -397,8 +397,8 @@
     "sliderFilterPanelBgOpacity": 2,
     "colorFilterPanelAccent": "#878787",
     "checkboxFilterPanelResizable": true,
-    "checkboxFilterPanelScrollable": false,
-    "checkboxFilterPanelDraggable": false,
+    "checkboxFilterPanelScrollable": true,
+    "checkboxFilterPanelDraggable": true,
     "checkboxFilterSongCountTop": true,
     "sliderFilterSongCountFontSize": 14,
     "sliderFilterSongCountOffsetX": 29,
@@ -5890,6 +5890,18 @@
                             },
                             {
                               "type": "row",
+                              "key": "checkboxFilterPanelResizable"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterPanelScrollable"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterPanelDraggable"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelWidth"
                             },
                             {
@@ -5991,6 +6003,9 @@
                           "rowKeys": [
                             "checkboxFilterPanelKeepVisible",
                             "checkboxFilterCloseOnOutside",
+                            "checkboxFilterPanelResizable",
+                            "checkboxFilterPanelScrollable",
+                            "checkboxFilterPanelDraggable",
                             "sliderFilterPanelWidth",
                             "sliderFilterPanelOffsetX",
                             "sliderFilterPanelOffsetY",
@@ -6436,25 +6451,8 @@
                         "type": "group",
                         "section": {
                           "key": "desktop:Panel",
-                          "items": [
-                            {
-                              "type": "row",
-                              "key": "checkboxFilterPanelResizable"
-                            },
-                            {
-                              "type": "row",
-                              "key": "checkboxFilterPanelScrollable"
-                            },
-                            {
-                              "type": "row",
-                              "key": "checkboxFilterPanelDraggable"
-                            }
-                          ],
-                          "rowKeys": [
-                            "checkboxFilterPanelResizable",
-                            "checkboxFilterPanelScrollable",
-                            "checkboxFilterPanelDraggable"
-                          ],
+                          "items": [],
+                          "rowKeys": [],
                           "subgroups": []
                         }
                       }
@@ -6554,6 +6552,18 @@
                           {
                             "type": "row",
                             "key": "checkboxFilterCloseOnOutside"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelResizable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelScrollable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelDraggable"
                           },
                           {
                             "type": "row",
@@ -6658,6 +6668,9 @@
                         "rowKeys": [
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
+                          "checkboxFilterPanelResizable",
+                          "checkboxFilterPanelScrollable",
+                          "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
                           "sliderFilterPanelOffsetY",
@@ -7088,25 +7101,8 @@
                       },
                       {
                         "key": "desktop:Panel",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterPanelResizable"
-                          },
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterPanelScrollable"
-                          },
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterPanelDraggable"
-                          }
-                        ],
-                        "rowKeys": [
-                          "checkboxFilterPanelResizable",
-                          "checkboxFilterPanelScrollable",
-                          "checkboxFilterPanelDraggable"
-                        ],
+                        "items": [],
+                        "rowKeys": [],
                         "subgroups": []
                       }
                     ]
@@ -8864,6 +8860,18 @@
                           },
                           {
                             "type": "row",
+                            "key": "checkboxFilterPanelResizable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelScrollable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelDraggable"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterPanelWidth"
                           },
                           {
@@ -8965,6 +8973,9 @@
                         "rowKeys": [
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
+                          "checkboxFilterPanelResizable",
+                          "checkboxFilterPanelScrollable",
+                          "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
                           "sliderFilterPanelOffsetY",
@@ -9410,25 +9421,8 @@
                       "type": "group",
                       "section": {
                         "key": "desktop:Panel",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterPanelResizable"
-                          },
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterPanelScrollable"
-                          },
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterPanelDraggable"
-                          }
-                        ],
-                        "rowKeys": [
-                          "checkboxFilterPanelResizable",
-                          "checkboxFilterPanelScrollable",
-                          "checkboxFilterPanelDraggable"
-                        ],
+                        "items": [],
+                        "rowKeys": [],
                         "subgroups": []
                       }
                     }
@@ -9528,6 +9522,18 @@
                         {
                           "type": "row",
                           "key": "checkboxFilterCloseOnOutside"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelScrollable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelDraggable"
                         },
                         {
                           "type": "row",
@@ -9632,6 +9638,9 @@
                       "rowKeys": [
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
+                        "checkboxFilterPanelResizable",
+                        "checkboxFilterPanelScrollable",
+                        "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
                         "sliderFilterPanelOffsetY",
@@ -10062,25 +10071,8 @@
                     },
                     {
                       "key": "desktop:Panel",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterPanelResizable"
-                        },
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterPanelScrollable"
-                        },
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterPanelDraggable"
-                        }
-                      ],
-                      "rowKeys": [
-                        "checkboxFilterPanelResizable",
-                        "checkboxFilterPanelScrollable",
-                        "checkboxFilterPanelDraggable"
-                      ],
+                      "items": [],
+                      "rowKeys": [],
                       "subgroups": []
                     }
                   ]
@@ -15531,6 +15523,18 @@
                           },
                           {
                             "type": "row",
+                            "key": "checkboxFilterPanelResizable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelScrollable"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterPanelDraggable"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterPanelWidth"
                           },
                           {
@@ -15632,6 +15636,9 @@
                         "rowKeys": [
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
+                          "checkboxFilterPanelResizable",
+                          "checkboxFilterPanelScrollable",
+                          "checkboxFilterPanelDraggable",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
                           "sliderFilterPanelOffsetY",
@@ -16077,25 +16084,8 @@
                       "type": "group",
                       "section": {
                         "key": "desktop:Panel",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterPanelResizable"
-                          },
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterPanelScrollable"
-                          },
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterPanelDraggable"
-                          }
-                        ],
-                        "rowKeys": [
-                          "checkboxFilterPanelResizable",
-                          "checkboxFilterPanelScrollable",
-                          "checkboxFilterPanelDraggable"
-                        ],
+                        "items": [],
+                        "rowKeys": [],
                         "subgroups": []
                       }
                     }
@@ -16195,6 +16185,18 @@
                         {
                           "type": "row",
                           "key": "checkboxFilterCloseOnOutside"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelResizable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelScrollable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelDraggable"
                         },
                         {
                           "type": "row",
@@ -16299,6 +16301,9 @@
                       "rowKeys": [
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
+                        "checkboxFilterPanelResizable",
+                        "checkboxFilterPanelScrollable",
+                        "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
                         "sliderFilterPanelOffsetY",
@@ -16729,25 +16734,8 @@
                     },
                     {
                       "key": "desktop:Panel",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterPanelResizable"
-                        },
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterPanelScrollable"
-                        },
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterPanelDraggable"
-                        }
-                      ],
-                      "rowKeys": [
-                        "checkboxFilterPanelResizable",
-                        "checkboxFilterPanelScrollable",
-                        "checkboxFilterPanelDraggable"
-                      ],
+                      "items": [],
+                      "rowKeys": [],
                       "subgroups": []
                     }
                   ]
@@ -18505,6 +18493,18 @@
                         },
                         {
                           "type": "row",
+                          "key": "checkboxFilterPanelResizable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelScrollable"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxFilterPanelDraggable"
+                        },
+                        {
+                          "type": "row",
                           "key": "sliderFilterPanelWidth"
                         },
                         {
@@ -18606,6 +18606,9 @@
                       "rowKeys": [
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
+                        "checkboxFilterPanelResizable",
+                        "checkboxFilterPanelScrollable",
+                        "checkboxFilterPanelDraggable",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
                         "sliderFilterPanelOffsetY",
@@ -19051,25 +19054,8 @@
                     "type": "group",
                     "section": {
                       "key": "desktop:Panel",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterPanelResizable"
-                        },
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterPanelScrollable"
-                        },
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterPanelDraggable"
-                        }
-                      ],
-                      "rowKeys": [
-                        "checkboxFilterPanelResizable",
-                        "checkboxFilterPanelScrollable",
-                        "checkboxFilterPanelDraggable"
-                      ],
+                      "items": [],
+                      "rowKeys": [],
                       "subgroups": []
                     }
                   }
@@ -19169,6 +19155,18 @@
                       {
                         "type": "row",
                         "key": "checkboxFilterCloseOnOutside"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterPanelResizable"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterPanelScrollable"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxFilterPanelDraggable"
                       },
                       {
                         "type": "row",
@@ -19273,6 +19271,9 @@
                     "rowKeys": [
                       "checkboxFilterPanelKeepVisible",
                       "checkboxFilterCloseOnOutside",
+                      "checkboxFilterPanelResizable",
+                      "checkboxFilterPanelScrollable",
+                      "checkboxFilterPanelDraggable",
                       "sliderFilterPanelWidth",
                       "sliderFilterPanelOffsetX",
                       "sliderFilterPanelOffsetY",
@@ -19703,25 +19704,8 @@
                   },
                   {
                     "key": "desktop:Panel",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterPanelResizable"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterPanelScrollable"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterPanelDraggable"
-                      }
-                    ],
-                    "rowKeys": [
-                      "checkboxFilterPanelResizable",
-                      "checkboxFilterPanelScrollable",
-                      "checkboxFilterPanelDraggable"
-                    ],
+                    "items": [],
+                    "rowKeys": [],
                     "subgroups": []
                   }
                 ]
@@ -46661,7 +46645,7 @@
     "desktop:New Group (30)": true,
     "desktop:New Group (29)": true,
     "desktop:New Group (19)": false,
-    "desktop:New Group (24)": false,
+    "desktop:New Group (24)": true,
     "desktop:New Group (18)": true,
     "desktop:New Group (23)": true,
     "desktop:New Group (20)": true,
@@ -46670,7 +46654,7 @@
     "desktop:New Group (17)": true,
     "desktop:New Group (16)": true,
     "desktop:Panel Song Count": true,
-    "desktop:Panel": true,
+    "desktop:Panel": false,
     "desktop:Play On Device": true,
     "desktop:Song Data": true,
     "desktop:New Group (25)": true,
