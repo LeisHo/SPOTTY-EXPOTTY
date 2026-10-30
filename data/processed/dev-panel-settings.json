@@ -308,10 +308,10 @@
     "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
     "checkboxDeviceButtonEnabled": true,
-    "sliderDeviceIconSize": 20,
+    "sliderDeviceIconSize": 28,
     "sliderDeviceIconOffsetX": 0,
     "sliderDeviceIconOffsetY": 0,
-    "sliderDeviceEdgeOffset": 14,
+    "sliderDeviceEdgeOffset": 0,
     "sliderDeviceOffOpacity": 45,
     "sliderDeviceOnOpacity": 100,
     "colorDeviceIcon": "#f2f2f2",
@@ -335,10 +335,10 @@
     "sliderDevicePanelBlur": 6,
     "colorDevicePanelAccent": "#1db954",
     "selectFilterIconStyle": "3",
-    "selectTempoIconStyle": "",
-    "selectValenceIconStyle": "",
-    "selectDanceIconStyle": "",
-    "selectEnergyIconStyle": "",
+    "selectTempoIconStyle": "8",
+    "selectValenceIconStyle": "13",
+    "selectDanceIconStyle": "7",
+    "selectEnergyIconStyle": "7",
     "checkboxFilterButtonEnabled": true,
     "sliderFilterIconSize": 23,
     "sliderFilterIconOffsetX": 0,
@@ -378,23 +378,23 @@
     "checkboxFilterShowValueSongLength": true,
     "checkboxFilterShowNumbers": true,
     "checkboxFilterShowValueOriginal": false,
-    "sliderFilterValueOffsetY": 0,
-    "checkboxFilterShowRangeText": false,
+    "sliderFilterValueOffsetY": -12,
+    "checkboxFilterShowRangeText": true,
     "checkboxFilterCloseOnOutside": true,
     "checkboxFilterClickToExit": true,
     "sliderFilterPanelWidth": 260,
     "sliderFilterPanelFontSize": 13,
-    "sliderFilterPanelRowGap": -5,
+    "sliderFilterPanelRowGap": 6,
     "sliderFilterPanelRowsOffsetY": -24,
-    "checkboxFilterPanelKeepVisible": false,
+    "checkboxFilterPanelKeepVisible": true,
     "sliderFilterPanelIconOffsetY": 1,
     "sliderFilterPanelNumbersOffsetY": 1,
     "sliderFilterPanelIconSize": 23,
     "sliderFilterPanelOffsetX": 0,
-    "sliderFilterPanelOffsetY": 6,
+    "sliderFilterPanelOffsetY": -28,
     "colorFilterPanelBg": "#ffffff",
-    "sliderFilterPanelBlur": 1,
-    "sliderFilterPanelBgOpacity": 3,
+    "sliderFilterPanelBlur": 3,
+    "sliderFilterPanelBgOpacity": 2,
     "colorFilterPanelAccent": "#878787",
     "checkboxFilterPanelResizable": true,
     "checkboxFilterPanelScrollable": false,
@@ -678,7 +678,7 @@
     "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}"
   },
   "layout": {
-    "left": 112,
+    "left": 67.5999755859375,
     "top": 6,
     "width": 880,
     "height": 583
@@ -5788,6 +5788,10 @@
                       },
                       {
                         "type": "row",
+                        "key": "checkboxFilterIndividualArtists"
+                      },
+                      {
+                        "type": "row",
                         "key": "checkboxFilterClickToExit"
                       },
                       {
@@ -5887,14 +5891,6 @@
                             },
                             {
                               "type": "row",
-                              "key": "checkboxFilterShowNumbers"
-                            },
-                            {
-                              "type": "row",
-                              "key": "checkboxFilterShowRangeText"
-                            },
-                            {
-                              "type": "row",
                               "key": "sliderFilterPanelWidth"
                             },
                             {
@@ -5928,6 +5924,30 @@
                                 "items": [
                                   {
                                     "type": "row",
+                                    "key": "checkboxFilterShowNumbers"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "checkboxFilterShowRangeText"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "checkboxFilterShowValueNameLengths"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "checkboxFilterShowValueSongDate"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "checkboxFilterShowValueSongLength"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "checkboxFilterShowValueOriginal"
+                                  },
+                                  {
+                                    "type": "row",
                                     "key": "sliderFilterPanelFontSize"
                                   },
                                   {
@@ -5945,14 +5965,25 @@
                                   {
                                     "type": "row",
                                     "key": "sliderFilterPanelRowGap"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterValueOffsetY"
                                   }
                                 ],
                                 "rowKeys": [
+                                  "checkboxFilterShowNumbers",
+                                  "checkboxFilterShowRangeText",
+                                  "checkboxFilterShowValueNameLengths",
+                                  "checkboxFilterShowValueSongDate",
+                                  "checkboxFilterShowValueSongLength",
+                                  "checkboxFilterShowValueOriginal",
                                   "sliderFilterPanelFontSize",
                                   "sliderFilterPanelIconSize",
                                   "sliderFilterPanelRowsOffsetY",
                                   "sliderFilterPanelIconOffsetY",
-                                  "sliderFilterPanelRowGap"
+                                  "sliderFilterPanelRowGap",
+                                  "sliderFilterValueOffsetY"
                                 ],
                                 "subgroups": []
                               }
@@ -5961,8 +5992,6 @@
                           "rowKeys": [
                             "checkboxFilterPanelKeepVisible",
                             "checkboxFilterCloseOnOutside",
-                            "checkboxFilterShowNumbers",
-                            "checkboxFilterShowRangeText",
                             "sliderFilterPanelWidth",
                             "sliderFilterPanelOffsetX",
                             "sliderFilterPanelOffsetY",
@@ -5975,6 +6004,30 @@
                             {
                               "key": "desktop:New Group (24)",
                               "items": [
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowNumbers"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowRangeText"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueNameLengths"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueSongDate"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueSongLength"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueOriginal"
+                                },
                                 {
                                   "type": "row",
                                   "key": "sliderFilterPanelFontSize"
@@ -5994,14 +6047,25 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterPanelRowGap"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterValueOffsetY"
                                 }
                               ],
                               "rowKeys": [
+                                "checkboxFilterShowNumbers",
+                                "checkboxFilterShowRangeText",
+                                "checkboxFilterShowValueNameLengths",
+                                "checkboxFilterShowValueSongDate",
+                                "checkboxFilterShowValueSongLength",
+                                "checkboxFilterShowValueOriginal",
                                 "sliderFilterPanelFontSize",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
-                                "sliderFilterPanelRowGap"
+                                "sliderFilterPanelRowGap",
+                                "sliderFilterValueOffsetY"
                               ],
                               "subgroups": []
                             }
@@ -6319,30 +6383,6 @@
                         }
                       },
                       {
-                        "type": "row",
-                        "key": "checkboxFilterIndividualArtists"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterShowValueNameLengths"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterShowValueSongDate"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterShowValueSongLength"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterShowValueOriginal"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderFilterValueOffsetY"
-                      },
-                      {
                         "type": "group",
                         "section": {
                           "key": "desktop:Panel Song Count",
@@ -6425,13 +6465,8 @@
                       "checkboxFilterNameLengths",
                       "checkboxFilterSongLength",
                       "checkboxFilterSongDate",
-                      "checkboxFilterClickToExit",
                       "checkboxFilterIndividualArtists",
-                      "checkboxFilterShowValueNameLengths",
-                      "checkboxFilterShowValueSongDate",
-                      "checkboxFilterShowValueSongLength",
-                      "checkboxFilterShowValueOriginal",
-                      "sliderFilterValueOffsetY"
+                      "checkboxFilterClickToExit"
                     ],
                     "subgroups": [
                       {
@@ -6523,14 +6558,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterShowNumbers"
-                          },
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterShowRangeText"
-                          },
-                          {
-                            "type": "row",
                             "key": "sliderFilterPanelWidth"
                           },
                           {
@@ -6564,6 +6591,30 @@
                               "items": [
                                 {
                                   "type": "row",
+                                  "key": "checkboxFilterShowNumbers"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowRangeText"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueNameLengths"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueSongDate"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueSongLength"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueOriginal"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelFontSize"
                                 },
                                 {
@@ -6581,14 +6632,25 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterPanelRowGap"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterValueOffsetY"
                                 }
                               ],
                               "rowKeys": [
+                                "checkboxFilterShowNumbers",
+                                "checkboxFilterShowRangeText",
+                                "checkboxFilterShowValueNameLengths",
+                                "checkboxFilterShowValueSongDate",
+                                "checkboxFilterShowValueSongLength",
+                                "checkboxFilterShowValueOriginal",
                                 "sliderFilterPanelFontSize",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
-                                "sliderFilterPanelRowGap"
+                                "sliderFilterPanelRowGap",
+                                "sliderFilterValueOffsetY"
                               ],
                               "subgroups": []
                             }
@@ -6597,8 +6659,6 @@
                         "rowKeys": [
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
-                          "checkboxFilterShowNumbers",
-                          "checkboxFilterShowRangeText",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
                           "sliderFilterPanelOffsetY",
@@ -6611,6 +6671,30 @@
                           {
                             "key": "desktop:New Group (24)",
                             "items": [
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowNumbers"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowRangeText"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueNameLengths"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongDate"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongLength"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueOriginal"
+                              },
                               {
                                 "type": "row",
                                 "key": "sliderFilterPanelFontSize"
@@ -6630,14 +6714,25 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterPanelRowGap"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueOffsetY"
                               }
                             ],
                             "rowKeys": [
+                              "checkboxFilterShowNumbers",
+                              "checkboxFilterShowRangeText",
+                              "checkboxFilterShowValueNameLengths",
+                              "checkboxFilterShowValueSongDate",
+                              "checkboxFilterShowValueSongLength",
+                              "checkboxFilterShowValueOriginal",
                               "sliderFilterPanelFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelRowGap"
+                              "sliderFilterPanelRowGap",
+                              "sliderFilterValueOffsetY"
                             ],
                             "subgroups": []
                           }
@@ -7016,6 +7111,147 @@
                         "subgroups": []
                       }
                     ]
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Play On Device",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "sliderDeviceIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDeviceIconOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDeviceIconOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDeviceEdgeOffset"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDeviceOffOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDeviceOnOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorDeviceIcon"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorDeviceOn"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxDeviceMatchVolume"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxDeviceKeepPlaying"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxDeviceMuteClips"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxDeviceRemember"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDevicePollSeconds"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxDeviceShowThisBrowser"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxDeviceShowVolume"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDeviceListRefresh"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxDevicePanelCloseOnOutside"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxDeviceCloseOnPick"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDevicePanelWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDevicePanelFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDevicePanelOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDevicePanelOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorDevicePanelBg"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDevicePanelBgOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDevicePanelBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorDevicePanelAccent"
+                      }
+                    ],
+                    "rowKeys": [
+                      "sliderDeviceIconSize",
+                      "sliderDeviceIconOffsetX",
+                      "sliderDeviceIconOffsetY",
+                      "sliderDeviceEdgeOffset",
+                      "sliderDeviceOffOpacity",
+                      "sliderDeviceOnOpacity",
+                      "colorDeviceIcon",
+                      "colorDeviceOn",
+                      "checkboxDeviceMatchVolume",
+                      "checkboxDeviceKeepPlaying",
+                      "checkboxDeviceMuteClips",
+                      "checkboxDeviceRemember",
+                      "sliderDevicePollSeconds",
+                      "checkboxDeviceShowThisBrowser",
+                      "checkboxDeviceShowVolume",
+                      "sliderDeviceListRefresh",
+                      "checkboxDevicePanelCloseOnOutside",
+                      "checkboxDeviceCloseOnPick",
+                      "sliderDevicePanelWidth",
+                      "sliderDevicePanelFontSize",
+                      "sliderDevicePanelOffsetX",
+                      "sliderDevicePanelOffsetY",
+                      "colorDevicePanelBg",
+                      "sliderDevicePanelBgOpacity",
+                      "sliderDevicePanelBlur",
+                      "colorDevicePanelAccent"
+                    ],
+                    "subgroups": []
                   }
                 },
                 {
@@ -8526,6 +8762,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxFilterIndividualArtists"
+                    },
+                    {
+                      "type": "row",
                       "key": "checkboxFilterClickToExit"
                     },
                     {
@@ -8625,14 +8865,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterShowNumbers"
-                          },
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterShowRangeText"
-                          },
-                          {
-                            "type": "row",
                             "key": "sliderFilterPanelWidth"
                           },
                           {
@@ -8666,6 +8898,30 @@
                               "items": [
                                 {
                                   "type": "row",
+                                  "key": "checkboxFilterShowNumbers"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowRangeText"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueNameLengths"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueSongDate"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueSongLength"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueOriginal"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelFontSize"
                                 },
                                 {
@@ -8683,14 +8939,25 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterPanelRowGap"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterValueOffsetY"
                                 }
                               ],
                               "rowKeys": [
+                                "checkboxFilterShowNumbers",
+                                "checkboxFilterShowRangeText",
+                                "checkboxFilterShowValueNameLengths",
+                                "checkboxFilterShowValueSongDate",
+                                "checkboxFilterShowValueSongLength",
+                                "checkboxFilterShowValueOriginal",
                                 "sliderFilterPanelFontSize",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
-                                "sliderFilterPanelRowGap"
+                                "sliderFilterPanelRowGap",
+                                "sliderFilterValueOffsetY"
                               ],
                               "subgroups": []
                             }
@@ -8699,8 +8966,6 @@
                         "rowKeys": [
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
-                          "checkboxFilterShowNumbers",
-                          "checkboxFilterShowRangeText",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
                           "sliderFilterPanelOffsetY",
@@ -8713,6 +8978,30 @@
                           {
                             "key": "desktop:New Group (24)",
                             "items": [
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowNumbers"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowRangeText"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueNameLengths"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongDate"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongLength"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueOriginal"
+                              },
                               {
                                 "type": "row",
                                 "key": "sliderFilterPanelFontSize"
@@ -8732,14 +9021,25 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterPanelRowGap"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueOffsetY"
                               }
                             ],
                             "rowKeys": [
+                              "checkboxFilterShowNumbers",
+                              "checkboxFilterShowRangeText",
+                              "checkboxFilterShowValueNameLengths",
+                              "checkboxFilterShowValueSongDate",
+                              "checkboxFilterShowValueSongLength",
+                              "checkboxFilterShowValueOriginal",
                               "sliderFilterPanelFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelRowGap"
+                              "sliderFilterPanelRowGap",
+                              "sliderFilterValueOffsetY"
                             ],
                             "subgroups": []
                           }
@@ -9057,30 +9357,6 @@
                       }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxFilterIndividualArtists"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterShowValueNameLengths"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterShowValueSongDate"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterShowValueSongLength"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterShowValueOriginal"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderFilterValueOffsetY"
-                    },
-                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Panel Song Count",
@@ -9163,13 +9439,8 @@
                     "checkboxFilterNameLengths",
                     "checkboxFilterSongLength",
                     "checkboxFilterSongDate",
-                    "checkboxFilterClickToExit",
                     "checkboxFilterIndividualArtists",
-                    "checkboxFilterShowValueNameLengths",
-                    "checkboxFilterShowValueSongDate",
-                    "checkboxFilterShowValueSongLength",
-                    "checkboxFilterShowValueOriginal",
-                    "sliderFilterValueOffsetY"
+                    "checkboxFilterClickToExit"
                   ],
                   "subgroups": [
                     {
@@ -9261,14 +9532,6 @@
                         },
                         {
                           "type": "row",
-                          "key": "checkboxFilterShowNumbers"
-                        },
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterShowRangeText"
-                        },
-                        {
-                          "type": "row",
                           "key": "sliderFilterPanelWidth"
                         },
                         {
@@ -9302,6 +9565,30 @@
                             "items": [
                               {
                                 "type": "row",
+                                "key": "checkboxFilterShowNumbers"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowRangeText"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueNameLengths"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongDate"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongLength"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueOriginal"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelFontSize"
                               },
                               {
@@ -9319,14 +9606,25 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterPanelRowGap"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueOffsetY"
                               }
                             ],
                             "rowKeys": [
+                              "checkboxFilterShowNumbers",
+                              "checkboxFilterShowRangeText",
+                              "checkboxFilterShowValueNameLengths",
+                              "checkboxFilterShowValueSongDate",
+                              "checkboxFilterShowValueSongLength",
+                              "checkboxFilterShowValueOriginal",
                               "sliderFilterPanelFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelRowGap"
+                              "sliderFilterPanelRowGap",
+                              "sliderFilterValueOffsetY"
                             ],
                             "subgroups": []
                           }
@@ -9335,8 +9633,6 @@
                       "rowKeys": [
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
-                        "checkboxFilterShowNumbers",
-                        "checkboxFilterShowRangeText",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
                         "sliderFilterPanelOffsetY",
@@ -9349,6 +9645,30 @@
                         {
                           "key": "desktop:New Group (24)",
                           "items": [
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowNumbers"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowRangeText"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueNameLengths"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueSongDate"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueSongLength"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueOriginal"
+                            },
                             {
                               "type": "row",
                               "key": "sliderFilterPanelFontSize"
@@ -9368,14 +9688,25 @@
                             {
                               "type": "row",
                               "key": "sliderFilterPanelRowGap"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterValueOffsetY"
                             }
                           ],
                           "rowKeys": [
+                            "checkboxFilterShowNumbers",
+                            "checkboxFilterShowRangeText",
+                            "checkboxFilterShowValueNameLengths",
+                            "checkboxFilterShowValueSongDate",
+                            "checkboxFilterShowValueSongLength",
+                            "checkboxFilterShowValueOriginal",
                             "sliderFilterPanelFontSize",
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
-                            "sliderFilterPanelRowGap"
+                            "sliderFilterPanelRowGap",
+                            "sliderFilterValueOffsetY"
                           ],
                           "subgroups": []
                         }
@@ -9754,6 +10085,144 @@
                       "subgroups": []
                     }
                   ]
+                },
+                {
+                  "key": "desktop:Play On Device",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceIconOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceOffOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceMatchVolume"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceKeepPlaying"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceMuteClips"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceRemember"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePollSeconds"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceShowThisBrowser"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceShowVolume"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceListRefresh"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDevicePanelCloseOnOutside"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceCloseOnPick"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDevicePanelBg"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelBgOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDevicePanelAccent"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderDeviceIconSize",
+                    "sliderDeviceIconOffsetX",
+                    "sliderDeviceIconOffsetY",
+                    "sliderDeviceEdgeOffset",
+                    "sliderDeviceOffOpacity",
+                    "sliderDeviceOnOpacity",
+                    "colorDeviceIcon",
+                    "colorDeviceOn",
+                    "checkboxDeviceMatchVolume",
+                    "checkboxDeviceKeepPlaying",
+                    "checkboxDeviceMuteClips",
+                    "checkboxDeviceRemember",
+                    "sliderDevicePollSeconds",
+                    "checkboxDeviceShowThisBrowser",
+                    "checkboxDeviceShowVolume",
+                    "sliderDeviceListRefresh",
+                    "checkboxDevicePanelCloseOnOutside",
+                    "checkboxDeviceCloseOnPick",
+                    "sliderDevicePanelWidth",
+                    "sliderDevicePanelFontSize",
+                    "sliderDevicePanelOffsetX",
+                    "sliderDevicePanelOffsetY",
+                    "colorDevicePanelBg",
+                    "sliderDevicePanelBgOpacity",
+                    "sliderDevicePanelBlur",
+                    "colorDevicePanelAccent"
+                  ],
+                  "subgroups": []
                 },
                 {
                   "key": "desktop:Song Data",
@@ -11257,147 +11726,6 @@
                   "subgroups": []
                 }
               ]
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "desktop:Play On Device",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "sliderDeviceIconSize"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDeviceIconOffsetX"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDeviceIconOffsetY"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDeviceEdgeOffset"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDeviceOffOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDeviceOnOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "colorDeviceIcon"
-                },
-                {
-                  "type": "row",
-                  "key": "colorDeviceOn"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxDeviceMatchVolume"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxDeviceKeepPlaying"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxDeviceMuteClips"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxDeviceRemember"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDevicePollSeconds"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxDeviceShowThisBrowser"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxDeviceShowVolume"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDeviceListRefresh"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxDevicePanelCloseOnOutside"
-                },
-                {
-                  "type": "row",
-                  "key": "checkboxDeviceCloseOnPick"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDevicePanelWidth"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDevicePanelFontSize"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDevicePanelOffsetX"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDevicePanelOffsetY"
-                },
-                {
-                  "type": "row",
-                  "key": "colorDevicePanelBg"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDevicePanelBgOpacity"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDevicePanelBlur"
-                },
-                {
-                  "type": "row",
-                  "key": "colorDevicePanelAccent"
-                }
-              ],
-              "rowKeys": [
-                "sliderDeviceIconSize",
-                "sliderDeviceIconOffsetX",
-                "sliderDeviceIconOffsetY",
-                "sliderDeviceEdgeOffset",
-                "sliderDeviceOffOpacity",
-                "sliderDeviceOnOpacity",
-                "colorDeviceIcon",
-                "colorDeviceOn",
-                "checkboxDeviceMatchVolume",
-                "checkboxDeviceKeepPlaying",
-                "checkboxDeviceMuteClips",
-                "checkboxDeviceRemember",
-                "sliderDevicePollSeconds",
-                "checkboxDeviceShowThisBrowser",
-                "checkboxDeviceShowVolume",
-                "sliderDeviceListRefresh",
-                "checkboxDevicePanelCloseOnOutside",
-                "checkboxDeviceCloseOnPick",
-                "sliderDevicePanelWidth",
-                "sliderDevicePanelFontSize",
-                "sliderDevicePanelOffsetX",
-                "sliderDevicePanelOffsetY",
-                "colorDevicePanelBg",
-                "sliderDevicePanelBgOpacity",
-                "sliderDevicePanelBlur",
-                "colorDevicePanelAccent"
-              ],
-              "subgroups": []
             }
           }
         ],
@@ -15101,6 +15429,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxFilterIndividualArtists"
+                    },
+                    {
+                      "type": "row",
                       "key": "checkboxFilterClickToExit"
                     },
                     {
@@ -15200,14 +15532,6 @@
                           },
                           {
                             "type": "row",
-                            "key": "checkboxFilterShowNumbers"
-                          },
-                          {
-                            "type": "row",
-                            "key": "checkboxFilterShowRangeText"
-                          },
-                          {
-                            "type": "row",
                             "key": "sliderFilterPanelWidth"
                           },
                           {
@@ -15241,6 +15565,30 @@
                               "items": [
                                 {
                                   "type": "row",
+                                  "key": "checkboxFilterShowNumbers"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowRangeText"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueNameLengths"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueSongDate"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueSongLength"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "checkboxFilterShowValueOriginal"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterPanelFontSize"
                                 },
                                 {
@@ -15258,14 +15606,25 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterPanelRowGap"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterValueOffsetY"
                                 }
                               ],
                               "rowKeys": [
+                                "checkboxFilterShowNumbers",
+                                "checkboxFilterShowRangeText",
+                                "checkboxFilterShowValueNameLengths",
+                                "checkboxFilterShowValueSongDate",
+                                "checkboxFilterShowValueSongLength",
+                                "checkboxFilterShowValueOriginal",
                                 "sliderFilterPanelFontSize",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelRowsOffsetY",
                                 "sliderFilterPanelIconOffsetY",
-                                "sliderFilterPanelRowGap"
+                                "sliderFilterPanelRowGap",
+                                "sliderFilterValueOffsetY"
                               ],
                               "subgroups": []
                             }
@@ -15274,8 +15633,6 @@
                         "rowKeys": [
                           "checkboxFilterPanelKeepVisible",
                           "checkboxFilterCloseOnOutside",
-                          "checkboxFilterShowNumbers",
-                          "checkboxFilterShowRangeText",
                           "sliderFilterPanelWidth",
                           "sliderFilterPanelOffsetX",
                           "sliderFilterPanelOffsetY",
@@ -15288,6 +15645,30 @@
                           {
                             "key": "desktop:New Group (24)",
                             "items": [
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowNumbers"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowRangeText"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueNameLengths"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongDate"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongLength"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueOriginal"
+                              },
                               {
                                 "type": "row",
                                 "key": "sliderFilterPanelFontSize"
@@ -15307,14 +15688,25 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterPanelRowGap"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueOffsetY"
                               }
                             ],
                             "rowKeys": [
+                              "checkboxFilterShowNumbers",
+                              "checkboxFilterShowRangeText",
+                              "checkboxFilterShowValueNameLengths",
+                              "checkboxFilterShowValueSongDate",
+                              "checkboxFilterShowValueSongLength",
+                              "checkboxFilterShowValueOriginal",
                               "sliderFilterPanelFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelRowGap"
+                              "sliderFilterPanelRowGap",
+                              "sliderFilterValueOffsetY"
                             ],
                             "subgroups": []
                           }
@@ -15632,30 +16024,6 @@
                       }
                     },
                     {
-                      "type": "row",
-                      "key": "checkboxFilterIndividualArtists"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterShowValueNameLengths"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterShowValueSongDate"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterShowValueSongLength"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxFilterShowValueOriginal"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderFilterValueOffsetY"
-                    },
-                    {
                       "type": "group",
                       "section": {
                         "key": "desktop:Panel Song Count",
@@ -15738,13 +16106,8 @@
                     "checkboxFilterNameLengths",
                     "checkboxFilterSongLength",
                     "checkboxFilterSongDate",
-                    "checkboxFilterClickToExit",
                     "checkboxFilterIndividualArtists",
-                    "checkboxFilterShowValueNameLengths",
-                    "checkboxFilterShowValueSongDate",
-                    "checkboxFilterShowValueSongLength",
-                    "checkboxFilterShowValueOriginal",
-                    "sliderFilterValueOffsetY"
+                    "checkboxFilterClickToExit"
                   ],
                   "subgroups": [
                     {
@@ -15836,14 +16199,6 @@
                         },
                         {
                           "type": "row",
-                          "key": "checkboxFilterShowNumbers"
-                        },
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterShowRangeText"
-                        },
-                        {
-                          "type": "row",
                           "key": "sliderFilterPanelWidth"
                         },
                         {
@@ -15877,6 +16232,30 @@
                             "items": [
                               {
                                 "type": "row",
+                                "key": "checkboxFilterShowNumbers"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowRangeText"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueNameLengths"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongDate"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongLength"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueOriginal"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelFontSize"
                               },
                               {
@@ -15894,14 +16273,25 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterPanelRowGap"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueOffsetY"
                               }
                             ],
                             "rowKeys": [
+                              "checkboxFilterShowNumbers",
+                              "checkboxFilterShowRangeText",
+                              "checkboxFilterShowValueNameLengths",
+                              "checkboxFilterShowValueSongDate",
+                              "checkboxFilterShowValueSongLength",
+                              "checkboxFilterShowValueOriginal",
                               "sliderFilterPanelFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelRowGap"
+                              "sliderFilterPanelRowGap",
+                              "sliderFilterValueOffsetY"
                             ],
                             "subgroups": []
                           }
@@ -15910,8 +16300,6 @@
                       "rowKeys": [
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
-                        "checkboxFilterShowNumbers",
-                        "checkboxFilterShowRangeText",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
                         "sliderFilterPanelOffsetY",
@@ -15924,6 +16312,30 @@
                         {
                           "key": "desktop:New Group (24)",
                           "items": [
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowNumbers"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowRangeText"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueNameLengths"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueSongDate"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueSongLength"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueOriginal"
+                            },
                             {
                               "type": "row",
                               "key": "sliderFilterPanelFontSize"
@@ -15943,14 +16355,25 @@
                             {
                               "type": "row",
                               "key": "sliderFilterPanelRowGap"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterValueOffsetY"
                             }
                           ],
                           "rowKeys": [
+                            "checkboxFilterShowNumbers",
+                            "checkboxFilterShowRangeText",
+                            "checkboxFilterShowValueNameLengths",
+                            "checkboxFilterShowValueSongDate",
+                            "checkboxFilterShowValueSongLength",
+                            "checkboxFilterShowValueOriginal",
                             "sliderFilterPanelFontSize",
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
-                            "sliderFilterPanelRowGap"
+                            "sliderFilterPanelRowGap",
+                            "sliderFilterValueOffsetY"
                           ],
                           "subgroups": []
                         }
@@ -16329,6 +16752,147 @@
                       "subgroups": []
                     }
                   ]
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Play On Device",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceIconOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceOffOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDeviceOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceMatchVolume"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceKeepPlaying"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceMuteClips"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceRemember"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePollSeconds"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceShowThisBrowser"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceShowVolume"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDeviceListRefresh"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDevicePanelCloseOnOutside"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxDeviceCloseOnPick"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDevicePanelBg"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelBgOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDevicePanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorDevicePanelAccent"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderDeviceIconSize",
+                    "sliderDeviceIconOffsetX",
+                    "sliderDeviceIconOffsetY",
+                    "sliderDeviceEdgeOffset",
+                    "sliderDeviceOffOpacity",
+                    "sliderDeviceOnOpacity",
+                    "colorDeviceIcon",
+                    "colorDeviceOn",
+                    "checkboxDeviceMatchVolume",
+                    "checkboxDeviceKeepPlaying",
+                    "checkboxDeviceMuteClips",
+                    "checkboxDeviceRemember",
+                    "sliderDevicePollSeconds",
+                    "checkboxDeviceShowThisBrowser",
+                    "checkboxDeviceShowVolume",
+                    "sliderDeviceListRefresh",
+                    "checkboxDevicePanelCloseOnOutside",
+                    "checkboxDeviceCloseOnPick",
+                    "sliderDevicePanelWidth",
+                    "sliderDevicePanelFontSize",
+                    "sliderDevicePanelOffsetX",
+                    "sliderDevicePanelOffsetY",
+                    "colorDevicePanelBg",
+                    "sliderDevicePanelBgOpacity",
+                    "sliderDevicePanelBlur",
+                    "colorDevicePanelAccent"
+                  ],
+                  "subgroups": []
                 }
               },
               {
@@ -17839,6 +18403,10 @@
                   },
                   {
                     "type": "row",
+                    "key": "checkboxFilterIndividualArtists"
+                  },
+                  {
+                    "type": "row",
                     "key": "checkboxFilterClickToExit"
                   },
                   {
@@ -17938,14 +18506,6 @@
                         },
                         {
                           "type": "row",
-                          "key": "checkboxFilterShowNumbers"
-                        },
-                        {
-                          "type": "row",
-                          "key": "checkboxFilterShowRangeText"
-                        },
-                        {
-                          "type": "row",
                           "key": "sliderFilterPanelWidth"
                         },
                         {
@@ -17979,6 +18539,30 @@
                             "items": [
                               {
                                 "type": "row",
+                                "key": "checkboxFilterShowNumbers"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowRangeText"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueNameLengths"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongDate"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueSongLength"
+                              },
+                              {
+                                "type": "row",
+                                "key": "checkboxFilterShowValueOriginal"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterPanelFontSize"
                               },
                               {
@@ -17996,14 +18580,25 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterPanelRowGap"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterValueOffsetY"
                               }
                             ],
                             "rowKeys": [
+                              "checkboxFilterShowNumbers",
+                              "checkboxFilterShowRangeText",
+                              "checkboxFilterShowValueNameLengths",
+                              "checkboxFilterShowValueSongDate",
+                              "checkboxFilterShowValueSongLength",
+                              "checkboxFilterShowValueOriginal",
                               "sliderFilterPanelFontSize",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelRowsOffsetY",
                               "sliderFilterPanelIconOffsetY",
-                              "sliderFilterPanelRowGap"
+                              "sliderFilterPanelRowGap",
+                              "sliderFilterValueOffsetY"
                             ],
                             "subgroups": []
                           }
@@ -18012,8 +18607,6 @@
                       "rowKeys": [
                         "checkboxFilterPanelKeepVisible",
                         "checkboxFilterCloseOnOutside",
-                        "checkboxFilterShowNumbers",
-                        "checkboxFilterShowRangeText",
                         "sliderFilterPanelWidth",
                         "sliderFilterPanelOffsetX",
                         "sliderFilterPanelOffsetY",
@@ -18026,6 +18619,30 @@
                         {
                           "key": "desktop:New Group (24)",
                           "items": [
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowNumbers"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowRangeText"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueNameLengths"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueSongDate"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueSongLength"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueOriginal"
+                            },
                             {
                               "type": "row",
                               "key": "sliderFilterPanelFontSize"
@@ -18045,14 +18662,25 @@
                             {
                               "type": "row",
                               "key": "sliderFilterPanelRowGap"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterValueOffsetY"
                             }
                           ],
                           "rowKeys": [
+                            "checkboxFilterShowNumbers",
+                            "checkboxFilterShowRangeText",
+                            "checkboxFilterShowValueNameLengths",
+                            "checkboxFilterShowValueSongDate",
+                            "checkboxFilterShowValueSongLength",
+                            "checkboxFilterShowValueOriginal",
                             "sliderFilterPanelFontSize",
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
-                            "sliderFilterPanelRowGap"
+                            "sliderFilterPanelRowGap",
+                            "sliderFilterValueOffsetY"
                           ],
                           "subgroups": []
                         }
@@ -18370,30 +18998,6 @@
                     }
                   },
                   {
-                    "type": "row",
-                    "key": "checkboxFilterIndividualArtists"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxFilterShowValueNameLengths"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxFilterShowValueSongDate"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxFilterShowValueSongLength"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxFilterShowValueOriginal"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderFilterValueOffsetY"
-                  },
-                  {
                     "type": "group",
                     "section": {
                       "key": "desktop:Panel Song Count",
@@ -18476,13 +19080,8 @@
                   "checkboxFilterNameLengths",
                   "checkboxFilterSongLength",
                   "checkboxFilterSongDate",
-                  "checkboxFilterClickToExit",
                   "checkboxFilterIndividualArtists",
-                  "checkboxFilterShowValueNameLengths",
-                  "checkboxFilterShowValueSongDate",
-                  "checkboxFilterShowValueSongLength",
-                  "checkboxFilterShowValueOriginal",
-                  "sliderFilterValueOffsetY"
+                  "checkboxFilterClickToExit"
                 ],
                 "subgroups": [
                   {
@@ -18574,14 +19173,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxFilterShowNumbers"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxFilterShowRangeText"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderFilterPanelWidth"
                       },
                       {
@@ -18615,6 +19206,30 @@
                           "items": [
                             {
                               "type": "row",
+                              "key": "checkboxFilterShowNumbers"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowRangeText"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueNameLengths"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueSongDate"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueSongLength"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxFilterShowValueOriginal"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterPanelFontSize"
                             },
                             {
@@ -18632,14 +19247,25 @@
                             {
                               "type": "row",
                               "key": "sliderFilterPanelRowGap"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterValueOffsetY"
                             }
                           ],
                           "rowKeys": [
+                            "checkboxFilterShowNumbers",
+                            "checkboxFilterShowRangeText",
+                            "checkboxFilterShowValueNameLengths",
+                            "checkboxFilterShowValueSongDate",
+                            "checkboxFilterShowValueSongLength",
+                            "checkboxFilterShowValueOriginal",
                             "sliderFilterPanelFontSize",
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelRowsOffsetY",
                             "sliderFilterPanelIconOffsetY",
-                            "sliderFilterPanelRowGap"
+                            "sliderFilterPanelRowGap",
+                            "sliderFilterValueOffsetY"
                           ],
                           "subgroups": []
                         }
@@ -18648,8 +19274,6 @@
                     "rowKeys": [
                       "checkboxFilterPanelKeepVisible",
                       "checkboxFilterCloseOnOutside",
-                      "checkboxFilterShowNumbers",
-                      "checkboxFilterShowRangeText",
                       "sliderFilterPanelWidth",
                       "sliderFilterPanelOffsetX",
                       "sliderFilterPanelOffsetY",
@@ -18662,6 +19286,30 @@
                       {
                         "key": "desktop:New Group (24)",
                         "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterShowNumbers"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterShowRangeText"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterShowValueNameLengths"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterShowValueSongDate"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterShowValueSongLength"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxFilterShowValueOriginal"
+                          },
                           {
                             "type": "row",
                             "key": "sliderFilterPanelFontSize"
@@ -18681,14 +19329,25 @@
                           {
                             "type": "row",
                             "key": "sliderFilterPanelRowGap"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterValueOffsetY"
                           }
                         ],
                         "rowKeys": [
+                          "checkboxFilterShowNumbers",
+                          "checkboxFilterShowRangeText",
+                          "checkboxFilterShowValueNameLengths",
+                          "checkboxFilterShowValueSongDate",
+                          "checkboxFilterShowValueSongLength",
+                          "checkboxFilterShowValueOriginal",
                           "sliderFilterPanelFontSize",
                           "sliderFilterPanelIconSize",
                           "sliderFilterPanelRowsOffsetY",
                           "sliderFilterPanelIconOffsetY",
-                          "sliderFilterPanelRowGap"
+                          "sliderFilterPanelRowGap",
+                          "sliderFilterValueOffsetY"
                         ],
                         "subgroups": []
                       }
@@ -19067,6 +19726,144 @@
                     "subgroups": []
                   }
                 ]
+              },
+              {
+                "key": "desktop:Play On Device",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderDeviceIconSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDeviceIconOffsetX"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDeviceIconOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDeviceEdgeOffset"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDeviceOffOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDeviceOnOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorDeviceIcon"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorDeviceOn"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxDeviceMatchVolume"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxDeviceKeepPlaying"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxDeviceMuteClips"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxDeviceRemember"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDevicePollSeconds"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxDeviceShowThisBrowser"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxDeviceShowVolume"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDeviceListRefresh"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxDevicePanelCloseOnOutside"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxDeviceCloseOnPick"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDevicePanelWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDevicePanelFontSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDevicePanelOffsetX"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDevicePanelOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorDevicePanelBg"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDevicePanelBgOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDevicePanelBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorDevicePanelAccent"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderDeviceIconSize",
+                  "sliderDeviceIconOffsetX",
+                  "sliderDeviceIconOffsetY",
+                  "sliderDeviceEdgeOffset",
+                  "sliderDeviceOffOpacity",
+                  "sliderDeviceOnOpacity",
+                  "colorDeviceIcon",
+                  "colorDeviceOn",
+                  "checkboxDeviceMatchVolume",
+                  "checkboxDeviceKeepPlaying",
+                  "checkboxDeviceMuteClips",
+                  "checkboxDeviceRemember",
+                  "sliderDevicePollSeconds",
+                  "checkboxDeviceShowThisBrowser",
+                  "checkboxDeviceShowVolume",
+                  "sliderDeviceListRefresh",
+                  "checkboxDevicePanelCloseOnOutside",
+                  "checkboxDeviceCloseOnPick",
+                  "sliderDevicePanelWidth",
+                  "sliderDevicePanelFontSize",
+                  "sliderDevicePanelOffsetX",
+                  "sliderDevicePanelOffsetY",
+                  "colorDevicePanelBg",
+                  "sliderDevicePanelBgOpacity",
+                  "sliderDevicePanelBlur",
+                  "colorDevicePanelAccent"
+                ],
+                "subgroups": []
               },
               {
                 "key": "desktop:Song Data",
@@ -20561,144 +21358,6 @@
                 "subgroups": []
               }
             ]
-          },
-          {
-            "key": "desktop:Play On Device",
-            "items": [
-              {
-                "type": "row",
-                "key": "sliderDeviceIconSize"
-              },
-              {
-                "type": "row",
-                "key": "sliderDeviceIconOffsetX"
-              },
-              {
-                "type": "row",
-                "key": "sliderDeviceIconOffsetY"
-              },
-              {
-                "type": "row",
-                "key": "sliderDeviceEdgeOffset"
-              },
-              {
-                "type": "row",
-                "key": "sliderDeviceOffOpacity"
-              },
-              {
-                "type": "row",
-                "key": "sliderDeviceOnOpacity"
-              },
-              {
-                "type": "row",
-                "key": "colorDeviceIcon"
-              },
-              {
-                "type": "row",
-                "key": "colorDeviceOn"
-              },
-              {
-                "type": "row",
-                "key": "checkboxDeviceMatchVolume"
-              },
-              {
-                "type": "row",
-                "key": "checkboxDeviceKeepPlaying"
-              },
-              {
-                "type": "row",
-                "key": "checkboxDeviceMuteClips"
-              },
-              {
-                "type": "row",
-                "key": "checkboxDeviceRemember"
-              },
-              {
-                "type": "row",
-                "key": "sliderDevicePollSeconds"
-              },
-              {
-                "type": "row",
-                "key": "checkboxDeviceShowThisBrowser"
-              },
-              {
-                "type": "row",
-                "key": "checkboxDeviceShowVolume"
-              },
-              {
-                "type": "row",
-                "key": "sliderDeviceListRefresh"
-              },
-              {
-                "type": "row",
-                "key": "checkboxDevicePanelCloseOnOutside"
-              },
-              {
-                "type": "row",
-                "key": "checkboxDeviceCloseOnPick"
-              },
-              {
-                "type": "row",
-                "key": "sliderDevicePanelWidth"
-              },
-              {
-                "type": "row",
-                "key": "sliderDevicePanelFontSize"
-              },
-              {
-                "type": "row",
-                "key": "sliderDevicePanelOffsetX"
-              },
-              {
-                "type": "row",
-                "key": "sliderDevicePanelOffsetY"
-              },
-              {
-                "type": "row",
-                "key": "colorDevicePanelBg"
-              },
-              {
-                "type": "row",
-                "key": "sliderDevicePanelBgOpacity"
-              },
-              {
-                "type": "row",
-                "key": "sliderDevicePanelBlur"
-              },
-              {
-                "type": "row",
-                "key": "colorDevicePanelAccent"
-              }
-            ],
-            "rowKeys": [
-              "sliderDeviceIconSize",
-              "sliderDeviceIconOffsetX",
-              "sliderDeviceIconOffsetY",
-              "sliderDeviceEdgeOffset",
-              "sliderDeviceOffOpacity",
-              "sliderDeviceOnOpacity",
-              "colorDeviceIcon",
-              "colorDeviceOn",
-              "checkboxDeviceMatchVolume",
-              "checkboxDeviceKeepPlaying",
-              "checkboxDeviceMuteClips",
-              "checkboxDeviceRemember",
-              "sliderDevicePollSeconds",
-              "checkboxDeviceShowThisBrowser",
-              "checkboxDeviceShowVolume",
-              "sliderDeviceListRefresh",
-              "checkboxDevicePanelCloseOnOutside",
-              "checkboxDeviceCloseOnPick",
-              "sliderDevicePanelWidth",
-              "sliderDevicePanelFontSize",
-              "sliderDevicePanelOffsetX",
-              "sliderDevicePanelOffsetY",
-              "colorDevicePanelBg",
-              "sliderDevicePanelBgOpacity",
-              "sliderDevicePanelBlur",
-              "colorDevicePanelAccent"
-            ],
-            "subgroups": []
           }
         ]
       },
@@ -45961,7 +46620,7 @@
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
-    "desktop:Visibility / Render Order": false,
+    "desktop:Visibility / Render Order": true,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -45980,7 +46639,7 @@
     "desktop:New Group (38)": true,
     "desktop:New Group (39)": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": true,
+    "desktop:New Group (7)": false,
     "desktop:Volume Button": true,
     "desktop:New Group (5)": true,
     "desktop:New Group (8)": true,
@@ -45999,11 +46658,11 @@
     "desktop:New Group (14)": true,
     "desktop:New Group (15)": true,
     "desktop:Shuffle Button Animation": true,
-    "desktop:Filter Button": true,
+    "desktop:Filter Button": false,
     "desktop:New Group (30)": true,
     "desktop:New Group (29)": true,
-    "desktop:New Group (19)": true,
-    "desktop:New Group (24)": true,
+    "desktop:New Group (19)": false,
+    "desktop:New Group (24)": false,
     "desktop:New Group (18)": true,
     "desktop:New Group (23)": true,
     "desktop:New Group (20)": true,
@@ -46013,6 +46672,7 @@
     "desktop:New Group (16)": true,
     "desktop:Panel Song Count": true,
     "desktop:Panel": true,
+    "desktop:Play On Device": true,
     "desktop:Song Data": true,
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
@@ -46030,7 +46690,6 @@
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
     "desktop:Filter Panel Shadow": true,
-    "desktop:Play On Device": false,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
@@ -46601,7 +47260,7 @@
     "landscape:Start Button Animation": null,
     "landscape:Start Button": null,
     "landscape:Startup": null,
-    "desktop:New Group (7)": "AUDIO BUTTONS",
+    "desktop:New Group (7)": "BUTTONS",
     "mobile:New Group (7)": "AUDIO BUTTONS",
     "landscape:New Group (7)": "AUDIO BUTTONS",
     "buttonRunStartup": null,
@@ -47224,7 +47883,8 @@
     "desktop:New Group (36)",
     "desktop:New Group (39)",
     "desktop:New Group (38)",
-    "desktop:New Group (37)"
+    "desktop:New Group (37)",
+    "desktop:Filter Button"
   ],
   "lockedGroups": [
     "desktop:Dev Panel",
