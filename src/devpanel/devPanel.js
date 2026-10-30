@@ -7298,6 +7298,93 @@
         exportCurrentBtn.style.marginTop = '4px';
         exportCurrentBtn.addEventListener('click', exportDevPanelSettings);
         container.appendChild(exportCurrentBtn);
+        // Import Settings - the mirror of Export Current Settings above,
+        // direct request (2026-10-30): reads back a .json file produced
+        // by Export Current Settings, so an OFFLINE build can import
+        // settings captured from an ONLINE one with no clipboard access
+        // needed (this is a plain file round-trip, same as Export above -
+        // the generic list-picker's own clipboard-based exportable/
+        // importable flags, CLAUDE.md §12r, were never wired up for this
+        // control either, see buildSavedDevSettingsListPicker()'s own
+        // ctrl object above, which sets neither).
+        //
+        // Validates before applying, per direct request ("Add an error
+        // message if settings are missing or there are unrecognized
+        // settings or whatever") - applyControlValues() ([JS-13] above)
+        // already silently skips any control id not present in the
+        // current DOM, which is correct tolerance for ordinary cross-
+        // version drift, but it gives the user no way to tell afterward
+        // that anything was actually skipped. This surfaces that instead
+        // of changing the underlying tolerant-apply behavior.
+        //
+        // Ported verbatim from the canonical TEMPLATE_DEV_PANEL.html
+        // (CLAUDE.md §12) - this project's own buildSavedDevSettingsListPicker()
+        // was byte-identical to the template's up to this point.
+        const importStatusEl = document.createElement('div');
+        importStatusEl.id = 'devImportSettingsStatus';
+        importStatusEl.className = 'dev-list-picker-default-indicator';
+        const importFileInput = document.createElement('input');
+        importFileInput.type = 'file';
+        importFileInput.accept = '.json,application/json';
+        importFileInput.style.display = 'none';
+        importFileInput.addEventListener('change', () => {
+            const file = importFileInput.files && importFileInput.files[0];
+            importFileInput.value = '';
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                let state;
+                try {
+                    state = JSON.parse(reader.result);
+                } catch (e) {
+                    importStatusEl.textContent = 'Import failed: not valid JSON (' + e.message + ').';
+                    importStatusEl.style.color = '#ff6b6b';
+                    return;
+                }
+                if (!state || typeof state !== 'object' || Array.isArray(state)) {
+                    importStatusEl.textContent = 'Import failed: file is not a dev panel settings export.';
+                    importStatusEl.style.color = '#ff6b6b';
+                    return;
+                }
+                const KNOWN_TOP_LEVEL_KEYS = ['controls', 'layout', 'devPanelStyle', 'mobileDevPanelStyle',
+                    'landscapeDevPanelStyle', 'sectionOrder', 'sectionCollapseState', 'devTextOverrides',
+                    'devTextOverridesManual', 'lockedGroups', 'lockedSliderBounds', 'textEditModeEnabled',
+                    'hotkeys', 'devVisibility', 'devIndependence', 'devDeviceValues'];
+                if (!KNOWN_TOP_LEVEL_KEYS.some(k => k in state)) {
+                    importStatusEl.textContent = 'Import failed: file does not look like a dev panel settings export (no recognized fields).';
+                    importStatusEl.style.color = '#ff6b6b';
+                    return;
+                }
+                const knownIds = new Set();
+                DEV_PANEL_REGISTERED_ARRAYS.forEach(({ array }) => array.forEach(ctrl => knownIds.add(ctrl.id)));
+                const importedIds = Object.keys(state.controls || {});
+                const unrecognized = importedIds.filter(id => !knownIds.has(id));
+                const missing = Array.from(knownIds).filter(id => !importedIds.includes(id));
+                applyFullDevPanelState(state);
+                activeDevSettingsSetName = null;
+                updateActiveDevSettingsIndicator();
+                renderAllHotkeyBadges();
+                const parts = ['Imported.'];
+                if (unrecognized.length) parts.push(unrecognized.length + ' unrecognized setting' + (unrecognized.length === 1 ? '' : 's') + ' ignored (' + unrecognized.slice(0, 5).join(', ') + (unrecognized.length > 5 ? ', ...' : '') + ').');
+                if (missing.length) parts.push(missing.length + ' current setting' + (missing.length === 1 ? '' : 's') + ' not found in the file, left unchanged.');
+                importStatusEl.textContent = parts.join(' ');
+                importStatusEl.style.color = (unrecognized.length || missing.length) ? '#e0b84a' : '';
+            };
+            reader.onerror = () => {
+                importStatusEl.textContent = 'Import failed: could not read the file.';
+                importStatusEl.style.color = '#ff6b6b';
+            };
+            reader.readAsText(file);
+        });
+        const importBtn = document.createElement('button');
+        importBtn.type = 'button';
+        importBtn.textContent = 'Import Settings';
+        importBtn.className = 'dev-action-button';
+        importBtn.style.marginTop = '4px';
+        importBtn.addEventListener('click', () => importFileInput.click());
+        container.appendChild(importBtn);
+        container.appendChild(importFileInput);
+        container.appendChild(importStatusEl);
         updateActiveDevSettingsIndicator();
     }
 
