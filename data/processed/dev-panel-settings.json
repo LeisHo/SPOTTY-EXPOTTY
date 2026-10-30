@@ -6535,6 +6535,10 @@
                                   },
                                   {
                                     "type": "row",
+                                    "key": "sliderFilterValueLetterSpacing"
+                                  },
+                                  {
+                                    "type": "row",
                                     "key": "sliderFilterValueOffsetY"
                                   },
                                   {
@@ -6544,6 +6548,10 @@
                                   {
                                     "type": "row",
                                     "key": "sliderFilterMinMaxFontSize"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterMinMaxLetterSpacing"
                                   },
                                   {
                                     "type": "row",
@@ -6576,9 +6584,11 @@
                                   "checkboxFilterMinMaxBold",
                                   "sliderFilterPanelFontSize",
                                   "sliderFilterValueFontSize",
+                                  "sliderFilterValueLetterSpacing",
                                   "sliderFilterValueOffsetY",
                                   "sliderFilterMinMaxOffsetY",
                                   "sliderFilterMinMaxFontSize",
+                                  "sliderFilterMinMaxLetterSpacing",
                                   "sliderFilterPanelIconSize",
                                   "sliderFilterPanelIconOffsetY",
                                   "sliderFilterSlidersOffsetY",
@@ -6757,6 +6767,10 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "sliderFilterValueLetterSpacing"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterValueOffsetY"
                                 },
                                 {
@@ -6766,6 +6780,10 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterMinMaxFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxLetterSpacing"
                                 },
                                 {
                                   "type": "row",
@@ -6798,9 +6816,11 @@
                                 "checkboxFilterMinMaxBold",
                                 "sliderFilterPanelFontSize",
                                 "sliderFilterValueFontSize",
+                                "sliderFilterValueLetterSpacing",
                                 "sliderFilterValueOffsetY",
                                 "sliderFilterMinMaxOffsetY",
                                 "sliderFilterMinMaxFontSize",
+                                "sliderFilterMinMaxLetterSpacing",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelIconOffsetY",
                                 "sliderFilterSlidersOffsetY",
@@ -7495,6 +7515,10 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "sliderFilterValueLetterSpacing"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterValueOffsetY"
                                 },
                                 {
@@ -7504,6 +7528,10 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterMinMaxFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxLetterSpacing"
                                 },
                                 {
                                   "type": "row",
@@ -7536,9 +7564,11 @@
                                 "checkboxFilterMinMaxBold",
                                 "sliderFilterPanelFontSize",
                                 "sliderFilterValueFontSize",
+                                "sliderFilterValueLetterSpacing",
                                 "sliderFilterValueOffsetY",
                                 "sliderFilterMinMaxOffsetY",
                                 "sliderFilterMinMaxFontSize",
+                                "sliderFilterMinMaxLetterSpacing",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelIconOffsetY",
                                 "sliderFilterSlidersOffsetY",
@@ -7717,6 +7747,10 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterValueLetterSpacing"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterValueOffsetY"
                               },
                               {
@@ -7726,6 +7760,10 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterMinMaxFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxLetterSpacing"
                               },
                               {
                                 "type": "row",
@@ -7758,9 +7796,11 @@
                               "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
                               "sliderFilterValueFontSize",
+                              "sliderFilterValueLetterSpacing",
                               "sliderFilterValueOffsetY",
                               "sliderFilterMinMaxOffsetY",
                               "sliderFilterMinMaxFontSize",
+                              "sliderFilterMinMaxLetterSpacing",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelIconOffsetY",
                               "sliderFilterSlidersOffsetY",
@@ -10095,6 +10135,10 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "sliderFilterValueLetterSpacing"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterValueOffsetY"
                                 },
                                 {
@@ -10104,6 +10148,10 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterMinMaxFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxLetterSpacing"
                                 },
                                 {
                                   "type": "row",
@@ -10136,9 +10184,11 @@
                                 "checkboxFilterMinMaxBold",
                                 "sliderFilterPanelFontSize",
                                 "sliderFilterValueFontSize",
+                                "sliderFilterValueLetterSpacing",
                                 "sliderFilterValueOffsetY",
                                 "sliderFilterMinMaxOffsetY",
                                 "sliderFilterMinMaxFontSize",
+                                "sliderFilterMinMaxLetterSpacing",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelIconOffsetY",
                                 "sliderFilterSlidersOffsetY",
@@ -10317,6 +10367,10 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterValueLetterSpacing"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterValueOffsetY"
                               },
                               {
@@ -10326,6 +10380,10 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterMinMaxFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxLetterSpacing"
                               },
                               {
                                 "type": "row",
@@ -10358,9 +10416,11 @@
                               "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
                               "sliderFilterValueFontSize",
+                              "sliderFilterValueLetterSpacing",
                               "sliderFilterValueOffsetY",
                               "sliderFilterMinMaxOffsetY",
                               "sliderFilterMinMaxFontSize",
+                              "sliderFilterMinMaxLetterSpacing",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelIconOffsetY",
                               "sliderFilterSlidersOffsetY",
@@ -11055,6 +11115,10 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterValueLetterSpacing"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterValueOffsetY"
                               },
                               {
@@ -11064,6 +11128,10 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterMinMaxFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxLetterSpacing"
                               },
                               {
                                 "type": "row",
@@ -11096,9 +11164,11 @@
                               "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
                               "sliderFilterValueFontSize",
+                              "sliderFilterValueLetterSpacing",
                               "sliderFilterValueOffsetY",
                               "sliderFilterMinMaxOffsetY",
                               "sliderFilterMinMaxFontSize",
+                              "sliderFilterMinMaxLetterSpacing",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelIconOffsetY",
                               "sliderFilterSlidersOffsetY",
@@ -11277,6 +11347,10 @@
                             },
                             {
                               "type": "row",
+                              "key": "sliderFilterValueLetterSpacing"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterValueOffsetY"
                             },
                             {
@@ -11286,6 +11360,10 @@
                             {
                               "type": "row",
                               "key": "sliderFilterMinMaxFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxLetterSpacing"
                             },
                             {
                               "type": "row",
@@ -11318,9 +11396,11 @@
                             "checkboxFilterMinMaxBold",
                             "sliderFilterPanelFontSize",
                             "sliderFilterValueFontSize",
+                            "sliderFilterValueLetterSpacing",
                             "sliderFilterValueOffsetY",
                             "sliderFilterMinMaxOffsetY",
                             "sliderFilterMinMaxFontSize",
+                            "sliderFilterMinMaxLetterSpacing",
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelIconOffsetY",
                             "sliderFilterSlidersOffsetY",
@@ -17360,6 +17440,10 @@
                                 },
                                 {
                                   "type": "row",
+                                  "key": "sliderFilterValueLetterSpacing"
+                                },
+                                {
+                                  "type": "row",
                                   "key": "sliderFilterValueOffsetY"
                                 },
                                 {
@@ -17369,6 +17453,10 @@
                                 {
                                   "type": "row",
                                   "key": "sliderFilterMinMaxFontSize"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterMinMaxLetterSpacing"
                                 },
                                 {
                                   "type": "row",
@@ -17401,9 +17489,11 @@
                                 "checkboxFilterMinMaxBold",
                                 "sliderFilterPanelFontSize",
                                 "sliderFilterValueFontSize",
+                                "sliderFilterValueLetterSpacing",
                                 "sliderFilterValueOffsetY",
                                 "sliderFilterMinMaxOffsetY",
                                 "sliderFilterMinMaxFontSize",
+                                "sliderFilterMinMaxLetterSpacing",
                                 "sliderFilterPanelIconSize",
                                 "sliderFilterPanelIconOffsetY",
                                 "sliderFilterSlidersOffsetY",
@@ -17582,6 +17672,10 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterValueLetterSpacing"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterValueOffsetY"
                               },
                               {
@@ -17591,6 +17685,10 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterMinMaxFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxLetterSpacing"
                               },
                               {
                                 "type": "row",
@@ -17623,9 +17721,11 @@
                               "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
                               "sliderFilterValueFontSize",
+                              "sliderFilterValueLetterSpacing",
                               "sliderFilterValueOffsetY",
                               "sliderFilterMinMaxOffsetY",
                               "sliderFilterMinMaxFontSize",
+                              "sliderFilterMinMaxLetterSpacing",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelIconOffsetY",
                               "sliderFilterSlidersOffsetY",
@@ -18320,6 +18420,10 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterValueLetterSpacing"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterValueOffsetY"
                               },
                               {
@@ -18329,6 +18433,10 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterMinMaxFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxLetterSpacing"
                               },
                               {
                                 "type": "row",
@@ -18361,9 +18469,11 @@
                               "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
                               "sliderFilterValueFontSize",
+                              "sliderFilterValueLetterSpacing",
                               "sliderFilterValueOffsetY",
                               "sliderFilterMinMaxOffsetY",
                               "sliderFilterMinMaxFontSize",
+                              "sliderFilterMinMaxLetterSpacing",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelIconOffsetY",
                               "sliderFilterSlidersOffsetY",
@@ -18542,6 +18652,10 @@
                             },
                             {
                               "type": "row",
+                              "key": "sliderFilterValueLetterSpacing"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterValueOffsetY"
                             },
                             {
@@ -18551,6 +18665,10 @@
                             {
                               "type": "row",
                               "key": "sliderFilterMinMaxFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxLetterSpacing"
                             },
                             {
                               "type": "row",
@@ -18583,9 +18701,11 @@
                             "checkboxFilterMinMaxBold",
                             "sliderFilterPanelFontSize",
                             "sliderFilterValueFontSize",
+                            "sliderFilterValueLetterSpacing",
                             "sliderFilterValueOffsetY",
                             "sliderFilterMinMaxOffsetY",
                             "sliderFilterMinMaxFontSize",
+                            "sliderFilterMinMaxLetterSpacing",
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelIconOffsetY",
                             "sliderFilterSlidersOffsetY",
@@ -20920,6 +21040,10 @@
                               },
                               {
                                 "type": "row",
+                                "key": "sliderFilterValueLetterSpacing"
+                              },
+                              {
+                                "type": "row",
                                 "key": "sliderFilterValueOffsetY"
                               },
                               {
@@ -20929,6 +21053,10 @@
                               {
                                 "type": "row",
                                 "key": "sliderFilterMinMaxFontSize"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterMinMaxLetterSpacing"
                               },
                               {
                                 "type": "row",
@@ -20961,9 +21089,11 @@
                               "checkboxFilterMinMaxBold",
                               "sliderFilterPanelFontSize",
                               "sliderFilterValueFontSize",
+                              "sliderFilterValueLetterSpacing",
                               "sliderFilterValueOffsetY",
                               "sliderFilterMinMaxOffsetY",
                               "sliderFilterMinMaxFontSize",
+                              "sliderFilterMinMaxLetterSpacing",
                               "sliderFilterPanelIconSize",
                               "sliderFilterPanelIconOffsetY",
                               "sliderFilterSlidersOffsetY",
@@ -21142,6 +21272,10 @@
                             },
                             {
                               "type": "row",
+                              "key": "sliderFilterValueLetterSpacing"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterValueOffsetY"
                             },
                             {
@@ -21151,6 +21285,10 @@
                             {
                               "type": "row",
                               "key": "sliderFilterMinMaxFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxLetterSpacing"
                             },
                             {
                               "type": "row",
@@ -21183,9 +21321,11 @@
                             "checkboxFilterMinMaxBold",
                             "sliderFilterPanelFontSize",
                             "sliderFilterValueFontSize",
+                            "sliderFilterValueLetterSpacing",
                             "sliderFilterValueOffsetY",
                             "sliderFilterMinMaxOffsetY",
                             "sliderFilterMinMaxFontSize",
+                            "sliderFilterMinMaxLetterSpacing",
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelIconOffsetY",
                             "sliderFilterSlidersOffsetY",
@@ -21880,6 +22020,10 @@
                             },
                             {
                               "type": "row",
+                              "key": "sliderFilterValueLetterSpacing"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterValueOffsetY"
                             },
                             {
@@ -21889,6 +22033,10 @@
                             {
                               "type": "row",
                               "key": "sliderFilterMinMaxFontSize"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterMinMaxLetterSpacing"
                             },
                             {
                               "type": "row",
@@ -21921,9 +22069,11 @@
                             "checkboxFilterMinMaxBold",
                             "sliderFilterPanelFontSize",
                             "sliderFilterValueFontSize",
+                            "sliderFilterValueLetterSpacing",
                             "sliderFilterValueOffsetY",
                             "sliderFilterMinMaxOffsetY",
                             "sliderFilterMinMaxFontSize",
+                            "sliderFilterMinMaxLetterSpacing",
                             "sliderFilterPanelIconSize",
                             "sliderFilterPanelIconOffsetY",
                             "sliderFilterSlidersOffsetY",
@@ -22102,6 +22252,10 @@
                           },
                           {
                             "type": "row",
+                            "key": "sliderFilterValueLetterSpacing"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterValueOffsetY"
                           },
                           {
@@ -22111,6 +22265,10 @@
                           {
                             "type": "row",
                             "key": "sliderFilterMinMaxFontSize"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterMinMaxLetterSpacing"
                           },
                           {
                             "type": "row",
@@ -22143,9 +22301,11 @@
                           "checkboxFilterMinMaxBold",
                           "sliderFilterPanelFontSize",
                           "sliderFilterValueFontSize",
+                          "sliderFilterValueLetterSpacing",
                           "sliderFilterValueOffsetY",
                           "sliderFilterMinMaxOffsetY",
                           "sliderFilterMinMaxFontSize",
+                          "sliderFilterMinMaxLetterSpacing",
                           "sliderFilterPanelIconSize",
                           "sliderFilterPanelIconOffsetY",
                           "sliderFilterSlidersOffsetY",

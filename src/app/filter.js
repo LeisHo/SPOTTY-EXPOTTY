@@ -261,32 +261,43 @@ export function createFilter(songs, { host, onChange }) {
     // padding in, the same amount of margin out, so nothing moves; (2) the panel itself grows (padding) by what is still past ITS edge, which is
     // all the items plus the head button and the song count - so a shift inside the panel's own spare room (the margins and padding) shows as a
     // shift, and only what would leave the panel makes it bigger.
+    // The song count's real extent = its TEXT (the element itself is a full-width block, so a sideways offset would push the whole box past the panel edge while
+    // the number is still well inside). Used for the edge check and the cutoff gap.
+    const countTextRect = () => {
+        const rg = document.createRange(); rg.selectNodeContents(countEl);
+        const q = rg.getBoundingClientRect();
+        return q.width || q.height ? q : countEl.getBoundingClientRect();
+    };
     function fit() {
         const S = panel.style;
-        ['rt', 'rb', 'rl', 'rr', 'pt', 'pb', 'pl', 'pr'].forEach(k => S.removeProperty('--fit-' + k));
+        ['rt', 'rb', 'rl', 'rr', 'pt', 'pb', 'pl', 'pr', 'ct', 'cb'].forEach(k => S.removeProperty('--fit-' + k));
         rowsEl.style.clipPath = '';
         if (panel.hidden) return;
+        // Song Count cutoff distance (first, measured with everything reset): the scroll area keeps AT LEAST the dev panel's distance from the song count's real
+        // edge (its X / Y offsets included). Nothing is clipped: when the two are closer than that, the scroll area's own edge moves away by the difference
+        // (a margin on the edge facing the count) - count on top -> the area's top edge shifts down, count at the bottom -> its bottom edge shifts up. The area gets
+        // shorter (fixed panel height) or the panel grows (auto height); everything stays reachable by scrolling.
+        if (setting('checkboxFilterSongCountEnabled') && countEl.style.display !== 'none') {
+            const rr = rowsEl.getBoundingClientRect(), cr = countTextRect(), gap = setting('sliderFilterSongCountCutoffDistance');
+            const top = panel.classList.contains('count-top'), sep = top ? rr.top - cr.bottom : cr.top - rr.bottom, extra = Math.ceil(gap - sep);
+            if (extra > 0) S.setProperty(top ? '--fit-ct' : '--fit-cb', extra + 'px');
+        }
         // scroll mode: what is below (or scrolled above) the visible part is scroll content, not spill - only left / right and an item pushed above the unscrolled top count
         const scrollMode = panel.classList.contains('scroll');
-        const grow = (box, els, pre, scrolled) => {
+        const grow = (box, els, pre, scrolled, extraRects) => {
             const bb = box.getBoundingClientRect(), m = { t: 0, b: 0, l: 0, r: 0 }, st = scrolled ? rowsEl.scrollTop : 0;
-            els.forEach(el => {
-                const q = el.getBoundingClientRect();
+            Array.from(els).map(el => el.getBoundingClientRect()).concat(extraRects || []).forEach(q => {
                 if (!q.width && !q.height) return;
                 m.t = Math.max(m.t, bb.top - (q.top + st)); m.b = Math.max(m.b, q.bottom - bb.bottom); m.l = Math.max(m.l, bb.left - q.left); m.r = Math.max(m.r, q.right - bb.right);
             });
             if (scrolled) m.b = 0;
-            Object.keys(m).forEach(k => { if (m[k] > 0.5) S.setProperty('--fit-' + pre + k, Math.ceil(m[k]) + 'px'); });
+            let grew = false; // adds to what is already padded (a centred item moves only half of what the padding changes, so one pass is not always enough)
+            const cap = { t: bb.height * 0.35, b: bb.height * 0.35, l: bb.width * 0.35, r: bb.width * 0.35 }; // an extreme offset must not squeeze the sliders away: at most 35% of the box per side
+            Object.keys(m).forEach(k => { if (m[k] > 0.5) { const cur = parseFloat(S.getPropertyValue('--fit-' + pre + k)) || 0, next = Math.min(cur + Math.ceil(m[k]), pre === 'p' ? cap[k] : Infinity); if (next > cur + 0.5) { S.setProperty('--fit-' + pre + k, next + 'px'); grew = true; } } });
+            return grew;
         };
         grow(rowsEl, rowsEl.querySelectorAll('.spx-flt-top, .spx-flt-range, .spx-flt-nums, .spx-flt-cur'), 'r', scrollMode);
-        grow(panel, panel.querySelectorAll(scrollMode ? '.spx-flt-head > *, .spx-flt-count' : '.spx-flt-head > *, .spx-flt-count, .spx-flt-top, .spx-flt-range, .spx-flt-nums, .spx-flt-cur'), 'p');
-        // Song Count cutoff: the slider rows are cut off at the song count's real edge (transform offsets included) plus the dev panel's distance, so
-        // nothing scrolls under or over the number: count at the bottom -> rows end above it, count on top -> rows start below it.
-        if (setting('checkboxFilterSongCountEnabled') && countEl.style.display !== 'none') {
-            const rr = rowsEl.getBoundingClientRect(), cr = countEl.getBoundingClientRect(), gap = setting('sliderFilterSongCountCutoffDistance');
-            if (panel.classList.contains('count-top')) { const cut = Math.max(0, cr.bottom + gap - rr.top); if (cut > 0) rowsEl.style.clipPath = 'inset(' + cut + 'px 0 0 0)'; }
-            else { const cut = Math.max(0, rr.bottom - (cr.top - gap)); if (cut > 0) rowsEl.style.clipPath = 'inset(0 0 ' + cut + 'px 0)'; }
-        }
+        for (let pass = 0; pass < 8; pass++) if (!grow(panel, panel.querySelectorAll(scrollMode ? '.spx-flt-head > *' : '.spx-flt-head > *, .spx-flt-top, .spx-flt-range, .spx-flt-nums, .spx-flt-cur'), 'p', false, countEl.style.display !== 'none' ? [countTextRect()] : [])) break;
     }
     window.addEventListener('resize', fit);
     panel.addEventListener('pointerup', () => setTimeout(fit, 0)); // after a resize drag
