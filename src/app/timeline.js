@@ -321,9 +321,12 @@ export function createTimeline(canvas, data) {
     const layers = {}; // the scale / date / song data / scrub line canvases (see layerCtx in draw())
     const getTickCanvas = () => {
         if (!tickCanvas) {
-            tickCanvas = document.createElement('canvas'); tickCanvas.className = 'spx-ticks';
-            const fx = document.getElementById('spxBgFx');
-            if (fx && fx.parentNode) fx.parentNode.insertBefore(tickCanvas, fx.nextSibling); else canvas.parentNode.insertBefore(tickCanvas, canvas);
+            tickCanvas = document.getElementById('spxTicks'); // main.js creates it with the page (so the UI Layout Inspector can list it)
+            if (!tickCanvas) {
+                tickCanvas = document.createElement('canvas'); tickCanvas.className = 'spx-ticks';
+                const fx = document.getElementById('spxBgFx');
+                if (fx && fx.parentNode) fx.parentNode.insertBefore(tickCanvas, fx.nextSibling); else canvas.parentNode.insertBefore(tickCanvas, canvas);
+            }
         }
         return tickCanvas;
     };
@@ -355,8 +358,8 @@ export function createTimeline(canvas, data) {
         const layerCtx = name => {
             let L = layers[name];
             if (!L) {
-                const cv = document.createElement('canvas'); cv.className = 'spx-layer'; cv.dataset.layer = name;
-                canvas.parentNode.insertBefore(cv, canvas.nextSibling);
+                let cv = document.querySelector('canvas.spx-layer[data-layer="' + name + '"]'); // main.js creates these with the page (UI Layout Inspector)
+                if (!cv) { cv = document.createElement('canvas'); cv.className = 'spx-layer'; cv.dataset.layer = name; canvas.parentNode.insertBefore(cv, canvas.nextSibling); }
                 L = layers[name] = { cv, c: cv.getContext('2d') };
             }
             const cv = L.cv;
@@ -364,7 +367,9 @@ export function createTimeline(canvas, data) {
             cv.style.display = ''; cv.style.zIndex = String(zFor(name));
             if (cv.width !== canvas.width || cv.height !== canvas.height) { cv.width = canvas.width; cv.height = canvas.height; }
             if (!layerBox) { const ar = canvas.parentNode.getBoundingClientRect(), r0 = canvas.getBoundingClientRect(); layerBox = { l: r0.left - ar.left, t: r0.top - ar.top }; }
-            cv.style.left = layerBox.l + 'px'; cv.style.top = layerBox.t + 'px'; cv.style.width = canvas.clientWidth + 'px'; cv.style.height = canvas.clientHeight + 'px';
+            // an engine-managed layer (a position mode chosen in the UI Layout Inspector) is placed by the engine instead
+            if (cv.classList.contains('ui-mode-flow') || !cv.classList.contains('ui-element')) { cv.style.left = layerBox.l + 'px'; cv.style.top = layerBox.t + 'px'; } else { cv.style.left = ''; cv.style.top = ''; }
+            cv.style.width = canvas.clientWidth + 'px'; cv.style.height = canvas.clientHeight + 'px';
             const c = L.c;
             c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, cv.width, cv.height); c.globalAlpha = 1;
             c.setTransform(dpr, 0, 0, dpr, 0, oy * dpr);

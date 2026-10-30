@@ -60,6 +60,7 @@ async function boot() {
             <canvas class="spx-bg spx-bg-prev" id="spxBgPrev"></canvas>
             <canvas class="spx-bg" id="spxBg"></canvas>
             <canvas class="spx-bg spx-bg-fx" id="spxBgFx"></canvas>
+            <canvas class="spx-ticks" id="spxTicks"></canvas>
             <!-- the cover comes BEFORE the text and the timeline in the DOM: CSS anchor positioning (the engine's relative mode) needs the anchor target to come earlier in tree
                 order than the element anchored to it, so title / artist / album line / prev / next can all be anchored to the cover. Its z-index (0) keeps it under the text (2). -->
             <button class="ui-element spx-cover bs-host" id="spxCover" type="button" aria-label="Play">
@@ -71,6 +72,7 @@ async function boot() {
             <div class="ui-element spx-artist" id="spxArtist"></div>
             <div class="ui-element spx-meta" id="spxMeta"></div>
             <canvas class="ui-element spx-timeline" id="spxTimeline"></canvas>
+            <canvas class="spx-layer" data-layer="scrub" id="spxLayerScrub"></canvas><canvas class="spx-layer" data-layer="songdata" id="spxLayerSongdata"></canvas><canvas class="spx-layer" data-layer="date" id="spxLayerDate"></canvas><canvas class="spx-layer" data-layer="scale" id="spxLayerScale"></canvas>
             <div class="spx-embed"><div id="spxEmbed"></div></div>
             <div class="spx-sdk-status" id="spxSdkStatus" hidden></div>
             <div class="spx-songbar" id="spxSongBar"><div class="spx-songbar-empty"></div><div class="spx-songbar-fill"></div><div class="spx-songbar-hit" id="spxSongBarHit"></div><div class="spx-songbar-marker"></div></div>
@@ -181,6 +183,7 @@ async function boot() {
         layout: {
             position: { mode: 'relative', relativeTo: 'spxCover', myAnchor: my, targetAnchor: target, gap },
             size: { width: { mode: 'fixed', value: '48px' }, height: { mode: 'fixed', value: '48px' } },
+            icon: {},
         },
         contexts: ctx(),
     }));
@@ -189,8 +192,23 @@ async function boot() {
         layout: {
             position: { mode: 'anchor', horizontal: { anchor: 'left', offset: '14px' }, vertical: { anchor: 'top', offset: '-14px' } },
             size: { width: { mode: 'content' }, height: { mode: 'content' } },
+            icon: {},
         },
         contexts: ctx(),
+    });
+    // ---- every other on-screen item, each its own Inspector element (same names as the render-order list) -----------------------------------------------------
+    // They start UNMANAGED (position mode "flow" = the engine applies no positioning), so nothing moves. Choosing a position mode for one in the Inspector hands its
+    // position to the engine: app.css switches that item's own dev-panel position rules off while it is managed (`:not(.ui-mode-flow)`). Buttons also get an Icon
+    // size (`icon` block); the canvas layers are placed by timeline.js unless managed, and keep their size / colours from the dev panel.
+    const unmanaged = { position: { mode: 'flow', parent: 'spxApp' } }; // flow needs a parent id; spxApp is not an engine element, so the DOM-parent check does not apply
+    [['spxShuffle', 'Shuffle Button', 'button'], ['spxSongData', 'Song Data Button', 'button'], ['spxFilter', 'Filter Button', 'button'], ['spxDevice', 'Play On Device Button', 'button'], ['spxPlayGlyph', 'Play Button', 'button'],
+        ['spxSongBar', 'Song Timeline (Under The Cover)', 'container'],
+        ['spxLayerScrub', 'Scrub Line', 'container'], ['spxLayerSongdata', 'Song Data Text And Icons', 'container'], ['spxLayerDate', 'Song Add Date', 'container'], ['spxLayerScale', 'Timeline Scale (Numbers And Ticks)', 'container'],
+        ['spxTicks', 'Song Ticks', 'container'], ['spxBgFx', 'Background Animation', 'container'], ['spxBg', 'Background', 'container'],
+    ].forEach(([id, group, role]) => {
+        const node = el(id);
+        node.classList.add('ui-element');
+        createUIElement({ id, role, domNode: node, group, propertyLabel: 'Position', layout: role === 'button' && id !== 'spxPlayGlyph' ? { ...unmanaged, icon: {} } : { ...unmanaged }, contexts: ctx() }); // the play glyph's size follows the cover (Cover Scale), so it has no Icon group
     });
     resolveAndApplyAll();
     const shippedLayout = captureAllLayoutConfigs();
@@ -520,10 +538,15 @@ async function boot() {
         const syncGlyph = () => {
             let n = (cover.style.getPropertyValue('anchor-name') || '').split(',')[0].trim();
             if (!n) { n = '--spx-cover-self'; cover.style.setProperty('anchor-name', n); }
+            if (!glyph.classList.contains('ui-mode-flow')) { // placed by the engine (a position mode chosen in the Inspector): drop the pin to the cover
+                ['left', 'top', 'right', 'bottom'].forEach(k => { if (/^anchor\(/.test(glyph.style.getPropertyValue(k))) glyph.style.removeProperty(k); });
+                return;
+            }
             const set = (k, v) => { if (glyph.style.getPropertyValue(k) !== v) glyph.style.setProperty(k, v); };
             set('position-anchor', n); set('left', 'anchor(left)'); set('top', 'anchor(top)'); set('right', 'anchor(right)'); set('bottom', 'anchor(bottom)');
         };
         new MutationObserver(() => { mirror(); syncGlyph(); }).observe(cover, { attributes: true, attributeFilter: ['class', 'style'] });
+        new MutationObserver(syncGlyph).observe(glyph, { attributes: true, attributeFilter: ['class'] });
         mirror(); syncGlyph();
     }
     // hover / press / release state classes for the styled buttons (the CSS does the animating)

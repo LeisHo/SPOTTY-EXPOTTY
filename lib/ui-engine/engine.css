@@ -184,3 +184,7 @@
 .ui-typography[data-ui-overflow="wrap"] { white-space: normal; overflow: visible; text-overflow: clip; }
 .ui-typography[data-ui-overflow="truncate"] { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ui-typography[data-ui-overflow="clip"] { white-space: nowrap; overflow: hidden; text-overflow: clip; }
+
+/* ICON (v0.2.12) - opt-in like typography: `.ui-icon` is only added once an icon field is set. The element's svg takes --ui-icon-size; the doubled class keeps this
+   ahead of a host rule like `.my-button svg` (0,1,1) whatever the stylesheet order, and the hover / press animation rules (3 classes) still win for those states. */
+.ui-element.ui-icon svg, .ui-element.ui-icon .bs-icon { width: var(--ui-icon-size, 24px); height: var(--ui-icon-size, 24px); }

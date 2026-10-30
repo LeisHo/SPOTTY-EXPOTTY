@@ -282,3 +282,12 @@
 .spx-dev-meta { font-size: .85em; opacity: .6; }
 .spx-dev-msg { margin-top: 6px; font-size: .85em; opacity: .7; }
 .spx-dev-login { margin-top: 4px; width: 100%; padding: 6px; border: 0; border-radius: 6px; background: var(--dev-accent); color: #000; font: inherit; font-weight: 700; cursor: pointer; }
+
+/* ---- UI Layout Inspector takeover (2026-10-30): every button / layer is its own Inspector element, UNMANAGED (engine position mode "flow") until a position mode is chosen.
+   While managed (not .ui-mode-flow) the item's own dev-panel position rules are switched off. :where() keeps this at the same specificity as the item's base rule, so it wins by
+   coming later but still loses to the engine's own (higher) mode rules. */
+:where(.spx-shuffle, .spx-songdata, .spx-filter, .spx-device, .spx-songbar):where(:not(.ui-mode-flow)) { right: auto; top: auto; left: auto; bottom: auto; translate: none; }
+.spx-songbar:where(:not(.ui-mode-flow)) { width: 100vw; }
+/* Icon size (Inspector > Icon): the button's box follows the icon (icon + 20px, like the dev-panel icon sizes do), and the animation's own base size follows it too. */
+.ui-icon { --bs-size: var(--ui-icon-size); }
+.spx-shuffle.ui-icon, .spx-songdata.ui-icon, .spx-filter.ui-icon, .spx-device.ui-icon { width: calc(var(--ui-icon-size) + 20px); height: calc(var(--ui-icon-size) + 20px); }
