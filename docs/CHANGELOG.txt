@@ -1477,3 +1477,10 @@ Source: spotty-expotty-logs-2026-10-30T22-31-41-713Z.json (live site, logged in,
    state events while a device is the target (the 3 ms flip at 19.983-19.986 s).
 6. A song swap in the iframe reported "paused at 14321 ms" and counted as the song ending, so shuffle skipped the song picked by scrubbing (81.5 s): embed end / pause detection is ignored for 3 s after a loadUri.
 Checked: syntax + page load, no script errors. NOT tested: any real device or the 403 song. If it recurs, send the Playback Timing + Play Button State logs again (a "GAVE UP" line now says why).
+
+2026-10-30 (later 32) - Play On Device: the device list is logged
+Report: "the app isnt detecting my devices anymore". No code change since the list last worked touched it (listDevices() in sdkPlayer.js, refresh() in devicePanel.js and
+the scopes are unchanged; only the clip-volume line was removed from devicePanel.js). The cause is NOT found: Spotify's /me/player/devices only lists devices that were
+recently active (open Spotify on the phone / speaker, play a second), and a 429 or an expired login would show as "Could not load the devices (...)" in the panel.
+Added: every refresh writes "DEVICE list: <names> / Spotify returned no devices" or "DEVICE list FAILED: <error>" to the Playback Timing Log.
+Checked: syntax only. NOT tested against a real device list.
