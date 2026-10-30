@@ -1425,3 +1425,10 @@ Owner: "for the search button gimme a drop down to select the icon. and i cant s
   Deployed (renderOrder.js refresh()). Until a Deployed list has been saved once, visitors keep getting the original list, so nothing changes on the live site until then. The Deployed
   items are NOT linked to the Enabled checkboxes; renderOrder.js hides a visitor's switched-off item with `.ro-off` (DEPLOYED_HIDE) on top of its own Enabled checkbox.
   Tested by switching Shuffle + Search off in Deployed: dev mode unaffected; with `dev-mode` removed, both are `.ro-off`, Filter is not. Not tested on the live Vercel site (needs a Sync first).
+
+--------------------------------------------------------------------------------
+2026-10-30  -  later 27 (Search in Global Override)
+
+Owner: add the Search button to Global Override, and every new button of this kind from now on. Global Override > "Search Button" tick-box (checkboxOverrideSearch, on by default like Filter / Play On Device),
+target in applyGlobalOverride() (main.js, kind 'plain', --spx-search-off-op / --spx-search-on-op). Verified locally: ticking Global Override sets Search's inline colour and off-opacity exactly as Filter's
+(opacity 0.8 read back; unticking the Search box clears it). The standing rule is in CLAUDE.md (new buttons get a Global Override tick-box).
