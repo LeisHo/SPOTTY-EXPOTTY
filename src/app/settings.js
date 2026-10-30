@@ -39,6 +39,7 @@ export const DEFAULTS = {
     checkboxShowSpotifyPlayer: false,
     checkboxLogPlayback: false,
     checkboxLogPreload: false,
+    checkboxLogPlayButton: false,
     checkboxExportLogsUiButton: false,
     checkboxShowFrameRate: false,
     colorFrameRateText: '#ffffff',

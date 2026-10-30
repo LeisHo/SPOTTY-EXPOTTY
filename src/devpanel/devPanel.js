@@ -8989,8 +8989,9 @@
             { tab, group: DBG, id: 'checkboxShowFrameRate', type: 'checkbox', label: 'Show Frame Rate', value: false },
             { tab, group: DBG, id: 'colorFrameRateText', type: 'color', label: 'Frame Rate Text Color:', value: '#ffffff' },
             { tab, group: DBG, id: 'sliderFrameRateRefreshMs', type: 'slider', label: 'Frame Rate Refresh Rate (Ms Between Updates):', min: 100, max: 5000, step: 50, value: 500 },
-            { tab, group: DBG, id: 'checkboxLogPlayback', type: 'checkbox', label: 'Log Playback Timing (Songs, Clips, Handoff, Spotify Embed)', value: false },
+            { tab, group: DBG, id: 'checkboxLogPlayback', type: 'checkbox', label: 'Log Playback Timing (Songs, Clips, Handoff, Spotify Embed, Device)', value: false },
             { tab, group: DBG, id: 'checkboxLogPreload', type: 'checkbox', label: 'Log Preloading (Batches, URL And Audio Arrival Times)', value: false },
+            { tab, group: DBG, id: 'checkboxLogPlayButton', type: 'checkbox', label: 'Log Play Button State (Which Player Says Playing, Icon Changes)', value: false },
         ];
         renderControlArray(DEBUG_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_DEBUG_CONTROLS', DEBUG_CONTROLS);
@@ -9120,6 +9121,7 @@
         }
         buildDebugLogBox('checkboxLogPlayback', 'playback', 'Playback Timing Log');
         buildDebugLogBox('checkboxLogPreload', 'preload', 'Preload Log');
+        buildDebugLogBox('checkboxLogPlayButton', 'playbutton', 'Play Button State Log');
         buildDebugLogBox('buttonDebugSnapshot', 'snapshot', 'Snapshot');
         window.spxDebugShowSnapshot = t => { const v = window.spxDebugLogViews.snapshot; if (v) v.set(t); };
         // the new tools (and the Snapshot subgroup) sit ABOVE the Mouse Log subgroup, not below it

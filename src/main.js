@@ -1608,7 +1608,7 @@ async function boot() {
         if (!isPlaying() && previewClipsOn() && !spotifyWouldPlay) {
             if (clipIsPlaying()) { pauseClip(); logEvent('playback', 'USER paused the preview clip'); }
             else if (!resumeClip()) playClip(clipKey(songs[playIdx >= 0 ? playIdx : idx]));
-            refreshPlayUi();
+            refreshPlayUi('cover click / Space');
             return;
         }
         stopClip();
@@ -1709,16 +1709,24 @@ async function boot() {
     window.addEventListener('resize', placeNav);
     placeNav();
     // The play / pause icon shows the real state: the Spotify song OR the preview clip playing.
-    function refreshPlayUi() {
-        const shown = isPlaying() || clipIsPlaying();
+    let lastPlayUiLog = null;
+    function refreshPlayUi(src) {
+        const sp = isPlaying(), cl = clipIsPlaying(), shown = sp || cl;
+        logEvent('playbutton', `refresh (${src || '?'}): ${shown ? 'PLAYING' : 'paused'}  spotify=${sp}  clip=${cl}  playingId=${playingId() || '-'}${lastPlayUiLog === shown ? '  (same as before)' : ''}`);
+        lastPlayUiLog = shown;
         el('spxCover').classList.toggle('playing', shown);
         bgAnim.refresh(); // the background animation runs only while playing
         el('spxCover').setAttribute('aria-label', shown ? 'Pause' : 'Play');
     }
-    onClipState(refreshPlayUi);
+    onClipState(() => refreshPlayUi('clip state'));
     onPlayState(playing => {
-        refreshPlayUi();
+        refreshPlayUi('spotify state=' + playing);
     });
+    // What the screen really did: the cover and the play glyph each gain / lose `.playing` (the icon swap), logged whenever that changes.
+    {
+        const watch = (node, name) => { let was = node.classList.contains('playing'); new MutationObserver(() => { const now = node.classList.contains('playing'); if (now !== was) { was = now; logEvent('playbutton', `DOM ${name} .playing -> ${now ? 'ON (pause icon)' : 'OFF (play icon)'}`); } }).observe(node, { attributes: true, attributeFilter: ['class'] }); };
+        watch(el('spxCover'), 'cover'); watch(el('spxPlayGlyph'), 'glyph');
+    }
 
     // ---- UI Layout Inspector (dev only): the engine's own Inspector in a floating panel ------
     let inspectorMounted = false;

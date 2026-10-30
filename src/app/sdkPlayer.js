@@ -3,11 +3,12 @@
 // start (not logged in, no Client ID, not Premium, unsupported browser) the iframe embed keeps being used.
 // Needs the login from spotifyAuth.js. Tracks are started with the Web API (PUT /v1/me/player/play) on this device.
 import { getAccessToken, isLoggedIn, hasClientId } from './spotifyAuth.js';
-import { logEvent } from './debugLog.js';
+import { logEvent, setLogDevice } from './debugLog.js';
 
 let player = null, deviceId = null, ready = false, failed = null, loading = false, volume = 1, lastPlayError = null;
 // The last SDK events, kept even when "Log Playback Timing" is off, so the snapshot (Debug > Take Snapshot) can say what the SDK did.
 const recent = [];
+setLogDevice(() => (target ? target.name + ' (' + target.type + ')' : 'this browser')); // every Playback Timing Log line says which device it concerns
 const note = msg => { recent.push(new Date().toISOString().slice(11, 23) + '  ' + msg); if (recent.length > 25) recent.shift(); logEvent('playback', 'SDK ' + msg); };
 export const sdkRecentEvents = () => recent.slice();
 let cb = { onState: () => {}, onEnded: () => {}, onStatus: () => {} };

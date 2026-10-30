@@ -10,14 +10,19 @@ const MAX_LINES = 2000;
 const logs = {
     playback: { title: 'Playback Timing Log', flag: 'checkboxLogPlayback', lines: [], last: 0 },
     preload: { title: 'Preload Log', flag: 'checkboxLogPreload', lines: [], last: 0 },
+    playbutton: { title: 'Play Button State Log', flag: 'checkboxLogPlayButton', lines: [], last: 0 },
 };
+// Which device the Playback Timing Log lines belong to: sdkPlayer.js sets this (a Play On Device device's name, or this browser).
+let deviceTag = () => '';
+export const setLogDevice = fn => { deviceTag = fn; };
 const view = key => (window.spxDebugLogViews || {})[key];
 
 export function logEvent(key, msg) {
     const L = logs[key];
     if (!L || window.spxLogsPaused || !setting(L.flag)) return;
     const now = performance.now();
-    const line = `${(now / 1000).toFixed(3)}s  +${String(Math.round(now - L.last)).padStart(5)}ms  ${msg}`;
+    const dev = key === 'playback' ? deviceTag() : '';
+    const line = `${(now / 1000).toFixed(3)}s  +${String(Math.round(now - L.last)).padStart(5)}ms  ${dev ? '[' + dev + ']  ' : ''}${msg}`;
     L.last = now;
     L.lines.push(line);
     if (L.lines.length > MAX_LINES) L.lines.shift();
