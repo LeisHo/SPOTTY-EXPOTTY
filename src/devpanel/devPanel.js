@@ -8670,7 +8670,7 @@
             { tab, group: PD, id: 'sliderDeviceIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
             { tab, group: PD, id: 'sliderDeviceIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: PD, id: 'sliderDeviceIconOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
-            { tab, group: PD, id: 'sliderDeviceEdgeOffset', type: 'slider', label: 'Offset From Right Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
+            { tab, group: PD, id: 'sliderDeviceEdgeOffset', type: 'slider', label: 'Offset From Left Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
             { tab, group: PD, id: 'sliderDeviceOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
             { tab, group: PD, id: 'sliderDeviceOnOpacity', type: 'slider', label: 'On Icon Opacity (%) (Playing On A Device):', min: 0, max: 100, step: 1, value: 100 },
             { tab, group: PD, id: 'colorDeviceIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },

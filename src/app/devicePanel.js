@@ -30,7 +30,7 @@ export function initDevicePlayer({ button, api, player, volume, setClipVolume })
         const r = button.getBoundingClientRect();
         const w = panel.offsetWidth || setting('sliderDevicePanelWidth');
         panel.style.top = Math.max(4, r.bottom + setting('sliderDevicePanelOffsetY')) + 'px';
-        panel.style.left = Math.max(4, Math.min(window.innerWidth - w - 4, r.right - w + setting('sliderDevicePanelOffsetX'))) + 'px';
+        panel.style.left = Math.max(4, Math.min(window.innerWidth - w - 4, r.left + setting('sliderDevicePanelOffsetX'))) + 'px'; // the button is at the left edge: the list opens to its right
     }
     function render() {
         panel.textContent = '';
