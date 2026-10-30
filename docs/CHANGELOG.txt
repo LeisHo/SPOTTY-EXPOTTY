@@ -1453,3 +1453,13 @@ Owner: (1) logged in to Spotify, preview never plays, nothing needs to play whil
 - Settings deleted: Play Preview Clips, Handoff Crossfade, Full Song Start Offset From Preview, Mute The Scrub Clips (device panel; its setClipVolume wiring too). Relabelled: "Play Preview Clips While Scrubbing
   (Only When Not Logged In To Spotify)", "Loop The Song / Preview When It Ends". Saved values for the deleted ids in dev-panel-settings.json are now ignored (harmless).
 - A login from another tab stops a running clip. Tested locally: panel builds without the removed controls, no script errors, logged-in load makes no preview lookups. Real audio (SDK song, device) not heard here.
+
+--------------------------------------------------------------------------------
+2026-10-30  -  later 30 (Playback Timing Log shows the device; Play Button State Log)
+
+Owner: put the device in the Playback Timing Log; add a Debug checkbox for a log of the main play button's state (it flickers; do NOT fix it yet).
+- debugLog.js: every Playback Timing Log line now carries `[device]` (sdkPlayer.js `setLogDevice`: the Play On Device device's "name (type)", else "this browser"). New log `playbutton`
+  ("Play Button State Log", flag `checkboxLogPlayButton`, Debug group, box with Copy / Save / Clear like the other logs, covered by Copy All / Clear All / Export / Pause Logs).
+- main.js: `refreshPlayUi(src)` logs each refresh (who called it, PLAYING / paused, spotify=, clip=, playingId, "(same as before)" when the shown state did not change), and a MutationObserver per element
+  logs the real icon swaps: `DOM cover .playing -> ON / OFF` and `DOM glyph .playing -> ON / OFF`. The flicker itself is untouched.
+- Tested: both logs filled correctly on a cover click / pause locally; no script errors.
