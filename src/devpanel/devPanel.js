@@ -7236,7 +7236,10 @@
     // Single shared restore path for both the Reset button and the
     // boot-time load below — applies the panel's own state, then the
     // host's own extra state (devSaveApplyExtra) if any was saved.
-    function applyDevPanelStateWithExtra(data) {
+    function applyDevPanelStateWithExtra(data, tries = 0) {
+        // The saved settings can arrive (network) before the page's module scripts have defined window.SPX_ICON_IMPORT. Restoring then would skip the imported icons and
+        // leave an icon dropdown with no option for its saved value (it falls back to empty = the default icon), so wait for the importer (up to ~10 s) first.
+        if (data && data.extra && data.extra.customIcons && !window.SPX_ICON_IMPORT && tries < 200) { setTimeout(() => applyDevPanelStateWithExtra(data, tries + 1), 50); return; }
         // Imported icons FIRST: a saved icon dropdown value can name one of them (e.g. Play On Device icon 5 = the 1st imported one), and the dropdown has to
         // list it before its value is restored - otherwise the value falls back to empty and the next Sync saves the default (found 2026-10-30).
         if (data && data.extra && data.extra.customIcons && window.SPX_ICON_IMPORT) window.SPX_ICON_IMPORT.apply(data.extra.customIcons);
