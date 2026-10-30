@@ -5833,6 +5833,37 @@
                             {
                               "type": "group",
                               "section": {
+                                "key": "desktop:New Group (29)",
+                                "items": [
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterIconOffsetY"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterIconOffsetX"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterEdgeOffset"
+                                  },
+                                  {
+                                    "type": "row",
+                                    "key": "sliderFilterPanelNumbersOffsetY"
+                                  }
+                                ],
+                                "rowKeys": [
+                                  "sliderFilterIconOffsetY",
+                                  "sliderFilterIconOffsetX",
+                                  "sliderFilterEdgeOffset",
+                                  "sliderFilterPanelNumbersOffsetY"
+                                ],
+                                "subgroups": []
+                              }
+                            },
+                            {
+                              "type": "group",
+                              "section": {
                                 "key": "desktop:New Group (16)",
                                 "items": [
                                   {
@@ -5864,6 +5895,34 @@
                           ],
                           "subgroups": [
                             {
+                              "key": "desktop:New Group (29)",
+                              "items": [
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterIconOffsetY"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterIconOffsetX"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterEdgeOffset"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterPanelNumbersOffsetY"
+                                }
+                              ],
+                              "rowKeys": [
+                                "sliderFilterIconOffsetY",
+                                "sliderFilterIconOffsetX",
+                                "sliderFilterEdgeOffset",
+                                "sliderFilterPanelNumbersOffsetY"
+                              ],
+                              "subgroups": []
+                            },
+                            {
                               "key": "desktop:New Group (16)",
                               "items": [
                                 {
@@ -5882,37 +5941,6 @@
                               "subgroups": []
                             }
                           ]
-                        }
-                      },
-                      {
-                        "type": "group",
-                        "section": {
-                          "key": "desktop:New Group (29)",
-                          "items": [
-                            {
-                              "type": "row",
-                              "key": "sliderFilterIconOffsetY"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterIconOffsetX"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterEdgeOffset"
-                            },
-                            {
-                              "type": "row",
-                              "key": "sliderFilterPanelNumbersOffsetY"
-                            }
-                          ],
-                          "rowKeys": [
-                            "sliderFilterIconOffsetY",
-                            "sliderFilterIconOffsetX",
-                            "sliderFilterEdgeOffset",
-                            "sliderFilterPanelNumbersOffsetY"
-                          ],
-                          "subgroups": []
                         }
                       },
                       {
@@ -6672,6 +6700,37 @@
                           {
                             "type": "group",
                             "section": {
+                              "key": "desktop:New Group (29)",
+                              "items": [
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterIconOffsetY"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterIconOffsetX"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterEdgeOffset"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterPanelNumbersOffsetY"
+                                }
+                              ],
+                              "rowKeys": [
+                                "sliderFilterIconOffsetY",
+                                "sliderFilterIconOffsetX",
+                                "sliderFilterEdgeOffset",
+                                "sliderFilterPanelNumbersOffsetY"
+                              ],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
                               "key": "desktop:New Group (16)",
                               "items": [
                                 {
@@ -6703,6 +6762,34 @@
                         ],
                         "subgroups": [
                           {
+                            "key": "desktop:New Group (29)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetX"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterEdgeOffset"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              }
+                            ],
+                            "rowKeys": [
+                              "sliderFilterIconOffsetY",
+                              "sliderFilterIconOffsetX",
+                              "sliderFilterEdgeOffset",
+                              "sliderFilterPanelNumbersOffsetY"
+                            ],
+                            "subgroups": []
+                          },
+                          {
                             "key": "desktop:New Group (16)",
                             "items": [
                               {
@@ -6721,34 +6808,6 @@
                             "subgroups": []
                           }
                         ]
-                      },
-                      {
-                        "key": "desktop:New Group (29)",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderFilterIconOffsetY"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterIconOffsetX"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterEdgeOffset"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterPanelNumbersOffsetY"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderFilterIconOffsetY",
-                          "sliderFilterIconOffsetX",
-                          "sliderFilterEdgeOffset",
-                          "sliderFilterPanelNumbersOffsetY"
-                        ],
-                        "subgroups": []
                       },
                       {
                         "key": "desktop:New Group (19)",
@@ -9145,6 +9204,37 @@
                           {
                             "type": "group",
                             "section": {
+                              "key": "desktop:New Group (29)",
+                              "items": [
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterIconOffsetY"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterIconOffsetX"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterEdgeOffset"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterPanelNumbersOffsetY"
+                                }
+                              ],
+                              "rowKeys": [
+                                "sliderFilterIconOffsetY",
+                                "sliderFilterIconOffsetX",
+                                "sliderFilterEdgeOffset",
+                                "sliderFilterPanelNumbersOffsetY"
+                              ],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
                               "key": "desktop:New Group (16)",
                               "items": [
                                 {
@@ -9176,6 +9266,34 @@
                         ],
                         "subgroups": [
                           {
+                            "key": "desktop:New Group (29)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetX"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterEdgeOffset"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              }
+                            ],
+                            "rowKeys": [
+                              "sliderFilterIconOffsetY",
+                              "sliderFilterIconOffsetX",
+                              "sliderFilterEdgeOffset",
+                              "sliderFilterPanelNumbersOffsetY"
+                            ],
+                            "subgroups": []
+                          },
+                          {
                             "key": "desktop:New Group (16)",
                             "items": [
                               {
@@ -9194,37 +9312,6 @@
                             "subgroups": []
                           }
                         ]
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:New Group (29)",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderFilterIconOffsetY"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterIconOffsetX"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterEdgeOffset"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterPanelNumbersOffsetY"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderFilterIconOffsetY",
-                          "sliderFilterIconOffsetX",
-                          "sliderFilterEdgeOffset",
-                          "sliderFilterPanelNumbersOffsetY"
-                        ],
-                        "subgroups": []
                       }
                     },
                     {
@@ -9984,6 +10071,37 @@
                         {
                           "type": "group",
                           "section": {
+                            "key": "desktop:New Group (29)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetX"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterEdgeOffset"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              }
+                            ],
+                            "rowKeys": [
+                              "sliderFilterIconOffsetY",
+                              "sliderFilterIconOffsetX",
+                              "sliderFilterEdgeOffset",
+                              "sliderFilterPanelNumbersOffsetY"
+                            ],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
                             "key": "desktop:New Group (16)",
                             "items": [
                               {
@@ -10015,6 +10133,34 @@
                       ],
                       "subgroups": [
                         {
+                          "key": "desktop:New Group (29)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderFilterIconOffsetY"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterIconOffsetX"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterEdgeOffset"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterPanelNumbersOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderFilterIconOffsetY",
+                            "sliderFilterIconOffsetX",
+                            "sliderFilterEdgeOffset",
+                            "sliderFilterPanelNumbersOffsetY"
+                          ],
+                          "subgroups": []
+                        },
+                        {
                           "key": "desktop:New Group (16)",
                           "items": [
                             {
@@ -10033,34 +10179,6 @@
                           "subgroups": []
                         }
                       ]
-                    },
-                    {
-                      "key": "desktop:New Group (29)",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderFilterIconOffsetY"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterIconOffsetX"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterEdgeOffset"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterPanelNumbersOffsetY"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderFilterIconOffsetY",
-                        "sliderFilterIconOffsetX",
-                        "sliderFilterEdgeOffset",
-                        "sliderFilterPanelNumbersOffsetY"
-                      ],
-                      "subgroups": []
                     },
                     {
                       "key": "desktop:New Group (19)",
@@ -16150,6 +16268,37 @@
                           {
                             "type": "group",
                             "section": {
+                              "key": "desktop:New Group (29)",
+                              "items": [
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterIconOffsetY"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterIconOffsetX"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterEdgeOffset"
+                                },
+                                {
+                                  "type": "row",
+                                  "key": "sliderFilterPanelNumbersOffsetY"
+                                }
+                              ],
+                              "rowKeys": [
+                                "sliderFilterIconOffsetY",
+                                "sliderFilterIconOffsetX",
+                                "sliderFilterEdgeOffset",
+                                "sliderFilterPanelNumbersOffsetY"
+                              ],
+                              "subgroups": []
+                            }
+                          },
+                          {
+                            "type": "group",
+                            "section": {
                               "key": "desktop:New Group (16)",
                               "items": [
                                 {
@@ -16181,6 +16330,34 @@
                         ],
                         "subgroups": [
                           {
+                            "key": "desktop:New Group (29)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetX"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterEdgeOffset"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              }
+                            ],
+                            "rowKeys": [
+                              "sliderFilterIconOffsetY",
+                              "sliderFilterIconOffsetX",
+                              "sliderFilterEdgeOffset",
+                              "sliderFilterPanelNumbersOffsetY"
+                            ],
+                            "subgroups": []
+                          },
+                          {
                             "key": "desktop:New Group (16)",
                             "items": [
                               {
@@ -16199,37 +16376,6 @@
                             "subgroups": []
                           }
                         ]
-                      }
-                    },
-                    {
-                      "type": "group",
-                      "section": {
-                        "key": "desktop:New Group (29)",
-                        "items": [
-                          {
-                            "type": "row",
-                            "key": "sliderFilterIconOffsetY"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterIconOffsetX"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterEdgeOffset"
-                          },
-                          {
-                            "type": "row",
-                            "key": "sliderFilterPanelNumbersOffsetY"
-                          }
-                        ],
-                        "rowKeys": [
-                          "sliderFilterIconOffsetY",
-                          "sliderFilterIconOffsetX",
-                          "sliderFilterEdgeOffset",
-                          "sliderFilterPanelNumbersOffsetY"
-                        ],
-                        "subgroups": []
                       }
                     },
                     {
@@ -16989,6 +17135,37 @@
                         {
                           "type": "group",
                           "section": {
+                            "key": "desktop:New Group (29)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetX"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterEdgeOffset"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              }
+                            ],
+                            "rowKeys": [
+                              "sliderFilterIconOffsetY",
+                              "sliderFilterIconOffsetX",
+                              "sliderFilterEdgeOffset",
+                              "sliderFilterPanelNumbersOffsetY"
+                            ],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
                             "key": "desktop:New Group (16)",
                             "items": [
                               {
@@ -17020,6 +17197,34 @@
                       ],
                       "subgroups": [
                         {
+                          "key": "desktop:New Group (29)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderFilterIconOffsetY"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterIconOffsetX"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterEdgeOffset"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterPanelNumbersOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderFilterIconOffsetY",
+                            "sliderFilterIconOffsetX",
+                            "sliderFilterEdgeOffset",
+                            "sliderFilterPanelNumbersOffsetY"
+                          ],
+                          "subgroups": []
+                        },
+                        {
                           "key": "desktop:New Group (16)",
                           "items": [
                             {
@@ -17038,34 +17243,6 @@
                           "subgroups": []
                         }
                       ]
-                    },
-                    {
-                      "key": "desktop:New Group (29)",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderFilterIconOffsetY"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterIconOffsetX"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterEdgeOffset"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterPanelNumbersOffsetY"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderFilterIconOffsetY",
-                        "sliderFilterIconOffsetX",
-                        "sliderFilterEdgeOffset",
-                        "sliderFilterPanelNumbersOffsetY"
-                      ],
-                      "subgroups": []
                     },
                     {
                       "key": "desktop:New Group (19)",
@@ -19462,6 +19639,37 @@
                         {
                           "type": "group",
                           "section": {
+                            "key": "desktop:New Group (29)",
+                            "items": [
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetY"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterIconOffsetX"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterEdgeOffset"
+                              },
+                              {
+                                "type": "row",
+                                "key": "sliderFilterPanelNumbersOffsetY"
+                              }
+                            ],
+                            "rowKeys": [
+                              "sliderFilterIconOffsetY",
+                              "sliderFilterIconOffsetX",
+                              "sliderFilterEdgeOffset",
+                              "sliderFilterPanelNumbersOffsetY"
+                            ],
+                            "subgroups": []
+                          }
+                        },
+                        {
+                          "type": "group",
+                          "section": {
                             "key": "desktop:New Group (16)",
                             "items": [
                               {
@@ -19493,6 +19701,34 @@
                       ],
                       "subgroups": [
                         {
+                          "key": "desktop:New Group (29)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderFilterIconOffsetY"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterIconOffsetX"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterEdgeOffset"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterPanelNumbersOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderFilterIconOffsetY",
+                            "sliderFilterIconOffsetX",
+                            "sliderFilterEdgeOffset",
+                            "sliderFilterPanelNumbersOffsetY"
+                          ],
+                          "subgroups": []
+                        },
+                        {
                           "key": "desktop:New Group (16)",
                           "items": [
                             {
@@ -19511,37 +19747,6 @@
                           "subgroups": []
                         }
                       ]
-                    }
-                  },
-                  {
-                    "type": "group",
-                    "section": {
-                      "key": "desktop:New Group (29)",
-                      "items": [
-                        {
-                          "type": "row",
-                          "key": "sliderFilterIconOffsetY"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterIconOffsetX"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterEdgeOffset"
-                        },
-                        {
-                          "type": "row",
-                          "key": "sliderFilterPanelNumbersOffsetY"
-                        }
-                      ],
-                      "rowKeys": [
-                        "sliderFilterIconOffsetY",
-                        "sliderFilterIconOffsetX",
-                        "sliderFilterEdgeOffset",
-                        "sliderFilterPanelNumbersOffsetY"
-                      ],
-                      "subgroups": []
                     }
                   },
                   {
@@ -20301,6 +20506,37 @@
                       {
                         "type": "group",
                         "section": {
+                          "key": "desktop:New Group (29)",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "sliderFilterIconOffsetY"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterIconOffsetX"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterEdgeOffset"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderFilterPanelNumbersOffsetY"
+                            }
+                          ],
+                          "rowKeys": [
+                            "sliderFilterIconOffsetY",
+                            "sliderFilterIconOffsetX",
+                            "sliderFilterEdgeOffset",
+                            "sliderFilterPanelNumbersOffsetY"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
                           "key": "desktop:New Group (16)",
                           "items": [
                             {
@@ -20332,6 +20568,34 @@
                     ],
                     "subgroups": [
                       {
+                        "key": "desktop:New Group (29)",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "sliderFilterIconOffsetY"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterIconOffsetX"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterEdgeOffset"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderFilterPanelNumbersOffsetY"
+                          }
+                        ],
+                        "rowKeys": [
+                          "sliderFilterIconOffsetY",
+                          "sliderFilterIconOffsetX",
+                          "sliderFilterEdgeOffset",
+                          "sliderFilterPanelNumbersOffsetY"
+                        ],
+                        "subgroups": []
+                      },
+                      {
                         "key": "desktop:New Group (16)",
                         "items": [
                           {
@@ -20350,34 +20614,6 @@
                         "subgroups": []
                       }
                     ]
-                  },
-                  {
-                    "key": "desktop:New Group (29)",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "sliderFilterIconOffsetY"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderFilterIconOffsetX"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderFilterEdgeOffset"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderFilterPanelNumbersOffsetY"
-                      }
-                    ],
-                    "rowKeys": [
-                      "sliderFilterIconOffsetY",
-                      "sliderFilterIconOffsetX",
-                      "sliderFilterEdgeOffset",
-                      "sliderFilterPanelNumbersOffsetY"
-                    ],
-                    "subgroups": []
                   },
                   {
                     "key": "desktop:New Group (19)",
@@ -48011,10 +48247,10 @@
     "desktop:Shuffle Button Animation": true,
     "desktop:Filter Button": false,
     "desktop:New Group (30)": true,
+    "desktop:New Group (29)": true,
     "desktop:New Group (16)": true,
-    "desktop:New Group (29)": false,
     "desktop:New Group (19)": false,
-    "desktop:New Group (24)": false,
+    "desktop:New Group (24)": true,
     "desktop:Panel Song Count": true,
     "desktop:New Group (18)": true,
     "desktop:New Group (23)": true,
