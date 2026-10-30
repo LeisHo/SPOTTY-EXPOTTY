@@ -334,7 +334,7 @@
     "colorDevicePanelBg": "#14161a",
     "sliderDevicePanelBgOpacity": 92,
     "sliderDevicePanelBlur": 6,
-    "colorDevicePanelAccent": "#1db954",
+    "colorDevicePanelAccent": "#fcfcfc",
     "selectFilterIconStyle": "3",
     "selectTempoIconStyle": "8",
     "selectValenceIconStyle": "13",
@@ -7665,15 +7665,15 @@
                       },
                       {
                         "type": "row",
+                        "key": "colorDevicePanelAccent"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderDevicePanelBgOpacity"
                       },
                       {
                         "type": "row",
                         "key": "sliderDevicePanelBlur"
-                      },
-                      {
-                        "type": "row",
-                        "key": "colorDevicePanelAccent"
                       }
                     ],
                     "rowKeys": [
@@ -7701,9 +7701,9 @@
                       "sliderDevicePanelOffsetX",
                       "sliderDevicePanelOffsetY",
                       "colorDevicePanelBg",
+                      "colorDevicePanelAccent",
                       "sliderDevicePanelBgOpacity",
-                      "sliderDevicePanelBlur",
-                      "colorDevicePanelAccent"
+                      "sliderDevicePanelBlur"
                     ],
                     "subgroups": []
                   }
@@ -11083,15 +11083,15 @@
                     },
                     {
                       "type": "row",
+                      "key": "colorDevicePanelAccent"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderDevicePanelBgOpacity"
                     },
                     {
                       "type": "row",
                       "key": "sliderDevicePanelBlur"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorDevicePanelAccent"
                     }
                   ],
                   "rowKeys": [
@@ -11119,9 +11119,9 @@
                     "sliderDevicePanelOffsetX",
                     "sliderDevicePanelOffsetY",
                     "colorDevicePanelBg",
+                    "colorDevicePanelAccent",
                     "sliderDevicePanelBgOpacity",
-                    "sliderDevicePanelBlur",
-                    "colorDevicePanelAccent"
+                    "sliderDevicePanelBlur"
                   ],
                   "subgroups": []
                 },
@@ -18200,15 +18200,15 @@
                     },
                     {
                       "type": "row",
+                      "key": "colorDevicePanelAccent"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderDevicePanelBgOpacity"
                     },
                     {
                       "type": "row",
                       "key": "sliderDevicePanelBlur"
-                    },
-                    {
-                      "type": "row",
-                      "key": "colorDevicePanelAccent"
                     }
                   ],
                   "rowKeys": [
@@ -18236,9 +18236,9 @@
                     "sliderDevicePanelOffsetX",
                     "sliderDevicePanelOffsetY",
                     "colorDevicePanelBg",
+                    "colorDevicePanelAccent",
                     "sliderDevicePanelBgOpacity",
-                    "sliderDevicePanelBlur",
-                    "colorDevicePanelAccent"
+                    "sliderDevicePanelBlur"
                   ],
                   "subgroups": []
                 }
@@ -21618,15 +21618,15 @@
                   },
                   {
                     "type": "row",
+                    "key": "colorDevicePanelAccent"
+                  },
+                  {
+                    "type": "row",
                     "key": "sliderDevicePanelBgOpacity"
                   },
                   {
                     "type": "row",
                     "key": "sliderDevicePanelBlur"
-                  },
-                  {
-                    "type": "row",
-                    "key": "colorDevicePanelAccent"
                   }
                 ],
                 "rowKeys": [
@@ -21654,9 +21654,9 @@
                   "sliderDevicePanelOffsetX",
                   "sliderDevicePanelOffsetY",
                   "colorDevicePanelBg",
+                  "colorDevicePanelAccent",
                   "sliderDevicePanelBgOpacity",
-                  "sliderDevicePanelBlur",
-                  "colorDevicePanelAccent"
+                  "sliderDevicePanelBlur"
                 ],
                 "subgroups": []
               },
@@ -49221,7 +49221,7 @@
     "desktop:New Group (22)": true,
     "desktop:New Group (21)": true,
     "desktop:New Group (17)": true,
-    "desktop:Play On Device": false,
+    "desktop:Play On Device": true,
     "desktop:Song Data": true,
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
