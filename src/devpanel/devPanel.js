@@ -8569,6 +8569,7 @@
             { tab, group: GO, id: 'checkboxOverrideShuffle', type: 'checkbox', label: 'Shuffle Button', value: false },
             { tab, group: GO, id: 'checkboxOverrideVolume', type: 'checkbox', label: 'Volume Button', value: false },
             { tab, group: GO, id: 'checkboxOverrideFilter', type: 'checkbox', label: 'Filter Button', value: true },
+            { tab, group: GO, id: 'checkboxOverrideSearch', type: 'checkbox', label: 'Search Button', value: true },
             { tab, group: GO, id: 'checkboxOverrideSongData', type: 'checkbox', label: 'Show Song Data Button', value: true },
             { tab, group: GO, id: 'checkboxOverrideDevice', type: 'checkbox', label: 'Play On Device Button', value: true },
             { tab, group: GO, id: 'checkboxOverrideStart', type: 'checkbox', label: 'Startup Page Start Button', value: true },

@@ -770,6 +770,7 @@ async function boot() {
             { k: 'Volume', host: el('spxVolume').querySelector('.spx-vol-btn'), kind: 'plain', opVar: '--spx-vol-op' },
             // Filter and Show Song Data have an on / off state like Shuffle: their CSS picks the off / on opacity variable from aria-pressed
             { k: 'Filter', host: el('spxFilter'), kind: 'plain', opVar: '--spx-filter-off-op', onVar: '--spx-filter-on-op' },
+            { k: 'Search', host: el('spxSearch'), kind: 'plain', opVar: '--spx-search-off-op', onVar: '--spx-search-on-op' }, // Search: on = a search is active
             { k: 'SongData', host: el('spxSongData'), kind: 'plain', opVar: '--spx-sd-off-op', onVar: '--spx-sd-on-op' },
             { k: 'Device', host: el('spxDevice'), kind: 'plain', opVar: '--spx-device-off-op', onVar: '--spx-device-on-op' }, // Play On Device: on = a device is playing
             { k: 'Start', host: el('spxStartBtn'), kind: 'start' }, // the start screen's Start button: colour + opacity only (it has its own animation group, not the bs one)
