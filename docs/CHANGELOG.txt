@@ -1410,3 +1410,18 @@ if the chain ends at a hidden button that sits at the screen edge, it takes over
 swaps it back in, so Sync saves the Inspector layout, never the temporary re-pointing; an Inspector edit made while re-pointed is treated as the new original. The Inspector shows the
 re-pointed anchor while a button above is hidden. Verified live (chain Shuffle -> Song Data -> Filter -> Search): middle hidden, stack on -> Filter 90 / Search 120 (under Shuffle at 60);
 stack off -> Filter breaks to 0 (the old behaviour); first + middle hidden -> Filter takes the first's place (60); all back -> 60 / 90 / 120 / 150; saved Filter anchor stays Song Data.
+
+--------------------------------------------------------------------------------
+2026-10-30  -  later 26 (Search icon dropdown, Search was invisible, Deployed render order)
+
+Owner: "for the search button gimme a drop down to select the icon. and i cant see the button right now", then a Deployed subgroup in Visibility / Render Order.
+- Why Search was invisible: it was never in the render-order list, so it got no z-index from renderOrder.js (CSS fallback z-index 4, under the graph canvas); and an item missing from the
+  saved list was appended at the BACK of the list (lowest layer). Fixed three ways: `search` is now in RO_ITEMS (devPanel.js, linked to Enabled), DEFAULT_KEYS and Z_OF (renderOrder.js);
+  a key the saved list has never heard of now goes right after the key before it in the default order, in that item's group (renderOrder.js refresh() and devPanel.js lpMergeCanonical()).
+  Measured locally: Search z 170 (Filter 180), same column as Filter, nothing over it.
+- Icon dropdown: Search Button > "Icon Style" (selectSearchIconStyle), 4 built-in options (Magnifying Glass = the old look, Bold Magnifier, Magnifier Over Lines, Binoculars) in
+  iconStyles.js EXTRA_ICON_SETS + extraIconNames.js; it gets the Import button like the other icon dropdowns. The button's CSS stroke styling was removed (the icons are filled shapes).
+- Deployed: subgroup "Deployed" inside Visibility / Render Order, the same item selector (control `listPickerRenderOrderDeployed`). Dev mode reads the original list; a normal visitor reads
+  Deployed (renderOrder.js refresh()). Until a Deployed list has been saved once, visitors keep getting the original list, so nothing changes on the live site until then. The Deployed
+  items are NOT linked to the Enabled checkboxes; renderOrder.js hides a visitor's switched-off item with `.ro-off` (DEPLOYED_HIDE) on top of its own Enabled checkbox.
+  Tested by switching Shuffle + Search off in Deployed: dev mode unaffected; with `dev-mode` removed, both are `.ro-off`, Filter is not. Not tested on the live Vercel site (needs a Sync first).
