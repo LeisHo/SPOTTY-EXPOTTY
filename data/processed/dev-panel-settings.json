@@ -307,6 +307,33 @@
     "sliderShuffleAnimReleaseSize": 20,
     "sliderShuffleAnimHoverOpacity": 100,
     "sliderShuffleAnimClickOpacity": 100,
+    "checkboxDeviceButtonEnabled": true,
+    "sliderDeviceIconSize": 20,
+    "sliderDeviceIconOffsetX": 0,
+    "sliderDeviceIconOffsetY": 0,
+    "sliderDeviceEdgeOffset": 14,
+    "sliderDeviceOffOpacity": 45,
+    "sliderDeviceOnOpacity": 100,
+    "colorDeviceIcon": "#f2f2f2",
+    "colorDeviceOn": "#1db954",
+    "checkboxDeviceMatchVolume": true,
+    "checkboxDeviceKeepPlaying": true,
+    "checkboxDeviceMuteClips": false,
+    "checkboxDeviceRemember": false,
+    "sliderDevicePollSeconds": 1.5,
+    "checkboxDeviceShowThisBrowser": true,
+    "checkboxDeviceShowVolume": true,
+    "sliderDeviceListRefresh": 4,
+    "checkboxDevicePanelCloseOnOutside": true,
+    "checkboxDeviceCloseOnPick": false,
+    "sliderDevicePanelWidth": 240,
+    "sliderDevicePanelFontSize": 13,
+    "sliderDevicePanelOffsetX": 0,
+    "sliderDevicePanelOffsetY": 6,
+    "colorDevicePanelBg": "#14161a",
+    "sliderDevicePanelBgOpacity": 92,
+    "sliderDevicePanelBlur": 6,
+    "colorDevicePanelAccent": "#1db954",
     "selectFilterIconStyle": "3",
     "selectTempoIconStyle": "",
     "selectValenceIconStyle": "",
@@ -648,11 +675,11 @@
     "sliderStartPlayLiftPressPx": 2,
     "sliderStartPlayLiftShadowBlur": 14,
     "sliderStartPlayLiftShadowOpacity": 0.5,
-    "listPickerRenderOrder": "{\"items\":[{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null}"
+    "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}"
   },
   "layout": {
-    "left": 298,
-    "top": 141,
+    "left": 112,
+    "top": 6,
     "width": 880,
     "height": 583
   },
@@ -11231,6 +11258,147 @@
                 }
               ]
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:Play On Device",
+              "items": [
+                {
+                  "type": "row",
+                  "key": "sliderDeviceIconSize"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDeviceIconOffsetX"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDeviceIconOffsetY"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDeviceEdgeOffset"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDeviceOffOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDeviceOnOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "colorDeviceIcon"
+                },
+                {
+                  "type": "row",
+                  "key": "colorDeviceOn"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxDeviceMatchVolume"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxDeviceKeepPlaying"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxDeviceMuteClips"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxDeviceRemember"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDevicePollSeconds"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxDeviceShowThisBrowser"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxDeviceShowVolume"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDeviceListRefresh"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxDevicePanelCloseOnOutside"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxDeviceCloseOnPick"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDevicePanelWidth"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDevicePanelFontSize"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDevicePanelOffsetX"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDevicePanelOffsetY"
+                },
+                {
+                  "type": "row",
+                  "key": "colorDevicePanelBg"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDevicePanelBgOpacity"
+                },
+                {
+                  "type": "row",
+                  "key": "sliderDevicePanelBlur"
+                },
+                {
+                  "type": "row",
+                  "key": "colorDevicePanelAccent"
+                }
+              ],
+              "rowKeys": [
+                "sliderDeviceIconSize",
+                "sliderDeviceIconOffsetX",
+                "sliderDeviceIconOffsetY",
+                "sliderDeviceEdgeOffset",
+                "sliderDeviceOffOpacity",
+                "sliderDeviceOnOpacity",
+                "colorDeviceIcon",
+                "colorDeviceOn",
+                "checkboxDeviceMatchVolume",
+                "checkboxDeviceKeepPlaying",
+                "checkboxDeviceMuteClips",
+                "checkboxDeviceRemember",
+                "sliderDevicePollSeconds",
+                "checkboxDeviceShowThisBrowser",
+                "checkboxDeviceShowVolume",
+                "sliderDeviceListRefresh",
+                "checkboxDevicePanelCloseOnOutside",
+                "checkboxDeviceCloseOnPick",
+                "sliderDevicePanelWidth",
+                "sliderDevicePanelFontSize",
+                "sliderDevicePanelOffsetX",
+                "sliderDevicePanelOffsetY",
+                "colorDevicePanelBg",
+                "sliderDevicePanelBgOpacity",
+                "sliderDevicePanelBlur",
+                "colorDevicePanelAccent"
+              ],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -20393,6 +20561,144 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "desktop:Play On Device",
+            "items": [
+              {
+                "type": "row",
+                "key": "sliderDeviceIconSize"
+              },
+              {
+                "type": "row",
+                "key": "sliderDeviceIconOffsetX"
+              },
+              {
+                "type": "row",
+                "key": "sliderDeviceIconOffsetY"
+              },
+              {
+                "type": "row",
+                "key": "sliderDeviceEdgeOffset"
+              },
+              {
+                "type": "row",
+                "key": "sliderDeviceOffOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderDeviceOnOpacity"
+              },
+              {
+                "type": "row",
+                "key": "colorDeviceIcon"
+              },
+              {
+                "type": "row",
+                "key": "colorDeviceOn"
+              },
+              {
+                "type": "row",
+                "key": "checkboxDeviceMatchVolume"
+              },
+              {
+                "type": "row",
+                "key": "checkboxDeviceKeepPlaying"
+              },
+              {
+                "type": "row",
+                "key": "checkboxDeviceMuteClips"
+              },
+              {
+                "type": "row",
+                "key": "checkboxDeviceRemember"
+              },
+              {
+                "type": "row",
+                "key": "sliderDevicePollSeconds"
+              },
+              {
+                "type": "row",
+                "key": "checkboxDeviceShowThisBrowser"
+              },
+              {
+                "type": "row",
+                "key": "checkboxDeviceShowVolume"
+              },
+              {
+                "type": "row",
+                "key": "sliderDeviceListRefresh"
+              },
+              {
+                "type": "row",
+                "key": "checkboxDevicePanelCloseOnOutside"
+              },
+              {
+                "type": "row",
+                "key": "checkboxDeviceCloseOnPick"
+              },
+              {
+                "type": "row",
+                "key": "sliderDevicePanelWidth"
+              },
+              {
+                "type": "row",
+                "key": "sliderDevicePanelFontSize"
+              },
+              {
+                "type": "row",
+                "key": "sliderDevicePanelOffsetX"
+              },
+              {
+                "type": "row",
+                "key": "sliderDevicePanelOffsetY"
+              },
+              {
+                "type": "row",
+                "key": "colorDevicePanelBg"
+              },
+              {
+                "type": "row",
+                "key": "sliderDevicePanelBgOpacity"
+              },
+              {
+                "type": "row",
+                "key": "sliderDevicePanelBlur"
+              },
+              {
+                "type": "row",
+                "key": "colorDevicePanelAccent"
+              }
+            ],
+            "rowKeys": [
+              "sliderDeviceIconSize",
+              "sliderDeviceIconOffsetX",
+              "sliderDeviceIconOffsetY",
+              "sliderDeviceEdgeOffset",
+              "sliderDeviceOffOpacity",
+              "sliderDeviceOnOpacity",
+              "colorDeviceIcon",
+              "colorDeviceOn",
+              "checkboxDeviceMatchVolume",
+              "checkboxDeviceKeepPlaying",
+              "checkboxDeviceMuteClips",
+              "checkboxDeviceRemember",
+              "sliderDevicePollSeconds",
+              "checkboxDeviceShowThisBrowser",
+              "checkboxDeviceShowVolume",
+              "sliderDeviceListRefresh",
+              "checkboxDevicePanelCloseOnOutside",
+              "checkboxDeviceCloseOnPick",
+              "sliderDevicePanelWidth",
+              "sliderDevicePanelFontSize",
+              "sliderDevicePanelOffsetX",
+              "sliderDevicePanelOffsetY",
+              "colorDevicePanelBg",
+              "sliderDevicePanelBgOpacity",
+              "sliderDevicePanelBlur",
+              "colorDevicePanelAccent"
+            ],
+            "subgroups": []
           }
         ]
       },
@@ -28854,6 +29160,15 @@
                 }
               ]
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Play On Device",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -33722,6 +34037,12 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "mobile:Play On Device",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       },
@@ -39970,6 +40291,15 @@
                 }
               ]
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Play On Device",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
+            }
           }
         ],
         "rowKeys": [
@@ -44838,6 +45168,12 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "landscape:Play On Device",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       },
@@ -45694,6 +46030,7 @@
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
     "desktop:Filter Panel Shadow": true,
+    "desktop:Play On Device": false,
     "desktop:Scrub Audio": true,
     "desktop:New Group (2)": true,
     "desktop:Spotify Handoff": true,
@@ -45807,6 +46144,7 @@
     "mobile:Previous / Next Shadow": false,
     "mobile:Title Lift Shadow": false,
     "mobile:Filter Panel Shadow": false,
+    "mobile:Play On Device": false,
     "mobile:Scrub Audio": true,
     "mobile:New Group (2)": false,
     "mobile:Spotify Handoff": true,
@@ -45920,6 +46258,7 @@
     "landscape:Previous / Next Shadow": false,
     "landscape:Title Lift Shadow": false,
     "landscape:Filter Panel Shadow": false,
+    "landscape:Play On Device": false,
     "landscape:Scrub Audio": false,
     "landscape:New Group (2)": false,
     "landscape:Spotify Handoff": false,
@@ -46831,7 +47170,9 @@
     "landscape:New Group (35)": "SEPARATOR",
     "landscape:New Group (37)": "TYPE",
     "landscape:New Group (39)": "OVERFLOW SCROLL",
-    "landscape:New Group (38)": "Overflow"
+    "landscape:New Group (38)": "Overflow",
+    "mobile:Play On Device": null,
+    "landscape:Play On Device": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
