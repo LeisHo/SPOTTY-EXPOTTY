@@ -1463,3 +1463,17 @@ Owner: put the device in the Playback Timing Log; add a Debug checkbox for a log
 - main.js: `refreshPlayUi(src)` logs each refresh (who called it, PLAYING / paused, spotify=, clip=, playingId, "(same as before)" when the shown state did not change), and a MutationObserver per element
   logs the real icon swaps: `DOM cover .playing -> ON / OFF` and `DOM glyph .playing -> ON / OFF`. The flicker itself is untouched.
 - Tested: both logs filled correctly on a cover click / pause locally; no script errors.
+
+--------------------------------------------------------------------------------
+2026-10-30  -  later 31 (six bugs from the exported Play On Device log)
+
+Source: spotty-expotty-logs-2026-10-30T22-31-41-713Z.json (live site, logged in, Play On Device "Everywhere"). Not reproduced locally (no real device); the fixes follow the log + the code.
+1. handoff.js playTrack: a failed / "didn't switch" play request used to load the 30 s iframe preview even while logged in and with a device as the target (log 3.2-14.9 s and 65.6-81.5 s). With the SDK / a device as the
+   player there is now NO iframe fallback; the song is given up on (`giveUpOn`: logged as "GAVE UP on <id>", the player paused). The iframe is still used only when the SDK never connects (phones).
+2. One song (2ggM9SgRdE9Y7Bi82i8dy9) answered 403 "Restriction violated" ~15 times on two devices: a 403 is not retried any more (`sdkPlayRestricted()`), and a given-up song is not asked for again for 60 s.
+3. sdkPlayer.js sdkPlay: only a 404 drops the device ("did not answer"); a 403 used to (it blamed Everywhere for the song's refusal at 8.118 s).
+4. "SDK did not switch" now compares with what the player reported BEFORE the request (a different id = switched). Spotify reported a regional copy under another id, without linked_from (6pzdxt... -> 2flHPm...).
+5. Flicker: handleUpdate (the iframe's updates) returns at once while the SDK / a device is the player, so it no longer overwrites the shared playing state; and sdkPlayer.js onState ignores the browser player's own
+   state events while a device is the target (the 3 ms flip at 19.983-19.986 s).
+6. A song swap in the iframe reported "paused at 14321 ms" and counted as the song ending, so shuffle skipped the song picked by scrubbing (81.5 s): embed end / pause detection is ignored for 3 s after a loadUri.
+Checked: syntax + page load, no script errors. NOT tested: any real device or the 403 song. If it recurs, send the Playback Timing + Play Button State logs again (a "GAVE UP" line now says why).
