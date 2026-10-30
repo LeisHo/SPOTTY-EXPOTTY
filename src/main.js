@@ -1300,7 +1300,7 @@ async function boot() {
             return;
         }
         pn.style.top = Math.max(4, r.bottom - setting('sliderFilterPanelOffsetY')) + 'px'; // positive = up
-        const w = pn.offsetWidth || setting('sliderFilterPanelWidth');
+        const w = (pn.offsetWidth || setting('sliderFilterPanelWidth')) - flt.fitGrowth; // the base width: fit() widens the panel outward from this box
         pn.style.left = Math.max(4, Math.min(window.innerWidth - w - 4, r.right - w + setting('sliderFilterPanelOffsetX'))) + 'px';
         // a dragged edge keeps its own place: X = left + width, Y = top + height (the opposite edge stayed where it was)
         const ur = flt.userRect;

@@ -199,14 +199,14 @@
 .spx-filter[aria-pressed="true"] { --bs-op: var(--spx-filter-on-op, 1); color: var(--spx-filter-on-color, #1db954); }
 .spx-filter[hidden] { display: none; }
 .spx-app.no-shadow-vol .spx-filter { filter: none; }
-.spx-filter-panel { position: fixed; z-index: 2147482000; width: var(--spx-flt-width, 260px); box-sizing: border-box; padding: calc(10px + var(--fit-pt, 0px)) calc(12px + var(--fit-pr, 0px)) calc(12px + var(--fit-pb, 0px)) calc(12px + var(--fit-pl, 0px)); border-radius: 10px; color: #f2f2f2; font-size: var(--spx-flt-font, 12px); font-family: var(--spx-font, inherit);
+.spx-filter-panel { position: fixed; z-index: 2147482000; width: calc(var(--spx-flt-userw, var(--spx-flt-width, 260px)) + var(--fit-gl, 0px) + var(--fit-gr, 0px)); margin-left: calc(-1 * var(--fit-gl, 0px)); box-sizing: border-box; padding: calc(10px + var(--fit-pt, 0px)) 12px calc(12px + var(--fit-pb, 0px)) 12px; /* fit(): an item pushed past a side edge makes the panel WIDER (--fit-gl / --fit-gr), the space from the edge to the slider ends never changes */ border-radius: 10px; color: #f2f2f2; font-size: var(--spx-flt-font, 12px); font-family: var(--spx-font, inherit);
     background: var(--spx-flt-bg, rgba(20,22,26,0.92)); box-shadow: var(--shadow-flt-panel, 0 6px 24px #000a); backdrop-filter: blur(var(--spx-flt-blur, 6px)); -webkit-backdrop-filter: blur(var(--spx-flt-blur, 6px)); --flt-accent: var(--spx-flt-accent, #1db954); }
 .spx-filter-panel { display: flex; flex-direction: column; } /* head, rows and the song count are flex items: the count stays visible while the rows clip or scroll */
 .spx-filter-panel[hidden] { display: none; }
 .spx-filter-panel .spx-flt-head { order: 0; }
 .spx-filter-panel .spx-flt-count { order: 3; flex: none; }
 .spx-filter-panel.count-top .spx-flt-count { order: 1; }
-.spx-filter-panel .spx-flt-rows { order: 2; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: hidden; padding: var(--fit-rt, 0px) calc(6px + var(--fit-rr, 0px)) var(--fit-rb, 0px) calc(6px + var(--fit-rl, 0px)); margin-left: calc(-6px - var(--fit-rl, 0px)); margin-right: calc(-6px - var(--fit-rr, 0px)); } /* fit(): the clipping box grows by the overflow (padding) while the margin takes the same amount back, so nothing moves */
+.spx-filter-panel .spx-flt-rows { order: 2; flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: hidden; padding: var(--fit-rt, 0px) 6px var(--fit-rb, 0px) 6px; margin-left: -6px; margin-right: -6px; } /* fit(): the clipping box grows by the overflow (padding) while the margin takes the same amount back, so nothing moves */
 .spx-filter-panel.scroll { max-height: calc(100dvh - 8px); }
 .spx-filter-panel.scroll .spx-flt-rows { overflow-y: auto; overscroll-behavior: contain; }
 .spx-filter-panel.no-scrollbar .spx-flt-rows { scrollbar-width: none; -ms-overflow-style: none; } /* Show Scroll Bar off: the panel still scrolls, the bar is just not drawn */

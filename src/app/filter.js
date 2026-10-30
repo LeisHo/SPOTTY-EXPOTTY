@@ -133,6 +133,7 @@ export function createFilter(songs, { host, onChange }) {
             if (e.button !== 0) return;
             e.preventDefault();
             try { h.setPointerCapture(e.pointerId); } catch (e2) { /* not an active pointer */ }
+            panel.style.removeProperty('--fit-gl'); panel.style.removeProperty('--fit-gr'); fitG = { l: 0, r: 0 }; // drag the base box; fit() adds the growth back afterwards
             const r0 = panel.getBoundingClientRect(), x0 = e.clientX, y0 = e.clientY;
             const move = ev => {
                 if (horizontal) {
@@ -156,7 +157,7 @@ export function createFilter(songs, { host, onChange }) {
             const up = () => {
                 h.removeEventListener('pointermove', move); h.removeEventListener('pointerup', up); h.removeEventListener('pointercancel', up);
                 const q = panel.getBoundingClientRect();
-                if (horizontal) userRect.x = { left: Math.round(q.left), width: Math.round(q.width) };
+                if (horizontal) { userRect.x = { left: Math.round(q.left), width: Math.round(q.width) }; panel.style.width = ''; panel.style.setProperty('--spx-flt-userw', userRect.x.width + 'px'); }
                 else userRect.y = { top: Math.round(q.top), height: Math.round(q.height) };
                 saveRect();
                 setTimeout(fit, 0);
@@ -164,12 +165,12 @@ export function createFilter(songs, { host, onChange }) {
             h.addEventListener('pointermove', move); h.addEventListener('pointerup', up); h.addEventListener('pointercancel', up);
         });
         h.addEventListener('dblclick', () => { // this axis goes back to the dev panel's width / the content height and the default place
-            if (horizontal) { delete userRect.x; panel.style.width = ''; } else { delete userRect.y; panel.style.height = ''; }
+            if (horizontal) { delete userRect.x; panel.style.width = ''; panel.style.removeProperty('--spx-flt-userw'); } else { delete userRect.y; panel.style.height = ''; }
             saveRect();
             onChange({ layout: true });
         });
     });
-    if (userRect.x && userRect.x.width >= MIN_W) panel.style.width = userRect.x.width + 'px';
+    if (userRect.x && userRect.x.width >= MIN_W) panel.style.setProperty('--spx-flt-userw', userRect.x.width + 'px');
     if (userRect.y && userRect.y.height >= MIN_H) panel.style.height = userRect.y.height + 'px';
     host.appendChild(panel);
     const rowsEl = panel.querySelector('.spx-flt-rows'), countEl = panel.querySelector('.spx-flt-count');
@@ -239,9 +240,9 @@ export function createFilter(songs, { host, onChange }) {
         panel.classList.toggle('draggable', !!setting('checkboxFilterPanelDraggable'));
         panel.classList.toggle('count-top', !!setting('checkboxFilterSongCountTop'));
         // an axis switched off goes back to the dev panel's own size on that axis; switched on again, the remembered rectangle returns
-        if (!rzx) panel.style.width = '';
+        if (!rzx) { panel.style.width = ''; panel.style.removeProperty('--spx-flt-userw'); }
         if (!rzy) panel.style.height = '';
-        if (rzx && userRect.x && !panel.style.width && userRect.x.width >= MIN_W) panel.style.width = userRect.x.width + 'px';
+        if (rzx && userRect.x && userRect.x.width >= MIN_W) panel.style.setProperty('--spx-flt-userw', userRect.x.width + 'px');
         if (rzy && userRect.y && !panel.style.height && userRect.y.height >= MIN_H) panel.style.height = userRect.y.height + 'px';
         // Panel Song Count group: on/off, font size, X / Y offset, bold, italic, letter spacing, space around the "/"
         const cOn = !!setting('checkboxFilterSongCountEnabled');
@@ -268,9 +269,11 @@ export function createFilter(songs, { host, onChange }) {
         const q = rg.getBoundingClientRect();
         return q.width || q.height ? q : countEl.getBoundingClientRect();
     };
+    let fitG = { l: 0, r: 0 }; // how much the panel is currently wider than its base width, per side (main.js places the base box)
     function fit() {
         const S = panel.style;
-        ['rt', 'rb', 'rl', 'rr', 'pt', 'pb', 'pl', 'pr', 'ct', 'cb'].forEach(k => S.removeProperty('--fit-' + k));
+        ['rt', 'rb', 'pt', 'pb', 'ct', 'cb', 'gl', 'gr'].forEach(k => S.removeProperty('--fit-' + k));
+        fitG = { l: 0, r: 0 };
         rowsEl.style.clipPath = '';
         if (panel.hidden) return;
         // Song Count cutoff distance (first, measured with everything reset): the scroll area keeps AT LEAST the dev panel's distance from the song count's real
@@ -282,17 +285,34 @@ export function createFilter(songs, { host, onChange }) {
             const top = panel.classList.contains('count-top'), sep = top ? rr.top - cr.bottom : cr.top - rr.bottom, extra = Math.ceil(gap - sep);
             if (extra > 0) S.setProperty(top ? '--fit-ct' : '--fit-cb', extra + 'px');
         }
-        // scroll mode: what is below (or scrolled above) the visible part is scroll content, not spill - only left / right and an item pushed above the unscrolled top count
+        // SIDES: the space between the panel's edge and the slider ends is fixed, so nothing that sticks out past a side shortens the sliders - the panel itself
+        // gets wider on that side instead (the head button and the song count's text are what can be moved out there; the song count is centred, so it moves with
+        // the growth and the loop adds the remainder until nothing is outside; capped so the panel stays inside the window).
+        {
+            const left0 = parseFloat(S.left) || 0, base = panel.getBoundingClientRect().width;
+            const maxL = Math.max(0, left0 - 4), maxR = Math.max(0, window.innerWidth - 4 - (left0 + base));
+            for (let pass = 0; pass < 12; pass++) {
+                const bb = panel.getBoundingClientRect(), rects = Array.from(panel.querySelectorAll('.spx-flt-head > *')).map(el => el.getBoundingClientRect());
+                if (countEl.style.display !== 'none') rects.push(countTextRect());
+                let ol = 0, orr = 0;
+                rects.forEach(q => { if (!q.width && !q.height) return; ol = Math.max(ol, bb.left - q.left); orr = Math.max(orr, q.right - bb.right); });
+                const nl = Math.min(maxL, fitG.l + Math.max(0, Math.ceil(ol))), nr = Math.min(maxR, fitG.r + Math.max(0, Math.ceil(orr)));
+                if (nl === fitG.l && nr === fitG.r) break;
+                fitG = { l: nl, r: nr };
+                S.setProperty('--fit-gl', nl + 'px'); S.setProperty('--fit-gr', nr + 'px');
+            }
+        }
+        // TOP / BOTTOM: scroll mode: what is below (or scrolled above) the visible part is scroll content, not spill - only an item pushed above the unscrolled top counts
         const scrollMode = panel.classList.contains('scroll');
         const grow = (box, els, pre, scrolled, extraRects) => {
-            const bb = box.getBoundingClientRect(), m = { t: 0, b: 0, l: 0, r: 0 }, st = scrolled ? rowsEl.scrollTop : 0;
+            const bb = box.getBoundingClientRect(), m = { t: 0, b: 0 }, st = scrolled ? rowsEl.scrollTop : 0;
             Array.from(els).map(el => el.getBoundingClientRect()).concat(extraRects || []).forEach(q => {
                 if (!q.width && !q.height) return;
-                m.t = Math.max(m.t, bb.top - (q.top + st)); m.b = Math.max(m.b, q.bottom - bb.bottom); m.l = Math.max(m.l, bb.left - q.left); m.r = Math.max(m.r, q.right - bb.right);
+                m.t = Math.max(m.t, bb.top - (q.top + st)); m.b = Math.max(m.b, q.bottom - bb.bottom);
             });
             if (scrolled) m.b = 0;
-            let grew = false; // adds to what is already padded (a centred item moves only half of what the padding changes, so one pass is not always enough)
-            const cap = { t: bb.height * 0.35, b: bb.height * 0.35, l: bb.width * 0.35, r: bb.width * 0.35 }; // an extreme offset must not squeeze the sliders away: at most 35% of the box per side
+            let grew = false; // adds to what is already padded (the song count is centred in its row, so one pass is not always enough)
+            const cap = { t: bb.height * 0.35, b: bb.height * 0.35 }; // an extreme offset must not squeeze the sliders away: at most 35% of the box per side
             Object.keys(m).forEach(k => { if (m[k] > 0.5) { const cur = parseFloat(S.getPropertyValue('--fit-' + pre + k)) || 0, next = Math.min(cur + Math.ceil(m[k]), pre === 'p' ? cap[k] : Infinity); if (next > cur + 0.5) { S.setProperty('--fit-' + pre + k, next + 'px'); grew = true; } } });
             return grew;
         };
@@ -310,7 +330,7 @@ export function createFilter(songs, { host, onChange }) {
     refresh();
 
     return {
-        get userPos() { return userPos; }, get userRect() { return userRect; }, panel, passes, active, countPassing, clear, refresh, ext, range,
+        get userPos() { return userPos; }, get userRect() { return userRect; }, get fitGrowth() { return fitG.l + fitG.r; }, panel, passes, active, countPassing, clear, refresh, ext, range,
         get open() { return !panel.hidden; },
         setOpen(v) { panel.hidden = !v; if (v) refresh(); },
         describe() { return FEATURES.filter(narrowed).map(f => `${f.label} ${fmt(f, range[f.key][0])}-${fmt(f, range[f.key][1])}`).join(', ') || 'none'; },
