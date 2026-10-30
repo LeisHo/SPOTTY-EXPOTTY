@@ -8777,7 +8777,8 @@
         const FPG = 'Panel';
         findGroupContent(tab, FLB, 'renderSpottyDevControls', FPG).appendChild(createDevGroupElement(FPG, tab));
         const FPG_CONTROLS = [
-            { tab, group: FPG, id: 'checkboxFilterPanelResizable', type: 'checkbox', label: 'Resizable (Drag The Left, Right And Bottom Edges; Double-Click An Edge To Reset)', value: true },
+            { tab, group: FPG, id: 'checkboxFilterPanelResizeX', type: 'checkbox', label: 'X Resize (Drag The Left And Right Edges; Double-Click An Edge To Reset)', value: true },
+            { tab, group: FPG, id: 'checkboxFilterPanelResizeY', type: 'checkbox', label: 'Y Resize (Drag The Bottom Edge; Double-Click It To Reset)', value: true },
             { tab, group: FPG, id: 'checkboxFilterPanelScrollable', type: 'checkbox', label: 'Scrollable (The Sliders Scroll When The Panel Is Short; The Song Count Stays Visible)', value: false },
             { tab, group: FPG, id: 'checkboxFilterPanelDraggable', type: 'checkbox', label: 'Draggable (Drag The Panel By Its Background)', value: false },
         ];

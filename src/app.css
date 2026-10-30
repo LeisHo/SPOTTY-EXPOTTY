@@ -210,7 +210,8 @@
 .spx-filter-panel.scroll { max-height: calc(100dvh - 8px); }
 .spx-filter-panel.scroll .spx-flt-rows { overflow-y: auto; overscroll-behavior: contain; }
 .spx-filter-panel.no-resize .spx-flt-resize { display: none; }
-.spx-flt-resize-b { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 8px; cursor: ns-resize; }
+.spx-filter-panel.no-resize-x .spx-flt-resize-l, .spx-filter-panel.no-resize-x .spx-flt-resize-r, .spx-filter-panel.no-resize-y .spx-flt-resize-b { display: none; }
+.spx-filter-panel .spx-flt-resize-b { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 10px; cursor: ns-resize; z-index: 1; } /* the panel prefix: the plain .spx-flt-resize rule below would otherwise win and turn this into a left-edge strip */
 .spx-filter-panel.draggable { cursor: grab; }
 .spx-filter-panel.draggable input, .spx-filter-panel.draggable button { cursor: pointer; }
 .spx-flt-resize { position: absolute; top: 0; bottom: 0; width: 8px; cursor: ew-resize; z-index: 0; touch-action: none; }

@@ -235,18 +235,18 @@ export function createFilter(songs, { host, onChange }) {
         panel.classList.toggle('no-nums', !setting('checkboxFilterShowNumbers'));
         panel.classList.toggle('no-range-text', !setting('checkboxFilterShowRangeText')); // the "36 BPM - 209 BPM" text between the two end numbers
         // Panel group: resizable / scrollable / draggable
-        const rz = !!setting('checkboxFilterPanelResizable');
-        panel.classList.toggle('no-resize', !rz);
+        const rzx = !!setting('checkboxFilterPanelResizeX'), rzy = !!setting('checkboxFilterPanelResizeY');
+        panel.classList.toggle('no-resize-x', !rzx); panel.classList.toggle('no-resize-y', !rzy);
         panel.classList.toggle('scroll', !!setting('checkboxFilterPanelScrollable'));
         panel.classList.toggle('draggable', !!setting('checkboxFilterPanelDraggable'));
         panel.classList.toggle('count-top', !!setting('checkboxFilterSongCountTop'));
-        if (!rz) { panel.style.width = ''; panel.style.height = ''; }
-        else { // back to the remembered size after a Resizable off / on
-            try {
-                if (!panel.style.width) { const w0 = parseFloat(localStorage.getItem(WIDTH_KEY)); if (w0 >= MIN_W) panel.style.width = w0 + 'px'; }
-                if (!panel.style.height) { const h0 = parseFloat(localStorage.getItem(HEIGHT_KEY)); if (h0 >= MIN_H) panel.style.height = h0 + 'px'; }
-            } catch (e) { /* storage blocked */ }
-        }
+        // an axis switched off goes back to the dev panel's own size on that axis; switched on again, the remembered drag size returns
+        if (!rzx) panel.style.width = '';
+        if (!rzy) panel.style.height = '';
+        try {
+            if (rzx && !panel.style.width) { const w0 = parseFloat(localStorage.getItem(WIDTH_KEY)); if (w0 >= MIN_W) panel.style.width = w0 + 'px'; }
+            if (rzy && !panel.style.height) { const h0 = parseFloat(localStorage.getItem(HEIGHT_KEY)); if (h0 >= MIN_H) panel.style.height = h0 + 'px'; }
+        } catch (e) { /* storage blocked */ }
         // Panel Song Count group: on/off, font size, X / Y offset, bold, italic, letter spacing, space around the "/"
         const cOn = !!setting('checkboxFilterSongCountEnabled');
         countEl.style.display = cOn ? '' : 'none';
