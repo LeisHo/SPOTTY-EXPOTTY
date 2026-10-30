@@ -212,7 +212,8 @@
 .spx-filter-panel.no-scrollbar .spx-flt-rows { scrollbar-width: none; -ms-overflow-style: none; } /* Show Scroll Bar off: the panel still scrolls, the bar is just not drawn */
 .spx-filter-panel.no-scrollbar .spx-flt-rows::-webkit-scrollbar { display: none; }
 .spx-filter-panel.no-resize .spx-flt-resize { display: none; }
-.spx-filter-panel.no-resize-x .spx-flt-resize-l, .spx-filter-panel.no-resize-x .spx-flt-resize-r, .spx-filter-panel.no-resize-y .spx-flt-resize-b { display: none; }
+.spx-filter-panel.no-resize-x .spx-flt-resize-l, .spx-filter-panel.no-resize-x .spx-flt-resize-r, .spx-filter-panel.no-resize-y .spx-flt-resize-b, .spx-filter-panel.no-resize-y .spx-flt-resize-t { display: none; }
+.spx-filter-panel .spx-flt-resize-t { left: 0; right: 0; top: 0; bottom: auto; width: auto; height: 10px; cursor: ns-resize; z-index: 1; }
 .spx-filter-panel .spx-flt-resize-b { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 10px; cursor: ns-resize; z-index: 1; } /* the panel prefix: the plain .spx-flt-resize rule below would otherwise win and turn this into a left-edge strip */
 .spx-filter-panel.draggable { cursor: grab; }
 .spx-filter-panel.draggable input, .spx-filter-panel.draggable button { cursor: pointer; }

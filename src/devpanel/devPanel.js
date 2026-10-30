@@ -7224,6 +7224,9 @@
     // boot-time load below — applies the panel's own state, then the
     // host's own extra state (devSaveApplyExtra) if any was saved.
     function applyDevPanelStateWithExtra(data) {
+        // Imported icons FIRST: a saved icon dropdown value can name one of them (e.g. Play On Device icon 5 = the 1st imported one), and the dropdown has to
+        // list it before its value is restored - otherwise the value falls back to empty and the next Sync saves the default (found 2026-10-30).
+        if (data && data.extra && data.extra.customIcons && window.SPX_ICON_IMPORT) window.SPX_ICON_IMPORT.apply(data.extra.customIcons);
         applyFullDevPanelState(data);
         if (data && data.extra !== undefined && devSaveApplyExtra) devSaveApplyExtra(data.extra);
     }
@@ -8804,6 +8807,7 @@
             { tab, group: PSC, id: 'sliderFilterSongCountFontSize', type: 'slider', label: 'Font Size (Px):', min: 6, max: 40, step: 1, value: 12 },
             { tab, group: PSC, id: 'sliderFilterSongCountOffsetX', type: 'slider', label: 'X Offset (Px):', min: -200, max: 200, step: 1, value: 0 },
             { tab, group: PSC, id: 'sliderFilterSongCountOffsetY', type: 'slider', label: 'Y Offset (Px, Positive = Up):', min: -200, max: 200, step: 1, value: 0 },
+            { tab, group: PSC, id: 'sliderFilterSongCountCutoffDistance', type: 'slider', label: 'Scroll Cutoff Distance From Song Count (Px, Positive = Farther; Count At Bottom: Rows End Above It, On Top: Start Below It)', min: -60, max: 120, step: 1, value: 0 },
             { tab, group: PSC, id: 'sliderFilterSongCountLetterSpacing', type: 'slider', label: 'Letter Spacing (Px):', min: -3, max: 15, step: 0.1, value: 0 },
             { tab, group: PSC, id: 'sliderFilterSongCountNumberGap', type: 'slider', label: 'Space Between The Numbers And The "/" (Px):', min: 0, max: 40, step: 1, value: 4 },
             { tab, group: PSC, id: 'checkboxFilterSongCountBold', type: 'checkbox', label: 'Bold', value: false },
