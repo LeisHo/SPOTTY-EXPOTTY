@@ -13,7 +13,7 @@ import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn, seekClip, clipLength, onClipState, setOnClipEnded, pauseClip, resumeClip } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
-import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon, applySongDataIcon, applyDeviceIcon } from './app/iconStyles.js';
+import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon, applySearchIcon, applySongDataIcon, applyDeviceIcon } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
 import { initAudioMods } from './app/audioMods.js';
 import { logEvent } from './app/debugLog.js';
@@ -894,6 +894,7 @@ async function boot() {
             c('--spx-search-off-op', String(setting('sliderSearchOffOpacity') / 100)); c('--spx-search-on-op', String(setting('sliderSearchOnOpacity') / 100));
             c('--spx-search-color', setting('colorSearchIcon')); c('--spx-search-on-color', setting('colorSearchOn'));
             el('spxSearch').style.setProperty('--bs-size', ic + 'px');
+            applySearchIcon(el('spxSearch').querySelector('svg'), iconIndex(setting('selectSearchIconStyle')));
             if (srch) {
                 const ps = srch.panel.style;
                 ps.setProperty('--spx-srch-width', setting('sliderSearchPanelWidth') + 'px'); ps.setProperty('--spx-srch-font', setting('sliderSearchPanelFontSize') + 'px');

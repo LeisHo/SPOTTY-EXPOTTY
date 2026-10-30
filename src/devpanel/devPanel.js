@@ -3536,7 +3536,15 @@
         const canon = ctrl.canonicalItems(), byKey = new Map(canon.map(c => [c.key, c]));
         const out = [], seen = new Set();
         list.forEach(it => { const c = it && byKey.get(it.key); if (c && !seen.has(it.key)) { seen.add(it.key); out.push(Object.assign({}, it, { name: c.name })); } });
-        canon.forEach(c => { if (!seen.has(c.key)) out.push(Object.assign({}, c)); });
+        // a new item goes right after the item that precedes it in the code's own order (and into that item's group), not to the back where it would sit behind everything
+        canon.forEach((c, ci) => {
+            if (seen.has(c.key)) return;
+            const prev = ci > 0 ? out.findIndex(o => o.key === canon[ci - 1].key) : -1;
+            const add = Object.assign({}, c);
+            if (prev >= 0 && out[prev].group) add.group = out[prev].group;
+            out.splice(prev + 1, 0, add);
+            seen.add(c.key);
+        });
         return out;
     }
     // Updates the "Default: X" / "No default set" text under a list-picker
@@ -7048,7 +7056,7 @@
     }
     // The icon style dropdowns are always the first rows of their group (owner's request): a saved layout (Sync) keeps whatever order the panel had
     // when it was saved, which put them back down the list once, so this runs after every restore and re-pins them. Order = this list.
-    const ICON_DROPDOWN_ORDER = ['selectVolIconStyle', 'selectShuffleIconStyle', 'selectFilterIconStyle', 'selectTempoIconStyle', 'selectValenceIconStyle', 'selectDanceIconStyle', 'selectEnergyIconStyle', 'selectTitleLenIconStyle', 'selectArtistLenIconStyle', 'selectAlbumLenIconStyle', 'selectSongDateIconStyle', 'selectSongLenIconStyle', 'selectDeviceIconStyle', 'selectSongDataIconStyle', 'selectPlayIconStyle', 'selectPauseIconStyle', 'selectNavIconStyle'];
+    const ICON_DROPDOWN_ORDER = ['selectVolIconStyle', 'selectShuffleIconStyle', 'selectFilterIconStyle', 'selectSearchIconStyle', 'selectTempoIconStyle', 'selectValenceIconStyle', 'selectDanceIconStyle', 'selectEnergyIconStyle', 'selectTitleLenIconStyle', 'selectArtistLenIconStyle', 'selectAlbumLenIconStyle', 'selectSongDateIconStyle', 'selectSongLenIconStyle', 'selectDeviceIconStyle', 'selectSongDataIconStyle', 'selectPlayIconStyle', 'selectPauseIconStyle', 'selectNavIconStyle'];
     // A checkbox row = a control row whose own id starts with "checkbox" (the id prefix is the panel's control-type convention; the extra Show-in-Mobile /
     // Independent checkboxes inside every row do not count).
     const isCheckboxRow = el => el.classList && el.classList.contains('dev-row') && /^checkbox/.test(getRowKey(el, 0));
@@ -8013,8 +8021,8 @@
     // ---- Import icons: a button to the right of every icon dropdown --------------------------------------------------------------------------------------------------
     // Pick one or several SVG files: each becomes an entry of that dropdown's list (named after the file); a name that already exists is overwritten. The work is done by
     // src/app/iconImport.js (window.SPX_ICON_IMPORT); the lists, and the saved copy (Sync -> extra.customIcons, plus localStorage), live there.
-    const ICON_SELECT_RE = /^select(?:Mobile|Landscape)?(Vol|Shuffle|Filter|Tempo|Valence|Dance|Energy|SongData|Play|Pause|Nav|TitleLen|ArtistLen|AlbumLen|SongDate|SongLen|Device)IconStyle$/;
-    const ICON_SELECT_KEY = { Vol: 'volume', Shuffle: 'shuffle', Filter: 'filter', Tempo: 'tp', Valence: 'v', Dance: 'dn', Energy: 'e', SongData: 'data', Play: 'play', Pause: 'pause', Nav: 'nav', TitleLen: 'ln', ArtistLen: 'la', AlbumLen: 'lb', SongDate: 'rd', SongLen: 'du', Device: 'device' };
+    const ICON_SELECT_RE = /^select(?:Mobile|Landscape)?(Vol|Shuffle|Filter|Search|Tempo|Valence|Dance|Energy|SongData|Play|Pause|Nav|TitleLen|ArtistLen|AlbumLen|SongDate|SongLen|Device)IconStyle$/;
+    const ICON_SELECT_KEY = { Vol: 'volume', Shuffle: 'shuffle', Filter: 'filter', Search: 'search', Tempo: 'tp', Valence: 'v', Dance: 'dn', Energy: 'e', SongData: 'data', Play: 'play', Pause: 'pause', Nav: 'nav', TitleLen: 'ln', ArtistLen: 'la', AlbumLen: 'lb', SongDate: 'rd', SongLen: 'du', Device: 'device' };
     const iconKeyOfSelect = sel => { const m = ICON_SELECT_RE.exec(sel.id || ''); return m ? ICON_SELECT_KEY[m[1]] : null; };
     function refreshIconSelects() {
         if (!window.SPX_ICON_IMPORT) return;
@@ -8736,6 +8744,7 @@
         const SRB_CONTROLS = [
             { tab, group: SRB, id: 'checkboxStackShownButtons', type: 'checkbox', label: 'Stack Shown Buttons (A Switched-Off Button Leaves No Gap; The Others Keep The Same Spacing)', value: false },
             { tab, group: SRB, id: 'checkboxSearchButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: SRB, id: 'selectSearchIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: extraIconOptions('search') },
             { tab, group: SRB, id: 'sliderSearchIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
             { tab, group: SRB, id: 'sliderSearchIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
             { tab, group: SRB, id: 'sliderSearchIconOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
@@ -9564,7 +9573,7 @@
         // (the third entry); the rest are shown / hidden by renderOrder.js. src/app/renderOrder.js carries the same keys, in the same default order.
         const RO_ITEMS = [
             ['volume', 'Volume Button'], ['shuffle', 'Shuffle Button', 'checkboxShuffleButtonEnabled'], ['songdatabtn', 'Song Data Button', 'checkboxSongDataEnabled'],
-            ['filter', 'Filter Button', 'checkboxFilterButtonEnabled'], ['device', 'Play On Device Button', 'checkboxDeviceButtonEnabled'], ['nav', 'Next And Last Song Buttons'], ['songbar', 'Song Timeline (Under The Cover)', 'checkboxSongBarEnabled'],
+            ['filter', 'Filter Button', 'checkboxFilterButtonEnabled'], ['search', 'Search Button', 'checkboxSearchButtonEnabled'], ['device', 'Play On Device Button', 'checkboxDeviceButtonEnabled'], ['nav', 'Next And Last Song Buttons'], ['songbar', 'Song Timeline (Under The Cover)', 'checkboxSongBarEnabled'],
             ['scrub', 'Scrub Line'], ['songdata', 'Song Data Text And Icons'], ['date', 'Song Add Date', 'checkboxSongAddDateEnabled'], ['scale', 'Timeline Scale (Numbers And Ticks)'],
             ['graph', 'Graph'], ['meta', 'Album And Date Line', 'checkboxTxtAlbumDateEnabled'], ['artist', 'Artist', 'checkboxTxtArtistEnabled'], ['title', 'Song Title', 'checkboxTxtSongTitleEnabled'],
             ['play', 'Play Button', 'checkboxPlayButtonEnabled'], ['cover', 'Album Cover'], ['ticks', 'Song Ticks'], ['bgfx', 'Background Animation'], ['bg', 'Background'],
@@ -9589,6 +9598,18 @@
         };
         renderControlArray([RO_CTRL], 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_RENDER_ORDER', [RO_CTRL]);
+        // "Deployed": the same item selector, applied to a normal visitor (non-dev mode); the list above is for dev mode. Its items are not linked to the Enabled checkboxes
+        // (renderOrder.js hides an item a visitor's list switches off, on top of the item's own Enabled checkbox). Until it has been saved once, visitors get the list above.
+        const RO_DEP = 'Deployed';
+        roGroupEl.querySelector(':scope > .dev-section-content').appendChild(createDevGroupElement(RO_DEP, tab));
+        const RO_DEP_CTRL = {
+            tab, group: RO_DEP, id: 'listPickerRenderOrderDeployed', type: 'list-picker', label: 'Top Of The List = In Front (Visitors):', itemLabel: 'Item',
+            visibilityMode: true, canonicalItems: roCanon, value: roCanon(), skipDeviceCheckbox: true,
+            captureCurrent: () => ({}), onUse: () => {},
+            onChange: () => { window.dispatchEvent(new Event('spx-render-order')); },
+        };
+        renderControlArray([RO_DEP_CTRL], 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_RENDER_ORDER_DEPLOYED', [RO_DEP_CTRL]);
         // a linked Enabled checkbox changed (by hand, Undo, Reset, a restore): the list follows
         document.addEventListener('change', e => {
             const t = e.target, key = t && t.id && RO_LINK_BY_ID[t.id], entry = RO_CTRL.__entry;

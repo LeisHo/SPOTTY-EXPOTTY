@@ -6,5 +6,6 @@ window.SPX_EXTRA_ICON_NAMES = {
     lb: ['Record', 'Stacked Covers', 'Disc In Sleeve'],
     rd: ['Calendar', 'Hourglass', 'Price Tag'],
     du: ['Clock', 'Stopwatch', 'Progress Bar'],
+    search: ['Magnifying Glass', 'Bold Magnifier', 'Magnifier Over Lines', 'Binoculars'],
     device: ['Screen And Phone', 'Speaker', 'Cast Screen', 'Headphones', 'Broadcast'],
 };

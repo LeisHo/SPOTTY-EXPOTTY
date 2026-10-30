@@ -7,11 +7,14 @@
 import { setting } from './settings.js';
 
 // Same keys, same default order as RO_ITEMS in src/devpanel/devPanel.js (front to back).
-export const DEFAULT_KEYS = ['volume', 'shuffle', 'songdatabtn', 'filter', 'device', 'nav', 'songbar', 'scrub', 'songdata', 'date', 'scale', 'graph', 'meta', 'artist', 'title', 'play', 'cover', 'ticks', 'bgfx', 'bg'];
+export const DEFAULT_KEYS = ['volume', 'shuffle', 'songdatabtn', 'filter', 'search', 'device', 'nav', 'songbar', 'scrub', 'songdata', 'date', 'scale', 'graph', 'meta', 'artist', 'title', 'play', 'cover', 'ticks', 'bgfx', 'bg'];
 // Items whose visibility the panel does NOT link to another checkbox: renderOrder hides them (the timeline's own layers are handled in timeline.js).
 const HIDDEN_BY_CLASS = { volume: ['spxVolume'], nav: ['spxPrev', 'spxNext'], cover: ['spxCover'], bg: ['spxBg', 'spxBgPrev'], bgfx: ['spxBgFx'] };
-const Z_OF = { volume: ['spxVolume'], shuffle: ['spxShuffle'], songdatabtn: ['spxSongData'], filter: ['spxFilter'], device: ['spxDevice'], nav: ['spxPrev', 'spxNext'], songbar: ['spxSongBar'], graph: ['spxTimeline'], bg: ['spxBg'],
+const Z_OF = { volume: ['spxVolume'], shuffle: ['spxShuffle'], songdatabtn: ['spxSongData'], filter: ['spxFilter'], search: ['spxSearch'], device: ['spxDevice'], nav: ['spxPrev', 'spxNext'], songbar: ['spxSongBar'], graph: ['spxTimeline'], bg: ['spxBg'],
     meta: ['spxMeta'], artist: ['spxArtist'], title: ['spxTitle'], play: ['spxPlayGlyph'], cover: ['spxCover'], bgfx: ['spxBgFx'] };
+// Deployed (non-dev) mode: the Deployed list has no linked Enabled checkboxes, so these items are hidden here too (on top of their own Enabled checkbox).
+const DEPLOYED_HIDE = { shuffle: ['spxShuffle'], songdatabtn: ['spxSongData'], filter: ['spxFilter'], search: ['spxSearch'], device: ['spxDevice'], songbar: ['spxSongBar'], meta: ['spxMeta'], artist: ['spxArtist'], title: ['spxTitle'], play: ['spxPlayGlyph'] };
+const isDev = () => document.documentElement.classList.contains('dev-mode');
 const SEP = '/';
 
 let state = new Map(); // key -> { z, on }
@@ -48,11 +51,18 @@ function flatten(items, groupOrder, topOrder) {
 
 // Reads the saved / live list again. Cheap: the list is ~20 items.
 export function refresh() {
-    let parsed = setting('listPickerRenderOrder');
-    if (typeof parsed === 'string') { try { parsed = JSON.parse(parsed); } catch (e) { parsed = null; } }
+    const read = id => { let v = setting(id); if (typeof v === 'string') { try { v = JSON.parse(v); } catch (e) { v = null; } } return v && Array.isArray(v.items) ? v : null; };
+    // Dev mode reads the "Visibility / Render Order" list, a normal visitor the "Deployed" list under it (until one has been saved, the visitor gets the dev list).
+    let parsed = isDev() ? read('listPickerRenderOrder') : (read('listPickerRenderOrderDeployed') || read('listPickerRenderOrder'));
     const items = parsed && Array.isArray(parsed.items) ? parsed.items.filter(it => it && DEFAULT_KEYS.includes(it.key)) : [];
     const seen = new Set(items.map(it => it.key));
-    DEFAULT_KEYS.forEach(k => { if (!seen.has(k)) items.push({ key: k, on: true }); }); // an item the saved list has never heard of goes to the back
+    // an item the saved list has never heard of goes right after the item before it in the default order (and into that item's group), not behind everything
+    DEFAULT_KEYS.forEach((k, ki) => {
+        if (seen.has(k)) return;
+        const prev = ki > 0 ? items.findIndex(it => it.key === DEFAULT_KEYS[ki - 1]) : -1;
+        items.splice(prev + 1, 0, { key: k, on: true, ...(prev >= 0 && items[prev].group ? { group: items[prev].group } : {}) });
+        seen.add(k);
+    });
     const ordered = flatten(items, parsed && parsed.groupOrder, parsed && parsed.topOrder);
     const next = new Map();
     ordered.forEach((it, i) => next.set(it.key, { z: (ordered.length - i) * 10, on: it.on !== false }));
@@ -69,4 +79,6 @@ export function applyRenderOrder() {
     const bgPrev = $('spxBgPrev');
     if (bgPrev) bgPrev.style.zIndex = String(zFor('bg') + 1); // the previous frame fades out ABOVE the new one
     Object.entries(HIDDEN_BY_CLASS).forEach(([key, ids]) => ids.forEach(id => { const e = $(id); if (e) e.classList.toggle('ro-off', !isOn(key)); }));
+    const dep = !isDev();
+    Object.entries(DEPLOYED_HIDE).forEach(([key, ids]) => ids.forEach(id => { const e = $(id); if (e) e.classList.toggle('ro-off', dep && !isOn(key)); }));
 }

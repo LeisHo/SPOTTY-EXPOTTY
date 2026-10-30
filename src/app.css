@@ -296,7 +296,7 @@
 .spx-search { z-index: 4; position: absolute; right: var(--spx-search-edge, 14px); top: var(--spx-stack-top, calc(14px + (var(--spx-vol-icon, 24px) + 20px - (var(--spx-shuffle-icon, 20px) + 20px)) / 2 + var(--spx-shuffle-icon, 20px) + 20px + var(--spx-sd-offset, 0px) + var(--spx-flt-offset, 0px))); width: calc(var(--spx-search-icon, 20px) + 20px); height: calc(var(--spx-search-icon, 20px) + 20px);
     border: 0; padding: 0; margin: 0; background: none; display: flex; align-items: center; justify-content: center; color: var(--spx-search-color, #f2f2f2); --bs-op: var(--spx-search-off-op, 0.45); cursor: pointer;
     filter: var(--shadow-vol, drop-shadow(0 1px 3px #000a)); -webkit-tap-highlight-color: transparent; transition: opacity .15s, color .15s; translate: var(--spx-search-x, 0px) var(--spx-search-y, 0px); }
-.spx-search svg { width: var(--spx-search-icon, 20px); height: var(--spx-search-icon, 20px); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spx-search svg { width: var(--spx-search-icon, 20px); height: var(--spx-search-icon, 20px); }
 .spx-search[aria-pressed="true"] { --bs-op: var(--spx-search-on-op, 1); color: var(--spx-search-on-color, #1db954); }
 .spx-search[hidden] { display: none; }
 .spx-app.no-shadow-vol .spx-search { filter: none; }
