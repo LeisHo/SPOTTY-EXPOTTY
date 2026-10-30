@@ -80,6 +80,16 @@ export default async function handler(req, res) {
 
     if (req.method === 'GET') {
         try {
+            res.setHeader('Cache-Control', 'no-store');
+            // The settings file is over 1 MB, where the Contents API omits `content` and the old code fell back to `download_url`, i.e. raw.githubusercontent.com's CDN, which keeps a
+            // file for MINUTES: a refresh right after a save showed the PREVIOUS settings (checked boxes came back, and a save made from that view overwrote the newer one).
+            // The raw media type returns the CURRENT file straight from the API (up to 100 MB), so ask for that first and only fall back to the older lookups if it fails.
+            let jsonText = null;
+            try {
+                const rawResp = await ghFetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers: { ...headers, Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' });
+                if (rawResp.ok) jsonText = await rawResp.text();
+            } catch (e) { /* fall back below */ }
+            if (jsonText === null) {
             const getResp = await ghFetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers, cache: 'no-store' });
             if (getResp.status === 404) {
                 res.status(200).json({ ok: true, settings: null }); // nothing saved yet -- not an error
@@ -91,7 +101,6 @@ export default async function handler(req, res) {
                 return;
             }
             const getData = await getResp.json();
-            let jsonText;
             if (getData.content) {
                 jsonText = Buffer.from(getData.content, 'base64').toString('utf-8');
             } else if (getData.download_url) {
@@ -105,6 +114,7 @@ export default async function handler(req, res) {
             } else {
                 res.status(500).json({ ok: false, error: 'GitHub response had neither content nor download_url' });
                 return;
+            }
             }
             if (req.query && req.query.gz === '1') {
                 const gz = zlib.gzipSync(Buffer.from(jsonText, 'utf-8')).toString('base64');
