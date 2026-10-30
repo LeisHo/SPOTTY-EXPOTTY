@@ -49156,7 +49156,7 @@
   },
   "sectionCollapseState": {
     "desktop:Saved Dev Settings": false,
-    "desktop:Dev Panel": true,
+    "desktop:Dev Panel": false,
     "desktop:MECHANICS": true,
     "desktop:PANEL UI": true,
     "desktop:TEXT": true,
