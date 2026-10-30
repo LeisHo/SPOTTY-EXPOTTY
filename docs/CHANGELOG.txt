@@ -1441,3 +1441,15 @@ Cause (from the code, NOT reproduced: no real device here): with a device target
 (shuffle on, or Loop Preview off), moveTo() started that song's 30 s clip in the browser at once, and the real song reached the device only after the play request and the poll (~1-2 s).
 Fix (main.js): onSongEnded sets `silentStep` while dp.active(); moveTo() then starts no clip (`noClip`) and doHandoff() does not wait for one. The device still gets the play request at once.
 Scrubbing and Next / Last still play clips as before. Syntax-checked and the page loads; the end-of-song path itself is untested (needs a real device). If it still happens, turn on the Playback Timing log and send it.
+
+--------------------------------------------------------------------------------
+2026-10-30  -  later 29 (one sound at a time: clips logged out, Spotify song logged in)
+
+Owner: (1) logged in to Spotify, preview never plays, nothing needs to play while scrubbing; (2) preview plays only when not logged in; (3) preview and Spotify never play in the same period, no fade;
+(4) adjust / delete settings as needed.
+- clipPlayer.js previewClipsOn() = scrub-audio checkbox AND not logged in (was: or "Play Preview Clips" ticked). main.js realPlayAllowed() now requires isLoggedIn(), so logged out the iframe handoff,
+  the cover button and the play/pause key use the clip only. Logged in: no clips, no preloading (0 /api/preview lookups on load, measured with a fake token), song starts from 0:00 after the handoff delay.
+- Crossfade removed: handoff.js playTrackCrossfade / audibleWait, sdkPlayer.js sdkPrepareFade / sdkFadeIn / sdkRestoreVolume, main.js previewHold, and last turn's silentStep (redundant now).
+- Settings deleted: Play Preview Clips, Handoff Crossfade, Full Song Start Offset From Preview, Mute The Scrub Clips (device panel; its setClipVolume wiring too). Relabelled: "Play Preview Clips While Scrubbing
+  (Only When Not Logged In To Spotify)", "Loop The Song / Preview When It Ends". Saved values for the deleted ids in dev-panel-settings.json are now ignored (harmless).
+- A login from another tab stops a running clip. Tested locally: panel builds without the removed controls, no script errors, logged-in load makes no preview lookups. Real audio (SDK song, device) not heard here.
