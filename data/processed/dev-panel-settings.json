@@ -338,8 +338,9 @@
     "sliderDevicePanelBlur": 6,
     "colorDevicePanelAccent": "#1db954",
     "checkboxStackShownButtons": false,
-    "checkboxSearchButtonEnabled": true,
-    "sliderSearchIconSize": 20,
+    "checkboxSearchButtonEnabled": false,
+    "selectSearchIconStyle": "1",
+    "sliderSearchIconSize": 26,
     "sliderSearchIconOffsetX": 0,
     "sliderSearchIconOffsetY": 0,
     "sliderSearchEdgeOffset": 14,
@@ -709,12 +710,13 @@
     "sliderStartPlayLiftPressPx": 2,
     "sliderStartPlayLiftShadowBlur": 14,
     "sliderStartPlayLiftShadowOpacity": 0.5,
-    "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}"
+    "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"search\",\"name\":\"Search Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}",
+    "listPickerRenderOrderDeployed": "{\"items\":[{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true},{\"key\":\"search\",\"name\":\"Search Button\",\"on\":true},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true},{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true}],\"groupOrder\":[],\"defaultName\":null}"
   },
   "layout": {
     "left": 35,
     "top": 35.28125,
-    "width": 350,
+    "width": 708,
     "height": 478
   },
   "devPanelStyle": {
@@ -2126,12 +2128,42 @@
                 {
                   "type": "row",
                   "key": "listPickerRenderOrder"
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Deployed",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "listPickerRenderOrderDeployed"
+                      }
+                    ],
+                    "rowKeys": [
+                      "listPickerRenderOrderDeployed"
+                    ],
+                    "subgroups": []
+                  }
                 }
               ],
               "rowKeys": [
                 "listPickerRenderOrder"
               ],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "desktop:Deployed",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "listPickerRenderOrderDeployed"
+                    }
+                  ],
+                  "rowKeys": [
+                    "listPickerRenderOrderDeployed"
+                  ],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -8140,6 +8172,10 @@
                     "items": [
                       {
                         "type": "row",
+                        "key": "selectSearchIconStyle"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderSearchIconSize"
                       },
                       {
@@ -8200,6 +8236,7 @@
                       }
                     ],
                     "rowKeys": [
+                      "selectSearchIconStyle",
                       "sliderSearchIconSize",
                       "sliderSearchIconOffsetX",
                       "sliderSearchIconOffsetY",
@@ -11790,6 +11827,10 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "selectSearchIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderSearchIconSize"
                     },
                     {
@@ -11850,6 +11891,7 @@
                     }
                   ],
                   "rowKeys": [
+                    "selectSearchIconStyle",
                     "sliderSearchIconSize",
                     "sliderSearchIconOffsetX",
                     "sliderSearchIconOffsetY",
@@ -13142,12 +13184,42 @@
               {
                 "type": "row",
                 "key": "listPickerRenderOrder"
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Deployed",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "listPickerRenderOrderDeployed"
+                    }
+                  ],
+                  "rowKeys": [
+                    "listPickerRenderOrderDeployed"
+                  ],
+                  "subgroups": []
+                }
               }
             ],
             "rowKeys": [
               "listPickerRenderOrder"
             ],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "desktop:Deployed",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "listPickerRenderOrderDeployed"
+                  }
+                ],
+                "rowKeys": [
+                  "listPickerRenderOrderDeployed"
+                ],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "desktop:Text",
@@ -19150,6 +19222,10 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "selectSearchIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderSearchIconSize"
                     },
                     {
@@ -19210,6 +19286,7 @@
                     }
                   ],
                   "rowKeys": [
+                    "selectSearchIconStyle",
                     "sliderSearchIconSize",
                     "sliderSearchIconOffsetX",
                     "sliderSearchIconOffsetY",
@@ -22800,6 +22877,10 @@
                 "items": [
                   {
                     "type": "row",
+                    "key": "selectSearchIconStyle"
+                  },
+                  {
+                    "type": "row",
                     "key": "sliderSearchIconSize"
                   },
                   {
@@ -22860,6 +22941,7 @@
                   }
                 ],
                 "rowKeys": [
+                  "selectSearchIconStyle",
                   "sliderSearchIconSize",
                   "sliderSearchIconOffsetX",
                   "sliderSearchIconOffsetY",
@@ -27800,9 +27882,26 @@
             "type": "group",
             "section": {
               "key": "mobile:Visibility / Render Order",
-              "items": [],
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "mobile:Deployed",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
               "rowKeys": [],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "mobile:Deployed",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -32894,9 +32993,26 @@
         "subgroups": [
           {
             "key": "mobile:Visibility / Render Order",
-            "items": [],
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "mobile:Deployed",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
             "rowKeys": [],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "mobile:Deployed",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "mobile:Text",
@@ -39360,9 +39476,26 @@
             "type": "group",
             "section": {
               "key": "landscape:Visibility / Render Order",
-              "items": [],
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "landscape:Deployed",
+                    "items": [],
+                    "rowKeys": [],
+                    "subgroups": []
+                  }
+                }
+              ],
               "rowKeys": [],
-              "subgroups": []
+              "subgroups": [
+                {
+                  "key": "landscape:Deployed",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              ]
             }
           },
           {
@@ -44454,9 +44587,26 @@
         "subgroups": [
           {
             "key": "landscape:Visibility / Render Order",
-            "items": [],
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "landscape:Deployed",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              }
+            ],
             "rowKeys": [],
-            "subgroups": []
+            "subgroups": [
+              {
+                "key": "landscape:Deployed",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
+              }
+            ]
           },
           {
             "key": "landscape:Text",
@@ -50336,6 +50486,7 @@
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
     "desktop:Visibility / Render Order": true,
+    "desktop:Deployed": false,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -50378,7 +50529,7 @@
     "desktop:New Group (25)": true,
     "desktop:New Group (26)": true,
     "desktop:New Group (27)": true,
-    "desktop:Filter Button": false,
+    "desktop:Filter Button": true,
     "desktop:New Group (30)": true,
     "desktop:New Group (29)": true,
     "desktop:New Group (16)": true,
@@ -50451,6 +50602,7 @@
     "mobile:Snapshot": true,
     "mobile:UI Layout": false,
     "mobile:Visibility / Render Order": true,
+    "mobile:Deployed": false,
     "mobile:Text": true,
     "mobile:Font": true,
     "mobile:Song Title": true,
@@ -50566,6 +50718,7 @@
     "landscape:Snapshot": false,
     "landscape:UI Layout": false,
     "landscape:Visibility / Render Order": false,
+    "landscape:Deployed": false,
     "landscape:Text": false,
     "landscape:Font": false,
     "landscape:Song Title": false,
@@ -51561,7 +51714,9 @@
     "checkboxMobileOverrideStart": null,
     "checkboxLandscapeOverrideStart": null,
     "mobile:Search Button": null,
-    "landscape:Search Button": null
+    "landscape:Search Button": null,
+    "mobile:Deployed": null,
+    "landscape:Deployed": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
