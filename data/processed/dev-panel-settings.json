@@ -696,9 +696,9 @@
   },
   "layout": {
     "left": 35.28570556640625,
-    "top": 129,
+    "top": 208,
     "width": 350,
-    "height": 383
+    "height": 491
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -50107,7 +50107,7 @@
     "mobile:New Group (34)": false,
     "mobile:New Group (36)": false,
     "mobile:New Group (35)": false,
-    "mobile:Album & Date": true,
+    "mobile:Album & Date": false,
     "mobile:New Group (37)": false,
     "mobile:New Group (38)": false,
     "mobile:New Group (39)": false,
@@ -51606,10 +51606,10 @@
       "sliderSongDataIconSize": true,
       "sliderSongDataOffsetY": true,
       "sliderTxtSongTitleOffsetY": false,
-      "sliderTxtArtistOffsetY": true,
-      "sliderTxtAlbumDateOffsetY": true,
+      "sliderTxtArtistOffsetY": false,
+      "sliderTxtAlbumDateOffsetY": false,
       "sliderTitleMaxLines": false,
-      "sliderAlbumDateMaxLines": true,
+      "sliderAlbumDateMaxLines": false,
       "sliderTxtAlbumDateFontSize": true,
       "sliderTxtAlbumDateMaxWidth": true,
       "sliderTxtArtistMaxWidth": true,
