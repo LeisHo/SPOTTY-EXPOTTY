@@ -307,6 +307,7 @@ async function boot() {
     // with shuffle on or off.
     const playedHistory = [];
     let stepImmediate = false; // set by stepSong() so that one song change skips the handoff delay
+    let silentStep = false; // set while a song that ended on a Play On Device device moves on: that step starts no browser preview clip (it would sound here for a moment before the device takes over)
     // Audio-feature filter (Filter button, filter.js). Created further down; until then every song passes.
     let flt = null;
     let srch = null; // the Search panel (search.js), ANDed into the filter
@@ -1107,7 +1108,8 @@ async function boot() {
         // With preview clips off nothing else would sound in the gap, so the playing song is left playing until the next one's play request replaces it (the SDK or the embed
         // switches songs by itself); pausing it here made every Next / Last / scroll a silence of up to a second or two. doHandoff stops it if no request is sent.
         if (handedOff) { const replaceNext = !previewClipsOn() && interacted && isUnlocked() && setting('checkboxHandoffEnabled') && realPlayAllowed(); logEvent('playback', replaceNext ? 'EMBED song left playing: the next song replaces it' : 'EMBED song stopped: moved to another song'); if (!replaceNext) pauseEmbed(); handedOff = false; }
-        playClip(clipKey(songs[idx]));
+        const noClip = silentStep;
+        if (!noClip) playClip(clipKey(songs[idx]));
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
         previewHold = null;
@@ -1119,7 +1121,7 @@ async function boot() {
         // The handoff reads where the preview is, so it waits (up to 2 s after the song change) for a pending preview to start.
         const handoffWaitUntil = performance.now() + 2000;
         const doHandoff = () => {
-            if (previewClipsOn() && clipKey(songs[playIdx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
+            if (!noClip && previewClipsOn() && clipKey(songs[playIdx]) && !clipIsPlaying() && performance.now() < handoffWaitUntil) { handoffTimer = setTimeout(doHandoff, 50); return; }
             handoffPending = false;
             if (playedHistory[playedHistory.length - 1] !== playIdx) { playedHistory.push(playIdx); if (playedHistory.length > 300) playedHistory.shift(); }
             const ok = interacted && isUnlocked() && setting('checkboxHandoffEnabled') && realPlayAllowed();
@@ -1332,7 +1334,8 @@ async function boot() {
     const onSongEnded = () => {
         if (!shuffleOn && setting('checkboxLoopPreview')) return false;
         logEvent('playback', shuffleOn ? 'SONG ended: shuffle picks the next song' : 'SONG ended: Loop Preview is off, moves to the next song');
-        stepSong(1, true);
+        silentStep = !!(dp && dp.active());
+        try { stepSong(1, true); } finally { silentStep = false; }
         return true;
     };
     setOnEnded(onSongEnded);
