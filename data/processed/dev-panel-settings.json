@@ -2,7 +2,6 @@
   "controls": {
     "listPickerSavedDevSettings": "{\"items\":[],\"groupOrder\":[],\"defaultName\":null}",
     "checkboxScrubAudioEnabled": true,
-    "checkboxPlayPreviewClips": false,
     "sliderScrubVolume": 0.7,
     "sliderClipStartMin": 0,
     "sliderClipStartMax": 4.5,
@@ -24,9 +23,7 @@
     "checkboxSpotifyLoginOnStart": true,
     "buttonSpotifyLogin": "",
     "checkboxShowSpotifyPlayer": false,
-    "sliderHandoffCrossfade": 0,
     "sliderHandoffDelay": 400,
-    "sliderHandoffStartOffset": 0,
     "colorTimelineAccent": "#ffffff",
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
@@ -241,6 +238,7 @@
     "checkboxOverrideShuffle": true,
     "checkboxOverrideVolume": true,
     "checkboxOverrideFilter": true,
+    "checkboxOverrideSearch": true,
     "checkboxOverrideSongData": true,
     "checkboxOverrideDevice": true,
     "checkboxOverrideStart": true,
@@ -321,7 +319,6 @@
     "colorDeviceOn": "#ffffff",
     "checkboxDeviceMatchVolume": true,
     "checkboxDeviceKeepPlaying": true,
-    "checkboxDeviceMuteClips": false,
     "checkboxDeviceRemember": false,
     "sliderDevicePollSeconds": 1.5,
     "checkboxDeviceShowThisBrowser": true,
@@ -515,7 +512,7 @@
     "sliderNavAnimClickOpacity": 70,
     "sliderNavAnimReleaseSize": 32,
     "buttonDebugPause": "",
-    "checkboxExportLogsUiButton": false,
+    "checkboxExportLogsUiButton": true,
     "checkboxShowFrameRate": false,
     "colorFrameRateText": "#ffffff",
     "sliderFrameRateRefreshMs": 500,
@@ -715,9 +712,9 @@
   },
   "layout": {
     "left": 35,
-    "top": 35.28125,
+    "top": 97,
     "width": 708,
-    "height": 478
+    "height": 416
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -5646,10 +5643,6 @@
                       },
                       {
                         "type": "row",
-                        "key": "checkboxDeviceMuteClips"
-                      },
-                      {
-                        "type": "row",
                         "key": "checkboxDeviceRemember"
                       },
                       {
@@ -5748,7 +5741,6 @@
                     "rowKeys": [
                       "checkboxDeviceMatchVolume",
                       "checkboxDeviceKeepPlaying",
-                      "checkboxDeviceMuteClips",
                       "checkboxDeviceRemember",
                       "checkboxDeviceShowThisBrowser",
                       "checkboxDeviceShowVolume",
@@ -8450,6 +8442,10 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxOverrideSearch"
                       }
                     ],
                     "rowKeys": [
@@ -8464,7 +8460,8 @@
                       "checkboxOverrideStart",
                       "colorGlobalOverride",
                       "sliderGlobalOverrideOpacity",
-                      "sliderGlobalOverrideOnOpacity"
+                      "sliderGlobalOverrideOnOpacity",
+                      "checkboxOverrideSearch"
                     ],
                     "subgroups": [
                       {
@@ -9313,10 +9310,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxDeviceMuteClips"
-                    },
-                    {
-                      "type": "row",
                       "key": "checkboxDeviceRemember"
                     },
                     {
@@ -9415,7 +9408,6 @@
                   "rowKeys": [
                     "checkboxDeviceMatchVolume",
                     "checkboxDeviceKeepPlaying",
-                    "checkboxDeviceMuteClips",
                     "checkboxDeviceRemember",
                     "checkboxDeviceShowThisBrowser",
                     "checkboxDeviceShowVolume",
@@ -12099,6 +12091,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxOverrideSearch"
                     }
                   ],
                   "rowKeys": [
@@ -12113,7 +12109,8 @@
                     "checkboxOverrideStart",
                     "colorGlobalOverride",
                     "sliderGlobalOverrideOpacity",
-                    "sliderGlobalOverrideOnOpacity"
+                    "sliderGlobalOverrideOnOpacity",
+                    "checkboxOverrideSearch"
                   ],
                   "subgroups": [
                     {
@@ -16696,10 +16693,6 @@
                     },
                     {
                       "type": "row",
-                      "key": "checkboxDeviceMuteClips"
-                    },
-                    {
-                      "type": "row",
                       "key": "checkboxDeviceRemember"
                     },
                     {
@@ -16798,7 +16791,6 @@
                   "rowKeys": [
                     "checkboxDeviceMatchVolume",
                     "checkboxDeviceKeepPlaying",
-                    "checkboxDeviceMuteClips",
                     "checkboxDeviceRemember",
                     "checkboxDeviceShowThisBrowser",
                     "checkboxDeviceShowVolume",
@@ -19500,6 +19492,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxOverrideSearch"
                     }
                   ],
                   "rowKeys": [
@@ -19514,7 +19510,8 @@
                     "checkboxOverrideStart",
                     "colorGlobalOverride",
                     "sliderGlobalOverrideOpacity",
-                    "sliderGlobalOverrideOnOpacity"
+                    "sliderGlobalOverrideOnOpacity",
+                    "checkboxOverrideSearch"
                   ],
                   "subgroups": [
                     {
@@ -20363,10 +20360,6 @@
                   },
                   {
                     "type": "row",
-                    "key": "checkboxDeviceMuteClips"
-                  },
-                  {
-                    "type": "row",
                     "key": "checkboxDeviceRemember"
                   },
                   {
@@ -20465,7 +20458,6 @@
                 "rowKeys": [
                   "checkboxDeviceMatchVolume",
                   "checkboxDeviceKeepPlaying",
-                  "checkboxDeviceMuteClips",
                   "checkboxDeviceRemember",
                   "checkboxDeviceShowThisBrowser",
                   "checkboxDeviceShowVolume",
@@ -23149,6 +23141,10 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxOverrideSearch"
                   }
                 ],
                 "rowKeys": [
@@ -23163,7 +23159,8 @@
                   "checkboxOverrideStart",
                   "colorGlobalOverride",
                   "sliderGlobalOverrideOpacity",
-                  "sliderGlobalOverrideOnOpacity"
+                  "sliderGlobalOverrideOnOpacity",
+                  "checkboxOverrideSearch"
                 ],
                 "subgroups": [
                   {
@@ -24240,10 +24237,6 @@
           },
           {
             "type": "row",
-            "key": "checkboxPlayPreviewClips"
-          },
-          {
-            "type": "row",
             "key": "sliderScrubVolume"
           },
           {
@@ -24295,14 +24288,6 @@
                 {
                   "type": "row",
                   "key": "buttonSpotifyLogin"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderHandoffStartOffset"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderHandoffCrossfade"
                 }
               ],
               "rowKeys": [
@@ -24310,9 +24295,7 @@
                 "checkboxSpotifyLoginOnStart",
                 "checkboxShowSpotifyPlayer",
                 "sliderHandoffDelay",
-                "buttonSpotifyLogin",
-                "sliderHandoffStartOffset",
-                "sliderHandoffCrossfade"
+                "buttonSpotifyLogin"
               ],
               "subgroups": []
             }
@@ -24456,7 +24439,6 @@
           "checkboxStartAtBuffer",
           "checkboxRandomStartSong",
           "checkboxLoopPreview",
-          "checkboxPlayPreviewClips",
           "sliderScrubVolume",
           "sliderClipFadeOut"
         ],
@@ -24501,14 +24483,6 @@
               {
                 "type": "row",
                 "key": "buttonSpotifyLogin"
-              },
-              {
-                "type": "row",
-                "key": "sliderHandoffStartOffset"
-              },
-              {
-                "type": "row",
-                "key": "sliderHandoffCrossfade"
               }
             ],
             "rowKeys": [
@@ -24516,9 +24490,7 @@
               "checkboxSpotifyLoginOnStart",
               "checkboxShowSpotifyPlayer",
               "sliderHandoffDelay",
-              "buttonSpotifyLogin",
-              "sliderHandoffStartOffset",
-              "sliderHandoffCrossfade"
+              "buttonSpotifyLogin"
             ],
             "subgroups": []
           },
@@ -30697,6 +30669,10 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxMobileOverrideSearch"
                       }
                     ],
                     "rowKeys": [
@@ -30711,7 +30687,8 @@
                       "checkboxMobileOverrideStart",
                       "colorMobileGlobalOverride",
                       "sliderMobileGlobalOverrideOpacity",
-                      "sliderMobileGlobalOverrideOnOpacity"
+                      "sliderMobileGlobalOverrideOnOpacity",
+                      "checkboxMobileOverrideSearch"
                     ],
                     "subgroups": [
                       {
@@ -32233,6 +32210,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileOverrideSearch"
                     }
                   ],
                   "rowKeys": [
@@ -32247,7 +32228,8 @@
                     "checkboxMobileOverrideStart",
                     "colorMobileGlobalOverride",
                     "sliderMobileGlobalOverrideOpacity",
-                    "sliderMobileGlobalOverrideOnOpacity"
+                    "sliderMobileGlobalOverrideOnOpacity",
+                    "checkboxMobileOverrideSearch"
                   ],
                   "subgroups": [
                     {
@@ -35802,6 +35784,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileOverrideSearch"
                     }
                   ],
                   "rowKeys": [
@@ -35816,7 +35802,8 @@
                     "checkboxMobileOverrideStart",
                     "colorMobileGlobalOverride",
                     "sliderMobileGlobalOverrideOpacity",
-                    "sliderMobileGlobalOverrideOnOpacity"
+                    "sliderMobileGlobalOverrideOnOpacity",
+                    "checkboxMobileOverrideSearch"
                   ],
                   "subgroups": [
                     {
@@ -37338,6 +37325,10 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxMobileOverrideSearch"
                   }
                 ],
                 "rowKeys": [
@@ -37352,7 +37343,8 @@
                   "checkboxMobileOverrideStart",
                   "colorMobileGlobalOverride",
                   "sliderMobileGlobalOverrideOpacity",
-                  "sliderMobileGlobalOverrideOnOpacity"
+                  "sliderMobileGlobalOverrideOnOpacity",
+                  "checkboxMobileOverrideSearch"
                 ],
                 "subgroups": [
                   {
@@ -42291,6 +42283,10 @@
                           ],
                           "subgroups": []
                         }
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxLandscapeOverrideSearch"
                       }
                     ],
                     "rowKeys": [
@@ -42305,7 +42301,8 @@
                       "checkboxLandscapeOverrideStart",
                       "colorLandscapeGlobalOverride",
                       "sliderLandscapeGlobalOverrideOpacity",
-                      "sliderLandscapeGlobalOverrideOnOpacity"
+                      "sliderLandscapeGlobalOverrideOnOpacity",
+                      "checkboxLandscapeOverrideSearch"
                     ],
                     "subgroups": [
                       {
@@ -43827,6 +43824,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeOverrideSearch"
                     }
                   ],
                   "rowKeys": [
@@ -43841,7 +43842,8 @@
                     "checkboxLandscapeOverrideStart",
                     "colorLandscapeGlobalOverride",
                     "sliderLandscapeGlobalOverrideOpacity",
-                    "sliderLandscapeGlobalOverrideOnOpacity"
+                    "sliderLandscapeGlobalOverrideOnOpacity",
+                    "checkboxLandscapeOverrideSearch"
                   ],
                   "subgroups": [
                     {
@@ -47396,6 +47398,10 @@
                         ],
                         "subgroups": []
                       }
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeOverrideSearch"
                     }
                   ],
                   "rowKeys": [
@@ -47410,7 +47416,8 @@
                     "checkboxLandscapeOverrideStart",
                     "colorLandscapeGlobalOverride",
                     "sliderLandscapeGlobalOverrideOpacity",
-                    "sliderLandscapeGlobalOverrideOnOpacity"
+                    "sliderLandscapeGlobalOverrideOnOpacity",
+                    "checkboxLandscapeOverrideSearch"
                   ],
                   "subgroups": [
                     {
@@ -48932,6 +48939,10 @@
                       ],
                       "subgroups": []
                     }
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxLandscapeOverrideSearch"
                   }
                 ],
                 "rowKeys": [
@@ -48946,7 +48957,8 @@
                   "checkboxLandscapeOverrideStart",
                   "colorLandscapeGlobalOverride",
                   "sliderLandscapeGlobalOverrideOpacity",
-                  "sliderLandscapeGlobalOverrideOnOpacity"
+                  "sliderLandscapeGlobalOverrideOnOpacity",
+                  "checkboxLandscapeOverrideSearch"
                 ],
                 "subgroups": [
                   {
@@ -50481,7 +50493,7 @@
     "desktop:TABS": true,
     "desktop:BUTTONS": true,
     "desktop:Hot Keys": true,
-    "desktop:Debug": true,
+    "desktop:Debug": false,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
@@ -51716,7 +51728,9 @@
     "mobile:Search Button": null,
     "landscape:Search Button": null,
     "mobile:Deployed": null,
-    "landscape:Deployed": null
+    "landscape:Deployed": null,
+    "checkboxMobileOverrideSearch": null,
+    "checkboxLandscapeOverrideSearch": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
