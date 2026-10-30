@@ -50,7 +50,7 @@
     "sliderTimelineHeightTransitionMs": 990,
     "sliderTimelineScaleGap": 14,
     "sliderPlayheadWidth": 4,
-    "sliderPlayheadHeight": 76,
+    "sliderPlayheadHeight": 85,
     "sliderPlayheadOpacity": 75,
     "sliderPlayheadStartHeight": 30,
     "rangeBarTimelineZoomLimits": "{\"min\":64,\"max\":100}",
