@@ -6,7 +6,7 @@
 // songs are drawn gray and are not played (main.js / timeline.js use passes(i)).
 import { setting } from './settings.js';
 import { cleanTitle } from './title.mjs';
-import { featureIconHtml, customIconHtml, iconRev, ICON_BOX } from './iconStyles.js';
+import { featureIconHtml, extraIconHtml, iconRev, ICON_BOX } from './iconStyles.js';
 
 // Name Lengths / Song Date / Song Length: each is shown (and applied) only while its dev-panel checkbox is on. Icons are simple stand-ins
 // (title letter, person, disc, calendar, clock) until the owner's own icon files exist. `get` returns the song's value, or null if it has none.
@@ -19,14 +19,8 @@ const fmtLen = v => { const t = Math.round(v); return Math.floor(t / 60) + ':' +
 let indiv = false; // Individual Artists: each artist of a song is its own length instead of the joined text
 const artistLens = s => { const p = typeof s.a === 'string' ? s.a.split(';').map(x => x.trim()).filter(Boolean) : []; return indiv ? (p.length ? p.map(x => x.length) : null) : (typeof s.a === 'string' && s.a.length ? s.a.length : null); };
 const lenOf = k => s => { const t = typeof s[k] === 'string' ? (k === 'n' ? cleanTitle(s[k]) : s[k]) : ''; return t.length ? t.length : null; }; // the title is measured as shown (decoration stripped)
-const CIRCLE = (cx, cy, r) => `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0z`;
-const EXTRA_ICONS = {
-    ln: [['M7 7h28.5v6.5H24.6V36h-6.7V13.5H7z', 0]],
-    la: [[CIRCLE(21.26, 13, 8), 0], ['M5 37c0-8.5 7-13 16.26-13S37.5 28.5 37.5 37z', 0]],
-    lb: [[CIRCLE(21.26, 21.26, 17.26) + CIRCLE(21.26, 21.26, 4.5), 1]],
-    rd: [['M11 4h4.5v5h11.5V4h4.5v5h4a2.5 2.5 0 0 1 2.5 2.5v22a2.5 2.5 0 0 1-2.5 2.5H7a2.5 2.5 0 0 1-2.5-2.5v-22A2.5 2.5 0 0 1 7 9h4zM9 18v15.5h24.5V18z', 1]],
-    du: [[CIRCLE(21.26, 21.26, 17.26) + CIRCLE(21.26, 21.26, 13.5), 1], ['M19.4 11.5h3.7v9.2l6.4 3.7-1.85 3.2-8.25-4.8z', 0]],
-};
+// the filter panel's other rows: their icon is the dev panel's choice too (built-in options in iconStyles.js EXTRA_ICON_SETS)
+export const EXTRA_ICON_SETTING = { ln: 'selectTitleLenIconStyle', la: 'selectArtistLenIconStyle', lb: 'selectAlbumLenIconStyle', rd: 'selectSongDateIconStyle', du: 'selectSongLenIconStyle' };
 const FEATURES = [
     { key: 'tp', showVal: 'checkboxFilterShowValueOriginal', label: 'Tempo', unit: ' BPM', step: 'any', dp: 0 },
     { key: 'v', showVal: 'checkboxFilterShowValueOriginal', label: 'Valence', unit: '', step: 'any', dp: 1 },
@@ -218,7 +212,7 @@ export function createFilter(songs, { host, onChange }) {
         FEATURES.forEach(f => { const r = rows[f.key], shown = gateOn[f.key]; r.row.style.display = shown ? '' : 'none'; r.row.style.marginTop = shown && firstShown ? '0' : ''; if (shown) firstShown = false; });
         FEATURES.forEach(f => {
             const r = rows[f.key];
-            if (EXTRA_ICONS[f.key]) { if (!r.ico.dataset.icon) { r.ico.dataset.icon = 'x'; r.ico.innerHTML = customIconHtml(EXTRA_ICONS[f.key]); } return; }
+            if (EXTRA_ICON_SETTING[f.key]) { const xv = setting(EXTRA_ICON_SETTING[f.key]), xk = 'x' + xv + ':' + iconRev(); if (r.ico.dataset.icon !== xk) { r.ico.dataset.icon = xk; r.ico.innerHTML = extraIconHtml(f.key, xv); } return; }
             const v = setting(FEATURE_ICON_SETTING[f.key]), ik = v + ':' + iconRev(); if (r.ico.dataset.icon !== ik) { r.ico.dataset.icon = ik; r.ico.innerHTML = featureIconHtml(f.key, v); }
         });
         FEATURES.forEach(f => {

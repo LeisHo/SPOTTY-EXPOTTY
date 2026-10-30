@@ -5819,6 +5819,26 @@
                             },
                             {
                               "type": "row",
+                              "key": "selectTitleLenIconStyle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectArtistLenIconStyle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectAlbumLenIconStyle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectSongDateIconStyle"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectSongLenIconStyle"
+                            },
+                            {
+                              "type": "row",
                               "key": "sliderFilterIconSize"
                             },
                             {
@@ -5883,6 +5903,11 @@
                             "selectValenceIconStyle",
                             "selectDanceIconStyle",
                             "selectEnergyIconStyle",
+                            "selectTitleLenIconStyle",
+                            "selectArtistLenIconStyle",
+                            "selectAlbumLenIconStyle",
+                            "selectSongDateIconStyle",
+                            "selectSongLenIconStyle",
                             "sliderFilterIconSize",
                             "colorFilterOn",
                             "colorFilterIcon"
@@ -6687,6 +6712,26 @@
                           },
                           {
                             "type": "row",
+                            "key": "selectTitleLenIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectArtistLenIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectAlbumLenIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectSongDateIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectSongLenIconStyle"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterIconSize"
                           },
                           {
@@ -6751,6 +6796,11 @@
                           "selectValenceIconStyle",
                           "selectDanceIconStyle",
                           "selectEnergyIconStyle",
+                          "selectTitleLenIconStyle",
+                          "selectArtistLenIconStyle",
+                          "selectAlbumLenIconStyle",
+                          "selectSongDateIconStyle",
+                          "selectSongLenIconStyle",
                           "sliderFilterIconSize",
                           "colorFilterOn",
                           "colorFilterIcon"
@@ -7520,6 +7570,10 @@
                     "items": [
                       {
                         "type": "row",
+                        "key": "selectDeviceIconStyle"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderDeviceIconSize"
                       },
                       {
@@ -7624,6 +7678,7 @@
                       }
                     ],
                     "rowKeys": [
+                      "selectDeviceIconStyle",
                       "sliderDeviceIconSize",
                       "sliderDeviceIconOffsetX",
                       "sliderDeviceIconOffsetY",
@@ -9195,6 +9250,26 @@
                           },
                           {
                             "type": "row",
+                            "key": "selectTitleLenIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectArtistLenIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectAlbumLenIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectSongDateIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectSongLenIconStyle"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterIconSize"
                           },
                           {
@@ -9259,6 +9334,11 @@
                           "selectValenceIconStyle",
                           "selectDanceIconStyle",
                           "selectEnergyIconStyle",
+                          "selectTitleLenIconStyle",
+                          "selectArtistLenIconStyle",
+                          "selectAlbumLenIconStyle",
+                          "selectSongDateIconStyle",
+                          "selectSongLenIconStyle",
                           "sliderFilterIconSize",
                           "colorFilterOn",
                           "colorFilterIcon"
@@ -10063,6 +10143,26 @@
                         },
                         {
                           "type": "row",
+                          "key": "selectTitleLenIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectArtistLenIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectAlbumLenIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectSongDateIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectSongLenIconStyle"
+                        },
+                        {
+                          "type": "row",
                           "key": "sliderFilterIconSize"
                         },
                         {
@@ -10127,6 +10227,11 @@
                         "selectValenceIconStyle",
                         "selectDanceIconStyle",
                         "selectEnergyIconStyle",
+                        "selectTitleLenIconStyle",
+                        "selectArtistLenIconStyle",
+                        "selectAlbumLenIconStyle",
+                        "selectSongDateIconStyle",
+                        "selectSongLenIconStyle",
                         "sliderFilterIconSize",
                         "colorFilterOn",
                         "colorFilterIcon"
@@ -10893,6 +10998,10 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "selectDeviceIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderDeviceIconSize"
                     },
                     {
@@ -10997,6 +11106,7 @@
                     }
                   ],
                   "rowKeys": [
+                    "selectDeviceIconStyle",
                     "sliderDeviceIconSize",
                     "sliderDeviceIconOffsetX",
                     "sliderDeviceIconOffsetY",
@@ -16264,6 +16374,26 @@
                           },
                           {
                             "type": "row",
+                            "key": "selectTitleLenIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectArtistLenIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectAlbumLenIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectSongDateIconStyle"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectSongLenIconStyle"
+                          },
+                          {
+                            "type": "row",
                             "key": "sliderFilterIconSize"
                           },
                           {
@@ -16328,6 +16458,11 @@
                           "selectValenceIconStyle",
                           "selectDanceIconStyle",
                           "selectEnergyIconStyle",
+                          "selectTitleLenIconStyle",
+                          "selectArtistLenIconStyle",
+                          "selectAlbumLenIconStyle",
+                          "selectSongDateIconStyle",
+                          "selectSongLenIconStyle",
                           "sliderFilterIconSize",
                           "colorFilterOn",
                           "colorFilterIcon"
@@ -17132,6 +17267,26 @@
                         },
                         {
                           "type": "row",
+                          "key": "selectTitleLenIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectArtistLenIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectAlbumLenIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectSongDateIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectSongLenIconStyle"
+                        },
+                        {
+                          "type": "row",
                           "key": "sliderFilterIconSize"
                         },
                         {
@@ -17196,6 +17351,11 @@
                         "selectValenceIconStyle",
                         "selectDanceIconStyle",
                         "selectEnergyIconStyle",
+                        "selectTitleLenIconStyle",
+                        "selectArtistLenIconStyle",
+                        "selectAlbumLenIconStyle",
+                        "selectSongDateIconStyle",
+                        "selectSongLenIconStyle",
                         "sliderFilterIconSize",
                         "colorFilterOn",
                         "colorFilterIcon"
@@ -17965,6 +18125,10 @@
                   "items": [
                     {
                       "type": "row",
+                      "key": "selectDeviceIconStyle"
+                    },
+                    {
+                      "type": "row",
                       "key": "sliderDeviceIconSize"
                     },
                     {
@@ -18069,6 +18233,7 @@
                     }
                   ],
                   "rowKeys": [
+                    "selectDeviceIconStyle",
                     "sliderDeviceIconSize",
                     "sliderDeviceIconOffsetX",
                     "sliderDeviceIconOffsetY",
@@ -19640,6 +19805,26 @@
                         },
                         {
                           "type": "row",
+                          "key": "selectTitleLenIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectArtistLenIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectAlbumLenIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectSongDateIconStyle"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectSongLenIconStyle"
+                        },
+                        {
+                          "type": "row",
                           "key": "sliderFilterIconSize"
                         },
                         {
@@ -19704,6 +19889,11 @@
                         "selectValenceIconStyle",
                         "selectDanceIconStyle",
                         "selectEnergyIconStyle",
+                        "selectTitleLenIconStyle",
+                        "selectArtistLenIconStyle",
+                        "selectAlbumLenIconStyle",
+                        "selectSongDateIconStyle",
+                        "selectSongLenIconStyle",
                         "sliderFilterIconSize",
                         "colorFilterOn",
                         "colorFilterIcon"
@@ -20508,6 +20698,26 @@
                       },
                       {
                         "type": "row",
+                        "key": "selectTitleLenIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectArtistLenIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectAlbumLenIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectSongDateIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectSongLenIconStyle"
+                      },
+                      {
+                        "type": "row",
                         "key": "sliderFilterIconSize"
                       },
                       {
@@ -20572,6 +20782,11 @@
                       "selectValenceIconStyle",
                       "selectDanceIconStyle",
                       "selectEnergyIconStyle",
+                      "selectTitleLenIconStyle",
+                      "selectArtistLenIconStyle",
+                      "selectAlbumLenIconStyle",
+                      "selectSongDateIconStyle",
+                      "selectSongLenIconStyle",
                       "sliderFilterIconSize",
                       "colorFilterOn",
                       "colorFilterIcon"
@@ -21338,6 +21553,10 @@
                 "items": [
                   {
                     "type": "row",
+                    "key": "selectDeviceIconStyle"
+                  },
+                  {
+                    "type": "row",
                     "key": "sliderDeviceIconSize"
                   },
                   {
@@ -21442,6 +21661,7 @@
                   }
                 ],
                 "rowKeys": [
+                  "selectDeviceIconStyle",
                   "sliderDeviceIconSize",
                   "sliderDeviceIconOffsetX",
                   "sliderDeviceIconOffsetY",

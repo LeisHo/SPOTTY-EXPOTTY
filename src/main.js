@@ -13,7 +13,7 @@ import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn, seekClip, clipLength, onClipState, setOnClipEnded, pauseClip, resumeClip } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
-import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon, applySongDataIcon } from './app/iconStyles.js';
+import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon, applySongDataIcon, applyDeviceIcon } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
 import { initAudioMods } from './app/audioMods.js';
 import { logEvent } from './app/debugLog.js';
@@ -819,6 +819,7 @@ async function boot() {
         {   // Play On Device button (under Filter): its own look
             const ap = el('spxApp').style, dOn = !!setting('checkboxDeviceButtonEnabled');
             el('spxDevice').hidden = !dOn;
+            applyDeviceIcon(el('spxDevice').querySelector('svg'), iconIndex(setting('selectDeviceIconStyle')));
             ap.setProperty('--spx-device-icon', setting('sliderDeviceIconSize') + 'px'); ap.setProperty('--spx-device-x', setting('sliderDeviceIconOffsetX') + 'px'); ap.setProperty('--spx-device-y', setting('sliderDeviceIconOffsetY') + 'px');
             ap.setProperty('--spx-device-edge', setting('sliderDeviceEdgeOffset') + 'px');
             ap.setProperty('--spx-device-off-op', String(setting('sliderDeviceOffOpacity') / 100)); ap.setProperty('--spx-device-on-op', String(setting('sliderDeviceOnOpacity') / 100));
