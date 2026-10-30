@@ -43,35 +43,52 @@
 .ui-mode-anchor {
   position: absolute;
 }
+/* v0.2.10 — offsetX/offsetY sign convention, UNIFIED across every edge:
+   positive offsetX always means screen-right, positive offsetY always means
+   screen-up, regardless of which edge (top/bottom/left/right/center) the
+   element is anchored to. Before this, the RAW CSS property being written
+   (`top`/`bottom`/`left`/`right`) determined the sign: a `top`-anchored
+   element had positive-Y-down (more `top` = further down), a `bottom`-
+   anchored one had positive-Y-up (more `bottom` = further up) — the same
+   stored number meant opposite visual directions depending on which edge
+   was active. `left`/`right` had the identical asymmetry on the X axis.
+   Fix: negate the var() wherever the raw CSS property's own natural
+   direction disagrees with the desired convention (top, right) — leave it
+   alone wherever it already agrees (bottom, left). See registry.mjs's
+   SIGN_MIGRATION_V0_2_10 for the one-time stored-value migration that keeps
+   every already-saved offset rendering at its current visual position
+   under this new convention. */
 .ui-mode-anchor[data-anchor-h="left"] { left: var(--ui-offset-x, 0); right: auto; }
-.ui-mode-anchor[data-anchor-h="right"] { right: var(--ui-offset-x, 0); left: auto; }
+.ui-mode-anchor[data-anchor-h="right"] { right: calc(-1 * var(--ui-offset-x, 0px)); left: auto; }
 .ui-mode-anchor[data-anchor-h="center"] { left: 50%; right: auto; transform: translateX(calc(-50% + var(--ui-offset-x, 0px))); }
-.ui-mode-anchor[data-anchor-v="top"] { top: var(--ui-offset-y, 0); bottom: auto; }
+.ui-mode-anchor[data-anchor-v="top"] { top: calc(-1 * var(--ui-offset-y, 0px)); bottom: auto; }
 .ui-mode-anchor[data-anchor-v="bottom"] { bottom: var(--ui-offset-y, 0); top: auto; }
-.ui-mode-anchor[data-anchor-v="center"] { top: 50%; bottom: auto; transform: translateY(calc(-50% + var(--ui-offset-y, 0px))); }
+.ui-mode-anchor[data-anchor-v="center"] { top: 50%; bottom: auto; transform: translateY(calc(-50% - var(--ui-offset-y, 0px))); }
 /* Both axes centered: combine the two transforms rather than letting the
    later rule silently clobber the earlier one (CSS's own cascade would
    otherwise apply whichever single-axis transform rule appears last in the
    stylesheet, dropping the other axis entirely). */
 .ui-mode-anchor[data-anchor-h="center"][data-anchor-v="center"] {
   left: 50%; top: 50%; right: auto; bottom: auto;
-  transform: translate(calc(-50% + var(--ui-offset-x, 0px)), calc(-50% + var(--ui-offset-y, 0px)));
+  transform: translate(calc(-50% + var(--ui-offset-x, 0px)), calc(-50% - var(--ui-offset-y, 0px)));
 }
 
 /* fixed — position:fixed against the viewport. Same inset-property pattern
-   as anchor, plus the 3x3 named viewport anchors from data-viewport-anchor. */
+   as anchor, plus the 3x3 named viewport anchors from data-viewport-anchor.
+   Same v0.2.10 sign-negation rule as anchor mode above: negate on top/right
+   edges, leave bottom/left as-is. */
 .ui-mode-fixed {
   position: fixed;
 }
-.ui-mode-fixed[data-viewport-anchor="top-left"] { top: var(--ui-offset-y, 0); left: var(--ui-offset-x, 0); }
-.ui-mode-fixed[data-viewport-anchor="top-center"] { top: var(--ui-offset-y, 0); left: 50%; transform: translateX(-50%); }
-.ui-mode-fixed[data-viewport-anchor="top-right"] { top: var(--ui-offset-y, 0); right: var(--ui-offset-x, 0); }
+.ui-mode-fixed[data-viewport-anchor="top-left"] { top: calc(-1 * var(--ui-offset-y, 0px)); left: var(--ui-offset-x, 0); }
+.ui-mode-fixed[data-viewport-anchor="top-center"] { top: calc(-1 * var(--ui-offset-y, 0px)); left: 50%; transform: translateX(-50%); }
+.ui-mode-fixed[data-viewport-anchor="top-right"] { top: calc(-1 * var(--ui-offset-y, 0px)); right: calc(-1 * var(--ui-offset-x, 0px)); }
 .ui-mode-fixed[data-viewport-anchor="center-left"] { top: 50%; left: var(--ui-offset-x, 0); transform: translateY(-50%); }
 .ui-mode-fixed[data-viewport-anchor="center"] { top: 50%; left: 50%; transform: translate(-50%, -50%); }
-.ui-mode-fixed[data-viewport-anchor="center-right"] { top: 50%; right: var(--ui-offset-x, 0); transform: translateY(-50%); }
+.ui-mode-fixed[data-viewport-anchor="center-right"] { top: 50%; right: calc(-1 * var(--ui-offset-x, 0px)); transform: translateY(-50%); }
 .ui-mode-fixed[data-viewport-anchor="bottom-left"] { bottom: var(--ui-offset-y, 0); left: var(--ui-offset-x, 0); }
 .ui-mode-fixed[data-viewport-anchor="bottom-center"] { bottom: var(--ui-offset-y, 0); left: 50%; transform: translateX(-50%); }
-.ui-mode-fixed[data-viewport-anchor="bottom-right"] { bottom: var(--ui-offset-y, 0); right: var(--ui-offset-x, 0); }
+.ui-mode-fixed[data-viewport-anchor="bottom-right"] { bottom: var(--ui-offset-y, 0); right: calc(-1 * var(--ui-offset-x, 0px)); }
 
 /* absolute — explicit x/y inside a declared containing block. */
 .ui-mode-absolute {

@@ -51947,7 +51947,7 @@
           "mobileLandscape": {
             "enabled": true,
             "overrides": {
-              "offsetY": "5vh"
+              "offsetY": "-5vh"
             }
           }
         }
@@ -51998,7 +51998,7 @@
               "offset": "0px"
             },
             "vertical": {
-              "offset": "-5vh"
+              "offset": "5vh"
             }
           },
           "size": {
@@ -52188,7 +52188,7 @@
             },
             "vertical": {
               "anchor": "top",
-              "offset": "14px"
+              "offset": "-14px"
             }
           },
           "size": {
@@ -52210,7 +52210,8 @@
             "overrides": {}
           }
         }
-      }
+      },
+      "__signV": 2
     },
     "customIcons": {
       "tp": [

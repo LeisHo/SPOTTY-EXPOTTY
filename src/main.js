@@ -127,10 +127,10 @@ async function boot() {
     createUIElement({
         id: 'spxTitle', role: 'text', domNode: el('spxTitle'), group: 'Song Title', propertyLabel: 'Position & Size',
         layout: {
-            position: { mode: 'anchor', horizontal: { anchor: 'center', offset: '0px' }, vertical: { anchor: 'top', offset: '12vh' } },
+            position: { mode: 'anchor', horizontal: { anchor: 'center', offset: '0px' }, vertical: { anchor: 'top', offset: '-12vh' } }, // engine v0.2.10: positive offsetY = UP, so a top-anchored element sits at a NEGATIVE offset
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
         },
-        contexts: ctx({ mobileLandscape: { offsetY: '5vh' } }),
+        contexts: ctx({ mobileLandscape: { offsetY: '-5vh' } }),
     });
     createUIElement({
         id: 'spxArtist', role: 'text', domNode: el('spxArtist'), group: 'Artist', propertyLabel: 'Position & Size',
@@ -187,7 +187,7 @@ async function boot() {
     createUIElement({
         id: 'spxVolume', role: 'container', domNode: el('spxVolume'), group: 'Volume Control', propertyLabel: 'Position & Size',
         layout: {
-            position: { mode: 'anchor', horizontal: { anchor: 'left', offset: '14px' }, vertical: { anchor: 'top', offset: '14px' } },
+            position: { mode: 'anchor', horizontal: { anchor: 'left', offset: '14px' }, vertical: { anchor: 'top', offset: '-14px' } },
             size: { width: { mode: 'content' }, height: { mode: 'content' } },
         },
         contexts: ctx(),
@@ -202,7 +202,35 @@ async function boot() {
         save() { if (typeof saveDevPanelSettings === 'function') saveDevPanelSettings(); },
         load() { return pendingLayout; },
     });
-    window.spxCaptureLayout = () => captureAllLayoutConfigs();
+    // Engine v0.2.10 flipped the offset sign convention (positive Y = up, positive X = right on EVERY edge); the old one depended on the anchor edge. A layout saved
+    // before that has no marker, and legacyToV2() converts it once (every offset keeps its place on screen); everything captured now carries `__signV: 2`.
+    const SIGN_V = 2;
+    const negLen = v => {
+        if (typeof v !== 'string') return v;
+        const t = v.trim();
+        if (/^-?0+(\.0+)?[a-z%]*$/i.test(t)) return v;
+        if (/^-[\d.]/.test(t)) return t.slice(1);
+        if (/^[\d.]/.test(t)) return '-' + t;
+        return 'calc(-1 * (' + t + '))';
+    };
+    function legacyToV2(state) {
+        if (!state || typeof state !== 'object') return state;
+        const out = JSON.parse(JSON.stringify(state));
+        delete out.__signV;
+        Object.values(out).forEach(e => {
+            const p = e && e.layout && e.layout.position;
+            if (!p) return;
+            const va = p.viewportAnchor || '';
+            const flipX = p.mode === 'anchor' ? (p.horizontal || {}).anchor === 'right' : p.mode === 'fixed' ? /right$/.test(va) : false;
+            const flipY = p.mode === 'anchor' ? ['top', 'center'].includes((p.vertical || {}).anchor) : p.mode === 'fixed' ? /^top/.test(va) : p.mode === 'relative';
+            if (flipX && p.horizontal && p.horizontal.offset !== undefined) p.horizontal.offset = negLen(p.horizontal.offset);
+            if (flipY && p.vertical && p.vertical.offset !== undefined) p.vertical.offset = negLen(p.vertical.offset);
+            if (p.offset && typeof p.offset === 'object') { if (flipX && p.offset.x !== undefined) p.offset.x = negLen(p.offset.x); if (flipY && p.offset.y !== undefined) p.offset.y = negLen(p.offset.y); }
+            Object.values(e.contexts || {}).forEach(c => { const o = c && c.overrides; if (!o) return; if (flipX && o.offsetX !== undefined) o.offsetX = negLen(o.offsetX); if (flipY && o.offsetY !== undefined) o.offsetY = negLen(o.offsetY); });
+        });
+        return out;
+    }
+    window.spxCaptureLayout = () => ({ ...captureAllLayoutConfigs(), __signV: SIGN_V });
     // The saved layout can arrive before the timeline data does (timeline is created later), so the redraw goes through a hook set then.
     // CSS anchor positioning needs an anchor target to come EARLIER in the DOM than the element anchored to it, and the engine never moves DOM nodes. The owner can chain the
     // elements in any direction in the UI Layout Inspector (title above artist above album line above cover, or the reverse), so after any style change on an element the
@@ -228,7 +256,7 @@ async function boot() {
         Array.from(el('spxApp').children).filter(c => c.classList.contains('ui-element')).forEach(c => mo.observe(c, { attributes: true, attributeFilter: ['style'] }));
         queue();
     }
-    window.spxApplyLayout = state => { pendingLayout = state; loadLayoutConfig(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); };
+    window.spxApplyLayout = state => { pendingLayout = state && state.__signV === SIGN_V ? (({ __signV, ...rest }) => rest)(state) : legacyToV2(state); loadLayoutConfig(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); };
     window.spxResetLayout = () => { resetLayoutConfig(shippedLayout); resolveAndApplyAll(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); };
 
     // ---- data ----------------------------------------------------------------------
