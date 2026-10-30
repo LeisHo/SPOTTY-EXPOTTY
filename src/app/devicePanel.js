@@ -68,8 +68,8 @@ export function initDevicePlayer({ button, api, player, volume }) {
     async function refresh() {
         if (!isLoggedIn()) { render(); return; }
         loading = true; message = ''; render();
-        try { devices = await api.list(); }
-        catch (e) { message = 'Could not load the devices (' + e.message.replace(/^GET \S+ -> /, '') + ').'; }
+        try { devices = await api.list(); logEvent('playback', 'DEVICE list: ' + (devices.length ? devices.map(d => d.name + ' (' + d.type + (d.active ? ', active' : '') + (d.isThis ? ', this browser' : '') + ')').join('; ') : 'Spotify returned no devices')); }
+        catch (e) { message = 'Could not load the devices (' + e.message.replace(/^GET \S+ -> /, '') + ').'; logEvent('playback', 'DEVICE list FAILED: ' + e.message); }
         loading = false; render();
     }
     function setOpen(o) {
