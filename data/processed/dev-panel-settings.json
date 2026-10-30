@@ -161,7 +161,7 @@
     "sliderTxtSongTitleOpacity": 1,
     "sliderTxtSongTitleOffsetY": 0,
     "checkboxTxtSongTitleWordWrap": true,
-    "sliderTxtSongTitleMaxWidth": 2400,
+    "sliderTxtSongTitleMaxWidth": 3000,
     "selectTxtSongTitleOverflow": "wrap",
     "selectTitleOverMaxLines": "scale",
     "sliderTitleMaxLines": 2,
@@ -230,8 +230,8 @@
     "checkboxTxtAlbumDateOutlineEnabled": false,
     "colorTxtAlbumDateOutlineColor": "#000000",
     "sliderTxtAlbumDateOutlineThickness": 2,
-    "checkboxTestTextEnabled": true,
-    "textTestSong": "HELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLET",
+    "checkboxTestTextEnabled": false,
+    "textTestSong": "HE HE HE HE HE HE HE HE HE HE HE HE HE HE HE HE HE ",
     "textTestArtist": "HELLO ELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
     "textTestAlbum": "HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
     "checkboxGlobalOverrideEnabled": true,
@@ -695,8 +695,8 @@
     "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}"
   },
   "layout": {
-    "left": 88,
-    "top": 6,
+    "left": 86,
+    "top": 329,
     "width": 525,
     "height": 671
   },
@@ -49983,7 +49983,7 @@
     "desktop:Visibility / Render Order": true,
     "desktop:Text": false,
     "desktop:Font": true,
-    "desktop:Song Title": true,
+    "desktop:Song Title": false,
     "desktop:New Group (31)": true,
     "desktop:New Group (32)": true,
     "desktop:Track Title Button Animation": true,
@@ -51977,7 +51977,7 @@
           "size": {
             "width": {
               "mode": "fixed",
-              "value": "75vw"
+              "value": "85vw"
             },
             "height": {
               "mode": "content"
@@ -52008,13 +52008,13 @@
               "offset": "0px"
             },
             "vertical": {
-              "offset": "1ah"
+              "offset": "0.5ah"
             }
           },
           "size": {
             "width": {
               "mode": "fixed",
-              "value": "90vw"
+              "value": "100vw"
             },
             "height": {
               "mode": "content"
