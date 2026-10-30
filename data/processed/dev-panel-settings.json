@@ -337,6 +337,23 @@
     "sliderDevicePanelBgOpacity": 92,
     "sliderDevicePanelBlur": 6,
     "colorDevicePanelAccent": "#1db954",
+    "checkboxStackShownButtons": false,
+    "checkboxSearchButtonEnabled": true,
+    "sliderSearchIconSize": 20,
+    "sliderSearchIconOffsetX": 0,
+    "sliderSearchIconOffsetY": 0,
+    "sliderSearchEdgeOffset": 14,
+    "sliderSearchOffOpacity": 45,
+    "sliderSearchOnOpacity": 100,
+    "colorSearchIcon": "#f2f2f2",
+    "colorSearchOn": "#1db954",
+    "sliderSearchPanelWidth": 240,
+    "sliderSearchPanelFontSize": 13,
+    "sliderSearchPanelOffsetX": 0,
+    "sliderSearchPanelOffsetY": 6,
+    "colorSearchPanelBg": "#14161a",
+    "sliderSearchPanelBgOpacity": 92,
+    "colorSearchPanelAccent": "#1db954",
     "selectFilterIconStyle": "3",
     "selectTempoIconStyle": "",
     "selectValenceIconStyle": "",
@@ -698,7 +715,7 @@
     "left": 35,
     "top": 112,
     "width": 350,
-    "height": 80
+    "height": 478
   },
   "devPanelStyle": {
     "titleFontSize": 17,
@@ -8123,10 +8140,6 @@
                     "items": [
                       {
                         "type": "row",
-                        "key": "checkboxSearchButtonEnabled"
-                      },
-                      {
-                        "type": "row",
                         "key": "sliderSearchIconSize"
                       },
                       {
@@ -8187,7 +8200,6 @@
                       }
                     ],
                     "rowKeys": [
-                      "checkboxSearchButtonEnabled",
                       "sliderSearchIconSize",
                       "sliderSearchIconOffsetX",
                       "sliderSearchIconOffsetY",
@@ -11778,10 +11790,6 @@
                   "items": [
                     {
                       "type": "row",
-                      "key": "checkboxSearchButtonEnabled"
-                    },
-                    {
-                      "type": "row",
                       "key": "sliderSearchIconSize"
                     },
                     {
@@ -11842,7 +11850,6 @@
                     }
                   ],
                   "rowKeys": [
-                    "checkboxSearchButtonEnabled",
                     "sliderSearchIconSize",
                     "sliderSearchIconOffsetX",
                     "sliderSearchIconOffsetY",
@@ -15803,6 +15810,10 @@
             "key": "desktop:New Group (7)",
             "items": [
               {
+                "type": "row",
+                "key": "checkboxStackShownButtons"
+              },
+              {
                 "type": "group",
                 "section": {
                   "key": "desktop:Play Button",
@@ -19135,6 +19146,92 @@
               {
                 "type": "group",
                 "section": {
+                  "key": "desktop:Search Button",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "sliderSearchIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchIconOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchOffOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSearchIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSearchOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSearchPanelBg"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderSearchPanelBgOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorSearchPanelAccent"
+                    }
+                  ],
+                  "rowKeys": [
+                    "sliderSearchIconSize",
+                    "sliderSearchIconOffsetX",
+                    "sliderSearchIconOffsetY",
+                    "sliderSearchEdgeOffset",
+                    "sliderSearchOffOpacity",
+                    "sliderSearchOnOpacity",
+                    "colorSearchIcon",
+                    "colorSearchOn",
+                    "sliderSearchPanelWidth",
+                    "sliderSearchPanelFontSize",
+                    "sliderSearchPanelOffsetX",
+                    "sliderSearchPanelOffsetY",
+                    "colorSearchPanelBg",
+                    "sliderSearchPanelBgOpacity",
+                    "colorSearchPanelAccent"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "desktop:Song Timeline",
                   "items": [
                     {
@@ -19385,7 +19482,9 @@
                 }
               }
             ],
-            "rowKeys": [],
+            "rowKeys": [
+              "checkboxStackShownButtons"
+            ],
             "subgroups": [
               {
                 "key": "desktop:Play Button",
@@ -22695,6 +22794,89 @@
                     "subgroups": []
                   }
                 ]
+              },
+              {
+                "key": "desktop:Search Button",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "sliderSearchIconSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchIconOffsetX"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchIconOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchEdgeOffset"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchOffOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchOnOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorSearchIcon"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorSearchOn"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchPanelWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchPanelFontSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchPanelOffsetX"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchPanelOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorSearchPanelBg"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderSearchPanelBgOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorSearchPanelAccent"
+                  }
+                ],
+                "rowKeys": [
+                  "sliderSearchIconSize",
+                  "sliderSearchIconOffsetX",
+                  "sliderSearchIconOffsetY",
+                  "sliderSearchEdgeOffset",
+                  "sliderSearchOffOpacity",
+                  "sliderSearchOnOpacity",
+                  "colorSearchIcon",
+                  "colorSearchOn",
+                  "sliderSearchPanelWidth",
+                  "sliderSearchPanelFontSize",
+                  "sliderSearchPanelOffsetX",
+                  "sliderSearchPanelOffsetY",
+                  "colorSearchPanelBg",
+                  "sliderSearchPanelBgOpacity",
+                  "colorSearchPanelAccent"
+                ],
+                "subgroups": []
               },
               {
                 "key": "desktop:Song Timeline",
@@ -35304,6 +35486,15 @@
               {
                 "type": "group",
                 "section": {
+                  "key": "mobile:Search Button",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "mobile:Song Timeline",
                   "items": [
                     {
@@ -36835,6 +37026,12 @@
                     "subgroups": []
                   }
                 ]
+              },
+              {
+                "key": "mobile:Search Button",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
               },
               {
                 "key": "mobile:Song Timeline",
@@ -46849,6 +47046,15 @@
               {
                 "type": "group",
                 "section": {
+                  "key": "landscape:Search Button",
+                  "items": [],
+                  "rowKeys": [],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "landscape:Song Timeline",
                   "items": [
                     {
@@ -48380,6 +48586,12 @@
                     "subgroups": []
                   }
                 ]
+              },
+              {
+                "key": "landscape:Search Button",
+                "items": [],
+                "rowKeys": [],
+                "subgroups": []
               },
               {
                 "key": "landscape:Song Timeline",
@@ -50124,9 +50336,9 @@
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
     "desktop:Visibility / Render Order": true,
-    "desktop:Text": false,
+    "desktop:Text": true,
     "desktop:Font": true,
-    "desktop:Song Title": false,
+    "desktop:Song Title": true,
     "desktop:New Group (31)": false,
     "desktop:New Group (32)": true,
     "desktop:Track Title Button Animation": true,
@@ -50179,13 +50391,14 @@
     "desktop:New Group (22)": true,
     "desktop:New Group (21)": true,
     "desktop:New Group (17)": true,
+    "desktop:Search Button": false,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
     "desktop:Global Override": true,
     "desktop:Standard Button Animation": true,
     "desktop:Background": true,
     "desktop:Animation": true,
-    "desktop:Album Cover": true,
+    "desktop:Album Cover": false,
     "desktop:Shadows": true,
     "desktop:Album Cover Shadow": true,
     "desktop:Volume Shadow": true,
@@ -50293,6 +50506,7 @@
     "mobile:New Group (22)": true,
     "mobile:New Group (21)": true,
     "mobile:New Group (17)": true,
+    "mobile:Search Button": false,
     "mobile:Song Timeline": true,
     "mobile:Song Timeline Animation": true,
     "mobile:Global Override": true,
@@ -50407,6 +50621,7 @@
     "landscape:New Group (22)": false,
     "landscape:New Group (21)": false,
     "landscape:New Group (17)": false,
+    "landscape:Search Button": false,
     "landscape:Song Timeline": false,
     "landscape:Song Timeline Animation": false,
     "landscape:Global Override": false,
@@ -51344,7 +51559,9 @@
     "checkboxMobileOverrideDevice": null,
     "checkboxLandscapeOverrideDevice": null,
     "checkboxMobileOverrideStart": null,
-    "checkboxLandscapeOverrideStart": null
+    "checkboxLandscapeOverrideStart": null,
+    "mobile:Search Button": null,
+    "landscape:Search Button": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -52265,8 +52482,8 @@
               "offset": "0px"
             },
             "vertical": {
-              "anchor": "bottom",
-              "offset": "228px"
+              "anchor": "center",
+              "offset": "-4vh"
             }
           },
           "size": {
@@ -52392,6 +52609,263 @@
             "height": {
               "mode": "content"
             }
+          }
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxShuffle": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          },
+          "icon": {}
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxSongData": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          },
+          "icon": {}
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxFilter": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          },
+          "icon": {}
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxSearch": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          },
+          "icon": {}
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxDevice": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          },
+          "icon": {}
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxPlayGlyph": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          }
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxSongBar": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          }
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxLayerScrub": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          }
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxLayerSongdata": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          }
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxLayerDate": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          }
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxLayerScale": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          }
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxTicks": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          }
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxBgFx": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          }
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxBg": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
           }
         },
         "contexts": {
