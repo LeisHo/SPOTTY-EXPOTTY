@@ -32,7 +32,7 @@
 /* the album cover is the play/pause button */
 /* Stacking: the cover sits BEHIND everything. Scaled up it can overlap the text and the timeline, which
    stay in front of it (and the timeline canvas is transparent, so the bars draw over the cover). */
-.spx-cover { z-index: 0; padding: 0; border: 0; border-radius: 10px; overflow: hidden; background: #1a1d22; cursor: pointer; box-shadow: var(--shadow-cover, 0 8px 28px #0008); }
+.spx-cover { z-index: 0; padding: 0; border: 0; border-radius: 10px; overflow: hidden; background: transparent; /* was #1a1d22: it showed as a thin dark edge where the image meets the rounded corner, most visible when the cover is scaled up */ cursor: pointer; box-shadow: var(--shadow-cover, 0 8px 28px #0008); }
 .spx-title, .spx-artist, .spx-meta, .spx-timeline { z-index: 2; }
 /* the cover can't be selected, highlighted or dragged: no blue selection overlay when click-dragging across it */
 .spx-cover, .spx-cover * { user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
