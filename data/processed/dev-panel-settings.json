@@ -8239,6 +8239,10 @@
                       },
                       {
                         "type": "row",
+                        "key": "checkboxOverrideStart"
+                      },
+                      {
+                        "type": "row",
                         "key": "colorGlobalOverride"
                       },
                       {
@@ -8300,6 +8304,7 @@
                       "checkboxOverrideFilter",
                       "checkboxOverrideSongData",
                       "checkboxOverrideDevice",
+                      "checkboxOverrideStart",
                       "colorGlobalOverride",
                       "sliderGlobalOverrideOpacity",
                       "sliderGlobalOverrideOnOpacity"
@@ -11783,6 +11788,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxOverrideStart"
+                    },
+                    {
+                      "type": "row",
                       "key": "colorGlobalOverride"
                     },
                     {
@@ -11844,6 +11853,7 @@
                     "checkboxOverrideFilter",
                     "checkboxOverrideSongData",
                     "checkboxOverrideDevice",
+                    "checkboxOverrideStart",
                     "colorGlobalOverride",
                     "sliderGlobalOverrideOpacity",
                     "sliderGlobalOverrideOnOpacity"
@@ -19044,6 +19054,10 @@
                     },
                     {
                       "type": "row",
+                      "key": "checkboxOverrideStart"
+                    },
+                    {
+                      "type": "row",
                       "key": "colorGlobalOverride"
                     },
                     {
@@ -19105,6 +19119,7 @@
                     "checkboxOverrideFilter",
                     "checkboxOverrideSongData",
                     "checkboxOverrideDevice",
+                    "checkboxOverrideStart",
                     "colorGlobalOverride",
                     "sliderGlobalOverrideOpacity",
                     "sliderGlobalOverrideOnOpacity"
@@ -22588,6 +22603,10 @@
                   },
                   {
                     "type": "row",
+                    "key": "checkboxOverrideStart"
+                  },
+                  {
+                    "type": "row",
                     "key": "colorGlobalOverride"
                   },
                   {
@@ -22649,6 +22668,7 @@
                   "checkboxOverrideFilter",
                   "checkboxOverrideSongData",
                   "checkboxOverrideDevice",
+                  "checkboxOverrideStart",
                   "colorGlobalOverride",
                   "sliderGlobalOverrideOpacity",
                   "sliderGlobalOverrideOnOpacity"
@@ -30155,6 +30175,10 @@
                       {
                         "type": "row",
                         "key": "checkboxMobileOverrideDevice"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxMobileOverrideStart"
                       }
                     ],
                     "rowKeys": [
@@ -30168,7 +30192,8 @@
                       "colorMobileGlobalOverride",
                       "sliderMobileGlobalOverrideOpacity",
                       "sliderMobileGlobalOverrideOnOpacity",
-                      "checkboxMobileOverrideDevice"
+                      "checkboxMobileOverrideDevice",
+                      "checkboxMobileOverrideStart"
                     ],
                     "subgroups": [
                       {
@@ -31680,6 +31705,10 @@
                     {
                       "type": "row",
                       "key": "checkboxMobileOverrideDevice"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileOverrideStart"
                     }
                   ],
                   "rowKeys": [
@@ -31693,7 +31722,8 @@
                     "colorMobileGlobalOverride",
                     "sliderMobileGlobalOverrideOpacity",
                     "sliderMobileGlobalOverrideOnOpacity",
-                    "checkboxMobileOverrideDevice"
+                    "checkboxMobileOverrideDevice",
+                    "checkboxMobileOverrideStart"
                   ],
                   "subgroups": [
                     {
@@ -35218,6 +35248,10 @@
                     {
                       "type": "row",
                       "key": "checkboxMobileOverrideDevice"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileOverrideStart"
                     }
                   ],
                   "rowKeys": [
@@ -35231,7 +35265,8 @@
                     "colorMobileGlobalOverride",
                     "sliderMobileGlobalOverrideOpacity",
                     "sliderMobileGlobalOverrideOnOpacity",
-                    "checkboxMobileOverrideDevice"
+                    "checkboxMobileOverrideDevice",
+                    "checkboxMobileOverrideStart"
                   ],
                   "subgroups": [
                     {
@@ -36743,6 +36778,10 @@
                   {
                     "type": "row",
                     "key": "checkboxMobileOverrideDevice"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxMobileOverrideStart"
                   }
                 ],
                 "rowKeys": [
@@ -36756,7 +36795,8 @@
                   "colorMobileGlobalOverride",
                   "sliderMobileGlobalOverrideOpacity",
                   "sliderMobileGlobalOverrideOnOpacity",
-                  "checkboxMobileOverrideDevice"
+                  "checkboxMobileOverrideDevice",
+                  "checkboxMobileOverrideStart"
                 ],
                 "subgroups": [
                   {
@@ -41701,6 +41741,10 @@
                       {
                         "type": "row",
                         "key": "checkboxLandscapeOverrideDevice"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxLandscapeOverrideStart"
                       }
                     ],
                     "rowKeys": [
@@ -41714,7 +41758,8 @@
                       "colorLandscapeGlobalOverride",
                       "sliderLandscapeGlobalOverrideOpacity",
                       "sliderLandscapeGlobalOverrideOnOpacity",
-                      "checkboxLandscapeOverrideDevice"
+                      "checkboxLandscapeOverrideDevice",
+                      "checkboxLandscapeOverrideStart"
                     ],
                     "subgroups": [
                       {
@@ -43226,6 +43271,10 @@
                     {
                       "type": "row",
                       "key": "checkboxLandscapeOverrideDevice"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeOverrideStart"
                     }
                   ],
                   "rowKeys": [
@@ -43239,7 +43288,8 @@
                     "colorLandscapeGlobalOverride",
                     "sliderLandscapeGlobalOverrideOpacity",
                     "sliderLandscapeGlobalOverrideOnOpacity",
-                    "checkboxLandscapeOverrideDevice"
+                    "checkboxLandscapeOverrideDevice",
+                    "checkboxLandscapeOverrideStart"
                   ],
                   "subgroups": [
                     {
@@ -46764,6 +46814,10 @@
                     {
                       "type": "row",
                       "key": "checkboxLandscapeOverrideDevice"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeOverrideStart"
                     }
                   ],
                   "rowKeys": [
@@ -46777,7 +46831,8 @@
                     "colorLandscapeGlobalOverride",
                     "sliderLandscapeGlobalOverrideOpacity",
                     "sliderLandscapeGlobalOverrideOnOpacity",
-                    "checkboxLandscapeOverrideDevice"
+                    "checkboxLandscapeOverrideDevice",
+                    "checkboxLandscapeOverrideStart"
                   ],
                   "subgroups": [
                     {
@@ -48289,6 +48344,10 @@
                   {
                     "type": "row",
                     "key": "checkboxLandscapeOverrideDevice"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxLandscapeOverrideStart"
                   }
                 ],
                 "rowKeys": [
@@ -48302,7 +48361,8 @@
                   "colorLandscapeGlobalOverride",
                   "sliderLandscapeGlobalOverrideOpacity",
                   "sliderLandscapeGlobalOverrideOnOpacity",
-                  "checkboxLandscapeOverrideDevice"
+                  "checkboxLandscapeOverrideDevice",
+                  "checkboxLandscapeOverrideStart"
                 ],
                 "subgroups": [
                   {

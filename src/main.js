@@ -710,9 +710,15 @@ async function boot() {
             { k: 'Filter', host: el('spxFilter'), kind: 'plain', opVar: '--spx-filter-off-op', onVar: '--spx-filter-on-op' },
             { k: 'SongData', host: el('spxSongData'), kind: 'plain', opVar: '--spx-sd-off-op', onVar: '--spx-sd-on-op' },
             { k: 'Device', host: el('spxDevice'), kind: 'plain', opVar: '--spx-device-off-op', onVar: '--spx-device-on-op' }, // Play On Device: on = a device is playing
+            { k: 'Start', host: el('spxStartBtn'), kind: 'start' }, // the start screen's Start button: colour + opacity only (it has its own animation group, not the bs one)
         ];
         targets.forEach(t => {
             const ticked = on && !!g('checkboxOverride' + t.k), st = t.host.style;
+            if (t.kind === 'start') { // the play icon is currentColor; its opacity goes on the svg so the button's own animation keeps the button's opacity
+                const svg = t.host.querySelector('svg');
+                if (ticked) { st.setProperty('color', col); if (svg) svg.style.opacity = op; } else { st.removeProperty('color'); if (svg) svg.style.removeProperty('opacity'); }
+                return;
+            }
             if (t.kind === 'bs') {
                 if (ticked) {
                     st.setProperty('--bs-color', col); st.setProperty('--bs-op', op);
@@ -795,9 +801,11 @@ async function boot() {
                 c('--spx-sd-off-op', String(setting('sliderSongDataBtnOffOpacity') / 100)); c('--spx-sd-on-op', String(setting('sliderSongDataBtnOnOpacity') / 100));
                 c('--spx-sd-color', setting('colorSongDataBtn')); c('--spx-sd-on-color', setting('colorSongDataBtnOn'));
                 c('--spx-sd-offset', sdOn ? (ic + 20) + 'px' : '0px');
+                el('spxSongData').style.setProperty('--bs-size', ic + 'px'); // the animation (and the Global Override's scaled sizes) work from the icon's own size
                 updateSongData();
             }
             el('spxFilter').hidden = !setting('checkboxFilterButtonEnabled');
+            el('spxFilter').style.setProperty('--bs-size', setting('sliderFilterIconSize') + 'px'); // same: the animation / Global Override scale this button's own icon size
             c('--spx-filter-icon', setting('sliderFilterIconSize') + 'px'); c('--spx-filter-x', setting('sliderFilterIconOffsetX') + 'px'); c('--spx-filter-y', setting('sliderFilterIconOffsetY') + 'px');
             c('--spx-filter-edge', setting('sliderFilterEdgeOffset') + 'px');
             c('--spx-flt-offset', setting('checkboxFilterButtonEnabled') ? (setting('sliderFilterIconSize') + 20) + 'px' : '0px'); // the Device button sits under the Filter button
@@ -821,6 +829,7 @@ async function boot() {
             const ap = el('spxApp').style, dOn = !!setting('checkboxDeviceButtonEnabled');
             el('spxDevice').hidden = !dOn;
             applyDeviceIcon(el('spxDevice').querySelector('svg'), iconIndex(setting('selectDeviceIconStyle')));
+            el('spxDevice').style.setProperty('--bs-size', setting('sliderDeviceIconSize') + 'px'); // same: the animation / Global Override scale this button's own icon size
             ap.setProperty('--spx-device-icon', setting('sliderDeviceIconSize') + 'px'); ap.setProperty('--spx-device-x', setting('sliderDeviceIconOffsetX') + 'px'); ap.setProperty('--spx-device-y', setting('sliderDeviceIconOffsetY') + 'px');
             ap.setProperty('--spx-device-edge', setting('sliderDeviceEdgeOffset') + 'px');
             ap.setProperty('--spx-device-off-op', String(setting('sliderDeviceOffOpacity') / 100)); ap.setProperty('--spx-device-on-op', String(setting('sliderDeviceOnOpacity') / 100));

@@ -176,7 +176,7 @@ export const DEFAULTS = {
     checkboxSongBarEnabled: false, sliderSongBarHeight: 4, colorSongBarFill: '#1db954', colorSongBarEmpty: '#3a3f47', sliderSongBarClickTol: 6, sliderSongBarOpacity: 100,
     checkboxSongBarMarker: false, sliderSongBarMarkerRadius: 6, sliderSongBarMarkerOpacity: 100,
     checkboxSongBarAnimEnabled: false, sliderSongBarHoverOpacity: 100, sliderSongBarClickOpacity: 100, sliderSongBarAnimTime: 160,
-    checkboxGlobalOverrideEnabled: false, checkboxOverridePlay: false, checkboxOverrideNext: false, checkboxOverrideLast: false, checkboxOverrideShuffle: false, checkboxOverrideFilter: true, checkboxOverrideSongData: true, checkboxOverrideDevice: true, checkboxOverrideVolume: false,
+    checkboxGlobalOverrideEnabled: false, checkboxOverridePlay: false, checkboxOverrideNext: false, checkboxOverrideLast: false, checkboxOverrideShuffle: false, checkboxOverrideFilter: true, checkboxOverrideSongData: true, checkboxOverrideDevice: true, checkboxOverrideStart: true, checkboxOverrideVolume: false,
     colorGlobalOverride: '#ffffff', sliderGlobalOverrideOpacity: 100, sliderGlobalOverrideOnOpacity: 100,
     checkboxGlobalOverrideAnim: false, sliderGlobalAnimTime: 150, sliderGlobalAnimHoverSize: 115, sliderGlobalAnimClickSize: 85, sliderGlobalAnimReleaseSize: 120, sliderGlobalAnimHoverOpacity: 100, sliderGlobalAnimClickOpacity: 70,
     checkboxVolBtnAnimEnabled: false, sliderVolBtnAnimTime: 160, sliderVolBtnAnimHoverSize: 24, sliderVolBtnAnimClickSize: 18, sliderVolBtnAnimReleaseSize: 20,
