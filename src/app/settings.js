@@ -40,7 +40,7 @@ export const DEFAULTS = {
     checkboxLogPlayback: false,
     checkboxLogPreload: false,
     checkboxLogPlayButton: false,
-    checkboxExportLogsUiButton: false,
+    checkboxExportLogsUiButton: false, checkboxClickOrderFollowsRender: false,
     checkboxShowFrameRate: false,
     colorFrameRateText: '#ffffff',
     sliderFrameRateRefreshMs: 500,

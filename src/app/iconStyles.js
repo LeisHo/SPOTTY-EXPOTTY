@@ -88,6 +88,9 @@ export const EXTRA_ICON_SETS = {
         { name: 'Magnifier Over Lines', p: [[rect(4, 6, 20, 3.5) + rect(4, 14, 12, 3.5) + rect(4, 22, 12, 3.5), 0], [circ(26, 24, 9) + circ(26, 24, 5.8), 1], ['M32 30.5l2.6-2.6 6.4 6.4-2.6 2.6z', 0]] },
         { name: 'Binoculars', p: [[circ(11.5, 28, 8) + circ(11.5, 28, 4.5) + circ(31, 28, 8) + circ(31, 28, 4.5), 1], [rect(8, 7, 7, 14) + rect(27.5, 7, 7, 14) + rect(15, 13, 12.5, 5), 0]] },
     ],
+    export: [ // Export Logs corner button (Debug)
+        { name: 'Download Arrow', p: [['M18.3 5h5.9v16.5h-5.9z', 0], ['M9 20.5h24.5L21.26 34z', 0], [rect(6, 36, 30.5, 4), 0]] },
+    ],
     device: [ // Play On Device button
         { name: 'Screen And Phone', p: [[rect(3, 6, 26.5, 19.5) + rect(6, 9, 20.5, 13.5), 1], [rect(12, 28, 8.5, 3) + rect(9, 31, 14.5, 3), 0], [rect(31, 13, 8.5, 21) + rect(33.5, 16, 3.5, 13), 1]] },
         { name: 'Speaker', p: [[rect(9, 4, 24.5, 34.5) + rect(12, 7, 18.5, 28.5), 1], [circ(C, 15, 3.5), 0], [circ(C, 27, 6.5), 0]] },
@@ -101,4 +104,5 @@ export const EXTRA_ICON_SETS = {
 Object.entries(EXTRA_ICON_SETS).forEach(([key, list]) => { if (!BUTTON_ICONS[key]) BUTTON_ICONS[key] = list.map(o => ({ n: o.name, p: o.p.map(([d, eo]) => [d, eo]) })); });
 export const extraIconHtml = (key, i) => shapes(pick(key, iconIndex(i)));
 export function applySearchIcon(svg, i) { setIcon(svg, 'srch' + i, shapes(pick('search', iconIndex(i)))); }
+export function applyExportIcon(svg, i) { setIcon(svg, 'expt' + i, shapes(pick('export', iconIndex(i)))); }
 export function applyDeviceIcon(svg, i) { setIcon(svg, 'devc' + i, shapes(pick('device', iconIndex(i)))); }

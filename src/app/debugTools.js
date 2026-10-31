@@ -8,6 +8,7 @@
 // Hand Behaviour / Pose Jump / Render Reordering / Frame Rate Drop logs, hand numbers, grid helper, wireframe etc. are specific
 // to HANDY DANDIES and were left out on purpose.
 import { setting, DEFAULTS, activeDevice } from './settings.js';
+import { applyExportIcon } from './iconStyles.js';
 import { embedStatus, isPlaying, embedMode, spotifyLoginStatus } from './handoff.js';
 import { sdkRecentEvents } from './sdkPlayer.js';
 
@@ -76,8 +77,8 @@ function ensureExportButton() {
     let b = document.getElementById('spxExportLogsBtn');
     if (!b) {
         b = document.createElement('button');
-        b.id = 'spxExportLogsBtn'; b.type = 'button'; b.title = 'Export logs (JSON)'; b.setAttribute('aria-label', 'Export logs'); b.textContent = '↓';
-        b.style.cssText = 'position:fixed;left:12px;top:12px;z-index:100001;width:34px;height:34px;padding:0;margin:0;display:none;align-items:center;justify-content:center;cursor:pointer;line-height:1;font-size:18px;color:#fff;background:#0d0f12aa;border:1px solid #ffffff55;border-radius:50%;-webkit-tap-highlight-color:transparent';
+        b.id = 'spxExportLogsBtn'; b.type = 'button'; b.title = 'Export logs (JSON)'; b.setAttribute('aria-label', 'Export logs'); b.className = 'spx-export-logs'; b.innerHTML = '<svg aria-hidden="true"></svg>'; applyExportIcon(b.querySelector('svg'), 0);
+        b.style.cssText = 'position:fixed;left:12px;top:12px;z-index:100001;display:none'; // the look (an icon like the other buttons) is .spx-export-logs in app.css
         b.addEventListener('click', e => { e.stopPropagation(); exportLogs(b); });
         document.body.appendChild(b);
     }

@@ -9595,8 +9595,9 @@
                 window.dispatchEvent(new Event('spx-render-order'));
             },
         };
-        renderControlArray([RO_CTRL], 'renderSpottyDevControls');
-        registerDevControlArray('SPOTTY_RENDER_ORDER', [RO_CTRL]);
+        const RO_CLICK = { tab, group: RO, id: 'checkboxClickOrderFollowsRender', type: 'checkbox', label: 'Click Order Follows Render Order', value: false, skipDeviceCheckbox: true };
+        renderControlArray([RO_CTRL, RO_CLICK], 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_RENDER_ORDER', [RO_CTRL, RO_CLICK]);
         // "Deployed": the same item selector, applied to a normal visitor (non-dev mode); the list above is for dev mode. Its items are not linked to the Enabled checkboxes
         // (renderOrder.js hides an item a visitor's list switches off, on top of the item's own Enabled checkbox). Until it has been saved once, visitors get the list above.
         const RO_DEP = 'Deployed';

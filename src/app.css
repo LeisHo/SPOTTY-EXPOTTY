@@ -299,6 +299,10 @@
 .spx-search svg { width: var(--spx-search-icon, 20px); height: var(--spx-search-icon, 20px); }
 .spx-search[aria-pressed="true"] { --bs-op: var(--spx-search-on-op, 1); color: var(--spx-search-on-color, #1db954); }
 .spx-search[hidden] { display: none; }
+/* Export Logs corner button (Debug): an icon like the other buttons, dim until hovered */
+.spx-export-logs { width: 40px; height: 40px; border: 0; padding: 0; margin: 0; background: none; align-items: center; justify-content: center; color: #f2f2f2; opacity: 0.45; cursor: pointer; filter: drop-shadow(0 1px 3px #000a); -webkit-tap-highlight-color: transparent; transition: opacity .15s; }
+.spx-export-logs:hover, .spx-export-logs:active { opacity: 1; }
+.spx-export-logs svg { width: 22px; height: 22px; }
 .spx-app.no-shadow-vol .spx-search { filter: none; }
 .spx-search-panel { position: fixed; z-index: 2147482000; width: var(--spx-srch-width, 240px); box-sizing: border-box; padding: 10px 12px 12px; border-radius: 10px; color: #f2f2f2; font-size: var(--spx-srch-font, 13px); font-family: var(--spx-font, inherit);
     background: var(--spx-srch-bg, rgba(20,22,26,0.92)); box-shadow: 0 6px 24px #000a; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); --srch-accent: var(--spx-srch-accent, #1db954); }

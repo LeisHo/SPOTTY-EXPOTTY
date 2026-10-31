@@ -1179,10 +1179,17 @@ async function boot() {
     let redirectBtn = null;
     // Click Tolerance (Shuffle, Next/Last, Play): each button's hit area grows by its own tolerance in px.
     const clickTolOf = b => (b.id === 'spxShuffle' ? setting('sliderShuffleClickTolerance') : b.id === 'spxFilter' ? setting('sliderFilterClickTolerance') : b.id === 'spxSongData' ? setting('sliderSongDataClickTolerance') : (b.id === 'spxPrev' || b.id === 'spxNext') ? setting('sliderNavClickTolerance') : b.id === 'spxCover' ? setting('sliderPlayClickTolerance') : 0);
-    const buttonUnder = (x, y) => [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxSongData'), el('spxFilter'), el('spxSearch'), el('spxTitleLink'), el('spxStartBtn')].find(b => {
-        const r = b.getBoundingClientRect(), p = clickTolOf(b);
-        return x >= r.left - p && x <= r.right + p && y >= r.top - p && y <= r.bottom + p;
-    });
+    // Which button a press under the canvas belongs to when several overlap: by default the first in this list; with "Click Order Follows Render Order" the one in front
+    // (highest z-index of itself or its nearest ancestor that has one; a tie keeps the list order).
+    const zOfBtn = b => { for (let n = b; n && n !== document.body; n = n.parentElement) { const z = parseInt(getComputedStyle(n).zIndex, 10); if (Number.isFinite(z)) return z; } return 0; };
+    const buttonUnder = (x, y) => {
+        const hits = [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxSongData'), el('spxFilter'), el('spxSearch'), el('spxTitleLink'), el('spxStartBtn')].filter(b => {
+            const r = b.getBoundingClientRect(), p = clickTolOf(b);
+            return x >= r.left - p && x <= r.right + p && y >= r.top - p && y <= r.bottom + p;
+        });
+        if (hits.length < 2 || !setting('checkboxClickOrderFollowsRender')) return hits[0];
+        return hits.reduce((best, b) => (zOfBtn(b) > zOfBtn(best) ? b : best));
+    };
     // The timeline canvas sits over the buttons, so the pointer shows as a hand over a button here too (the cursor follows the same test as the click).
     // Over the scrub line (with Click and Drag on) the pointer is a horizontal resize and the line takes its hover state.
     let phNear = false;
