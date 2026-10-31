@@ -1484,3 +1484,8 @@ the scopes are unchanged; only the clip-volume line was removed from devicePanel
 recently active (open Spotify on the phone / speaker, play a second), and a 429 or an expired login would show as "Could not load the devices (...)" in the panel.
 Added: every refresh writes "DEVICE list: <names> / Spotify returned no devices" or "DEVICE list FAILED: <error>" to the Playback Timing Log.
 Checked: syntax only. NOT tested against a real device list.
+
+2026-10-30 (later 33) - Export Logs icon; Click Order Follows Render Order
+- The on-screen Export Logs corner button (Debug > ADD UI BUTTON) was a text arrow in a circle. It is now an SVG icon (new `export` set in iconStyles.js, `applyExportIcon`) styled like the other buttons: no circle, #f2f2f2, dim until hovered (.spx-export-logs in app.css). Position and its show/hide checkbox are unchanged. Not an engine element: it has no icon-style picker, size or colour controls yet.
+- Answer to "does render order set click order?": the z-index (render order) decides which element a real press lands on, but a press that lands on the timeline canvas / a text line is re-dispatched to the button under it by `buttonUnder()` (main.js), which picked the first match in a FIXED list (volume, prev, next, cover, shuffle, song data, filter, search, title link, start). New checkbox UI Layout > Visibility / Render Order > "Click Order Follows Render Order" (`checkboxClickOrderFollowsRender`, default OFF = the old fixed order). On: among overlapping buttons the one with the highest z-index wins (ties keep the list order).
+- Tested: icon shows in the local page (40x40, #f2f2f2, 0.45 opacity, no background); the checkbox exists in the panel. NOT tested: the overlap pick itself (no real overlapping layout set up).
