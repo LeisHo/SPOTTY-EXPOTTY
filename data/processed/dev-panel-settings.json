@@ -130,7 +130,7 @@
     "checkboxInvertScroll": false,
     "checkboxScrollZoomEnabled": true,
     "sliderScrollZoomSpeed": 0.1,
-    "checkboxInvertScrollZoom": false,
+    "checkboxInvertScrollZoom": true,
     "checkboxWheelCurveEnabled": true,
     "curveEditorWheelScrubCurve": "{\"points\":[{\"x\":0,\"y\":1,\"h1\":{\"x\":0.5882778794478349,\"y\":-0.052916717529296886}},{\"x\":1,\"y\":0,\"h2\":{\"x\":-0.08755427386877113,\"y\":0.6270833333333333}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "selectWheelCurveXRange": "full",
