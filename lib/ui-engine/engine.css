@@ -145,13 +145,21 @@
 }
 
 /* ============================================================
-   TYPOGRAPHY (v0.2.7) — opt-in: `.ui-typography` is only ever added by
+   TYPOGRAPHY (v0.2.7) — opt-in via RESOLUTION, not via Inspector-
+   availability: `.ui-typography` is only ever added by
    resolveElementLayout() when an element's layout config actually has at
-   least one typography field set (see engine.mjs's own comment) — an
-   element that never touches typography gets zero rules here, zero
-   custom properties, completely untouched. Every var() fallback below is
-   exactly schema.mjs's own FIELDS default for that field, so an element
-   that opts in but leaves a field unset still renders a sensible value.
+   least one typography field SET (see engine.mjs's own comment) — an
+   element that never touches a typography field gets zero rules here,
+   zero custom properties, completely untouched, REGARDLESS of whether its
+   config has an (empty) `typography` object at all. Every var() fallback
+   below is exactly schema.mjs's own FIELDS default for that field, so an
+   element that opts in but leaves a field unset still renders a sensible
+   value. As of v0.2.13, createUIElement() auto-seeds `typography: {}` on
+   every element so the Inspector's Typography group is always available
+   without the host writing it out — that is a registry.mjs/
+   canonicalSchema.mjs-level change only; this file's own gate is
+   unchanged and still requires an actual field value before any CSS here
+   applies.
    ============================================================ */
 .ui-typography {
   font-family: var(--ui-font-family, Arial);
@@ -165,6 +173,7 @@
   opacity: var(--ui-opacity, 1);
   overflow-wrap: var(--ui-overflow-wrap, normal);
   max-width: var(--ui-max-width, 400px);
+  text-transform: var(--ui-text-transform, none); /* v0.2.14 — textCase (none/uppercase/lowercase); was a boolean `capitalize` in v0.2.13, replaced before any project adopted it */
 }
 /* `enabled: false` only — a visible element's `display` is never touched
    (see engine.mjs's css-class-toggle-false comment). */

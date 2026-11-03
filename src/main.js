@@ -94,7 +94,7 @@ async function boot() {
             <button type="button" class="spx-device bs-host" id="spxDevice" aria-label="Play on a device" aria-pressed="false" aria-expanded="false" title="Play on a device"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="13" height="10" rx="1.5"/><path d="M7 18h5M9.5 14v4"/><rect x="18" y="8" width="4" height="9" rx="1"/></svg></button>
             <button type="button" class="spx-search bs-host" id="spxSearch" aria-label="Search songs" aria-pressed="false" aria-expanded="false" title="Search"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></button>
             <div class="spx-pool" id="spxPool" hidden></div>
-            <div class="spx-start" id="spxStart"><button type="button" class="spx-start-play" id="spxStartBtn" aria-label="Start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button></div>
+            <div class="spx-start" id="spxStart" hidden><button type="button" class="spx-start-play" id="spxStartBtn" aria-label="Start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button></div>
             <div class="spx-inspector" id="spxInspectorPanel" hidden>
                 <div class="spx-inspector-head"><span>UI LAYOUT INSPECTOR</span><button type="button" id="spxInspectorClose">✕</button></div>
                 <div id="spxInspectorMount"></div>
@@ -128,29 +128,60 @@ async function boot() {
         mobilePortrait: { enabled: true, overrides: o.mobilePortrait || {} },
         mobileLandscape: { enabled: true, overrides: o.mobileLandscape || {} },
     });
+    // Typography values below (2026-10-30 migration) are the REAL values this project
+    // already had saved in data/processed/dev-panel-settings.json before its own
+    // hand-rolled Font Size/Color/Bold/Italic/Underline/Capitalize-LowerCase/Letter
+    // Spacing/Line Spacing/Opacity/Max Width/Outline controls were removed from
+    // devPanel.js's buildSpottyTextElementGroup() -- not the original code defaults
+    // (e.g. Song Title's real Font Size was 51px, not the old 44px default) -- so this
+    // is a verified, zero-visual-change carry-over, not a reset to defaults. Tune these
+    // going forward via UI Layout > Open UI Layout Inspector; Sync/Save/Reset already
+    // cover them for free via captureAllLayoutConfigs()/loadLayoutConfig().
     createUIElement({
         id: 'spxTitle', role: 'text', domNode: el('spxTitle'), group: 'Song Title', propertyLabel: 'Position & Size',
         layout: {
             position: { mode: 'anchor', horizontal: { anchor: 'center', offset: '0px' }, vertical: { anchor: 'top', offset: '-12vh' } }, // engine v0.2.10: positive offsetY = UP, so a top-anchored element sits at a NEGATIVE offset
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
+            typography: {
+                fontSize: '51px', color: '#f2f2f2', bold: true, italic: false, underline: false, textCase: 'none',
+                letterSpacing: '1.3px', lineSpacing: 1.3, opacity: 1, maxWidth: '2400px',
+                outlineEnabled: false, outlineColor: '#000000', outlineThickness: '2px',
+            },
         },
-        contexts: ctx({ mobileLandscape: { offsetY: '-5vh' } }),
+        // Y Offset (2026-10-30): the dev panel's own hand-rolled "Y Offset (Px)" slider
+        // (a separate CSS-translate hack, see applyTextElementStyles()'s own removed
+        // comment) was removed -- it was additive and saved at 0 for all 3 text
+        // elements (verified in the real dev-panel-settings.json before removing it),
+        // so this element's existing offsetY (-12vh/-5vh above) already fully owns
+        // vertical position with zero change. Max Width's own real mobilePortrait
+        // override (700px, vs. the 2400px base) carries over the same way.
+        contexts: ctx({ mobilePortrait: { maxWidth: '700px' }, mobileLandscape: { offsetY: '-5vh' } }),
     });
     createUIElement({
         id: 'spxArtist', role: 'text', domNode: el('spxArtist'), group: 'Artist', propertyLabel: 'Position & Size',
         layout: {
             position: { mode: 'relative', relativeTo: 'spxTitle', myAnchor: 'top-center', targetAnchor: 'bottom-center', gap: '10px' },
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
+            typography: {
+                fontSize: '25px', color: '#f7f7f7', bold: false, italic: false, underline: false, textCase: 'none',
+                letterSpacing: '0.6px', lineSpacing: 1.2, opacity: 1, maxWidth: '945px',
+                outlineEnabled: false, outlineColor: '#000000', outlineThickness: '2px',
+            },
         },
-        contexts: ctx(),
+        contexts: ctx({ mobilePortrait: { fontSize: '20px' } }), // real saved mobile override, carried over verbatim
     });
     createUIElement({
         id: 'spxMeta', role: 'text', domNode: el('spxMeta'), group: 'Album & Date Line', propertyLabel: 'Position & Size',
         layout: {
             position: { mode: 'relative', relativeTo: 'spxArtist', myAnchor: 'top-center', targetAnchor: 'bottom-center', gap: '12px' },
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
+            typography: {
+                fontSize: '14px', color: '#ffffff', bold: false, italic: false, underline: false, textCase: 'none',
+                letterSpacing: '2.3px', lineSpacing: 1.2, opacity: 1, maxWidth: '2179px',
+                outlineEnabled: false, outlineColor: '#000000', outlineThickness: '2px',
+            },
         },
-        contexts: ctx(),
+        contexts: ctx({ mobilePortrait: { maxWidth: '761px' } }), // real saved mobile override, carried over verbatim
     });
     createUIElement({
         id: 'spxTimeline', role: 'container', domNode: el('spxTimeline'), group: 'Timeline', propertyLabel: 'Position & Size',
@@ -572,15 +603,17 @@ async function boot() {
         };
         h.addEventListener('pointerup', up); h.addEventListener('pointercancel', up);
     }));
-    // UI Layout > Text: per-element Font Size/Color/Bold/Italic/Underline/Letter Spacing/Line
-    // Spacing/Opacity/Wrap/Max Width/Overflow/Outline/Enabled, ported 2026-10-25 (see devPanel.js's
-    // buildSpottyTextElementGroup() for the full account). Replaces the old scale/clamp vars above.
-    // Font SIZE is a literal px value now, not the old clamp(min, growth-vw, max)*scale formula --
-    // a disclosed tradeoff (continuous vw growth is gone; a phone still gets its own size through
-    // the existing Mobile/Landscape independence checkbox, same as every other control here).
-    // Box WIDTH/POSITION stay engine-owned (CLAUDE.md's own architecture note) -- Max Width is
-    // applied as a plain CSS max-width (never shrinks the engine's own box, only caps it), with no
-    // margin/position changes, so it can't fight the Layout Engine for ownership of these boxes.
+    // UI Layout > Text: Enabled/Font Size/Color/Bold/Italic/Underline/Capitalize-LowerCase/
+    // Letter Spacing/Line Spacing/Opacity/Y Offset/Max Width/Outline were ported into a
+    // hand-rolled dev-panel battery 2026-10-25, then MIGRATED onto the engine's own
+    // typography/position fields 2026-10-30 (see main.js's own createUIElement() calls
+    // above and devPanel.js's buildSpottyTextElementGroup() top comment for the full
+    // account) -- this function no longer sets any of those itself; the engine's CSS
+    // (`.ui-typography` + `--ui-*` vars) does, continuously, including per-device
+    // overrides. What's left here is exactly the part that can't be a pure-CSS engine
+    // field: Overflow/Word Wrap (tangled with the max-lines/shrink logic below, kept
+    // local on purpose, per direct instruction) and the Scale Down to Match / If Over Max
+    // Lines / Shrink-to-Fit / Scroll measurement loops, none of which this migration touched.
     // Test Text Mode is a dev tool: it only ever applies in dev mode, so a visitor never sees the test text whatever the saved settings say.
     const testTextOn = () => document.documentElement.classList.contains('dev-mode') && !!setting('checkboxTestTextEnabled');
     const TEXT_ELEMENTS = [['SongTitle', () => el('spxTitle')], ['Artist', () => el('spxArtist')], ['AlbumDate', () => el('spxMeta')]];
@@ -613,35 +646,22 @@ async function boot() {
         TEXT_ELEMENTS.forEach(([p, getNode]) => {
             const node = getNode();
             if (!node) return;
-            const enabled = setting('checkboxTxt' + p + 'Enabled');
-            node.style.display = enabled ? '' : 'none';
-            if (!enabled) return;
-            let size = setting('sliderTxt' + p + 'FontSize');
+            // Enabled is now the engine's own typography.enabled -- `.ui-typography-hidden`
+            // is the resolved result (see engine.css), so read it back from the DOM
+            // instead of a (now-removed) dev-panel checkbox.
+            if (node.classList.contains('ui-typography-hidden')) return;
+            // Font Size's real, device-correct starting value now comes from the engine
+            // (the `--ui-font-size` custom property it sets directly on this node --
+            // reading the CUSTOM PROPERTY, not node.style.fontSize, is what avoids a
+            // feedback loop: the shrink/scale-to-match logic below repeatedly WRITES
+            // node.style.fontSize as it searches, but never touches --ui-font-size, so
+            // this always re-reads the engine's true, un-shrunk base value on every call).
+            let size = parseFloat(getComputedStyle(node).getPropertyValue('--ui-font-size')) || 16;
             // Scale Down to Match: Artist is capped at the Song Title's final size, Album & Date at the Artist's
             const matchOf = { Artist: 'SongTitle', AlbumDate: 'Artist' }[p];
             if (matchOf && setting('checkboxScale' + p + 'ToMatch') && effective[matchOf] !== undefined) size = Math.min(size, effective[matchOf]);
             const overflow = setting('selectTxt' + p + 'Overflow');
             const st = node.style;
-            st.color = setting('colorTxt' + p + 'Color');
-            st.fontWeight = setting('checkboxTxt' + p + 'Bold') ? '700' : '400';
-            st.fontStyle = setting('checkboxTxt' + p + 'Italic') ? 'italic' : 'normal';
-            st.textDecoration = setting('checkboxTxt' + p + 'Underline') ? 'underline' : 'none';
-            st.textTransform = setting('checkboxTxt' + p + 'Capitalize') ? 'uppercase' : setting('checkboxTxt' + p + 'LowerCase') ? 'lowercase' : 'none'; // both on: Capitalize wins
-            st.letterSpacing = setting('sliderTxt' + p + 'LetterSpacing') + 'px';
-            st.lineHeight = String(setting('sliderTxt' + p + 'LineSpacing'));
-            st.opacity = String(setting('sliderTxt' + p + 'Opacity'));
-            // Y Offset: the CSS translate property, so the engine's own transform (anchor centering) is untouched. The Artist and the Album line are placed
-            // RELATIVE to the element above (the engine's anchor follows that element's translate), so each one's translate is its own offset minus the offset of
-            // the element it hangs from: that way every offset moves only its own text instead of dragging the lines below along.
-            const hostId = ({ SongTitle: 'spxTitle', Artist: 'spxArtist', AlbumDate: 'spxMeta' })[p];
-            let rel = null; try { const pos = getElement(hostId).layout.position; rel = pos && pos.mode === 'relative' ? pos.relativeTo : null; } catch (e) { /* not registered yet */ }
-            const parent = TEXT_ELEMENTS.find(([q]) => ({ SongTitle: 'spxTitle', Artist: 'spxArtist', AlbumDate: 'spxMeta' })[q] === rel);
-            const own = setting('sliderTxt' + p + 'OffsetY'), up = parent && setting('checkboxTxt' + parent[0] + 'Enabled') ? setting('sliderTxt' + parent[0] + 'OffsetY') : 0;
-            st.translate = '0px ' + (own - up) + 'px';
-            st.maxWidth = setting('sliderTxt' + p + 'MaxWidth') + 'px';
-            const outlineOn = setting('checkboxTxt' + p + 'OutlineEnabled');
-            st.webkitTextStrokeWidth = outlineOn ? setting('sliderTxt' + p + 'OutlineThickness') + 'px' : '0px';
-            st.webkitTextStrokeColor = outlineOn ? setting('colorTxt' + p + 'OutlineColor') : 'transparent';
             if (overflow === 'truncate') { st.whiteSpace = 'nowrap'; st.overflow = 'hidden'; st.textOverflow = 'ellipsis'; }
             else if (overflow === 'clip') { st.whiteSpace = 'nowrap'; st.overflow = 'hidden'; st.textOverflow = 'clip'; }
             else if (overflow === 'scale') { st.whiteSpace = 'nowrap'; st.overflow = 'visible'; st.textOverflow = ''; }
@@ -656,7 +676,12 @@ async function boot() {
             const overMode = multi && overflow !== 'scale' ? setting('select' + multi + 'OverMaxLines') : 'none';
             if (overMode === 'scale' || overMode === 'scroll') {
                 const maxLines = setting('slider' + multi + 'MaxLines');
-                const lineMul = parseFloat(st.lineHeight) || 1.2;
+                // Line Spacing is engine-managed now (--ui-line-height, a raw unitless
+                // number, same shape node.style.lineHeight used to hold before the
+                // 2026-10-30 migration) -- read it from there, not a hardcoded fallback,
+                // or every element's real (non-1.2) line spacing would silently be
+                // ignored by this line-counting math.
+                const lineMul = parseFloat(getComputedStyle(node).getPropertyValue('--ui-line-height')) || 1.2;
                 // Line count = content height / line height (not fragment rectangles, which count a smaller bracketed span
                 // or a differently-aligned fragment as an extra line).
                 const cs = getComputedStyle(node);
@@ -1166,6 +1191,12 @@ async function boot() {
         if (inUi(e.target)) return;
         e.preventDefault();
         const unit = e.deltaMode === 1 ? e.deltaY / 3 : e.deltaY / 100;
+        if (setting('checkboxScrollZoomEnabled')) { // Scroll To Zoom: the wheel zooms around the playhead, like a click-drag
+            timeline.zoomBy(Math.exp(unit * 0.15 * setting('sliderScrollZoomSpeed') * (setting('checkboxInvertScrollZoom') ? -1 : 1)));
+            timeline.draw();
+            return;
+        }
+        if (!setting('checkboxWheelScrubEnabled')) return; // Scrubbing off: the wheel does not change songs
         moveTo(snapPos(timeline.scrubByPixels(unit * wheelPixels() * (setting('checkboxInvertScroll') ? -1 : 1))));
     }, { passive: false });
 
@@ -1735,10 +1766,12 @@ async function boot() {
         watch(el('spxCover'), 'cover'); watch(el('spxPlayGlyph'), 'glyph');
     }
 
-    // ---- UI Layout Inspector (dev only): the engine's own Inspector in a floating panel ------
+    // ---- UI Layout Inspector (dev only): a floating button matching #devToggleBtn (CLAUDE.md
+    // §13a, corrected 2026-10-31 -- a sibling of the DEV button reusing its own .dev-toggle-btn
+    // class, not a dev-panel row) opens the engine's own Inspector in a floating panel. Exposed
+    // on window since index.html's inline onclick calls it and this file is a module script.
     let inspectorMounted = false;
-    document.addEventListener('click', async e => {
-        if (e.target.id !== 'buttonOpenLayoutInspector') return;
+    window.toggleUiLayoutInspector = async () => {
         const panel = el('spxInspectorPanel');
         panel.hidden = !panel.hidden;
         if (!panel.hidden && !inspectorMounted) {
@@ -1746,7 +1779,7 @@ async function boot() {
             mountInspector(el('spxInspectorMount'));
             inspectorMounted = true;
         }
-    });
+    };
     el('spxInspectorClose').addEventListener('click', () => { el('spxInspectorPanel').hidden = true; });
 
     // settings changes (dev panel controls fire input/change)
@@ -1797,6 +1830,12 @@ async function boot() {
     render();
     timeline.setPos(pos); // the app's position (a random start sets it): the scrub line must follow it, not reset to the start
     timeline.draw();
+    // The start button appears only once loading has finished: data, saved settings and the cover image.
+    {
+        const reveal = () => { if (!startedOnce) el('spxStart').hidden = false; };
+        const img = el('spxCover').querySelector('img');
+        if (img && !img.complete) { img.addEventListener('load', reveal, { once: true }); img.addEventListener('error', reveal, { once: true }); setTimeout(reveal, 4000); } else reveal();
+    }
     schedulePreload();
     initAudioMods(); // dev-only preview-clip modifiers (audioMods.js)
     initDebugTools(); // Debug group: PAUSE, Pause/Copy/Clear/Export Logs, frame rate, snapshot (debugTools.js)

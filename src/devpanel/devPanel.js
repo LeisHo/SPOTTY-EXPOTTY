@@ -8081,24 +8081,47 @@
         cb.addEventListener('input', applyState);
         applyState();
     }
-    // Full per-text-element battery, ported from the shared .claude/TEMPLATE_DEV_PANEL.html
-    // (its own buildTextElementControls()) and adapted for this project, 2026-10-25:
-    //  - No font-family dropdown of its own. SPOTTY EXPOTTY keeps ONE global font
-    //    selector (UI Layout > Font > selectUiFont) -- the owner's explicit choice when
-    //    this was ported, so this battery only ever gets Font SIZE, not family.
-    //  - Nested under the EXISTING "UI Layout" group's own new "Text" subgroup, not the
-    //    template's separate mandatory "UI" group -- this project has no such group, and
-    //    "UI Layout" already holds every other visual setting (Background, Buttons, etc.).
-    //  - Drop Shadow / Extrusion (opt-in in the template) are left out entirely -- not
-    //    requested for this port.
-    //  - REPLACES the old sliderTitleScale/ArtistScale/MetaScale + per-element
-    //    SizeMin/Pref/Max clamp system (3 elements x 4 sliders = 12 controls, a
-    //    clamp(min,pref vw,max)*scale formula) with this battery's own Font Size: a
-    //    literal px value, not a vw-responsive clamp. A disclosed tradeoff -- this loses
-    //    continuous in-between-breakpoint growth as the viewport resizes; a phone still
-    //    gets its own size via the existing Mobile/Landscape independence checkbox, the
-    //    same mechanism every other control in this file already uses for a per-device
-    //    value, just no longer a continuous vw curve.
+    // Per-text-element battery, ported from the shared .claude/TEMPLATE_DEV_PANEL.html
+    // (its own buildTextElementControls()) and adapted for this project, 2026-10-25.
+    //
+    // CORRECTED 2026-10-30 (the SAME-DAY open decision this file's own CLAUDE.md
+    // flagged — "whether to keep both or migrate this battery onto the engine's own
+    // typography field is an open decision, not made by either session"): this
+    // decision is now made. Font Size, Font Color, Bold, Italic, Underline,
+    // Capitalize/Lower Case, Letter Spacing, Line Spacing, Opacity, Max Width,
+    // Outline (Enabled/Color/Thickness), Enabled, and Y Offset are REMOVED from this
+    // battery -- `lib/ui-engine/` (re-vendored to v0.2.14 in this same pass) now owns
+    // all of these directly on each element's own `typography`/`position` block
+    // (set in main.js's createUIElement() calls, carrying over this project's real
+    // saved values -- see docs/CHANGELOG.txt's matching 2026-10-30 entry for the exact
+    // numbers moved). Direct request: "do easy and medium [...] I prefer having one
+    // setting instead of 2 for the same thing" -- Capitalize/Lower Case were 2
+    // competing booleans fighting over one CSS property (with their own
+    // "// both on: Capitalize wins" tie-break hack); the engine's new v0.2.14
+    // `textCase` enum (none/uppercase/lowercase) replaces both with one setting, and
+    // Y Offset's own hand-rolled translate-chain hack is replaced by the engine's own
+    // offsetX/offsetY (already the real position mechanism for these 3 elements —
+    // Artist/Album&Date are already `relative`-anchored off the element above; the
+    // hand-rolled slider was a currently-all-zero ADDITIVE layer on top, confirmed via
+    // the real saved dev-panel-settings.json before removing it, so this is a verified
+    // zero-visual-change removal, not a best-effort one).
+    //
+    // All 10 of these fields are now tuned through the engine's own Inspector (UI
+    // Layout > Open UI Layout Inspector), the SAME control surface every other
+    // engine-managed element already uses -- not a 2nd copy of these controls here.
+    // They are captured/restored by Sync/Save/Reset FOR FREE, since
+    // captureAllLayoutConfigs()/loadLayoutConfig() already walk every registered
+    // element's FULL layout config (typography included), with zero project code
+    // needed beyond the createUIElement() values themselves.
+    //
+    // What STAYS in this battery, and why: Overflow (wrap/truncate/clip/"Shrink to
+    // Fit") and Word Wrap are NOT migrated -- both are tangled into the "If Over Max
+    // Lines" (Scale Down/Scroll) and the word-fit shrink safety net below, which the
+    // owner asked to leave alone ("leave max lines [...] alone"); the engine's own
+    // `overflow` field has no "Shrink to Fit" value and no live-measurement concept at
+    // all (deliberately, see HTML UI ENGINE's own v0.2.7 scope note), so moving these
+    // 2 fields would risk silently breaking that system. Artist's name-separator
+    // fields are data-formatting, not styling, and were never in scope either way.
     // Text > Test Text Mode: a toggle group; when it is on, the Song Title, Artist and Album & Date line show the three texts typed here instead of the song's own.
     function buildSpottyTestTextGroup(tab, uiLayoutContent) {
         let textSec = uiLayoutContent.querySelector(':scope > .dev-section > .dev-section-title[data-sid="Text"]')?.closest('.dev-section');
@@ -8116,7 +8139,7 @@
         wireNestedGroupToggle(sec, enabledRow.querySelector('input'));
         registerDevControlArray('textTestMode', ctrls);
     }
-    function buildSpottyTextElementGroup(tab, uiLayoutContent, elementName, d) {
+    function buildSpottyTextElementGroup(tab, uiLayoutContent, elementName) {
         let textSec = uiLayoutContent.querySelector(':scope > .dev-section > .dev-section-title[data-sid="Text"]')?.closest('.dev-section');
         if (!textSec) { textSec = createDevGroupElement('Text', tab); uiLayoutContent.appendChild(textSec); }
         const textContent = textSec.querySelector(':scope > .dev-section-content');
@@ -8133,21 +8156,12 @@
             targetContent.appendChild(row);
             return row;
         }
-        const enabledRow = add({ tab, id: 'checkboxTxt' + p + 'Enabled', type: 'checkbox', label: 'Enabled', value: true }, elemContent);
-        wireNestedGroupToggle(elemSec, enabledRow.querySelector('input'));
-        add({ tab, id: 'sliderTxt' + p + 'FontSize', type: 'slider', label: 'Font Size (Px):', min: 6, max: 140, step: 1, value: d.size }, elemContent);
-        add({ tab, id: 'colorTxt' + p + 'Color', type: 'color', label: 'Font Color:', value: d.color }, elemContent);
-        add({ tab, id: 'checkboxTxt' + p + 'Bold', type: 'checkbox', label: 'Bold', value: d.bold }, elemContent);
-        add({ tab, id: 'checkboxTxt' + p + 'Italic', type: 'checkbox', label: 'Italic', value: false }, elemContent);
-        add({ tab, id: 'checkboxTxt' + p + 'Underline', type: 'checkbox', label: 'Underline', value: false }, elemContent);
-        add({ tab, id: 'checkboxTxt' + p + 'Capitalize', type: 'checkbox', label: 'Capitalize (All Caps)', value: false }, elemContent);
-        add({ tab, id: 'checkboxTxt' + p + 'LowerCase', type: 'checkbox', label: 'Lower Case', value: false }, elemContent);
-        add({ tab, id: 'sliderTxt' + p + 'LetterSpacing', type: 'slider', label: 'Letter Spacing (Px):', min: -5, max: 30, step: 0.1, value: 0 }, elemContent);
-        add({ tab, id: 'sliderTxt' + p + 'LineSpacing', type: 'slider', label: 'Line Spacing (x):', min: 0.5, max: 3, step: 0.05, value: d.lineSpacing }, elemContent);
-        add({ tab, id: 'sliderTxt' + p + 'Opacity', type: 'slider', label: 'Opacity:', min: 0, max: 1, step: 0.01, value: 1 }, elemContent);
-        add({ tab, id: 'sliderTxt' + p + 'OffsetY', type: 'slider', label: 'Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 }, elemContent);
+        // Enabled/Font Size/Color/Bold/Italic/Underline/Capitalize-LowerCase/Letter Spacing/
+        // Line Spacing/Opacity/Y Offset/Max Width/Outline used to be built here -- all 13
+        // removed 2026-10-30, now owned by the engine's own typography/position fields on
+        // this element (UI Layout > Open UI Layout Inspector). See this function's own
+        // top comment.
         add({ tab, id: 'checkboxTxt' + p + 'WordWrap', type: 'checkbox', label: 'Word Wrap', value: true }, elemContent);
-        add({ tab, id: 'sliderTxt' + p + 'MaxWidth', type: 'slider', label: 'Max Width (Px):', min: 20, max: 2400, step: 1, value: 900 }, elemContent);
         add({
             tab, id: 'selectTxt' + p + 'Overflow', type: 'select', label: 'Overflow:', value: 'wrap',
             options: [{ value: 'wrap', text: 'Wrap' }, { value: 'truncate', text: 'Truncate (…)' }, { value: 'clip', text: 'Clip' }, { value: 'scale', text: 'Shrink to Fit' }],
@@ -8187,13 +8201,9 @@
         // Scale Down to Match: this element's font size is capped at the size of the element above it (Artist -> Song Title, Album & Date -> Artist)
         if (elementName === 'Artist') add({ tab, id: 'checkboxScaleArtistToMatch', type: 'checkbox', label: 'Scale Down to Match Song Title', value: false }, elemContent);
         if (elementName === 'Album & Date') add({ tab, id: 'checkboxScaleAlbumDateToMatch', type: 'checkbox', label: 'Scale Down to Match Artist', value: false }, elemContent);
-        const outlineSec = createDevGroupElement('Outline', tab);
-        elemContent.appendChild(outlineSec);
-        const outlineContent = outlineSec.querySelector(':scope > .dev-section-content');
-        const outlineEnabledRow = add({ tab, id: 'checkboxTxt' + p + 'OutlineEnabled', type: 'checkbox', label: 'Enabled', value: false }, elemContent);
-        add({ tab, id: 'colorTxt' + p + 'OutlineColor', type: 'color', label: 'Outline Color:', value: '#000000' }, outlineContent);
-        add({ tab, id: 'sliderTxt' + p + 'OutlineThickness', type: 'slider', label: 'Outline Thickness (Px):', min: 0, max: 20, step: 0.5, value: 2 }, outlineContent);
-        wireNestedGroupToggle(outlineSec, outlineEnabledRow.querySelector('input'));
+        // Outline (Enabled/Color/Thickness) removed 2026-10-30 -- now the engine's own
+        // typography.outlineEnabled/outlineColor/outlineThickness, same as every other
+        // field this function used to build. See this function's own top comment.
         registerDevControlArray('textElem_' + p, allCtrls);
     }
     // SPOTTY EXPOTTY's own settings. The app (src/app/settings.js) reads these
@@ -8231,8 +8241,6 @@
             { tab, group: 'Scrub Preload', id: 'sliderPreloadAhead', type: 'slider', label: 'Preload Ahead (Songs):', min: 0, max: 30, step: 1, value: 8 },
             { tab, group: 'Scrub Preload', id: 'sliderPreloadBehind', type: 'slider', label: 'Preload Behind (Songs):', min: 0, max: 30, step: 1, value: 3 },
             { tab, group: 'Scrub Preload', id: 'checkboxShowPoolOverlay', type: 'checkbox', label: 'Show Preload Pool Overlay:', value: false },
-            { tab, group: 'Scrub Input', id: 'sliderWheelScrubPixels', type: 'slider', label: 'Wheel Scrub Per Notch (Px):', min: 2, max: 300, step: 1, value: 40 },
-            { tab, group: 'Scrub Input', id: 'checkboxInvertScroll', type: 'checkbox', label: 'Invert Wheel / Touch Scrub Direction:', value: false },
             { tab, group: 'Scrub Input', id: 'sliderTimelineZoomSpeed', type: 'slider', label: 'Drag Zoom Speed (x):', min: 0.1, max: 5, step: 0.1, value: 1 },
             { tab, group: 'Scrub Input', id: 'checkboxInvertZoomDrag', type: 'checkbox', label: 'Invert Drag Zoom Direction:', value: false },
             { tab, group: 'Scrub Input', id: 'sliderDefaultTimelineSpanDays', type: 'slider', label: 'Starting Timeline Span (Days):', min: 1, max: 5000, step: 1, value: 120 },
@@ -8273,7 +8281,6 @@
             { tab, group: TL, id: 'sliderPlayheadStartHeight', type: 'slider', label: 'Scrub Line Start Height (Px Above The Scale Line):', min: 0, max: 400, step: 1, value: 0 },
             // Integer-valued dual-handle control, so it is a 0-100 % log scale: 0 = 2 minutes visible, 100 = the whole timeline.
             { tab, group: TL, id: 'rangeBarTimelineZoomLimits', type: 'range-bar', label: 'Zoom Limits (% zoomed out, log scale):', trackMin: 0, trackMax: 100, unit: '%', defaultValue: { min: 0, max: 100 } },
-            { tab, group: 'UI Layout', id: 'buttonOpenLayoutInspector', type: 'button', label: 'Open UI Layout Inspector', skipDeviceCheckbox: true },
         ];
         renderControlArray(SPOTTY_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_CONTROLS', SPOTTY_CONTROLS);
@@ -8488,12 +8495,21 @@
 
         // ---- Scrub Input: two toggleable curve groups --------------------------------------------------
         const WC = 'Wheel Scrub Per Notch Curve', SC = 'Starting Timeline Span Curve';
+        const SCR = 'Scrubbing', SZ = 'Scroll To Zoom';
         const scrubInputContent = findGroupContent(tab, 'Scrub Input', 'renderSpottyDevControls', WC);
+        scrubInputContent.appendChild(createDevGroupElement(SCR, tab));
+        scrubInputContent.appendChild(createDevGroupElement(SZ, tab));
         scrubInputContent.appendChild(createDevGroupElement(WC, tab));
         scrubInputContent.appendChild(createDevGroupElement(SC, tab));
         const TS = 'Touch Scrub And Pinch';
         scrubInputContent.appendChild(createDevGroupElement(TS, tab));
         const CURVE_CONTROLS = [
+            { tab, group: SCR, id: 'checkboxWheelScrubEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: SCR, id: 'sliderWheelScrubPixels', type: 'slider', label: 'Wheel Scrub Per Notch (Px):', min: 2, max: 300, step: 1, value: 40 },
+            { tab, group: SCR, id: 'checkboxInvertScroll', type: 'checkbox', label: 'Invert Wheel / Touch Scrub Direction:', value: false },
+            { tab, group: SZ, id: 'checkboxScrollZoomEnabled', type: 'checkbox', label: 'Enabled', value: false },
+            { tab, group: SZ, id: 'sliderScrollZoomSpeed', type: 'slider', label: 'Scroll Zoom Speed (x):', min: 0.1, max: 5, step: 0.1, value: 1 },
+            { tab, group: SZ, id: 'checkboxInvertScrollZoom', type: 'checkbox', label: 'Invert Scroll Zoom Direction:', value: false },
             { tab, group: WC, id: 'checkboxWheelCurveEnabled', type: 'checkbox', label: 'Enabled', value: false },
             { tab, group: WC, id: 'curveEditorWheelScrubCurve', type: 'curve-editor', label: 'Curve (X: Zoom Scale, Y: Px Per Notch):', defaultPoints: [{ x: 0, y: 0.2 }, { x: 1, y: 0.7 }], defaultMethod: 'monotone' },
             {
@@ -8517,6 +8533,14 @@
         ];
         renderControlArray(CURVE_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_CURVE_CONTROLS', CURVE_CONTROLS);
+        makeDevGroupToggleable(tab, SCR, 'checkboxWheelScrubEnabled');
+        makeDevGroupToggleable(tab, SZ, 'checkboxScrollZoomEnabled');
+        // Scrubbing and Scroll To Zoom are exclusive: turning one on turns the other off.
+        {
+            const sc = document.getElementById('checkboxWheelScrubEnabled'), sz = document.getElementById('checkboxScrollZoomEnabled');
+            const off = (self, other) => self.addEventListener('change', () => { if (self.checked && other.checked) { other.checked = false; other.dispatchEvent(new Event('change', { bubbles: true })); } });
+            if (sc && sz) { off(sc, sz); off(sz, sc); }
+        }
         makeDevGroupToggleable(tab, WC, 'checkboxWheelCurveEnabled');
         makeDevGroupToggleable(tab, SC, 'checkboxStartSpanCurveEnabled');
 
@@ -8540,13 +8564,14 @@
         renderControlArray(FONT_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_FONT_CONTROLS', FONT_CONTROLS);
 
-        // UI Layout > Text: per-element Font Size/Color/Bold/Italic/Underline/Letter
-        // Spacing/Line Spacing/Opacity/Wrap/Outline/Enabled, ported 2026-10-25 -- see
-        // buildSpottyTextElementGroup()'s own top comment for the full account. Replaces
-        // the old Title/Artist/Meta Text Scale + Min/Pref/Max clamp sliders (now removed).
-        buildSpottyTextElementGroup(tab, uiLayoutContent, 'Song Title', { size: 44, color: '#f2f2f2', bold: true, lineSpacing: 1.1 });
-        buildSpottyTextElementGroup(tab, uiLayoutContent, 'Artist', { size: 22, color: '#c9d1d9', bold: false, lineSpacing: 1.2 });
-        buildSpottyTextElementGroup(tab, uiLayoutContent, 'Album & Date', { size: 14, color: '#8b94a1', bold: false, lineSpacing: 1.2 });
+        // UI Layout > Text: Word Wrap/Overflow + the "If Over Max Lines"/"Scale Down to
+        // Match"/separator fields only, ported 2026-10-25 -- see
+        // buildSpottyTextElementGroup()'s own top comment for the full, corrected
+        // (2026-10-30) account of what moved to the engine's own typography/position
+        // fields and why.
+        buildSpottyTextElementGroup(tab, uiLayoutContent, 'Song Title');
+        buildSpottyTextElementGroup(tab, uiLayoutContent, 'Artist');
+        buildSpottyTextElementGroup(tab, uiLayoutContent, 'Album & Date');
         buildSpottyTestTextGroup(tab, uiLayoutContent);
 
         // ---- UI Layout: Volume Button (toggleable) + Album Cover ------------------------------------------------

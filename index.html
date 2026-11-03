@@ -35,6 +35,10 @@
 
 
     <button class="dev-toggle-btn" id="devToggleBtn" onclick="ensureDevPanelBuilt(); devPanel.classList.toggle('hidden')">DEV</button>
+    <!-- CLAUDE.md §13a: reuses .dev-toggle-btn verbatim so it matches DEV and is gated by the
+         same html.dev-mode rule -- present under exactly the same condition DEV is, with no
+         separate gating code. -->
+    <button class="dev-toggle-btn" id="devUiInspectorBtn" style="bottom: 44px;" onclick="toggleUiLayoutInspector()">UI</button>
 
     <div class="dev-panel" id="devPanel">
         <div class="dev-panel-scroll-content">
