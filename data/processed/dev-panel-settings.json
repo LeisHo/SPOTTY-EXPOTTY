@@ -709,6 +709,7 @@
     "sliderStartPlayLiftShadowBlur": 14,
     "sliderStartPlayLiftShadowOpacity": 0.5,
     "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"search\",\"name\":\"Search Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}",
+    "checkboxClickOrderFollowsRender": false,
     "listPickerRenderOrderDeployed": "{\"items\":[{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true},{\"key\":\"search\",\"name\":\"Search Button\",\"on\":true},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true},{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true}],\"groupOrder\":[],\"defaultName\":null}"
   },
   "layout": {
@@ -2147,10 +2148,15 @@
                     ],
                     "subgroups": []
                   }
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxClickOrderFollowsRender"
                 }
               ],
               "rowKeys": [
-                "listPickerRenderOrder"
+                "listPickerRenderOrder",
+                "checkboxClickOrderFollowsRender"
               ],
               "subgroups": [
                 {
@@ -13175,6 +13181,581 @@
                 }
               ]
             }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "desktop:New Group",
+              "items": [
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Scrub Preload",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxShowPoolOverlay"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPreloadAhead"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPreloadBehind"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxShowPoolOverlay",
+                      "sliderPreloadAhead",
+                      "sliderPreloadBehind"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
+                    "key": "desktop:Scrub Input",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxFullScaleOnStartup"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderDefaultTimelineSpanDays"
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Touch Scrub And Pinch",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "checkboxInvertTouchScrub"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxInvertPinch"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTouchScrubSpeed"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTouchScrubAcceleration"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTouchStartThreshold"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderPinchZoomSpeed"
+                            }
+                          ],
+                          "rowKeys": [
+                            "checkboxInvertTouchScrub",
+                            "checkboxInvertPinch",
+                            "sliderTouchScrubSpeed",
+                            "sliderTouchScrubAcceleration",
+                            "sliderTouchStartThreshold",
+                            "sliderPinchZoomSpeed"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Wheel Scrub Per Notch Curve",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "checkboxInvertScroll"
+                            },
+                            {
+                              "type": "row",
+                              "key": "checkboxInvertZoomDrag"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderWheelScrubPixels"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderTimelineZoomSpeed"
+                            },
+                            {
+                              "type": "row",
+                              "key": "curveEditorWheelScrubCurve"
+                            },
+                            {
+                              "type": "row",
+                              "key": "selectWheelCurveXRange"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderWheelCurveMinPx"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderWheelCurveMaxPx"
+                            }
+                          ],
+                          "rowKeys": [
+                            "checkboxInvertScroll",
+                            "checkboxInvertZoomDrag",
+                            "sliderWheelScrubPixels",
+                            "sliderTimelineZoomSpeed",
+                            "curveEditorWheelScrubCurve",
+                            "selectWheelCurveXRange",
+                            "sliderWheelCurveMinPx",
+                            "sliderWheelCurveMaxPx"
+                          ],
+                          "subgroups": []
+                        }
+                      },
+                      {
+                        "type": "group",
+                        "section": {
+                          "key": "desktop:Starting Timeline Span Curve",
+                          "items": [
+                            {
+                              "type": "row",
+                              "key": "checkboxStartSpanApplyOnJump"
+                            },
+                            {
+                              "type": "row",
+                              "key": "curveEditorStartSpanCurve"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderStartSpanCurveMinDays"
+                            },
+                            {
+                              "type": "row",
+                              "key": "sliderStartSpanCurveMaxDays"
+                            }
+                          ],
+                          "rowKeys": [
+                            "checkboxStartSpanApplyOnJump",
+                            "curveEditorStartSpanCurve",
+                            "sliderStartSpanCurveMinDays",
+                            "sliderStartSpanCurveMaxDays"
+                          ],
+                          "subgroups": []
+                        }
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxFullScaleOnStartup",
+                      "sliderDefaultTimelineSpanDays"
+                    ],
+                    "subgroups": [
+                      {
+                        "key": "desktop:Touch Scrub And Pinch",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertTouchScrub"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertPinch"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTouchScrubSpeed"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTouchScrubAcceleration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTouchStartThreshold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPinchZoomSpeed"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxInvertTouchScrub",
+                          "checkboxInvertPinch",
+                          "sliderTouchScrubSpeed",
+                          "sliderTouchScrubAcceleration",
+                          "sliderTouchStartThreshold",
+                          "sliderPinchZoomSpeed"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:Wheel Scrub Per Notch Curve",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertScroll"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertZoomDrag"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderWheelScrubPixels"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTimelineZoomSpeed"
+                          },
+                          {
+                            "type": "row",
+                            "key": "curveEditorWheelScrubCurve"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectWheelCurveXRange"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderWheelCurveMinPx"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderWheelCurveMaxPx"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxInvertScroll",
+                          "checkboxInvertZoomDrag",
+                          "sliderWheelScrubPixels",
+                          "sliderTimelineZoomSpeed",
+                          "curveEditorWheelScrubCurve",
+                          "selectWheelCurveXRange",
+                          "sliderWheelCurveMinPx",
+                          "sliderWheelCurveMaxPx"
+                        ],
+                        "subgroups": []
+                      },
+                      {
+                        "key": "desktop:Starting Timeline Span Curve",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxStartSpanApplyOnJump"
+                          },
+                          {
+                            "type": "row",
+                            "key": "curveEditorStartSpanCurve"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderStartSpanCurveMinDays"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderStartSpanCurveMaxDays"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxStartSpanApplyOnJump",
+                          "curveEditorStartSpanCurve",
+                          "sliderStartSpanCurveMinDays",
+                          "sliderStartSpanCurveMaxDays"
+                        ],
+                        "subgroups": []
+                      }
+                    ]
+                  }
+                }
+              ],
+              "rowKeys": [],
+              "subgroups": [
+                {
+                  "key": "desktop:Scrub Preload",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "checkboxShowPoolOverlay"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPreloadAhead"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPreloadBehind"
+                    }
+                  ],
+                  "rowKeys": [
+                    "checkboxShowPoolOverlay",
+                    "sliderPreloadAhead",
+                    "sliderPreloadBehind"
+                  ],
+                  "subgroups": []
+                },
+                {
+                  "key": "desktop:Scrub Input",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "checkboxFullScaleOnStartup"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDefaultTimelineSpanDays"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Touch Scrub And Pinch",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertTouchScrub"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertPinch"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTouchScrubSpeed"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTouchScrubAcceleration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTouchStartThreshold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPinchZoomSpeed"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxInvertTouchScrub",
+                          "checkboxInvertPinch",
+                          "sliderTouchScrubSpeed",
+                          "sliderTouchScrubAcceleration",
+                          "sliderTouchStartThreshold",
+                          "sliderPinchZoomSpeed"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Wheel Scrub Per Notch Curve",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertScroll"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertZoomDrag"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderWheelScrubPixels"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTimelineZoomSpeed"
+                          },
+                          {
+                            "type": "row",
+                            "key": "curveEditorWheelScrubCurve"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectWheelCurveXRange"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderWheelCurveMinPx"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderWheelCurveMaxPx"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxInvertScroll",
+                          "checkboxInvertZoomDrag",
+                          "sliderWheelScrubPixels",
+                          "sliderTimelineZoomSpeed",
+                          "curveEditorWheelScrubCurve",
+                          "selectWheelCurveXRange",
+                          "sliderWheelCurveMinPx",
+                          "sliderWheelCurveMaxPx"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Starting Timeline Span Curve",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxStartSpanApplyOnJump"
+                          },
+                          {
+                            "type": "row",
+                            "key": "curveEditorStartSpanCurve"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderStartSpanCurveMinDays"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderStartSpanCurveMaxDays"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxStartSpanApplyOnJump",
+                          "curveEditorStartSpanCurve",
+                          "sliderStartSpanCurveMinDays",
+                          "sliderStartSpanCurveMaxDays"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "checkboxFullScaleOnStartup",
+                    "sliderDefaultTimelineSpanDays"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "desktop:Touch Scrub And Pinch",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertTouchScrub"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertPinch"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTouchScrubSpeed"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTouchScrubAcceleration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTouchStartThreshold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPinchZoomSpeed"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxInvertTouchScrub",
+                        "checkboxInvertPinch",
+                        "sliderTouchScrubSpeed",
+                        "sliderTouchScrubAcceleration",
+                        "sliderTouchStartThreshold",
+                        "sliderPinchZoomSpeed"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:Wheel Scrub Per Notch Curve",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertScroll"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertZoomDrag"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderWheelScrubPixels"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTimelineZoomSpeed"
+                        },
+                        {
+                          "type": "row",
+                          "key": "curveEditorWheelScrubCurve"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectWheelCurveXRange"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderWheelCurveMinPx"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderWheelCurveMaxPx"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxInvertScroll",
+                        "checkboxInvertZoomDrag",
+                        "sliderWheelScrubPixels",
+                        "sliderTimelineZoomSpeed",
+                        "curveEditorWheelScrubCurve",
+                        "selectWheelCurveXRange",
+                        "sliderWheelCurveMinPx",
+                        "sliderWheelCurveMaxPx"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:Starting Timeline Span Curve",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxStartSpanApplyOnJump"
+                        },
+                        {
+                          "type": "row",
+                          "key": "curveEditorStartSpanCurve"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderStartSpanCurveMinDays"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderStartSpanCurveMaxDays"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxStartSpanApplyOnJump",
+                        "curveEditorStartSpanCurve",
+                        "sliderStartSpanCurveMinDays",
+                        "sliderStartSpanCurveMaxDays"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              ]
+            }
           }
         ],
         "rowKeys": [
@@ -13203,10 +13784,15 @@
                   ],
                   "subgroups": []
                 }
+              },
+              {
+                "type": "row",
+                "key": "checkboxClickOrderFollowsRender"
               }
             ],
             "rowKeys": [
-              "listPickerRenderOrder"
+              "listPickerRenderOrder",
+              "checkboxClickOrderFollowsRender"
             ],
             "subgroups": [
               {
@@ -24215,6 +24801,578 @@
                 "subgroups": []
               }
             ]
+          },
+          {
+            "key": "desktop:New Group",
+            "items": [
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Scrub Preload",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "checkboxShowPoolOverlay"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPreloadAhead"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderPreloadBehind"
+                    }
+                  ],
+                  "rowKeys": [
+                    "checkboxShowPoolOverlay",
+                    "sliderPreloadAhead",
+                    "sliderPreloadBehind"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
+                  "key": "desktop:Scrub Input",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "checkboxFullScaleOnStartup"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderDefaultTimelineSpanDays"
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Touch Scrub And Pinch",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertTouchScrub"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertPinch"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTouchScrubSpeed"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTouchScrubAcceleration"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTouchStartThreshold"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderPinchZoomSpeed"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxInvertTouchScrub",
+                          "checkboxInvertPinch",
+                          "sliderTouchScrubSpeed",
+                          "sliderTouchScrubAcceleration",
+                          "sliderTouchStartThreshold",
+                          "sliderPinchZoomSpeed"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Wheel Scrub Per Notch Curve",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertScroll"
+                          },
+                          {
+                            "type": "row",
+                            "key": "checkboxInvertZoomDrag"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderWheelScrubPixels"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderTimelineZoomSpeed"
+                          },
+                          {
+                            "type": "row",
+                            "key": "curveEditorWheelScrubCurve"
+                          },
+                          {
+                            "type": "row",
+                            "key": "selectWheelCurveXRange"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderWheelCurveMinPx"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderWheelCurveMaxPx"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxInvertScroll",
+                          "checkboxInvertZoomDrag",
+                          "sliderWheelScrubPixels",
+                          "sliderTimelineZoomSpeed",
+                          "curveEditorWheelScrubCurve",
+                          "selectWheelCurveXRange",
+                          "sliderWheelCurveMinPx",
+                          "sliderWheelCurveMaxPx"
+                        ],
+                        "subgroups": []
+                      }
+                    },
+                    {
+                      "type": "group",
+                      "section": {
+                        "key": "desktop:Starting Timeline Span Curve",
+                        "items": [
+                          {
+                            "type": "row",
+                            "key": "checkboxStartSpanApplyOnJump"
+                          },
+                          {
+                            "type": "row",
+                            "key": "curveEditorStartSpanCurve"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderStartSpanCurveMinDays"
+                          },
+                          {
+                            "type": "row",
+                            "key": "sliderStartSpanCurveMaxDays"
+                          }
+                        ],
+                        "rowKeys": [
+                          "checkboxStartSpanApplyOnJump",
+                          "curveEditorStartSpanCurve",
+                          "sliderStartSpanCurveMinDays",
+                          "sliderStartSpanCurveMaxDays"
+                        ],
+                        "subgroups": []
+                      }
+                    }
+                  ],
+                  "rowKeys": [
+                    "checkboxFullScaleOnStartup",
+                    "sliderDefaultTimelineSpanDays"
+                  ],
+                  "subgroups": [
+                    {
+                      "key": "desktop:Touch Scrub And Pinch",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertTouchScrub"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertPinch"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTouchScrubSpeed"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTouchScrubAcceleration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTouchStartThreshold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPinchZoomSpeed"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxInvertTouchScrub",
+                        "checkboxInvertPinch",
+                        "sliderTouchScrubSpeed",
+                        "sliderTouchScrubAcceleration",
+                        "sliderTouchStartThreshold",
+                        "sliderPinchZoomSpeed"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:Wheel Scrub Per Notch Curve",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertScroll"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertZoomDrag"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderWheelScrubPixels"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTimelineZoomSpeed"
+                        },
+                        {
+                          "type": "row",
+                          "key": "curveEditorWheelScrubCurve"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectWheelCurveXRange"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderWheelCurveMinPx"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderWheelCurveMaxPx"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxInvertScroll",
+                        "checkboxInvertZoomDrag",
+                        "sliderWheelScrubPixels",
+                        "sliderTimelineZoomSpeed",
+                        "curveEditorWheelScrubCurve",
+                        "selectWheelCurveXRange",
+                        "sliderWheelCurveMinPx",
+                        "sliderWheelCurveMaxPx"
+                      ],
+                      "subgroups": []
+                    },
+                    {
+                      "key": "desktop:Starting Timeline Span Curve",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxStartSpanApplyOnJump"
+                        },
+                        {
+                          "type": "row",
+                          "key": "curveEditorStartSpanCurve"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderStartSpanCurveMinDays"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderStartSpanCurveMaxDays"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxStartSpanApplyOnJump",
+                        "curveEditorStartSpanCurve",
+                        "sliderStartSpanCurveMinDays",
+                        "sliderStartSpanCurveMaxDays"
+                      ],
+                      "subgroups": []
+                    }
+                  ]
+                }
+              }
+            ],
+            "rowKeys": [],
+            "subgroups": [
+              {
+                "key": "desktop:Scrub Preload",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "checkboxShowPoolOverlay"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPreloadAhead"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderPreloadBehind"
+                  }
+                ],
+                "rowKeys": [
+                  "checkboxShowPoolOverlay",
+                  "sliderPreloadAhead",
+                  "sliderPreloadBehind"
+                ],
+                "subgroups": []
+              },
+              {
+                "key": "desktop:Scrub Input",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "checkboxFullScaleOnStartup"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderDefaultTimelineSpanDays"
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Touch Scrub And Pinch",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertTouchScrub"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertPinch"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTouchScrubSpeed"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTouchScrubAcceleration"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTouchStartThreshold"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderPinchZoomSpeed"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxInvertTouchScrub",
+                        "checkboxInvertPinch",
+                        "sliderTouchScrubSpeed",
+                        "sliderTouchScrubAcceleration",
+                        "sliderTouchStartThreshold",
+                        "sliderPinchZoomSpeed"
+                      ],
+                      "subgroups": []
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Wheel Scrub Per Notch Curve",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertScroll"
+                        },
+                        {
+                          "type": "row",
+                          "key": "checkboxInvertZoomDrag"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderWheelScrubPixels"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderTimelineZoomSpeed"
+                        },
+                        {
+                          "type": "row",
+                          "key": "curveEditorWheelScrubCurve"
+                        },
+                        {
+                          "type": "row",
+                          "key": "selectWheelCurveXRange"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderWheelCurveMinPx"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderWheelCurveMaxPx"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxInvertScroll",
+                        "checkboxInvertZoomDrag",
+                        "sliderWheelScrubPixels",
+                        "sliderTimelineZoomSpeed",
+                        "curveEditorWheelScrubCurve",
+                        "selectWheelCurveXRange",
+                        "sliderWheelCurveMinPx",
+                        "sliderWheelCurveMaxPx"
+                      ],
+                      "subgroups": []
+                    }
+                  },
+                  {
+                    "type": "group",
+                    "section": {
+                      "key": "desktop:Starting Timeline Span Curve",
+                      "items": [
+                        {
+                          "type": "row",
+                          "key": "checkboxStartSpanApplyOnJump"
+                        },
+                        {
+                          "type": "row",
+                          "key": "curveEditorStartSpanCurve"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderStartSpanCurveMinDays"
+                        },
+                        {
+                          "type": "row",
+                          "key": "sliderStartSpanCurveMaxDays"
+                        }
+                      ],
+                      "rowKeys": [
+                        "checkboxStartSpanApplyOnJump",
+                        "curveEditorStartSpanCurve",
+                        "sliderStartSpanCurveMinDays",
+                        "sliderStartSpanCurveMaxDays"
+                      ],
+                      "subgroups": []
+                    }
+                  }
+                ],
+                "rowKeys": [
+                  "checkboxFullScaleOnStartup",
+                  "sliderDefaultTimelineSpanDays"
+                ],
+                "subgroups": [
+                  {
+                    "key": "desktop:Touch Scrub And Pinch",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxInvertTouchScrub"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxInvertPinch"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTouchScrubSpeed"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTouchScrubAcceleration"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTouchStartThreshold"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderPinchZoomSpeed"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxInvertTouchScrub",
+                      "checkboxInvertPinch",
+                      "sliderTouchScrubSpeed",
+                      "sliderTouchScrubAcceleration",
+                      "sliderTouchStartThreshold",
+                      "sliderPinchZoomSpeed"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:Wheel Scrub Per Notch Curve",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxInvertScroll"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxInvertZoomDrag"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderWheelScrubPixels"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderTimelineZoomSpeed"
+                      },
+                      {
+                        "type": "row",
+                        "key": "curveEditorWheelScrubCurve"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectWheelCurveXRange"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderWheelCurveMinPx"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderWheelCurveMaxPx"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxInvertScroll",
+                      "checkboxInvertZoomDrag",
+                      "sliderWheelScrubPixels",
+                      "sliderTimelineZoomSpeed",
+                      "curveEditorWheelScrubCurve",
+                      "selectWheelCurveXRange",
+                      "sliderWheelCurveMinPx",
+                      "sliderWheelCurveMaxPx"
+                    ],
+                    "subgroups": []
+                  },
+                  {
+                    "key": "desktop:Starting Timeline Span Curve",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxStartSpanApplyOnJump"
+                      },
+                      {
+                        "type": "row",
+                        "key": "curveEditorStartSpanCurve"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderStartSpanCurveMinDays"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderStartSpanCurveMaxDays"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxStartSpanApplyOnJump",
+                      "curveEditorStartSpanCurve",
+                      "sliderStartSpanCurveMinDays",
+                      "sliderStartSpanCurveMaxDays"
+                    ],
+                    "subgroups": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -24625,578 +25783,6 @@
               "sliderModReverbDecay"
             ],
             "subgroups": []
-          }
-        ]
-      },
-      {
-        "key": "desktop:New Group",
-        "items": [
-          {
-            "type": "group",
-            "section": {
-              "key": "desktop:Scrub Preload",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "checkboxShowPoolOverlay"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderPreloadAhead"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderPreloadBehind"
-                }
-              ],
-              "rowKeys": [
-                "checkboxShowPoolOverlay",
-                "sliderPreloadAhead",
-                "sliderPreloadBehind"
-              ],
-              "subgroups": []
-            }
-          },
-          {
-            "type": "group",
-            "section": {
-              "key": "desktop:Scrub Input",
-              "items": [
-                {
-                  "type": "row",
-                  "key": "checkboxFullScaleOnStartup"
-                },
-                {
-                  "type": "row",
-                  "key": "sliderDefaultTimelineSpanDays"
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Touch Scrub And Pinch",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "checkboxInvertTouchScrub"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxInvertPinch"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTouchScrubSpeed"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTouchScrubAcceleration"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTouchStartThreshold"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderPinchZoomSpeed"
-                      }
-                    ],
-                    "rowKeys": [
-                      "checkboxInvertTouchScrub",
-                      "checkboxInvertPinch",
-                      "sliderTouchScrubSpeed",
-                      "sliderTouchScrubAcceleration",
-                      "sliderTouchStartThreshold",
-                      "sliderPinchZoomSpeed"
-                    ],
-                    "subgroups": []
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Wheel Scrub Per Notch Curve",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "checkboxInvertScroll"
-                      },
-                      {
-                        "type": "row",
-                        "key": "checkboxInvertZoomDrag"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderWheelScrubPixels"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderTimelineZoomSpeed"
-                      },
-                      {
-                        "type": "row",
-                        "key": "curveEditorWheelScrubCurve"
-                      },
-                      {
-                        "type": "row",
-                        "key": "selectWheelCurveXRange"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderWheelCurveMinPx"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderWheelCurveMaxPx"
-                      }
-                    ],
-                    "rowKeys": [
-                      "checkboxInvertScroll",
-                      "checkboxInvertZoomDrag",
-                      "sliderWheelScrubPixels",
-                      "sliderTimelineZoomSpeed",
-                      "curveEditorWheelScrubCurve",
-                      "selectWheelCurveXRange",
-                      "sliderWheelCurveMinPx",
-                      "sliderWheelCurveMaxPx"
-                    ],
-                    "subgroups": []
-                  }
-                },
-                {
-                  "type": "group",
-                  "section": {
-                    "key": "desktop:Starting Timeline Span Curve",
-                    "items": [
-                      {
-                        "type": "row",
-                        "key": "checkboxStartSpanApplyOnJump"
-                      },
-                      {
-                        "type": "row",
-                        "key": "curveEditorStartSpanCurve"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderStartSpanCurveMinDays"
-                      },
-                      {
-                        "type": "row",
-                        "key": "sliderStartSpanCurveMaxDays"
-                      }
-                    ],
-                    "rowKeys": [
-                      "checkboxStartSpanApplyOnJump",
-                      "curveEditorStartSpanCurve",
-                      "sliderStartSpanCurveMinDays",
-                      "sliderStartSpanCurveMaxDays"
-                    ],
-                    "subgroups": []
-                  }
-                }
-              ],
-              "rowKeys": [
-                "checkboxFullScaleOnStartup",
-                "sliderDefaultTimelineSpanDays"
-              ],
-              "subgroups": [
-                {
-                  "key": "desktop:Touch Scrub And Pinch",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "checkboxInvertTouchScrub"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxInvertPinch"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTouchScrubSpeed"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTouchScrubAcceleration"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTouchStartThreshold"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPinchZoomSpeed"
-                    }
-                  ],
-                  "rowKeys": [
-                    "checkboxInvertTouchScrub",
-                    "checkboxInvertPinch",
-                    "sliderTouchScrubSpeed",
-                    "sliderTouchScrubAcceleration",
-                    "sliderTouchStartThreshold",
-                    "sliderPinchZoomSpeed"
-                  ],
-                  "subgroups": []
-                },
-                {
-                  "key": "desktop:Wheel Scrub Per Notch Curve",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "checkboxInvertScroll"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxInvertZoomDrag"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelScrubPixels"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTimelineZoomSpeed"
-                    },
-                    {
-                      "type": "row",
-                      "key": "curveEditorWheelScrubCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectWheelCurveXRange"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelCurveMinPx"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelCurveMaxPx"
-                    }
-                  ],
-                  "rowKeys": [
-                    "checkboxInvertScroll",
-                    "checkboxInvertZoomDrag",
-                    "sliderWheelScrubPixels",
-                    "sliderTimelineZoomSpeed",
-                    "curveEditorWheelScrubCurve",
-                    "selectWheelCurveXRange",
-                    "sliderWheelCurveMinPx",
-                    "sliderWheelCurveMaxPx"
-                  ],
-                  "subgroups": []
-                },
-                {
-                  "key": "desktop:Starting Timeline Span Curve",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "checkboxStartSpanApplyOnJump"
-                    },
-                    {
-                      "type": "row",
-                      "key": "curveEditorStartSpanCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderStartSpanCurveMinDays"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderStartSpanCurveMaxDays"
-                    }
-                  ],
-                  "rowKeys": [
-                    "checkboxStartSpanApplyOnJump",
-                    "curveEditorStartSpanCurve",
-                    "sliderStartSpanCurveMinDays",
-                    "sliderStartSpanCurveMaxDays"
-                  ],
-                  "subgroups": []
-                }
-              ]
-            }
-          }
-        ],
-        "rowKeys": [],
-        "subgroups": [
-          {
-            "key": "desktop:Scrub Preload",
-            "items": [
-              {
-                "type": "row",
-                "key": "checkboxShowPoolOverlay"
-              },
-              {
-                "type": "row",
-                "key": "sliderPreloadAhead"
-              },
-              {
-                "type": "row",
-                "key": "sliderPreloadBehind"
-              }
-            ],
-            "rowKeys": [
-              "checkboxShowPoolOverlay",
-              "sliderPreloadAhead",
-              "sliderPreloadBehind"
-            ],
-            "subgroups": []
-          },
-          {
-            "key": "desktop:Scrub Input",
-            "items": [
-              {
-                "type": "row",
-                "key": "checkboxFullScaleOnStartup"
-              },
-              {
-                "type": "row",
-                "key": "sliderDefaultTimelineSpanDays"
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Touch Scrub And Pinch",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "checkboxInvertTouchScrub"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxInvertPinch"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTouchScrubSpeed"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTouchScrubAcceleration"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTouchStartThreshold"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderPinchZoomSpeed"
-                    }
-                  ],
-                  "rowKeys": [
-                    "checkboxInvertTouchScrub",
-                    "checkboxInvertPinch",
-                    "sliderTouchScrubSpeed",
-                    "sliderTouchScrubAcceleration",
-                    "sliderTouchStartThreshold",
-                    "sliderPinchZoomSpeed"
-                  ],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Wheel Scrub Per Notch Curve",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "checkboxInvertScroll"
-                    },
-                    {
-                      "type": "row",
-                      "key": "checkboxInvertZoomDrag"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelScrubPixels"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderTimelineZoomSpeed"
-                    },
-                    {
-                      "type": "row",
-                      "key": "curveEditorWheelScrubCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "selectWheelCurveXRange"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelCurveMinPx"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderWheelCurveMaxPx"
-                    }
-                  ],
-                  "rowKeys": [
-                    "checkboxInvertScroll",
-                    "checkboxInvertZoomDrag",
-                    "sliderWheelScrubPixels",
-                    "sliderTimelineZoomSpeed",
-                    "curveEditorWheelScrubCurve",
-                    "selectWheelCurveXRange",
-                    "sliderWheelCurveMinPx",
-                    "sliderWheelCurveMaxPx"
-                  ],
-                  "subgroups": []
-                }
-              },
-              {
-                "type": "group",
-                "section": {
-                  "key": "desktop:Starting Timeline Span Curve",
-                  "items": [
-                    {
-                      "type": "row",
-                      "key": "checkboxStartSpanApplyOnJump"
-                    },
-                    {
-                      "type": "row",
-                      "key": "curveEditorStartSpanCurve"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderStartSpanCurveMinDays"
-                    },
-                    {
-                      "type": "row",
-                      "key": "sliderStartSpanCurveMaxDays"
-                    }
-                  ],
-                  "rowKeys": [
-                    "checkboxStartSpanApplyOnJump",
-                    "curveEditorStartSpanCurve",
-                    "sliderStartSpanCurveMinDays",
-                    "sliderStartSpanCurveMaxDays"
-                  ],
-                  "subgroups": []
-                }
-              }
-            ],
-            "rowKeys": [
-              "checkboxFullScaleOnStartup",
-              "sliderDefaultTimelineSpanDays"
-            ],
-            "subgroups": [
-              {
-                "key": "desktop:Touch Scrub And Pinch",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "checkboxInvertTouchScrub"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxInvertPinch"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTouchScrubSpeed"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTouchScrubAcceleration"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTouchStartThreshold"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderPinchZoomSpeed"
-                  }
-                ],
-                "rowKeys": [
-                  "checkboxInvertTouchScrub",
-                  "checkboxInvertPinch",
-                  "sliderTouchScrubSpeed",
-                  "sliderTouchScrubAcceleration",
-                  "sliderTouchStartThreshold",
-                  "sliderPinchZoomSpeed"
-                ],
-                "subgroups": []
-              },
-              {
-                "key": "desktop:Wheel Scrub Per Notch Curve",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "checkboxInvertScroll"
-                  },
-                  {
-                    "type": "row",
-                    "key": "checkboxInvertZoomDrag"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderWheelScrubPixels"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderTimelineZoomSpeed"
-                  },
-                  {
-                    "type": "row",
-                    "key": "curveEditorWheelScrubCurve"
-                  },
-                  {
-                    "type": "row",
-                    "key": "selectWheelCurveXRange"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderWheelCurveMinPx"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderWheelCurveMaxPx"
-                  }
-                ],
-                "rowKeys": [
-                  "checkboxInvertScroll",
-                  "checkboxInvertZoomDrag",
-                  "sliderWheelScrubPixels",
-                  "sliderTimelineZoomSpeed",
-                  "curveEditorWheelScrubCurve",
-                  "selectWheelCurveXRange",
-                  "sliderWheelCurveMinPx",
-                  "sliderWheelCurveMaxPx"
-                ],
-                "subgroups": []
-              },
-              {
-                "key": "desktop:Starting Timeline Span Curve",
-                "items": [
-                  {
-                    "type": "row",
-                    "key": "checkboxStartSpanApplyOnJump"
-                  },
-                  {
-                    "type": "row",
-                    "key": "curveEditorStartSpanCurve"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderStartSpanCurveMinDays"
-                  },
-                  {
-                    "type": "row",
-                    "key": "sliderStartSpanCurveMaxDays"
-                  }
-                ],
-                "rowKeys": [
-                  "checkboxStartSpanApplyOnJump",
-                  "curveEditorStartSpanCurve",
-                  "sliderStartSpanCurveMinDays",
-                  "sliderStartSpanCurveMaxDays"
-                ],
-                "subgroups": []
-              }
-            ]
           }
         ]
       },
@@ -50499,12 +51085,12 @@
     "desktop:TABS": true,
     "desktop:BUTTONS": true,
     "desktop:Hot Keys": true,
-    "desktop:Debug": false,
+    "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
     "desktop:Visibility / Render Order": true,
-    "desktop:Deployed": false,
+    "desktop:Deployed": true,
     "desktop:Text": true,
     "desktop:Font": true,
     "desktop:Song Title": true,
@@ -50523,7 +51109,7 @@
     "desktop:New Group (38)": true,
     "desktop:New Group (39)": true,
     "desktop:Test Text Mode": true,
-    "desktop:New Group (7)": false,
+    "desktop:New Group (7)": true,
     "desktop:Play Button": true,
     "desktop:New Group (10)": true,
     "desktop:New Group (11)": true,
@@ -50551,7 +51137,7 @@
     "desktop:New Group (30)": true,
     "desktop:New Group (29)": true,
     "desktop:New Group (16)": true,
-    "desktop:New Group (19)": false,
+    "desktop:New Group (19)": true,
     "desktop:New Group (24)": true,
     "desktop:Panel Song Count": true,
     "desktop:New Group (18)": true,
@@ -50574,17 +51160,17 @@
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
     "desktop:Filter Panel Shadow": true,
-    "desktop:Scrub Audio": true,
-    "desktop:New Group (2)": true,
-    "desktop:Spotify Handoff": true,
-    "desktop:No Preview": true,
-    "desktop:Modifiers": true,
     "desktop:New Group": true,
     "desktop:Scrub Preload": true,
     "desktop:Scrub Input": true,
     "desktop:Touch Scrub And Pinch": true,
     "desktop:Wheel Scrub Per Notch Curve": true,
     "desktop:Starting Timeline Span Curve": true,
+    "desktop:Scrub Audio": true,
+    "desktop:New Group (2)": true,
+    "desktop:Spotify Handoff": true,
+    "desktop:No Preview": true,
+    "desktop:Modifiers": true,
     "desktop:Timeline Look": true,
     "desktop:New Group (4)": true,
     "desktop:Click and Drag": true,
