@@ -1519,3 +1519,11 @@ Per workspace-wide CLAUDE.md S13a (corrected same day, direct request: "match th
 - The startup play overlay (`#spxStart`) is `hidden` in the markup and shown at the end of boot, after the data, saved settings and the cover image have loaded (4 s cap on the image wait).
 - Tested in a local browser: scrubbing moved the position (654 -> 6380); with it off the same wheel event did nothing; with Scroll To Zoom on, a scroll-up shrank the span (10,368,000,000 ms -> 6,610,928,676 ms); the exclusivity worked both directions. The start overlay was shown after load. A first version used requestAnimationFrame for the reveal, which never fires while the pane is hidden; replaced with a direct call.
 - Pushed to main (a rebase onto the settings Sync commit was needed first).
+
+## 2026-11-06 - Spotify data explorer (data-explorer/index.html)
+- New single-file viewer for the Spotify account-data export in data/Spotify Account Data/. Open http://127.0.0.1:8000/data-explorer/ (needs scripts/active/serve.py); opened straight from disk it falls back to a file picker / drop zone. Data is read in the browser only.
+- Sidebar: the 15 files asked about (numbered) plus the other files in the export. Each file has a plain-language description, an Explained tab (cards, bar and column charts, sortable/filterable tables, per-file notes) and a Raw data tab (collapsible JSON tree). Private values (address, email, birthdate, Facebook ID, ad cookie IDs, payment postal code) are hidden until clicked.
+- Spotify URIs show the name when it is known from Playlist1 / YourLibrary, otherwise a "look up" link that calls Spotify oEmbed (cached in localStorage; failures are not cached; pauses 60 s on HTTP 429).
+- Artist-affinity ad segments (33 codes of 6 hex characters): tested MD5 / SHA-1 / SHA-256 / SHA-512 (start and end) of 3,159 artist URIs, IDs and names from the export; no real match (1 chance hit expected). Not decodable from the export; explained on the Inferences page.
+- UserAddress.json is not JSON (Scala "List(HashMap(...))"); the viewer parses it. UserPrompts has a 1970 timestamp (export bug).
+- Checked in a local browser: all 22 pages render without errors; name lookup resolved 3 artists. Pushed to main.
