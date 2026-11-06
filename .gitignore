@@ -13,3 +13,4 @@ data/raw/
 # Local scratch/log output (screen recordings, one-off dumps) -- never
 # meant to be tracked.
 datalog/
+data-explorer/fun-stats.json
