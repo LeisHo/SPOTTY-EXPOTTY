@@ -101,6 +101,7 @@ function h(tag, props, ...kids) {
   const e = document.createElement(tag);
   if (props) for (const [k, v] of Object.entries(props)) {
     if (k === 'class') e.className = v;
+    else if (k === 'html') e.innerHTML = v;
     else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
     else if (v !== false && v != null) e.setAttribute(k, v === true ? '' : v);
   }
@@ -416,7 +417,7 @@ const SPECS = [
     render: d => {
       const t = d.tasteProfile || {}, para = s => h('div', { class: 'text' }, String(s || '').split(/\n+/).map(x => h('p', { html: x.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>') })));
       return [section('Musical identity', 'Spotify\'s own summary of your taste.', para(t.musicalIdentity)), section('Content rhythms', 'When and how you listen.', para(t.contentRhythms)),
-        section('Podcast and audiobook taste', 'Placeholder text - no taste was generated.', para(t.podcastTaste), para(t.audiobookTaste)),
+        /^Tell us about your/.test(t.podcastTaste || '') && /^Tell us about your/.test(t.audiobookTaste || '') ? h('p', { class: 'help' }, 'Podcast and audiobook taste: Spotify generated nothing (it only stored a placeholder prompt), so they are left out.') : section('Podcast and audiobook taste', null, para(t.podcastTaste), para(t.audiobookTaste)),
         section('Artists it was built from', 'Artist URIs (Spotify IDs). Use "look up" to see the names.', t.artistUris && t.artistUris.length ? h('div', null, lookupAllButton(), h('ul', null, t.artistUris.map(u => h('li', null, uriCell(u))))) : empty('None')),
         section('Notes', null, (d.notes || []).length ? autoSections(d.notes) : empty('No notes.'))];
     } },
@@ -593,6 +594,27 @@ function renderNav() {
   mk('Other files in the export', SPECS.filter(s => s.other));
   side.append(h('h3', null, 'Load files'), h('div', { class: 'sub' }, 'Files are read in your browser only. Nothing is uploaded.'), h('input', { type: 'file', multiple: true, accept: '.json', onchange: e => loadFiles([...e.target.files]) }));
 }
+// ---------- Spotify-written prose, surfaced at the top of any page ----------
+function proseSection(data) {
+  const out = [], words = x => String(x).trim().split(/\s+/).length;
+  const keyRe = /description|identity|rhythm|summary|story|insight|narrative|blurb|caption/i;
+  (function walk(o, path) {
+    if (Array.isArray(o)) { o.forEach((v, i) => walk(v, path)); return; }
+    if (!o || typeof o !== 'object') return;
+    const hit = Object.entries(o).filter(([k, v]) => typeof v === 'string' && keyRe.test(k) && words(v) >= 10 && !/^Tell us about your/.test(v));
+    if (hit.length) {
+      const title = typeof o.title === 'string' && words(o.title) >= 3 ? o.title : null;
+      const tags = typeof o.filedUnderTags === 'string' ? o.filedUnderTags : null;
+      out.push({ title, texts: hit.map(([, v]) => v), tags, meta: [o.reason, o.columnQualifier].filter(Boolean).join(' - ') });
+      Object.entries(o).forEach(([k, v]) => { if (v && typeof v === 'object') walk(v, path); });
+    } else Object.entries(o).forEach(([k, v]) => { if (v && typeof v === 'object') walk(v, path + '/' + k); });
+  })(data, '');
+  if (!out.length) return null;
+  const esc = x => x.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  return section("In Spotify's own words", 'Written text Spotify generated for you in this file. The raw tab still has everything exactly as stored.',
+    ...out.map(p => h('div', { class: 'card', style: 'margin:8px 0' }, p.title ? h('div', { style: 'font-weight:600;margin-bottom:4px' }, p.title) : null,
+      p.meta ? h('div', { class: 'cl' }, p.meta) : null, h('div', { class: 'text' }, p.texts.map(t => h('p', { html: esc(t) }))), p.tags ? h('div', { class: 'cl' }, 'Filed under: ' + p.tags.replace(/^[|]$/g, '')) : null)));
+}
 let cur = null;
 function renderView() {
   const spec = SPECS.find(s => s.file === cur);
@@ -626,7 +648,7 @@ function renderView() {
   };
   tabE.onclick = () => show(false); tabR.onclick = () => show(true);
   main.append(h('div', { class: 'tabs' }, tabE, tabR), view, raw);
-  try { view.append(...spec.render(data).filter(Boolean)); } catch (e) { view.append(h('div', { class: 'priv' }, 'This file did not match the expected layout (' + e.message + '). Showing a generic view instead.'), ...autoSections(data)); }
+  try { const ps = spec.file === 'TasteProfile' ? null : proseSection(data); if (ps) view.append(ps); view.append(...spec.render(data).filter(Boolean)); } catch (e) { view.append(h('div', { class: 'priv' }, 'This file did not match the expected layout (' + e.message + '). Showing a generic view instead.'), ...autoSections(data)); }
   window.scrollTo(0, 0);
 }
 function route() { cur = decodeURIComponent(location.hash.slice(1)) || null; renderNav(); renderView(); }
