@@ -1,22 +1,15 @@
-// Builds data-explorer/fun-stats.json: small per-year aggregates (2024-2026) from the
+// Builds data-explorer/fun-stats.json: small per-year aggregates (every year) from the
 // Extended Streaming History export. Run: node scripts/active/build_fun_stats.js
 // Times are UTC (the export's own timestamps). IP addresses are never read into the output.
 const fs = require('fs'), path = require('path');
 const root = path.join(__dirname, '..', '..');
 const dir = path.join(root, 'data', 'Spotify Extended Streaming History');
-const YEARS = [2024, 2025, 2026];
+const files = fs.readdirSync(dir);
+const YEARS = [...new Set(files.map(f => (f.match(/^Streaming_History_Audio_(\d{4})/) || [])[1]).filter(Boolean))].map(Number).sort();
 const out = { years: {}, generated: new Date().toISOString().slice(0, 10) };
 
 // artists heard before 2024 (to separate "new to you" from "old favourites")
-const seenBefore = new Set();
-for (const f of fs.readdirSync(dir)) {
-  const m = f.match(/^Streaming_History_Audio_(\d{4})/);
-  if (!m || +m[1] >= 2024) continue;
-  for (const r of JSON.parse(fs.readFileSync(path.join(dir, f)))) {
-    if (r.master_metadata_album_artist_name && r.ms_played >= 30000) seenBefore.add(r.master_metadata_album_artist_name);
-  }
-}
-const seenSoFar = new Set(seenBefore);
+const seenSoFar = new Set(); // rolling: an artist is "new" in the first year you heard it 30 s+
 
 const top = (map, n) => [...map].sort((a, b) => b[1].ms - a[1].ms).slice(0, n)
   .map(([k, v]) => ({ name: k, plays: v.plays, hours: +(v.ms / 3.6e6).toFixed(1), sub: v.sub }));
@@ -24,7 +17,8 @@ const bump = (map, k, ms, sub) => { const v = map.get(k) || { ms: 0, plays: 0, s
 const count = (o, k, n = 1) => { o[k] = (o[k] || 0) + n; };
 
 for (const y of YEARS) {
-  const rows = JSON.parse(fs.readFileSync(path.join(dir, `Streaming_History_Audio_${y}.json`)));
+  const rows = files.filter(f => f.startsWith(`Streaming_History_Audio_${y}`)).sort()
+    .flatMap(f => JSON.parse(fs.readFileSync(path.join(dir, f)))).sort((p, q) => (p.ts < q.ts ? -1 : 1));
   const S = { rows: rows.length, ms: 0, music: 0, podcast: 0, skips: 0, shuffle: 0, offline: 0, incognito: 0,
     hour: Array(24).fill(0), dow: Array(7).fill(0), month: Array(12).fill(0), days: {}, platform: {}, country: {},
     startReason: {}, endReason: {}, shortPlays: 0, fullPlays: 0 };
