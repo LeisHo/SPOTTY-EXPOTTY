@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spotify Data Explorer</title>
+<style>
+:root{--bg:#fff;--fg:#1c1e21;--mut:#6b7280;--line:#e5e7eb;--card:#f6f7f9;--acc:#1db954;--acc2:#0f7a37;--warn:#92400e;--warnbg:#fef3c7;--side:#f0f1f4}
+@media (prefers-color-scheme:dark){:root{--bg:#121316;--fg:#e8e9ec;--mut:#9aa0aa;--line:#2a2d33;--card:#1b1d22;--acc:#1ed760;--acc2:#6ee7a0;--warn:#fbbf24;--warnbg:#3a2e0b;--side:#17181c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,Segoe UI,Roboto,sans-serif}
+#app{display:flex;min-height:100vh}
+#side{width:290px;flex:none;background:var(--side);border-right:1px solid var(--line);padding:14px 10px;overflow:auto;position:sticky;top:0;height:100vh}
+#side h1{font-size:17px;margin:0 6px 4px}
+#side .sub{color:var(--mut);font-size:12px;margin:0 6px 10px}
+#side h3{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:14px 6px 4px}
+.nav{display:flex;gap:8px;align-items:baseline;width:100%;text-align:left;border:0;background:none;color:inherit;padding:6px 8px;border-radius:6px;cursor:pointer;font:inherit}
+.nav:hover{background:var(--line)}
+.nav.on{background:var(--acc);color:#04210f;font-weight:600}
+.nav .n{color:var(--mut);width:18px;flex:none;font-size:12px;text-align:right}
+.nav.on .n{color:#04210f}
+.nav .t{flex:1}
+.nav .b{font-size:10px;border:1px solid currentColor;border-radius:9px;padding:0 5px;opacity:.7}
+.nav.miss{opacity:.4}
+#main{flex:1;min-width:0;padding:22px 28px 60px;max-width:1100px}
+h1.pt{margin:0;font-size:24px}
+.fn{color:var(--mut);font-size:13px;margin:2px 0 10px}
+.blurb{background:var(--card);border-left:4px solid var(--acc);padding:10px 14px;border-radius:4px;margin:10px 0 14px}
+.priv{background:var(--warnbg);color:var(--warn);border-radius:4px;padding:8px 12px;margin:10px 0;font-size:13px}
+.tabs{display:flex;gap:6px;margin:10px 0;border-bottom:1px solid var(--line)}
+.tab{border:0;background:none;color:var(--mut);padding:7px 12px;cursor:pointer;font:inherit;border-bottom:2px solid transparent}
+.tab.on{color:var(--fg);border-bottom-color:var(--acc);font-weight:600}
+section{margin:26px 0}
+h2{font-size:17px;margin:0 0 4px}
+.help{color:var(--mut);margin:0 0 10px;font-size:14px}
+.cards{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}
+.card{background:var(--card);border-radius:8px;padding:10px 14px;min-width:120px}
+.cv{font-size:21px;font-weight:700}
+.cl{font-size:12px;color:var(--mut)}
+.cs{font-size:11px;color:var(--mut)}
+table{border-collapse:collapse;width:100%}
+table.kv th{text-align:left;width:190px;color:var(--mut);font-weight:500;vertical-align:top;padding:5px 8px 5px 0}
+table.kv td{padding:5px 8px;vertical-align:top}
+table.kv td.ex{color:var(--mut);font-size:13px}
+table.kv tr{border-bottom:1px solid var(--line)}
+.tbl table{font-size:13px}
+.tbl th{position:sticky;top:0;background:var(--bg);text-align:left;border-bottom:2px solid var(--line);padding:5px 8px;cursor:pointer;white-space:nowrap}
+.tbl td{border-bottom:1px solid var(--line);padding:4px 8px;vertical-align:top;max-width:420px;overflow-wrap:anywhere}
+.tbl td.num,.tbl th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tbl .wrapx{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:6px}
+.tbar{display:flex;gap:10px;align-items:center;margin:6px 0}
+input[type=search],select{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
+button.btn{font:inherit;padding:5px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);cursor:pointer}
+button.btn:hover{border-color:var(--acc)}
+.mut{color:var(--mut)}
+.null{color:var(--mut);font-style:italic}
+.mask{background:var(--line);border-radius:4px;padding:0 6px;cursor:pointer;font-size:13px}
+.mask.shown{background:var(--warnbg);color:var(--warn)}
+.bars{display:flex;flex-direction:column;gap:3px}
+.brow{display:grid;grid-template-columns:minmax(120px,260px) 1fr 80px;gap:8px;align-items:center;font-size:13px}
+.bl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bt{background:var(--card);border-radius:3px;height:14px}
+.bf{background:var(--acc);height:100%;border-radius:3px;min-width:1px}
+.bv{text-align:right;font-variant-numeric:tabular-nums;color:var(--mut)}
+.chart{margin:6px 0}
+.cols{display:flex;align-items:flex-end;gap:1px;height:130px;border-bottom:1px solid var(--line)}
+.col{flex:1;height:100%;display:flex;align-items:flex-end}
+.col:hover{background:var(--card)}
+.cf{width:100%;background:var(--acc);min-height:1px}
+.cax{display:flex;gap:1px;font-size:10px;color:var(--mut)}
+.cl2{flex:1;white-space:nowrap;overflow:visible;width:0}
+.uri .tag{font-size:10px;text-transform:uppercase;background:var(--line);border-radius:3px;padding:0 4px;color:var(--mut)}
+.uri a{color:var(--acc2);font-size:12px}
+.tl{margin-left:2px;font:12px/1.5 ui-monospace,Consolas,monospace;overflow-wrap:anywhere}
+.tind{margin-left:16px;border-left:1px solid var(--line);padding-left:8px}
+.tk{color:var(--mut)}.ts{color:#0b7a3b}.tn{color:#b45309}
+details>summary{cursor:pointer;font:12px ui-monospace,Consolas,monospace}
+.empty{padding:26px;text-align:center;color:var(--mut);background:var(--card);border-radius:8px}
+.note{font-size:13px;color:var(--mut)}
+.text p{margin:6px 0}
+#drop{border:2px dashed var(--line);border-radius:10px;padding:26px;text-align:center;margin:20px 0}
+#drop.over{border-color:var(--acc)}
+#st{position:fixed;right:14px;bottom:12px;background:var(--card);border:1px solid var(--line);padding:6px 12px;border-radius:6px;font-size:13px;display:none}
+@media(max-width:800px){#app{flex-direction:column}#side{width:auto;height:auto;position:static}#main{padding:16px}.brow{grid-template-columns:100px 1fr 60px}}
+</style>
+</head>
+<body>
+<div id="app">
+  <nav id="side"></nav>
+  <main id="main"></main>
+</div>
+<div id="st"></div>
+<script>
+'use strict';
+// ---------- tiny helpers ----------
+const BASE = '../data/Spotify%20Account%20Data/';
+const store = {};            // file stem -> parsed JSON (or {__text})
+const sizes = {};            // file stem -> bytes of text
+const $ = s => document.querySelector(s);
+function h(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  if (props) for (const [k, v] of Object.entries(props)) {
+    if (k === 'class') e.className = v;
+    else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) e.setAttribute(k, v === true ? '' : v);
+  }
+  for (const c of kids.flat(9)) { if (c == null || c === false) continue; e.append(c.nodeType ? c : document.createTextNode(String(c))); }
+  return e;
+}
+const nf = n => Number(n).toLocaleString('en-US');
+const f1 = n => Number(n).toLocaleString('en-US', { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+const hrs = ms => ms / 3.6e6;
+const mmss = ms => { const s = Math.round(ms / 1000); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const d10 = s => s ? String(s).slice(0, 10) : '';
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const decodeHtml = s => { const t = document.createElement('textarea'); t.innerHTML = s || ''; return t.value; };
+const lc = s => String(s == null ? '' : s).toLowerCase();
+function status(msg, ms) { const e = $('#st'); e.textContent = msg; e.style.display = msg ? 'block' : 'none'; if (ms) setTimeout(() => { e.style.display = 'none'; }, ms); }
+
+function section(title, help, ...nodes) { return h('section', null, h('h2', null, title), help ? h('p', { class: 'help' }, help) : null, ...nodes); }
+function cards(pairs) { return h('div', { class: 'cards' }, pairs.map(([l, v, sub]) => h('div', { class: 'card' }, h('div', { class: 'cv' }, v), h('div', { class: 'cl' }, l), sub ? h('div', { class: 'cs' }, sub) : null))); }
+function empty(msg) { return h('div', { class: 'empty' }, msg); }
+
+function mask(v) {
+  if (v == null || v === '') return h('span', { class: 'null' }, '(empty)');
+  const s = String(v), hid = '•••••• (click to show)';
+  const b = h('span', { class: 'mask', title: 'Private - click to show / hide' }, hid);
+  let on = false;
+  b.addEventListener('click', () => { on = !on; b.textContent = on ? s : hid; b.classList.toggle('shown', on); });
+  return b;
+}
+function valNode(v) {
+  if (v == null) return h('span', { class: 'null' }, 'null');
+  if (typeof v === 'string' && v.startsWith('spotify:')) return uriCell(v);
+  if (typeof v === 'object') return JSON.stringify(v);
+  return String(v);
+}
+// rows: [label, value, explanation, isPrivate]
+function kv(rows) {
+  return h('table', { class: 'kv' }, rows.map(([k, v, ex, p]) =>
+    h('tr', null, h('th', null, k), h('td', null, p ? mask(v) : valNode(v)), h('td', { class: 'ex' }, ex || ''))));
+}
+
+// ---------- tables ----------
+// cols: {label, key | get, fmt, num, sort}
+function dataTable(rows, cols, o = {}) {
+  const ps = o.pageSize || 50;
+  let q = '', sk = null, sd = 1, shown = ps;
+  const val = (r, c) => c.get ? c.get(r) : r[c.key];
+  const cache = new Map();
+  const txt = r => { let t = cache.get(r); if (t === undefined) { t = cols.map(c => lc(val(r, c))).join(' \u0001 '); cache.set(r, t); } return t; };
+  const body = h('tbody'), head = h('thead'), foot = h('div', { class: 'tbar' }), info = h('span', { class: 'mut' });
+  const wrap = h('div', { class: 'tbl' });
+  function draw() {
+    let list = rows;
+    if (q) list = list.filter(r => txt(r).includes(q));
+    if (sk != null) {
+      const c = cols[sk], g = r => c.sort ? c.sort(r) : val(r, c);
+      list = [...list].sort((a, b) => { const x = g(a), y = g(b); return (x > y ? 1 : x < y ? -1 : 0) * sd; });
+    }
+    body.textContent = '';
+    for (const r of list.slice(0, shown)) {
+      body.append(h('tr', null, cols.map(c => {
+        const v = val(r, c);
+        const cell = c.fmt ? c.fmt(v, r) : valNode(v);
+        return h('td', { class: c.num ? 'num' : '' }, cell);
+      })));
+    }
+    info.textContent = `${nf(Math.min(shown, list.length))} of ${nf(list.length)} rows` + (q ? ' (filtered)' : '');
+    foot.textContent = '';
+    foot.append(info);
+    if (list.length > shown) foot.append(h('button', { class: 'btn', onclick: () => { shown += ps; draw(); } }, `Show ${Math.min(ps, list.length - shown)} more`),
+      h('button', { class: 'btn', onclick: () => { shown = list.length; draw(); } }, 'Show all'));
+  }
+  head.append(h('tr', null, cols.map((c, i) => h('th', { class: c.num ? 'num' : '', title: 'Click to sort', onclick: () => { sd = sk === i ? -sd : 1; sk = i; draw(); } }, c.label))));
+  if (o.search !== false) wrap.append(h('div', { class: 'tbar' }, h('input', { type: 'search', placeholder: 'Filter…', oninput: e => { q = lc(e.target.value); shown = ps; draw(); } })));
+  wrap.append(h('div', { class: 'wrapx' }, h('table', null, head, body)), foot);
+  wrap.setRows = r => { rows = r; cache.clear(); shown = ps; draw(); };
+  draw();
+  return wrap;
+}
+
+// ---------- charts ----------
+function bars(items, o = {}) {
+  if (!items.length) return empty('Nothing to show.');
+  const mx = Math.max(...items.map(i => i.value), 1), f = o.fmt || nf;
+  return h('div', { class: 'bars' }, items.map(i => h('div', { class: 'brow' },
+    h('div', { class: 'bl', title: i.label }, i.label),
+    h('div', { class: 'bt' }, h('div', { class: 'bf', style: `width:${i.value / mx * 100}%` })),
+    h('div', { class: 'bv' }, f(i.value)))));
+}
+function colChart(pairs, o = {}) {
+  if (!pairs.length) return empty('Nothing to show.');
+  const mx = Math.max(...pairs.map(p => p[1]), 1), step = Math.ceil(pairs.length / (o.labels || 10)), f = o.fmt || nf;
+  return h('div', { class: 'chart' },
+    h('div', { class: 'cols' }, pairs.map(([l, v]) => h('div', { class: 'col', title: `${l}: ${f(v)}` }, h('div', { class: 'cf', style: `height:${v / mx * 100}%` })))),
+    h('div', { class: 'cax' }, pairs.map(([l], i) => h('div', { class: 'cl2' }, i % step === 0 ? l : ''))));
+}
+function countBy(arr, fn) { const m = new Map(); for (const x of arr) { const k = fn(x); if (k == null) continue; m.set(k, (m.get(k) || 0) + 1); } return m; }
+function sumBy(arr, fn, w) { const m = new Map(); for (const x of arr) { const k = fn(x); if (k == null) continue; m.set(k, (m.get(k) || 0) + w(x)); } return m; }
+function topN(m, n, label) { return [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, n).map(([k, v]) => ({ label: label ? label(k) : k, value: v })); }
+function monthSeries(m) { // Map 'YYYY-MM' -> n, gaps filled
+  const ks = [...m.keys()].sort(); if (!ks.length) return [];
+  const out = []; let [y, mo] = ks[0].split('-').map(Number); const [ey, em] = ks[ks.length - 1].split('-').map(Number);
+  while (y < ey || (y === ey && mo <= em)) { const k = y + '-' + String(mo).padStart(2, '0'); out.push([k, m.get(k) || 0]); if (++mo > 12) { mo = 1; y++; } }
+  return out;
+}
+function daySeries(m) {
+  const ks = [...m.keys()].sort(); if (!ks.length) return [];
+  const out = [], d = new Date(ks[0] + 'T00:00:00Z'), e = new Date(ks[ks.length - 1] + 'T00:00:00Z');
+  for (; d <= e; d.setUTCDate(d.getUTCDate() + 1)) { const k = d.toISOString().slice(0, 10); out.push([k, m.get(k) || 0]); }
+  return out;
+}
+
+// ---------- Spotify URI names ----------
+const NAMES = new Map();
+let nameCache = {};
+try { nameCache = JSON.parse(localStorage.sdeNames || '{}'); } catch (e) { nameCache = {}; }
+const saveNames = () => { try { localStorage.sdeNames = JSON.stringify(nameCache); } catch (e) { /* storage unavailable */ } };
+const nameOf = u => NAMES.get(u) || nameCache[u] || null;
+const kindOf = u => u.split(':')[1];
+function paintUri(s) {
+  const u = s.dataset.uri, n = nameOf(u);
+  s.textContent = '';
+  s.append(h('span', { class: 'tag' }, kindOf(u)), ' ');
+  if (n) s.append(n);
+  else s.append(u.split(':').pop().slice(0, 8) + '… ', h('a', { href: '#', onclick: e => { e.preventDefault(); queueResolve([s]); } }, 'look up'));
+}
+function uriCell(u) { const s = h('span', { class: 'uri', 'data-uri': u, title: u }); paintUri(s); return s; }
+let rq = [], pumping = false;
+function queueResolve(spans) { for (const s of spans) if (!nameOf(s.dataset.uri) && !rq.includes(s)) rq.push(s); pump(); }
+async function pump() {
+  if (pumping) return; pumping = true;
+  let done = 0;
+  while (rq.length) {
+    const s = rq.shift(), u = s.dataset.uri;
+    if (nameOf(u)) { paintUri(s); continue; }
+    const parts = u.split(':');
+    if (parts.length !== 3 || !/^(artist|track|album|show|episode|playlist)$/.test(parts[1])) { s.textContent = u; continue; }
+    status(`Looking up names… ${rq.length + 1} left`);
+    let ok = false;
+    try {
+      const r = await fetch('https://open.spotify.com/oembed?url=' + encodeURIComponent(`https://open.spotify.com/${parts[1]}/${parts[2]}`));
+      if (r.status === 429) { rq.unshift(s); status('Spotify asked us to slow down - pausing 60 s'); await sleep(60000); continue; }
+      if (r.ok) { nameCache[u] = (await r.json()).title; saveNames(); ok = true; }
+      else if (r.status === 404 || r.status === 400) { nameCache[u] = '(not found)'; saveNames(); ok = true; }
+    } catch (e) { /* network/CORS failure: not cached */ }
+    document.querySelectorAll('.uri').forEach(x => { if (x.dataset.uri === u) { ok ? paintUri(x) : (x.textContent = u.split(':').pop().slice(0, 8) + '… (lookup failed)'); } });
+    done++; await sleep(450);
+  }
+  pumping = false; status(done ? `Looked up ${done} names` : '', 2500);
+}
+function lookupAllButton() {
+  return h('button', { class: 'btn', onclick: () => {
+    const all = [...document.querySelectorAll('#view .uri')].filter(s => !nameOf(s.dataset.uri)).slice(0, 150);
+    if (!all.length) return status('Nothing left to look up on this page', 2500);
+    queueResolve(all);
+  } }, 'Look up names for URIs on this page');
+}
+function buildLocalNames() {
+  const pl = (store.Playlist1 || {}).playlists || [];
+  for (const p of pl) for (const i of p.items || []) if (i.track) NAMES.set(i.track.trackUri, `${i.track.trackName} - ${i.track.artistName}`);
+  const lib = store.YourLibrary || {};
+  for (const t of lib.tracks || []) NAMES.set(t.uri, `${t.track} - ${t.artist}`);
+  for (const a of lib.albums || []) NAMES.set(a.uri, `${a.album} - ${a.artist}`);
+  for (const a of lib.artists || []) NAMES.set(a.uri, a.name);
+  for (const a of lib.shows || []) NAMES.set(a.uri, a.name);
+  for (const a of lib.episodes || []) NAMES.set(a.uri, `${a.name} (${a.show})`);
+}
+
+// ---------- raw JSON tree ----------
+function tree(v, key, depth = 0) {
+  const k = key != null ? h('span', { class: 'tk' }, key + ': ') : null;
+  if (v === null || typeof v !== 'object') {
+    const s = typeof v === 'string' ? JSON.stringify(v.length > 240 ? v.slice(0, 240) + '…' : v) : String(v);
+    return h('div', { class: 'tl' }, k, h('span', { class: typeof v === 'string' ? 'ts' : 'tn' }, s));
+  }
+  const isA = Array.isArray(v), ks = Object.keys(v);
+  const d = h('details', null, h('summary', null, k, isA ? `[${nf(ks.length)}]` : `{${nf(ks.length)}}`));
+  const box = h('div', { class: 'tind' });
+  let n = 0, more = null;
+  const fill = () => {
+    const end = Math.min(ks.length, n + 100);
+    for (; n < end; n++) box.insertBefore(tree(v[ks[n]], isA ? n : ks[n], depth + 1), more);
+    if (more) more.remove();
+    if (n < ks.length) { more = h('button', { class: 'btn', onclick: fill }, `Show 100 more (${nf(ks.length - n)} left)`); box.append(more); } else more = null;
+  };
+  d.append(box);
+  let filled = false;
+  const first = () => { if (!filled) { filled = true; fill(); } };
+  d.addEventListener('toggle', () => { if (d.open) first(); });
+  if (depth < 1) { d.open = true; first(); }
+  return d;
+}
+
+// ---------- generic fallback renderer ----------
+function autoSections(data, title) {
+  const out = [];
+  if (Array.isArray(data)) {
+    if (!data.length) return [section(title || 'Contents', null, empty('Empty list.'))];
+    if (typeof data[0] === 'object' && data[0] !== null) {
+      const keys = [...new Set(data.flatMap(x => Object.keys(x)))];
+      const flat = keys.filter(k => data.every(x => x[k] == null || typeof x[k] !== 'object'));
+      return [section(title || 'Contents', `${nf(data.length)} entries.`, dataTable(data, flat.map(k => ({ label: k, key: k, num: typeof data[0][k] === 'number' }))))];
+    }
+    return [section(title || 'Contents', `${nf(data.length)} values.`, dataTable(data.map(v => ({ v })), [{ label: 'value', key: 'v' }]))];
+  }
+  if (data && typeof data === 'object') {
+    const scalars = Object.entries(data).filter(([, v]) => v === null || typeof v !== 'object');
+    if (scalars.length) out.push(section(title || 'Fields', null, kv(scalars.map(([k, v]) => [k, v]))));
+    for (const [k, v] of Object.entries(data)) if (v && typeof v === 'object') out.push(...autoSections(v, (title ? title + ' / ' : '') + k));
+    return out;
+  }
+  return [section(title || 'Value', null, String(data))];
+}
+
+// ---------- parsers for odd formats ----------
+function parseScalaList(t) { // List(HashMap(a -> b, c -> d))
+  const rows = [];
+  for (const m of t.matchAll(/HashMap\(([^)]*)\)/g)) {
+    const o = {}; for (const part of m[1].split(/, (?=\w+ ->)/)) { const i = part.indexOf(' -> '); if (i > 0) o[part.slice(0, i)] = part.slice(i + 4); }
+    rows.push(o);
+  }
+  return rows;
+}
+function localTrack(uri) { // spotify:local:Artist:Album:Title:secs  ('+' = space)
+  const p = uri.split(':').slice(2).map(x => { try { return decodeURIComponent(x.replace(/\+/g, ' ')); } catch (e) { return x.replace(/\+/g, ' '); } });
+  return { artist: p[0] || '', album: p[1] || '', title: p[2] || '', secs: Number(p[3]) || 0 };
+}
+function playlistSections(data, o = {}) {
+  const pls = data.playlists || [];
+  const items = pls.flatMap(p => (p.items || []).map(i => ({ pl: p.name, i })));
+  const local = items.filter(x => x.i.localTrack).length;
+  const dates = items.map(x => x.i.addedDate).filter(Boolean).sort();
+  const secs = [];
+  secs.push(section('At a glance', null, cards([
+    ['Playlists', nf(pls.length)], ['Track entries', nf(items.length)], ['Local files', nf(local), 'files on your computer, not from Spotify\'s catalogue'],
+    ...(dates.length ? [['First add date', dates[0]], ['Last add date', dates[dates.length - 1]]] : [])
+  ])));
+  const rows = pls.map(p => {
+    const ds = (p.items || []).map(i => i.addedDate).filter(Boolean).sort();
+    return { name: p.name, n: (p.items || []).length, mod: p.lastModifiedDate, f: p.numberOfFollowers, first: ds[0] || '', last: ds[ds.length - 1] || '', desc: decodeHtml(p.description || ''), p };
+  });
+  const sel = h('select'), trk = h('div');
+  const showPl = i => {
+    const p = rows[i].p;
+    trk.textContent = '';
+    trk.append(dataTable((p.items || []).map((it, k) => {
+      if (it.track) return { n: k + 1, title: it.track.trackName, artist: it.track.artistName, album: it.track.albumName, added: it.addedDate || '', uri: it.track.trackUri };
+      const l = localTrack((it.localTrack || {}).uri || '');
+      return { n: k + 1, title: l.title, artist: l.artist, album: l.album, added: it.addedDate || '', uri: '(local file, ' + mmss(l.secs * 1000) + ')' };
+    }), [{ label: '#', key: 'n', num: true }, { label: 'Title', key: 'title' }, { label: 'Artist', key: 'artist' }, { label: 'Album', key: 'album' }, { label: 'Added', key: 'added' }, { label: 'URI', key: 'uri', fmt: v => v.startsWith('spotify:') ? h('span', { class: 'mut', title: v }, v.slice(-8) + '…') : v }], { pageSize: 100 }));
+  };
+  rows.forEach((r, i) => sel.append(h('option', { value: i }, `${r.name} (${r.n})`)));
+  sel.addEventListener('change', () => showPl(Number(sel.value)));
+  secs.push(section('Playlists', 'One row per playlist. "Added" dates are the first and last time a song was put into it - for your diary playlists that is roughly the period the playlist was active.',
+    dataTable(rows, [{ label: 'Playlist', key: 'name' }, { label: 'Tracks', key: 'n', num: true }, { label: 'First added', key: 'first' }, { label: 'Last added', key: 'last' }, { label: 'Last modified', key: 'mod' }, { label: 'Followers', key: 'f', num: true }, { label: 'Description', key: 'desc' }], { pageSize: 100 })));
+  if (rows.length) { secs.push(section('Browse a playlist\'s tracks', null, h('div', { class: 'tbar' }, sel), trk)); showPl(0); }
+  if (dates.length) secs.push(section('Songs added per month (all playlists)', 'Each bar is one month. Hover for the exact number.', colChart(monthSeries(countBy(dates, d => d.slice(0, 7))), { labels: 12 })));
+  const tracks = items.map(x => x.i.track ? { a: x.i.track.artistName, t: x.i.track.trackName } : null).filter(Boolean);
+  if (tracks.length) secs.push(section('Most-added artists', 'How many playlist entries each artist has (the same song in several playlists counts several times).', bars(topN(countBy(tracks, x => x.a), 20))));
+  else if (items.length) secs.push(section('Most-added artists', null, bars(topN(countBy(items.map(x => localTrack(x.i.localTrack.uri)), x => x.artist), 20))));
+  return secs;
+}
+
+// ---------- the file specs ----------
+const SENS = /email|identifier|facebook|birth|street|postal|zip|city|state|username|gender|mobile/i;
+const SPECS = [
+  { file: 'AdsIdentitySecondPartyIdentifiers', n: 1, title: 'Ad identifiers', priv: true,
+    blurb: 'Anonymous cookie IDs that Spotify generated so advertisers can recognise your browser or device without knowing who you are. No music information.',
+    render: d => {
+      const ids = d.ids || [];
+      return [section('At a glance', null, cards([['Identifiers', nf(ids.length)], ['Types', [...new Set(ids.map(i => i.identifierType))].join(', ') || '-']])),
+        section('The identifiers', '"Generated" is when Spotify created each one (stored as microseconds since 1970 in the file; converted here). IDs are hidden - click to show.',
+          dataTable(ids, [{ label: 'Type', key: 'identifierType' }, { label: 'Identifier', key: 'identifier', fmt: v => mask(v) }, { label: 'Generated', get: r => new Date(Number(r.generatedAt) / 1000).toISOString().slice(0, 16).replace('T', ' ') }], { search: false }))];
+    } },
+  { file: 'AgentGateway', n: 2, title: 'AI agent conversations',
+    blurb: 'Would hold any conversations with Spotify\'s AI assistant features.',
+    render: d => [section('Contents', null, (d.conversations || []).length ? autoSections(d.conversations) : empty('Empty - the list of conversations is []. You have no AI-agent conversation history.'))] },
+  { file: 'Identifiers', n: 3, title: 'Account identifiers', priv: true,
+    blurb: 'The identifiers tied to your account for login/contact - here just your email address.',
+    render: d => [section('Fields', null, kv([['Type', d.identifierType, 'What kind of identifier this is'], ['Value', d.identifierValue, 'The identifier itself', true]]))] },
+  { file: 'Identity', n: 4, title: 'Public profile',
+    blurb: 'What other people see on your Spotify profile.',
+    render: d => [section('Profile', null, kv([['Display name', d.displayName, 'The name shown on your profile'], ['First name', d.firstName, 'Empty: Spotify never stored one'], ['Last name', d.lastName, 'Empty: Spotify never stored one'],
+        ['Taste maker', d.tasteMaker, 'Whether Spotify flagged you as a playlist curator/influencer'], ['Verified', d.verified, 'Blue-tick verified artist/profile'], ['Image URL', d.imageUrl, 'Your small profile picture'], ['Large image URL', d.largeImageUrl, 'Your large profile picture']])),
+      d.imageUrl ? section('Profile picture', null, h('img', { src: d.imageUrl, width: 160, alt: 'profile', style: 'border-radius:8px' })) : null] },
+  { file: 'iDJAudio', n: 5, title: 'AI DJ audio',
+    blurb: 'Would list audio clips from Spotify\'s AI DJ feature.',
+    render: d => [section('Contents', null, (d.filesMetadata || []).length ? autoSections(d.filesMetadata) : empty('Empty - no DJ audio files (filesMetadata is []).'))] },
+  { file: 'Inferences', n: 6, title: 'Ad-targeting segments',
+    blurb: 'Labels Spotify attaches to your account so advertisers can target ads. They describe how you are classified, not what you listened to. Many are lookalike or purchased lists that may say little about you personally.',
+    render: renderInferences },
+  { file: 'Marquee', n: 7, title: 'Artist listener segments',
+    blurb: 'Spotify\'s "Marquee" tool lets artists promote new releases to listeners. This file lists every artist that has you in one of its listener groups, and which group.',
+    render: d => {
+      const segs = countBy(d, x => x.segment);
+      const tbl = dataTable(d, [{ label: 'Artist', key: 'artistName' }, { label: 'Segment', key: 'segment' }], { pageSize: 100 });
+      const sel = h('select', { onchange: e => tbl.setRows(e.target.value ? d.filter(x => x.segment === e.target.value) : d) }, h('option', { value: '' }, 'All segments'), [...segs.keys()].map(s => h('option', { value: s }, s)));
+      return [section('At a glance', null, cards([['Artists', nf(d.length)], ...[...segs.entries()].sort((a, b) => b[1] - a[1]).map(([k, v]) => [k, nf(v)])])),
+        section('What the segments mean', 'Super / Moderate / Light listeners are ranked by how much you play that artist. "Previously active" means you used to listen but no longer do.', bars(topN(segs, 10))),
+        section('Every artist', null, h('div', { class: 'tbar' }, sel), tbl)];
+    } },
+  { file: 'Playlist1', n: 8, title: 'Playlists (main set)',
+    blurb: 'Your playlists with every track and the date you added it. This is the richest file for your diary playlists: it holds the exact add dates, and includes newer playlists than the Exportify CSVs.',
+    render: d => playlistSections(d) },
+  { file: 'Playlist2', n: 9, title: 'Playlists (local files)',
+    blurb: 'Four older playlists made entirely of local files (music files from your own computer). Spotify only keeps the artist, album, title and length written into each file - no add dates and no catalogue IDs.',
+    render: d => playlistSections(d) },
+  { file: 'SearchQueries', n: 10, title: 'Search history', render: renderSearch,
+    blurb: 'Everything you typed into Spotify\'s search box. It logs partial typing as separate entries ("a", "am", "amy wine"…), so this page also collapses them into the searches you actually finished.' },
+  { file: 'StreamingHistory_music_0', n: 11, title: 'Listening history (last year)', render: renderStreaming,
+    blurb: 'Every song you played in roughly the last 12 months: when it finished, artist, song, and how many milliseconds you listened. No song IDs. Times are in UTC (not your local time). Plays under 30 s are usually skips.' },
+  { file: 'TasteProfile', n: 12, title: 'Spotify\'s taste summary',
+    blurb: 'Written descriptions of your taste generated by Spotify. The podcast/audiobook fields contain only the placeholder prompt because you have no data there.',
+    render: d => {
+      const t = d.tasteProfile || {}, para = s => h('div', { class: 'text' }, String(s || '').split(/\n+/).map(x => h('p', { html: x.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>') })));
+      return [section('Musical identity', 'Spotify\'s own summary of your taste.', para(t.musicalIdentity)), section('Content rhythms', 'When and how you listen.', para(t.contentRhythms)),
+        section('Podcast and audiobook taste', 'Placeholder text - no taste was generated.', para(t.podcastTaste), para(t.audiobookTaste)),
+        section('Artists it was built from', 'Artist URIs (Spotify IDs). Use "look up" to see the names.', t.artistUris && t.artistUris.length ? h('div', null, lookupAllButton(), h('ul', null, t.artistUris.map(u => h('li', null, uriCell(u))))) : empty('None')),
+        section('Notes', null, (d.notes || []).length ? autoSections(d.notes) : empty('No notes.'))];
+    } },
+  { file: 'UserAddress', n: 13, title: 'Address on file', priv: true,
+    blurb: 'The postal address attached to your account (probably from billing). The file is in an odd Scala format rather than normal JSON; it is read here anyway.',
+    render: d => {
+      const rows = d.__text ? parseScalaList(d.__text) : [];
+      if (!rows.length) return [section('Contents', null, empty('Could not read an address.'))];
+      return rows.map((r, i) => section('Address ' + (i + 1), null, kv(Object.entries(r).map(([k, v]) => [k, v, ({ city: 'City', state: 'State', street: 'Street', postal_code_short: 'ZIP code', postal_code_extra: 'ZIP+4 extension' })[k] || '', true]))));
+    } },
+  { file: 'UserAttributes', n: 14, title: 'Account details', priv: true,
+    blurb: 'Basic facts Spotify holds about your account. Most are hidden by default - click a value to show it.',
+    render: d => {
+      const ex = { username: 'Spotify\'s internal user ID', email: 'Email on the account', country: 'Account country', createdFromFacebook: 'You signed up using Facebook', facebookUid: 'Your Facebook user ID (linked login)', birthdate: 'Date of birth you gave', gender: 'Gender you gave', postalCode: 'ZIP/postal code (not stored here)', mobileNumber: 'Phone number (none)', mobileOperator: 'Mobile carrier (none)', mobileBrand: 'Phone brand (none)', creationTime: 'When the account was created', assuredEstimatedAge: 'Spotify\'s estimate of your age (none)', assuredAgeMethod: 'How age was verified (none)', assuredAgeTimestamp: 'When age was verified (none)' };
+      const open = new Set(['country', 'creationTime', 'createdFromFacebook']);
+      return [section('Fields', null, kv(Object.entries(d).map(([k, v]) => [k, v, ex[k] || '', SENS.test(k) && !open.has(k) && v != null])))];
+    } },
+  { file: 'YourSoundCapsule', n: 15, title: 'Sound Capsule (weekly recaps)', render: renderCapsule,
+    blurb: 'Spotify\'s weekly "Sound Capsule" snapshots: how much you listened, your top songs and artists that week, plus notable moments ("highlights"). Note: the weekly stream total is 0 in your file, but each top song/artist does carry its own play count and seconds.' },
+  // ---- other files in the export ----
+  { file: 'Wrapped2025', other: true, title: 'Wrapped 2025',
+    blurb: 'The raw numbers behind your 2025 Wrapped. Songs, artists and albums appear as Spotify IDs - use "look up" to resolve names.',
+    render: d => [h('div', { class: 'tbar' }, lookupAllButton()), ...autoSections(d)] },
+  { file: 'YourLibrary', other: true, title: 'Saved library',
+    blurb: 'Everything you have saved/liked: songs, albums, artists, shows and episodes.',
+    render: d => Object.entries(d).filter(([, v]) => Array.isArray(v) && v.length).flatMap(([k, v]) => autoSections(v, k)) },
+  { file: 'Follow', other: true, title: 'Following', priv: true,
+    blurb: 'Spotify usernames you follow and who follows you. Many are numeric IDs.',
+    render: d => [section('At a glance', null, cards([['You follow', nf((d.userIsFollowing || []).length)], ['Follow you', nf((d.userIsFollowedBy || []).length)], ['Blocked', nf((d.userIsBlocking || []).length)]])),
+      section('You follow', null, dataTable((d.userIsFollowing || []).map(u => ({ u })), [{ label: 'user', key: 'u' }])), section('Followed by', null, dataTable((d.userIsFollowedBy || []).map(u => ({ u })), [{ label: 'user', key: 'u' }]))] },
+  { file: 'MessageData', other: true, title: 'Messages', priv: true,
+    blurb: 'Spotify chat threads (songs/playlists you shared with friends).',
+    render: d => Object.entries(d).map(([id, c]) => section('Chat with ' + (c.members || []).join(', '), `${nf((c.messages || []).length)} messages`, dataTable((c.messages || []).map(m => ({ time: m.time, from: m.from, message: m.message })), [{ label: 'Time', key: 'time' }, { label: 'From', key: 'from' }, { label: 'Message', key: 'message' }], { search: false }))) },
+  { file: 'Payments', other: true, title: 'Payment methods', priv: true,
+    blurb: 'Payment methods on your account. No card numbers are included.',
+    render: d => [section('Methods', null, dataTable(d, [{ label: 'Method', key: 'payment_method' }, { label: 'Created', key: 'creation_date' }, { label: 'Country', key: 'country' }, { label: 'Postal code', key: 'postal_code', fmt: mask }], { search: false }))] },
+  { file: 'StreamingHistory_podcast_0', other: true, title: 'Podcast listening',
+    blurb: 'Podcast plays from the last year (just a few tiny ones here).',
+    render: d => [section('Plays', null, dataTable(d, [{ label: 'Ended', key: 'endTime' }, { label: 'Podcast', key: 'podcastName' }, { label: 'Episode', key: 'episodeName' }, { label: 'Listened', key: 'msPlayed', num: true, fmt: v => mmss(v) }]))] },
+  { file: 'UserFestivalsDataForSAR', other: true, title: 'Festival matches',
+    blurb: 'Spotify\'s festival feature: how well a festival lineup matches your taste.',
+    render: d => autoSections(d) },
+  { file: 'UserPrompts', other: true, title: 'Saved prompts',
+    blurb: 'A text prompt you entered into a Spotify AI feature. The date in the file (1970) looks like an export bug, so it cannot be trusted.',
+    render: d => autoSections(d) }
+];
+
+// ---------- special renderers ----------
+function renderInferences(d) {
+  const L = d.inferences || [];
+  const clean = s => s.replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
+  function classify(l) {
+    let m;
+    if (/^1P_Custom_ArtistAffinity_/.test(l)) return ['Artist affinity (hashed)', l.split('_').pop()];
+    if ((m = l.match(/^1P_Custom_EventAffinity_(.*)/))) return ['Event affinity', clean(m[1])];
+    if (/^1P_Custom_\d{4}_Wrapped/.test(l)) return ['Wrapped engagers', clean(l.slice(10))];
+    if (/^1P_/.test(l)) return ['Other Spotify behaviour (1P)', clean(l.slice(3).replace(/^Custom_/, ''))];
+    if (/^2P_/.test(l)) return ['Advertiser lookalike lists (2P)', clean(l.slice(3))];
+    if (/^3P_/.test(l)) return ['Third-party data (3P)', clean(l.slice(3).replace(/^\s*Custom_/, ''))];
+    if (/^Interest \|/.test(l)) return ['Interest topics', l.replace(/\(1P\)$/, '').split('|').map(x => x.trim()).filter((x, i, a) => a.indexOf(x) === i).join(' > ')];
+    if (/^Custom Audience_/.test(l)) return ['Advertiser custom audiences', clean(l.slice(16))];
+    if (/test\]/i.test(l)) return ['Test segments', clean(l)];
+    return ['Other', clean(l)];
+  }
+  const rows = L.map(l => { const [g, lab] = classify(l); return { g, lab, raw: l }; });
+  const groups = countBy(rows, r => r.g);
+  const help = {
+    'Artist affinity (hashed)': 'You are in an audience of fans of a particular artist. The artist is hidden behind a 6-character code (see the section below).',
+    'Event affinity': 'Interest in festivals and events (Coachella, Lollapalooza, awards shows…).',
+    'Wrapped engagers': 'You opened your Wrapped recap in that year.',
+    'Other Spotify behaviour (1P)': 'How Spotify classifies your device, language and subgenre tastes.',
+    'Advertiser lookalike lists (2P)': 'Audiences built for specific advertisers (Pepsico, Pfizer, Starbucks…) - lookalikes of that company\'s customers, which does not mean you are a customer.',
+    'Third-party data (3P)': 'Segments bought from data brokers - shopping and demographic guesses.',
+    'Interest topics': 'Broad topics Spotify files you under, including music genres.',
+    'Advertiser custom audiences': 'Customer lists uploaded by individual advertisers.',
+    'Test segments': 'Internal test labels - safe to ignore.'
+  };
+  const sel = h('select'), tbl = dataTable(rows, [{ label: 'Group', key: 'g' }, { label: 'Segment', key: 'lab' }], { pageSize: 100 });
+  sel.append(h('option', { value: '' }, 'All groups'), ...[...groups.keys()].map(g => h('option', { value: g }, `${g} (${groups.get(g)})`)));
+  sel.addEventListener('change', () => tbl.setRows(sel.value ? rows.filter(r => r.g === sel.value) : rows));
+  const aff = rows.filter(r => r.g === 'Artist affinity (hashed)').map(r => ({ code: r.lab, raw: r.raw }));
+  const interest = rows.filter(r => r.g === 'Interest topics').map(r => r.lab.split(' > '));
+  return [
+    section('At a glance', null, cards([['Total segments', nf(L.length)], ...[...groups.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([k, v]) => [k, nf(v)])])),
+    section('What kinds of segments there are', 'Hover or read the table below for a plain-language meaning of each group.', bars(topN(groups, 12)),
+      h('div', { class: 'note' }, h('ul', null, [...groups.keys()].map(g => h('li', null, h('b', null, g + ': '), help[g] || '')))),
+    ),
+    section('Every segment', 'Pick a group to narrow the list, or search.', h('div', { class: 'tbar' }, sel), tbl),
+    interest.length ? section('Interest topics, by theme', 'The broad interest buckets Spotify has put you in (the first word after "Interest").', bars(topN(countBy(interest, a => a[0]), 20))) : null,
+    section('Can the artist-affinity codes be decoded?', null,
+      h('div', { class: 'blurb' }, 'Short answer: no, not from this export. Each code is 6 hex characters (only 16.7 million possible values), so it looks like a truncated hash or internal ID of an artist. I tested the MD5, SHA-1, SHA-256 and SHA-512 hashes (start and end) of all 3,159 artist IDs, URIs and names found anywhere in your export against all 33 codes. The only hit was a coincidence that chance alone predicts, so there is no real match. Spotify would need to tell you what each code stands for.'),
+      h('p', { class: 'help' }, 'The 33 codes, for reference. All of them are artists whose fans Spotify grouped you with; the number of them is the only thing known about them.'),
+      dataTable(aff, [{ label: 'Code', key: 'code' }, { label: 'Full label', key: 'raw' }], { search: false, pageSize: 40 }))
+  ];
+}
+
+function renderSearch(d) {
+  const t = x => String(x.searchTime).slice(0, 19);
+  const sorted = [...d].sort((a, b) => (t(a) > t(b) ? 1 : -1));
+  const fin = [];
+  sorted.forEach((x, i) => {
+    const nx = sorted[i + 1], q = x.searchQuery || '';
+    const typing = nx && (Date.parse(t(nx) + 'Z') - Date.parse(t(x) + 'Z')) < 12000 && lc(nx.searchQuery).startsWith(lc(q).trim().slice(0, Math.max(1, Math.min(q.trim().length, 3)))) && !x.searchInteractionURIs.length;
+    if (!typing && q.trim()) fin.push(x);
+  });
+  const withClick = d.filter(x => x.searchInteractionURIs.length);
+  const plat = countBy(d, x => x.platform || '(blank)');
+  const rows = fin.map(x => ({ time: t(x).replace('T', ' '), q: x.searchQuery, plat: x.platform || '', click: x.searchInteractionURIs[0] || '' }));
+  return [
+    section('At a glance', null, cards([['Raw entries', nf(d.length), 'includes partial typing'], ['Finished searches (estimate)', nf(fin.length)], ['Searches with a click', nf(withClick.length), 'you opened a result'], ['First', d10(sorted[0] && sorted[0].searchTime)], ['Last', d10(sorted.length && sorted[sorted.length - 1].searchTime)]])),
+    section('Searches per day', 'Raw entries per day, so bursts of typing show as tall bars.', colChart(daySeries(countBy(d, x => d10(x.searchTime))), { labels: 8 })),
+    section('Which device', 'The app/OS the search was made from.', bars(topN(plat, 10))),
+    section('Finished searches', 'My guess at what you actually submitted: typed text that was not just an intermediate step of the next entry (a heuristic, so a few may be wrong). When you opened a result, it shows as a Spotify ID - use "look up".',
+      h('div', { class: 'tbar' }, lookupAllButton()),
+      dataTable(rows, [{ label: 'Time (UTC)', key: 'time' }, { label: 'Search', key: 'q' }, { label: 'Device', key: 'plat' }, { label: 'Result you clicked', key: 'click', fmt: v => v ? uriCell(v) : '' }], { pageSize: 100 })),
+    section('All raw entries', 'Exactly as stored, including each keystroke.', dataTable(sorted.map(x => ({ time: t(x).replace('T', ' '), q: x.searchQuery, plat: x.platform || '' })), [{ label: 'Time (UTC)', key: 'time' }, { label: 'Typed text', key: 'q' }, { label: 'Device', key: 'plat' }], { pageSize: 100 }))
+  ];
+}
+
+function renderStreaming(d) {
+  const tot = d.reduce((s, x) => s + x.msPlayed, 0);
+  const full = d.filter(x => x.msPlayed >= 30000);
+  const arts = sumBy(d, x => x.artistName, x => x.msPlayed), artPlays = countBy(d, x => x.artistName);
+  const tracks = countBy(d, x => x.trackName + '\u0001' + x.artistName);
+  const lastEnd = d.map(x => x.endTime).sort();
+  const hour = new Array(24).fill(0), dow = new Array(7).fill(0);
+  for (const x of d) { const t = new Date(x.endTime.replace(' ', 'T') + ':00Z'); hour[t.getUTCHours()] += x.msPlayed; dow[t.getUTCDay()] += x.msPlayed; }
+  const dn = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const artRows = [...arts.entries()].map(([a, ms]) => ({ a, h: hrs(ms), n: artPlays.get(a) }));
+  return [
+    section('At a glance', null, cards([['Plays', nf(d.length)], ['Total listening', f1(hrs(tot)) + ' h', f1(hrs(tot) / 24) + ' days'], ['Unique artists', nf(arts.size)], ['Unique songs', nf(tracks.size)], ['Skipped (<30 s)', nf(d.length - full.length), Math.round((d.length - full.length) / d.length * 100) + '% of plays'], ['From', lastEnd[0]], ['To', lastEnd[lastEnd.length - 1]]])),
+    section('Top artists by hours listened', null, bars(topN(arts, 20), { fmt: v => f1(hrs(v)) + ' h' })),
+    section('Top songs by number of plays', null, bars(topN(tracks, 20, k => k.replace('\u0001', ' - ')), { fmt: v => v + ' plays' })),
+    section('Hours listened per month', null, colChart(monthSeries(sumBy(d, x => x.endTime.slice(0, 7), x => x.msPlayed)).map(([k, v]) => [k, v / 3.6e6]), { fmt: v => f1(v) + ' h', labels: 13 })),
+    section('Time of day (UTC)', 'Hours of the day when plays ended, in UTC. Subtract 4-5 h for New York time.', colChart(hour.map((v, i) => [String(i).padStart(2, '0') + 'h', v / 3.6e6]), { fmt: v => f1(v) + ' h', labels: 12 })),
+    section('Day of week (UTC)', null, colChart(dow.map((v, i) => [dn[i], v / 3.6e6]), { fmt: v => f1(v) + ' h', labels: 7 })),
+    section('All artists', null, dataTable(artRows, [{ label: 'Artist', key: 'a' }, { label: 'Hours', key: 'h', num: true, fmt: v => f1(v) }, { label: 'Plays', key: 'n', num: true }], { pageSize: 50 })),
+    section('Every play', null, dataTable(d, [{ label: 'Ended (UTC)', key: 'endTime' }, { label: 'Artist', key: 'artistName' }, { label: 'Song', key: 'trackName' }, { label: 'Listened', key: 'msPlayed', num: true, fmt: v => mmss(v) }], { pageSize: 100 }))
+  ];
+}
+
+function renderCapsule(d) {
+  const st = d.stats || [], hl = d.highlights || [];
+  const names = a => (a || []).map(x => x.name || x.trackName || x.artistName || x.title || JSON.stringify(x));
+  const secs = [section('At a glance', null, cards([['Weeks', nf(st.length)], ['Highlights', nf(hl.length)], ['Total listened', f1(st.reduce((s, x) => s + x.secondsPlayed, 0) / 3600) + ' h']])),
+    section('Listening time per week', 'Seconds played that week, shown in hours.', bars(st.map(x => ({ label: x.date, value: x.secondsPlayed / 3600 })), { fmt: v => f1(v) + ' h' }))];
+  for (const s of st) {
+    const rk = (a, k) => (a || []).map((x, i) => ({ i: i + 1, name: x.name || JSON.stringify(x).slice(0, 80), plays: x.streamCount, secs: x.secondsPlayed }));
+    const cols = k => [{ label: '#', key: 'i', num: true }, { label: k, key: 'name' }, { label: 'Plays', key: 'plays', num: true }, { label: 'Listened', key: 'secs', num: true, fmt: v => mmss(v * 1000) }];
+    secs.push(section('Week of ' + s.date, `${f1(s.secondsPlayed / 3600)} h listened.`, h('div', null, h('b', null, 'Top songs'), (s.topTracks || []).length ? dataTable(rk(s.topTracks), cols('Song'), { search: false }) : empty('None')),
+      h('div', null, h('b', null, 'Top artists'), (s.topArtists || []).length ? dataTable(rk(s.topArtists), cols('Artist'), { search: false }) : empty('None')),
+      h('div', null, h('b', null, 'Top genres: '), (s.topGenres || []).length ? names(s.topGenres).join(', ') : h('span', { class: 'null' }, 'none recorded'))));
+  }
+  const kinds = countBy(hl, x => x.highlightType);
+  const describe = x => { const k = Object.keys(x).find(y => /Highlight$/.test(y)); return k ? JSON.stringify(x[k]) : ''; };
+  secs.push(section('Highlights', 'Notable moments Spotify picked out (streaks, milestones, odd pairings…). The detail column is the raw highlight data.', bars(topN(kinds, 10)), dataTable(hl.map(x => ({ date: x.date, type: x.highlightType, detail: describe(x) })), [{ label: 'Date', key: 'date' }, { label: 'Type', key: 'type' }, { label: 'Detail', key: 'detail' }], { pageSize: 30 })));
+  return secs;
+}
+
+// ---------- shell ----------
+function stem(name) { return name.replace(/\.json$/i, ''); }
+function renderNav() {
+  const side = $('#side'); side.textContent = '';
+  side.append(h('h1', null, 'Spotify Data Explorer'), h('div', { class: 'sub' }, 'Click a file to see what is inside.'));
+  const mk = (title, list) => {
+    side.append(h('h3', null, title));
+    for (const s of list) {
+      const has = store[s.file] !== undefined;
+      side.append(h('button', { class: 'nav' + (s.file === cur ? ' on' : '') + (has ? '' : ' miss'), onclick: () => { location.hash = s.file; } },
+        h('span', { class: 'n' }, s.n || ''), h('span', { class: 't' }, s.title), s.priv ? h('span', { class: 'b' }, 'private') : null));
+    }
+  };
+  mk('The 15 files', SPECS.filter(s => s.n));
+  mk('Other files in the export', SPECS.filter(s => s.other));
+  side.append(h('h3', null, 'Load files'), h('div', { class: 'sub' }, 'Files are read in your browser only. Nothing is uploaded.'), h('input', { type: 'file', multiple: true, accept: '.json', onchange: e => loadFiles([...e.target.files]) }));
+}
+let cur = null;
+function renderView() {
+  const spec = SPECS.find(s => s.file === cur);
+  const main = $('#main'); main.textContent = '';
+  if (!Object.keys(store).length) {
+    main.append(h('h1', { class: 'pt' }, 'Spotify Data Explorer'), h('div', { id: 'drop' }, h('p', null, 'Could not load the data folder automatically (this happens when the page is opened straight from disk).'),
+      h('p', null, 'Choose or drop the .json files from ', h('code', null, 'data/Spotify Account Data'), ' here:'), h('input', { type: 'file', multiple: true, accept: '.json', onchange: e => loadFiles([...e.target.files]) })));
+    return;
+  }
+  if (!spec) {
+    main.append(h('h1', { class: 'pt' }, 'Spotify Data Explorer'), h('div', { class: 'blurb' }, 'This is your Spotify account export. Pick a file on the left. Each page explains what the file is, breaks it into sections, and lets you search and sort the details. Private values (address, email, IDs) are hidden until you click them.'),
+      h('div', { class: 'cards' }, SPECS.filter(s => s.n).map(s => h('div', { class: 'card', style: 'cursor:pointer;width:230px', onclick: () => { location.hash = s.file; } }, h('div', { class: 'cl' }, s.n + '. ' + s.file), h('div', { style: 'font-weight:600' }, s.title)))));
+    return;
+  }
+  const data = store[spec.file];
+  main.append(h('h1', { class: 'pt' }, spec.title), h('div', { class: 'fn' }, spec.file + '.json' + (sizes[spec.file] ? ' - ' + (sizes[spec.file] / 1024 < 1024 ? f1(sizes[spec.file] / 1024) + ' KB' : f1(sizes[spec.file] / 1048576) + ' MB') : '')));
+  if (data === undefined) { main.append(h('div', { class: 'empty' }, 'This file is not loaded. Use "Load files" in the sidebar.')); return; }
+  main.append(h('div', { class: 'blurb' }, spec.blurb));
+  if (spec.priv) main.append(h('div', { class: 'priv' }, 'Contains private information. Sensitive values are hidden until you click them.'));
+  const view = h('div', { id: 'view' }), raw = h('div', { id: 'raw', style: 'display:none' });
+  let rawDone = false;
+  const tabE = h('button', { class: 'tab on' }, 'Explained'), tabR = h('button', { class: 'tab' }, 'Raw data');
+  const show = r => {
+    tabE.classList.toggle('on', !r); tabR.classList.toggle('on', r); view.style.display = r ? 'none' : ''; raw.style.display = r ? '' : 'none';
+    if (r && !rawDone) {
+      const go = () => { raw.textContent = ''; raw.append(tree(data, null)); rawDone = true; };
+      if (spec.priv) raw.append(h('div', { class: 'empty' }, 'The raw view shows real private values.', h('br'), h('button', { class: 'btn', onclick: go }, 'Show raw data')));
+      else go();
+      rawDone = true; if (spec.priv) rawDone = false;
+    }
+  };
+  tabE.onclick = () => show(false); tabR.onclick = () => show(true);
+  main.append(h('div', { class: 'tabs' }, tabE, tabR), view, raw);
+  try { view.append(...spec.render(data).filter(Boolean)); } catch (e) { view.append(h('div', { class: 'priv' }, 'This file did not match the expected layout (' + e.message + '). Showing a generic view instead.'), ...autoSections(data)); }
+  window.scrollTo(0, 0);
+}
+function route() { cur = decodeURIComponent(location.hash.slice(1)) || null; renderNav(); renderView(); }
+function parseText(t) { try { return JSON.parse(t); } catch (e) { return { __text: t }; } }
+async function loadFiles(files) {
+  for (const f of files) {
+    const s = SPECS.find(x => lc(x.file) === lc(stem(f.name)));
+    if (!s) continue;
+    const t = await f.text(); store[s.file] = parseText(t); sizes[s.file] = t.length;
+  }
+  buildLocalNames(); route();
+}
+async function autoLoad() {
+  await Promise.all(SPECS.map(async s => {
+    try { const r = await fetch(BASE + s.file + '.json'); if (!r.ok) return; const t = await r.text(); store[s.file] = parseText(t); sizes[s.file] = t.length; } catch (e) { /* not served */ }
+  }));
+  buildLocalNames(); route();
+}
+addEventListener('hashchange', route);
+addEventListener('dragover', e => e.preventDefault());
+addEventListener('drop', e => { e.preventDefault(); if (e.dataTransfer && e.dataTransfer.files.length) loadFiles([...e.dataTransfer.files]); });
+route(); autoLoad();
+</script>
+</body>
+</html>
