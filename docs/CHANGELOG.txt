@@ -1527,3 +1527,11 @@ Per workspace-wide CLAUDE.md S13a (corrected same day, direct request: "match th
 - Artist-affinity ad segments (33 codes of 6 hex characters): tested MD5 / SHA-1 / SHA-256 / SHA-512 (start and end) of 3,159 artist URIs, IDs and names from the export; no real match (1 chance hit expected). Not decodable from the export; explained on the Inferences page.
 - UserAddress.json is not JSON (Scala "List(HashMap(...))"); the viewer parses it. UserPrompts has a 1970 timestamp (export bug).
 - Checked in a local browser: all 22 pages render without errors; name lookup resolved 3 artists. Pushed to main.
+
+
+2026-11-06 -- Inspector Typography section missing on the live site
+- Symptom: in the UI Layout Inspector, Song Title / Artist / Album & Date Line showed only Position and Size; no Typography (so no text colour).
+- Cause: loadLayoutConfig() replaces an element's whole layout with the saved one. The layout saved in dev-panel-settings.json (extra.uiLayout) pre-dates the typography block, so loading it removed typography (checked on the live site: spxTitle.layout had only position and size). The text also fell back to the app.css first-paint sizes/colours instead of the tuned 51 px / #f2f2f2 etc.
+- Fix (src/main.js): fillMissingBlocks() copies the shipped typography / icon block into any saved layout that lacks one, before loadLayoutConfig(). Checked locally by applying a layout with both blocks removed: Typography section back, title 51 px rgb(242,242,242).
+- Also: the Select Property entry for the three text objects is now labelled "Position, Size & Text (scroll down for Color)" (Typography is a section of the panel, not a dropdown entry).
+- Not yet checked on the deployed site (needs the redeploy). Clicking Sync once writes the typography block into the saved file.
