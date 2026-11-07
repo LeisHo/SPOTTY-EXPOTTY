@@ -50734,9 +50734,12 @@
       "textTestArtist": false,
       "textTestAlbum": false,
       "sliderCoverScale": false,
-      "sliderCoverOffsetX": false
+      "sliderCoverOffsetX": false,
+      "sliderSongTickMinSpacing": true
     },
-    "landscape": {}
+    "landscape": {
+      "sliderSongTickMinSpacing": true
+    }
   },
   "devDeviceValues": {
     "mobile": {
@@ -50803,9 +50806,12 @@
       "textTestArtist": "HELLO ELLO HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
       "textTestAlbum": "HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS HELLO ELLO HELLO MACARONI SPAMARONI QUINTUPLETS  SPAGALICIOUS FAMTAMPENING SEAHORSE MONKEY BOOGERS BOOGEROOGERS",
       "sliderCoverScale": 2.35,
-      "sliderCoverOffsetX": 0
+      "sliderCoverOffsetX": 0,
+      "sliderSongTickMinSpacing": 0.03
     },
-    "landscape": {}
+    "landscape": {
+      "sliderSongTickMinSpacing": 0.06
+    }
   },
   "perMode": {
     "selectTitleAnimMode": {
