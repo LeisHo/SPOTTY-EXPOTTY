@@ -20,6 +20,7 @@
    engine.css in index.html) would keep winning the tie forever, not just at first
    paint. Found live: Artist/Album & Date's real saved colors (#f7f7f7/#ffffff) were
    silently overridden back to these old hardcoded fallback colors). */
+.ui-typography { font-family: var(--ui-font-family, inherit); } /* engine.css falls back to Arial; unset must follow the dev panel's "Font For All Text" (--spx-font on .spx-app) like the Font select's default 'inherit' says. Loads after engine.css, same specificity. */
 .spx-title:not(.ui-typography) { font-size: 44px; font-weight: 700; line-height: 1.1; color: #f2f2f2; }
 /* The track title is a link to the song on Spotify. Never underlined (hover included); inline-block so
    transform animations (pulse / grow / lift) work on it. Animation styles are set from titleAnim.js. */

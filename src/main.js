@@ -9,6 +9,7 @@ import {
     createUIElement, updateElement, setContextValue, getActiveContext, resolveAndApplyAll, captureAllLayoutConfigs, registerStorageBackend, loadLayoutConfig,
     resetLayoutConfig, getElement, resolveAndApply,
 } from '../lib/ui-engine/registry.mjs';
+import { FIELDS } from '../lib/ui-engine/schema.mjs';
 import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings.js';
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn, seekClip, clipLength, onClipState, setOnClipEnded, pauseClip, resumeClip } from './app/clipPlayer.js';
@@ -28,6 +29,11 @@ import { createBackground } from './app/background.js';
 import { createFilter } from './app/filter.js';
 import { createSearch } from './app/search.js';
 import { createBgAnimation } from './app/bgAnimation.js';
+
+// The Inspector's Font select lists the same fonts as the dev panel's "Font For All Text" (index.html loads them from Google Fonts). The engine's own list was ordinary system fonts.
+// 'inherit' (first, the default) follows that dev-panel font. Set before any element is registered, so validation and the Inspector both see this list.
+FIELDS.fontFamily.values = ['inherit', 'Inter', 'Roboto', 'Montserrat', 'Poppins', 'Lato', 'Raleway', 'Nunito', 'Space Grotesk', 'Oswald', 'Bebas Neue', 'Playfair Display', 'Merriweather', 'Lora', 'DM Serif Display', 'Pacifico', 'Permanent Marker', 'Caveat', 'Orbitron', 'Space Mono'];
+FIELDS.fontFamily.default = 'inherit';
 
 const fmtDate = iso => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 // exact add moment, in the viewer's local time; date only when the export has no time of day
@@ -143,7 +149,7 @@ async function boot() {
             position: { mode: 'anchor', horizontal: { anchor: 'center', offset: '0px' }, vertical: { anchor: 'top', offset: '-12vh' } }, // engine v0.2.10: positive offsetY = UP, so a top-anchored element sits at a NEGATIVE offset
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
             typography: {
-                fontSize: '51px', color: '#f2f2f2', bold: true, italic: false, underline: false, textCase: 'none',
+                enabled: true, fontFamily: 'inherit', fontSize: '51px', color: '#f2f2f2', bold: true, italic: false, underline: false, textCase: 'none',
                 letterSpacing: '1.3px', lineSpacing: 1.3, opacity: 1, maxWidth: '2400px',
                 outlineEnabled: false, outlineColor: '#000000', outlineThickness: '2px',
             },
@@ -163,7 +169,7 @@ async function boot() {
             position: { mode: 'relative', relativeTo: 'spxTitle', myAnchor: 'top-center', targetAnchor: 'bottom-center', gap: '10px' },
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
             typography: {
-                fontSize: '25px', color: '#f7f7f7', bold: false, italic: false, underline: false, textCase: 'none',
+                enabled: true, fontFamily: 'inherit', fontSize: '25px', color: '#f7f7f7', bold: false, italic: false, underline: false, textCase: 'none',
                 letterSpacing: '0.6px', lineSpacing: 1.2, opacity: 1, maxWidth: '945px',
                 outlineEnabled: false, outlineColor: '#000000', outlineThickness: '2px',
             },
@@ -176,7 +182,7 @@ async function boot() {
             position: { mode: 'relative', relativeTo: 'spxArtist', myAnchor: 'top-center', targetAnchor: 'bottom-center', gap: '12px' },
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
             typography: {
-                fontSize: '14px', color: '#ffffff', bold: false, italic: false, underline: false, textCase: 'none',
+                enabled: true, fontFamily: 'inherit', fontSize: '14px', color: '#ffffff', bold: false, italic: false, underline: false, textCase: 'none',
                 letterSpacing: '2.3px', lineSpacing: 1.2, opacity: 1, maxWidth: '2179px',
                 outlineEnabled: false, outlineColor: '#000000', outlineThickness: '2px',
             },
@@ -323,6 +329,8 @@ async function boot() {
             const shipped = shippedLayout[id];
             if (!saved || !saved.layout || !shipped || !shipped.layout) return;
             ['typography', 'icon'].forEach(k => { if (saved.layout[k] === undefined && shipped.layout[k] !== undefined) saved.layout[k] = JSON.parse(JSON.stringify(shipped.layout[k])); });
+            // The Inspector shows an unset Enabled box as unchecked although the text is on screen (it reads !!undefined), so a click then hid the text on the SECOND click. Same for Font.
+            if (saved.layout.typography && shipped.layout.typography) ['enabled', 'fontFamily'].forEach(k => { if (saved.layout.typography[k] === undefined && shipped.layout.typography[k] !== undefined) saved.layout.typography[k] = shipped.layout.typography[k]; });
         });
     }
     window.spxApplyLayout = state => { stackSaved.clear(); pendingLayout = state && state.__signV === SIGN_V ? (({ __signV, ...rest }) => rest)(state) : legacyToV2(state); fillMissingBlocks(pendingLayout); loadLayoutConfig(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); if (stackReady) layoutStack(); };
