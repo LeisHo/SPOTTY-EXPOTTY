@@ -315,7 +315,17 @@ async function boot() {
         Array.from(el('spxApp').children).filter(c => c.classList.contains('ui-element')).forEach(c => mo.observe(c, { attributes: true, attributeFilter: ['style'] }));
         queue();
     }
-    window.spxApplyLayout = state => { stackSaved.clear(); pendingLayout = state && state.__signV === SIGN_V ? (({ __signV, ...rest }) => rest)(state) : legacyToV2(state); loadLayoutConfig(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); if (stackReady) layoutStack(); };
+    // loadLayoutConfig() REPLACES an element's whole layout with the saved one. A layout saved before the typography / icon blocks existed has neither, so the Inspector lost its
+    // Typography section (and the text lost its saved size / colour) on every page that loaded it. Any block the saved layout lacks is filled in from the shipped one.
+    function fillMissingBlocks(state) {
+        if (!state || typeof state !== 'object') return;
+        Object.entries(state).forEach(([id, saved]) => {
+            const shipped = shippedLayout[id];
+            if (!saved || !saved.layout || !shipped || !shipped.layout) return;
+            ['typography', 'icon'].forEach(k => { if (saved.layout[k] === undefined && shipped.layout[k] !== undefined) saved.layout[k] = JSON.parse(JSON.stringify(shipped.layout[k])); });
+        });
+    }
+    window.spxApplyLayout = state => { stackSaved.clear(); pendingLayout = state && state.__signV === SIGN_V ? (({ __signV, ...rest }) => rest)(state) : legacyToV2(state); fillMissingBlocks(pendingLayout); loadLayoutConfig(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); if (stackReady) layoutStack(); };
     window.spxResetLayout = () => { stackSaved.clear(); resetLayoutConfig(shippedLayout); resolveAndApplyAll(); if (window.spxRedrawTimeline) window.spxRedrawTimeline(); if (stackReady) layoutStack(); };
 
     // ---- data ----------------------------------------------------------------------
