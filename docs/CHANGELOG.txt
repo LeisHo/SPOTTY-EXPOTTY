@@ -1541,3 +1541,8 @@ Per workspace-wide CLAUDE.md S13a (corrected same day, direct request: "match th
 - Cause: the Inspector draws a checkbox as !!value, and the shipped typography blocks had no `enabled` or `fontFamily`. Engine.css also fell back to Arial, overriding the dev panel font.
 - Fix (src/main.js, src/app.css): shipped blocks now carry enabled: true and fontFamily: inherit (fillMissingBlocks() also fills them into older saved layouts); FIELDS.fontFamily.values is the dev panel Font For All Text list (inherit first = follows that font); .ui-typography falls back to inherit. Checked locally: box starts checked, 20 font options, Oswald applies to the line only, inherit returns to the dev-panel font.
 - Not reproduced: Title and Artist disappearing. Unchecking Enabled hid only the Album & Date line here. Not checked on the deployed site yet.
+
+2026-11-07 -- Song ticks on phones
+  Symptom: song ticks not visible on mobile.
+  Cause: a visitor starts at Full Scale, so all 6,381 songs sit in a ~360 px phone = 0.056 px per song, below the shared Tick Visibility Per Zoom of 0.1 (desktop is wide enough to pass). Reproduced as a visitor at 375 px: 0 tick pixels.
+  Fix: Mobile and Landscape now have their own Tick Visibility Per Zoom (0.03 / 0.06) saved in dev-panel-settings.json (devIndependence + devDeviceValues). Checked locally: ticks draw at 375 px. Not checked on the deployed site; a later Sync keeps these values.
