@@ -138,7 +138,7 @@ async function boot() {
     // going forward via UI Layout > Open UI Layout Inspector; Sync/Save/Reset already
     // cover them for free via captureAllLayoutConfigs()/loadLayoutConfig().
     createUIElement({
-        id: 'spxTitle', role: 'text', domNode: el('spxTitle'), group: 'Song Title', propertyLabel: 'Position & Size',
+        id: 'spxTitle', role: 'text', domNode: el('spxTitle'), group: 'Song Title', propertyLabel: 'Position, Size & Text (scroll down for Color)',
         layout: {
             position: { mode: 'anchor', horizontal: { anchor: 'center', offset: '0px' }, vertical: { anchor: 'top', offset: '-12vh' } }, // engine v0.2.10: positive offsetY = UP, so a top-anchored element sits at a NEGATIVE offset
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
@@ -158,7 +158,7 @@ async function boot() {
         contexts: ctx({ mobilePortrait: { maxWidth: '700px' }, mobileLandscape: { offsetY: '-5vh' } }),
     });
     createUIElement({
-        id: 'spxArtist', role: 'text', domNode: el('spxArtist'), group: 'Artist', propertyLabel: 'Position & Size',
+        id: 'spxArtist', role: 'text', domNode: el('spxArtist'), group: 'Artist', propertyLabel: 'Position, Size & Text (scroll down for Color)',
         layout: {
             position: { mode: 'relative', relativeTo: 'spxTitle', myAnchor: 'top-center', targetAnchor: 'bottom-center', gap: '10px' },
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
@@ -171,7 +171,7 @@ async function boot() {
         contexts: ctx({ mobilePortrait: { fontSize: '20px' } }), // real saved mobile override, carried over verbatim
     });
     createUIElement({
-        id: 'spxMeta', role: 'text', domNode: el('spxMeta'), group: 'Album & Date Line', propertyLabel: 'Position & Size',
+        id: 'spxMeta', role: 'text', domNode: el('spxMeta'), group: 'Album & Date Line', propertyLabel: 'Position, Size & Text (scroll down for Color)',
         layout: {
             position: { mode: 'relative', relativeTo: 'spxArtist', myAnchor: 'top-center', targetAnchor: 'bottom-center', gap: '12px' },
             size: { width: { mode: 'fixed', value: '90vw' }, height: { mode: 'content' } },
