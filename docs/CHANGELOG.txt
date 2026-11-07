@@ -1535,3 +1535,9 @@ Per workspace-wide CLAUDE.md S13a (corrected same day, direct request: "match th
 - Fix (src/main.js): fillMissingBlocks() copies the shipped typography / icon block into any saved layout that lacks one, before loadLayoutConfig(). Checked locally by applying a layout with both blocks removed: Typography section back, title 51 px rgb(242,242,242).
 - Also: the Select Property entry for the three text objects is now labelled "Position, Size & Text (scroll down for Color)" (Typography is a section of the panel, not a dropdown entry).
 - Not yet checked on the deployed site (needs the redeploy). Clicking Sync once writes the typography block into the saved file.
+
+2026-11-07 -- Inspector text: Enabled box, Font select
+- Symptom: in the Inspector (Album & Date Line) the Enabled box showed UNCHECKED although the text was visible; the first click set it on (no change), the second hid the line. Font select did not match the dev panel.
+- Cause: the Inspector draws a checkbox as !!value, and the shipped typography blocks had no `enabled` or `fontFamily`. Engine.css also fell back to Arial, overriding the dev panel font.
+- Fix (src/main.js, src/app.css): shipped blocks now carry enabled: true and fontFamily: inherit (fillMissingBlocks() also fills them into older saved layouts); FIELDS.fontFamily.values is the dev panel Font For All Text list (inherit first = follows that font); .ui-typography falls back to inherit. Checked locally: box starts checked, 20 font options, Oswald applies to the line only, inherit returns to the dev-panel font.
+- Not reproduced: Title and Artist disappearing. Unchecking Enabled hid only the Album & Date line here. Not checked on the deployed site yet.
