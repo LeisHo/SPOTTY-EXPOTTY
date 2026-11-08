@@ -8231,6 +8231,7 @@
         const SPOTTY_CONTROLS = [
             { tab, group: 'Scrub Audio', id: 'checkboxScrubAudioEnabled', type: 'checkbox', label: 'Play Preview Clips While Scrubbing (Only When Not Logged In To Spotify):', value: true },
             { tab, group: 'Scrub Audio', id: 'sliderScrubVolume', type: 'slider', label: 'Clip Volume (x):', min: 0, max: 1, step: 0.05, value: 0.7 },
+            { tab, group: 'Scrub Audio', id: 'checkboxStepClipFromStart', type: 'checkbox', label: 'Next / Last / Shuffle Play The Clip From The Beginning:', value: true },
             { tab, group: 'Scrub Audio', id: 'sliderClipStartMin', type: 'slider', label: 'Clip Start Min (S):', min: 0, max: 28, step: 0.5, value: 2 },
             { tab, group: 'Scrub Audio', id: 'sliderClipStartMax', type: 'slider', label: 'Clip Start Max (S):', min: 0, max: 28, step: 0.5, value: 22 },
             { tab, group: 'Scrub Audio', id: 'checkboxStartAtBuffer', type: 'checkbox', label: 'Start At Buffer:', value: true },
@@ -8293,6 +8294,7 @@
             { tab, group: RCP, id: 'sliderRcPanSpeed', type: 'slider', label: 'Pan Speed (x):', min: 0.1, max: 5, step: 0.05, value: 1 },
             { tab, group: RCP, id: 'checkboxRcPanInvert', type: 'checkbox', label: 'Invert Pan Direction', value: false },
             { tab, group: RCP, id: 'sliderRcPanThreshold', type: 'slider', label: 'Pan Start Threshold (Px):', min: 0, max: 100, step: 1, value: 0 },
+            { tab, group: RCP, id: 'checkboxRcPanUnderGraph', type: 'checkbox', label: 'Drag Under The Graph Pans Instead Of Scrubbing (Mobile And Landscape)', value: true },
         ];
         const RCH_CONTROLS = [
             { tab, group: RCH, id: 'checkboxRcHeightEnabled', type: 'checkbox', label: 'Enabled', value: true },

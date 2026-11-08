@@ -186,7 +186,7 @@ export function stopClip(fadeOverrideMs) {
 
 // Start a clip from a random point inside it. Returns 'playing' | 'pending' |
 // 'skipped' (no clip for this song, or cold start disabled and not preloaded).
-export function playClip(did) {
+export function playClip(did, fromStart = false) { // fromStart: a deliberate song change (Next / Last / shuffle / song end) plays the clip from 0:00 instead of a random start
     stopClip();
     const reqAt = performance.now();
     // Play Preview Clips off: only the Spotify song plays, once logged in. Not logged in, the preview always plays.
@@ -209,7 +209,9 @@ export function playClip(did) {
         // preloaded clip (buffered ~30 s) uses the whole configured range.
         const cap = Math.max(0, Math.min(dur, bufferedEnd(a)) - 1.5);
         let start;
-        if (setting('checkboxStartAtBuffer')) {
+        if (fromStart && setting('checkboxStepClipFromStart')) {
+            start = 0;
+        } else if (setting('checkboxStartAtBuffer')) {
             // Start At Buffer: if the buffer has not reached Clip Start Min, start at the latest buffered point;
             // if it has, start at Clip Start Min.
             start = cap >= lo ? lo : cap;

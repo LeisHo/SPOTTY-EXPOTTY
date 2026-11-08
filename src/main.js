@@ -1150,7 +1150,7 @@ async function boot() {
         // With preview clips off nothing else would sound in the gap, so the playing song is left playing until the next one's play request replaces it (the SDK or the embed
         // switches songs by itself); pausing it here made every Next / Last / scroll a silence of up to a second or two. doHandoff stops it if no request is sent.
         if (handedOff) { const replaceNext = !previewClipsOn() && interacted && isUnlocked() && setting('checkboxHandoffEnabled') && realPlayAllowed(); logEvent('playback', replaceNext ? 'EMBED song left playing: the next song replaces it' : 'EMBED song stopped: moved to another song'); if (!replaceNext) pauseEmbed(); handedOff = false; }
-        playClip(clipKey(songs[idx]));
+        playClip(clipKey(songs[idx]), stepImmediate);
         if (handoffPending) logEvent('playback', 'HANDOFF timer cancelled: moved on before it fired');
         clearTimeout(handoffTimer);
         // The handoff delay only exists so a fast wheel scrub does not send Spotify a play request per song. A single deliberate step
@@ -1272,6 +1272,7 @@ async function boot() {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         if ((inUi(e.target) || inText(e.target)) && e.target.id !== 'spxTimeline') return;
         ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, type: e.pointerType, onTimeline: e.target.id === 'spxTimeline', moved: false, t: performance.now() });
+        if (e.pointerType !== 'mouse' && activeDevice() !== '' && e.target.id === 'spxTimeline' && setting('checkboxRcPanEnabled') && setting('checkboxRcPanUnderGraph') && timeline.belowGraph(e.clientY)) ptrs.get(e.pointerId).touchPan = true; // a finger dragging under the graph pans instead of scrubbing
         if (setting('checkboxScrubLineDrag') && e.target.id === 'spxTimeline' && Math.abs(e.clientX - playheadScreenX()) <= 10) {
             // Grabbing the line does not move it: the drag keeps the grab point's offset from the line, so the song changes only when the line is dragged.
             const grab = ptrs.get(e.pointerId); grab.playhead = true; grab.grab = e.clientX - playheadScreenX(); timeline.setPlayheadState('press');
@@ -1309,6 +1310,8 @@ async function boot() {
                 applyTimelineBox();
             }
             timeline.draw();
+        } else if (p.touchPan) {
+            if (p.moved) { timeline.panPx(dx * setting('sliderRcPanSpeed') * (setting('checkboxRcPanInvert') ? -1 : 1)); timeline.draw(); }
         } else if (p.moved) {
             if (p.type === 'mouse') { // click-drag zooms, drag right = zoom in
                 timeline.zoomBy(Math.exp(-dx * 0.008 * setting('sliderTimelineZoomSpeed') * (setting('checkboxInvertZoomDrag') ? -1 : 1)));

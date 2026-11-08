@@ -858,5 +858,10 @@ export function createTimeline(canvas, data) {
     function centerOnPlayhead() { keepPlayheadVisible(true); }
     window.addEventListener('resize', draw);
     centerOnPlayhead();
-    return { draw, setBandHeight, setPhoneBand, bandHeight, setFilter, setSongData, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
+    // true when a screen point is in the strip under the bars and graph (the playlist rows, scale and add date)
+    function belowGraph(clientY) {
+        const dateH = Math.max(0, 18 + setting('sliderTimelineScaleGap'));
+        return clientY - canvas.getBoundingClientRect().top >= canvas.clientHeight - 18 - dateH;
+    }
+    return { belowGraph, draw, setBandHeight, setPhoneBand, bandHeight, setFilter, setSongData, setDateLine, panPx, setPlayheadState, playheadX: () => xOf(posToVt(pos)), get fullSpanMs() { return FULL_SPAN; }, setPos, zoomBy, scrubByPixels, posAtX, centerOnPlayhead, currentIndex, zoomFraction, timeFraction, setSpanMs, width: W, get span() { return span; } };
 }
