@@ -1546,3 +1546,8 @@ Per workspace-wide CLAUDE.md S13a (corrected same day, direct request: "match th
   Symptom: song ticks not visible on mobile.
   Cause: a visitor starts at Full Scale, so all 6,381 songs sit in a ~360 px phone = 0.056 px per song, below the shared Tick Visibility Per Zoom of 0.1 (desktop is wide enough to pass). Reproduced as a visitor at 375 px: 0 tick pixels.
   Fix: Mobile and Landscape now have their own Tick Visibility Per Zoom (0.03 / 0.06) saved in dev-panel-settings.json (devIndependence + devDeviceValues). Checked locally: ticks draw at 375 px. Not checked on the deployed site; a later Sync keeps these values.
+
+2026-11-07 -- Drag under the graph pans (phone); songs start at 0:00 on a step
+- Dev panel > Timeline > Right Click Pan has a new checkbox, Drag Under The Graph Pans Instead Of Scrubbing (on by default). On Mobile and Landscape, a finger dragging in the strip under the bars (playlist rows, scale, add date) pans the view with the Pan Speed / Invert settings of that group, and does not scrub. It follows the group Enabled box. A tap there still jumps. (timeline.js belowGraph(), main.js touchPan.)
+- Song start: preview clips start at a random point between Clip Start Min and Max (saved: 0 to 4.5 s), so a clip did not begin at 0:00. Next / Last / shuffle / song end now start the clip at 0:00 (new Scrub Audio checkbox Next / Last / Shuffle Play The Clip From The Beginning, on by default); scrubbing keeps the random start. Not reproduced on a real phone. If a logged-in phone still starts mid-song, that is the Spotify embed or SDK, not this.
+- Tested in a local 375 px browser: a touch drag under the graph moved the timeline and kept the song; a drag above it changed the song.
