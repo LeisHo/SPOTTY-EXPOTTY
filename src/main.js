@@ -249,6 +249,9 @@ async function boot() {
         node.classList.add('ui-element');
         createUIElement({ id, role, domNode: node, group, propertyLabel: 'Position', layout: role === 'button' && id !== 'spxPlayGlyph' ? { ...unmanaged, icon: {} } : { ...unmanaged }, contexts: ctx() }); // the play glyph's size follows the cover (Cover Scale), so it has no Icon group
     });
+    // The engine gives EVERY element an empty Typography block (so the Inspector shows Typography settings for the cover, the buttons, the canvases...). Only the three text
+    // elements have text, so the empty block is removed from the rest (before shippedLayout is captured, so a saved layout and a reset never bring it back).
+    Object.keys(captureAllLayoutConfigs()).forEach(id => { const e = getElement(id); if (e && e.role !== 'text' && e.layout.typography && !Object.keys(e.layout.typography).length) delete e.layout.typography; });
     resolveAndApplyAll();
     const shippedLayout = captureAllLayoutConfigs();
 
