@@ -3,6 +3,7 @@
     "listPickerSavedDevSettings": "{\"items\":[],\"groupOrder\":[],\"defaultName\":null}",
     "checkboxScrubAudioEnabled": true,
     "sliderScrubVolume": 0.7,
+    "checkboxStepClipFromStart": true,
     "sliderClipStartMin": 0,
     "sliderClipStartMax": 4.5,
     "checkboxStartAtBuffer": false,
@@ -26,9 +27,9 @@
     "colorTimelinePlayhead": "#ffffff",
     "sliderTimelineBarOpacity": 1,
     "sliderBarWidth": 3,
-    "rangeBarSongTickWidth": "{\"min\":0.5,\"max\":20}",
-    "rangeBarSongTickThinWidth": "{\"min\":0.5,\"max\":2}",
-    "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1,\"h1\":{\"x\":0.21535329643235615,\"y\":-0.3743750254313152}},{\"x\":1,\"y\":0,\"h2\":{\"x\":-0.6949728093970923,\"y\":0.665625}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
+    "rangeBarSongTickWidth": "{\"min\":0.5,\"max\":25}",
+    "rangeBarSongTickThinWidth": "{\"min\":0.5,\"max\":5}",
+    "curveEditorSongTickThinZoom": "{\"points\":[{\"x\":0,\"y\":1,\"h1\":{\"x\":0.4944237918215613,\"y\":-0.6748697916666667}},{\"x\":1,\"y\":0,\"h2\":{\"x\":-0.34572490706319703,\"y\":0.7834635416666667}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "curveEditorSongTickThickZoom": "{\"points\":[{\"x\":0,\"y\":1,\"h1\":{\"x\":0.34234234234234234,\"y\":0}},{\"x\":1,\"y\":0,\"h2\":{\"x\":-0.27361702929130405,\"y\":0}}],\"method\":\"monotone\",\"bgOpacity\":0.15}",
     "sliderSongTickWidthTransitionMs": 500,
     "sliderSongTickHeight": 900,
@@ -53,6 +54,7 @@
     "sliderRcPanSpeed": 1,
     "checkboxRcPanInvert": false,
     "sliderRcPanThreshold": 0,
+    "checkboxRcPanUnderGraph": true,
     "checkboxRcHeightEnabled": true,
     "sliderRcHeightSpeed": 1,
     "checkboxRcHeightInvert": false,
@@ -220,7 +222,7 @@
     "sliderSongBarClickOpacity": 80,
     "sliderSongBarAnimTime": 250,
     "selectVolIconStyle": "6",
-    "checkboxVolumeButtonEnabled": false,
+    "checkboxVolumeButtonEnabled": true,
     "sliderVolMutedOpacity": 40,
     "sliderVolIconOpacity": 75,
     "sliderVolHoverOpacity": 100,
@@ -317,7 +319,7 @@
     "selectAlbumLenIconStyle": "0",
     "selectSongDateIconStyle": "",
     "selectSongLenIconStyle": "0",
-    "checkboxFilterButtonEnabled": false,
+    "checkboxFilterButtonEnabled": true,
     "sliderFilterIconSize": 23,
     "sliderFilterIconOffsetX": 0,
     "sliderFilterIconOffsetY": 7,
@@ -396,7 +398,7 @@
     "checkboxFilterSongCountBold": false,
     "checkboxFilterSongCountItalic": false,
     "selectSongDataIconStyle": "1",
-    "checkboxSongDataEnabled": false,
+    "checkboxSongDataEnabled": true,
     "sliderSongDataBtnSize": 23,
     "sliderSongDataBtnOffsetX": 0,
     "sliderSongDataBtnOffsetY": 0,
@@ -663,7 +665,7 @@
     "sliderStartPlayLiftPressPx": 2,
     "sliderStartPlayLiftShadowBlur": 14,
     "sliderStartPlayLiftShadowOpacity": 0.5,
-    "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"search\",\"name\":\"Search Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}",
+    "listPickerRenderOrder": "{\"items\":[{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true,\"group\":\"MAIN BUTTONS\"},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true,\"group\":\"MAIN TEXT\"},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true,\"group\":\"GRAPH\"},{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true,\"group\":\"TOP BUTTONS\"},{\"key\":\"search\",\"name\":\"Search Button\",\"on\":false,\"group\":\"TOP BUTTONS\"},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true,\"group\":\"BACKGROUND\"},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true,\"group\":\"BACKGROUND\"}],\"groupOrder\":[\"MAIN BUTTONS\",\"MAIN TEXT\",\"GRAPH\",\"TOP BUTTONS\",\"BACKGROUND\"],\"defaultName\":null,\"topOrder\":[\"g:MAIN BUTTONS\",\"g:MAIN TEXT\",\"g:GRAPH\",\"i:cover\",\"g:TOP BUTTONS\",\"i:ticks\",\"g:BACKGROUND\"]}",
     "checkboxClickOrderFollowsRender": false,
     "listPickerRenderOrderDeployed": "{\"items\":[{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true},{\"key\":\"search\",\"name\":\"Search Button\",\"on\":true},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true},{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true}],\"groupOrder\":[],\"defaultName\":null}"
   },
@@ -23896,6 +23898,10 @@
               ],
               "subgroups": []
             }
+          },
+          {
+            "type": "row",
+            "key": "checkboxStepClipFromStart"
           }
         ],
         "rowKeys": [
@@ -23905,7 +23911,8 @@
           "checkboxRandomStartSong",
           "checkboxLoopPreview",
           "sliderScrubVolume",
-          "sliderClipFadeOut"
+          "sliderClipFadeOut",
+          "checkboxStepClipFromStart"
         ],
         "subgroups": [
           {
@@ -24623,12 +24630,17 @@
                 {
                   "type": "row",
                   "key": "sliderRcPanThreshold"
+                },
+                {
+                  "type": "row",
+                  "key": "checkboxRcPanUnderGraph"
                 }
               ],
               "rowKeys": [
                 "checkboxRcPanInvert",
                 "sliderRcPanSpeed",
-                "sliderRcPanThreshold"
+                "sliderRcPanThreshold",
+                "checkboxRcPanUnderGraph"
               ],
               "subgroups": []
             }
@@ -25377,12 +25389,17 @@
               {
                 "type": "row",
                 "key": "sliderRcPanThreshold"
+              },
+              {
+                "type": "row",
+                "key": "checkboxRcPanUnderGraph"
               }
             ],
             "rowKeys": [
               "checkboxRcPanInvert",
               "sliderRcPanSpeed",
-              "sliderRcPanThreshold"
+              "sliderRcPanThreshold",
+              "checkboxRcPanUnderGraph"
             ],
             "subgroups": []
           },
@@ -49068,7 +49085,7 @@
     "desktop:TABS": true,
     "desktop:BUTTONS": true,
     "desktop:Hot Keys": true,
-    "desktop:Debug": false,
+    "desktop:Debug": true,
     "desktop:Mouse Log": true,
     "desktop:Snapshot": true,
     "desktop:UI Layout": false,
@@ -49143,7 +49160,7 @@
     "desktop:Previous / Next Shadow": true,
     "desktop:Title Lift Shadow": true,
     "desktop:Filter Panel Shadow": true,
-    "desktop:New Group": false,
+    "desktop:New Group": true,
     "desktop:Scrub Preload": true,
     "desktop:Scrub Input": false,
     "desktop:Touch Scrub And Pinch": true,
@@ -49168,8 +49185,8 @@
     "desktop:Song Add Date": true,
     "desktop:Right Click Pan": true,
     "desktop:Right Click Height": true,
-    "desktop:New Group (28)": true,
-    "desktop:New Group (40)": true,
+    "desktop:New Group (28)": false,
+    "desktop:New Group (40)": false,
     "desktop:Match Graph Colors": true,
     "desktop:Opacity Per Zoom": true,
     "desktop:Opacity Per Width": true,
