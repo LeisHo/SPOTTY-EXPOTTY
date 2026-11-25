@@ -1250,8 +1250,9 @@ async function boot() {
     // Which button a press under the canvas belongs to when several overlap: by default the first in this list; with "Click Order Follows Render Order" the one in front
     // (highest z-index of itself or its nearest ancestor that has one; a tie keeps the list order).
     const zOfBtn = b => { for (let n = b; n && n !== document.body; n = n.parentElement) { const z = parseInt(getComputedStyle(n).zIndex, 10); if (Number.isFinite(z)) return z; } return 0; };
+    // Play On Device and Add To Playlist come first (they have no click tolerance): a press inside their own box must not go to another button whose tolerance zone reaches it.
     const buttonUnder = (x, y) => {
-        const hits = [el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxSongData'), el('spxFilter'), el('spxSearch'), el('spxTitleLink'), el('spxStartBtn')].filter(b => {
+        const hits = [el('spxDevice'), el('spxAddPlaylist'), el('spxVolume').querySelector('.spx-vol-btn'), el('spxPrev'), el('spxNext'), el('spxCover'), el('spxShuffle'), el('spxSongData'), el('spxFilter'), el('spxSearch'), el('spxTitleLink'), el('spxStartBtn')].filter(b => {
             const r = b.getBoundingClientRect(), p = clickTolOf(b);
             return x >= r.left - p && x <= r.right + p && y >= r.top - p && y <= r.bottom + p;
         });
