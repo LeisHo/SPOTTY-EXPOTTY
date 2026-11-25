@@ -98,6 +98,11 @@ export const EXTRA_ICON_SETS = {
         { name: 'Headphones', p: [['M6 27V21.3a15.26 15.26 0 0 1 30.52 0V27h-4v-5.7a11.26 11.26 0 0 0-22.52 0V27z', 0], [rect(4, 25, 9, 14), 0], [rect(29.5, 25, 9, 14), 0]] },
         { name: 'Broadcast', p: [[circ(C, C, 4), 0], [circ(C, C, 10) + circ(C, C, 7.5), 1], [circ(C, C, 17.26) + circ(C, C, 14.5), 1]] },
     ],
+    addpl: [ // Add To Playlist button
+        { name: 'List With Plus', p: [[rect(4, 8, 22, 4) + rect(4, 18, 22, 4) + rect(4, 28, 14, 4), 0], [rect(26, 24, 14, 4) + rect(31, 19, 4, 14), 0]] },
+        { name: 'Plus In Circle', p: [[circ(C, C, 17) + circ(C, C, 13.5), 1], [rect(11, 19.26, 20.52, 4) + rect(19.26, 11, 4, 20.52), 0]] },
+        { name: 'Note With Plus', p: [[circ(11, 32, 6), 0], [rect(15, 6, 4, 26) + 'M19 6h4l10 5v5l-10-4z', 0], [rect(26, 28, 14, 4) + rect(31, 23, 4, 14), 0]] },
+    ],
 };
 // The built-in options live in BUTTON_ICONS next to the imported button sets, so the dropdowns' Import button (iconImport.js) adds to / overwrites them
 // the same way (and the imported ones are saved with Sync like any other).
@@ -106,3 +111,4 @@ export const extraIconHtml = (key, i) => shapes(pick(key, iconIndex(i)));
 export function applySearchIcon(svg, i) { setIcon(svg, 'srch' + i, shapes(pick('search', iconIndex(i)))); }
 export function applyExportIcon(svg, i) { setIcon(svg, 'expt' + i, shapes(pick('export', iconIndex(i)))); }
 export function applyDeviceIcon(svg, i) { setIcon(svg, 'devc' + i, shapes(pick('device', iconIndex(i)))); }
+export function applyAddPlaylistIcon(svg, i) { setIcon(svg, 'addp' + i, shapes(pick('addpl', iconIndex(i)))); }

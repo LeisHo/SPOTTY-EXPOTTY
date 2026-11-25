@@ -7056,7 +7056,7 @@
     }
     // The icon style dropdowns are always the first rows of their group (owner's request): a saved layout (Sync) keeps whatever order the panel had
     // when it was saved, which put them back down the list once, so this runs after every restore and re-pins them. Order = this list.
-    const ICON_DROPDOWN_ORDER = ['selectVolIconStyle', 'selectShuffleIconStyle', 'selectFilterIconStyle', 'selectSearchIconStyle', 'selectTempoIconStyle', 'selectValenceIconStyle', 'selectDanceIconStyle', 'selectEnergyIconStyle', 'selectTitleLenIconStyle', 'selectArtistLenIconStyle', 'selectAlbumLenIconStyle', 'selectSongDateIconStyle', 'selectSongLenIconStyle', 'selectDeviceIconStyle', 'selectSongDataIconStyle', 'selectPlayIconStyle', 'selectPauseIconStyle', 'selectNavIconStyle'];
+    const ICON_DROPDOWN_ORDER = ['selectVolIconStyle', 'selectShuffleIconStyle', 'selectFilterIconStyle', 'selectSearchIconStyle', 'selectTempoIconStyle', 'selectValenceIconStyle', 'selectDanceIconStyle', 'selectEnergyIconStyle', 'selectTitleLenIconStyle', 'selectArtistLenIconStyle', 'selectAlbumLenIconStyle', 'selectSongDateIconStyle', 'selectSongLenIconStyle', 'selectDeviceIconStyle', 'selectAddPlaylistIconStyle', 'selectSongDataIconStyle', 'selectPlayIconStyle', 'selectPauseIconStyle', 'selectNavIconStyle'];
     // A checkbox row = a control row whose own id starts with "checkbox" (the id prefix is the panel's control-type convention; the extra Show-in-Mobile /
     // Independent checkboxes inside every row do not count).
     const isCheckboxRow = el => el.classList && el.classList.contains('dev-row') && /^checkbox/.test(getRowKey(el, 0));
@@ -8021,8 +8021,8 @@
     // ---- Import icons: a button to the right of every icon dropdown --------------------------------------------------------------------------------------------------
     // Pick one or several SVG files: each becomes an entry of that dropdown's list (named after the file); a name that already exists is overwritten. The work is done by
     // src/app/iconImport.js (window.SPX_ICON_IMPORT); the lists, and the saved copy (Sync -> extra.customIcons, plus localStorage), live there.
-    const ICON_SELECT_RE = /^select(?:Mobile|Landscape)?(Vol|Shuffle|Filter|Search|Tempo|Valence|Dance|Energy|SongData|Play|Pause|Nav|TitleLen|ArtistLen|AlbumLen|SongDate|SongLen|Device)IconStyle$/;
-    const ICON_SELECT_KEY = { Vol: 'volume', Shuffle: 'shuffle', Filter: 'filter', Search: 'search', Tempo: 'tp', Valence: 'v', Dance: 'dn', Energy: 'e', SongData: 'data', Play: 'play', Pause: 'pause', Nav: 'nav', TitleLen: 'ln', ArtistLen: 'la', AlbumLen: 'lb', SongDate: 'rd', SongLen: 'du', Device: 'device' };
+    const ICON_SELECT_RE = /^select(?:Mobile|Landscape)?(Vol|Shuffle|Filter|Search|Tempo|Valence|Dance|Energy|SongData|Play|Pause|Nav|TitleLen|ArtistLen|AlbumLen|SongDate|SongLen|Device|AddPlaylist)IconStyle$/;
+    const ICON_SELECT_KEY = { Vol: 'volume', Shuffle: 'shuffle', Filter: 'filter', Search: 'search', Tempo: 'tp', Valence: 'v', Dance: 'dn', Energy: 'e', SongData: 'data', Play: 'play', Pause: 'pause', Nav: 'nav', TitleLen: 'ln', ArtistLen: 'la', AlbumLen: 'lb', SongDate: 'rd', SongLen: 'du', Device: 'device', AddPlaylist: 'addpl' };
     const iconKeyOfSelect = sel => { const m = ICON_SELECT_RE.exec(sel.id || ''); return m ? ICON_SELECT_KEY[m[1]] : null; };
     function refreshIconSelects() {
         if (!window.SPX_ICON_IMPORT) return;
@@ -8596,6 +8596,7 @@
             { tab, group: GO, id: 'checkboxOverrideSearch', type: 'checkbox', label: 'Search Button', value: true },
             { tab, group: GO, id: 'checkboxOverrideSongData', type: 'checkbox', label: 'Show Song Data Button', value: true },
             { tab, group: GO, id: 'checkboxOverrideDevice', type: 'checkbox', label: 'Play On Device Button', value: true },
+            { tab, group: GO, id: 'checkboxOverrideAddPlaylist', type: 'checkbox', label: 'Add To Playlist Button', value: true },
             { tab, group: GO, id: 'checkboxOverrideStart', type: 'checkbox', label: 'Startup Page Start Button', value: true },
             { tab, group: GO, id: 'colorGlobalOverride', type: 'color', label: 'Color:', value: '#ffffff' },
             // On = a button that is switched on (Shuffle). Off = the same button switched off, and for buttons with no on / off (Play, Next, Last, Volume) the opacity when not hovered.
@@ -8761,6 +8762,39 @@
         renderControlArray(PD_CONTROLS, 'renderSpottyDevControls');
         registerDevControlArray('SPOTTY_DEVICE_CONTROLS', PD_CONTROLS);
         makeDevGroupToggleable(tab, PD, 'checkboxDeviceButtonEnabled');
+        // Add To Playlist (under Play On Device): adds the shown song to one of the owner's Spotify playlists (src/app/addPlaylist.js); needs the Spotify login with the playlist permission.
+        const AP = 'Add To Playlist';
+        uiLayoutContent.appendChild(createDevGroupElement(AP, tab));
+        const AP_CONTROLS = [
+            { tab, group: AP, id: 'checkboxAddPlaylistButtonEnabled', type: 'checkbox', label: 'Enabled', value: true },
+            { tab, group: AP, id: 'selectAddPlaylistIconStyle', type: 'select', label: 'Icon Style:', value: '0', options: extraIconOptions('addpl') },
+            // the button
+            { tab, group: AP, id: 'sliderAddPlaylistIconSize', type: 'slider', label: 'Icon Size (Px):', min: 10, max: 120, step: 1, value: 20 },
+            { tab, group: AP, id: 'sliderAddPlaylistIconOffsetX', type: 'slider', label: 'Icon X Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: AP, id: 'sliderAddPlaylistIconOffsetY', type: 'slider', label: 'Icon Y Offset (Px):', min: -300, max: 300, step: 1, value: 0 },
+            { tab, group: AP, id: 'sliderAddPlaylistEdgeOffset', type: 'slider', label: 'Offset From Left Edge (Px):', min: 0, max: 300, step: 1, value: 14 },
+            { tab, group: AP, id: 'sliderAddPlaylistOffOpacity', type: 'slider', label: 'Off Icon Opacity (%):', min: 0, max: 100, step: 1, value: 45 },
+            { tab, group: AP, id: 'sliderAddPlaylistOnOpacity', type: 'slider', label: 'On Icon Opacity (%) (Panel Open):', min: 0, max: 100, step: 1, value: 100 },
+            { tab, group: AP, id: 'colorAddPlaylistIcon', type: 'color', label: 'Icon Color (Off):', value: '#f2f2f2' },
+            { tab, group: AP, id: 'colorAddPlaylistOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
+            // what adding does
+            { tab, group: AP, id: 'selectAddPlaylistPosition', type: 'select', label: 'Add The Song To (Default):', value: 'end', options: [{ value: 'end', text: 'End Of The Playlist' }, { value: 'start', text: 'Beginning Of The Playlist' }] },
+            { tab, group: AP, id: 'checkboxAddPlaylistShowSong', type: 'checkbox', label: 'Panel: Show The Song Being Added', value: true },
+            { tab, group: AP, id: 'checkboxAddPlaylistCloseAfterAdd', type: 'checkbox', label: 'Panel: Close After Adding', value: false },
+            { tab, group: AP, id: 'checkboxAddPlaylistCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
+            // the panel
+            { tab, group: AP, id: 'sliderAddPlaylistPanelWidth', type: 'slider', label: 'Panel: Width (Px):', min: 160, max: 600, step: 1, value: 260 },
+            { tab, group: AP, id: 'sliderAddPlaylistPanelFontSize', type: 'slider', label: 'Panel: Font Size (Px):', min: 8, max: 32, step: 1, value: 13 },
+            { tab, group: AP, id: 'sliderAddPlaylistPanelOffsetX', type: 'slider', label: 'Panel: X Offset (Px):', min: -400, max: 400, step: 1, value: 0 },
+            { tab, group: AP, id: 'sliderAddPlaylistPanelOffsetY', type: 'slider', label: 'Panel: Y Offset (Px):', min: -100, max: 400, step: 1, value: 6 },
+            { tab, group: AP, id: 'colorAddPlaylistPanelBg', type: 'color', label: 'Panel: Background Color:', value: '#14161a' },
+            { tab, group: AP, id: 'sliderAddPlaylistPanelBgOpacity', type: 'slider', label: 'Panel: Background Opacity (%):', min: 0, max: 100, step: 1, value: 92 },
+            { tab, group: AP, id: 'sliderAddPlaylistPanelBlur', type: 'slider', label: 'Panel: Background Blur (Px, Of The UI Behind It):', min: 0, max: 60, step: 1, value: 6 },
+            { tab, group: AP, id: 'colorAddPlaylistPanelAccent', type: 'color', label: 'Panel: Button Color:', value: '#1db954' },
+        ];
+        renderControlArray(AP_CONTROLS, 'renderSpottyDevControls');
+        registerDevControlArray('SPOTTY_ADD_PLAYLIST_CONTROLS', AP_CONTROLS);
+        makeDevGroupToggleable(tab, AP, 'checkboxAddPlaylistButtonEnabled');
         // Search Button (right side, under Filter): a text search (Song / Artist / Album) that narrows the song list, with Stack Shown Buttons (the buttons close up the gap
         // when one is switched off). src/app/search.js; the stacking is layoutStack() in main.js.
         const SRB = 'Search Button';
@@ -9599,7 +9633,7 @@
         // (the third entry); the rest are shown / hidden by renderOrder.js. src/app/renderOrder.js carries the same keys, in the same default order.
         const RO_ITEMS = [
             ['volume', 'Volume Button'], ['shuffle', 'Shuffle Button', 'checkboxShuffleButtonEnabled'], ['songdatabtn', 'Song Data Button', 'checkboxSongDataEnabled'],
-            ['filter', 'Filter Button', 'checkboxFilterButtonEnabled'], ['search', 'Search Button', 'checkboxSearchButtonEnabled'], ['device', 'Play On Device Button', 'checkboxDeviceButtonEnabled'], ['nav', 'Next And Last Song Buttons'], ['songbar', 'Song Timeline (Under The Cover)', 'checkboxSongBarEnabled'],
+            ['filter', 'Filter Button', 'checkboxFilterButtonEnabled'], ['search', 'Search Button', 'checkboxSearchButtonEnabled'], ['device', 'Play On Device Button', 'checkboxDeviceButtonEnabled'], ['addplaylist', 'Add To Playlist Button', 'checkboxAddPlaylistButtonEnabled'], ['nav', 'Next And Last Song Buttons'], ['songbar', 'Song Timeline (Under The Cover)', 'checkboxSongBarEnabled'],
             ['scrub', 'Scrub Line'], ['songdata', 'Song Data Text And Icons'], ['date', 'Song Add Date', 'checkboxSongAddDateEnabled'], ['scale', 'Timeline Scale (Numbers And Ticks)'],
             ['graph', 'Graph'], ['meta', 'Album And Date Line', 'checkboxTxtAlbumDateEnabled'], ['artist', 'Artist', 'checkboxTxtArtistEnabled'], ['title', 'Song Title', 'checkboxTxtSongTitleEnabled'],
             ['play', 'Play Button', 'checkboxPlayButtonEnabled'], ['cover', 'Album Cover'], ['ticks', 'Song Ticks'], ['bgfx', 'Background Animation'], ['bg', 'Background'],

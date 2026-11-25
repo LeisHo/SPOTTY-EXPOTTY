@@ -10,7 +10,7 @@ import { logEvent } from './debugLog.js';
 
 const TOKENS = 'spxSpotifyTokens', VERIFIER = 'spxSpotifyVerifier', STATE = 'spxSpotifyState';
 // streaming = the Web Playback SDK; user-read-private tells us whether the account is Premium; the two playback scopes let us start a track
-const SCOPES = 'streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state';
+const SCOPES = 'streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private';
 const TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
 export const clientId = () => window.__spxClientIdOverride || SPOTIFY_CLIENT_ID; // the override is for tests
@@ -24,6 +24,8 @@ export async function codeChallenge(verifier) { return b64url(await crypto.subtl
 const read = () => { try { return JSON.parse(localStorage.getItem(TOKENS)) || null; } catch (e) { return null; } };
 const write = t => { try { if (t) localStorage.setItem(TOKENS, JSON.stringify(t)); else localStorage.removeItem(TOKENS); } catch (e) { /* storage blocked */ } };
 export const isLoggedIn = () => { const t = read(); return !!(t && t.refresh_token); };
+// The scopes this login was granted (stored with the token). A login made before the playlist scopes were requested has none, so Add To Playlist asks for one more login.
+export const hasPlaylistScope = () => { const t = read(); return !!(t && /playlist-modify-private/.test(t.scope || '') && /playlist-read-private/.test(t.scope || '')); };
 export function logout() { write(null); logEvent('playback', 'SPOTIFY logged out'); }
 
 export async function buildAuthUrl() {
@@ -53,7 +55,7 @@ async function tokenRequest(body) {
 }
 const store = j => {
     const prev = read() || {};
-    write({ access_token: j.access_token, refresh_token: j.refresh_token || prev.refresh_token, expires_at: Date.now() + (j.expires_in || 3600) * 1000 });
+    write({ access_token: j.access_token, refresh_token: j.refresh_token || prev.refresh_token, expires_at: Date.now() + (j.expires_in || 3600) * 1000, scope: j.scope || prev.scope });
 };
 
 // Called first thing at boot. If this page load IS the redirect back from Spotify, finish the login and report it.

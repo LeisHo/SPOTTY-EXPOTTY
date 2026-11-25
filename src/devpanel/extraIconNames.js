@@ -8,4 +8,5 @@ window.SPX_EXTRA_ICON_NAMES = {
     du: ['Clock', 'Stopwatch', 'Progress Bar'],
     search: ['Magnifying Glass', 'Bold Magnifier', 'Magnifier Over Lines', 'Binoculars'],
     device: ['Screen And Phone', 'Speaker', 'Cast Screen', 'Headphones', 'Broadcast'],
+    addpl: ['List With Plus', 'Plus In Circle', 'Note With Plus'],
 };

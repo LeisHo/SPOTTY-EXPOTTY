@@ -14,12 +14,13 @@ import { setting, loadSavedSettings, rgbaOf, activeDevice } from './app/settings
 import { createTimeline } from './app/timeline.js';
 import { preload, playClip, stopClip, unlock, isUnlocked, poolInfo, setMasterVolume, clipState, clipPosition, clipIsPlaying, previewClipsOn, seekClip, clipLength, onClipState, setOnClipEnded, pauseClip, resumeClip } from './app/clipPlayer.js';
 import { initVolume } from './app/volume.js';
-import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon, applySearchIcon, applySongDataIcon, applyDeviceIcon } from './app/iconStyles.js';
+import { iconIndex, applyVolumeIcon, applyShuffleIcon, applyNavIcon, applyPlayIcon, applyCoverGlyph, applyFilterIcon, applySearchIcon, applySongDataIcon, applyDeviceIcon, applyAddPlaylistIcon } from './app/iconStyles.js';
 import { initDebugTools } from './app/debugTools.js';
 import { initAudioMods } from './app/audioMods.js';
 import { logEvent } from './app/debugLog.js';
 import { initEmbed, playTrack, pauseEmbed, toggleTrack, onPlayState, setOnEnded, noteSongChange, embedStatus, embedMode, initSdkPlayer, setRealVolume, activateRealPlayer, spotifyLoginStatus, sdkIsReady, sdkInfo, isPlaying, playingId, getProgress, seekTo, deviceApi } from './app/handoff.js';
 import { initDevicePlayer } from './app/devicePanel.js';
+import { initAddPlaylist } from './app/addPlaylist.js';
 import { hasClientId, isLoggedIn, handleRedirectIfAny, loginPopup, logout, onLoginChange } from './app/spotifyAuth.js';
 import { cleanTitle } from './app/title.mjs';
 import { applyCustomIcons } from './app/iconImport.js';
@@ -98,6 +99,7 @@ async function boot() {
             <button type="button" class="spx-songdata bs-host" id="spxSongData" aria-label="Song data" aria-pressed="false" title="Song data off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></button>
             <button type="button" class="spx-filter bs-host" id="spxFilter" aria-label="Filter songs" aria-pressed="false" aria-expanded="false" title="Filter off"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg></button>
             <button type="button" class="spx-device bs-host" id="spxDevice" aria-label="Play on a device" aria-pressed="false" aria-expanded="false" title="Play on a device"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="13" height="10" rx="1.5"/><path d="M7 18h5M9.5 14v4"/><rect x="18" y="8" width="4" height="9" rx="1"/></svg></button>
+            <button type="button" class="spx-addpl bs-host" id="spxAddPlaylist" aria-label="Add to a playlist" aria-pressed="false" aria-expanded="false" title="Add to a playlist"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h12M3 12h12M3 18h7M18 14v8M14 18h8"/></svg></button>
             <button type="button" class="spx-search bs-host" id="spxSearch" aria-label="Search songs" aria-pressed="false" aria-expanded="false" title="Search"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></button>
             <div class="spx-pool" id="spxPool" hidden></div>
             <div class="spx-start" id="spxStart" hidden><button type="button" class="spx-start-play" id="spxStartBtn" aria-label="Start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button></div>
@@ -240,7 +242,7 @@ async function boot() {
     // position to the engine: app.css switches that item's own dev-panel position rules off while it is managed (`:not(.ui-mode-flow)`). Buttons also get an Icon
     // size (`icon` block); the canvas layers are placed by timeline.js unless managed, and keep their size / colours from the dev panel.
     const unmanaged = { position: { mode: 'flow', parent: 'spxApp' } }; // flow needs a parent id; spxApp is not an engine element, so the DOM-parent check does not apply
-    [['spxShuffle', 'Shuffle Button', 'button'], ['spxSongData', 'Song Data Button', 'button'], ['spxFilter', 'Filter Button', 'button'], ['spxSearch', 'Search Button', 'button'], ['spxDevice', 'Play On Device Button', 'button'], ['spxPlayGlyph', 'Play Button', 'button'],
+    [['spxShuffle', 'Shuffle Button', 'button'], ['spxSongData', 'Song Data Button', 'button'], ['spxFilter', 'Filter Button', 'button'], ['spxSearch', 'Search Button', 'button'], ['spxDevice', 'Play On Device Button', 'button'], ['spxAddPlaylist', 'Add To Playlist Button', 'button'], ['spxPlayGlyph', 'Play Button', 'button'],
         ['spxSongBar', 'Song Timeline (Under The Cover)', 'container'],
         ['spxLayerScrub', 'Scrub Line', 'container'], ['spxLayerSongdata', 'Song Data Text And Icons', 'container'], ['spxLayerDate', 'Song Add Date', 'container'], ['spxLayerScale', 'Timeline Scale (Numbers And Ticks)', 'container'],
         ['spxTicks', 'Song Ticks', 'container'], ['spxBgFx', 'Background Animation', 'container'], ['spxBg', 'Background', 'container'],
@@ -433,6 +435,7 @@ async function boot() {
     initTitleAnim(el('spxStartBtn'), 'StartPlay');
     // Volume (top right): scales the scrub clips. Spotify's embedded player has no volume method, so at exactly
     // 0 % the song player is simply stopped and not started (a full mute); above 0 it plays at its own level.
+    let apl = null; // Add To Playlist (below)
     let dp = null; // Play On Device (below): while a device plays, the slider is that device's volume and the scrub clips keep this browser's level
     const volume = initVolume({
         root: el('spxVolume'),
@@ -818,6 +821,7 @@ async function boot() {
             { k: 'Filter', host: el('spxFilter'), kind: 'plain', opVar: '--spx-filter-off-op', onVar: '--spx-filter-on-op' },
             { k: 'Search', host: el('spxSearch'), kind: 'plain', opVar: '--spx-search-off-op', onVar: '--spx-search-on-op' }, // Search: on = a search is active
             { k: 'SongData', host: el('spxSongData'), kind: 'plain', opVar: '--spx-sd-off-op', onVar: '--spx-sd-on-op' },
+            { k: 'AddPlaylist', host: el('spxAddPlaylist'), kind: 'plain', opVar: '--spx-addpl-off-op', onVar: '--spx-addpl-on-op' }, // Add To Playlist: on = its panel is open
             { k: 'Device', host: el('spxDevice'), kind: 'plain', opVar: '--spx-device-off-op', onVar: '--spx-device-on-op' }, // Play On Device: on = a device is playing
             { k: 'Start', host: el('spxStartBtn'), kind: 'start' }, // the start screen's Start button: colour + opacity only (it has its own animation group, not the bs one)
         ];
@@ -962,6 +966,17 @@ async function boot() {
             ap.setProperty('--spx-device-off-op', String(setting('sliderDeviceOffOpacity') / 100)); ap.setProperty('--spx-device-on-op', String(setting('sliderDeviceOnOpacity') / 100));
             ap.setProperty('--spx-device-color', setting('colorDeviceIcon')); ap.setProperty('--spx-device-on-color', setting('colorDeviceOn'));
             if (dp) dp.applySettings();
+        }
+        {   // Add To Playlist button (under Play On Device): its own look
+            const ap = el('spxApp').style, aOn = !!setting('checkboxAddPlaylistButtonEnabled');
+            el('spxAddPlaylist').hidden = !aOn;
+            applyAddPlaylistIcon(el('spxAddPlaylist').querySelector('svg'), iconIndex(setting('selectAddPlaylistIconStyle')));
+            el('spxAddPlaylist').style.setProperty('--bs-size', setting('sliderAddPlaylistIconSize') + 'px');
+            ap.setProperty('--spx-addpl-icon', setting('sliderAddPlaylistIconSize') + 'px'); ap.setProperty('--spx-addpl-x', setting('sliderAddPlaylistIconOffsetX') + 'px'); ap.setProperty('--spx-addpl-y', setting('sliderAddPlaylistIconOffsetY') + 'px');
+            ap.setProperty('--spx-addpl-edge', setting('sliderAddPlaylistEdgeOffset') + 'px');
+            ap.setProperty('--spx-addpl-off-op', String(setting('sliderAddPlaylistOffOpacity') / 100)); ap.setProperty('--spx-addpl-on-op', String(setting('sliderAddPlaylistOnOpacity') / 100));
+            ap.setProperty('--spx-addpl-color', setting('colorAddPlaylistIcon')); ap.setProperty('--spx-addpl-on-color', setting('colorAddPlaylistOn'));
+            if (apl) apl.applySettings();
         }
         placeNav(); // the edge offset is a setting
         el('spxApp').style.setProperty('--spx-shuffle-icon', setting('sliderShuffleIconSize') + 'px');
@@ -1147,6 +1162,7 @@ async function boot() {
         noteSongChange();
         logEvent('playback', `SONG ${idx + 1}/${songs.length} "${songs[idx].n}" - ${songs[idx].a}  [clip: ${clipState(clipKey(songs[idx]))}]`);
         render();
+        if (apl) apl.songChanged();
         schedulePreload();
         // Pausing the Web Playback SDK here and sending its play request 100 ms later raced (the play could fail or be undone by the pause), so with the SDK ready
         // and preview clips off the playing song is left alone: the next play request replaces it (and doHandoff pauses it if no request is sent).
@@ -1205,7 +1221,7 @@ async function boot() {
     // ---- input ---------------------------------------------------------------------------
     // Desktop: wheel = scrub (a notch moves the playhead N px along the current scale), click on the
     // timeline = jump, click-drag = zoom around the playhead. Touch: drag = scrub, pinch = zoom, tap = jump.
-    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxFilterPanel, #spxSearchPanel, #spxDevicePanel, #spxCover, #spxVolume, #spxSongBar, a, button, input, select, textarea');
+    const inUi = t => t.closest && t.closest('#devPanel, #spxInspectorPanel, #spxFilterPanel, #spxSearchPanel, #spxDevicePanel, #spxAddPlaylistPanel, #spxCover, #spxVolume, #spxSongBar, a, button, input, select, textarea');
     // The title/artist/album lines are selectable text: a drag that starts on them selects it instead of zooming.
     const inText = t => t.closest && t.closest('.spx-title, .spx-artist, .spx-meta');
     window.addEventListener('wheel', e => {
@@ -1255,7 +1271,7 @@ async function boot() {
     window.addEventListener('pointerdown', e => {
         redirectBtn = null;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
-        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxFilterPanel, #spxDevicePanel, #spxVolume, #spxSongBar')) return;
+        if (e.target.closest && e.target.closest('button, a, input, select, textarea, #devPanel, #spxInspectorPanel, #spxFilterPanel, #spxDevicePanel, #spxAddPlaylistPanel, #spxVolume, #spxSongBar')) return;
         redirectBtn = buttonUnder(e.clientX, e.clientY) || null;
     }, true);
     window.addEventListener('click', e => {
@@ -1424,11 +1440,14 @@ async function boot() {
     dp = initDevicePlayer({ button: el('spxDevice'), api: deviceApi, volume,
         player: { isPlaying, playingId, getProgress, playTrack, pauseEmbed, setRealVolume } });
     dp.applySettings();
+    // ---- Add To Playlist button (under Play On Device) ----
+    apl = initAddPlaylist({ button: el('spxAddPlaylist'), getSong: () => { const s = songs[idx]; return s ? { id: s.id, name: s.n, artist: s.a } : null; } });
+    apl.applySettings();
     // ---- Filter button (under Shuffle) + panel ----
     // Stack Shown Buttons: the right-hand buttons (Shuffle, Song Data, Filter, Search) and the left-hand ones (Play On Device, under Volume) are laid out one after the other in
     // the shown ones only, each box (icon + 20 px) directly under the previous one - the same spacing they have with everything on. Off = every button keeps its own fixed place.
     const STACK_RIGHT = [['spxShuffle', 'checkboxShuffleButtonEnabled', 'sliderShuffleIconSize'], ['spxSongData', 'checkboxSongDataEnabled', 'sliderSongDataBtnSize'], ['spxFilter', 'checkboxFilterButtonEnabled', 'sliderFilterIconSize'], ['spxSearch', 'checkboxSearchButtonEnabled', 'sliderSearchIconSize']];
-    const STACK_LEFT = [['spxDevice', 'checkboxDeviceButtonEnabled', 'sliderDeviceIconSize']];
+    const STACK_LEFT = [['spxDevice', 'checkboxDeviceButtonEnabled', 'sliderDeviceIconSize'], ['spxAddPlaylist', 'checkboxAddPlaylistButtonEnabled', 'sliderAddPlaylistIconSize']];
     const STACK_ITEMS = [...STACK_RIGHT, ...STACK_LEFT], STACK_IDS = new Set(STACK_ITEMS.map(x => x[0]));
     stackReady = true;
     const stackShown = id => { const it = STACK_ITEMS.find(x => x[0] === id); return !!it && !!setting(it[1]); };
@@ -1466,7 +1485,7 @@ async function boot() {
     }
     { // an icon size chosen in the UI Layout Inspector changes a button's box without going through applyLook: re-stack when any of them resizes
         const ro = new ResizeObserver(() => layoutStack());
-        ['spxShuffle', 'spxSongData', 'spxFilter', 'spxSearch', 'spxDevice'].forEach(id => ro.observe(el(id)));
+        ['spxShuffle', 'spxSongData', 'spxFilter', 'spxSearch', 'spxDevice', 'spxAddPlaylist'].forEach(id => ro.observe(el(id)));
         let q = false; const again = () => { if (q) return; q = true; requestAnimationFrame(() => { q = false; layoutStack(); }); };
         const mo2 = new MutationObserver(again);
         STACK_ITEMS.forEach(([id]) => mo2.observe(el(id), { attributes: true, attributeFilter: ['style'] }));

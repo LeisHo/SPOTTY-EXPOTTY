@@ -7,13 +7,13 @@
 import { setting } from './settings.js';
 
 // Same keys, same default order as RO_ITEMS in src/devpanel/devPanel.js (front to back).
-export const DEFAULT_KEYS = ['volume', 'shuffle', 'songdatabtn', 'filter', 'search', 'device', 'nav', 'songbar', 'scrub', 'songdata', 'date', 'scale', 'graph', 'meta', 'artist', 'title', 'play', 'cover', 'ticks', 'bgfx', 'bg'];
+export const DEFAULT_KEYS = ['volume', 'shuffle', 'songdatabtn', 'filter', 'search', 'device', 'addplaylist', 'nav', 'songbar', 'scrub', 'songdata', 'date', 'scale', 'graph', 'meta', 'artist', 'title', 'play', 'cover', 'ticks', 'bgfx', 'bg'];
 // Items whose visibility the panel does NOT link to another checkbox: renderOrder hides them (the timeline's own layers are handled in timeline.js).
 const HIDDEN_BY_CLASS = { volume: ['spxVolume'], nav: ['spxPrev', 'spxNext'], cover: ['spxCover'], bg: ['spxBg', 'spxBgPrev'], bgfx: ['spxBgFx'] };
-const Z_OF = { volume: ['spxVolume'], shuffle: ['spxShuffle'], songdatabtn: ['spxSongData'], filter: ['spxFilter'], search: ['spxSearch'], device: ['spxDevice'], nav: ['spxPrev', 'spxNext'], songbar: ['spxSongBar'], graph: ['spxTimeline'], bg: ['spxBg'],
+const Z_OF = { volume: ['spxVolume'], shuffle: ['spxShuffle'], songdatabtn: ['spxSongData'], filter: ['spxFilter'], search: ['spxSearch'], device: ['spxDevice'], addplaylist: ['spxAddPlaylist'], nav: ['spxPrev', 'spxNext'], songbar: ['spxSongBar'], graph: ['spxTimeline'], bg: ['spxBg'],
     meta: ['spxMeta'], artist: ['spxArtist'], title: ['spxTitle'], play: ['spxPlayGlyph'], cover: ['spxCover'], bgfx: ['spxBgFx'] };
 // Deployed (non-dev) mode: the Deployed list has no linked Enabled checkboxes, so these items are hidden here too (on top of their own Enabled checkbox).
-const DEPLOYED_HIDE = { shuffle: ['spxShuffle'], songdatabtn: ['spxSongData'], filter: ['spxFilter'], search: ['spxSearch'], device: ['spxDevice'], songbar: ['spxSongBar'], meta: ['spxMeta'], artist: ['spxArtist'], title: ['spxTitle'], play: ['spxPlayGlyph'] };
+const DEPLOYED_HIDE = { shuffle: ['spxShuffle'], songdatabtn: ['spxSongData'], filter: ['spxFilter'], search: ['spxSearch'], device: ['spxDevice'], addplaylist: ['spxAddPlaylist'], songbar: ['spxSongBar'], meta: ['spxMeta'], artist: ['spxArtist'], title: ['spxTitle'], play: ['spxPlayGlyph'] };
 const isDev = () => document.documentElement.classList.contains('dev-mode');
 const SEP = '/';
 

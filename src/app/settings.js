@@ -151,6 +151,10 @@ export const DEFAULTS = {
     // Play On Device (UI Layout > Play On Device)
     checkboxDeviceButtonEnabled: true, sliderDeviceIconSize: 20, sliderDeviceIconOffsetX: 0, sliderDeviceIconOffsetY: 0, sliderDeviceOffOpacity: 45, sliderDeviceOnOpacity: 100, sliderDeviceEdgeOffset: 14, colorDeviceIcon: '#f2f2f2', colorDeviceOn: '#1db954',
     sliderDevicePollSeconds: 1.5, sliderDeviceListRefresh: 4, checkboxDeviceMatchVolume: true, checkboxDeviceKeepPlaying: true, checkboxDeviceRemember: false, checkboxDeviceShowThisBrowser: true, checkboxDeviceShowVolume: true, checkboxDevicePanelCloseOnOutside: true, checkboxDeviceCloseOnPick: false,
+    // Add To Playlist (UI Layout > Add To Playlist)
+    checkboxAddPlaylistButtonEnabled: true, sliderAddPlaylistIconSize: 20, sliderAddPlaylistIconOffsetX: 0, sliderAddPlaylistIconOffsetY: 0, sliderAddPlaylistOffOpacity: 45, sliderAddPlaylistOnOpacity: 100, sliderAddPlaylistEdgeOffset: 14, colorAddPlaylistIcon: '#f2f2f2', colorAddPlaylistOn: '#1db954',
+    selectAddPlaylistPosition: 'end', checkboxAddPlaylistShowSong: true, checkboxAddPlaylistCloseAfterAdd: false, checkboxAddPlaylistCloseOnOutside: true,
+    sliderAddPlaylistPanelWidth: 260, sliderAddPlaylistPanelFontSize: 13, sliderAddPlaylistPanelOffsetX: 0, sliderAddPlaylistPanelOffsetY: 6, colorAddPlaylistPanelBg: '#14161a', sliderAddPlaylistPanelBgOpacity: 92, sliderAddPlaylistPanelBlur: 6, colorAddPlaylistPanelAccent: '#1db954',
     sliderDevicePanelWidth: 240, sliderDevicePanelFontSize: 13, sliderDevicePanelOffsetX: 0, sliderDevicePanelOffsetY: 6, colorDevicePanelBg: '#14161a', sliderDevicePanelBgOpacity: 92, sliderDevicePanelBlur: 6, colorDevicePanelAccent: '#1db954',
     checkboxShuffleButtonEnabled: true, sliderShuffleIconSize: 20, sliderShuffleIconOffsetX: 0, sliderShuffleOffOpacity: 45, colorShuffleIcon: '#f2f2f2', colorShuffleOn: '#1db954',
     // Start Button Animation: the Track Title Button Animation settings, with 'Title' replaced by 'StartPlay' (see titleAnim.js)
@@ -182,7 +186,7 @@ export const DEFAULTS = {
     checkboxSongBarEnabled: false, sliderSongBarHeight: 4, colorSongBarFill: '#1db954', colorSongBarEmpty: '#3a3f47', sliderSongBarClickTol: 6, sliderSongBarOpacity: 100,
     checkboxSongBarMarker: false, sliderSongBarMarkerRadius: 6, sliderSongBarMarkerOpacity: 100,
     checkboxSongBarAnimEnabled: false, sliderSongBarHoverOpacity: 100, sliderSongBarClickOpacity: 100, sliderSongBarAnimTime: 160,
-    checkboxGlobalOverrideEnabled: false, checkboxOverridePlay: false, checkboxOverrideNext: false, checkboxOverrideLast: false, checkboxOverrideShuffle: false, checkboxOverrideFilter: true, checkboxOverrideSearch: true, checkboxOverrideSongData: true, checkboxOverrideDevice: true, checkboxOverrideStart: true, checkboxOverrideVolume: false,
+    checkboxGlobalOverrideEnabled: false, checkboxOverridePlay: false, checkboxOverrideNext: false, checkboxOverrideLast: false, checkboxOverrideShuffle: false, checkboxOverrideFilter: true, checkboxOverrideSearch: true, checkboxOverrideSongData: true, checkboxOverrideDevice: true, checkboxOverrideAddPlaylist: true, checkboxOverrideStart: true, checkboxOverrideVolume: false,
     colorGlobalOverride: '#ffffff', sliderGlobalOverrideOpacity: 100, sliderGlobalOverrideOnOpacity: 100,
     checkboxGlobalOverrideAnim: false, sliderGlobalAnimTime: 150, sliderGlobalAnimHoverSize: 115, sliderGlobalAnimClickSize: 85, sliderGlobalAnimReleaseSize: 120, sliderGlobalAnimHoverOpacity: 100, sliderGlobalAnimClickOpacity: 70,
     checkboxVolBtnAnimEnabled: false, sliderVolBtnAnimTime: 160, sliderVolBtnAnimHoverSize: 24, sliderVolBtnAnimClickSize: 18, sliderVolBtnAnimReleaseSize: 20,
