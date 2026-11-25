@@ -14,10 +14,14 @@ async function call(method, path, body) {
     const r = await fetch(API + path, { method, headers: { Authorization: 'Bearer ' + (await getAccessToken()), 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
     if (r.status === 204) return null;
     const text = await r.text().catch(() => '');
-    if (!r.ok) { const e = new Error(method + ' ' + path + ' -> ' + r.status + ' ' + text.slice(0, 140)); e.status = r.status; throw e; }
+    if (!r.ok) {
+        let detail = ''; try { const j = JSON.parse(text); detail = (j.error && (j.error.message || j.error)) || j.error_description || ''; } catch (x) { detail = text.slice(0, 120); }
+        const e = new Error(method + ' ' + path + ' -> ' + r.status + ' ' + String(detail || text).slice(0, 160)); e.status = r.status; e.detail = String(detail || ''); throw e;
+    }
     try { return text ? JSON.parse(text) : null; } catch (e) { return null; }
 }
-// Spotify renamed some playlist endpoints for newer apps (/tracks -> /items, /users/{id}/playlists -> /me/playlists); the old name is tried when the new one is not found.
+// Since February 2026 Spotify has REMOVED the old playlist endpoints (/playlists/{id}/tracks -> /items, /users/{id}/playlists -> /me/playlists). The new name is used first; the old one
+// is only tried when the new one is not found (an older app).
 const missing = e => e && (e.status === 404 || e.status === 405 || e.status === 410);
 
 let meId = null;
@@ -38,8 +42,8 @@ async function hasTrack(playlistId, trackId) {
     for (let offset = 0; offset < 20000; offset += 100) {
         const q = '?limit=100&offset=' + offset;
         let page;
-        try { page = await call('GET', '/playlists/' + playlistId + '/tracks' + q); }
-        catch (e) { if (!missing(e)) throw e; page = await call('GET', '/playlists/' + playlistId + '/items' + q); }
+        try { page = await call('GET', '/playlists/' + playlistId + '/items' + q); }
+        catch (e) { if (!missing(e)) throw e; page = await call('GET', '/playlists/' + playlistId + '/tracks' + q); }
         const items = (page && page.items) || [];
         if (items.some(it => { const t = it && (it.track || it.item); return t && t.id === trackId; })) return true;
         if (!page || !page.next || !items.length) return false;
@@ -48,8 +52,8 @@ async function hasTrack(playlistId, trackId) {
 }
 async function addTrack(playlistId, trackId, atStart) {
     const body = { uris: ['spotify:track:' + trackId], ...(atStart ? { position: 0 } : {}) };
-    try { return await call('POST', '/playlists/' + playlistId + '/tracks', body); }
-    catch (e) { if (!missing(e)) throw e; return call('POST', '/playlists/' + playlistId + '/items', body); }
+    try { return await call('POST', '/playlists/' + playlistId + '/items', body); }
+    catch (e) { if (!missing(e)) throw e; return call('POST', '/playlists/' + playlistId + '/tracks', body); }
 }
 async function createPlaylist(name, isPublic) {
     const body = { name, public: !!isPublic, description: 'Made with SPOTTY EXPOTTY' };
@@ -114,7 +118,7 @@ export function initAddPlaylist({ button, getSong }) {
         if (!isLoggedIn() || !hasPlaylistScope()) { render(); return; }
         loading = true; render();
         try { playlists = await loadPlaylists(); logEvent('playback', 'PLAYLISTS loaded: ' + playlists.length); message = ''; needLogin = false; }
-        catch (e) { message = 'Could not load the playlists (' + e.message.replace(/^GET \S+ -> /, '') + ').'; if (e.status === 401 || e.status === 403) needLogin = true; logEvent('playback', 'PLAYLISTS load FAILED: ' + e.message); }
+        catch (e) { message = 'Could not load the playlists (' + e.message.replace(/^GET \S+ -> /, '') + ').'; if (e.status === 401 || /scope/i.test(e.detail || '')) needLogin = true; logEvent('playback', 'PLAYLISTS load FAILED: ' + e.message); }
         loading = false; render();
     }
     async function doAdd() {
@@ -147,8 +151,8 @@ export function initAddPlaylist({ button, getSong }) {
             if (setting('checkboxAddPlaylistCloseAfterAdd')) setOpen(false); else render();
             return;
         } catch (e) {
-            message = e.status === 403 || e.status === 401 ? 'Spotify refused (' + e.status + '). Log in again to allow playlists.' : 'Could not add it (' + e.message.replace(/^\w+ \S+ -> /, '') + ').';
-            if (e.status === 401 || e.status === 403) needLogin = true;
+            needLogin = e.status === 401 || /scope/i.test(e.detail || '');
+            message = needLogin ? 'Spotify needs you to log in again to allow playlists.' : 'Spotify refused it (' + e.message.replace(/^\w+ \S+ -> /, '') + ').';
             logEvent('playback', 'PLAYLIST add FAILED: ' + e.message);
         }
         busy = false; render();
