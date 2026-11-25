@@ -198,6 +198,7 @@
     "checkboxOverrideSearch": true,
     "checkboxOverrideSongData": true,
     "checkboxOverrideDevice": true,
+    "checkboxOverrideAddPlaylist": true,
     "checkboxOverrideStart": true,
     "colorGlobalOverride": "#ffffff",
     "sliderGlobalOverrideOnOpacity": 75,
@@ -291,6 +292,29 @@
     "sliderDevicePanelBgOpacity": 92,
     "sliderDevicePanelBlur": 6,
     "colorDevicePanelAccent": "#1db954",
+    "checkboxAddPlaylistButtonEnabled": true,
+    "selectAddPlaylistIconStyle": "0",
+    "sliderAddPlaylistIconSize": 25,
+    "sliderAddPlaylistIconOffsetX": -11,
+    "sliderAddPlaylistIconOffsetY": 8,
+    "sliderAddPlaylistEdgeOffset": 14,
+    "sliderAddPlaylistOffOpacity": 45,
+    "sliderAddPlaylistOnOpacity": 100,
+    "colorAddPlaylistIcon": "#f2f2f2",
+    "colorAddPlaylistOn": "#1db954",
+    "selectAddPlaylistPosition": "end",
+    "checkboxAddPlaylistSkipDuplicates": true,
+    "checkboxAddPlaylistShowSong": true,
+    "checkboxAddPlaylistCloseAfterAdd": false,
+    "checkboxAddPlaylistCloseOnOutside": true,
+    "sliderAddPlaylistPanelWidth": 260,
+    "sliderAddPlaylistPanelFontSize": 13,
+    "sliderAddPlaylistPanelOffsetX": 0,
+    "sliderAddPlaylistPanelOffsetY": 6,
+    "colorAddPlaylistPanelBg": "#14161a",
+    "sliderAddPlaylistPanelBgOpacity": 92,
+    "sliderAddPlaylistPanelBlur": 6,
+    "colorAddPlaylistPanelAccent": "#1db954",
     "checkboxStackShownButtons": false,
     "checkboxSearchButtonEnabled": false,
     "selectSearchIconStyle": "1",
@@ -670,9 +694,9 @@
     "listPickerRenderOrderDeployed": "{\"items\":[{\"key\":\"volume\",\"name\":\"Volume Button\",\"on\":true},{\"key\":\"shuffle\",\"name\":\"Shuffle Button\",\"on\":true},{\"key\":\"songdatabtn\",\"name\":\"Song Data Button\",\"on\":true},{\"key\":\"filter\",\"name\":\"Filter Button\",\"on\":true},{\"key\":\"search\",\"name\":\"Search Button\",\"on\":true},{\"key\":\"device\",\"name\":\"Play On Device Button\",\"on\":true},{\"key\":\"nav\",\"name\":\"Next And Last Song Buttons\",\"on\":true},{\"key\":\"songbar\",\"name\":\"Song Timeline (Under The Cover)\",\"on\":true},{\"key\":\"scrub\",\"name\":\"Scrub Line\",\"on\":true},{\"key\":\"songdata\",\"name\":\"Song Data Text And Icons\",\"on\":true},{\"key\":\"date\",\"name\":\"Song Add Date\",\"on\":true},{\"key\":\"scale\",\"name\":\"Timeline Scale (Numbers And Ticks)\",\"on\":true},{\"key\":\"graph\",\"name\":\"Graph\",\"on\":true},{\"key\":\"meta\",\"name\":\"Album And Date Line\",\"on\":true},{\"key\":\"artist\",\"name\":\"Artist\",\"on\":true},{\"key\":\"title\",\"name\":\"Song Title\",\"on\":true},{\"key\":\"play\",\"name\":\"Play Button\",\"on\":true},{\"key\":\"cover\",\"name\":\"Album Cover\",\"on\":true},{\"key\":\"ticks\",\"name\":\"Song Ticks\",\"on\":true},{\"key\":\"bgfx\",\"name\":\"Background Animation\",\"on\":true},{\"key\":\"bg\",\"name\":\"Background\",\"on\":true}],\"groupOrder\":[],\"defaultName\":null}"
   },
   "layout": {
-    "left": 35,
-    "top": 52.77496337890625,
-    "width": 350,
+    "left": 102,
+    "top": 75,
+    "width": 538,
     "height": 671
   },
   "devPanelStyle": {
@@ -7385,6 +7409,127 @@
                 {
                   "type": "group",
                   "section": {
+                    "key": "desktop:Add To Playlist",
+                    "items": [
+                      {
+                        "type": "row",
+                        "key": "checkboxAddPlaylistSkipDuplicates"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxAddPlaylistShowSong"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxAddPlaylistCloseAfterAdd"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxAddPlaylistCloseOnOutside"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectAddPlaylistIconStyle"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistIconSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistIconOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistIconOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistEdgeOffset"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistOffOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistOnOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorAddPlaylistIcon"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorAddPlaylistOn"
+                      },
+                      {
+                        "type": "row",
+                        "key": "selectAddPlaylistPosition"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistPanelWidth"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistPanelFontSize"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistPanelOffsetX"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistPanelOffsetY"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorAddPlaylistPanelBg"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistPanelBgOpacity"
+                      },
+                      {
+                        "type": "row",
+                        "key": "sliderAddPlaylistPanelBlur"
+                      },
+                      {
+                        "type": "row",
+                        "key": "colorAddPlaylistPanelAccent"
+                      }
+                    ],
+                    "rowKeys": [
+                      "checkboxAddPlaylistSkipDuplicates",
+                      "checkboxAddPlaylistShowSong",
+                      "checkboxAddPlaylistCloseAfterAdd",
+                      "checkboxAddPlaylistCloseOnOutside",
+                      "selectAddPlaylistIconStyle",
+                      "sliderAddPlaylistIconSize",
+                      "sliderAddPlaylistIconOffsetX",
+                      "sliderAddPlaylistIconOffsetY",
+                      "sliderAddPlaylistEdgeOffset",
+                      "sliderAddPlaylistOffOpacity",
+                      "sliderAddPlaylistOnOpacity",
+                      "colorAddPlaylistIcon",
+                      "colorAddPlaylistOn",
+                      "selectAddPlaylistPosition",
+                      "sliderAddPlaylistPanelWidth",
+                      "sliderAddPlaylistPanelFontSize",
+                      "sliderAddPlaylistPanelOffsetX",
+                      "sliderAddPlaylistPanelOffsetY",
+                      "colorAddPlaylistPanelBg",
+                      "sliderAddPlaylistPanelBgOpacity",
+                      "sliderAddPlaylistPanelBlur",
+                      "colorAddPlaylistPanelAccent"
+                    ],
+                    "subgroups": []
+                  }
+                },
+                {
+                  "type": "group",
+                  "section": {
                     "key": "desktop:Global Override",
                     "items": [
                       {
@@ -7479,6 +7624,10 @@
                       {
                         "type": "row",
                         "key": "checkboxOverrideSearch"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxOverrideAddPlaylist"
                       }
                     ],
                     "rowKeys": [
@@ -7494,7 +7643,8 @@
                       "colorGlobalOverride",
                       "sliderGlobalOverrideOpacity",
                       "sliderGlobalOverrideOnOpacity",
-                      "checkboxOverrideSearch"
+                      "checkboxOverrideSearch",
+                      "checkboxOverrideAddPlaylist"
                     ],
                     "subgroups": [
                       {
@@ -11034,6 +11184,124 @@
                   ]
                 },
                 {
+                  "key": "desktop:Add To Playlist",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "checkboxAddPlaylistSkipDuplicates"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxAddPlaylistShowSong"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxAddPlaylistCloseAfterAdd"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxAddPlaylistCloseOnOutside"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectAddPlaylistIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistIconOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistOffOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorAddPlaylistIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorAddPlaylistOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectAddPlaylistPosition"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorAddPlaylistPanelBg"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelBgOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorAddPlaylistPanelAccent"
+                    }
+                  ],
+                  "rowKeys": [
+                    "checkboxAddPlaylistSkipDuplicates",
+                    "checkboxAddPlaylistShowSong",
+                    "checkboxAddPlaylistCloseAfterAdd",
+                    "checkboxAddPlaylistCloseOnOutside",
+                    "selectAddPlaylistIconStyle",
+                    "sliderAddPlaylistIconSize",
+                    "sliderAddPlaylistIconOffsetX",
+                    "sliderAddPlaylistIconOffsetY",
+                    "sliderAddPlaylistEdgeOffset",
+                    "sliderAddPlaylistOffOpacity",
+                    "sliderAddPlaylistOnOpacity",
+                    "colorAddPlaylistIcon",
+                    "colorAddPlaylistOn",
+                    "selectAddPlaylistPosition",
+                    "sliderAddPlaylistPanelWidth",
+                    "sliderAddPlaylistPanelFontSize",
+                    "sliderAddPlaylistPanelOffsetX",
+                    "sliderAddPlaylistPanelOffsetY",
+                    "colorAddPlaylistPanelBg",
+                    "sliderAddPlaylistPanelBgOpacity",
+                    "sliderAddPlaylistPanelBlur",
+                    "colorAddPlaylistPanelAccent"
+                  ],
+                  "subgroups": []
+                },
+                {
                   "key": "desktop:Global Override",
                   "items": [
                     {
@@ -11128,6 +11396,10 @@
                     {
                       "type": "row",
                       "key": "checkboxOverrideSearch"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxOverrideAddPlaylist"
                     }
                   ],
                   "rowKeys": [
@@ -11143,7 +11415,8 @@
                     "colorGlobalOverride",
                     "sliderGlobalOverrideOpacity",
                     "sliderGlobalOverrideOnOpacity",
-                    "checkboxOverrideSearch"
+                    "checkboxOverrideSearch",
+                    "checkboxOverrideAddPlaylist"
                   ],
                   "subgroups": [
                     {
@@ -18189,6 +18462,127 @@
               {
                 "type": "group",
                 "section": {
+                  "key": "desktop:Add To Playlist",
+                  "items": [
+                    {
+                      "type": "row",
+                      "key": "checkboxAddPlaylistSkipDuplicates"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxAddPlaylistShowSong"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxAddPlaylistCloseAfterAdd"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxAddPlaylistCloseOnOutside"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectAddPlaylistIconStyle"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistIconSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistIconOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistIconOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistEdgeOffset"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistOffOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistOnOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorAddPlaylistIcon"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorAddPlaylistOn"
+                    },
+                    {
+                      "type": "row",
+                      "key": "selectAddPlaylistPosition"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelWidth"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelFontSize"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelOffsetX"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelOffsetY"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorAddPlaylistPanelBg"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelBgOpacity"
+                    },
+                    {
+                      "type": "row",
+                      "key": "sliderAddPlaylistPanelBlur"
+                    },
+                    {
+                      "type": "row",
+                      "key": "colorAddPlaylistPanelAccent"
+                    }
+                  ],
+                  "rowKeys": [
+                    "checkboxAddPlaylistSkipDuplicates",
+                    "checkboxAddPlaylistShowSong",
+                    "checkboxAddPlaylistCloseAfterAdd",
+                    "checkboxAddPlaylistCloseOnOutside",
+                    "selectAddPlaylistIconStyle",
+                    "sliderAddPlaylistIconSize",
+                    "sliderAddPlaylistIconOffsetX",
+                    "sliderAddPlaylistIconOffsetY",
+                    "sliderAddPlaylistEdgeOffset",
+                    "sliderAddPlaylistOffOpacity",
+                    "sliderAddPlaylistOnOpacity",
+                    "colorAddPlaylistIcon",
+                    "colorAddPlaylistOn",
+                    "selectAddPlaylistPosition",
+                    "sliderAddPlaylistPanelWidth",
+                    "sliderAddPlaylistPanelFontSize",
+                    "sliderAddPlaylistPanelOffsetX",
+                    "sliderAddPlaylistPanelOffsetY",
+                    "colorAddPlaylistPanelBg",
+                    "sliderAddPlaylistPanelBgOpacity",
+                    "sliderAddPlaylistPanelBlur",
+                    "colorAddPlaylistPanelAccent"
+                  ],
+                  "subgroups": []
+                }
+              },
+              {
+                "type": "group",
+                "section": {
                   "key": "desktop:Global Override",
                   "items": [
                     {
@@ -18283,6 +18677,10 @@
                     {
                       "type": "row",
                       "key": "checkboxOverrideSearch"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxOverrideAddPlaylist"
                     }
                   ],
                   "rowKeys": [
@@ -18298,7 +18696,8 @@
                     "colorGlobalOverride",
                     "sliderGlobalOverrideOpacity",
                     "sliderGlobalOverrideOnOpacity",
-                    "checkboxOverrideSearch"
+                    "checkboxOverrideSearch",
+                    "checkboxOverrideAddPlaylist"
                   ],
                   "subgroups": [
                     {
@@ -21838,6 +22237,124 @@
                 ]
               },
               {
+                "key": "desktop:Add To Playlist",
+                "items": [
+                  {
+                    "type": "row",
+                    "key": "checkboxAddPlaylistSkipDuplicates"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxAddPlaylistShowSong"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxAddPlaylistCloseAfterAdd"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxAddPlaylistCloseOnOutside"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectAddPlaylistIconStyle"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistIconSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistIconOffsetX"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistIconOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistEdgeOffset"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistOffOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistOnOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorAddPlaylistIcon"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorAddPlaylistOn"
+                  },
+                  {
+                    "type": "row",
+                    "key": "selectAddPlaylistPosition"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistPanelWidth"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistPanelFontSize"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistPanelOffsetX"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistPanelOffsetY"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorAddPlaylistPanelBg"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistPanelBgOpacity"
+                  },
+                  {
+                    "type": "row",
+                    "key": "sliderAddPlaylistPanelBlur"
+                  },
+                  {
+                    "type": "row",
+                    "key": "colorAddPlaylistPanelAccent"
+                  }
+                ],
+                "rowKeys": [
+                  "checkboxAddPlaylistSkipDuplicates",
+                  "checkboxAddPlaylistShowSong",
+                  "checkboxAddPlaylistCloseAfterAdd",
+                  "checkboxAddPlaylistCloseOnOutside",
+                  "selectAddPlaylistIconStyle",
+                  "sliderAddPlaylistIconSize",
+                  "sliderAddPlaylistIconOffsetX",
+                  "sliderAddPlaylistIconOffsetY",
+                  "sliderAddPlaylistEdgeOffset",
+                  "sliderAddPlaylistOffOpacity",
+                  "sliderAddPlaylistOnOpacity",
+                  "colorAddPlaylistIcon",
+                  "colorAddPlaylistOn",
+                  "selectAddPlaylistPosition",
+                  "sliderAddPlaylistPanelWidth",
+                  "sliderAddPlaylistPanelFontSize",
+                  "sliderAddPlaylistPanelOffsetX",
+                  "sliderAddPlaylistPanelOffsetY",
+                  "colorAddPlaylistPanelBg",
+                  "sliderAddPlaylistPanelBgOpacity",
+                  "sliderAddPlaylistPanelBlur",
+                  "colorAddPlaylistPanelAccent"
+                ],
+                "subgroups": []
+              },
+              {
                 "key": "desktop:Global Override",
                 "items": [
                   {
@@ -21932,6 +22449,10 @@
                   {
                     "type": "row",
                     "key": "checkboxOverrideSearch"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxOverrideAddPlaylist"
                   }
                 ],
                 "rowKeys": [
@@ -21947,7 +22468,8 @@
                   "colorGlobalOverride",
                   "sliderGlobalOverrideOpacity",
                   "sliderGlobalOverrideOnOpacity",
-                  "checkboxOverrideSearch"
+                  "checkboxOverrideSearch",
+                  "checkboxOverrideAddPlaylist"
                 ],
                 "subgroups": [
                   {
@@ -29375,6 +29897,10 @@
                       {
                         "type": "row",
                         "key": "checkboxMobileOverrideSearch"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxMobileOverrideAddPlaylist"
                       }
                     ],
                     "rowKeys": [
@@ -29390,7 +29916,8 @@
                       "colorMobileGlobalOverride",
                       "sliderMobileGlobalOverrideOpacity",
                       "sliderMobileGlobalOverrideOnOpacity",
-                      "checkboxMobileOverrideSearch"
+                      "checkboxMobileOverrideSearch",
+                      "checkboxMobileOverrideAddPlaylist"
                     ],
                     "subgroups": [
                       {
@@ -30916,6 +31443,10 @@
                     {
                       "type": "row",
                       "key": "checkboxMobileOverrideSearch"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileOverrideAddPlaylist"
                     }
                   ],
                   "rowKeys": [
@@ -30931,7 +31462,8 @@
                     "colorMobileGlobalOverride",
                     "sliderMobileGlobalOverrideOpacity",
                     "sliderMobileGlobalOverrideOnOpacity",
-                    "checkboxMobileOverrideSearch"
+                    "checkboxMobileOverrideSearch",
+                    "checkboxMobileOverrideAddPlaylist"
                   ],
                   "subgroups": [
                     {
@@ -31863,6 +32395,15 @@
                   ]
                 }
               ]
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "mobile:Add To Playlist",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
             }
           }
         ],
@@ -34479,6 +35020,10 @@
                     {
                       "type": "row",
                       "key": "checkboxMobileOverrideSearch"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxMobileOverrideAddPlaylist"
                     }
                   ],
                   "rowKeys": [
@@ -34494,7 +35039,8 @@
                     "colorMobileGlobalOverride",
                     "sliderMobileGlobalOverrideOpacity",
                     "sliderMobileGlobalOverrideOnOpacity",
-                    "checkboxMobileOverrideSearch"
+                    "checkboxMobileOverrideSearch",
+                    "checkboxMobileOverrideAddPlaylist"
                   ],
                   "subgroups": [
                     {
@@ -36020,6 +36566,10 @@
                   {
                     "type": "row",
                     "key": "checkboxMobileOverrideSearch"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxMobileOverrideAddPlaylist"
                   }
                 ],
                 "rowKeys": [
@@ -36035,7 +36585,8 @@
                   "colorMobileGlobalOverride",
                   "sliderMobileGlobalOverrideOpacity",
                   "sliderMobileGlobalOverrideOnOpacity",
-                  "checkboxMobileOverrideSearch"
+                  "checkboxMobileOverrideSearch",
+                  "checkboxMobileOverrideAddPlaylist"
                 ],
                 "subgroups": [
                   {
@@ -36955,6 +37506,12 @@
                 ]
               }
             ]
+          },
+          {
+            "key": "mobile:Add To Playlist",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       },
@@ -40830,6 +41387,10 @@
                       {
                         "type": "row",
                         "key": "checkboxLandscapeOverrideSearch"
+                      },
+                      {
+                        "type": "row",
+                        "key": "checkboxLandscapeOverrideAddPlaylist"
                       }
                     ],
                     "rowKeys": [
@@ -40845,7 +41406,8 @@
                       "colorLandscapeGlobalOverride",
                       "sliderLandscapeGlobalOverrideOpacity",
                       "sliderLandscapeGlobalOverrideOnOpacity",
-                      "checkboxLandscapeOverrideSearch"
+                      "checkboxLandscapeOverrideSearch",
+                      "checkboxLandscapeOverrideAddPlaylist"
                     ],
                     "subgroups": [
                       {
@@ -42371,6 +42933,10 @@
                     {
                       "type": "row",
                       "key": "checkboxLandscapeOverrideSearch"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeOverrideAddPlaylist"
                     }
                   ],
                   "rowKeys": [
@@ -42386,7 +42952,8 @@
                     "colorLandscapeGlobalOverride",
                     "sliderLandscapeGlobalOverrideOpacity",
                     "sliderLandscapeGlobalOverrideOnOpacity",
-                    "checkboxLandscapeOverrideSearch"
+                    "checkboxLandscapeOverrideSearch",
+                    "checkboxLandscapeOverrideAddPlaylist"
                   ],
                   "subgroups": [
                     {
@@ -43318,6 +43885,15 @@
                   ]
                 }
               ]
+            }
+          },
+          {
+            "type": "group",
+            "section": {
+              "key": "landscape:Add To Playlist",
+              "items": [],
+              "rowKeys": [],
+              "subgroups": []
             }
           }
         ],
@@ -45934,6 +46510,10 @@
                     {
                       "type": "row",
                       "key": "checkboxLandscapeOverrideSearch"
+                    },
+                    {
+                      "type": "row",
+                      "key": "checkboxLandscapeOverrideAddPlaylist"
                     }
                   ],
                   "rowKeys": [
@@ -45949,7 +46529,8 @@
                     "colorLandscapeGlobalOverride",
                     "sliderLandscapeGlobalOverrideOpacity",
                     "sliderLandscapeGlobalOverrideOnOpacity",
-                    "checkboxLandscapeOverrideSearch"
+                    "checkboxLandscapeOverrideSearch",
+                    "checkboxLandscapeOverrideAddPlaylist"
                   ],
                   "subgroups": [
                     {
@@ -47475,6 +48056,10 @@
                   {
                     "type": "row",
                     "key": "checkboxLandscapeOverrideSearch"
+                  },
+                  {
+                    "type": "row",
+                    "key": "checkboxLandscapeOverrideAddPlaylist"
                   }
                 ],
                 "rowKeys": [
@@ -47490,7 +48075,8 @@
                   "colorLandscapeGlobalOverride",
                   "sliderLandscapeGlobalOverrideOpacity",
                   "sliderLandscapeGlobalOverrideOnOpacity",
-                  "checkboxLandscapeOverrideSearch"
+                  "checkboxLandscapeOverrideSearch",
+                  "checkboxLandscapeOverrideAddPlaylist"
                 ],
                 "subgroups": [
                   {
@@ -48410,6 +48996,12 @@
                 ]
               }
             ]
+          },
+          {
+            "key": "landscape:Add To Playlist",
+            "items": [],
+            "rowKeys": [],
+            "subgroups": []
           }
         ]
       },
@@ -49149,6 +49741,7 @@
     "desktop:Search Button": true,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
+    "desktop:Add To Playlist": false,
     "desktop:Global Override": true,
     "desktop:Standard Button Animation": true,
     "desktop:Background": true,
@@ -49286,6 +49879,7 @@
     "mobile:Starting Timeline Span Curve": true,
     "mobile:Scrubbing": false,
     "mobile:Scroll To Zoom": false,
+    "mobile:Add To Playlist": false,
     "mobile:Scrub Audio": true,
     "mobile:New Group (2)": true,
     "mobile:Spotify Handoff": true,
@@ -49404,6 +49998,7 @@
     "landscape:Starting Timeline Span Curve": false,
     "landscape:Scrubbing": false,
     "landscape:Scroll To Zoom": false,
+    "landscape:Add To Playlist": false,
     "landscape:Scrub Audio": false,
     "landscape:New Group (2)": false,
     "landscape:Spotify Handoff": false,
@@ -50332,7 +50927,11 @@
     "mobile:Scrubbing": null,
     "mobile:Scroll To Zoom": null,
     "landscape:Scrubbing": null,
-    "landscape:Scroll To Zoom": null
+    "landscape:Scroll To Zoom": null,
+    "checkboxMobileOverrideAddPlaylist": null,
+    "mobile:Add To Playlist": null,
+    "checkboxLandscapeOverrideAddPlaylist": null,
+    "landscape:Add To Playlist": null
   },
   "devTextOverridesManual": [
     "desktop:UI Layout",
@@ -51548,6 +52147,25 @@
           },
           "icon": {},
           "typography": {}
+        },
+        "contexts": {
+          "mobilePortrait": {
+            "enabled": true,
+            "overrides": {}
+          },
+          "mobileLandscape": {
+            "enabled": true,
+            "overrides": {}
+          }
+        }
+      },
+      "spxAddPlaylist": {
+        "layout": {
+          "position": {
+            "mode": "flow",
+            "parent": "spxApp"
+          },
+          "icon": {}
         },
         "contexts": {
           "mobilePortrait": {
