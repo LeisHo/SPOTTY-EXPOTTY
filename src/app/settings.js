@@ -153,7 +153,7 @@ export const DEFAULTS = {
     sliderDevicePollSeconds: 1.5, sliderDeviceListRefresh: 4, checkboxDeviceMatchVolume: true, checkboxDeviceKeepPlaying: true, checkboxDeviceRemember: false, checkboxDeviceShowThisBrowser: true, checkboxDeviceShowVolume: true, checkboxDevicePanelCloseOnOutside: true, checkboxDeviceCloseOnPick: false,
     // Add To Playlist (UI Layout > Add To Playlist)
     checkboxAddPlaylistButtonEnabled: true, sliderAddPlaylistIconSize: 20, sliderAddPlaylistIconOffsetX: 0, sliderAddPlaylistIconOffsetY: 0, sliderAddPlaylistOffOpacity: 45, sliderAddPlaylistOnOpacity: 100, sliderAddPlaylistEdgeOffset: 14, colorAddPlaylistIcon: '#f2f2f2', colorAddPlaylistOn: '#1db954',
-    selectAddPlaylistPosition: 'end', checkboxAddPlaylistShowSong: true, checkboxAddPlaylistCloseAfterAdd: false, checkboxAddPlaylistCloseOnOutside: true,
+    selectAddPlaylistPosition: 'end', checkboxAddPlaylistShowSong: true, checkboxAddPlaylistCloseAfterAdd: false, checkboxAddPlaylistSkipDuplicates: true, checkboxAddPlaylistCloseOnOutside: true,
     sliderAddPlaylistPanelWidth: 260, sliderAddPlaylistPanelFontSize: 13, sliderAddPlaylistPanelOffsetX: 0, sliderAddPlaylistPanelOffsetY: 6, colorAddPlaylistPanelBg: '#14161a', sliderAddPlaylistPanelBgOpacity: 92, sliderAddPlaylistPanelBlur: 6, colorAddPlaylistPanelAccent: '#1db954',
     sliderDevicePanelWidth: 240, sliderDevicePanelFontSize: 13, sliderDevicePanelOffsetX: 0, sliderDevicePanelOffsetY: 6, colorDevicePanelBg: '#14161a', sliderDevicePanelBgOpacity: 92, sliderDevicePanelBlur: 6, colorDevicePanelAccent: '#1db954',
     checkboxShuffleButtonEnabled: true, sliderShuffleIconSize: 20, sliderShuffleIconOffsetX: 0, sliderShuffleOffOpacity: 45, colorShuffleIcon: '#f2f2f2', colorShuffleOn: '#1db954',

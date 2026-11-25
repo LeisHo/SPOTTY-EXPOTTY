@@ -33,6 +33,19 @@ async function loadPlaylists() {
     }
     return out;
 }
+// Is the song already in the playlist? Reads every page of the playlist's songs (100 at a time); an item holds the song as "track" (the older name) or "item".
+async function hasTrack(playlistId, trackId) {
+    for (let offset = 0; offset < 20000; offset += 100) {
+        const q = '?limit=100&offset=' + offset;
+        let page;
+        try { page = await call('GET', '/playlists/' + playlistId + '/tracks' + q); }
+        catch (e) { if (!missing(e)) throw e; page = await call('GET', '/playlists/' + playlistId + '/items' + q); }
+        const items = (page && page.items) || [];
+        if (items.some(it => { const t = it && (it.track || it.item); return t && t.id === trackId; })) return true;
+        if (!page || !page.next || !items.length) return false;
+    }
+    return false;
+}
 async function addTrack(playlistId, trackId, atStart) {
     const body = { uris: ['spotify:track:' + trackId], ...(atStart ? { position: 0 } : {}) };
     try { return await call('POST', '/playlists/' + playlistId + '/tracks', body); }
@@ -121,6 +134,11 @@ export function initAddPlaylist({ button, getSong }) {
                 chosen = made.id; newName = '';
                 try { localStorage.setItem(REMEMBER, made.id); } catch (e) { /* storage blocked */ }
             } else target = playlists.find(p => p.id === chosen);
+            if (!isNew && setting('checkboxAddPlaylistSkipDuplicates')) {
+                let dup = false;
+                try { dup = await hasTrack(target.id, song.id); } catch (e) { logEvent('playback', 'PLAYLIST duplicate check FAILED (adding anyway): ' + e.message); }
+                if (dup) { message = 'Already in ' + target.name + '.'; logEvent('playback', 'PLAYLIST skipped ' + song.id + ': already in ' + target.name); busy = false; render(); return; }
+            }
             await addTrack(target.id, song.id, atStart && !isNew);
             const p = playlists.find(x => x.id === target.id); if (p && p.count != null) p.count++;
             message = 'Added to ' + target.name + '.';

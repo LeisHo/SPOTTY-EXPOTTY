@@ -8779,6 +8779,7 @@
             { tab, group: AP, id: 'colorAddPlaylistOn', type: 'color', label: 'Icon Color (On):', value: '#1db954' },
             // what adding does
             { tab, group: AP, id: 'selectAddPlaylistPosition', type: 'select', label: 'Add The Song To (Default):', value: 'end', options: [{ value: 'end', text: 'End Of The Playlist' }, { value: 'start', text: 'Beginning Of The Playlist' }] },
+            { tab, group: AP, id: 'checkboxAddPlaylistSkipDuplicates', type: 'checkbox', label: 'Skip A Song That Is Already In The Playlist (Reads The Whole Playlist First)', value: true },
             { tab, group: AP, id: 'checkboxAddPlaylistShowSong', type: 'checkbox', label: 'Panel: Show The Song Being Added', value: true },
             { tab, group: AP, id: 'checkboxAddPlaylistCloseAfterAdd', type: 'checkbox', label: 'Panel: Close After Adding', value: false },
             { tab, group: AP, id: 'checkboxAddPlaylistCloseOnOutside', type: 'checkbox', label: 'Panel: Close When Clicking Elsewhere', value: true },
