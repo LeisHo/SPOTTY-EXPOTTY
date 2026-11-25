@@ -49741,7 +49741,7 @@
     "desktop:Search Button": true,
     "desktop:Song Timeline": true,
     "desktop:Song Timeline Animation": true,
-    "desktop:Add To Playlist": false,
+    "desktop:Add To Playlist": true,
     "desktop:Global Override": true,
     "desktop:Standard Button Animation": true,
     "desktop:Background": true,
